@@ -893,7 +893,7 @@ async function fetchComments(k){
 }
 async function postCommentLive(k,name,body,change){
   const c=byKey[k];
-  await fetch(CONFIG.apiBase+CONFIG.tableComments+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Card_Key:k,Card_Name:c?c.n:'',Commenter_Name:name,Body:body,Status:'visible',Change_Request:change?'pending':''})});
+  await fetch(CONFIG.apiBase+CONFIG.tableComments+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Card_Key:k,Card_Name:c?c.n:'',Commenter_Name:name,Body:body,Status:'visible',Change_Request:change?'pending':null})});
 }
 function toggleChange(k,i,val){
   if(CONFIG.useLive){return toggleChangeLive(k,i,val);}
