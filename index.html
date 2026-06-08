@@ -902,7 +902,7 @@ function toggleChange(k,i,val){
 }
 async function toggleChangeLive(k,i,val){
   try{const list=await fetchComments(k);const row=list[i];if(!row||!row.id)return;
-    await fetch(CONFIG.apiBase+CONFIG.tableComments+'/'+row.id+'/?user_field_names=true',{method:'PATCH',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Change_Request:val?'pending':''})});
+    await fetch(CONFIG.apiBase+CONFIG.tableComments+'/'+row.id+'/?user_field_names=true',{method:'PATCH',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Change_Request:val?'pending':null})});
     toast(val?'Flagged to apply on next push':'Unflagged');renderComments();
   }catch(e){toast('Could not update (needs write access on Comments)');}
 }
