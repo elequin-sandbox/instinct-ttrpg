@@ -102,7 +102,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .vtoggle button:disabled{opacity:.3;cursor:default;}
 .vlabel{min-width:120px;max-width:280px;text-align:center;color:#cbb98e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .vnote{min-height:16px;font-size:11px;color:var(--gold-d);font-style:italic;text-align:center;line-height:1.4;}
-.sheet-side{flex:1;min-width:220px;display:flex;flex-direction:column;gap:12px;}
+.sheet-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;}
 @media(max-width:700px){.sheet{flex-direction:column;width:94vw;}}
 .sheet-side h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;}
 .meta{font-size:12px;color:var(--gold-d);text-transform:capitalize;}
@@ -803,8 +803,8 @@ function renderSim(){
 /* ---------- modal ---------- */
 async function openCard(k){
   modalKey=k;modalVerIdx=0;const c=byKey[k];
-  modalVersions=[{label:'Current',html:c.hs||styleHTML(c.h)}];
-  if(CONFIG.useLive){try{modalVersions=modalVersions.concat((await fetchVersions(k)).map(v=>({label:v.label,html:styleHTML(v.html)})));}catch(e){}}
+  modalVersions=[{label:'Current',html:c.hs||styleHTML(c.h),since:c.u||''}];
+  if(CONFIG.useLive){try{modalVersions=modalVersions.concat((await fetchVersions(k)).map(v=>({label:v.label,html:styleHTML(v.html),since:v.since})));}catch(e){}}
   renderModal();document.getElementById('modal').classList.remove('hidden');
 }
 function closeModal(){document.getElementById('modal').classList.add('hidden');modalKey=null;}
@@ -813,10 +813,12 @@ function renderModal(){
   const isCurrent=modalVerIdx===0;
   const vNum=modalVersions.length-1-modalVerIdx;
   const toggleLabel=isCurrent?'Current':'v'+vNum+' of '+(modalVersions.length-1);
-  const cardZoom=Math.max(1,Math.min(3,Math.round(window.innerWidth*0.8*0.42/240*10)/10));
+  const sheetW=Math.min(window.innerWidth*0.8,1600);
+  const cardZoom=Math.max(1,Math.min(3,Math.round(sheetW*0.42/240*10)/10));
+  const cardColW=Math.round(240*cardZoom);
   document.getElementById('modal').innerHTML='<div class="sheet" onclick="event.stopPropagation()">'+
     '<button class="closex" onclick="closeModal()">&times;</button>'+
-    '<div class="sheet-card">'+
+    '<div class="sheet-card" style="flex:0 0 '+cardColW+'px;width:'+cardColW+'px">'+
       '<div class="modal-card-outer"><div class="modal-card-zoomed cardwrap scope-'+c.s+' cls-'+c.c+'" style="zoom:'+cardZoom+'">'+v.html+'</div></div>'+
       '<div class="vtoggle">'+
         '<button onclick="verStep(1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
@@ -843,12 +845,13 @@ function renderModalButtons(){
 
 /* ---------- comments (sessionStorage preview; Baserow when live) ---------- */
 function cmtKey(k){return 'irpg_cmt_'+k;}
-function readComments(k){
-  if(CONFIG.useLive)return fetchComments(k);
+function readComments(k,since){
+  if(CONFIG.useLive)return fetchComments(k,since);
   try{return Promise.resolve(JSON.parse(SS.getItem(cmtKey(k))||'[]'));}catch(e){return Promise.resolve([]);}
 }
 async function renderComments(){
-  const k=modalKey,list=await readComments(k),box=document.getElementById('cmts');if(!box)return;
+  const k=modalKey,since=(modalVersions[modalVerIdx]||{}).since||'';
+  const list=await readComments(k,since),box=document.getElementById('cmts');if(!box)return;
   box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
     (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
     '<div class="cmtform"><input id="cmtName" placeholder="Your name"><textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
@@ -899,14 +902,13 @@ async function fetchVersions(k){
     const date=(r.Version_Date||'').slice(0,10);
     const note=(r.Change_Note||'').trim();
     const label=note ? note+' ('+date+')' : date;
-    return {label,html:r.HTML};
+    return {label,html:r.HTML,since:r.Version_Date||''};
   });
 }
-async function fetchComments(k){
-  const card=byKey[k],cardUpdated=(card&&card.u)||'';
+async function fetchComments(k,since){
   const rows=await fetchAll(CONFIG.tableComments,'&filter__Card_Key__equal='+encodeURIComponent(k)+'&filter__Status__single_select_equal=visible');
   return rows
-    .filter(r=>!cardUpdated||(r.Created||'')>=cardUpdated)
+    .filter(r=>!since||(r.Created||'')>=since)
     .map(r=>({id:r.id,name:r.Commenter_Name,body:r.Body,when:(r.Created||'').slice(0,16),change:(((r.Change_Request||{}).value)||r.Change_Request)==='pending'}));
 }
 async function postCommentLive(k,name,body,change){
