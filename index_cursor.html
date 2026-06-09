@@ -615,8 +615,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <script>
 const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
-
 let LIVE = [];
+let cardsLoading = false;
 const byKey = {};
 let deck = new Set();
 let filters = {cls:new Set(), type:new Set()};
@@ -866,7 +866,13 @@ function printOne(k){printList([byKey[k]]);}
 function authHeaders(){return {'Authorization':'Token '+CONFIG.readToken};}
 async function fetchAll(tableId,params){
   let url=CONFIG.apiBase+tableId+'/?user_field_names=true&size=200'+(params||'');let out=[];
-  while(url){const r=await fetch(url,{headers:authHeaders(),cache:'no-store'});const j=await r.json();out=out.concat(j.results||[]);url=j.next;}
+  while(url){
+    const r=await fetch(url,{headers:authHeaders(),cache:'no-store'});
+    if(!r.ok)throw new Error('Baserow request failed ('+r.status+')');
+    const j=await r.json();
+    out=out.concat(j.results||[]);
+    url=j.next;
+  }
   return out;
 }
 function guessSet(h){return /core-header/.test(h)?'core':/bf-head/.test(h)?'boon':'ability';}
@@ -878,7 +884,33 @@ function guessType(h){
 }
 async function fetchCards(){
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
-  return rows.map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML}));
+  return rows
+    .filter(r=>r.Card_Key&&r.HTML)
+    .map(r=>({k:r.Card_Key,n:r.Name||r.Card_Key,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML}));
+}
+async function loadCardsFromBaserow(){
+  if(cardsLoading)return;
+  if(!CONFIG.readToken||CONFIG.readToken==='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE'){
+    document.getElementById('grid').innerHTML='<div class="empty">No Baserow token — cards load from Baserow when deployed with a token in config.js.</div>';
+    document.getElementById('count').textContent='0 cards';
+    return;
+  }
+  cardsLoading=true;
+  document.getElementById('grid').innerHTML='<div class="empty">Loading cards from Baserow…</div>';
+  document.getElementById('count').textContent='Loading…';
+  try{
+    LIVE=await fetchCards();
+    Object.keys(byKey).forEach(k=>delete byKey[k]);
+    prestyleAll();indexCards();buildChips();applyFilters();syncBadges();
+    toast('Loaded '+LIVE.length+' cards');
+  }catch(e){
+    console.error(e);
+    document.getElementById('grid').innerHTML='<div class="empty">Could not load cards from Baserow. Check token scopes (Cards: read) and try Reload.</div>';
+    document.getElementById('count').textContent='0 cards';
+    toast('Card load failed');
+  }finally{
+    cardsLoading=false;
+  }
 }
 async function fetchVersions(k){
   const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
@@ -915,29 +947,14 @@ async function deleteCommentLive(k,i){
     toast('Comment deleted');renderComments();
   }catch(e){toast('Could not delete (needs delete access on Comments)');}
 }
-async function loadCards(){
-  document.getElementById('grid').innerHTML='<div class="empty">Loading cards…</div>';
-  try{
-    const cards=await fetchCards();
-    LIVE=cards;
-    LIVE.forEach(c=>{c.hs=styleHTML(c.h);});
-    LIVE.forEach(c=>{byKey[c.k]=c;});
-    buildChips();applyFilters();syncBadges();
-  }catch(e){
-    document.getElementById('grid').innerHTML='<div class="empty">Could not load cards — check token and connection.</div>';
-  }
-}
-
 async function reload(){
-  toast('Refreshing…');
-  await loadCards();
-  toast('Cards refreshed.');
+  await loadCardsFromBaserow();
 }
 
 /* ---------- init ---------- */
 async function init(){
-  loadDeck();
-  await loadCards();
+  loadDeck();syncBadges();
+  await loadCardsFromBaserow();
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
