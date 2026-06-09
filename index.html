@@ -810,8 +810,8 @@ function renderModal(){
     '<button class="closex" onclick="closeModal()">&times;</button>'+
     '<div class="sheet-card">'+
       '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+v.html+'</div>'+
-      '<div class="vtoggle"><button onclick="verStep(-1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
-      '<span class="vlabel">'+esc(v.label)+'</span><button onclick="verStep(1)" '+(modalVerIdx<=0?'disabled':'')+'>&#9654;</button></div>'+
+      '<div class="vtoggle"><button onclick="verStep(1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
+      '<span class="vlabel">'+esc(v.label)+(multi?' <span style="opacity:.5;font-size:10px">'+(modalVerIdx===0?'(current)':'v'+(modalVersions.length-1-modalVerIdx)+' of '+(modalVersions.length-1))+'</span>':'')+'</span><button onclick="verStep(-1)" '+(modalVerIdx<=0?'disabled':'')+'>&#9654;</button></div>'+
       (multi?'':'<div class="meta">No earlier versions yet - history builds from the next edit.</div>')+
     '</div>'+
     '<div class="sheet-side cls-'+c.c+'">'+
@@ -884,7 +884,12 @@ async function fetchCards(){
 }
 async function fetchVersions(k){
   const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
-  return rows.sort((a,b)=>(b.Version_Date||'').localeCompare(a.Version_Date||'')).map(r=>({label:(r.Version_Date||'').slice(0,16),html:r.HTML}));
+  return rows.sort((a,b)=>(b.Version_Date||'').localeCompare(a.Version_Date||'')).map(r=>{
+    const date=(r.Version_Date||'').slice(0,10);
+    const note=(r.Change_Note||'').trim();
+    const label=note ? note+' ('+date+')' : date;
+    return {label,html:r.HTML};
+  });
 }
 async function fetchComments(k){
   const rows=await fetchAll(CONFIG.tableComments,'&filter__Card_Key__equal='+encodeURIComponent(k)+'&filter__Status__single_select_equal=visible');
