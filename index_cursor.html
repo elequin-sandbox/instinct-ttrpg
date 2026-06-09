@@ -871,7 +871,7 @@ async function fetchAll(tableId,params){
     if(!r.ok)throw new Error('Baserow request failed ('+r.status+')');
     const j=await r.json();
     out=out.concat(j.results||[]);
-    url=j.next;
+    url=j.next?j.next.replace('http://','https://'):null;
   }
   return out;
 }
