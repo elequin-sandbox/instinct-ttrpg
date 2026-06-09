@@ -885,7 +885,7 @@ function guessType(h){
 async function fetchCards(){
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
-    .filter(r=>r.Card_Key&&r.HTML)
+    .filter(r=>r.Card_Key&&r.HTML&&(((r.Status&&r.Status.value)||r.Status||'').toLowerCase()!=='legacy'))
     .map(r=>({k:r.Card_Key,n:r.Name||r.Card_Key,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML}));
 }
 async function loadCardsFromBaserow(){
