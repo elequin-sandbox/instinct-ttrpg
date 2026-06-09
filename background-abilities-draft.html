@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html><html><head><meta charset="utf-8">
+<title>Instinct RPG — Background Abilities (draft)</title>
+<style>
+:root{--ocean:#0f2d45;--badge:#5080a0;--namec:#c4d8e8;--parch:#f7f0e0;--gold:#c8a96e;--ink:#2a241a;}
+*{box-sizing:border-box}
+body{background:#3a3026;margin:0;padding:32px;font-family:system-ui,-apple-system,sans-serif;color:var(--ink)}
+h1{font-family:system-ui,-apple-system,sans-serif;color:#e8dcc0;text-align:center;font-weight:600;letter-spacing:.04em}
+.sub{text-align:center;color:#b9a98a;margin:-8px 0 28px;font-style:italic}
+.grid{display:flex;flex-wrap:wrap;gap:22px;justify-content:center}
+.card{width:2.5in;min-height:3.5in;background:var(--parch);border:1.5px solid var(--gold);
+  border-radius:9px;box-shadow:5px 5px 0 #0e0b06;display:flex;flex-direction:column;overflow:hidden}
+.chead{background:var(--ocean);padding:9px 8px 7px;text-align:center}
+.orn{color:#caa75a;opacity:.85;font-size:9px;letter-spacing:3px;line-height:1}
+.ornb{margin-top:3px}
+.badge{color:var(--badge);font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;letter-spacing:.16em;margin:4px 0 2px}
+.cname{color:var(--namec);font-family:system-ui,-apple-system,sans-serif;font-weight:700;font-size:17px;line-height:1.05}
+.cbody{padding:10px 11px 8px;flex:1;display:flex;flex-direction:column;font-size:11.5px;line-height:1.34}
+.trig{color:#4a4030}
+.hr{height:1px;background:var(--gold);opacity:.5;margin:7px 0}
+.eff{margin-bottom:6px}
+.lead{font-family:system-ui,-apple-system,sans-serif;font-size:9.5px;letter-spacing:.05em;color:#6a5a3a;margin-bottom:3px;text-transform:uppercase}
+.opt{margin:2px 0}
+.opt b{color:#1f3a52}
+.q{margin:3px 0;font-style:italic}
+.gm{margin-top:5px;color:#5a4d36}
+.pill{display:inline-block;border-radius:4px;padding:0 5px;font-size:9.5px;font-family:system-ui,-apple-system,sans-serif;font-weight:600;vertical-align:1px}
+.boost{background:#0F766E;color:#CCFBF1}
+.luck{background:#B8860B;color:#FFFDE7}
+.stemlbl{margin-top:auto;padding-top:8px;font-family:system-ui,-apple-system,sans-serif;font-size:9px;letter-spacing:.12em;color:#8a6a3a}
+.stem{font-size:11px;color:#4a4030}
+.fill{display:inline-block;min-width:70px;border-bottom:1px dotted #c8a96e}
+.lines{margin-top:4px;border-bottom:1px dotted #c8a96e;height:17px;
+  background:repeating-linear-gradient(transparent,transparent 16px,#c8a96e 16px,#c8a96e 17px);height:34px}
+.cfoot{background:#ede0c4;border-top:1.5px solid var(--gold);padding:5px 9px;display:flex;
+  justify-content:space-between;font-family:system-ui,-apple-system,sans-serif;font-size:8px;letter-spacing:.08em;color:#7a674a}
+</style></head>
+<body>
+<h1>Background Abilities &mdash; Draft for Review</h1>
+<div class="sub">10 cards, abilities newly written &middot; June 2026</div>
+<div class="grid">
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Field Medic</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When precision matters and the pressure is high,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Steady the Hand</b> &mdash; your hands do exactly what they must — take <span class="pill boost">Boost&nbsp;1</span> on the careful action</div><div class="opt"><b>Hold Them Together</b> &mdash; keep someone beside you calm enough to do their part</div><div class="opt"><b>Work the Margin</b> &mdash; narrate the small, exact thing that keeps it from getting worse</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I first learned what steady hands were worth when</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Inspector</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>While this card is in your hand, once per scene study someone or something closely and ask one:</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="q">What here is not what it appears to be?</div><div class="q">What is this person trying not to show?</div><div class="q">What&#x27;s the fastest way this goes wrong?</div><div class="gm">The GM answers honestly.</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I started looking harder after</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Cutpurse</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When precision and control matter more than force,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Leave No Trace</b> &mdash; do it, and narrate why no one will know it was you</div><div class="opt"><b>Light Fingers</b> &mdash; take or place something small, unseen</div><div class="opt"><b>Slip the Notice</b> &mdash; move through a watched space as if you belong</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I learned to move without leaving marks after</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Pit Fighter</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When you deliberately face something that would shake anyone else,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Walk Into It</b> &mdash; close the distance you're meant to flee — take <span class="pill boost">Boost&nbsp;1</span> on what it takes</div><div class="opt"><b>Set the Tone</b> &mdash; let them see you unbothered, and steady them by it</div><div class="opt"><b>Stare It Down</b> &mdash; make the threatening thing hesitate</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>Something stopped scaring me when</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Musician</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>Your internal clock never lies.</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">When timing is everything, choose one:</div><div class="opt"><b>Right on the Beat</b> &mdash; act at the exact moment it lands hardest</div><div class="opt"><b>Set the Pace</b> &mdash; give the group a rhythm to move on together</div><div class="opt"><b>Feel the Turn</b> &mdash; sense when the moment is about to change, and call it</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I first felt the rhythm of a moment when</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Street-Raised</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>You&#x27;ve seen enough that very little surprises you anymore.</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">When things turn sharp or strange, choose one:</div><div class="opt"><b>Already Knew</b> &mdash; react as if you saw it coming, because part of you did</div><div class="opt"><b>Read the Angle</b> &mdash; spot who benefits, and say so</div><div class="opt"><b>Keep Your Footing</b> &mdash; stay steady, and give the others something to hold to</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I stopped flinching after</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Caravan Guard</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When differences would be a barrier,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Find Common Ground</b> &mdash; name the thing you both actually want</div><div class="opt"><b>Speak Their Way</b> &mdash; frame it so it lands for them, not you</div><div class="opt"><b>Vouch</b> &mdash; put your own standing behind someone to bridge the gap</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I learned to find common ground when</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Pilgrim</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When you meet someone driven by the same devotion,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Recognize the Road</b> &mdash; name what you share; you both move easier for it</div><div class="opt"><b>Offer the Path</b> &mdash; give them a reason to walk alongside you</div><div class="opt"><b>Invoke It</b> &mdash; call on the shared cause to ask something of them</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I found others on the same road when</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Ascetic</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When your conviction is tested — by pain, pressure, or doubt —</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Endure It</b> &mdash; take the cost without bending, and let it show</div><div class="opt"><b>Steady the Doubting</b> &mdash; hold someone else's faith up when theirs slips</div><div class="opt"><b>Refuse the Bargain</b> &mdash; turn down the easy way, and narrate why</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I knew what I stood for after</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+<div class="card">
+  <div class="chead">
+    <div class="orn">&#10022; &#10022; &#10022;</div>
+    <div class="badge">BOON &mdash; BACKGROUND</div>
+    <div class="cname">Pathfinder</div>
+    <div class="orn ornb">&#10022; &#10022; &#10022;</div>
+  </div>
+  <div class="cbody">
+    <div class="trig"><em>When you&#x27;re navigating uncertain or dangerous ground,</em></div>
+    <div class="hr"></div>
+    <div class="eff"><div class="lead">Choose one:</div><div class="opt"><b>Read the Land</b> &mdash; name a feature of the terrain and how you'll use it — take <span class="pill boost">Boost&nbsp;1</span> on the crossing</div><div class="opt"><b>Find the Way Through</b> &mdash; pick the route others would miss</div><div class="opt"><b>Set the Trail</b> &mdash; lead so the group moves safe and quick</div></div>
+    <div class="stemlbl">Origin</div>
+    <div class="stem"><em>I learned to read the land after</em> <span class="fill"></span></div>
+    <div class="lines"></div>
+  </div>
+  <div class="cfoot"><span>Any &mdash; Boon</span><span>Background</span></div>
+</div>
+</div>
+</body></html>
