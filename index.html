@@ -866,7 +866,7 @@ function printOne(k){printList([byKey[k]]);}
 function authHeaders(){return {'Authorization':'Token '+CONFIG.readToken};}
 async function fetchAll(tableId,params){
   let url=CONFIG.apiBase+tableId+'/?user_field_names=true&size=200'+(params||'');let out=[];
-  while(url){const r=await fetch(url,{headers:authHeaders()});const j=await r.json();out=out.concat(j.results||[]);url=j.next;}
+  while(url){const r=await fetch(url,{headers:authHeaders(),cache:'no-store'});const j=await r.json();out=out.concat(j.results||[]);url=j.next;}
   return out;
 }
 function guessSet(h){return /core-header/.test(h)?'core':/bf-head/.test(h)?'boon':'ability';}
@@ -916,7 +916,7 @@ async function deleteCommentLive(k,i){
   }catch(e){toast('Could not delete (needs delete access on Comments)');}
 }
 async function reload(){
-  toast('Cards refresh when the designer republishes; reopen a card for the latest comments.');
+  window.location.reload();
 }
 
 /* ---------- init ---------- */
