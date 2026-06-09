@@ -1,0 +1,946 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instinct RPG - Card Studio</title>
+<style>
+:root{--ink:#1e1810;--parch:#f4ecd8;--gold:#c8a96e;--gold-d:#7a6030;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;}
+button{font-family:inherit;cursor:pointer;}
+.hidden{display:none !important;}
+
+#gate{position:fixed;inset:0;background:#16110a;z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#gate h1{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);letter-spacing:3px;font-size:22px;text-transform:uppercase;}
+#gate p{color:var(--gold-d);font-size:13px;}
+#gate input{padding:10px 14px;background:#211810;border:1px solid var(--gold-d);color:#f0e6cf;border-radius:6px;font-family:inherit;font-size:15px;width:240px;text-align:center;}
+#gate button{padding:10px 24px;background:var(--gold);color:#1a1108;border:none;border-radius:6px;font-weight:700;letter-spacing:1px;}
+#gateErr{color:#d4604a;font-size:12px;height:14px;}
+
+header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px solid var(--gold);padding:10px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+.brand{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);letter-spacing:2px;font-size:15px;text-transform:uppercase;white-space:nowrap;}
+.tabs{display:flex;gap:4px;}
+.tab{background:transparent;border:1px solid transparent;color:#bfae86;padding:6px 14px;border-radius:6px;font-size:13px;letter-spacing:.5px;}
+.tab:hover{color:#f0e6cf;}
+.tab.active{background:#2a1d10;border-color:var(--gold-d);color:var(--gold);}
+.tab .badge{display:inline-block;min-width:18px;padding:0 5px;margin-left:6px;border-radius:9px;background:var(--gold);color:#1a1108;font-size:11px;font-weight:700;}
+.spacer{flex:1;}
+.hbtn{background:#2a1d10;border:1px solid var(--gold-d);color:var(--gold);padding:6px 12px;border-radius:6px;font-size:12px;letter-spacing:.5px;}
+.hbtn:hover{background:#3a2814;}
+
+.filters{padding:14px 18px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid #2a1d10;background:#1d140b;font-family:system-ui,-apple-system,sans-serif;}
+.frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.flabel{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);min-width:74px;}
+.chip{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 11px;border-radius:14px;font-size:12px;text-transform:capitalize;font-family:system-ui,-apple-system,sans-serif;}
+.chip:hover{border-color:var(--gold-d);}
+.chip.on{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+/* class filter chip colors */
+.chip.cls-barbarian{border-color:#9E2B2B;color:#e07070;}
+.chip.cls-barbarian:hover,.chip.cls-barbarian.on{background:#9E2B2B;color:#fff;border-color:#9E2B2B;}
+.chip.cls-fighter{border-color:#B45309;color:#e09050;}
+.chip.cls-fighter:hover,.chip.cls-fighter.on{background:#B45309;color:#fff;border-color:#B45309;}
+.chip.cls-paladin{border-color:#B8860B;color:#e0c040;}
+.chip.cls-paladin:hover,.chip.cls-paladin.on{background:#B8860B;color:#fff;border-color:#B8860B;}
+.chip.cls-cleric{border-color:#5E81AC;color:#9ab8d8;}
+.chip.cls-cleric:hover,.chip.cls-cleric.on{background:#5E81AC;color:#fff;border-color:#5E81AC;}
+.chip.cls-ranger{border-color:#2F6B3D;color:#6ab880;}
+.chip.cls-ranger:hover,.chip.cls-ranger.on{background:#2F6B3D;color:#fff;border-color:#2F6B3D;}
+.chip.cls-rogue{border-color:#6C5BA8;color:#b0a0e0;}
+.chip.cls-rogue:hover,.chip.cls-rogue.on{background:#6C5BA8;color:#fff;border-color:#6C5BA8;}
+.chip.cls-druid{border-color:#5A7D2A;color:#9ac050;}
+.chip.cls-druid:hover,.chip.cls-druid.on{background:#5A7D2A;color:#fff;border-color:#5A7D2A;}
+.chip.cls-warlock{border-color:#9A2B5E;color:#e070a0;}
+.chip.cls-warlock:hover,.chip.cls-warlock.on{background:#9A2B5E;color:#fff;border-color:#9A2B5E;}
+.chip.cls-bard{border-color:#B5388D;color:#e070c0;}
+.chip.cls-bard:hover,.chip.cls-bard.on{background:#B5388D;color:#fff;border-color:#B5388D;}
+#search{flex:1;min-width:180px;padding:8px 12px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;}
+#count{font-size:12px;color:var(--gold-d);white-space:nowrap;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(2.5in,1fr));gap:22px 18px;padding:24px 18px;justify-items:center;}
+.cardwrap{position:relative;width:2.5in;cursor:pointer;transition:transform .12s;}
+.cardwrap:hover{transform:translateY(-3px);}
+.cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
+.cardwrap.sel::after{content:"in deck";position:absolute;top:-9px;right:-6px;background:#2f7d4f;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:.5px;box-shadow:0 1px 4px rgba(0,0,0,.4);}
+.cardwrap.sel .card{outline:3px solid #3fae6c;outline-offset:1px;}
+.deckbtn{position:absolute;bottom:6px;right:6px;z-index:3;width:30px;height:30px;border-radius:50%;border:none;background:var(--gold);color:#1a1108;font-size:18px;font-weight:700;line-height:1;opacity:0;transition:opacity .12s;box-shadow:0 1px 4px rgba(0,0,0,.5);}
+.cardwrap:hover .deckbtn{opacity:1;}
+.cardwrap.sel .deckbtn{opacity:1;background:#3fae6c;color:#fff;}
+.empty{padding:60px;text-align:center;color:var(--gold-d);font-size:15px;width:100%;}
+
+/* keyword pills + bold + icons */
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-weight:700;font-size:.92em;line-height:1.5;white-space:nowrap;vertical-align:baseline;}
+.kw .ic{font-style:normal;margin-right:2px;font-weight:400;}
+.kw-guard{background:#166534;color:#F0FDF4;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-hd{background:#7F1D1D;color:#FEE2E2;}
+.kw-act{background:#1D4ED8;color:#EFF6FF;}
+.kw-react{background:#6D28D9;color:#EDE9FE;}
+.kw-boon{background:#B8860B;color:#1a1208;}
+.kw-bane{background:#7A1F1F;color:#FEE2E2;}
+.kw-cond{background:#C2620E;color:#FFF7ED;}
+.kw-status{background:#475569;color:#F1F5F9;}
+.cb .ic{font-style:normal;margin-right:2px;}
+.cb-act,.cb-react{}
+
+/* crit cost on the same line, text wraps cleanly */
+.scope-ability .ci{display:flex;gap:5px;align-items:flex-start;}
+.scope-ability .ci .tc{flex:0 0 auto;}
+.scope-ability .ci .ci-txt{flex:1;}
+.scope-ability .tp.tc{background:#3B0764;color:#E9D5FF;font-weight:700;border-radius:3px;padding:0 5px;font-size:.9em;}
+
+/* uniform TCG dimensions */
+.scope-ability .card,.scope-core .card,.scope-boon .card{width:2.5in;height:3.5in;}
+
+#modal{position:fixed;inset:0;z-index:200;background:rgba(10,7,3,.82);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;}
+.sheet{background:#221810;border:1px solid var(--gold-d);border-radius:12px;max-width:700px;width:100%;display:flex;gap:24px;padding:24px;flex-wrap:wrap;position:relative;}
+.sheet-card{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.vtoggle{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;}
+.vtoggle button{background:#2a1d10;border:1px solid var(--gold-d);color:var(--gold);width:30px;height:26px;border-radius:6px;font-size:14px;}
+.vtoggle button:disabled{opacity:.3;cursor:default;}
+.vlabel{min-width:120px;text-align:center;color:#cbb98e;}
+.sheet-side{flex:1;min-width:240px;display:flex;flex-direction:column;gap:12px;}
+.sheet-side h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;}
+.meta{font-size:12px;color:var(--gold-d);text-transform:capitalize;}
+.meta-cls{text-transform:capitalize;}
+.sbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.sbtns button{flex:1;min-width:110px;padding:8px;border-radius:7px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:12px;}
+.sbtns button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.cmts{border-top:1px solid #3a2c19;padding-top:12px;display:flex;flex-direction:column;gap:8px;}
+.cmts h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);}
+.cmt{background:#1b130b;border-left:2px solid var(--gold-d);padding:6px 10px;border-radius:4px;font-size:13px;}
+.cmt .who{color:var(--gold);font-weight:700;font-size:12px;}
+.cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
+.cmtform{display:flex;flex-direction:column;gap:6px;}
+.cmtform input,.cmtform textarea{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
+.cmtform textarea{resize:vertical;min-height:48px;}
+.cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
+.cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
+.cmt-del{background:none;border:none;color:#7a5a4a;font-size:12px;cursor:pointer;margin-left:auto;padding:0 4px;line-height:1;}
+.cmt-del:hover{color:#d4604a;}
+.cmt-chk{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:#9a8a5a;cursor:pointer;user-select:none;}
+.cmt-chk.on{color:#d8b84a;font-weight:700;}
+.cmt-chk input{accent-color:#c8a96e;}
+.cmtform .cmt-chk{color:#bfae86;margin-top:2px;}
+.closex{position:absolute;top:12px;right:16px;background:none;border:none;color:#cbb98e;font-size:26px;line-height:1;}
+
+.panel{padding:20px 18px;}
+.panel h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;margin-bottom:6px;}
+.panel .sub{color:var(--gold-d);font-size:13px;margin-bottom:14px;}
+.simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.simbar button{padding:9px 16px;border-radius:8px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:13px;letter-spacing:.5px;}
+.simbar button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.simbar button:disabled{opacity:.35;cursor:default;}
+.simstat{color:#cbb98e;font-size:13px;}
+
+#printroot{display:none;}
+@media print{
+  body{background:#fff;}
+  header,.filters,#modal,#toast{display:none !important;}
+  .view{display:none !important;}
+  #printroot{display:block !important;}
+  .print-sheet{display:grid;grid-template-columns:repeat(3,2.5in);gap:0;justify-content:center;align-content:start;}
+  .print-sheet .cardwrap{cursor:default;transform:none;width:2.5in;}
+  .print-sheet .cardwrap .card{box-shadow:none !important;}
+  .cardwrap{break-inside:avoid;page-break-inside:avoid;}
+  @page{size:letter;margin:.35in;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2f7d4f;color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;z-index:500;pointer-events:none;}
+#toast.show{opacity:1;}
+
+*{box-sizing:border-box;margin:0;padding:0;}.scope-ability body{background:#1e1810;font-family:system-ui,-apple-system,sans-serif;}.scope-ability .screen-header{text-align:center;padding:32px 24px 20px;}.scope-ability .page-title{font-family:system-ui,-apple-system,sans-serif;font-size:16.50px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;}.scope-ability .page-subtitle{font-size:13.20px;color:#7a6030;letter-spacing:1px;margin-top:6px;}.scope-ability .class-divider{text-align:center;padding:20px 0 8px;font-family:system-ui,-apple-system,sans-serif;font-size:12.10px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;}.scope-ability .print-page{width:816px;height:1056px;margin:8px auto;background:#ffffff;display:grid;grid-template-columns:repeat(3,240px);grid-template-rows:repeat(3,336px);justify-content:center;align-content:center;gap:0;page-break-after:always;}.scope-ability .cw{position:relative;width:240px;height:336px;flex-shrink:0;}.scope-ability .card-shadow{position:absolute;inset:0;top:4px;left:4px;background:#0e0b06;border-radius:8px;}.scope-ability .card{position:relative;width:240px;height:336px;background:#f7f0e0;border-radius:8px;border:1.5px solid #c8a96e;display:flex;flex-direction:column;overflow:hidden;z-index:1;}.scope-ability .ch{padding:7px 10px 6px;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #c8a96e;flex-shrink:0;background:#1a1108;}.scope-ability .cn{font-family:system-ui,-apple-system,sans-serif;font-size:11.55px;font-weight:700;color:#f0dfa8;letter-spacing:0.5px;text-transform:uppercase;}.scope-ability .cb{font-size:8.25px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#f0dfa8;border:1px solid rgba(200,169,110,0.5);border-radius:3px;padding:1px 4px;white-space:nowrap;flex-shrink:0;margin-left:5px;}.scope-ability .cbody{flex:1;padding:7px 10px 5px;display:flex;flex-direction:column;min-height:0;}.scope-ability .flv{font-size:10.45px;font-style:italic;color:#5a4020;line-height:1.4;margin-bottom:5px;flex-shrink:0;}.scope-ability .hr{height:0.5px;background:#c8a96e;opacity:0.4;margin:4px 0;flex-shrink:0;}.scope-ability .elbl{font-size:8.25px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#7a6030;margin-bottom:3px;flex-shrink:0;}.scope-ability .etxt{font-size:11.00px;line-height:1.5;color:#1c1408;flex-shrink:0;}.scope-ability .etxt em{font-style:italic;color:#3a2a0a;}.scope-ability .etxt+.etxt{margin-top:4px;}.scope-ability .co{font-size:9.90px;font-weight:700;letter-spacing:0.3px;color:#5a4020;margin-top:4px;margin-bottom:2px;flex-shrink:0;}.scope-ability .ql{display:flex;flex-direction:column;gap:2px;flex-shrink:0;padding-left:2px;}.scope-ability .qi{font-size:10.45px;line-height:1.4;color:#2a1e08;font-style:italic;display:flex;gap:4px;align-items:flex-start;}.scope-ability .qi::before{content:"·";color:#c8a96e;font-style:normal;flex-shrink:0;}.scope-ability .tp{display:inline-block;padding:0 4px;border-radius:3px;font-size:9.90px;font-weight:700;vertical-align:middle;line-height:1.65;margin:0 1px;letter-spacing:0.1px;font-style:normal;font-family:system-ui,-apple-system,sans-serif;white-space:nowrap;}.scope-ability .tv{background:#1D4ED8;color:#EFF6FF;}.scope-ability .ts{background:#92400E;color:#FEF3C7;}.scope-ability .tp2{background:#166534;color:#F0FDF4;}.scope-ability .tn{background:#991B1B;color:#FEF2F2;}.scope-ability .tb{background:#0F766E;color:#CCFBF1;}.scope-ability .tc{background:#3B0764;color:#E9D5FF;font-size:8.80px;padding:0 4px;}.scope-ability .td{background:#7F1D1D;color:#FEF2F2;}.scope-ability .tr{background:#78350F;color:#FEF3C7;}.scope-ability .csec{margin-top:5px;flex-shrink:0;}.scope-ability .clbl{font-size:8.25px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#7a6030;margin-bottom:3px;}.scope-ability .crow{display:flex;flex-direction:row;flex-wrap:wrap;gap:3px;}.scope-ability .ci{font-size:9.90px;color:#2a1e08;background:#ede0c4;border:1px solid #c8a96e;border-radius:3px;padding:2px 5px;line-height:1.4;display:flex;align-items:center;gap:3px;flex-wrap:wrap;}.scope-ability .cf{padding:4px 10px;border-top:1px solid #c8a96e;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}.scope-ability .fclass{font-size:8.80px;letter-spacing:0.5px;text-transform:uppercase;font-weight:700;font-family:system-ui,-apple-system,sans-serif;}.scope-ability .fright{font-size:8.80px;color:#7a6030;font-style:italic;letter-spacing:0.3px;}.scope-ability .rogue .cf{background:#1e0f2a;}.scope-ability .rogue .fclass{color:#c084fc;}.scope-ability .warlock .cf{background:#1a0812;}.scope-ability .warlock .fclass{color:#f87171;}.scope-ability .druid .cf{background:#0a1a0d;}.scope-ability .druid .fclass{color:#86efac;}.scope-ability .barb .cf{background:#1a0c04;}.scope-ability .barb .fclass{color:#fb923c;}.scope-ability .fighter .cf{background:#0a1020;}.scope-ability .fighter .fclass{color:#93c5fd;}.scope-ability .paladin .cf{background:#1a1404;}.scope-ability .paladin .fclass{color:#fcd34d;}.scope-ability .cleric .cf{background:#0a1220;}.scope-ability .cleric .fclass{color:#bae6fd;}.scope-ability .ranger .cf{background:#0a1208;}.scope-ability .ranger .fclass{color:#a3e635;}.scope-ability .sp{flex:1;}
+
+  *{ box-sizing: border-box; margin: 0; padding: 0; }.scope-core body{
+    background: #111008;
+    padding: 40px 24px 60px;
+    font-family: system-ui,-apple-system,sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }.scope-core .page-header{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }.scope-core .page-title{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:17.60px;
+    letter-spacing: 4px;
+    color: #c8a96e;
+    text-transform: uppercase;
+  }.scope-core .page-sub{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:12.10px;
+    color: #5a4a2a;
+    font-style: italic;
+  }.scope-core .class-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }.scope-core .class-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:11.00px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 4px 20px;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+  }.scope-core .cards-row{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }.scope-core .card-wrap{
+    position: relative;
+    width: 220px;
+    height: 308px;
+    flex-shrink: 0;
+  }.scope-core .card-shadow{
+    position: absolute;
+    top: 4px; left: 4px;
+    width: 220px; height: 308px;
+    background: #050402;
+    border-radius: 8px;
+  }.scope-core .card{
+    position: relative;
+    width: 220px;
+    height: 308px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1;
+    background: #f5ead4;
+  }.scope-core .core-header{
+    padding: 7px 10px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+  }.scope-core .core-keyword{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:9.90px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f5ead4;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 6px;
+    border-radius: 2px;
+  }.scope-core .core-class-name{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:8.80px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.75;
+    color: #f5ead4;
+  }.scope-core .card-name-zone{
+    padding: 7px 10px 5px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.08);
+  }.scope-core .card-name{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:12.65px;
+    font-weight: 700;
+    color: #1a1008;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }.scope-core .card-subtitle{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:9.35px;
+    color: #6a5030;
+    font-style: italic;
+    margin-top: 1px;
+    line-height: 1.3;
+  }.scope-core .card-body{
+    flex: 1;
+    padding: 7px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-height: 0;
+    overflow: hidden;
+  }.scope-core .zone-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.70px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #8a6a30;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }.scope-core .effect-text{
+    font-size:10.45px;
+    line-height: 1.5;
+    color: #1a1008;
+    flex-shrink: 0;
+  }.scope-core .effect-text em{
+    color: #5a4a20;
+  }.scope-core .rule{
+    height: 0.5px;
+    background: rgba(180, 140, 60, 0.3);
+    flex-shrink: 0;
+  }.scope-core .writein-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #9a8050;
+  }.scope-core .writein-line{
+    height: 12px;
+    border-bottom: 0.5px solid rgba(140,100,40,0.4);
+    margin-bottom: 2px;
+  }.scope-core .special-zone{
+    background: rgba(0,0,0,0.04);
+    border: 0.5px solid rgba(0,0,0,0.1);
+    border-radius: 3px;
+    padding: 5px 7px;
+    flex-shrink: 0;
+  }.scope-core .special-zone-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }.scope-core .special-zone-text{
+    font-size:9.90px;
+    line-height: 1.45;
+    color: #1a1008;
+  }.scope-core .threshold-row{
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+  }.scope-core .threshold-pill{
+    flex: 1;
+    border-radius: 3px;
+    padding: 3px 4px;
+    text-align: center;
+  }.scope-core .threshold-pill .t-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    opacity: 0.75;
+  }.scope-core .threshold-pill .t-val{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:9.90px;
+    font-weight: 700;
+    display: block;
+    margin-top: 1px;
+  }.scope-core .t-cold{ background: rgba(100,120,160,0.15); color: #3a4a6a; }.scope-core .t-hot{ background: rgba(180,100,20,0.15); color: #7a4a10; }.scope-core .t-over{ background: rgba(160,30,20,0.15); color: #7a1a10; }.scope-core .marks-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+    flex-shrink: 0;
+  }.scope-core .mark-pill{
+    display: flex;
+    align-items: stretch;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 0.5px solid rgba(0,0,0,0.2);
+  }.scope-core .mark-num{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.70px;
+    font-weight: 700;
+    color: #f5ead4;
+    padding: 1px 3px;
+    display: flex;
+    align-items: center;
+  }.scope-core .mark-word{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:8.25px;
+    font-weight: 600;
+    padding: 1px 5px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }.scope-core .choose-list{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+  }.scope-core .choose-item{
+    font-size:9.35px;
+    line-height: 1.4;
+    color: #1a1008;
+    padding-left: 8px;
+    position: relative;
+  }.scope-core .choose-item::before{
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: #8a6a30;
+  }.scope-core .choose-item strong{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:8.80px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }.scope-core .card-footer{
+    padding: 4px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.06);
+  }.scope-core .footer-left{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.70px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    color: #1a1008;
+  }.scope-core .footer-right{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.70px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    color: #1a1008;
+  }.scope-core .bane-band{
+    padding: 5px 10px 6px;
+    border-top: 1.5px solid;
+    flex-shrink: 0;
+  }.scope-core .bane-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }.scope-core .bane-text{
+    font-size:9.35px;
+    line-height: 1.4;
+    font-style: italic;
+  }.scope-core .loadout-recipe{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+  }.scope-core .recipe-row{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }.scope-core .recipe-dot{
+    font-size:8.80px;
+    color: #8a6a30;
+    flex-shrink: 0;
+  }.scope-core .recipe-text{
+    font-size:9.35px;
+    color: #1a1008;
+    line-height: 1.4;
+  }.scope-core .recipe-text.special{
+    font-style: italic;
+    color: #5a3a10;
+  }.scope-core .fighter .core-header{ background: #1e3a5f; border-bottom-color: #4a7aaf; }.scope-core .fighter{ border: 2px solid #2a5a9f; }.scope-core .fighter .card-shadow{ background: #0a1a2f; }.scope-core .fighter-label{ color: #4a7aaf; border-color: #2a5a9f; }.scope-core .paladin .core-header{ background: #5a4a10; border-bottom-color: #c8a030; }.scope-core .paladin{ border: 2px solid #c8a030; }.scope-core .paladin .card-shadow{ background: #1a1404; }.scope-core .paladin-label{ color: #c8a030; border-color: #c8a030; }.scope-core .ranger .core-header{ background: #1a3a1a; border-bottom-color: #4a8a4a; }.scope-core .ranger{ border: 2px solid #3a7a3a; }.scope-core .ranger .card-shadow{ background: #060e06; }.scope-core .ranger-label{ color: #4a8a4a; border-color: #3a7a3a; }.scope-core .cleric .core-header{ background: #3a3a4a; border-bottom-color: #9a9aba; }.scope-core .cleric{ border: 2px solid #7a7a9a; }.scope-core .cleric .card-shadow{ background: #0e0e14; }.scope-core .cleric-label{ color: #9a9aba; border-color: #7a7a9a; }.scope-core .bard .core-header{ background: #3a1a5a; border-bottom-color: #9a5aba; }.scope-core .bard{ border: 2px solid #7a3a9a; }.scope-core .bard .card-shadow{ background: #0e061a; }.scope-core .bard-label{ color: #9a5aba; border-color: #7a3a9a; }.scope-core .warlock .core-header{ background: #2a0a1a; border-bottom-color: #8a2040; }.scope-core .warlock{ border: 2px solid #6a1a30; }.scope-core .warlock .card-shadow{ background: #0a0408; }.scope-core .warlock-label{ color: #8a2040; border-color: #6a1a30; }.scope-core .druid .core-header{ background: #1a2a0a; border-bottom-color: #6a9a2a; }.scope-core .druid{ border: 2px solid #5a8a1a; }.scope-core .druid .card-shadow{ background: #060a02; }.scope-core .druid-label{ color: #6a9a2a; border-color: #5a8a1a; }.scope-core .barbarian .core-header{ background: #3a0a0a; border-bottom-color: #9a2a1a; }.scope-core .barbarian{ border: 2px solid #7a1a0a; }.scope-core .barbarian .card-shadow{ background: #0e0202; }.scope-core .barbarian-label{ color: #9a2a1a; border-color: #7a1a0a; }.scope-core .rogue .core-header{ background: #0a2a2a; border-bottom-color: #2a7a7a; }.scope-core .rogue{ border: 2px solid #1a5a5a; }.scope-core .rogue .card-shadow{ background: #020a0a; }.scope-core .rogue-label{ color: #2a7a7a; border-color: #1a5a5a; }.scope-core .infernal-num{ background: #6a1a08; }.scope-core .infernal-word{ background: rgba(138,32,16,0.08); color: #4a1408; }.scope-core .fey-num{ background: #3a1a5a; }.scope-core .fey-word{ background: rgba(90,40,120,0.08); color: #3a1458; }.scope-core .oldone-num{ background: #0a1a2a; }.scope-core .oldone-word{ background: rgba(20,40,80,0.08); color: #0a1428; }.scope-core .celestial-num{ background: #3a3a0a; }.scope-core .celestial-word{ background: rgba(100,100,20,0.08); color: #3a3408; }.scope-core .undying-num{ background: #1a1a1a; }.scope-core .undying-word{ background: rgba(40,40,40,0.08); color: #1a1a18; }.scope-core .kinship-zone{
+    background: rgba(80,120,60,0.08);
+    border: 0.5px solid rgba(80,120,60,0.25);
+    border-radius: 3px;
+    padding: 4px 7px;
+    flex-shrink: 0;
+  }.scope-core .fullform-zone{
+    background: rgba(20,60,20,0.06);
+    border: 0.5px solid rgba(20,60,20,0.2);
+    border-radius: 3px;
+    padding: 4px 7px;
+    flex-shrink: 0;
+  }.scope-core .kinship-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #4a6a30;
+    margin-bottom: 2px;
+  }.scope-core .fullform-label{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:7.15px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #2a4a20;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }.scope-core .check-pill{
+    font-family: system-ui,-apple-system,sans-serif;
+    font-size:6.60px;
+    letter-spacing: 1px;
+    color: #f5ead4;
+    background: #2a4a20;
+    padding: 1px 4px;
+    border-radius: 2px;
+  }.scope-core .t-cold{ background: rgba(80,100,160,0.12); }.scope-core .t-hot{ background: rgba(180,120,20,0.15); }.scope-core .t-over{ background: rgba(160,30,20,0.15); }.scope-core .ace-cards{
+    display: flex;
+    justify-content: center;
+    gap: -6px;
+    flex-shrink: 0;
+    position: relative;
+    height: 32px;
+    margin: 2px 0;
+  }.scope-core .ace-card-back{
+    width: 22px;
+    height: 30px;
+    background: #1a1008;
+    border: 1px solid #c8a96e;
+    border-radius: 3px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }.scope-core .ace-card-back span{
+    font-size:9.90px;
+    color: #c8a96e;
+    opacity: 0.5;
+  }
+.cls-barbarian .card{border-left:5px solid #9E2B2B;}.cls-barbarian .ch{border-bottom-color:#9E2B2B;}.cls-barbarian .fclass,.cls-barbarian .footer-left,.cls-barbarian .core-class-name,.cls-barbarian .meta-cls{color:#9E2B2B;font-weight:700;}
+.cls-fighter .card{border-left:5px solid #B45309;}.cls-fighter .ch{border-bottom-color:#B45309;}.cls-fighter .fclass,.cls-fighter .footer-left,.cls-fighter .core-class-name,.cls-fighter .meta-cls{color:#B45309;font-weight:700;}
+.cls-paladin .card{border-left:5px solid #B8860B;}.cls-paladin .ch{border-bottom-color:#B8860B;}.cls-paladin .fclass,.cls-paladin .footer-left,.cls-paladin .core-class-name,.cls-paladin .meta-cls{color:#B8860B;font-weight:700;}
+.cls-cleric .card{border-left:5px solid #5E81AC;}.cls-cleric .ch{border-bottom-color:#5E81AC;}.cls-cleric .fclass,.cls-cleric .footer-left,.cls-cleric .core-class-name,.cls-cleric .meta-cls{color:#5E81AC;font-weight:700;}
+.cls-ranger .card{border-left:5px solid #2F6B3D;}.cls-ranger .ch{border-bottom-color:#2F6B3D;}.cls-ranger .fclass,.cls-ranger .footer-left,.cls-ranger .core-class-name,.cls-ranger .meta-cls{color:#2F6B3D;font-weight:700;}
+.cls-rogue .card{border-left:5px solid #6C5BA8;}.cls-rogue .ch{border-bottom-color:#6C5BA8;}.cls-rogue .fclass,.cls-rogue .footer-left,.cls-rogue .core-class-name,.cls-rogue .meta-cls{color:#6C5BA8;font-weight:700;}
+.cls-druid .card{border-left:5px solid #5A7D2A;}.cls-druid .ch{border-bottom-color:#5A7D2A;}.cls-druid .fclass,.cls-druid .footer-left,.cls-druid .core-class-name,.cls-druid .meta-cls{color:#5A7D2A;font-weight:700;}
+.cls-warlock .card{border-left:5px solid #9A2B5E;}.cls-warlock .ch{border-bottom-color:#9A2B5E;}.cls-warlock .fclass,.cls-warlock .footer-left,.cls-warlock .core-class-name,.cls-warlock .meta-cls{color:#9A2B5E;font-weight:700;}
+.cls-bard .card{border-left:5px solid #B5388D;}.cls-bard .ch{border-bottom-color:#B5388D;}.cls-bard .fclass,.cls-bard .footer-left,.cls-bard .core-class-name,.cls-bard .meta-cls{color:#B5388D;font-weight:700;}
+.scope-boon .card{width:2.5in;height:3.5in;background:#f4ecd8;border:0.5px solid #c8a96e;display:flex;flex-direction:column;overflow:hidden;font-family:system-ui,-apple-system,sans-serif;color:#241a08;}
+.scope-boon .bf-head{padding:6px 8px 5px;text-align:center;border-bottom:2px solid #c8a96e;}
+.scope-boon .bf-orn{font-size:8.5px;letter-spacing:3px;line-height:1;}
+.scope-boon .bf-badge{font-family:system-ui,-apple-system,sans-serif;font-size:6.5pt;font-weight:700;letter-spacing:1.6pt;margin:2px 0;}
+.scope-boon .bf-name{font-family:system-ui,-apple-system,sans-serif;font-weight:900;text-transform:uppercase;font-size:13.5px;letter-spacing:.6px;line-height:1.05;}
+.scope-boon .bf-body{flex:1;padding:7px 10px 5px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.5;overflow:hidden;}
+.scope-boon .bf-flv{font-style:italic;color:#5a4520;}
+.scope-boon .bf-trig{font-style:italic;color:#3a2c10;}
+.scope-boon .bf-eff{color:#1c1408;}
+.scope-boon .bf-type{align-self:flex-start;font-size:7.5px;text-transform:uppercase;letter-spacing:1px;background:#e7d9ba;border:1px solid #c8a96e;border-radius:3px;padding:1px 7px;color:#6a5020;}
+.scope-boon .bf-choose{font-weight:700;font-size:9.5px;color:#5a4520;margin-top:1px;}
+.scope-boon .bf-choices{display:flex;flex-direction:column;gap:3px;}
+.scope-boon .bf-choice{font-size:9.8px;line-height:1.42;}
+.scope-boon .bf-dismiss{font-size:9px;color:#7a2a1a;line-height:1.4;}
+.scope-boon .bf-stem-label{margin-top:auto;font-family:system-ui,-apple-system,sans-serif;font-size:7pt;letter-spacing:1.4pt;text-transform:uppercase;color:#8a6a30;padding-top:3px;}
+.scope-boon .bf-stem{font-style:italic;color:#3a2c10;font-size:10px;line-height:1.45;}
+.scope-boon .bf-fill{display:inline-block;min-width:54px;border-bottom:1px solid #b09050;}
+.scope-boon .bf-foot{padding:3.5px 8px;border-top:0.5px solid #c8a96e;display:flex;justify-content:space-between;font-size:6.8pt;color:#8a6a30;text-transform:uppercase;letter-spacing:1px;background:#ece0c4;font-family:system-ui,-apple-system,sans-serif;}
+.scope-boon .bf-trait .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
+.scope-boon .bf-trait .bf-name{color:#d4e0f0;}
+.scope-boon .bf-trait .bf-badge,.scope-boon .bf-trait .bf-orn{color:#7a90c0;}
+.scope-boon .bf-bg .bf-head{background:#0f2d45;border-bottom-color:#6aa0c0;}
+.scope-boon .bf-bg .bf-name{color:#c4d8e8;}
+.scope-boon .bf-bg .bf-badge,.scope-boon .bf-bg .bf-orn{color:#6aa0c0;}
+.scope-boon .bf-bond .bf-head{background:#0f2b15;border-bottom-color:#8aa880;}
+.scope-boon .bf-bond .bf-name{color:#b8d0b0;}
+.scope-boon .bf-bond .bf-badge,.scope-boon .bf-bond .bf-orn{color:#8aa880;}
+.scope-boon .bf-flaw .bf-head{background:#3d0a0a;border-bottom-color:#c87070;}
+.scope-boon .bf-flaw .bf-name{color:#f0c0b8;}
+.scope-boon .bf-flaw .bf-badge,.scope-boon .bf-flaw .bf-orn{color:#c87070;}
+.scope-boon .bf-ancestry .bf-head{background:#2a1a08;border-bottom-color:#bfa060;}
+.scope-boon .bf-ancestry .bf-name{color:#d8c080;}
+.scope-boon .bf-ancestry .bf-badge,.scope-boon .bf-ancestry .bf-orn{color:#bfa060;}
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <h1>Instinct RPG</h1>
+  <p>Card Studio - enter the playtest password</p>
+  <input id="gatePass" type="password" placeholder="password" autocomplete="off">
+  <button onclick="checkGate()">Enter</button>
+  <div id="gateErr"></div>
+</div>
+
+<header class="hidden" id="appHeader">
+  <span class="brand">Instinct RPG - Card Studio</span>
+  <div class="tabs">
+    <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
+    <button class="tab" data-view="deck" onclick="showView('deck')">Deck Builder <span class="badge" id="deckBadge">0</span></button>
+    <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
+  </div>
+  <span class="spacer"></span>
+  <button class="hbtn" onclick="printSelected()">Print Selected (<span id="printN">0</span>)</button>
+  <button class="hbtn" onclick="reload()">Reload</button>
+</header>
+
+<section class="view" id="view-browse">
+  <div class="filters">
+    <div class="frow"><input id="search" placeholder="Search names and rules text..." oninput="applyFilters()"><span id="count"></span></div>
+    <div class="frow"><span class="flabel">Class</span><span id="classChips"></span></div>
+    <div class="frow"><span class="flabel">Type</span><span id="typeChips"></span></div>
+    <div class="frow"><span class="flabel">Actions</span>
+      <button class="chip" onclick="selectAllFiltered()">+ Select all (filtered)</button>
+      <button class="chip" onclick="clearDeck()">x Clear deck</button>
+      <button class="chip" onclick="resetFilters()">Reset filters</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="view hidden" id="view-deck">
+  <div class="panel">
+    <h2>Deck Builder</h2>
+    <div class="sub">Cards you select become a working deck for this session. <span id="deckSummary"></span></div>
+    <div class="simbar">
+      <button class="primary" onclick="showView('sim')">Go to Simulator</button>
+      <button onclick="printSelected()">Print this deck</button>
+      <button onclick="clearDeck()">Clear</button>
+    </div>
+    <div class="grid" id="deckGrid"></div>
+  </div>
+</section>
+
+<section class="view hidden" id="view-sim">
+  <div class="panel">
+    <h2>Play Simulator - Play-Through (Mode B)</h2>
+    <div class="sub">Draw an opening hand of 5, then keep drawing one at a time. The deck depletes as you go.</div>
+    <div class="simbar">
+      <button class="primary" onclick="drawHand()">Draw Opening Hand (5)</button>
+      <button onclick="drawOne()" id="drawOneBtn">Draw 1 More</button>
+      <button onclick="resetSim()">Reshuffle / Reset</button>
+      <span class="simstat" id="simStat"></span>
+    </div>
+    <div class="grid" id="simGrid"></div>
+  </div>
+</section>
+
+<div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
+<div id="printroot"></div>
+<div id="toast"></div>
+
+<script src="config.js"></script>
+<script>
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+
+
+let LIVE = [];
+const byKey = {};
+let deck = new Set();
+let filters = {cls:new Set(), type:new Set()};
+let modalKey=null, modalVerIdx=0, modalVersions=[];
+const SS = window.sessionStorage;
+const ACT_IC='▶', REACT_IC='⚡';
+
+/* ---------- keyword restyle engine ---------- */
+const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
+ 'boon':'boon','boons':'boon','bane':'bane','banes':'bane',
+ 'condition':'cond','conditions':'cond','status':'status','statuses':'status',
+ 'act':'act','acts':'act','react':'react','reacts':'react'};
+const KWICON={act:ACT_IC,react:REACT_IC};
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
+function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
+function kwPill(text,id){
+  const ic=KWICON[id]?('<span class="ic">'+KWICON[id]+'</span>'):'';
+  return '<span class="kw kw-'+id+'">'+ic+esc(titleCase(text))+'</span>';
+}
+function inSkip(node){
+  let p=node.parentElement;
+  while(p){
+    const tag=p.tagName, cl=' '+(p.className||'')+' ';
+    if(tag==='STRONG') return true;
+    if(/ kw /.test(cl)) return true;
+    if(/(bf-stem-label|bf-foot|bf-head|bf-badge|bf-name|card-name|core-class-name|core-header|core-keyword|fclass|footer-left|footer-right|fright|cfooter|chead| ch |cbadge|cname|zone-label|clbl|elbl|srlbl|flbl|slbl|bf-choose|card-subtitle)/.test(cl)) return true;
+    p=p.parentElement;
+  }
+  return false;
+}
+const SCAN_RE=/\b(Hit Dice|Hit Die|Guard|Boost|Boons?|Banes?|Conditions?|Statuses|Status|Acts?|Reacts?)\b/gi;
+function scanText(bodyEl){
+  if(!bodyEl) return;
+  const walker=document.createTreeWalker(bodyEl,NodeFilter.SHOW_TEXT,null);
+  const targets=[]; let n;
+  while(n=walker.nextNode()){ if(n.nodeValue.trim() && !inSkip(n)) targets.push(n); }
+  targets.forEach(function(tn){
+    const txt=tn.nodeValue; let res='', last=0, m; SCAN_RE.lastIndex=0; let hit=false;
+    while((m=SCAN_RE.exec(txt))){
+      const w=m[0], lw=w.toLowerCase();
+      if(lw==='act'||lw==='acts'||lw==='react'||lw==='reacts'){
+        if(w[0]===w[0].toLowerCase()) continue; // lowercase verb -> not the card type
+      }
+      const id=kwId(w); if(!id) continue;
+      res+=esc(txt.slice(last,m.index))+kwPill(w,id); last=m.index+w.length; hit=true;
+    }
+    if(hit){ res+=esc(txt.slice(last)); const sp=document.createElement('span'); sp.innerHTML=res; tn.replaceWith(sp); }
+  });
+}
+function restyle(root){
+  // 1. existing .tp / .tp-luck spans -> keyword pill or bold (keep crit-cost .tc)
+  root.querySelectorAll('span.tp, span.tp-luck').forEach(function(sp){
+    if(sp.classList.contains('tc')) return;
+    const txt=sp.textContent, id=kwId(txt);
+    if(id){ const tmp=document.createElement('span'); tmp.innerHTML=kwPill(txt,id); sp.replaceWith(tmp.firstChild); }
+    else { const st=document.createElement('strong'); st.textContent=txt; sp.replaceWith(st); }
+  });
+  // 2. plain-text keyword scan in the body zone
+  scanText(root.querySelector('.cbody, .card-body, .bf-body'));
+  // 3. crit option: wrap trailing text after the cost so it wraps cleanly
+  root.querySelectorAll('.ci').forEach(function(ci){
+    const cost=ci.querySelector('.tc'); if(!cost) return;
+    if(ci.querySelector('.ci-txt')) return;
+    const wrap=document.createElement('span'); wrap.className='ci-txt';
+    let nx=cost.nextSibling;
+    while(nx){ const after=nx.nextSibling; wrap.appendChild(nx); nx=after; }
+    ci.appendChild(wrap);
+  });
+  // 4. Act/React icons on the type badge + footer tier line
+  root.querySelectorAll('.cb').forEach(function(b){
+    const t=b.textContent.trim();
+    if(t==='Act'){ b.innerHTML='<span class="ic">'+ACT_IC+'</span> Act'; b.classList.add('cb-act'); }
+    else if(t==='React'){ b.innerHTML='<span class="ic">'+REACT_IC+'</span> React'; b.classList.add('cb-react'); }
+  });
+  root.querySelectorAll('.fright').forEach(function(f){
+    f.innerHTML=f.innerHTML.replace(/(^|[^>])\bAct\b/, '$1'+ACT_IC+' Act').replace(/(^|[^>])\bReact\b/, '$1'+REACT_IC+' React');
+  });
+  return root;
+}
+function styleHTML(rawHtml){
+  const d=document.createElement('div'); d.innerHTML=rawHtml; restyle(d); return d.innerHTML;
+}
+function prestyleAll(){ LIVE.forEach(function(c){ c.hs = styleHTML(c.h); }); }
+
+/* ---------- gate ---------- */
+function checkGate(){
+  const v=document.getElementById('gatePass').value.trim();
+  if(v===CONFIG.gatePassword || v===''){
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('appHeader').classList.remove('hidden');
+  } else document.getElementById('gateErr').textContent='Not quite - ask Annie for the password.';
+}
+document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+
+/* ---------- helpers ---------- */
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400);}
+function classLabel(c){return c==='any'?'universal':c;}
+function indexCards(){ LIVE.forEach(c=>byKey[c.k]=c); }
+function cardHTML(c,opts){opts=opts||{};
+  const sel=deck.has(c.k)?' sel':'';
+  const btn=opts.noBtn?'':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
+  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'" data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+'</div>';
+}
+
+/* ---------- filters ---------- */
+function buildChips(){
+  const classes=[...new Set(LIVE.map(c=>c.c))].sort();
+  const types=[...new Set(LIVE.map(c=>c.t))].sort();
+  document.getElementById('classChips').innerHTML=classes.map(c=>'<button class="chip cls-'+c+'" onclick="toggleFilter(\'cls\',\''+c+'\',this)">'+classLabel(c)+'</button>').join('');
+  document.getElementById('typeChips').innerHTML=types.map(t=>'<button class="chip" onclick="toggleFilter(\'type\',\''+t+'\',this)">'+t+'</button>').join('');
+}
+function toggleFilter(kind,val,el){
+  const set=kind==='cls'?filters.cls:filters.type;
+  if(set.has(val)){set.delete(val);el.classList.remove('on');}else{set.add(val);el.classList.add('on');}
+  applyFilters();
+}
+function resetFilters(){filters.cls.clear();filters.type.clear();document.getElementById('search').value="";document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));applyFilters();}
+function filtered(){
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  return LIVE.filter(c=>{
+    if(filters.cls.size && !filters.cls.has(c.c))return false;
+    if(filters.type.size && !filters.type.has(c.t))return false;
+    if(q){const hay=(c.n+' '+c.h).toLowerCase();if(!hay.includes(q))return false;}
+    return true;
+  });
+}
+function applyFilters(){
+  const list=filtered();
+  document.getElementById('grid').innerHTML=list.length?list.map(c=>cardHTML(c)).join(''):'<div class="empty">No cards match these filters.</div>';
+  document.getElementById('count').textContent=list.length+' of '+LIVE.length+' cards';
+}
+
+/* ---------- deck ---------- */
+function loadDeck(){try{deck=new Set(JSON.parse(SS.getItem('irpg_deck')||'[]'));}catch(e){deck=new Set();}}
+function saveDeck(){SS.setItem('irpg_deck',JSON.stringify([...deck]));syncBadges();}
+function syncBadges(){document.getElementById('deckBadge').textContent=deck.size;document.getElementById('printN').textContent=deck.size;}
+function toggleDeck(k){deck.has(k)?deck.delete(k):deck.add(k);saveDeck();refreshSelections();if(modalKey===k)renderModalButtons();}
+function selectAllFiltered(){filtered().forEach(c=>deck.add(c.k));saveDeck();refreshSelections();toast('Added filtered cards to deck');}
+function clearDeck(){deck.clear();saveDeck();refreshSelections();toast('Deck cleared');}
+function refreshSelections(){
+  document.querySelectorAll('.cardwrap').forEach(w=>{
+    const k=w.dataset.key,on=deck.has(k);w.classList.toggle('sel',on);
+    const b=w.querySelector('.deckbtn');if(b)b.textContent=on?'✓':'+';
+  });
+  if(!document.getElementById('view-deck').classList.contains('hidden'))renderDeck();
+}
+function renderDeck(){
+  const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
+  document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
+  document.getElementById('deckGrid').innerHTML=cards.length?cards.map(c=>cardHTML(c)).join(''):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
+}
+
+/* ---------- views ---------- */
+function showView(v){
+  document.querySelectorAll('.view').forEach(s=>s.classList.add('hidden'));
+  document.getElementById('view-'+v).classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
+  if(v==='deck')renderDeck(); if(v==='sim')renderSim();
+}
+
+/* ---------- simulator (Mode B) ---------- */
+let sim={pile:[],hand:[],started:false};
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function resetSim(){sim={pile:[],hand:[],started:false};renderSim();}
+function drawHand(){
+  const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
+  if(!cards.length){toast('Build a deck first');return;}
+  sim.pile=shuffle(cards.slice());sim.hand=sim.pile.splice(0,Math.min(5,sim.pile.length));sim.started=true;renderSim();
+}
+function drawOne(){ if(!sim.started){drawHand();return;} if(!sim.pile.length){toast('Deck is empty');return;} sim.hand.push(sim.pile.shift());renderSim(); }
+function renderSim(){
+  const stat=document.getElementById('simStat'),dOne=document.getElementById('drawOneBtn');
+  if(!sim.started){stat.textContent='Deck: '+deck.size+' cards ready.';document.getElementById('simGrid').innerHTML='<div class="empty">Draw an opening hand to begin.</div>';dOne.disabled=deck.size<1;return;}
+  stat.textContent='Hand: '+sim.hand.length+' - Remaining in deck: '+sim.pile.length+(sim.pile.length===0?' (empty)':'');
+  dOne.disabled=sim.pile.length===0;
+  document.getElementById('simGrid').innerHTML=sim.hand.map(c=>cardHTML(c,{noBtn:true})).join('');
+}
+
+/* ---------- modal ---------- */
+async function openCard(k){
+  modalKey=k;modalVerIdx=0;const c=byKey[k];
+  modalVersions=[{label:'Current',html:c.hs||styleHTML(c.h)}];
+  if(CONFIG.useLive){try{modalVersions=modalVersions.concat((await fetchVersions(k)).map(v=>({label:v.label,html:styleHTML(v.html)})));}catch(e){}}
+  renderModal();document.getElementById('modal').classList.remove('hidden');
+}
+function closeModal(){document.getElementById('modal').classList.add('hidden');modalKey=null;}
+function renderModal(){
+  const c=byKey[modalKey],v=modalVersions[modalVerIdx],multi=modalVersions.length>1;
+  document.getElementById('modal').innerHTML='<div class="sheet" onclick="event.stopPropagation()">'+
+    '<button class="closex" onclick="closeModal()">&times;</button>'+
+    '<div class="sheet-card">'+
+      '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+v.html+'</div>'+
+      '<div class="vtoggle"><button onclick="verStep(-1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
+      '<span class="vlabel">'+esc(v.label)+'</span><button onclick="verStep(1)" '+(modalVerIdx<=0?'disabled':'')+'>&#9654;</button></div>'+
+      (multi?'':'<div class="meta">No earlier versions yet - history builds from the next edit.</div>')+
+    '</div>'+
+    '<div class="sheet-side cls-'+c.c+'">'+
+      '<h2>'+esc(c.n)+'</h2>'+
+      '<div class="meta"><span class="meta-cls">'+classLabel(c.c)+'</span> - '+esc(c.t)+'</div>'+
+      '<div class="sbtns" id="modalBtns"></div>'+
+      '<div class="cmts" id="cmts"></div>'+
+    '</div></div>';
+  renderModalButtons();renderComments();
+}
+function verStep(d){modalVerIdx=Math.max(0,Math.min(modalVersions.length-1,modalVerIdx+d));renderModal();}
+function renderModalButtons(){
+  const c=byKey[modalKey],inDeck=deck.has(c.k);
+  document.getElementById('modalBtns').innerHTML=
+    '<button class="'+(inDeck?'':'primary')+'" onclick="toggleDeck(\''+c.k+'\')">'+(inDeck?'In deck - remove':'+ Add to deck')+'</button>'+
+    '<button onclick="printOne(\''+c.k+'\')">Print this card</button>';
+}
+
+/* ---------- comments (sessionStorage preview; Baserow when live) ---------- */
+function cmtKey(k){return 'irpg_cmt_'+k;}
+function readComments(k){
+  if(CONFIG.useLive)return fetchComments(k);
+  try{return Promise.resolve(JSON.parse(SS.getItem(cmtKey(k))||'[]'));}catch(e){return Promise.resolve([]);}
+}
+async function renderComments(){
+  const k=modalKey,list=await readComments(k),box=document.getElementById('cmts');if(!box)return;
+  box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
+    (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
+    '<div class="cmtform"><input id="cmtName" placeholder="Your name"><textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
+}
+async function postComment(k){
+  const name=(document.getElementById('cmtName').value||'').trim()||'Anon';
+  const body=(document.getElementById('cmtBody').value||'').trim();
+  if(!body){toast('Write a comment first');return;}
+  const chk=document.getElementById('cmtChange');const change=!!(chk&&chk.checked);
+  const entry={name,body,when:new Date().toLocaleString(),change};
+  if(CONFIG.useLive){try{await postCommentLive(k,name,body,change);}catch(e){toast('Could not post');return;}}
+  else{const cur=JSON.parse(SS.getItem(cmtKey(k))||'[]');cur.push(entry);SS.setItem(cmtKey(k),JSON.stringify(cur));}
+  toast('Comment posted');renderComments();
+}
+
+/* ---------- print ---------- */
+function printList(cards){
+  if(!cards.length){toast('Nothing selected to print');return;}
+  document.getElementById('printroot').innerHTML='<div class="print-sheet">'+cards.map(c=>'<div class="cardwrap scope-'+c.s+' cls-'+c.c+'">'+(c.hs||c.h)+'</div>').join('')+'</div>';
+  window.print();
+}
+function printSelected(){printList([...deck].map(k=>byKey[k]).filter(Boolean));}
+function printOne(k){printList([byKey[k]]);}
+
+/* ---------- live Baserow (CONFIG.useLive) ---------- */
+function authHeaders(){return {'Authorization':'Token '+CONFIG.readToken};}
+async function fetchAll(tableId,params){
+  let url=CONFIG.apiBase+tableId+'/?user_field_names=true&size=200'+(params||'');let out=[];
+  while(url){const r=await fetch(url,{headers:authHeaders(),cache:'no-store'});const j=await r.json();out=out.concat(j.results||[]);url=j.next;}
+  return out;
+}
+function guessSet(h){return /core-header/.test(h)?'core':/bf-head/.test(h)?'boon':'ability';}
+function guessClass(h){const m=/class="(?:fclass|core-class-name)"[^>]*>([^<]+)</.exec(h||'');return m?m[1].toLowerCase():'any';}
+function guessType(h){
+  const b=/class="bf-badge"[^>]*>BOON\s*(?:&mdash;|-|—)\s*([A-Z]+)/.exec(h||'');
+  if(b)return b[1].charAt(0)+b[1].slice(1).toLowerCase();
+  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');return m?m[1].trim():'';
+}
+async function fetchCards(){
+  const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
+  return rows.map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML}));
+}
+async function fetchVersions(k){
+  const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
+  return rows.sort((a,b)=>(b.Version_Date||'').localeCompare(a.Version_Date||'')).map(r=>({label:(r.Version_Date||'').slice(0,16),html:r.HTML}));
+}
+async function fetchComments(k){
+  const rows=await fetchAll(CONFIG.tableComments,'&filter__Card_Key__equal='+encodeURIComponent(k)+'&filter__Status__single_select_equal=visible');
+  return rows.map(r=>({id:r.id,name:r.Commenter_Name,body:r.Body,when:(r.Created||'').slice(0,16),change:(((r.Change_Request||{}).value)||r.Change_Request)==='pending'}));
+}
+async function postCommentLive(k,name,body,change){
+  const c=byKey[k];
+  await fetch(CONFIG.apiBase+CONFIG.tableComments+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Card_Key:k,Card_Name:c?c.n:'',Commenter_Name:name,Body:body,Status:'visible',Change_Request:change?'pending':null})});
+}
+function toggleChange(k,i,val){
+  if(CONFIG.useLive){return toggleChangeLive(k,i,val);}
+  const cur=JSON.parse(SS.getItem(cmtKey(k))||'[]');if(cur[i]){cur[i].change=val;SS.setItem(cmtKey(k),JSON.stringify(cur));}
+  toast(val?'Flagged to apply on next push':'Unflagged');renderComments();
+}
+async function toggleChangeLive(k,i,val){
+  try{const list=await fetchComments(k);const row=list[i];if(!row||!row.id)return;
+    await fetch(CONFIG.apiBase+CONFIG.tableComments+'/'+row.id+'/?user_field_names=true',{method:'PATCH',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Change_Request:val?'pending':null})});
+    toast(val?'Flagged to apply on next push':'Unflagged');renderComments();
+  }catch(e){toast('Could not update (needs write access on Comments)');}
+}
+function deleteComment(k,i){
+  if(!window.confirm('Delete this comment? This cannot be undone.'))return;
+  if(CONFIG.useLive){return deleteCommentLive(k,i);}
+  const cur=JSON.parse(SS.getItem(cmtKey(k))||'[]');cur.splice(i,1);SS.setItem(cmtKey(k),JSON.stringify(cur));
+  toast('Comment deleted');renderComments();
+}
+async function deleteCommentLive(k,i){
+  try{const list=await fetchComments(k);const row=list[i];if(!row||!row.id)return;
+    await fetch(CONFIG.apiBase+CONFIG.tableComments+'/'+row.id+'/',{method:'DELETE',headers:authHeaders()});
+    toast('Comment deleted');renderComments();
+  }catch(e){toast('Could not delete (needs delete access on Comments)');}
+}
+async function loadCards(){
+  document.getElementById('grid').innerHTML='<div class="empty">Loading cards…</div>';
+  try{
+    const cards=await fetchCards();
+    LIVE=cards;
+    LIVE.forEach(c=>{c.hs=styleHTML(c.h);});
+    LIVE.forEach(c=>{byKey[c.k]=c;});
+    buildChips();applyFilters();syncBadges();
+  }catch(e){
+    document.getElementById('grid').innerHTML='<div class="empty">Could not load cards — check token and connection.</div>';
+  }
+}
+
+async function reload(){
+  toast('Refreshing…');
+  await loadCards();
+  toast('Cards refreshed.');
+}
+
+/* ---------- init ---------- */
+async function init(){
+  loadDeck();
+  await loadCards();
+}
+init();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
