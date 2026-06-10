@@ -546,6 +546,11 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-ancestry .bf-head{background:#2a1a08;border-bottom-color:#bfa060;}
 .scope-boon .bf-ancestry .bf-name{color:#d8c080;}
 .scope-boon .bf-ancestry .bf-badge,.scope-boon .bf-ancestry .bf-orn{color:#bfa060;}
+.class-divider{grid-column:1/-1;width:100%;padding:18px 4px 8px;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cls-color,#c8a96e);border-bottom:1px solid var(--cls-color,#c8a96e);}
+.rework-burst{position:absolute;top:-18px;right:-18px;z-index:10;width:62px;height:62px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.rework-burst::before,.rework-burst::after{content:'';position:absolute;inset:6px;background:#c8a96e;z-index:0;}
+.rework-burst::after{transform:rotate(45deg);}
+.burst-text{position:relative;z-index:1;font-family:system-ui,-apple-system,sans-serif;font-size:6.5px;font-weight:900;color:#1a1108;letter-spacing:0.3px;line-height:1.35;text-transform:uppercase;text-align:center;}
 </style>
 </head>
 <body>
@@ -723,7 +728,29 @@ function indexCards(){ LIVE.forEach(c=>byKey[c.k]=c); }
 function cardHTML(c,opts){opts=opts||{};
   const sel=deck.has(c.k)?' sel':'';
   const btn=opts.noBtn?'':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
-  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'" data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+'</div>';
+  const burst=(!opts.noBtn&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
+  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'" data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+burst+'</div>';
+}
+
+/* ---------- sort / group ---------- */
+function isLoadout(c){const m=/class="core-keyword"[^>]*>([^<]+)</.exec(c.h||'');return !!m&&m[1].trim().toUpperCase()==='LOADOUT';}
+function cardTier(c){if(isLoadout(c))return 0;if(c.s==='core')return 1;return 2;}
+function daysSince(ds){if(!ds)return null;return Math.floor((Date.now()-new Date(ds))/86400000);}
+function reworkLabel(ds){const d=daysSince(ds);if(d===null)return '';if(d<=0)return 'TODAY';if(d===1)return '1 DAY AGO';return d+' DAYS AGO';}
+function isRecentRework(c){const d=daysSince(c.rd);return d!==null&&d>=0&&d<=14;}
+function buildGroupedHTML(cards,opts){
+  opts=opts||{};
+  const cm={};
+  cards.forEach(c=>{(cm[c.c]||(cm[c.c]=[])).push(c);});
+  const classes=Object.keys(cm).sort();
+  const multi=classes.length>1;
+  let html='';
+  classes.forEach(cls=>{
+    cm[cls].sort((a,b)=>{const ta=cardTier(a),tb=cardTier(b);return ta!==tb?ta-tb:a.n.localeCompare(b.n);});
+    if(multi){const col=CONFIG.palette[cls]||'#c8a96e';html+='<div class="class-divider" style="--cls-color:'+col+'">'+cls.charAt(0).toUpperCase()+cls.slice(1)+'</div>';}
+    html+=cm[cls].map(c=>cardHTML(c,opts)).join('');
+  });
+  return html||'<div class="empty">No cards match these filters.</div>';
 }
 
 /* ---------- filters ---------- */
@@ -750,7 +777,7 @@ function filtered(){
 }
 function applyFilters(){
   const list=filtered();
-  document.getElementById('grid').innerHTML=list.length?list.map(c=>cardHTML(c)).join(''):'<div class="empty">No cards match these filters.</div>';
+  document.getElementById('grid').innerHTML=list.length?buildGroupedHTML(list):'<div class="empty">No cards match these filters.</div>';
   document.getElementById('count').textContent=list.length+' of '+LIVE.length+' cards';
 }
 
@@ -771,7 +798,7 @@ function refreshSelections(){
 function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
-  document.getElementById('deckGrid').innerHTML=cards.length?cards.map(c=>cardHTML(c)).join(''):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
+  document.getElementById('deckGrid').innerHTML=cards.length?buildGroupedHTML(cards):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
 }
 
 /* ---------- views ---------- */
@@ -894,7 +921,7 @@ async function fetchCards(){
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
     .filter(r=>{const v=(r.Status&&r.Status.value)||r.Status||'';return v.toLowerCase()!=='legacy';})
-    .map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML,u:r.updated_on||''}));
+    .map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML,u:r.updated_on||'',rd:r.Last_Rework_Date||''}));
 }
 async function fetchVersions(k){
   const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
