@@ -627,6 +627,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <div class="frow"><input id="search" placeholder="Search names and rules text..." oninput="applyFilters()"><span id="count"></span></div>
     <div class="frow"><span class="flabel">Class</span><span id="classChips"></span></div>
     <div class="frow"><span class="flabel">Type</span><span id="typeChips"></span><span class="flabel" style="margin-left:14px;white-space:nowrap">Action Type</span><span id="actionChips"></span></div>
+    <div class="frow"><span class="flabel">Show</span><button class="chip" onclick="toggleFilter('new','new',this)">★ New</button></div>
     <div class="frow"><span class="flabel">Actions</span>
       <button class="chip" onclick="selectAllFiltered()">+ Select all (filtered)</button>
       <button class="chip" onclick="clearDeck()">x Clear deck</button>
@@ -676,7 +677,7 @@ const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database
 let LIVE = [];
 const byKey = {};
 let deck = new Set();
-let filters = {cls:new Set(), type:new Set()};
+let filters = {cls:new Set(), type:new Set(), showNew:false};
 let modalKey=null, modalVerIdx=0, modalVersions=[];
 const SS = window.sessionStorage;
 const ACT_IC='▶', REACT_IC='⚡';
@@ -799,14 +800,14 @@ function buildGroupedHTML(cards,opts){
   let html='';
   BOON_TYPE_ORDER.forEach(type=>{
     const grp=boonBuckets[type];if(!grp||!grp.length)return;
-    grp.sort((a,b)=>a.n.localeCompare(b.n));
+    grp.sort((a,b)=>{const ra=isRecentRework(a)?0:1,rb=isRecentRework(b)?0:1;return ra!==rb?ra-rb:a.n.localeCompare(b.n);});
     html+='<div class="class-divider" style="--cls-color:'+(TYPE_PALETTE[type]||'#c8a96e')+'">'+type+'</div>';
     html+=grp.map(c=>cardHTML(c,opts)).join('');
   });
   const classes=Object.keys(classBuckets).sort();
   const multiCls=classes.length>1||Object.keys(boonBuckets).length>0;
   classes.forEach(cls=>{
-    classBuckets[cls].sort((a,b)=>{const ta=cardTier(a),tb=cardTier(b);return ta!==tb?ta-tb:a.n.localeCompare(b.n);});
+    classBuckets[cls].sort((a,b)=>{const ta=cardTier(a),tb=cardTier(b);if(ta!==tb)return ta-tb;const ra=isRecentRework(a)?0:1,rb=isRecentRework(b)?0:1;return ra!==rb?ra-rb:a.n.localeCompare(b.n);});
     if(multiCls){const col=CONFIG.palette[cls]||'#c8a96e';html+='<div class="class-divider" style="--cls-color:'+col+'">'+cls.charAt(0).toUpperCase()+cls.slice(1)+'</div>';}
     html+=classBuckets[cls].map(c=>cardHTML(c,opts)).join('');
   });
@@ -824,16 +825,17 @@ function buildChips(){
   document.getElementById('actionChips').innerHTML=ACTION_TYPES.filter(t=>allTypes.includes(t)).map(t=>'<button class="chip type-'+t.toLowerCase()+'" onclick="toggleFilter(\'type\',\''+t+'\',this)">'+{'Act':ACT_IC,'React':REACT_IC}[t]+' '+t+'</button>').join('');
 }
 function toggleFilter(kind,val,el){
-  const set=kind==='cls'?filters.cls:filters.type;
-  if(set.has(val)){set.delete(val);el.classList.remove('on');}else{set.add(val);el.classList.add('on');}
+  if(kind==='new'){filters.showNew=!filters.showNew;el.classList.toggle('on',filters.showNew);}
+  else{const set=kind==='cls'?filters.cls:filters.type;if(set.has(val)){set.delete(val);el.classList.remove('on');}else{set.add(val);el.classList.add('on');}}
   applyFilters();
 }
-function resetFilters(){filters.cls.clear();filters.type.clear();document.getElementById('search').value="";document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));applyFilters();}
+function resetFilters(){filters.cls.clear();filters.type.clear();filters.showNew=false;document.getElementById('search').value="";document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));applyFilters();}
 function filtered(){
   const q=document.getElementById('search').value.toLowerCase().trim();
   return LIVE.filter(c=>{
     if(filters.cls.size && !filters.cls.has(c.c))return false;
     if(filters.type.size && !filters.type.has(c.t))return false;
+    if(filters.showNew && !isRecentRework(c))return false;
     if(q){const hay=(c.n+' '+c.h).toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
