@@ -961,13 +961,16 @@ function guessClass(h){const m=/class="(?:fclass|core-class-name)"[^>]*>([^<]+)<
 function guessType(h){
   const b=/class="bf-badge"[^>]*>BOON\s*(?:&mdash;|-|—)\s*([A-Z]+)/.exec(h||'');
   if(b)return b[1].charAt(0)+b[1].slice(1).toLowerCase();
-  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');return m?m[1].trim():'';
+  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');
+  if(m)return m[1].trim();
+  if(/class="core-header"/.test(h||''))return 'Core';
+  return '';
 }
 async function fetchCards(){
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
     .filter(r=>{const v=(r.Status&&r.Status.value)||r.Status||'';return v.toLowerCase()!=='legacy';})
-    .map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML,u:r.updated_on||'',rd:r.Last_Rework_Date||''}));
+    .map(r=>{const s=guessSet(r.HTML);return{k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML)||(s==='core'?'Core':''),s,h:r.HTML,u:r.updated_on||'',rd:r.Last_Rework_Date||''};});
 }
 async function fetchVersions(k){
   const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
