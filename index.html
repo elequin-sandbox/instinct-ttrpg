@@ -167,11 +167,22 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .simbar button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
 .simbar button:disabled{opacity:.35;cursor:default;}
 .simstat{color:#cbb98e;font-size:13px;}
-#simCoreArea{margin-bottom:16px;}
-#simCoreArea .grid{margin-top:8px;}
-.sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gold-d);text-transform:uppercase;}
-.sim-core-divider{border:none;border-top:1px solid rgba(203,185,142,0.2);margin:14px 0 10px;}
-.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--gold-d);text-transform:uppercase;margin-bottom:8px;}
+#simCoreArea{
+  background:linear-gradient(160deg,rgba(18,52,20,.55) 0%,rgba(10,35,12,.62) 100%);
+  border:1px solid rgba(65,112,60,.32);
+  border-radius:12px;padding:16px 20px 20px;margin-bottom:18px;
+  box-shadow:inset 0 3px 22px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.03),0 2px 8px rgba(0,0,0,.35);
+}
+#simCoreArea .grid{margin-top:10px;}
+.sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(138,188,125,.75);text-transform:uppercase;}
+#simHandArea{
+  background:rgba(26,16,4,.52);
+  border:1px solid rgba(148,118,52,.22);
+  border-radius:12px;padding:16px 20px 20px;
+  box-shadow:inset 0 2px 14px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.02);
+}
+#simHandArea .grid{margin-top:10px;}
+.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;}
 
 #printroot{display:none;}
 @media print{
@@ -887,7 +898,7 @@ function renderSim(){
     return;
   }
   if(sim.coreCards.length){
-    coreArea.innerHTML='<div class="sim-core-label">Active Area — Core Cards</div><div class="grid">'+sim.coreCards.map(c=>cardHTML(c,{noBtn:true})).join('')+'</div><hr class="sim-core-divider">';
+    coreArea.innerHTML='<div class="sim-core-label">Active Area — Core Cards</div><div class="grid">'+sim.coreCards.map(c=>cardHTML(c,{noBtn:true})).join('')+'</div>';
     coreArea.classList.remove('hidden');
   } else {
     coreArea.classList.add('hidden');
