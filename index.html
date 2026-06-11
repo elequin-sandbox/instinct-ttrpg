@@ -80,6 +80,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deckbtn{position:absolute;bottom:6px;right:6px;z-index:3;width:30px;height:30px;border-radius:50%;border:none;background:var(--gold);color:#1a1108;font-size:18px;font-weight:700;line-height:1;opacity:0;transition:opacity .12s;box-shadow:0 1px 4px rgba(0,0,0,.5);}
 .cardwrap:hover .deckbtn{opacity:1;}
 .cardwrap.sel .deckbtn{opacity:1;background:#3fae6c;color:#fff;}
+.deckbtn.remove{opacity:1;background:rgba(120,28,28,.88);color:#fff;font-size:16px;font-weight:700;}
+.deckbtn.remove:hover{background:#9e2b2b;}
 .empty{padding:60px;text-align:center;color:var(--gold-d);font-size:15px;width:100%;}
 
 /* keyword pills + bold + icons */
@@ -648,6 +650,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-lbl span{font-size:9px;opacity:.5;}
 .deck-lane-cards{display:grid;grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:14px;align-items:start;}
 .deck-lane-nav{display:flex;gap:6px;padding:10px 16px;border-top:1px solid #2a1d10;flex-wrap:wrap;background:#1a1108;flex-shrink:0;}
+.deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
 </style>
@@ -666,7 +669,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   <span class="brand">Instinct RPG - Card Studio</span>
   <div class="tabs">
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
-    <button class="tab" data-view="deck" onclick="showView('deck')">Deck Builder <span class="badge" id="deckBadge">0</span></button>
+    <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
@@ -694,7 +697,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 
 <section class="view hidden" id="view-deck">
   <div class="panel">
-    <h2>Deck Builder</h2>
+    <h2>My Deck</h2>
     <div class="sub">Cards you select become a working deck for this session. <span id="deckSummary"></span></div>
     <div class="simbar">
       <button class="primary" onclick="showView('sim')">Go to Simulator</button>
@@ -834,7 +837,7 @@ function classLabel(c){return c==='any'?'universal':c;}
 function indexCards(){ LIVE.forEach(c=>byKey[c.k]=c); }
 function cardHTML(c,opts){opts=opts||{};
   const sel=(opts.noSel||!deck.has(c.k))?'':' sel';
-  const btn=opts.noBtn?'':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
+  const btn=opts.noBtn?'':opts.deckRemove?'<button class="deckbtn remove" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')" title="Remove from deck">✕</button>':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
   const burst=(!opts.noBtn&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
   const zstyle=opts.zoom&&opts.zoom!='1'?' style="zoom:'+opts.zoom+'"':'';
   return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'"'+zstyle+' data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+burst+'</div>';
@@ -912,11 +915,12 @@ function clearDeck(){deck.clear();saveDeck();refreshSelections();toast('Deck cle
 function refreshSelections(){
   document.querySelectorAll('.cardwrap').forEach(w=>{
     const k=w.dataset.key,on=deck.has(k);w.classList.toggle('sel',on);
-    const b=w.querySelector('.deckbtn');if(b)b.textContent=on?'✓':'+';
+    const b=w.querySelector('.deckbtn:not(.remove)');if(b)b.textContent=on?'✓':'+';
   });
   if(!document.getElementById('view-deck').classList.contains('hidden'))renderDeck();
 }
-function buildLaneHTML(groups,cardFn,idPfx){
+function buildLaneHTML(groups,cardFn,idPfx,opts){
+  opts=opts||{};
   var id=idPfx||'dlanes';
   var active=groups.filter(function(g){return g.cards.length;});
   var lanes=active.map(function(g,i){
@@ -927,9 +931,13 @@ function buildLaneHTML(groups,cardFn,idPfx){
   }).join('');
   var nav=active.map(function(g,i){
     var lid=id+i;
-    return '<button class="deck-lane-navbtn" onclick="(function(){var w=document.getElementById(\''+id+'\'),t=document.getElementById(\''+lid+'\');if(w&&t)w.scrollLeft=t.offsetLeft;})()">'+esc(g.lbl)+'</button>';
+    var cls=g.chipClass?'chip '+g.chipClass:'deck-lane-navbtn';
+    return '<button class="'+cls+'" onclick="(function(){var w=document.getElementById(\''+id+'\'),t=document.getElementById(\''+lid+'\');if(w&&t)w.scrollLeft=t.offsetLeft;})()">'+esc(g.lbl)+'</button>';
   }).join('');
-  return '<div class="deck-lanes-wrap"><div class="deck-lanes" id="'+id+'">'+lanes+'</div><div class="deck-lane-nav">'+nav+'</div></div>';
+  var navBar='<div class="deck-lane-nav'+(opts.navAtTop?' nav-top':'')+'">'+nav+'</div>';
+  return '<div class="deck-lanes-wrap">'+(opts.navAtTop?navBar:'')+
+    '<div class="deck-lanes" id="'+id+'">'+lanes+'</div>'+
+    (opts.navAtTop?'':navBar)+'</div>';
 }
 function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
@@ -937,16 +945,16 @@ function renderDeck(){
   if(!cards.length){document.getElementById('deckGrid').innerHTML='<div class="empty">Your deck is empty. Add cards from Browse.</div>';return;}
   const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Trait'];
   const groups=[
-    {lbl:'Core',       cards:cards.filter(c=>c.s==='core')},
-    {lbl:'Background', cards:cards.filter(c=>c.t==='Background')},
-    {lbl:'Ancestry',   cards:cards.filter(c=>c.t==='Ancestry')},
-    {lbl:'Bond',       cards:cards.filter(c=>c.t==='Bond')},
-    {lbl:'Flaw',       cards:cards.filter(c=>c.t==='Flaw')},
-    {lbl:'Traits',     cards:cards.filter(c=>c.t==='Trait')},
-    {lbl:'Abilities',  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
+    {lbl:'Core',       chipClass:'',                  cards:cards.filter(c=>c.s==='core')},
+    {lbl:'Background', chipClass:'type-background',   cards:cards.filter(c=>c.t==='Background')},
+    {lbl:'Ancestry',   chipClass:'type-ancestry',     cards:cards.filter(c=>c.t==='Ancestry')},
+    {lbl:'Bond',       chipClass:'type-bond',         cards:cards.filter(c=>c.t==='Bond')},
+    {lbl:'Flaw',       chipClass:'type-flaw',         cards:cards.filter(c=>c.t==='Flaw')},
+    {lbl:'Traits',     chipClass:'type-trait',        cards:cards.filter(c=>c.t==='Trait')},
+    {lbl:'Abilities',  chipClass:'',                  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
   ];
-  const cardFn=c=>'<div class="cardwrap scope-'+c.s+' cls-'+c.c+' sel" onclick="openCard(\''+c.k+'\')">'+cardHTML(c,{noBtn:true})+'</div>';
-  document.getElementById('deckGrid').innerHTML=buildLaneHTML(groups,cardFn,'dk');
+  const cardFn=c=>cardHTML(c,{noSel:true,deckRemove:true});
+  document.getElementById('deckGrid').innerHTML=buildLaneHTML(groups,cardFn,'dk',{navAtTop:true});
 }
 
 /* ---------- views ---------- */
