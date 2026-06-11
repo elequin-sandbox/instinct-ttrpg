@@ -633,6 +633,21 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .ob-review-divider{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold-d);padding-bottom:8px;border-bottom:1px solid #2a1d10;margin-bottom:12px;font-family:system-ui,-apple-system,sans-serif;}
 .ob-launch-btn{background:var(--gold) !important;color:#1a1108 !important;border-color:var(--gold) !important;font-weight:700;letter-spacing:.5px;}
 .ob-launch-btn:hover{background:#d4b878 !important;}
+
+/* ===== DECK LANE LAYOUT ===== */
+.deck-lanes-wrap{display:flex;flex-direction:column;overflow:hidden;}
+.deck-lanes{display:flex;overflow-x:auto;scroll-behavior:smooth;padding-bottom:2px;}
+.deck-lanes::-webkit-scrollbar{height:5px;}
+.deck-lanes::-webkit-scrollbar-track{background:#1a1108;}
+.deck-lanes::-webkit-scrollbar-thumb{background:var(--gold-d);border-radius:2px;}
+.deck-lane{flex-shrink:0;padding:14px 16px 20px;border-right:1px solid #2a1d10;}
+.deck-lane:last-child{border-right:none;}
+.deck-lane-lbl{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold-d);white-space:nowrap;padding-bottom:8px;margin-bottom:12px;border-bottom:1px solid #2a1d10;}
+.deck-lane-lbl span{font-size:9px;opacity:.5;}
+.deck-lane-cards{display:grid;grid-template-rows:repeat(3,auto);grid-auto-flow:column;gap:14px;align-items:start;}
+.deck-lane-nav{display:flex;gap:6px;padding:10px 16px;border-top:1px solid #2a1d10;flex-wrap:wrap;background:#1a1108;flex-shrink:0;}
+.deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
+.deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
 </style>
 </head>
 <body>
@@ -684,7 +699,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
       <button onclick="printSelected()">Print this deck</button>
       <button onclick="clearDeck()">Clear</button>
     </div>
-    <div class="grid" id="deckGrid"></div>
+    <div id="deckGrid"></div>
   </div>
 </section>
 
@@ -898,10 +913,37 @@ function refreshSelections(){
   });
   if(!document.getElementById('view-deck').classList.contains('hidden'))renderDeck();
 }
+function buildLaneHTML(groups,cardFn,idPfx){
+  var id=idPfx||'dlanes';
+  var active=groups.filter(function(g){return g.cards.length;});
+  var lanes=active.map(function(g,i){
+    var lid=id+i;
+    return '<div class="deck-lane" id="'+lid+'">'+
+      '<div class="deck-lane-lbl">'+esc(g.lbl)+' <span>('+g.cards.length+')</span></div>'+
+      '<div class="deck-lane-cards">'+g.cards.map(cardFn).join('')+'</div></div>';
+  }).join('');
+  var nav=active.map(function(g,i){
+    var lid=id+i;
+    return '<button class="deck-lane-navbtn" onclick="(function(){var w=document.getElementById(\''+id+'\'),t=document.getElementById(\''+lid+'\');if(w&&t)w.scrollLeft=t.offsetLeft;})()">'+esc(g.lbl)+'</button>';
+  }).join('');
+  return '<div class="deck-lanes-wrap"><div class="deck-lanes" id="'+id+'">'+lanes+'</div><div class="deck-lane-nav">'+nav+'</div></div>';
+}
 function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
-  document.getElementById('deckGrid').innerHTML=cards.length?buildGroupedHTML(cards):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
+  if(!cards.length){document.getElementById('deckGrid').innerHTML='<div class="empty">Your deck is empty. Add cards from Browse.</div>';return;}
+  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Trait'];
+  const groups=[
+    {lbl:'Core',       cards:cards.filter(c=>c.s==='core')},
+    {lbl:'Background', cards:cards.filter(c=>c.t==='Background')},
+    {lbl:'Ancestry',   cards:cards.filter(c=>c.t==='Ancestry')},
+    {lbl:'Bond',       cards:cards.filter(c=>c.t==='Bond')},
+    {lbl:'Flaw',       cards:cards.filter(c=>c.t==='Flaw')},
+    {lbl:'Traits',     cards:cards.filter(c=>c.t==='Trait')},
+    {lbl:'Abilities',  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
+  ];
+  const cardFn=c=>'<div class="cardwrap scope-'+c.s+' cls-'+c.c+' sel" onclick="openCard(\''+c.k+'\')">'+cardHTML(c,{noBtn:true})+'</div>';
+  document.getElementById('deckGrid').innerHTML=buildLaneHTML(groups,cardFn,'dk');
 }
 
 /* ---------- views ---------- */
@@ -1279,23 +1321,17 @@ function obStep9(){
   var groups=[
     {lbl:'Core Cards',cards:all.filter(function(c){return c.s==='core';})},
     {lbl:'Background',cards:all.filter(function(c){return c.t==='Background';})},
-    {lbl:'Ancestry',cards:all.filter(function(c){return c.t==='Ancestry';})},
-    {lbl:'Bond',cards:all.filter(function(c){return c.t==='Bond';})},
-    {lbl:'Flaw',cards:all.filter(function(c){return c.t==='Flaw';})},
-    {lbl:'Traits',cards:all.filter(function(c){return c.t==='Trait';})},
+    {lbl:'Ancestry',  cards:all.filter(function(c){return c.t==='Ancestry';})},
+    {lbl:'Bond',      cards:all.filter(function(c){return c.t==='Bond';})},
+    {lbl:'Flaw',      cards:all.filter(function(c){return c.t==='Flaw';})},
+    {lbl:'Traits',    cards:all.filter(function(c){return c.t==='Trait';})},
   ];
-  var groupHTML=groups.filter(function(g){return g.cards.length;}).map(function(g){
-    var cards=g.cards.map(function(c){
-      return '<div class="ob-card-option" style="cursor:default">'+
-        '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'">'+(c.hs||c.h)+'</div></div>';
-    }).join('');
-    return '<div class="ob-review-group">'+
-      '<div class="ob-review-divider">'+esc(g.lbl)+' ('+g.cards.length+')</div>'+
-      '<div class="ob-cards-row">'+cards+'</div></div>';
-  }).join('');
+  var cardFn=function(c){
+    return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+(c.hs||c.h)+'</div>';
+  };
   return obHead('Deck Review','Final Step')+
     '<div class="ob-subtext">'+all.length+' cards in your starting deck. Review below, then confirm to begin playing.</div>'+
-    groupHTML+
+    buildLaneHTML(groups,cardFn,'ob')+
     '<div class="ob-btns"><button class="ob-btn primary" onclick="obFinish()">✓ Confirm Deck &amp; Start Playing</button></div>';
 }
 
