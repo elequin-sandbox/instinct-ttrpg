@@ -176,17 +176,20 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   box-shadow:inset 0 3px 22px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.03),0 2px 8px rgba(0,0,0,.35);
 }
 #simCoreArea .grid{margin-top:8px;}
-#simCoreArea .cardwrap{zoom:0.62;}
 .sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(138,188,125,.75);text-transform:uppercase;cursor:help;}
 #simHandArea{
   background:rgba(26,16,4,.52);
   border:1px solid rgba(148,118,52,.22);
-  border-radius:12px;padding:16px 20px 20px;
+  border-radius:12px;padding:16px 20px 28px;
   box-shadow:inset 0 2px 14px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.02);
+  overflow:visible;
 }
-#simHandArea .sim-hand-label{margin-bottom:10px;}
-.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;}
-.sim-hand-grid{display:flex;gap:12px;flex-wrap:nowrap;overflow:hidden;max-width:calc(5 * 2.5in + 4 * 12px);}
+.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;margin-bottom:12px;}
+.sim-hand-grid{display:flex;gap:10px;flex-wrap:nowrap;align-items:flex-start;}
+.sim-hand-slot{flex:0 0 130px;height:195px;position:relative;overflow:hidden;z-index:1;cursor:pointer;}
+.sim-hand-slot:hover{overflow:visible;z-index:100;}
+.sim-hand-slot .cardwrap{position:absolute !important;top:0;left:50%;margin-left:calc(-1.25in);width:2.5in;transform:scale(0.54);transform-origin:top center;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+.sim-hand-slot:hover .cardwrap{transform:scale(1.0);box-shadow:0 16px 60px rgba(0,0,0,.9);}
 
 #printroot{display:none;}
 @media print{
@@ -999,9 +1002,8 @@ function renderSim(){
   }
   stat.textContent='Hand: '+sim.hand.length+' - Remaining in deck: '+sim.pile.length+(sim.pile.length===0?' (empty)':'');
   dOne.disabled=sim.pile.length===0;
-  const handZoom=sim.hand.length>5?(5/sim.hand.length).toFixed(3):'1';
   handArea.innerHTML='<div class="sim-hand-label">Hand</div>'+
-    '<div class="sim-hand-grid">'+sim.hand.map(c=>cardHTML(c,{noBtn:true,noSel:true,zoom:handZoom})).join('')+'</div>';
+    '<div class="sim-hand-grid">'+sim.hand.map(c=>'<div class="sim-hand-slot">'+cardHTML(c,{noBtn:true,noSel:true})+'</div>').join('')+'</div>';
 }
 
 /* ---------- modal ---------- */
