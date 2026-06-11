@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -54,20 +54,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .chip.cls-warlock:hover,.chip.cls-warlock.on{background:#9A2B5E;color:#fff;border-color:#9A2B5E;}
 .chip.cls-bard{border-color:#B5388D;color:#e070c0;}
 .chip.cls-bard:hover,.chip.cls-bard.on{background:#B5388D;color:#fff;border-color:#B5388D;}
-.chip.type-background{border-color:#6aa0c0;color:#9ac8e0;}
-.chip.type-background:hover,.chip.type-background.on{background:#6aa0c0;color:#fff;border-color:#6aa0c0;}
-.chip.type-ancestry{border-color:#bfa060;color:#d8c080;}
-.chip.type-ancestry:hover,.chip.type-ancestry.on{background:#bfa060;color:#1a1208;border-color:#bfa060;}
-.chip.type-bond{border-color:#8aa880;color:#aac8a0;}
-.chip.type-bond:hover,.chip.type-bond.on{background:#8aa880;color:#1a2a1a;border-color:#8aa880;}
-.chip.type-flaw{border-color:#c87070;color:#e09090;}
-.chip.type-flaw:hover,.chip.type-flaw.on{background:#c87070;color:#fff;border-color:#c87070;}
-.chip.type-trait{border-color:#7a90c0;color:#9aace0;}
-.chip.type-trait:hover,.chip.type-trait.on{background:#7a90c0;color:#fff;border-color:#7a90c0;}
-.chip.type-act{border-color:#1D4ED8;color:#93b8ff;}
-.chip.type-act:hover,.chip.type-act.on{background:#1D4ED8;color:#EFF6FF;border-color:#1D4ED8;}
-.chip.type-react{border-color:#6D28D9;color:#c4b0e8;}
-.chip.type-react:hover,.chip.type-react.on{background:#6D28D9;color:#EDE9FE;border-color:#6D28D9;}
 #search{flex:1;min-width:180px;padding:8px 12px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;}
 #count{font-size:12px;color:var(--gold-d);white-space:nowrap;}
 
@@ -94,23 +80,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-bane{background:#7A1F1F;color:#FEE2E2;}
 .kw-cond{background:#C2620E;color:#FFF7ED;}
 .kw-status{background:#475569;color:#F1F5F9;}
-/* loadout recipe pill types */
-.kw-background{background:#633806;color:#fef3c7;}
-.kw-ancestry{background:#14532D;color:#dcfce7;}
-.kw-bond{background:#0f2b15;color:#8aa880;}
-.kw-flaw{background:#5a1010;color:#f0b0a8;}
-.kw-trait{background:#1e2540;color:#7a90c0;}
-.kw-item{background:#3a2a10;color:#e0d0a0;}
-/* per-class ability card pills */
-.kw-barbarian{background:#9E2B2B;color:#fff;}
-.kw-fighter{background:#B45309;color:#fff;}
-.kw-paladin{background:#B8860B;color:#1a1208;}
-.kw-cleric{background:#5E81AC;color:#fff;}
-.kw-ranger{background:#2F6B3D;color:#fff;}
-.kw-rogue{background:#6C5BA8;color:#fff;}
-.kw-druid{background:#5A7D2A;color:#fff;}
-.kw-warlock{background:#9A2B5E;color:#fff;}
-.kw-bard{background:#B5388D;color:#fff;}
 .cb .ic{font-style:normal;margin-right:2px;}
 .cb-act,.cb-react{}
 
@@ -124,17 +93,13 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-ability .card,.scope-core .card,.scope-boon .card{width:2.5in;height:3.5in;}
 
 #modal{position:fixed;inset:0;z-index:200;background:rgba(10,7,3,.82);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;}
-.sheet{background:#221810;border:1px solid var(--gold-d);border-radius:12px;width:min(80vw,1600px);display:flex;flex-direction:row;gap:24px;padding:24px;position:relative;align-items:flex-start;}
-.sheet-card{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;}
-.modal-card-outer{display:flex;justify-content:center;}
-.modal-card-zoomed{cursor:default;}
-.vtoggle{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;height:30px;flex-shrink:0;}
+.sheet{background:#221810;border:1px solid var(--gold-d);border-radius:12px;max-width:700px;width:100%;display:flex;gap:24px;padding:24px;flex-wrap:wrap;position:relative;}
+.sheet-card{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.vtoggle{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;}
 .vtoggle button{background:#2a1d10;border:1px solid var(--gold-d);color:var(--gold);width:30px;height:26px;border-radius:6px;font-size:14px;}
 .vtoggle button:disabled{opacity:.3;cursor:default;}
-.vlabel{min-width:120px;max-width:280px;text-align:center;color:#cbb98e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.vnote{min-height:16px;font-size:11px;color:var(--gold-d);font-style:italic;text-align:center;line-height:1.4;}
-.sheet-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;}
-@media(max-width:700px){.sheet{flex-direction:column;width:94vw;}}
+.vlabel{min-width:120px;text-align:center;color:#cbb98e;}
+.sheet-side{flex:1;min-width:240px;display:flex;flex-direction:column;gap:12px;}
 .sheet-side h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;}
 .meta{font-size:12px;color:var(--gold-d);text-transform:capitalize;}
 .meta-cls{text-transform:capitalize;}
@@ -167,22 +132,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .simbar button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
 .simbar button:disabled{opacity:.35;cursor:default;}
 .simstat{color:#cbb98e;font-size:13px;}
-#simCoreArea{
-  background:linear-gradient(160deg,rgba(18,52,20,.55) 0%,rgba(10,35,12,.62) 100%);
-  border:1px solid rgba(65,112,60,.32);
-  border-radius:12px;padding:16px 20px 20px;margin-bottom:18px;
-  box-shadow:inset 0 3px 22px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.03),0 2px 8px rgba(0,0,0,.35);
-}
-#simCoreArea .grid{margin-top:10px;}
-.sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(138,188,125,.75);text-transform:uppercase;}
-#simHandArea{
-  background:rgba(26,16,4,.52);
-  border:1px solid rgba(148,118,52,.22);
-  border-radius:12px;padding:16px 20px 20px;
-  box-shadow:inset 0 2px 14px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.02);
-}
-#simHandArea .grid{margin-top:10px;}
-.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;}
 
 #printroot{display:none;}
 @media print{
@@ -248,19 +197,19 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     align-items: flex-start;
   }.scope-core .card-wrap{
     position: relative;
-    width: 240px;
-    height: 336px;
+    width: 220px;
+    height: 308px;
     flex-shrink: 0;
   }.scope-core .card-shadow{
     position: absolute;
     top: 4px; left: 4px;
-    width: 240px; height: 336px;
+    width: 220px; height: 308px;
     background: #050402;
     border-radius: 8px;
   }.scope-core .card{
     position: relative;
-    width: 240px;
-    height: 336px;
+    width: 220px;
+    height: 308px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
@@ -491,7 +440,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   }.scope-core .recipe-text.special{
     font-style: italic;
     color: #5a3a10;
-  }.scope-core .fighter .core-header{ background: #3a1c00; border-bottom-color: #b45309; }.scope-core .fighter{ border: 2px solid #8a3a00; }.scope-core .fighter .card-shadow{ background: #1a0c00; }.scope-core .fighter-label{ color: #b45309; border-color: #8a3a00; }.scope-core .paladin .core-header{ background: #5a4a10; border-bottom-color: #c8a030; }.scope-core .paladin{ border: 2px solid #c8a030; }.scope-core .paladin .card-shadow{ background: #1a1404; }.scope-core .paladin-label{ color: #c8a030; border-color: #c8a030; }.scope-core .ranger .core-header{ background: #1a3a1a; border-bottom-color: #4a8a4a; }.scope-core .ranger{ border: 2px solid #3a7a3a; }.scope-core .ranger .card-shadow{ background: #060e06; }.scope-core .ranger-label{ color: #4a8a4a; border-color: #3a7a3a; }.scope-core .cleric .core-header{ background: #3a3a4a; border-bottom-color: #9a9aba; }.scope-core .cleric{ border: 2px solid #7a7a9a; }.scope-core .cleric .card-shadow{ background: #0e0e14; }.scope-core .cleric-label{ color: #9a9aba; border-color: #7a7a9a; }.scope-core .bard .core-header{ background: #3a1a5a; border-bottom-color: #9a5aba; }.scope-core .bard{ border: 2px solid #7a3a9a; }.scope-core .bard .card-shadow{ background: #0e061a; }.scope-core .bard-label{ color: #9a5aba; border-color: #7a3a9a; }.scope-core .warlock .core-header{ background: #2a0a1a; border-bottom-color: #8a2040; }.scope-core .warlock{ border: 2px solid #6a1a30; }.scope-core .warlock .card-shadow{ background: #0a0408; }.scope-core .warlock-label{ color: #8a2040; border-color: #6a1a30; }.scope-core .druid .core-header{ background: #1a2a0a; border-bottom-color: #6a9a2a; }.scope-core .druid{ border: 2px solid #5a8a1a; }.scope-core .druid .card-shadow{ background: #060a02; }.scope-core .druid-label{ color: #6a9a2a; border-color: #5a8a1a; }.scope-core .barbarian .core-header{ background: #3a0a0a; border-bottom-color: #9a2a1a; }.scope-core .barbarian{ border: 2px solid #7a1a0a; }.scope-core .barbarian .card-shadow{ background: #0e0202; }.scope-core .barbarian-label{ color: #9a2a1a; border-color: #7a1a0a; }.scope-core .rogue .core-header{ background: #1a0f2a; border-bottom-color: #6c5ba8; }.scope-core .rogue{ border: 2px solid #4a3a80; }.scope-core .rogue .card-shadow{ background: #0a0810; }.scope-core .rogue-label{ color: #6c5ba8; border-color: #4a3a80; }.scope-core .infernal-num{ background: #6a1a08; }.scope-core .infernal-word{ background: rgba(138,32,16,0.08); color: #4a1408; }.scope-core .fey-num{ background: #3a1a5a; }.scope-core .fey-word{ background: rgba(90,40,120,0.08); color: #3a1458; }.scope-core .oldone-num{ background: #0a1a2a; }.scope-core .oldone-word{ background: rgba(20,40,80,0.08); color: #0a1428; }.scope-core .celestial-num{ background: #3a3a0a; }.scope-core .celestial-word{ background: rgba(100,100,20,0.08); color: #3a3408; }.scope-core .undying-num{ background: #1a1a1a; }.scope-core .undying-word{ background: rgba(40,40,40,0.08); color: #1a1a18; }.scope-core .kinship-zone{
+  }.scope-core .fighter .core-header{ background: #1e3a5f; border-bottom-color: #4a7aaf; }.scope-core .fighter{ border: 2px solid #2a5a9f; }.scope-core .fighter .card-shadow{ background: #0a1a2f; }.scope-core .fighter-label{ color: #4a7aaf; border-color: #2a5a9f; }.scope-core .paladin .core-header{ background: #5a4a10; border-bottom-color: #c8a030; }.scope-core .paladin{ border: 2px solid #c8a030; }.scope-core .paladin .card-shadow{ background: #1a1404; }.scope-core .paladin-label{ color: #c8a030; border-color: #c8a030; }.scope-core .ranger .core-header{ background: #1a3a1a; border-bottom-color: #4a8a4a; }.scope-core .ranger{ border: 2px solid #3a7a3a; }.scope-core .ranger .card-shadow{ background: #060e06; }.scope-core .ranger-label{ color: #4a8a4a; border-color: #3a7a3a; }.scope-core .cleric .core-header{ background: #3a3a4a; border-bottom-color: #9a9aba; }.scope-core .cleric{ border: 2px solid #7a7a9a; }.scope-core .cleric .card-shadow{ background: #0e0e14; }.scope-core .cleric-label{ color: #9a9aba; border-color: #7a7a9a; }.scope-core .bard .core-header{ background: #3a1a5a; border-bottom-color: #9a5aba; }.scope-core .bard{ border: 2px solid #7a3a9a; }.scope-core .bard .card-shadow{ background: #0e061a; }.scope-core .bard-label{ color: #9a5aba; border-color: #7a3a9a; }.scope-core .warlock .core-header{ background: #2a0a1a; border-bottom-color: #8a2040; }.scope-core .warlock{ border: 2px solid #6a1a30; }.scope-core .warlock .card-shadow{ background: #0a0408; }.scope-core .warlock-label{ color: #8a2040; border-color: #6a1a30; }.scope-core .druid .core-header{ background: #1a2a0a; border-bottom-color: #6a9a2a; }.scope-core .druid{ border: 2px solid #5a8a1a; }.scope-core .druid .card-shadow{ background: #060a02; }.scope-core .druid-label{ color: #6a9a2a; border-color: #5a8a1a; }.scope-core .barbarian .core-header{ background: #3a0a0a; border-bottom-color: #9a2a1a; }.scope-core .barbarian{ border: 2px solid #7a1a0a; }.scope-core .barbarian .card-shadow{ background: #0e0202; }.scope-core .barbarian-label{ color: #9a2a1a; border-color: #7a1a0a; }.scope-core .rogue .core-header{ background: #0a2a2a; border-bottom-color: #2a7a7a; }.scope-core .rogue{ border: 2px solid #1a5a5a; }.scope-core .rogue .card-shadow{ background: #020a0a; }.scope-core .rogue-label{ color: #2a7a7a; border-color: #1a5a5a; }.scope-core .infernal-num{ background: #6a1a08; }.scope-core .infernal-word{ background: rgba(138,32,16,0.08); color: #4a1408; }.scope-core .fey-num{ background: #3a1a5a; }.scope-core .fey-word{ background: rgba(90,40,120,0.08); color: #3a1458; }.scope-core .oldone-num{ background: #0a1a2a; }.scope-core .oldone-word{ background: rgba(20,40,80,0.08); color: #0a1428; }.scope-core .celestial-num{ background: #3a3a0a; }.scope-core .celestial-word{ background: rgba(100,100,20,0.08); color: #3a3408; }.scope-core .undying-num{ background: #1a1a1a; }.scope-core .undying-word{ background: rgba(40,40,40,0.08); color: #1a1a18; }.scope-core .kinship-zone{
     background: rgba(80,120,60,0.08);
     border: 0.5px solid rgba(80,120,60,0.25);
     border-radius: 3px;
@@ -593,11 +542,41 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-ancestry .bf-head{background:#2a1a08;border-bottom-color:#bfa060;}
 .scope-boon .bf-ancestry .bf-name{color:#d8c080;}
 .scope-boon .bf-ancestry .bf-badge,.scope-boon .bf-ancestry .bf-orn{color:#bfa060;}
-.class-divider{grid-column:1/-1;width:100%;padding:18px 4px 8px;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cls-color,#c8a96e);border-bottom:1px solid var(--cls-color,#c8a96e);}
-.rework-burst{position:absolute;top:-18px;right:-18px;z-index:10;width:62px;height:62px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.rework-burst::before,.rework-burst::after{content:'';position:absolute;inset:6px;background:#c8a96e;z-index:0;}
-.rework-burst::after{transform:rotate(45deg);}
-.burst-text{position:relative;z-index:1;font-family:system-ui,-apple-system,sans-serif;font-size:6.5px;font-weight:900;color:#1a1108;letter-spacing:0.3px;line-height:1.35;text-transform:uppercase;text-align:center;}
+
+/* ===== ONBOARDING OVERLAY ===== */
+#ob-overlay{position:fixed;inset:0;z-index:300;background:rgba(10,7,3,.96);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:32px 16px 60px;}
+#ob-inner{width:100%;max-width:940px;display:flex;flex-direction:column;gap:22px;}
+.ob-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+.ob-title{color:var(--gold);font-size:17px;letter-spacing:2px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;}
+.ob-step-lbl{color:var(--gold-d);font-size:12px;margin-top:4px;}
+.ob-skip{background:none;border:none;color:var(--gold-d);font-size:13px;cursor:pointer;padding:4px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.ob-skip:hover{color:var(--gold);}
+.ob-progress{height:3px;background:#2a1d10;border-radius:2px;}
+.ob-progress-fill{height:100%;background:var(--gold);border-radius:2px;transition:width .3s;}
+.ob-subtext{color:#cbb98e;font-size:13px;text-align:center;line-height:1.6;}
+.ob-class-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:12px;}
+.ob-class-tile{border:2px solid;border-radius:10px;padding:16px 14px;cursor:pointer;transition:transform .12s,box-shadow .12s;background:#1d140b;}
+.ob-class-tile:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.5);}
+.ob-class-name{font-size:15px;font-weight:700;letter-spacing:.8px;margin-bottom:6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;}
+.ob-class-tag{font-size:12px;line-height:1.5;color:#cbb98e;}
+.ob-class-count{margin-top:8px;font-size:10px;color:#6a5a3a;letter-spacing:.5px;}
+.ob-cards-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;align-items:flex-start;}
+.ob-card-option{cursor:pointer;transition:transform .12s;position:relative;}
+.ob-card-option:hover{transform:translateY(-4px);}
+.ob-card-option .cardwrap{pointer-events:none;}
+.ob-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:4px;}
+.ob-btn{padding:10px 22px;border-radius:8px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:13px;cursor:pointer;letter-spacing:.5px;font-family:inherit;}
+.ob-btn:hover{background:#3a2814;}
+.ob-btn.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.ob-round-lbl{text-align:center;color:var(--gold);font-size:13px;letter-spacing:1px;font-family:system-ui,-apple-system,sans-serif;}
+.ob-placeholder{text-align:center;padding:44px 24px;background:#1d140b;border:1px solid #2a1d10;border-radius:12px;max-width:500px;margin:0 auto;}
+.ob-placeholder-icon{font-size:36px;margin-bottom:14px;}
+.ob-placeholder-title{color:var(--gold);font-size:16px;font-weight:700;margin-bottom:8px;font-family:system-ui,-apple-system,sans-serif;}
+.ob-placeholder-body{color:#cbb98e;font-size:14px;line-height:1.6;}
+.ob-review-group{margin-bottom:20px;}
+.ob-review-divider{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold-d);padding-bottom:8px;border-bottom:1px solid #2a1d10;margin-bottom:12px;font-family:system-ui,-apple-system,sans-serif;}
+.ob-launch-btn{background:var(--gold) !important;color:#1a1108 !important;border-color:var(--gold) !important;font-weight:700;letter-spacing:.5px;}
+.ob-launch-btn:hover{background:#d4b878 !important;}
 </style>
 </head>
 <body>
@@ -617,6 +596,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab" data-view="deck" onclick="showView('deck')">Deck Builder <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
   </div>
+  <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
   <button class="hbtn" onclick="printSelected()">Print Selected (<span id="printN">0</span>)</button>
   <button class="hbtn" onclick="reload()">Reload</button>
@@ -626,8 +606,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   <div class="filters">
     <div class="frow"><input id="search" placeholder="Search names and rules text..." oninput="applyFilters()"><span id="count"></span></div>
     <div class="frow"><span class="flabel">Class</span><span id="classChips"></span></div>
-    <div class="frow"><span class="flabel">Type</span><span id="typeChips"></span><span class="flabel" style="margin-left:14px;white-space:nowrap">Action Type</span><span id="actionChips"></span></div>
-    <div class="frow"><span class="flabel">Show</span><button class="chip" onclick="toggleFilter('new','new',this)">★ New</button></div>
+    <div class="frow"><span class="flabel">Type</span><span id="typeChips"></span></div>
     <div class="frow"><span class="flabel">Actions</span>
       <button class="chip" onclick="selectAllFiltered()">+ Select all (filtered)</button>
       <button class="chip" onclick="clearDeck()">x Clear deck</button>
@@ -660,14 +639,14 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
       <button onclick="resetSim()">Reshuffle / Reset</button>
       <span class="simstat" id="simStat"></span>
     </div>
-    <div id="simCoreArea" class="hidden"></div>
-    <div id="simHandArea"></div>
+    <div class="grid" id="simGrid"></div>
   </div>
 </section>
 
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
+<div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
 
 <script src="config.js"></script>
 <script>
@@ -677,13 +656,10 @@ const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database
 let LIVE = [];
 const byKey = {};
 let deck = new Set();
-let filters = {cls:new Set(), type:new Set(), showNew:false};
+let filters = {cls:new Set(), type:new Set()};
 let modalKey=null, modalVerIdx=0, modalVersions=[];
 const SS = window.sessionStorage;
 const ACT_IC='▶', REACT_IC='⚡';
-const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Trait'];
-const ACTION_TYPES=['Act','React'];
-const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Trait':'#7a90c0'};
 
 /* ---------- keyword restyle engine ---------- */
 const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
@@ -780,69 +756,34 @@ function indexCards(){ LIVE.forEach(c=>byKey[c.k]=c); }
 function cardHTML(c,opts){opts=opts||{};
   const sel=deck.has(c.k)?' sel':'';
   const btn=opts.noBtn?'':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
-  const burst=(!opts.noBtn&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
-  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'" data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+burst+'</div>';
-}
-
-/* ---------- sort / group ---------- */
-function isLoadout(c){const m=/class="core-keyword"[^>]*>([^<]+)</.exec(c.h||'');return !!m&&m[1].trim().toUpperCase()==='LOADOUT';}
-function cardTier(c){if(isLoadout(c))return 0;if(c.s==='core')return 1;return 2;}
-function daysSince(ds){if(!ds)return null;return Math.floor((Date.now()-new Date(ds))/86400000);}
-function reworkLabel(ds){const d=daysSince(ds);if(d===null)return '';if(d<=0)return 'TODAY';if(d===1)return '1 DAY AGO';return d+' DAYS AGO';}
-function isRecentRework(c){const d=daysSince(c.rd);return d!==null&&d>=0&&d<=14;}
-function buildGroupedHTML(cards,opts){
-  opts=opts||{};
-  const boonBuckets={},classBuckets={};
-  cards.forEach(c=>{
-    if(BOON_TYPE_ORDER.includes(c.t)){(boonBuckets[c.t]||(boonBuckets[c.t]=[])).push(c);}
-    else{(classBuckets[c.c]||(classBuckets[c.c]=[])).push(c);}
-  });
-  let html='';
-  BOON_TYPE_ORDER.forEach(type=>{
-    const grp=boonBuckets[type];if(!grp||!grp.length)return;
-    grp.sort((a,b)=>{const ra=isRecentRework(a)?0:1,rb=isRecentRework(b)?0:1;return ra!==rb?ra-rb:a.n.localeCompare(b.n);});
-    html+='<div class="class-divider" style="--cls-color:'+(TYPE_PALETTE[type]||'#c8a96e')+'">'+type+'</div>';
-    html+=grp.map(c=>cardHTML(c,opts)).join('');
-  });
-  const classes=Object.keys(classBuckets).sort();
-  const multiCls=classes.length>1||Object.keys(boonBuckets).length>0;
-  classes.forEach(cls=>{
-    classBuckets[cls].sort((a,b)=>{const ta=cardTier(a),tb=cardTier(b);if(ta!==tb)return ta-tb;const ra=isRecentRework(a)?0:1,rb=isRecentRework(b)?0:1;return ra!==rb?ra-rb:a.n.localeCompare(b.n);});
-    if(multiCls){const col=CONFIG.palette[cls]||'#c8a96e';html+='<div class="class-divider" style="--cls-color:'+col+'">'+cls.charAt(0).toUpperCase()+cls.slice(1)+'</div>';}
-    html+=classBuckets[cls].map(c=>cardHTML(c,opts)).join('');
-  });
-  return html||'<div class="empty">No cards match these filters.</div>';
+  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'" data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+'</div>';
 }
 
 /* ---------- filters ---------- */
 function buildChips(){
   const classes=[...new Set(LIVE.map(c=>c.c))].sort();
-  const allTypes=[...new Set(LIVE.map(c=>c.t))];
+  const types=[...new Set(LIVE.map(c=>c.t))].sort();
   document.getElementById('classChips').innerHTML=classes.map(c=>'<button class="chip cls-'+c+'" onclick="toggleFilter(\'cls\',\''+c+'\',this)">'+classLabel(c)+'</button>').join('');
-  const orderedBoon=BOON_TYPE_ORDER.filter(t=>allTypes.includes(t));
-  const otherTypes=allTypes.filter(t=>!BOON_TYPE_ORDER.includes(t)&&!ACTION_TYPES.includes(t)&&t).sort();
-  document.getElementById('typeChips').innerHTML=[...orderedBoon,...otherTypes].map(t=>'<button class="chip type-'+t.toLowerCase()+'" onclick="toggleFilter(\'type\',\''+t+'\',this)">'+t+'</button>').join('');
-  document.getElementById('actionChips').innerHTML=ACTION_TYPES.filter(t=>allTypes.includes(t)).map(t=>'<button class="chip type-'+t.toLowerCase()+'" onclick="toggleFilter(\'type\',\''+t+'\',this)">'+{'Act':ACT_IC,'React':REACT_IC}[t]+' '+t+'</button>').join('');
+  document.getElementById('typeChips').innerHTML=types.map(t=>'<button class="chip" onclick="toggleFilter(\'type\',\''+t+'\',this)">'+t+'</button>').join('');
 }
 function toggleFilter(kind,val,el){
-  if(kind==='new'){filters.showNew=!filters.showNew;el.classList.toggle('on',filters.showNew);}
-  else{const set=kind==='cls'?filters.cls:filters.type;if(set.has(val)){set.delete(val);el.classList.remove('on');}else{set.add(val);el.classList.add('on');}}
+  const set=kind==='cls'?filters.cls:filters.type;
+  if(set.has(val)){set.delete(val);el.classList.remove('on');}else{set.add(val);el.classList.add('on');}
   applyFilters();
 }
-function resetFilters(){filters.cls.clear();filters.type.clear();filters.showNew=false;document.getElementById('search').value="";document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));applyFilters();}
+function resetFilters(){filters.cls.clear();filters.type.clear();document.getElementById('search').value="";document.querySelectorAll('.chip.on').forEach(c=>c.classList.remove('on'));applyFilters();}
 function filtered(){
   const q=document.getElementById('search').value.toLowerCase().trim();
   return LIVE.filter(c=>{
     if(filters.cls.size && !filters.cls.has(c.c))return false;
     if(filters.type.size && !filters.type.has(c.t))return false;
-    if(filters.showNew && !isRecentRework(c))return false;
     if(q){const hay=(c.n+' '+c.h).toLowerCase();if(!hay.includes(q))return false;}
     return true;
   });
 }
 function applyFilters(){
   const list=filtered();
-  document.getElementById('grid').innerHTML=list.length?buildGroupedHTML(list):'<div class="empty">No cards match these filters.</div>';
+  document.getElementById('grid').innerHTML=list.length?list.map(c=>cardHTML(c)).join(''):'<div class="empty">No cards match these filters.</div>';
   document.getElementById('count').textContent=list.length+' of '+LIVE.length+' cards';
 }
 
@@ -863,7 +804,7 @@ function refreshSelections(){
 function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
-  document.getElementById('deckGrid').innerHTML=cards.length?buildGroupedHTML(cards):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
+  document.getElementById('deckGrid').innerHTML=cards.length?cards.map(c=>cardHTML(c)).join(''):'<div class="empty">Your deck is empty. Add cards from Browse.</div>';
 }
 
 /* ---------- views ---------- */
@@ -875,68 +816,40 @@ function showView(v){
 }
 
 /* ---------- simulator (Mode B) ---------- */
-let sim={pile:[],hand:[],coreCards:[],started:false};
+let sim={pile:[],hand:[],started:false};
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function resetSim(){sim={pile:[],hand:[],coreCards:[],started:false};renderSim();}
+function resetSim(){sim={pile:[],hand:[],started:false};renderSim();}
 function drawHand(){
-  const allCards=[...deck].map(k=>byKey[k]).filter(Boolean);
-  if(!allCards.length){toast('Build a deck first');return;}
-  sim.coreCards=allCards.filter(c=>c.s==='core');
-  const drawable=allCards.filter(c=>c.s!=='core');
-  sim.pile=shuffle(drawable.slice());
-  sim.hand=sim.pile.splice(0,Math.min(5,sim.pile.length));
-  sim.started=true;
-  renderSim();
+  const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
+  if(!cards.length){toast('Build a deck first');return;}
+  sim.pile=shuffle(cards.slice());sim.hand=sim.pile.splice(0,Math.min(5,sim.pile.length));sim.started=true;renderSim();
 }
 function drawOne(){ if(!sim.started){drawHand();return;} if(!sim.pile.length){toast('Deck is empty');return;} sim.hand.push(sim.pile.shift());renderSim(); }
 function renderSim(){
   const stat=document.getElementById('simStat'),dOne=document.getElementById('drawOneBtn');
-  const coreArea=document.getElementById('simCoreArea'),handArea=document.getElementById('simHandArea');
-  if(!sim.started){
-    stat.textContent='Deck: '+deck.size+' cards ready.';
-    coreArea.classList.add('hidden');
-    handArea.innerHTML='<div class="grid"><div class="empty">Draw an opening hand to begin.</div></div>';
-    dOne.disabled=deck.size<1;
-    return;
-  }
-  if(sim.coreCards.length){
-    coreArea.innerHTML='<div class="sim-core-label">Active Area — Core Cards</div><div class="grid">'+sim.coreCards.map(c=>cardHTML(c,{noBtn:true})).join('')+'</div>';
-    coreArea.classList.remove('hidden');
-  } else {
-    coreArea.classList.add('hidden');
-  }
+  if(!sim.started){stat.textContent='Deck: '+deck.size+' cards ready.';document.getElementById('simGrid').innerHTML='<div class="empty">Draw an opening hand to begin.</div>';dOne.disabled=deck.size<1;return;}
   stat.textContent='Hand: '+sim.hand.length+' - Remaining in deck: '+sim.pile.length+(sim.pile.length===0?' (empty)':'');
   dOne.disabled=sim.pile.length===0;
-  handArea.innerHTML=(sim.hand.length?'<div class="sim-hand-label">Hand</div>':'')+
-    '<div class="grid">'+sim.hand.map(c=>cardHTML(c,{noBtn:true})).join('')+'</div>';
+  document.getElementById('simGrid').innerHTML=sim.hand.map(c=>cardHTML(c,{noBtn:true})).join('');
 }
 
 /* ---------- modal ---------- */
 async function openCard(k){
   modalKey=k;modalVerIdx=0;const c=byKey[k];
-  modalVersions=[{label:'Current',html:c.hs||styleHTML(c.h),since:c.u||''}];
-  if(CONFIG.useLive){try{modalVersions=modalVersions.concat((await fetchVersions(k)).map(v=>({label:v.label,html:styleHTML(v.html),since:v.since})));}catch(e){}}
+  modalVersions=[{label:'Current',html:c.hs||styleHTML(c.h)}];
+  if(CONFIG.useLive){try{modalVersions=modalVersions.concat((await fetchVersions(k)).map(v=>({label:v.label,html:styleHTML(v.html)})));}catch(e){}}
   renderModal();document.getElementById('modal').classList.remove('hidden');
 }
 function closeModal(){document.getElementById('modal').classList.add('hidden');modalKey=null;}
 function renderModal(){
   const c=byKey[modalKey],v=modalVersions[modalVerIdx],multi=modalVersions.length>1;
-  const isCurrent=modalVerIdx===0;
-  const vNum=modalVersions.length-1-modalVerIdx;
-  const toggleLabel=isCurrent?'Current':'v'+vNum+' of '+(modalVersions.length-1);
-  const sheetW=Math.min(window.innerWidth*0.8,1600);
-  const cardZoom=Math.max(1,Math.min(3,Math.round(sheetW*0.42/240*10)/10));
-  const cardColW=Math.round(240*cardZoom);
   document.getElementById('modal').innerHTML='<div class="sheet" onclick="event.stopPropagation()">'+
     '<button class="closex" onclick="closeModal()">&times;</button>'+
-    '<div class="sheet-card" style="flex:0 0 '+cardColW+'px;width:'+cardColW+'px">'+
-      '<div class="modal-card-outer"><div class="modal-card-zoomed cardwrap scope-'+c.s+' cls-'+c.c+'" style="zoom:'+cardZoom+'">'+v.html+'</div></div>'+
-      '<div class="vtoggle">'+
-        '<button onclick="verStep(1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
-        '<span class="vlabel">'+esc(toggleLabel)+(isCurrent?' <span style="opacity:.5;font-size:10px">(current)</span>':'')+'</span>'+
-        '<button onclick="verStep(-1)" '+(modalVerIdx<=0?'disabled':'')+'>&#9654;</button>'+
-      '</div>'+
-      '<div class="vnote">'+(!isCurrent?esc(v.label):'')+'</div>'+
+    '<div class="sheet-card">'+
+      '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+v.html+'</div>'+
+      '<div class="vtoggle"><button onclick="verStep(-1)" '+(modalVerIdx>=modalVersions.length-1?'disabled':'')+'>&#9664;</button>'+
+      '<span class="vlabel">'+esc(v.label)+'</span><button onclick="verStep(1)" '+(modalVerIdx<=0?'disabled':'')+'>&#9654;</button></div>'+
+      (multi?'':'<div class="meta">No earlier versions yet - history builds from the next edit.</div>')+
     '</div>'+
     '<div class="sheet-side cls-'+c.c+'">'+
       '<h2>'+esc(c.n)+'</h2>'+
@@ -956,13 +869,12 @@ function renderModalButtons(){
 
 /* ---------- comments (sessionStorage preview; Baserow when live) ---------- */
 function cmtKey(k){return 'irpg_cmt_'+k;}
-function readComments(k,since){
-  if(CONFIG.useLive)return fetchComments(k,since);
+function readComments(k){
+  if(CONFIG.useLive)return fetchComments(k);
   try{return Promise.resolve(JSON.parse(SS.getItem(cmtKey(k))||'[]'));}catch(e){return Promise.resolve([]);}
 }
 async function renderComments(){
-  const k=modalKey,since=(modalVersions[modalVerIdx]||{}).since||'';
-  const list=await readComments(k,since),box=document.getElementById('cmts');if(!box)return;
+  const k=modalKey,list=await readComments(k),box=document.getElementById('cmts');if(!box)return;
   box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
     (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
     '<div class="cmtform"><input id="cmtName" placeholder="Your name"><textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
@@ -999,31 +911,21 @@ function guessClass(h){const m=/class="(?:fclass|core-class-name)"[^>]*>([^<]+)<
 function guessType(h){
   const b=/class="bf-badge"[^>]*>BOON\s*(?:&mdash;|-|—)\s*([A-Z]+)/.exec(h||'');
   if(b)return b[1].charAt(0)+b[1].slice(1).toLowerCase();
-  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');
-  if(m)return m[1].trim();
-  if(/class="core-header"/.test(h||''))return 'Core';
-  return '';
+  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');return m?m[1].trim():'';
 }
 async function fetchCards(){
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
     .filter(r=>{const v=(r.Status&&r.Status.value)||r.Status||'';return v.toLowerCase()!=='legacy';})
-    .map(r=>{const s=guessSet(r.HTML);return{k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML)||(s==='core'?'Core':''),s,h:r.HTML,u:r.updated_on||'',rd:r.Last_Rework_Date||''};});
+    .map(r=>({k:r.Card_Key,n:r.Name,c:guessClass(r.HTML),t:guessType(r.HTML),s:guessSet(r.HTML),h:r.HTML}));
 }
 async function fetchVersions(k){
   const rows=await fetchAll(CONFIG.tableVersions,'&filter__Card_Key__equal='+encodeURIComponent(k));
-  return rows.sort((a,b)=>(b.Version_Date||'').localeCompare(a.Version_Date||'')).map(r=>{
-    const date=(r.Version_Date||'').slice(0,10);
-    const note=(r.Change_Note||'').trim();
-    const label=note ? note+' ('+date+')' : date;
-    return {label,html:r.HTML,since:r.Version_Date||''};
-  });
+  return rows.sort((a,b)=>(b.Version_Date||'').localeCompare(a.Version_Date||'')).map(r=>({label:(r.Version_Date||'').slice(0,16),html:r.HTML}));
 }
-async function fetchComments(k,since){
+async function fetchComments(k){
   const rows=await fetchAll(CONFIG.tableComments,'&filter__Card_Key__equal='+encodeURIComponent(k)+'&filter__Status__single_select_equal=visible');
-  return rows
-    .filter(r=>!since||(r.Created||'')>=since)
-    .map(r=>({id:r.id,name:r.Commenter_Name,body:r.Body,when:(r.Created||'').slice(0,16),change:(((r.Change_Request||{}).value)||r.Change_Request)==='pending'}));
+  return rows.map(r=>({id:r.id,name:r.Commenter_Name,body:r.Body,when:(r.Created||'').slice(0,16),change:(((r.Change_Request||{}).value)||r.Change_Request)==='pending'}));
 }
 async function postCommentLive(k,name,body,change){
   const c=byKey[k];
@@ -1078,6 +980,199 @@ async function init(){
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+
+/* ===== ONBOARDING FLOW ===== */
+const CLASSES = [
+  {id:'barbarian', name:'Barbarian', color:'#9E2B2B', tagline:'Eat every hit and make them pay for it.'},
+  {id:'bard',      name:'Bard',      color:'#B5388D', tagline:'Steal the spotlight — or hand it to someone who needs it.'},
+  {id:'cleric',    name:'Cleric',    color:'#5E81AC', tagline:'Bank your faith and spend it when it counts.'},
+  {id:'druid',     name:'Druid',     color:'#5A7D2A', tagline:'Shift shape and grow stronger from every setback.'},
+  {id:'fighter',   name:'Fighter',   color:'#B45309', tagline:'Gear up, share your edge, and never leave an ally exposed.'},
+  {id:'paladin',   name:'Paladin',   color:'#B8860B', tagline:'Your oath is a weapon — and your body is the shield.'},
+  {id:'ranger',    name:'Ranger',    color:'#2F6B3D', tagline:'The fight is already won before it starts.'},
+  {id:'rogue',     name:'Rogue',     color:'#6C5BA8', tagline:'Two decks, one shadow, zero witnesses.'},
+  {id:'warlock',   name:'Warlock',   color:'#9A2B5E', tagline:'Your body is the price — and you keep paying.'},
+];
+
+let ob = {active:false,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[]};
+
+function startOnboarding(){
+  if(!LIVE.length){toast('Cards are still loading…');return;}
+  ob={active:true,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[]};
+  document.getElementById('ob-overlay').classList.remove('hidden');
+  renderObStep();
+}
+
+function closeOnboarding(){
+  document.getElementById('ob-overlay').classList.add('hidden');
+  ob.active=false;
+}
+
+function obPct(s){return Math.round((s-1)/9*100);}
+
+function obHead(title,lbl){
+  return '<div class="ob-header"><div><div class="ob-title">'+esc(title)+'</div><div class="ob-step-lbl">'+esc(lbl)+'</div></div>'+
+    '<button class="ob-skip" onclick="closeOnboarding()">✕ Skip setup</button></div>'+
+    '<div class="ob-progress"><div class="ob-progress-fill" style="width:'+obPct(ob.step)+'%"></div></div>';
+}
+
+function renderObStep(){
+  const el=document.getElementById('ob-inner');
+  if(!el)return;
+  switch(ob.step){
+    case 1:el.innerHTML=obStep1();break;
+    case 2:el.innerHTML=obStep2();break;
+    case 3:el.innerHTML=obStep3();break;
+    case 4:el.innerHTML=obStep4();break;
+    case 5:el.innerHTML=obStep5();break;
+    case 6:el.innerHTML=obStep6();break;
+    case 7:el.innerHTML=obStep7();break;
+    case 8:el.innerHTML=obStep8();break;
+    case 9:el.innerHTML=obStep9();break;
+    default:obFinish();
+  }
+  document.getElementById('ob-overlay').scrollTop=0;
+}
+
+/* STEP 1 — Class */
+function obStep1(){
+  const tiles=CLASSES.map(function(cl){
+    const n=LIVE.filter(function(c){return c.s==='core'&&c.c===cl.id;}).length;
+    return '<div class="ob-class-tile" style="border-color:'+cl.color+'" onclick="obPickClass(\''+cl.id+'\')">'+
+      '<div class="ob-class-name" style="color:'+cl.color+'">'+esc(cl.name)+'</div>'+
+      '<div class="ob-class-tag">'+esc(cl.tagline)+'</div>'+
+      '<div class="ob-class-count">'+n+' core cards included</div></div>';
+  }).join('');
+  return obHead('Choose Your Class','Step 1 of 9')+
+    '<div class="ob-subtext">Your class defines your core mechanics. All core cards are added automatically when you pick.</div>'+
+    '<div class="ob-class-grid">'+tiles+'</div>';
+}
+
+function obPickClass(id){
+  ob.cls=id;
+  LIVE.filter(function(c){return c.s==='core'&&c.c===id;}).forEach(function(c){ob.deck.add(c.k);});
+  ob.step=2;ob.pool=obSample('Background',5);
+  renderObStep();
+}
+
+/* Random sampling */
+function obSample(type,n){
+  var pool=LIVE.filter(function(c){return c.t===type;});
+  var sh=pool.slice().sort(function(){return Math.random()-.5;});
+  return sh.slice(0,n);
+}
+function obSample3(type){
+  var pool=LIVE.filter(function(c){return c.t===type;});
+  var sh=pool.slice().sort(function(){return Math.random()-.5;});
+  return sh.slice(0,3);
+}
+
+/* Generic pick-from-5 renderer */
+function obPickPanel(title,lbl,type,nextStep){
+  var cards=ob.pool.map(function(c){
+    return '<div class="ob-card-option" onclick="obPickCard(\''+c.k+'\','+nextStep+',\''+type+'\')">'+
+      '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
+  }).join('');
+  return obHead(title,lbl)+
+    '<div class="ob-subtext">Tap a card to add it to your deck. You can reroll as many times as you like.</div>'+
+    '<div class="ob-cards-row">'+cards+'</div>'+
+    '<div class="ob-btns"><button class="ob-btn" onclick="ob.pool=obSample(\''+type+'\',5);renderObStep()">↻ Reroll</button></div>';
+}
+
+function obStep2(){return obPickPanel('Choose a Background','Step 2 of 9','Background',3);}
+function obStep3(){return obPickPanel('Choose an Ancestry','Step 3 of 9','Ancestry',4);}
+function obStep4(){return obPickPanel('Choose a Bond','Step 4 of 9','Bond',5);}
+function obStep5(){return obPickPanel('Choose a Flaw','Step 5 of 9','Flaw',6);}
+
+function obPickCard(key,nextStep,_type){
+  ob.deck.add(key);
+  ob.step=nextStep;
+  if(nextStep===3){ob.pool=obSample('Ancestry',5);}
+  else if(nextStep===4){ob.pool=obSample('Bond',5);}
+  else if(nextStep===5){ob.pool=obSample('Flaw',5);}
+  else if(nextStep===6){ob.traitRound=0;ob.traitPool=obSample3('Trait');}
+  renderObStep();
+}
+
+/* STEP 6 — Traits × 5 rounds */
+function obStep6(){
+  var round=ob.traitRound+1;
+  var cards=ob.traitPool.map(function(c){
+    return '<div class="ob-card-option" onclick="obPickTrait(\''+c.k+'\')">'+
+      '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
+  }).join('');
+  return obHead('Choose a Trait','Step 6 of 9 — Round '+round+' of 5')+
+    '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 trait to keep.</div>'+
+    '<div class="ob-cards-row">'+cards+'</div>';
+}
+
+function obPickTrait(key){
+  ob.deck.add(key);
+  ob.traitRound++;
+  if(ob.traitRound<5){ob.traitPool=obSample3('Trait');renderObStep();}
+  else{ob.step=7;renderObStep();}
+}
+
+/* STEP 7 — Class-Specific Placeholder */
+function obStep7(){
+  var cl=CLASSES.find(function(c){return c.id===ob.cls;});
+  var name=cl?cl.name+' ':'';
+  return obHead('Class Setup','Step 7 of 9')+
+    '<div class="ob-placeholder">'+
+      '<div class="ob-placeholder-icon">⚙️</div>'+
+      '<div class="ob-placeholder-title">'+esc(name)+'Special Setup</div>'+
+      '<div class="ob-placeholder-body">Your class has a special setup step — coming soon!<br>This will be customized per class (e.g. Warlock picks a patron).</div>'+
+    '</div>'+
+    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=8;renderObStep()">Continue →</button></div>';
+}
+
+/* STEP 8 — Item Placeholder */
+function obStep8(){
+  return obHead('Choose an Item','Step 8 of 9')+
+    '<div class="ob-placeholder">'+
+      '<div class="ob-placeholder-icon">⚔️</div>'+
+      '<div class="ob-placeholder-title">Item Selection</div>'+
+      '<div class="ob-placeholder-body">Item cards don\'t exist yet — coming soon!<br>Check back after the next content update.</div>'+
+    '</div>'+
+    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=9;renderObStep()">Continue →</button></div>';
+}
+
+/* STEP 9 — Deck Review */
+function obStep9(){
+  var all=[...ob.deck].map(function(k){return byKey[k];}).filter(Boolean);
+  var groups=[
+    {lbl:'Core Cards',cards:all.filter(function(c){return c.s==='core';})},
+    {lbl:'Background',cards:all.filter(function(c){return c.t==='Background';})},
+    {lbl:'Ancestry',cards:all.filter(function(c){return c.t==='Ancestry';})},
+    {lbl:'Bond',cards:all.filter(function(c){return c.t==='Bond';})},
+    {lbl:'Flaw',cards:all.filter(function(c){return c.t==='Flaw';})},
+    {lbl:'Traits',cards:all.filter(function(c){return c.t==='Trait';})},
+  ];
+  var groupHTML=groups.filter(function(g){return g.cards.length;}).map(function(g){
+    var cards=g.cards.map(function(c){
+      return '<div class="ob-card-option" style="cursor:default">'+
+        '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'">'+(c.hs||c.h)+'</div></div>';
+    }).join('');
+    return '<div class="ob-review-group">'+
+      '<div class="ob-review-divider">'+esc(g.lbl)+' ('+g.cards.length+')</div>'+
+      '<div class="ob-cards-row">'+cards+'</div></div>';
+  }).join('');
+  return obHead('Deck Review','Final Step')+
+    '<div class="ob-subtext">'+all.length+' cards in your starting deck. Review below, then confirm to begin playing.</div>'+
+    groupHTML+
+    '<div class="ob-btns"><button class="ob-btn primary" onclick="obFinish()">✓ Confirm Deck &amp; Start Playing</button></div>';
+}
+
+/* STEP 10 — Confirm */
+function obFinish(){
+  ob.deck.forEach(function(k){deck.add(k);});
+  saveDeck();
+  closeOnboarding();
+  showView('sim');
+  toast('Deck ready — draw your opening hand to begin!');
+}
+/* ===== END ONBOARDING ===== */
 </script>
 </body>
 </html>
