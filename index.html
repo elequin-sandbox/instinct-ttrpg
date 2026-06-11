@@ -1130,11 +1130,11 @@ const CLASSES = [
   {id:'warlock',   name:'Warlock',   color:'#9A2B5E', tagline:'Your body is the price — and you keep paying.'},
 ];
 
-let ob = {active:false,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[]};
+let ob = {active:false,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[]};
 
 function startOnboarding(){
   if(!LIVE.length){toast('Cards are still loading…');return;}
-  ob={active:true,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[]};
+  ob={active:true,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[]};
   document.getElementById('ob-overlay').classList.remove('hidden');
   renderObStep();
 }
@@ -1226,7 +1226,7 @@ function obPickCard(key,nextStep,_type){
   if(nextStep===3){ob.pool=obSample('Ancestry',5);}
   else if(nextStep===4){ob.pool=obSample('Bond',5);}
   else if(nextStep===5){ob.pool=obSample('Flaw',5);}
-  else if(nextStep===6){ob.traitRound=0;ob.traitPool=obSample3('Trait');}
+  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Trait';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
   renderObStep();
 }
 
@@ -1245,7 +1245,7 @@ function obStep6(){
 function obPickTrait(key){
   ob.deck.add(key);
   ob.traitRound++;
-  if(ob.traitRound<5){ob.traitPool=obSample3('Trait');renderObStep();}
+  if(ob.traitRound<5){ob.traitPool=ob.traitDeck.splice(0,3);renderObStep();}
   else{ob.step=7;renderObStep();}
 }
 
