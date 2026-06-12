@@ -915,8 +915,8 @@ function indexCards(){ LIVE.forEach(c=>byKey[c.k]=c); }
 function cardHTML(c,opts){opts=opts||{};
   const sel=(opts.noSel||!deck.has(c.k))?'':' sel';
   const btn=opts.noBtn?'':opts.deckRemove?'<button class="deckbtn remove" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')" title="Remove from deck">✕</button>':'<button class="deckbtn" onclick="event.stopPropagation();toggleDeck(\''+c.k+'\')">'+(deck.has(c.k)?'✓':'+')+'</button>';
-  const burst=(!opts.noBtn&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
-  const cburst=(!opts.noBtn&&isRecentComment(c))?'<div class="discuss-burst"><span class="burst-text">COMMENT<br>'+commentLabel(c)+'</span></div>':'';
+  const burst=(!opts.noBtn&&!opts.noBurst&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
+  const cburst=(!opts.noBtn&&!opts.noBurst&&isRecentComment(c))?'<div class="discuss-burst"><span class="burst-text">COMMENT<br>'+commentLabel(c)+'</span></div>':'';
   const zstyle=opts.zoom&&opts.zoom!='1'?' style="zoom:'+opts.zoom+'"':'';
   return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'"'+zstyle+' data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+burst+cburst+'</div>';
 }
@@ -1039,7 +1039,7 @@ function renderDeck(){
     {lbl:'Traits',     chipClass:'type-trait',        cards:cards.filter(c=>c.t==='Trait')},
     {lbl:'Abilities',  chipClass:'',                  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
   ];
-  const cardFn=c=>cardHTML(c,{noSel:true,deckRemove:true});
+  const cardFn=c=>cardHTML(c,{noSel:true,deckRemove:true,noBurst:true});
   document.getElementById('deckGrid').innerHTML=buildLaneHTML(groups,cardFn,'dk',{navAtTop:true});
 }
 
