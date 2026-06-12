@@ -149,7 +149,10 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .cmt .who{color:var(--gold);font-weight:700;font-size:12px;}
 .cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
 .cmtform{display:flex;flex-direction:column;gap:6px;}
-.cmtform input,.cmtform textarea{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
+.cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
+.name-picker{display:flex;gap:6px;align-items:stretch;}
+.name-picker select{flex:1;}
+.name-picker .name-other{flex:1;}
 .cmtform textarea{resize:vertical;min-height:48px;}
 .cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
 .cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
@@ -794,6 +797,22 @@ const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
 const KWICON={act:ACT_IC,react:REACT_IC};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const PICKER_NAMES=['Nathan','Jimmy','Jordan'];
+function namePickerHTML(savedName){
+  const isOther=!!(savedName&&!PICKER_NAMES.includes(savedName));
+  const opts=PICKER_NAMES.map(n=>'<option value="'+n+'"'+((!isOther&&savedName===n)?' selected':'')+'>'+n+'</option>').join('')
+    +'<option value="other"'+(isOther?' selected':'')+'>(Other)</option>';
+  return '<div class="name-picker">'
+    +'<select class="name-sel" onchange="toggleNameOther(this)">'+opts+'</select>'
+    +'<input class="name-other'+(isOther?'':' hidden')+'" placeholder="Your name" value="'+escAttr(isOther?savedName:'')+'">'
+    +'</div>';
+}
+function toggleNameOther(sel){const o=sel.parentElement.querySelector('.name-other');if(o)o.classList.toggle('hidden',sel.value!=='other');}
+function getPickerName(form){
+  const sel=form.querySelector('.name-sel');if(!sel)return 'Anon';
+  if(sel.value==='other'){const o=form.querySelector('.name-other');return(o?o.value:'').trim()||'Anon';}
+  return sel.value||'Anon';
+}
 function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
 function kwPill(text,id){
@@ -1110,10 +1129,10 @@ async function renderComments(){
   const list=await readComments(k,since),box=document.getElementById('cmts');if(!box)return;
   box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
     (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
-    '<div class="cmtform"><input id="cmtName" placeholder="Your name"><textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
+    '<div class="cmtform" id="modalCmtForm">'+namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')+'<textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
 }
 async function postComment(k){
-  const name=(document.getElementById('cmtName').value||'').trim()||'Anon';
+  const name=getPickerName(document.getElementById('modalCmtForm'));
   const body=(document.getElementById('cmtBody').value||'').trim();
   if(!body){toast('Write a comment first');return;}
   const chk=document.getElementById('cmtChange');const change=!!(chk&&chk.checked);
@@ -1200,8 +1219,8 @@ async function deleteCommentLive(k,i){
 async function postDiscussComment(k){
   const form=[...document.querySelectorAll('.discuss-form')].find(f=>f.dataset.key===k);
   if(!form)return;
-  const nameEl=form.querySelector('.df-name'),bodyEl=form.querySelector('.df-body'),chkEl=form.querySelector('.df-chk');
-  const name=(nameEl.value||'').trim()||'Anon';
+  const bodyEl=form.querySelector('.df-body'),chkEl=form.querySelector('.df-chk');
+  const name=getPickerName(form);
   const body=(bodyEl.value||'').trim();
   if(!body){toast('Write a comment first');return;}
   const change=!!(chkEl&&chkEl.checked);
@@ -1277,7 +1296,7 @@ async function renderDiscuss(force){
         +'<div class="discuss-cmts-list">'+cmtHTML+'</div>'
         +'<div class="discuss-form-wrap">'
           +'<div class="cmtform discuss-form" data-key="'+escAttr(c.k)+'">'
-            +'<input class="df-name" placeholder="Your name" value="'+escAttr(SS.getItem('irpg_cmt_name')||'')+'">'
+            +namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')
             +'<textarea class="df-body" placeholder="Leave feedback on this card..."></textarea>'
             +'<label class="cmt-chk"><input type="checkbox" class="df-chk"> Mark as a change to apply on next push</label>'
             +'<button onclick="postDiscussComment(this.closest(\'.discuss-form\').dataset.key)">Post comment</button>'
