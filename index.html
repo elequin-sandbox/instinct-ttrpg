@@ -152,7 +152,11 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
 .name-picker{display:flex;gap:6px;align-items:stretch;}
 .name-picker select{flex:1;}
-.name-picker .name-other{flex:1;}
+.name-hint-wrap{position:relative;flex-shrink:0;}
+.name-hint-btn{background:#2a1d10;border:1px solid #3a2c19;color:var(--gold);border-radius:6px;padding:0 9px;font-size:13px;cursor:pointer;font-family:inherit;height:100%;}
+.name-hint-btn:hover{background:#3a2814;}
+.name-hint-wrap::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);right:0;background:#1a1108;border:1px solid var(--gold-d);color:#cbb98e;font-size:11px;padding:5px 9px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200;}
+.name-hint-wrap:hover::after{opacity:1;}
 .cmtform textarea{resize:vertical;min-height:48px;}
 .cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
 .cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
@@ -706,6 +710,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
+    <button class="tab" data-view="users" onclick="showView('users')">Add Playtester</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
@@ -728,6 +733,18 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     </div>
   </div>
   <div class="grid" id="grid"></div>
+</section>
+
+<section class="view hidden" id="view-users">
+  <div class="panel">
+    <h2>Add Playtester</h2>
+    <div class="sub">Add a name to the commenter dropdown. Playtesters are listed in the order they were added.</div>
+    <div class="cmtform" id="userAddForm" style="max-width:360px;margin-top:14px;">
+      <input id="newUserName" placeholder="Name" autocomplete="off">
+      <button onclick="addPlaytester()">Add to list</button>
+    </div>
+    <div id="usersList" style="margin-top:20px;max-width:360px;"></div>
+  </div>
 </section>
 
 <section class="view hidden" id="view-discuss">
@@ -774,7 +791,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 
 <script src="config.js"></script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -797,22 +814,19 @@ const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
 const KWICON={act:ACT_IC,react:REACT_IC};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-const PICKER_NAMES=['Nathan','Ben','Jimmy','Jordan'];
+let USERS=[];
 function namePickerHTML(savedName){
-  const isOther=!!(savedName&&!PICKER_NAMES.includes(savedName));
-  const opts=PICKER_NAMES.map(n=>'<option value="'+n+'"'+((!isOther&&savedName===n)?' selected':'')+'>'+n+'</option>').join('')
-    +'<option value="other"'+(isOther?' selected':'')+'>(Other)</option>';
+  const opts=USERS.length
+    ? USERS.map(u=>'<option value="'+escAttr(u.name)+'"'+(savedName===u.name?' selected':'')+'>'+esc(u.name)+'</option>').join('')
+    : '<option value="" disabled selected>Loading…</option>';
   return '<div class="name-picker">'
-    +'<select class="name-sel" onchange="toggleNameOther(this)">'+opts+'</select>'
-    +'<input class="name-other'+(isOther?'':' hidden')+'" placeholder="Your name" value="'+escAttr(isOther?savedName:'')+'">'
+    +'<select class="name-sel">'+opts+'</select>'
+    +'<div class="name-hint-wrap" data-tip="Not listed? Add yourself via the Add Playtester tab.">'
+      +'<button class="name-hint-btn" onclick="event.preventDefault();showView(\'users\')">+ Add</button>'
+    +'</div>'
     +'</div>';
 }
-function toggleNameOther(sel){const o=sel.parentElement.querySelector('.name-other');if(o)o.classList.toggle('hidden',sel.value!=='other');}
-function getPickerName(form){
-  const sel=form.querySelector('.name-sel');if(!sel)return 'Anon';
-  if(sel.value==='other'){const o=form.querySelector('.name-other');return(o?o.value:'').trim()||'Anon';}
-  return sel.value||'Anon';
-}
+function getPickerName(form){const sel=form.querySelector('.name-sel');return sel?(sel.value||'Anon'):'Anon';}
 function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
 function kwPill(text,id){
@@ -1034,7 +1048,7 @@ function showView(v){
   document.querySelectorAll('.view').forEach(s=>s.classList.add('hidden'));
   document.getElementById('view-'+v).classList.remove('hidden');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
+  if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss(); if(v==='users'){renderUsersView();loadUsers();}
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1234,6 +1248,37 @@ async function postDiscussComment(k){
   toast('Comment posted');
   renderDiscuss(false);
 }
+async function loadUsers(){
+  if(!CONFIG.useLive)return;
+  try{
+    const rows=await fetchAll(CONFIG.tableUsers,'');
+    USERS=rows
+      .filter(r=>r.Active===true)
+      .sort((a,b)=>(a.User_Created_On||'').localeCompare(b.User_Created_On||''))
+      .map(r=>({name:r.Name,id:r.id}));
+    const discView=document.getElementById('view-discuss');
+    if(discView&&!discView.classList.contains('hidden'))renderDiscuss(false);
+    renderUsersView();
+  }catch(e){}
+}
+async function addPlaytester(){
+  const el=document.getElementById('newUserName');
+  const name=(el.value||'').trim();
+  if(!name){toast('Enter a name');return;}
+  if(USERS.some(u=>u.name.toLowerCase()===name.toLowerCase())){toast(name+' is already in the list');return;}
+  try{
+    await fetch(CONFIG.apiBase+CONFIG.tableUsers+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Name:name,Active:true})});
+    el.value='';
+    toast(name+' added!');
+    await loadUsers();
+  }catch(e){toast('Could not add playtester');}
+}
+function renderUsersView(){
+  const box=document.getElementById('usersList');if(!box)return;
+  if(!USERS.length){box.innerHTML='<div class="empty" style="padding:16px 0;text-align:left;font-size:13px;">No playtesters yet.</div>';return;}
+  box.innerHTML='<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);margin-bottom:8px;">Current Playtesters</div>'
+    +USERS.map(u=>'<div style="padding:7px 0;border-bottom:1px solid #2a1d10;font-size:13px;color:#f0e6cf;">'+esc(u.name)+'</div>').join('');
+}
 async function loadRecentComments(){
   if(!CONFIG.useLive){RECENT_CMTS_LOADED=true;return;}
   try{
@@ -1329,7 +1374,7 @@ async function reload(){
 /* ---------- init ---------- */
 async function init(){
   loadDeck();
-  await loadCards();
+  await Promise.all([loadCards(),loadUsers()]);
   loadRecentComments();
 }
 init();
