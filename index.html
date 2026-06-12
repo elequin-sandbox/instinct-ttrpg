@@ -797,7 +797,7 @@ const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
 const KWICON={act:ACT_IC,react:REACT_IC};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-const PICKER_NAMES=['Nathan','Jimmy','Jordan'];
+const PICKER_NAMES=['Nathan','Ben','Jimmy','Jordan'];
 function namePickerHTML(savedName){
   const isOther=!!(savedName&&!PICKER_NAMES.includes(savedName));
   const opts=PICKER_NAMES.map(n=>'<option value="'+n+'"'+((!isOther&&savedName===n)?' selected':'')+'>'+n+'</option>').join('')
