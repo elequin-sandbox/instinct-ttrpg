@@ -1,0 +1,63 @@
+name: Discord Feature Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need at least 2 commits to read the message
+
+      - name: Check commit message and notify Discord
+        env:
+          DISCORD_APP_WEBHOOK: ${{ secrets.DISCORD_APP_WEBHOOK }}
+        run: |
+          # Get the full commit message
+          COMMIT_MSG=$(git log -1 --format="%B")
+
+          # Get just the subject line (first line)
+          SUBJECT=$(echo "$COMMIT_MSG" | head -n 1)
+
+          # Check if subject starts with [Feature Update]
+          if [[ "$SUBJECT" != \[Feature\ Update\]* ]]; then
+            echo "Commit subject does not start with [Feature Update] — skipping Discord notification."
+            exit 0
+          fi
+
+          echo "Feature Update commit detected. Sending Discord notification..."
+
+          # Strip the [Feature Update] prefix from the title
+          TITLE=$(echo "$SUBJECT" | sed 's/^\[Feature Update\] //')
+
+          # Get the body (everything after the first line, trimming leading blank line)
+          BODY=$(echo "$COMMIT_MSG" | tail -n +2 | sed '/./,$!d')
+
+          # Escape double quotes in title and body for JSON safety
+          TITLE_ESCAPED=$(echo "$TITLE" | sed 's/"/\\"/g')
+          BODY_ESCAPED=$(echo "$BODY" | sed 's/"/\\"/g' | awk '{printf "%s\\n", $0}' | sed 's/\\n$//')
+
+          # POST to Discord webhook
+          curl -s -o /dev/null -w "%{http_code}" \
+            -H "Content-Type: application/json" \
+            -d "{
+              \"embeds\": [
+                {
+                  \"title\": \"$TITLE_ESCAPED\",
+                  \"description\": \"$BODY_ESCAPED\",
+                  \"color\": 8087790,
+                  \"footer\": {
+                    \"text\": \"nathan-elequin.github.io/act-tactics\"
+                  }
+                }
+              ]
+            }" \
+            "$DISCORD_APP_WEBHOOK"
+
+          echo "Discord notification sent."
