@@ -790,6 +790,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <div id="toast"></div>
 
 <script src="config.js"></script>
+<script>if(location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
 const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
@@ -1183,6 +1184,10 @@ function guessType(h){
   return '';
 }
 async function fetchCards(){
+  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname==='';
+  if(isLocal&&window.LOCAL_CARDS){
+    return window.LOCAL_CARDS.map(c=>{const s=guessSet(c.h);return{k:c.k,n:c.n,c:guessClass(c.h),t:guessType(c.h)||(s==='core'?'Core':''),s,h:c.h,u:c.updated||'',rd:c.rework||''};});
+  }
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
     .filter(r=>{const v=(r.Status&&r.Status.value)||r.Status||'';return v.toLowerCase()!=='legacy';})
@@ -1373,9 +1378,15 @@ async function reload(){
 
 /* ---------- init ---------- */
 async function init(){
+  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname==='';
   loadDeck();
-  await Promise.all([loadCards(),loadUsers()]);
-  loadRecentComments();
+  if(isLocal&&window.LOCAL_CARDS){
+    await loadCards();
+    RECENT_CMTS_LOADED=true;
+  }else{
+    await Promise.all([loadCards(),loadUsers()]);
+    loadRecentComments();
+  }
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
