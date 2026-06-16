@@ -16,7 +16,6 @@ button{font-family:inherit;cursor:pointer;}
 #gate p{color:var(--gold-d);font-size:13px;}
 #gate input{padding:10px 14px;background:#211810;border:1px solid var(--gold-d);color:#f0e6cf;border-radius:6px;font-family:inherit;font-size:15px;width:240px;text-align:center;}
 #gate button{padding:10px 24px;background:var(--gold);color:#1a1108;border:none;border-radius:6px;font-weight:700;letter-spacing:1px;}
-#gateErr{color:#d4604a;font-size:12px;height:14px;}
 
 header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px solid var(--gold);padding:10px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
 .brand{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);letter-spacing:2px;font-size:15px;text-transform:uppercase;white-space:nowrap;}
@@ -691,11 +690,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 
 <div id="gate">
   <h1>Instinct RPG</h1>
-  <p>Card Studio - enter the playtest password</p>
-  <input id="gatePass" type="password" placeholder="password" autocomplete="off">
-  <input id="gateName" type="text" placeholder="Your name (optional)" autocomplete="off">
+  <p>Card Studio - enter your name to continue</p>
+  <input id="gateName" type="text" placeholder="Your name" autocomplete="off">
   <button onclick="checkGate()">Enter</button>
-  <div id="gateErr"></div>
 </div>
 
 <header class="hidden" id="appHeader" style="position:relative;">
@@ -710,7 +707,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   <span class="spacer"></span>
   <button class="hbtn" onclick="printSelected()">Print Selected (<span id="printN">0</span>)</button>
   <button class="hbtn" onclick="reload()">Reload</button>
-  <div id="nameDisplay" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg2,#aaa);">
+  <div id="nameDisplay" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg2,#aaa);">
     <span id="nameLabel"></span>
     <button id="logoutBtn" onclick="doLogout()" style="background:#1e1610;border:1px solid #3a2c19;color:#8a7a5a;padding:4px 10px;border-radius:5px;font-size:11px;font-family:inherit;cursor:pointer;letter-spacing:.3px;">Log out</button>
   </div>
@@ -779,7 +776,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <script src="config.js"></script>
 <script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -896,14 +893,11 @@ function prestyleAll(){ LIVE.forEach(function(c){ c.hs = styleHTML(c.h); }); }
 
 /* ---------- gate ---------- */
 function checkGate(){
-  const v=document.getElementById('gatePass').value.trim();
   const nameIn=(document.getElementById('gateName').value||'').trim().toLowerCase();
   if(nameIn) setCookieName(nameIn);
-  if(v===CONFIG.gatePassword || v===''){
-    document.getElementById('gate').classList.add('hidden');
-    document.getElementById('appHeader').classList.remove('hidden');
-    updateNameDisplay();
-  } else document.getElementById('gateErr').textContent='Not quite - ask Annie for the password.';
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('appHeader').classList.remove('hidden');
+  updateNameDisplay();
 }
 function doLogout(){
   clearCookieName();
@@ -921,7 +915,7 @@ function updateNameDisplay(){
   const saved=getCookieName();
   if(saved){const gn=document.getElementById('gateName');if(gn)gn.value=saved;}
 })();
-document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+document.getElementById('gateName').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
 
 /* ---------- helpers ---------- */
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400);}
