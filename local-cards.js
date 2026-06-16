@@ -38,4 +38,4 @@ window.LOCAL_CARDS = [
   }
 ];
 
-console.log('[DEV] Using local example cards — ', window.LOCAL_CARDS.length, 'cards loaded');
+console.log('[DEV] local/file mode — ', window.LOCAL_CARDS.length, 'example cards loaded');
