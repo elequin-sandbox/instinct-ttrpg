@@ -812,13 +812,13 @@ function clearCookieName(){
 function namePickerHTML(){
   const name=getCookieName();
   if(name) return '';
-  return '<input class="name-input" type="text" placeholder="Your name (optional)" autocomplete="off" style="background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;">';
+  return '<input class="name-input" type="text" placeholder="Your name" autocomplete="off" style="background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;">';
 }
 function getPickerName(form){
   const cookieName=getCookieName();
   if(cookieName)return cookieName;
   const input=form?form.querySelector('.name-input'):null;
-  return (input&&input.value.trim())?input.value.trim().toLowerCase():'anon';
+  return (input&&input.value.trim())?input.value.trim().toLowerCase():'';
 }
 function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
@@ -913,7 +913,12 @@ function updateNameDisplay(){
 }
 (function prefillGateName(){
   const saved=getCookieName();
-  if(saved){const gn=document.getElementById('gateName');if(gn)gn.value=saved;}
+  if(saved){
+    const gn=document.getElementById('gateName');if(gn)gn.value=saved;
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('appHeader').classList.remove('hidden');
+    updateNameDisplay();
+  }
 })();
 document.getElementById('gateName').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
 
@@ -1156,6 +1161,7 @@ async function renderComments(){
 }
 async function postComment(k){
   const name=getPickerName(document.getElementById('modalCmtForm'));
+  if(!name||name==='anon'){toast('Enter your name first');return;}
   const body=(document.getElementById('cmtBody').value||'').trim();
   if(!body){toast('Write a comment first');return;}
   const chk=document.getElementById('cmtChange');const change=!!(chk&&chk.checked);
@@ -1249,6 +1255,7 @@ async function postDiscussComment(k){
   const bodyEl=form.querySelector('.df-body'),chkEl=form.querySelector('.df-chk');
   const name=getPickerName(form);
   const body=(bodyEl.value||'').trim();
+  if(!name||name==='anon'){toast('Enter your name first');return;}
   if(!body){toast('Write a comment first');return;}
   const change=!!(chkEl&&chkEl.checked);
   if(CONFIG.useLive){try{await postCommentLive(k,name,body,change);}catch(e){toast('Could not post');return;}}
