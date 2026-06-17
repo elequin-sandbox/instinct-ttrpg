@@ -16,7 +16,6 @@ button{font-family:inherit;cursor:pointer;}
 #gate p{color:var(--gold-d);font-size:13px;}
 #gate input{padding:10px 14px;background:#211810;border:1px solid var(--gold-d);color:#f0e6cf;border-radius:6px;font-family:inherit;font-size:15px;width:240px;text-align:center;}
 #gate button{padding:10px 24px;background:var(--gold);color:#1a1108;border:none;border-radius:6px;font-weight:700;letter-spacing:1px;}
-#gateErr{color:#d4604a;font-size:12px;height:14px;}
 
 header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px solid var(--gold);padding:10px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
 .brand{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);letter-spacing:2px;font-size:15px;text-transform:uppercase;white-space:nowrap;}
@@ -150,13 +149,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
 .cmtform{display:flex;flex-direction:column;gap:6px;}
 .cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
-.name-picker{display:flex;gap:6px;align-items:stretch;}
-.name-picker select{flex:1;}
-.name-hint-wrap{position:relative;flex-shrink:0;}
-.name-hint-btn{background:#2a1d10;border:1px solid #3a2c19;color:var(--gold);border-radius:6px;padding:0 9px;font-size:13px;cursor:pointer;font-family:inherit;height:100%;}
-.name-hint-btn:hover{background:#3a2814;}
-.name-hint-wrap::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);right:0;background:#1a1108;border:1px solid var(--gold-d);color:#cbb98e;font-size:11px;padding:5px 9px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200;}
-.name-hint-wrap:hover::after{opacity:1;}
+.name-input{width:100%;}
 .cmtform textarea{resize:vertical;min-height:48px;}
 .cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
 .cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
@@ -697,25 +690,27 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 
 <div id="gate">
   <h1>Instinct RPG</h1>
-  <p>Card Studio - enter the playtest password</p>
-  <input id="gatePass" type="password" placeholder="password" autocomplete="off">
+  <p>Card Studio - enter your name to continue</p>
+  <input id="gateName" type="text" placeholder="Your name" autocomplete="off">
   <button onclick="checkGate()">Enter</button>
-  <div id="gateErr"></div>
 </div>
 
-<header class="hidden" id="appHeader">
+<header class="hidden" id="appHeader" style="position:relative;">
   <span class="brand">Instinct RPG - Card Studio</span>
   <div class="tabs">
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
-    <button class="tab" data-view="users" onclick="showView('users')">Add Playtester</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
   <button class="hbtn" onclick="printSelected()">Print Selected (<span id="printN">0</span>)</button>
   <button class="hbtn" onclick="reload()">Reload</button>
+  <div id="nameDisplay" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg2,#aaa);">
+    <span id="nameLabel"></span>
+    <button id="logoutBtn" onclick="doLogout()" style="background:#1e1610;border:1px solid #3a2c19;color:#8a7a5a;padding:4px 10px;border-radius:5px;font-size:11px;font-family:inherit;cursor:pointer;letter-spacing:.3px;">Log out</button>
+  </div>
 </header>
 
 <div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
@@ -735,17 +730,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   <div class="grid" id="grid"></div>
 </section>
 
-<section class="view hidden" id="view-users">
-  <div class="panel">
-    <h2>Add Playtester</h2>
-    <div class="sub">Add a name to the commenter dropdown. Playtesters are listed in the order they were added.</div>
-    <div class="cmtform" id="userAddForm" style="max-width:360px;margin-top:14px;">
-      <input id="newUserName" placeholder="Name" autocomplete="off">
-      <button onclick="addPlaytester()">Add to list</button>
-    </div>
-    <div id="usersList" style="margin-top:20px;max-width:360px;"></div>
-  </div>
-</section>
 
 <section class="view hidden" id="view-discuss">
   <div class="filters">
@@ -790,9 +774,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <div id="toast"></div>
 
 <script src="config.js"></script>
-<script>if(location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
+<script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -815,19 +799,27 @@ const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
 const KWICON={act:ACT_IC,react:REACT_IC};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-let USERS=[];
-function namePickerHTML(savedName){
-  const opts=USERS.length
-    ? USERS.map(u=>'<option value="'+escAttr(u.name)+'"'+(savedName===u.name?' selected':'')+'>'+esc(u.name)+'</option>').join('')
-    : '<option value="" disabled selected>Loading…</option>';
-  return '<div class="name-picker">'
-    +'<select class="name-sel">'+opts+'</select>'
-    +'<div class="name-hint-wrap" data-tip="Not listed? Add yourself via the Add Playtester tab.">'
-      +'<button class="name-hint-btn" onclick="event.preventDefault();showView(\'users\')">+ Add</button>'
-    +'</div>'
-    +'</div>';
+function getCookieName(){
+  const m=document.cookie.match(/(?:^|;\s*)irpg_name=([^;]*)/);
+  return m?decodeURIComponent(m[1]):'';
 }
-function getPickerName(form){const sel=form.querySelector('.name-sel');return sel?(sel.value||'Anon'):'Anon';}
+function setCookieName(name){
+  document.cookie='irpg_name='+encodeURIComponent(name)+'; max-age=315360000; path=/';
+}
+function clearCookieName(){
+  document.cookie='irpg_name=; max-age=0; path=/';
+}
+function namePickerHTML(){
+  const name=getCookieName();
+  if(name) return '';
+  return '<input class="name-input" type="text" placeholder="Your name" autocomplete="off" style="background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;">';
+}
+function getPickerName(form){
+  const cookieName=getCookieName();
+  if(cookieName)return cookieName;
+  const input=form?form.querySelector('.name-input'):null;
+  return (input&&input.value.trim())?input.value.trim().toLowerCase():'';
+}
 function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
 function kwPill(text,id){
@@ -901,13 +893,34 @@ function prestyleAll(){ LIVE.forEach(function(c){ c.hs = styleHTML(c.h); }); }
 
 /* ---------- gate ---------- */
 function checkGate(){
-  const v=document.getElementById('gatePass').value.trim();
-  if(v===CONFIG.gatePassword || v===''){
+  const nameIn=(document.getElementById('gateName').value||'').trim().toLowerCase();
+  if(nameIn) setCookieName(nameIn);
+  document.getElementById('gate').classList.add('hidden');
+  document.getElementById('appHeader').classList.remove('hidden');
+  updateNameDisplay();
+}
+function doLogout(){
+  clearCookieName();
+  document.getElementById('gate').classList.remove('hidden');
+  document.getElementById('appHeader').classList.add('hidden');
+  const gn=document.getElementById('gateName');
+  if(gn)gn.value='';
+}
+function updateNameDisplay(){
+  const name=getCookieName();
+  const lbl=document.getElementById('nameLabel');
+  if(lbl)lbl.textContent=name?'Logged in as: '+name:'';
+}
+(function prefillGateName(){
+  const saved=getCookieName();
+  if(saved){
+    const gn=document.getElementById('gateName');if(gn)gn.value=saved;
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('appHeader').classList.remove('hidden');
-  } else document.getElementById('gateErr').textContent='Not quite - ask Annie for the password.';
-}
-document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+    updateNameDisplay();
+  }
+})();
+document.getElementById('gateName').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
 
 /* ---------- helpers ---------- */
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400);}
@@ -1049,7 +1062,7 @@ function showView(v){
   document.querySelectorAll('.view').forEach(s=>s.classList.add('hidden'));
   document.getElementById('view-'+v).classList.remove('hidden');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss(); if(v==='users'){renderUsersView();loadUsers();}
+  if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1144,10 +1157,11 @@ async function renderComments(){
   const list=await readComments(k,since),box=document.getElementById('cmts');if(!box)return;
   box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
     (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
-    '<div class="cmtform" id="modalCmtForm">'+namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')+'<textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
+    '<div class="cmtform" id="modalCmtForm">'+namePickerHTML()+'<textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
 }
 async function postComment(k){
   const name=getPickerName(document.getElementById('modalCmtForm'));
+  if(!name||name==='anon'){toast('Enter your name first');return;}
   const body=(document.getElementById('cmtBody').value||'').trim();
   if(!body){toast('Write a comment first');return;}
   const chk=document.getElementById('cmtChange');const change=!!(chk&&chk.checked);
@@ -1184,7 +1198,7 @@ function guessType(h){
   return '';
 }
 async function fetchCards(){
-  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname==='';
+  const isLocal=location.hostname==='';
   if(isLocal&&window.LOCAL_CARDS){
     return window.LOCAL_CARDS.map(c=>{const s=guessSet(c.h);return{k:c.k,n:c.n,c:guessClass(c.h),t:guessType(c.h)||(s==='core'?'Core':''),s,h:c.h,u:c.updated||'',rd:c.rework||''};});
   }
@@ -1241,9 +1255,9 @@ async function postDiscussComment(k){
   const bodyEl=form.querySelector('.df-body'),chkEl=form.querySelector('.df-chk');
   const name=getPickerName(form);
   const body=(bodyEl.value||'').trim();
+  if(!name||name==='anon'){toast('Enter your name first');return;}
   if(!body){toast('Write a comment first');return;}
   const change=!!(chkEl&&chkEl.checked);
-  SS.setItem('irpg_cmt_name',name);
   if(CONFIG.useLive){try{await postCommentLive(k,name,body,change);}catch(e){toast('Could not post');return;}}
   const now=new Date().toISOString().slice(0,16).replace('T',' ');
   if(!RECENT_CMTS[k])RECENT_CMTS[k]=[];
@@ -1252,37 +1266,6 @@ async function postDiscussComment(k){
   const badge=document.getElementById('discussBadge');if(badge)badge.textContent=cnt;
   toast('Comment posted');
   renderDiscuss(false);
-}
-async function loadUsers(){
-  if(!CONFIG.useLive)return;
-  try{
-    const rows=await fetchAll(CONFIG.tableUsers,'');
-    USERS=rows
-      .filter(r=>r.Active===true)
-      .sort((a,b)=>(a.User_Created_On||'').localeCompare(b.User_Created_On||''))
-      .map(r=>({name:r.Name,id:r.id}));
-    const discView=document.getElementById('view-discuss');
-    if(discView&&!discView.classList.contains('hidden'))renderDiscuss(false);
-    renderUsersView();
-  }catch(e){}
-}
-async function addPlaytester(){
-  const el=document.getElementById('newUserName');
-  const name=(el.value||'').trim();
-  if(!name){toast('Enter a name');return;}
-  if(USERS.some(u=>u.name.toLowerCase()===name.toLowerCase())){toast(name+' is already in the list');return;}
-  try{
-    await fetch(CONFIG.apiBase+CONFIG.tableUsers+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Name:name,Active:true})});
-    el.value='';
-    toast(name+' added!');
-    await loadUsers();
-  }catch(e){toast('Could not add playtester');}
-}
-function renderUsersView(){
-  const box=document.getElementById('usersList');if(!box)return;
-  if(!USERS.length){box.innerHTML='<div class="empty" style="padding:16px 0;text-align:left;font-size:13px;">No playtesters yet.</div>';return;}
-  box.innerHTML='<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);margin-bottom:8px;">Current Playtesters</div>'
-    +USERS.map(u=>'<div style="padding:7px 0;border-bottom:1px solid #2a1d10;font-size:13px;color:#f0e6cf;">'+esc(u.name)+'</div>').join('');
 }
 async function loadRecentComments(){
   if(!CONFIG.useLive){RECENT_CMTS_LOADED=true;return;}
@@ -1346,7 +1329,7 @@ async function renderDiscuss(force){
         +'<div class="discuss-cmts-list">'+cmtHTML+'</div>'
         +'<div class="discuss-form-wrap">'
           +'<div class="cmtform discuss-form" data-key="'+escAttr(c.k)+'">'
-            +namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')
+            +namePickerHTML()
             +'<textarea class="df-body" placeholder="Leave feedback on this card..."></textarea>'
             +'<label class="cmt-chk"><input type="checkbox" class="df-chk"> Mark as a change to apply on next push</label>'
             +'<button onclick="postDiscussComment(this.closest(\'.discuss-form\').dataset.key)">Post comment</button>'
@@ -1378,13 +1361,13 @@ async function reload(){
 
 /* ---------- init ---------- */
 async function init(){
-  const isLocal=location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname==='';
+  const isLocal=location.hostname==='';
   loadDeck();
   if(isLocal&&window.LOCAL_CARDS){
     await loadCards();
     RECENT_CMTS_LOADED=true;
   }else{
-    await Promise.all([loadCards(),loadUsers()]);
+    await loadCards();
     loadRecentComments();
   }
 }
