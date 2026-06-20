@@ -61,8 +61,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .chip.type-bond:hover,.chip.type-bond.on{background:#8aa880;color:#1a2a1a;border-color:#8aa880;}
 .chip.type-flaw{border-color:#c87070;color:#e09090;}
 .chip.type-flaw:hover,.chip.type-flaw.on{background:#c87070;color:#fff;border-color:#c87070;}
-.chip.type-trait{border-color:#7a90c0;color:#9aace0;}
-.chip.type-trait:hover,.chip.type-trait.on{background:#7a90c0;color:#fff;border-color:#7a90c0;}
+.chip.type-instinct{border-color:#7a90c0;color:#9aace0;}
+.chip.type-instinct:hover,.chip.type-instinct.on{background:#7a90c0;color:#fff;border-color:#7a90c0;}
 .chip.type-act{border-color:#1D4ED8;color:#93b8ff;}
 .chip.type-act:hover,.chip.type-act.on{background:#1D4ED8;color:#EFF6FF;border-color:#1D4ED8;}
 .chip.type-react{border-color:#6D28D9;color:#c4b0e8;}
@@ -100,7 +100,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-ancestry{background:#14532D;color:#dcfce7;}
 .kw-bond{background:#0f2b15;color:#8aa880;}
 .kw-flaw{background:#5a1010;color:#f0b0a8;}
-.kw-trait{background:#1e2540;color:#7a90c0;}
+.kw-instinct{background:#1e2540;color:#7a90c0;}
 .kw-item{background:#3a2a10;color:#e0d0a0;}
 /* per-class ability card pills */
 .kw-barbarian{background:#9E2B2B;color:#fff;}
@@ -585,9 +585,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-stem{font-style:italic;color:#3a2c10;font-size:10px;line-height:1.45;}
 .scope-boon .bf-fill{display:inline-block;min-width:54px;border-bottom:1px solid #b09050;}
 .scope-boon .bf-foot{padding:3.5px 8px;border-top:0.5px solid #c8a96e;display:flex;justify-content:space-between;font-size:6.8pt;color:#8a6a30;text-transform:uppercase;letter-spacing:1px;background:#ece0c4;font-family:system-ui,-apple-system,sans-serif;}
-.scope-boon .bf-trait .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
-.scope-boon .bf-trait .bf-name{color:#d4e0f0;}
-.scope-boon .bf-trait .bf-badge,.scope-boon .bf-trait .bf-orn{color:#7a90c0;}
+.scope-boon .bf-instinct .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
+.scope-boon .bf-instinct .bf-name{color:#d4e0f0;}
+.scope-boon .bf-instinct .bf-badge,.scope-boon .bf-instinct .bf-orn{color:#7a90c0;}
 .scope-boon .bf-bg .bf-head{background:#0f2d45;border-bottom-color:#6aa0c0;}
 .scope-boon .bf-bg .bf-name{color:#c4d8e8;}
 .scope-boon .bf-bg .bf-badge,.scope-boon .bf-bg .bf-orn{color:#6aa0c0;}
@@ -701,6 +701,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
+    <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
+    <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
@@ -712,6 +714,13 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button id="logoutBtn" onclick="doLogout()" style="background:#1e1610;border:1px solid #3a2c19;color:#8a7a5a;padding:4px 10px;border-radius:5px;font-size:11px;font-family:inherit;cursor:pointer;letter-spacing:.3px;">Log out</button>
   </div>
 </header>
+
+<section class="view hidden" id="view-primer">
+  <iframe src="instinct-rpg-primer.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
+</section>
+<section class="view hidden" id="view-quickref">
+  <iframe src="instinct-rpg-quick-ref.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
+</section>
 
 <div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
 
@@ -787,9 +796,9 @@ let RECENT_CMTS = {}, RECENT_CMTS_LOADED = false;
 let modalKey=null, modalVerIdx=0, modalVersions=[];
 const SS = window.sessionStorage;
 const ACT_IC='▶', REACT_IC='⚡';
-const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Trait'];
+const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Instinct'];
 const ACTION_TYPES=['Act','React'];
-const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Trait':'#7a90c0'};
+const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Instinct':'#7a90c0'};
 
 /* ---------- keyword restyle engine ---------- */
 const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
@@ -1043,14 +1052,14 @@ function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
   if(!cards.length){document.getElementById('deckGrid').innerHTML='<div class="empty">Your deck is empty. Add cards from Browse.</div>';return;}
-  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Trait'];
+  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Instinct'];
   const groups=[
     {lbl:'Core',       chipClass:'',                  cards:cards.filter(c=>c.s==='core')},
     {lbl:'Background', chipClass:'type-background',   cards:cards.filter(c=>c.t==='Background')},
     {lbl:'Ancestry',   chipClass:'type-ancestry',     cards:cards.filter(c=>c.t==='Ancestry')},
     {lbl:'Bond',       chipClass:'type-bond',         cards:cards.filter(c=>c.t==='Bond')},
     {lbl:'Flaw',       chipClass:'type-flaw',         cards:cards.filter(c=>c.t==='Flaw')},
-    {lbl:'Traits',     chipClass:'type-trait',        cards:cards.filter(c=>c.t==='Trait')},
+    {lbl:'Instincts',  chipClass:'type-instinct',     cards:cards.filter(c=>c.t==='Instinct')},
     {lbl:'Abilities',  chipClass:'',                  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
   ];
   const cardFn=c=>cardHTML(c,{noSel:true,deckRemove:true,noBurst:true});
@@ -1483,19 +1492,19 @@ function obPickCard(key,nextStep,_type){
   if(nextStep===3){ob.pool=obSample('Ancestry',5);}
   else if(nextStep===4){ob.pool=obSample('Bond',5);}
   else if(nextStep===5){ob.pool=obSample('Flaw',5);}
-  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Trait';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
+  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Instinct';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
   renderObStep();
 }
 
-/* STEP 6 — Traits × 5 rounds */
+/* STEP 6 — Instincts × 5 rounds */
 function obStep6(){
   var round=ob.traitRound+1;
   var cards=ob.traitPool.map(function(c){
     return '<div class="ob-card-option" onclick="obPickTrait(\''+c.k+'\')">'+
       '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
   }).join('');
-  return obHead('Choose a Trait','Step 6 of 9 — Round '+round+' of 5')+
-    '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 trait to keep.</div>'+
+  return obHead('Choose an Instinct','Step 6 of 9 — Round '+round+' of 5')+
+    '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 instinct to keep.</div>'+
     '<div class="ob-cards-row">'+cards+'</div>';
 }
 
@@ -1539,7 +1548,7 @@ function obStep9(){
     {lbl:'Ancestry',  cards:all.filter(function(c){return c.t==='Ancestry';})},
     {lbl:'Bond',      cards:all.filter(function(c){return c.t==='Bond';})},
     {lbl:'Flaw',      cards:all.filter(function(c){return c.t==='Flaw';})},
-    {lbl:'Traits',    cards:all.filter(function(c){return c.t==='Trait';})},
+    {lbl:'Instincts', cards:all.filter(function(c){return c.t==='Instinct';})},
   ];
   var cardFn=function(c){
     return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+(c.hs||c.h)+'</div>';
