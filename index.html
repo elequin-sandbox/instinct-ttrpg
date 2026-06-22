@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instinct RPG - Card Studio</title>
+<title>Instinct RPG - Card Studio test</title>
 <style>
 :root{--ink:#1e1810;--parch:#f4ecd8;--gold:#c8a96e;--gold-d:#7a6030;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -984,7 +984,7 @@ function buildGroupedHTML(cards,opts){
 
 /* ---------- filters ---------- */
 function buildChips(){
-  const classes=[...new Set(LIVE.map(c=>c.c))].sort();
+  const classes=[...new Set(LIVE.map(c=>c.c))].filter(c=>c&&c.toLowerCase()!=='instinct').sort();
   const allTypes=[...new Set(LIVE.map(c=>c.t))];
   document.getElementById('classChips').innerHTML=classes.map(c=>'<button class="chip cls-'+c+'" onclick="toggleFilter(\'cls\',\''+c+'\',this)">'+classLabel(c)+'</button>').join('');
   const orderedBoon=BOON_TYPE_ORDER.filter(t=>allTypes.includes(t));
