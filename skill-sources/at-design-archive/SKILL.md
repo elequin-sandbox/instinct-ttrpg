@@ -235,4 +235,38 @@ No direction chosen yet.
 
 ### B10 — Stack / Rally Roll Resolution (Unresolved)
 
-**The question:** When multiple players Stack on a single action, who rolls? The initiating player only, or does 
+**The question:** When multiple players Stack on a single action, who rolls? The initiating player only, or does each player roll and contribute their dice?
+
+**Status:** Unresolved. Needs a rule before Stack cards can be reliably taught.
+
+---
+
+### B11 — Distance Band Definitions (Deferred)
+
+**The question:** Does Instinct RPG use Daggerheart-style distance bands (Close / Near / Far / Very Far) or a custom system?
+
+**Status:** No decision made. Some cards use spatial language without a defined framework. Needs resolution before spatial cards are finalized.
+
+---
+
+### B12 — Open Design Tensions from Playtest #1
+
+**T1 — Conditions: Mechanical Facts vs. Narrative Vocabulary**
+
+Currently: conditions are narrative vocabulary adjudicated by the GM contextually. Rich and flexible; potentially inaccessible for GMs who aren't comfortable improvising. The "here: [interpretation]" parenthetical is a middle path.
+
+The underlying question: does Instinct RPG want to be a game where rules guide to consistent outcomes, or a game where rules give vocabulary and trust the table? These produce different GM skill requirements and different review profiles.
+
+*No direction recommended — this is a values decision for the designer.*
+
+**T2 — Cards Optional vs. Mandatory**
+
+See B2. The written rule and the felt experience don't match. Worth closing deliberately before next playtest.
+
+---
+
+### B13 — Warlock Wave Architecture (Deprecated but Revisitable)
+
+**What existed:** Multiple Warlock ability design experiments including different Patron mark architectures. Some early Patron designs used per-patron color schemes.
+
+**Current state:** Unified standard Warlock color for all Patron cards. Patron Bane section uses boxed treatment. Mark tables per Patron are locked (see project knowledge). The per-p

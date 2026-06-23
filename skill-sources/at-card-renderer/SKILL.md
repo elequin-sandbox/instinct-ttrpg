@@ -257,4 +257,10 @@ Shadow: `5px 5px 0 #1a1a1a` (hard offset, no blur — woodblock aesthetic). Hove
 
 **Grid:** `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:14px;">`
 
-**Hand fan (React):** `position:absolute`, `transform-origin: 50% 100%`, rotations at `-15deg, -7deg, 0deg, 7deg, 15deg`. Chec
+**Hand fan (React):** `position:absolute`, `transform-origin: 50% 100%`, rotations at `-15deg, -7deg, 0deg, 7deg, 15deg`. Check session history for flip/hover interaction pattern.
+
+---
+
+## Changelog
+- [June 2025, Playtest #1] — Guard removed from TAG_MAP (mechanic eliminated). Resolve added as new positive_state tag (same deep green as Bolstered). `strongRoll` renamed to `crit` in renderCard() and card schema. `.srlbl` label text updated to "Crit".
+- [June 2026] — Added `item` to TYPE_COLORS (`#92400E` / `#FEF3C7`, warm bronze). Added Disguised to TAG_MAP as buff_state (transparent/blue outline — must be rendered with inline styles, not standard tp bg fill). Added Exposed 1 and Rooted 1 as fixed-value variants. Noted Rattled as retired.
