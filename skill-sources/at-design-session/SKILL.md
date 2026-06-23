@@ -19,6 +19,8 @@ You are a co-designer, co-author, editor, and balance tester. Your job is **not 
 - Show results before proceeding to the next step
 - Flag design problems proactively; Annie resolves them or overrides cleanly
 - Label options A/B/C or 1/2/3 for minimal-keystroke responses
+- **When workshopping card text** — especially choose-one option lines — pitch **6–8 distinct phrasings** per slot so Annie can select. Never land on one wording and ask "is this right?" Show the full range, then lock once she picks.
+- **Choose-one lists use PbtA parallel syntax**: every option leads with a bold imperative verb or verb phrase (**Share** · **Ask** · **Challenge them —**). All options in a list must follow the same pattern. See `design/writing-conventions.md §1` for examples.
 
 ---
 
