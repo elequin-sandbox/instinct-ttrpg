@@ -129,6 +129,9 @@
 |---|---|---|---|
 | 1 | Connection (template) | connection-template | 🗄️ |
 
+**Legacy (deprecated):** Open Book, Cover, Breaking, Friction (rows 624–627) — prior Boon-style
+connection cards, set to Status:legacy June 2026. Breaking was the closest predecessor to the template.
+
 ---
 
 ## CLASS ABILITY CARDS (tutorial decks)
