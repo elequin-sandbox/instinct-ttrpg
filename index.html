@@ -684,6 +684,51 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
+/* ---------- submit idea view ---------- */
+.tab-submit{color:#c8a96e !important;font-weight:600;}
+.tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
+.submit-wrap{display:flex;justify-content:center;padding:40px 18px 60px;min-height:60vh;}
+.submit-card{background:#1d140b;border:1px solid #3a2c19;border-radius:12px;padding:36px 40px;max-width:640px;width:100%;}
+.submit-title{font-family:system-ui,-apple-system,sans-serif;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.submit-sub{font-size:13px;color:#8a7a5a;line-height:1.6;margin-bottom:28px;}
+.submit-field{margin-bottom:22px;}
+.submit-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px;}
+.submit-opt{font-weight:400;font-size:10px;text-transform:none;letter-spacing:0;color:#5a4a30;}
+.submit-hint{font-size:12px;color:#7a6a4a;line-height:1.5;margin-bottom:8px;}
+.submit-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.schip{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:5px 13px;border-radius:14px;font-size:12px;font-family:inherit;cursor:pointer;transition:all .12s;letter-spacing:.3px;}
+.schip:hover{border-color:var(--gold-d);color:var(--gold);}
+.schip.on{font-weight:700;}
+.schip.type-act{border-color:#1D4ED8;color:#93b8ff;} .schip.type-act.on{background:#1D4ED8;color:#EFF6FF;}
+.schip.type-react{border-color:#6D28D9;color:#c4b0e8;} .schip.type-react.on{background:#6D28D9;color:#EDE9FE;}
+.schip.type-background{border-color:#6aa0c0;color:#9ac8e0;} .schip.type-background.on{background:#6aa0c0;color:#fff;}
+.schip.type-ancestry{border-color:#bfa060;color:#d8c080;} .schip.type-ancestry.on{background:#bfa060;color:#1a1208;}
+.schip.type-bond{border-color:#8aa880;color:#aac8a0;} .schip.type-bond.on{background:#8aa880;color:#1a2a1a;}
+.schip.type-flaw{border-color:#c87070;color:#e09090;} .schip.type-flaw.on{background:#c87070;color:#fff;}
+.schip.type-instinct{border-color:#7a90c0;color:#9aace0;} .schip.type-instinct.on{background:#7a90c0;color:#fff;}
+.schip.cls-barbarian{border-color:#9E2B2B;color:#e07070;} .schip.cls-barbarian.on{background:#9E2B2B;color:#fff;}
+.schip.cls-fighter{border-color:#B45309;color:#e09050;} .schip.cls-fighter.on{background:#B45309;color:#fff;}
+.schip.cls-paladin{border-color:#B8860B;color:#e0c040;} .schip.cls-paladin.on{background:#B8860B;color:#fff;}
+.schip.cls-cleric{border-color:#5E81AC;color:#9ab8d8;} .schip.cls-cleric.on{background:#5E81AC;color:#fff;}
+.schip.cls-ranger{border-color:#2F6B3D;color:#6ab880;} .schip.cls-ranger.on{background:#2F6B3D;color:#fff;}
+.schip.cls-rogue{border-color:#6C5BA8;color:#b0a0e0;} .schip.cls-rogue.on{background:#6C5BA8;color:#fff;}
+.schip.cls-druid{border-color:#5A7D2A;color:#9ac050;} .schip.cls-druid.on{background:#5A7D2A;color:#fff;}
+.schip.cls-warlock{border-color:#9A2B5E;color:#e070a0;} .schip.cls-warlock.on{background:#9A2B5E;color:#fff;}
+.schip.cls-bard{border-color:#B5388D;color:#e070c0;} .schip.cls-bard.on{background:#B5388D;color:#fff;}
+.submit-textarea{width:100%;padding:12px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;line-height:1.6;resize:vertical;min-height:120px;}
+.submit-textarea:focus{outline:none;border-color:var(--gold-d);}
+.submit-input{width:100%;padding:10px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;}
+.submit-input:focus{outline:none;border-color:var(--gold-d);}
+.submit-btn{width:100%;padding:13px;background:var(--gold);color:#1a1108;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:6px;transition:opacity .12s;}
+.submit-btn:hover{opacity:.88;}
+.submit-btn:disabled{opacity:.4;cursor:not-allowed;}
+.submit-error{background:#3a1010;border:1px solid #7a2020;color:#e07070;border-radius:6px;padding:10px 14px;font-size:13px;margin-bottom:14px;}
+.submit-success{text-align:center;padding:32px 0 8px;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.submit-success-icon{font-size:32px;color:var(--gold);}
+.submit-success-msg{font-size:15px;color:#c8b88e;line-height:1.5;}
+.submit-again{background:transparent;border:1px solid var(--gold-d);color:var(--gold);padding:8px 20px;border-radius:6px;font-family:inherit;font-size:13px;cursor:pointer;letter-spacing:.5px;}
+.submit-again:hover{background:#2a1d10;}
+
 </style>
 </head>
 <body>
@@ -704,6 +749,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
+    <button class="tab tab-submit" data-view="submit" onclick="showView('submit')">✦ Submit Idea</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
@@ -778,6 +824,64 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   </div>
 </section>
 
+
+<section class="view hidden" id="view-submit">
+  <div class="submit-wrap">
+    <div class="submit-card">
+      <h2 class="submit-title">Submit a Card Idea</h2>
+      <p class="submit-sub">Got a card concept? Share it in your own words — no game-design jargon needed. We read every one.</p>
+
+      <div class="submit-field">
+        <div class="submit-label">Card Type</div>
+        <div class="submit-chips" id="submitTypeChips">
+          <button class="schip type-act"        data-group="type" data-val="Act"        onclick="toggleSubmitChip(this)">Act</button>
+          <button class="schip type-react"      data-group="type" data-val="React"      onclick="toggleSubmitChip(this)">React</button>
+          <button class="schip type-background" data-group="type" data-val="Background" onclick="toggleSubmitChip(this)">Background</button>
+          <button class="schip type-ancestry"   data-group="type" data-val="Ancestry"   onclick="toggleSubmitChip(this)">Ancestry</button>
+          <button class="schip type-bond"       data-group="type" data-val="Bond"       onclick="toggleSubmitChip(this)">Bond</button>
+          <button class="schip type-flaw"       data-group="type" data-val="Flaw"       onclick="toggleSubmitChip(this)">Flaw</button>
+          <button class="schip type-instinct"   data-group="type" data-val="Instinct"   onclick="toggleSubmitChip(this)">Instinct</button>
+          <button class="schip"                 data-group="type" data-val="Not Sure"   onclick="toggleSubmitChip(this)">Not Sure</button>
+        </div>
+      </div>
+
+      <div class="submit-field">
+        <div class="submit-label">Class <span class="submit-opt">(optional)</span></div>
+        <div class="submit-chips" id="submitClassChips">
+          <button class="schip cls-barbarian" data-group="cls" data-val="Barbarian"    onclick="toggleSubmitChip(this)">Barbarian</button>
+          <button class="schip cls-fighter"   data-group="cls" data-val="Fighter"      onclick="toggleSubmitChip(this)">Fighter</button>
+          <button class="schip cls-paladin"   data-group="cls" data-val="Paladin"      onclick="toggleSubmitChip(this)">Paladin</button>
+          <button class="schip cls-cleric"    data-group="cls" data-val="Cleric"       onclick="toggleSubmitChip(this)">Cleric</button>
+          <button class="schip cls-ranger"    data-group="cls" data-val="Ranger"       onclick="toggleSubmitChip(this)">Ranger</button>
+          <button class="schip cls-rogue"     data-group="cls" data-val="Rogue"        onclick="toggleSubmitChip(this)">Rogue</button>
+          <button class="schip cls-druid"     data-group="cls" data-val="Druid"        onclick="toggleSubmitChip(this)">Druid</button>
+          <button class="schip cls-warlock"   data-group="cls" data-val="Warlock"      onclick="toggleSubmitChip(this)">Warlock</button>
+          <button class="schip cls-bard"      data-group="cls" data-val="Bard"         onclick="toggleSubmitChip(this)">Bard</button>
+          <button class="schip"               data-group="cls" data-val="Any / Generic" onclick="toggleSubmitChip(this)">Any / Generic</button>
+        </div>
+      </div>
+
+      <div class="submit-field">
+        <div class="submit-label">Your Idea</div>
+        <p class="submit-hint">Describe what the card does in plain language. What's the fantasy? What would feel awesome to play?</p>
+        <textarea id="submitIdeaText" class="submit-textarea" placeholder="e.g. A Rogue card where if you're outnumbered you can vanish from the fight entirely and reappear somewhere nearby…" rows="6"></textarea>
+      </div>
+
+      <div class="submit-field">
+        <div class="submit-label">Your Name <span class="submit-opt">(optional)</span></div>
+        <input id="submitName" class="submit-input" type="text" placeholder="How should we credit you?">
+      </div>
+
+      <div id="submitError" class="submit-error hidden"></div>
+      <button class="submit-btn" id="submitBtn" onclick="submitIdea()">Send It In ✦</button>
+      <div id="submitSuccess" class="submit-success hidden">
+        <div class="submit-success-icon">✦</div>
+        <div class="submit-success-msg">Got it! Thanks for the idea — we'll take a look.</div>
+        <button class="submit-again" onclick="resetSubmitForm()">Submit Another</button>
+      </div>
+    </div>
+  </div>
+</section>
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
@@ -785,7 +889,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <script src="config.js"></script>
 <script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "tableIdeas": 1041581, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -1568,6 +1672,75 @@ function obFinish(){
   toast('Deck ready — draw your opening hand to begin!');
 }
 /* ===== END ONBOARDING ===== */
+/* ---------- submit idea form ---------- */
+function toggleSubmitChip(btn){
+  const group = btn.dataset.group;
+  // single-select per group
+  document.querySelectorAll('.schip[data-group="'+group+'"]').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+async function submitIdea(){
+  const ideaText = document.getElementById('submitIdeaText').value.trim();
+  const errEl    = document.getElementById('submitError');
+  errEl.classList.add('hidden');
+
+  if(!ideaText){
+    errEl.textContent = 'Please describe your card idea before submitting.';
+    errEl.classList.remove('hidden');
+    return;
+  }
+
+  const cardType  = (document.querySelector('.schip[data-group="type"].on') || {}).dataset?.val || '';
+  const cardClass = (document.querySelector('.schip[data-group="cls"].on')  || {}).dataset?.val || '';
+  const name      = document.getElementById('submitName').value.trim();
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  if(CONFIG.useLive && CONFIG.tableIdeas){
+    try{
+      const payload = {
+        Card_Type:      cardType  || 'Not specified',
+        Card_Class:     cardClass || 'Not specified',
+        Idea_Text:      ideaText,
+        Submitter_Name: name      || 'Anonymous',
+        Submitted_At:   new Date().toISOString(),
+        Status:         'new'
+      };
+      const resp = await fetch(CONFIG.apiBase + CONFIG.tableIdeas + '/?user_field_names=true', {
+        method: 'POST',
+        headers: Object.assign({'Content-Type':'application/json'}, authHeaders()),
+        body: JSON.stringify(payload)
+      });
+      if(!resp.ok) throw new Error('HTTP '+resp.status);
+    } catch(e){
+      btn.disabled = false;
+      btn.textContent = 'Send It In ✦';
+      errEl.textContent = 'Could not submit — please try again.';
+      errEl.classList.remove('hidden');
+      return;
+    }
+  }
+
+  // success
+  btn.classList.add('hidden');
+  document.getElementById('submitSuccess').classList.remove('hidden');
+}
+
+function resetSubmitForm(){
+  document.getElementById('submitIdeaText').value = '';
+  document.getElementById('submitName').value = '';
+  document.querySelectorAll('.schip.on').forEach(b=>b.classList.remove('on'));
+  document.getElementById('submitError').classList.add('hidden');
+  document.getElementById('submitSuccess').classList.add('hidden');
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = false;
+  btn.textContent = 'Send It In ✦';
+  btn.classList.remove('hidden');
+}
+
 </script>
 </body>
-</html>
+</
