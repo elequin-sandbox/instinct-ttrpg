@@ -1,0 +1,149 @@
+# Writing Conventions
+
+> **Purpose:** How to put words on a card — formatting tiers, voice, section anatomy, the forbidden-
+> terms list, and the pre-finalize audit. Run the **Term Audit** (bottom) before any card is approved
+> or pushed to Baserow.
+> **Status:** current. **Last updated:** June 2026.
+>
+> **Sibling docs:** keyword *meanings* → `design/core-rules.md` · pill/chip *colors* →
+> `design/card-anatomy.md` · classes → `design/classes.md`. Rendering **code** + Baserow viewer CSS
+> classes → the `at-card-renderer` and `at-baserow-push` skills.
+
+**Legend:** 🔒 locked · ⚠️ in flux.
+
+---
+
+## §1 — The three formatting tiers (how to write each)
+
+Mirrors the keyword taxonomy in `core-rules.md §11`; exact colors live in `card-anatomy.md §4`.
+
+1. **Impact Keywords → pills.** Write as `[Term]` or `[Term N]` (e.g. `[Boost 2]`, `[Resolve]`,
+   `[Threat]`, `[Crit]`, `[Toll]`, `[Hit Dice]`, `[Aid]`, `[Miss]`, `[Mill]`). Never write an Impact
+   Keyword as plain text. Always include the number when one applies: `[Boost 1]`, not "Boost."
+2. **Index Keywords → outlined chips.** Card types and class names used to *classify* a card
+   (Act, React, Core, Instinct, Background, Bond, Flaw, Ancestry, Item; class names). Rendered as
+   outlined chips in their type/class color — see `card-anatomy.md`.
+3. **Narrative vocabulary → plain bold.** Descriptive conditions with no mechanics
+   (**Exposed, Rattled, Rooted, Hidden, Marked, Sundered, Break**). Bold title case, no pill, no color.
+
+**Declared Actions → Bold + Capitalized** (not pills): **Action · Reaction · Draw · Discard ·
+Shuffle · Cleanse · Luck Check · Scene** (plus **Combat · Rest** as scene/time terms).
+
+**CRPG action verbs** (Move, Strike, Speak, Sense, Know, Focus, Enter, Exit, Read, Summon, Lift,
+Restrain) — effect-syntax verbs, rendered as steel-blue pills. Used for choose-one option lines.
+
+**Rule of thumb for a new term:** can it carry a number / change the dice? → Impact pill. Does it
+sort/filter a card? → Index chip. Is it just a named scene/action? → Bold+Cap. A fictional descriptor?
+→ plain bold. Otherwise → lowercase prose. **Do not invent new pill terms without explicit approval.**
+
+---
+
+## §2 — Voice & writing principles (priority order)
+
+1. **Brevity.** If a word can be cut without losing meaning, cut it. Cards are read mid-play.
+2. **Syntactic parallelism.** Same construction across cards reads the same way. If one card says
+   "Gain `[Boost 2]` for the Action," another must not say "earn a `[Boost 2]` bonus."
+3. **User-centric.** Write for the player holding the card. "You" = direct/present. "Your character"
+   = deliberate narrative distance — use intentionally, not by default.
+4. **No ambiguity.** If a player could read it two ways, rewrite it. The GM should never have to
+   settle a wording dispute.
+5. **No negation-passive.** Never "you cannot," "you are immune," "you are not." Reframe as an active
+   state or advantage.
+6. **"This scene," not "the scene ahead."** The hand is who the character is *right now*.
+7. **No designer-speak.** Never "the fiction advances," "narratively," "mechanically speaking,"
+   "spotlight" on player-facing text.
+
+---
+
+## §3 — Section anatomy & names
+
+Use these exact section names in design work.
+
+**Ability cards (Act / React / Core):** **Flavor Text** (2nd person, present, 1 sentence — only when
+the card earns framing) · **Trigger** (italic conditional, soft fiction-first gate, should fit most
+scenes) · **Effect** (main outcome; CRPG verb format for choose-one; hint direction, never prescribe)
+· **Crit** (only when the fiction earns it; 3–6 words/option, 2–3 options max) · **Discard** (one
+short clause).
+
+**Character-creation cards:** **Flavor / Universal Flavor** (Instinct uses fixed universal flavor —
+the header word is the personality) · **Effect Line** (Instinct, Bond) · **Trigger** (Background,
+Ancestry, Flaw) · **Body** (Background/Ancestry: choose-one / luck-check / passive-question) ·
+**Origin Stem** (all — 1st person, past tense, incomplete sentence with `___`, unique per card,
+never generic) · **Writing Lines** · **Flaw fill-in stem** (Format A `___ sets me off.` / Format B
+`I won't back down when ___`) · **Dismiss** (Flaw: act on it, or an ally **Cleanses** it).
+
+**Item cards:** Items remain a classless card type, but ⚠️ the item system is being **stripped back to
+its simplest form for the next playtest** — the old Item Check / placed-dice / Save anatomy is retired
+(§5). Keep items to Flavor + Effect (+ optional Crit) until the simpler version is designed.
+
+---
+
+## §4 — Special word rules
+
+| Term | Rule |
+|---|---|
+| **GM** | Always abbreviated — never "Game Master." |
+| beat | Lowercase — informal time language, not a game term. |
+| Pact | A card name, not a game term — no special formatting. |
+| Distances | Write in **feet**, never named ranges ("Near"/"Close"). |
+| Card-specific nouns | Bold+Cap on that card only (e.g. "Nature" on a Druid card); don't add to the global glossary unless it goes cross-card. |
+| Class economy terms | **Rally · Notoriety** *(Rogue)* · **Performance** *(Bard)* · **Debt** *(Warlock)* — Bold+Cap; more added as classes are designed (see `classes.md`). |
+
+---
+
+## §5 — Retired / forbidden terms — DO NOT USE 🔒
+
+The single catalogue of dead terms and their replacements. The *live* mechanic that replaced each is
+described in `core-rules.md`.
+
+| Don't write | Use instead / status |
+|---|---|
+| ~~Guard~~ | **[Resolve]** |
+| ~~Bolstered~~ | **[Boost]** (Boost absorbed it) |
+| ~~Strong Roll~~ | **[Crit]** |
+| ~~Rattled~~ | plain-bold narrative only — carries no mechanic |
+| ~~Encounter~~ | **Contest** (umbrella) / **Deadly Contest** / **Social Contest** |
+| ~~Combat encounter / Non-combat encounter~~ | **Deadly Contest** / **Social Contest** |
+| ~~Failure~~ (as a trigger) | **Miss** (a natural 1 only; a partial result is not a Miss) |
+| ~~Self-Aid~~ | Aid must come from an ally; self-assist does not exist |
+| ~~DC / target number / DC ladder~~ | difficulty is the GM's physical opposing dice pool |
+| ~~d8 / d10 / die-size upgrades~~ | the whole game is **d6 only** |
+| ~~Item Check~~ | **retired** — item system stripped back for next playtest |
+| ~~Placed dice / Save throws~~ | **retired** — the place-dice-and-Save loop is cut |
+| ~~[Rooted] / [Exposed] / [Hidden] as pills~~ | now **plain-bold narrative** terms, no mechanics |
+| ~~Disguised~~ | **retired** (was a placed-dice buff) |
+| ~~Buff/debuff pill distinction~~ | **retired** with the placed-dice system |
+| ~~"while held, [negative effect]"~~ on Flaws | the hand-slot cost IS the consequence |
+| ~~"the fiction advances"~~ | designer-speak — never on player-facing text |
+
+---
+
+## §6 — Term Audit Checklist
+
+Run on every card before approval or Baserow push. Fix violations immediately.
+
+- [ ] Impact Keywords written as pills (`[Boost 2]`), never plain text
+- [ ] Index keywords (types/classes) styled as outlined chips, not loud pills
+- [ ] Narrative conditions (Exposed, Rooted, Hidden, etc.) are **plain bold** — NOT pills
+- [ ] Declared actions capitalized: action → **Action**, scene → **Scene**, combat → **Combat**, rest → **Rest**
+- [ ] No retired terms (§5): no Guard, Bolstered, Strong Roll, Item Check, placed dice, Disguised, die upgrades
+- [ ] "GM" not "Game Master"; "beat" lowercase
+- [ ] Distances in feet, not Near/Close
+- [ ] Syntactic parallelism — compare phrasing to similar cards in the same deck
+- [ ] Brevity pass — any words to cut?
+- [ ] No negation-passive language; no designer-speak
+- [ ] "this scene" not "the scene ahead"
+- [ ] Section names match §3
+
+---
+
+## §7 — Baserow viewer rendering note
+
+When writing card HTML for the Baserow viewer, use the **viewer app CSS classes** (`.elbl`, `.csec`,
+`.clbl`, `.crow`, `.ci`) — **not** the renderer-preview classes (`.slbl`, `.srlbl`, `.sropt`), which
+render grey/incorrectly in the viewer. Full CSS and the `parse()`/`renderCard()` stack live in the
+`at-card-renderer` skill; the push workflow lives in `at-baserow-push`.
+
+---
+
+*Keyword meanings → `core-rules.md` · colors → `card-anatomy.md` · classes → `classes.md`.*
