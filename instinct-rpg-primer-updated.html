@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instinct RPG — A Player's Primer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep:       #090f1c;
+      --bg-mid:        #0e1827;
+      --bg-card:       #111e30;
+      --text-main:     #e2d4b8;
+      --text-muted:    #8499aa;
+      --text-faint:    #4d6070;
+      --gold:          #c8a96e;
+      --gold-light:    #dfc98e;
+      --gold-glow:     rgba(200, 169, 110, 0.12);
+      --border:        rgba(200, 169, 110, 0.25);
+      --border-bright: rgba(200, 169, 110, 0.55);
+      --max-w:         680px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 60px 0 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(30px, 8vw, 50px);
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--text-muted);
+      font-style: italic;
+      max-width: 400px;
+      margin: 0 auto 28px;
+    }
+    .hero-stars {
+      color: var(--gold);
+      letter-spacing: 0.4em;
+      font-size: 13px;
+      opacity: 0.55;
+    }
+
+    /* ── WHISPER ── */
+    .whisper {
+      margin: 36px 0;
+      padding: 20px 24px 20px 28px;
+      background: var(--bg-card);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── SECTIONS ── */
+    .section { margin-top: 52px; }
+    .section-number {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      opacity: 0.65;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(19px, 5vw, 26px);
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 18px;
+      padding-bottom: 11px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section p { margin-bottom: 16px; font-size: 17px; color: var(--text-main); }
+    .section p:last-child { margin-bottom: 0; }
+    .section em { color: var(--gold-light); font-style: italic; }
+    strong { color: var(--text-main); font-weight: 600; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--gold-glow);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .callout-label {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .callout p { font-size: 16px; margin: 0 0 10px; }
+    .callout p:last-child { margin: 0; }
+
+    /* ── DECK / HAND VISUAL ── */
+    .hand-deck-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .hd-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .hd-block.is-hand { border-color: var(--border-bright); }
+    .hd-label {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .hd-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    .hd-block.is-hand .hd-label { color: var(--gold-light); }
+    .hd-block.is-hand .hd-sub { color: var(--text-main); }
+
+    /* ── SCENE TYPES ── */
+    .scene-types {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 14px 0;
+    }
+    .scene-type-pill {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    /* ── KEYWORD TAG ── */
+    .kw {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 9px;
+      border-radius: 4px;
+      background: rgba(200, 169, 110, 0.15);
+      border: 1px solid rgba(200, 169, 110, 0.45);
+      color: var(--gold-light);
+      margin: 0 2px;
+    }
+
+    /* ── PHASES ── */
+    .phases { display: flex; flex-direction: column; gap: 2px; margin: 18px 0; }
+    .phase { display: grid; grid-template-columns: 110px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .phase-name { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; padding: 14px 14px; background: rgba(200,169,110,0.10); color: var(--gold-light); display: flex; align-items: flex-start; }
+    .phase-desc { padding: 14px 16px; font-size: 16px; color: var(--text-main); background: var(--bg-card); }
+    .phase-desc p { margin-bottom: 10px; font-size: 16px; }
+    .phase-desc p:last-child { margin-bottom: 0; }
+
+    /* ── DICE READING STEPS ── */
+    .dice-steps { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+    .dice-step { display: grid; grid-template-columns: 40px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .dice-step-num { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; text-align: center; padding: 12px 8px; background: rgba(200,169,110,0.08); color: var(--gold); display: flex; align-items: center; justify-content: center; }
+    .dice-step-content { padding: 12px 16px; font-size: 16px; color: var(--text-main); background: var(--bg-card); }
+    .dice-tag { display: inline-block; font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 4px; margin-right: 4px; }
+    .tag-miss  { background: rgba(192,80,80,0.2);   color: #e08080; border: 1px solid rgba(192,80,80,0.4); }
+    .tag-crit  { background: rgba(220,180,60,0.15);  color: #d4aa40; border: 1px solid rgba(220,180,60,0.4); }
+    .tag-total { background: rgba(100,160,200,0.15); color: #80b8d8; border: 1px solid rgba(100,160,200,0.35); }
+
+    /* ── OUTCOMES ── */
+    .outcomes { display: flex; flex-direction: column; gap: 6px; margin: 14px 0; }
+    .outcome { display: grid; grid-template-columns: 110px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .outcome-label { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 12px 10px; display: flex; align-items: center; }
+    .outcome-desc { padding: 12px 16px; font-size: 15px; color: var(--text-main); background: var(--bg-card); }
+    .out-success .outcome-label { background: rgba(80,160,100,0.15); color: #80cc9a; }
+    .out-partial .outcome-label { background: rgba(200,140,60,0.15); color: #d4a060; }
+    .out-fail    .outcome-label { background: rgba(180,80,80,0.12);  color: #cc8080; }
+
+    /* ── AID TERM ── */
+    .term-aid {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 1px 8px;
+      border-radius: 4px;
+      background: rgba(200,169,110,0.15);
+      border: 1px solid rgba(200,169,110,0.45);
+      color: var(--gold-light);
+    }
+
+    /* ── NOTE ── */
+    .note {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 8px 12px;
+      border-left: 2px solid var(--border);
+      margin: 12px 0;
+    }
+
+    /* ── CARD EXAMPLES ── */
+    .card-example { background: #f7f0e0; border: 1.5px solid #c8a96e; border-radius: 8px; overflow: hidden; margin: 20px 0; box-shadow: 4px 4px 0 rgba(10,8,6,0.6); max-width: 330px; }
+    .card-header { padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .card-header-act   { background: #1C3A5E; }
+    .card-header-react { background: #0C4A6E; }
+    .card-name  { color: #dbeafe; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; }
+    .card-badge { font-family: 'Cinzel', serif; font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: #dbeafe; text-transform: uppercase; }
+    .card-header-react .card-name,
+    .card-header-react .card-badge { color: #bae6fd; }
+    .card-body  { padding: 11px 13px; background: #f7f0e0; }
+    .card-flavor { font-style: italic; font-size: 12px; color: #5a4a30; margin-bottom: 7px; }
+    .card-divider { height: 1px; background: rgba(200,169,110,0.5); margin: 7px 0; }
+    .card-effect-label { font-family: 'Cinzel', serif; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #8a7050; margin-bottom: 4px; }
+    .card-effect { font-size: 12px; color: #2a1a0a; line-height: 1.5; }
+    .card-trigger { font-size: 11px; color: #3a2a14; font-style: italic; margin-bottom: 6px; background: rgba(200,169,110,0.15); padding: 4px 8px; border-radius: 3px; }
+    .card-crit-label { font-family: 'Cinzel', serif; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: #c87820; margin: 7px 0 3px; }
+    .card-crit-option { font-size: 12px; color: #3a2a14; padding-left: 10px; line-height: 1.5; }
+    .card-footer { padding: 7px 13px; background: #ede0c4; border-top: 1px solid #c8a96e; display: flex; justify-content: space-between; align-items: center; }
+    .card-class { font-family: 'Cinzel', serif; font-size: 9px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #6a5030; }
+    .card-cost  { width: 18px; height: 18px; background: #1C3A5E; color: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700; }
+
+    .tp { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 11px; font-weight: 600; font-family: 'Cinzel', serif; letter-spacing: 0.04em; line-height: 1.6; }
+    .tp-verb  { background: #1D4ED8; color: #EFF6FF; }
+    .tp-cond  { background: #991B1B; color: #FEF2F2; }
+    .tp-boost { background: #0F766E; color: #CCFBF1; }
+
+    /* ── CARD TYPES LIST ── */
+    .card-types { margin: 18px 0; display: flex; flex-direction: column; gap: 12px; }
+    .card-type-row { display: grid; grid-template-columns: 108px 1fr; gap: 12px; align-items: start; }
+    .card-type-name { font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-align: center; letter-spacing: 0.04em; }
+    .ctype-core      { background: #1a2c1a; color: #9fd4a8; }
+    .ctype-act       { background: #1C3A5E; color: #dbeafe; }
+    .ctype-react     { background: #0C4A6E; color: #bae6fd; }
+    .ctype-instinct  { background: #1e2540; color: #d4e0f0; }
+    .ctype-bg        { background: #0f2d45; color: #c4d8e8; }
+    .ctype-ancestry  { background: #2a1a08; color: #d8c080; }
+    .ctype-bond      { background: #0f2b15; color: #b8d0b0; }
+    .ctype-flaw      { background: #3d0a0a; color: #f0c0b8; }
+    .card-type-desc  { font-size: 16px; color: var(--text-main); padding-top: 2px; }
+
+    /* ── CARD STUDIO BOX ── */
+    .studio-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .studio-header {
+      background: rgba(200,169,110,0.12);
+      border-bottom: 1px solid var(--border);
+      padding: 13px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .studio-body {
+      display: grid;
+      grid-template-columns: 1fr 140px;
+      gap: 0;
+    }
+    .studio-text {
+      padding: 18px 20px;
+    }
+    .studio-text p { font-size: 15px; color: var(--text-main); margin-bottom: 10px; }
+    .studio-text p:last-child { margin-bottom: 0; }
+    .studio-text .studio-note { font-size: 13px; color: var(--text-muted); font-style: italic; }
+    .studio-qr {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid var(--border);
+      gap: 8px;
+    }
+    .studio-qr img {
+      width: 108px;
+      height: 108px;
+      border-radius: 6px;
+      display: block;
+    }
+    .studio-qr-label {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    /* ── EXAMPLE SCENE ── */
+    .scene-box { background: var(--bg-card); border: 1px solid var(--border-bright); border-radius: 10px; overflow: hidden; margin: 20px 0; }
+    .scene-header { background: rgba(200,169,110,0.12); border-bottom: 1px solid var(--border); padding: 13px 20px; font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .scene-body { padding: 18px 20px; }
+    .scene-step { margin-bottom: 18px; }
+    .scene-step:last-child { margin-bottom: 0; }
+    .scene-step-label { font-family: 'Cinzel', serif; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .scene-step p { font-size: 16px; color: var(--text-main); margin-bottom: 8px; }
+    .dice-display { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin: 10px 0; }
+    .die { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700; border: 2px solid; }
+    .die-crit   { background: rgba(240,208,80,0.12);  border-color: #d4a020; color: #f0d060; }
+    .die-miss   { background: rgba(192,80,80,0.12);   border-color: #c04040; color: #e07070; }
+    .die-normal { background: rgba(100,130,180,0.12); border-color: #6080a8; color: #aac0d8; }
+    .die-gm     { background: rgba(180,60,60,0.15);   border-color: #c03030; color: #e08080; }
+    .dice-label { font-size: 12px; color: var(--text-muted); font-style: italic; }
+    .toll-note    { background: rgba(192,80,80,0.10);   border-left: 3px solid #c04040; padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 14px; color: #e8c0b0; margin: 8px 0; }
+    .crit-note    { background: rgba(240,208,80,0.08);  border-left: 3px solid #d4a020; padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 14px; color: #e8d4a0; margin: 8px 0; }
+    .success-note { background: rgba(128,200,154,0.10); border-left: 3px solid #60a870; padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 14px; color: #a0d4b0; margin: 8px 0; }
+    .scene-divider { height: 1px; background: var(--border); margin: 14px 0; }
+    .speech { font-style: italic; color: var(--gold-light); }
+
+    /* ── GOLDEN RULE ── */
+    .golden-rule { background: var(--bg-card); border: 2px solid var(--gold); border-radius: 10px; padding: 28px 24px; margin: 20px 0; text-align: center; }
+    .golden-rule-text { font-family: 'Cinzel', serif; font-size: clamp(16px, 4vw, 21px); font-weight: 600; color: var(--gold-light); line-height: 1.5; margin-bottom: 12px; }
+    .golden-rule-sub { font-size: 16px; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer { margin-top: 60px; padding-top: 28px; border-top: 1px solid var(--border); text-align: center; }
+    footer .label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 10px; }
+    footer a { display: inline-block; background: var(--gold-glow); border: 1px solid var(--border-bright); border-radius: 6px; padding: 10px 22px; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; color: var(--gold-light); text-decoration: none; letter-spacing: 0.05em; }
+    footer .fine-print { margin-top: 14px; font-size: 13px; color: var(--text-faint); font-style: italic; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .wrapper { padding: 0 16px 60px; }
+      .hand-deck-grid { grid-template-columns: 1fr; }
+      .card-type-row { grid-template-columns: 88px 1fr; }
+      .phase { grid-template-columns: 84px 1fr; }
+      .card-example { max-width: 100%; }
+      .studio-body { grid-template-columns: 1fr; }
+      .studio-qr { border-left: none; border-top: 1px solid var(--border); flex-direction: row; justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-eyebrow">A Player's Primer · Playtest Edition · June 2026</div>
+    <h1 class="hero-title">Instinct RPG</h1>
+    <p class="hero-sub">For first-time players at the table tonight</p>
+    <div class="hero-stars">✦ &nbsp; ✦ &nbsp; ✦</div>
+  </header>
+
+  <!-- ═══ WHISPER ═══ -->
+  <div class="whisper">
+    Here's what you need to know before your first session. The rules are lighter than they look, and most of the mechanics will click faster at the table than they do on the page. Read through once — then dive in.
+  </div>
+
+  <!-- ═══ 01 — WHAT KIND OF GAME IS THIS? ═══ -->
+  <section class="section">
+    <div class="section-number">01</div>
+    <h2 class="section-title">What Kind of Game Is This?</h2>
+
+    <p>Instinct RPG is a card-driven tabletop RPG. The cards in your hand at any moment represent who your character is right now, and your job is to wield that hand as faithfully and as creatively as your character would. Three things drive every good session:</p>
+
+    <div class="callout">
+      <div class="callout-label">Three pillars of play</div>
+      <p><strong>Craftiness.</strong> There's real art in reading your hand, spotting the opening, and making a play that threads your character's situation through the scene in a way nobody anticipated. Not because it's clever — because it's right for this moment.</p>
+      <p><strong>Character in the moment.</strong> Whatever's in your hand is alive and present right now. The game is about harnessing those qualities as they surface, not executing a plan you mapped out before you sat down.</p>
+      <p><strong>Story always moving forward.</strong> Every roll, every card, every setback is fuel. The scene never stops. Your job isn't to survive the moment — it's to make it worth remembering.</p>
+    </div>
+
+    <p>The Barbarian who throws herself between an ally and a verbal attack, because someone is getting torn apart and she's not going to let that happen. The Rogue who holds back when everyone else charges — patience is the weapon, and waiting for the right moment pays off differently than rushing in. The Warlock who leans on a debt they're owed, not because it's the safe play, but because whatever they bargained with is watching and the terms are the terms. These are the moments the game is built for.</p>
+  </section>
+
+  <!-- ═══ 02 — YOUR DECK, YOUR HAND ═══ -->
+  <section class="section">
+    <div class="section-number">02</div>
+    <h2 class="section-title">Your Deck, Your Hand</h2>
+
+    <div class="hand-deck-grid">
+      <div class="hd-block">
+        <div class="hd-label">Your Deck</div>
+        <div class="hd-sub">Who your character is across all sessions — their abilities, their history, their relationships and pressures.</div>
+      </div>
+      <div class="hd-block is-hand">
+        <div class="hd-label">Your Hand</div>
+        <div class="hd-sub">Who they are <strong>right now</strong>, in this scene, under this specific pressure. This is what you play with.</div>
+      </div>
+    </div>
+
+    <p>Those aren't the same thing. A character in a story doesn't have equal access to every part of themselves at every moment. Some scenes you're sharp and ready. Some scenes an old wound surfaces. Some scenes a quality you've been holding back shows up in your hand and demands to be used. The hand is what's live — that's what you work with. You don't get to choose what arrives in each scene. You get to choose what to do with it.</p>
+  </section>
+
+  <!-- ═══ 03 — HOW SCENES WORK ═══ -->
+  <section class="section">
+    <div class="section-number">03</div>
+    <h2 class="section-title">How Scenes Work</h2>
+
+    <p>A <strong>scene</strong> is the basic unit of play. Each one has a location, a set of active participants, and a dramatic question — something the table is working through or pushing past. When the dramatic question is answered, avoided, or transformed into something new, the scene ends and a new one begins.</p>
+
+    <p><strong>At scene start, you draw up to 5 cards.</strong> That hand is what you have for the entire scene. There's no drawing mid-scene unless a card explicitly lets you. What you drew is what you have to work with.</p>
+
+    <p><strong>At scene end, your hand is discarded.</strong> Everything you held — played or not — goes to your discard pile. You draw a fresh hand of 5 for the next scene. Conditions applied during the scene typically clear, unless the GM decides they carry forward.</p>
+
+    <p>The game recognizes five scene types:</p>
+
+    <div class="scene-types">
+      <span class="scene-type-pill">Combat</span>
+      <span class="scene-type-pill">Social</span>
+      <span class="scene-type-pill">Exploration</span>
+      <span class="scene-type-pill">Rest &amp; Downtime</span>
+      <span class="scene-type-pill">Party Scenes</span>
+    </div>
+
+    <p>Cards don't have scene restrictions. A card that reads like a combat move can fire in a negotiation if the fiction calls for it. Scene type is context, not a filter on your options.</p>
+
+    <div class="note">As the scene goes on, your hand will thin. When the party's average hand drops to roughly 2 cards or fewer, expect the GM to transition or close the scene — a depleted hand is a pacing signal, not a punishment.</div>
+  </section>
+
+  <!-- ═══ 04 — HOW CHECKS WORK ═══ -->
+  <section class="section">
+    <div class="section-number">04</div>
+    <h2 class="section-title">How Checks Work</h2>
+
+    <p>A <span class="kw">check</span> is the game's core resolution mechanic. Nearly every uncertain action — striking an enemy, persuading a guard, navigating a hazard, holding your composure — is resolved as a <span class="kw">check</span>. The same rules always apply, whether you're in a tense negotiation or a life-or-death fight.</p>
+
+    <p>Every check follows three phases: <strong>Build → Roll → Read Your Dice.</strong></p>
+
+    <div class="phases">
+
+      <div class="phase">
+        <div class="phase-name">Build</div>
+        <div class="phase-desc">
+          <p>At Tier 1 (Levels 1–3), your base pool is <strong>2d6.</strong></p>
+          <p>Before rolling, you may discard 1 card from your own hand to add 1 extra die (<span class="kw">Boost</span>). You can do this even without playing a card. Declare before picking up the dice — never after.</p>
+          <p>An ally may also discard 1 card to add 1 die to your pool — this is called <span class="term-aid">Aid</span>. <strong>Only one ally may Aid a single check.</strong> You cannot Aid your own roll.</p>
+          <p><strong>Declare your full pool before picking up the dice.</strong> No changes once results are visible.</p>
+          <p>The GM places their own <strong>opposing dice pool</strong> on the table — this is the difficulty, made physical. You can see exactly what you're up against before you roll.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-name">Roll</div>
+        <div class="phase-desc">
+          <p>Roll all your dice simultaneously.</p>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-name">Read Your Dice</div>
+        <div class="phase-desc">
+          <p>Three steps, in order:</p>
+          <div class="dice-steps">
+            <div class="dice-step">
+              <div class="dice-step-num">1</div>
+              <div class="dice-step-content"><span class="dice-tag tag-miss">Miss</span> Any die showing <strong>1</strong> is a Miss die. Remove it from your pool immediately. Each Miss die gives the GM <strong>1 Toll</strong> — right now, regardless of whether you succeed or fail overall.</div>
+            </div>
+            <div class="dice-step">
+              <div class="dice-step-num">2</div>
+              <div class="dice-step-content"><span class="dice-tag tag-crit">Crit</span> Any die showing its maximum face (6 on a d6) is a Crit die. It <em>explodes</em> — roll one bonus die and add it to your pool. Bonus dice showing max face also count as Crits but don't explode again. Crits let you spend <strong>Flourishes</strong> on your card's bonus options after the roll resolves.</div>
+            </div>
+            <div class="dice-step">
+              <div class="dice-step-num">3</div>
+              <div class="dice-step-content"><span class="dice-tag tag-total">Resolve</span> Your dice clear the GM's opposing dice one at a time. When all opposing dice are cleared, the check succeeds. If some opposing dice remain, the GM adjudicates what was and wasn't achieved — a partial result, not a Miss.</div>
+            </div>
+          </div>
+          <div class="outcomes">
+            <div class="outcome out-success">
+              <div class="outcome-label">Pool Cleared</div>
+              <div class="outcome-desc">Full success. Narrate what you pull off. Spend any Flourishes earned from Crit dice on your card's bonus options.</div>
+            </div>
+            <div class="outcome out-partial">
+              <div class="outcome-label">Partial</div>
+              <div class="outcome-desc">Some opposing dice remain. The GM adjudicates what was and wasn't achieved. This is not a Miss — it's a partial success.</div>
+            </div>
+            <div class="outcome out-fail">
+              <div class="outcome-label">Miss (the 1s)</div>
+              <div class="outcome-desc">Each die showing 1 was already removed in Step 1 and gave the GM 1 Toll. The scene always keeps moving regardless.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ 05 — TOLL ═══ -->
+  <section class="section">
+    <div class="section-number">05</div>
+    <h2 class="section-title">What Toll Is</h2>
+
+    <p>Every <span class="dice-tag tag-miss" style="font-size:13px">Miss</span> die — any die showing a natural 1 — gives the GM <strong>1 Toll</strong>, immediately. This happens whether the overall check succeeds or fails. Roll five dice, two come up 1s, the GM gets 2 Toll — even if the rest of your dice cleared the opposing pool.</p>
+
+    <p>Toll is the GM's scene-pressure resource. It isn't spent to punish you specifically — it's spent to make the world react. A guard appears. A negotiation shifts. An NPC makes a move they'd been holding back. Toll is what keeps even successful moments feeling earned.</p>
+
+    <div class="callout">
+      <div class="callout-label">A Miss is never a stop</div>
+      <p>A <strong>Miss</strong> is strictly a natural 1. A check that partially clears the opposing pool is a partial result — not a Miss. When Misses occur, the GM gains Toll and uses it to push the scene somewhere more interesting. The scene never stops — it only changes direction.</p>
+    </div>
+  </section>
+
+  <!-- ═══ 06 — RESOLVE & HIT DICE ═══ -->
+  <section class="section">
+    <div class="section-number">06</div>
+    <h2 class="section-title">Resolve &amp; Hit Dice</h2>
+
+    <p><strong>Hit Dice</strong> are your health pool — physical dice sitting on the table in front of you, mostly d6s. Enemies deal damage equal to their dice face values. When you take damage, your Hit Dice are removed. At Level 1, all your Hit Dice start at their maximum value.</p>
+
+    <p><strong>Resolve</strong> is a temporary defensive layer set up at the start of any Contest — a fight, a tense confrontation, any scene where consequences hit hard. At Contest start, you move a portion of your Hit Dice forward as your Resolve pool. Resolve absorbs all incoming damage before anything touches your actual Hit Dice. When Resolve runs out, damage starts hitting your health directly.</p>
+
+    <div class="callout">
+      <div class="callout-label">Resolve works in social contests too</div>
+      <p>A tense interrogation, a high-stakes debate, a scene where someone is actively working to break your character down — these are <strong>Social Contests</strong>, and they use the same Resolve pool and the same resolution engine as a fight. Composure, credibility, emotional momentum — they work exactly the same way as taking a hit. The game doesn't draw a hard line between physical and social stakes.</p>
+    </div>
+
+    <p>One thing to know before your first fight: the game always shows you the stakes. Enemy dice are placed visibly on the table before you commit. You see exactly what's coming and choose whether to engage.</p>
+  </section>
+
+  <!-- ═══ 07 — DEADLY CONTESTS ═══ -->
+  <section class="section">
+    <div class="section-number">07</div>
+    <h2 class="section-title">Deadly Contests</h2>
+
+    <p>A <strong>Deadly Contest</strong> is any scene where Hit Dice can be lost — where characters are eligible to die. This is what most games call "combat." It runs on the same resolution engine as everything else, with a few structural additions.</p>
+
+    <p><strong>At Contest start, two things happen simultaneously:</strong></p>
+
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-name">Threat Locks In</div>
+        <div class="phase-desc">
+          <p>Enemies reveal their <strong>Threat</strong> — the damage they will deal — upfront, before anyone acts. The GM places Threat dice visibly in front of relevant players. This is locked: the Threat resolves regardless of the order players choose to act.</p>
+          <p>This makes a Deadly Contest a genuine decision with known stakes. You can see what's coming. You choose: <strong>fight</strong> (accepting the Threat), <strong>flee</strong>, or <strong>negotiate</strong>. Engaging means accepting the Threat.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-name">Resolve Sets Up</div>
+        <div class="phase-desc">
+          <p>Each player moves a portion of their Hit Dice forward as their <strong>Resolve</strong> pool — the buffer that absorbs incoming Threat before it touches actual health.</p>
+        </div>
+      </div>
+    </div>
+
+    <p><strong>Open Floor:</strong> There is no fixed turn order in a Deadly Contest. After Threat is revealed, any player may act in whatever sequence makes narrative sense. The group decides who acts when, moment to moment. This is called the <em>Open Floor</em>.</p>
+
+    <div class="callout">
+      <div class="callout-label">Defensive dice can go anywhere</div>
+      <p>When you use a card to deploy defensive dice and those dice fully clear an incoming Threat pool, any leftover dice can be directed to <em>any target you choose</em> — an ally, or even yourself. Spillover protection is not restricted to allies.</p>
+    </div>
+
+    <p><strong>When Resolve breaks.</strong> Any remaining Threat that wasn't cleared hits your Hit Dice. At that point, you choose: <strong>retreat</strong> (you're safe, but out of the fight for this Contest) or <strong>stay in</strong> (you keep acting, but future Threat hits your Hit Dice directly).</p>
+
+    <p><strong>Knockout.</strong> If your last Hit Die falls, you're out. You take a <strong>Scar</strong> — a permanent card added to your deck. Three Scars and your character dies or retires (the GM and story decide how).</p>
+
+    <p>Social Contests work the same way — same opposing pool, same Open Floor, same Resolve structure — but only Resolve is at risk. Hit Dice are safe in a Social Contest. When one side's Resolve is depleted, the confrontation ends.</p>
+  </section>
+
+  <!-- ═══ 08 — YOUR CARDS ═══ -->
+  <section class="section">
+    <div class="section-number">08</div>
+    <h2 class="section-title">Your Cards</h2>
+
+    <p>Eight card types live in your deck. Here's the quick guide:</p>
+
+    <div class="card-types">
+      <div class="card-type-row">
+        <div class="card-type-name ctype-core">Core</div>
+        <div class="card-type-desc">Your class's permanent rules. These sit face-up in your Active area and never enter the deck. Always available, every scene. Equipment access is baked into specific classes' Core cards — there's no universal equipment rule.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-act">Act</div>
+        <div class="card-type-desc">Your primary moves. Play one on your turn. <strong>Cost: 1</strong> — playing this card is your spotlight for this moment.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-react">React</div>
+        <div class="card-type-desc">Interrupts and responses. <strong>Cost: 0.</strong> Play any time, in response to any action at the table. There's a brief React window after every roll. Some React cards and Item cards carry the <strong>Mill</strong> keyword: at scene start, you may discard that card to draw 1 replacement.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-instinct">Instinct</div>
+        <div class="card-type-desc">A single word — <em>Bold, Cautious, Perceptive, Loyal</em> — naming a quality that's driving you right now. Reveal from hand when that quality is at work. Gain <span class="tp tp-boost" style="font-size:10px">Boost 2</span> — two extra dice.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-bg">Background</div>
+        <div class="card-type-desc">Your character's past and what it taught them. Plays when the fictional trigger fires — a moment of expertise, lucky knowledge, or a sharp read on the situation.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-ancestry">Ancestry</div>
+        <div class="card-type-desc">Where you come from. Plays when the trigger fires — your heritage does something useful at the right moment.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-bond">Bond</div>
+        <div class="card-type-desc">Your connection to someone. <em>You</em> name the moment — describe how this relationship is driving you right now — and both you and the named person gain <span class="tp tp-boost" style="font-size:10px">Boost 1</span>. A <strong>Connection</strong> is a Bond to a specific named party member, earned through Rest, Growth rewards, or by discarding a Bond as a Super Aid.</div>
+      </div>
+      <div class="card-type-row">
+        <div class="card-type-name ctype-flaw">Flaw 🔒</div>
+        <div class="card-type-desc">The pressure you're under right now. You'll start with <strong>2 Flaws</strong> in your deck, drawn from the same pool. Find something in the scene that fits. Lean in dramatically (GM makes a free move) or suppress it (pay an ongoing cost while you hold the card). You can't simply ignore a Flaw in hand.</div>
+      </div>
+    </div>
+
+    <!-- ── CARD STUDIO ── -->
+    <div class="studio-box">
+      <div class="studio-header">Instinct RPG — Card Studio</div>
+      <div class="studio-body">
+        <div class="studio-text">
+          <p>Browse your class cards before and during the session. Tap any card to see its full text, trigger, and Crit options.</p>
+          <p>If a card raises a question or sparks a thought during play, use the <strong>feedback button</strong> on that card to leave a note. All feedback gets collected for review after the session.</p>
+          <p class="studio-note">The "Build My Deck" feature is available but still in early beta — not needed for today's game.</p>
+        </div>
+        <div class="studio-qr">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://elequin-sandbox.github.io/instinct-ttrpg/&bgcolor=111e30&color=dfc98e&margin=6"
+            alt="QR code for Instinct RPG Card Studio"
+            width="108"
+            height="108"
+          />
+          <div class="studio-qr-label">Scan to open</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══ 09 — A TYPICAL MOMENT ═══ -->
+  <section class="section">
+    <div class="section-number">09</div>
+    <h2 class="section-title">At the Table: A Typical Moment</h2>
+
+    <p>Here's how a single moment plays out — step by step through a real scene.</p>
+
+    <div class="scene-box">
+      <div class="scene-header">The Bridge — Three Guards, One Way Out</div>
+      <div class="scene-body">
+
+        <div class="scene-step">
+          <div class="scene-step-label">The Setup</div>
+          <p>Three armed mercenaries are blocking the only road out of town. The bridge is too narrow to run through. The Barbarian looks at their hand and sees <strong>Battle Cry</strong>.</p>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">Fiction First</div>
+          <p><span class="speech">"I step forward," the Barbarian's player says. "I make myself as big as possible and I let everything I've been holding back show in my face. I want them scared enough to hesitate."</span></p>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">Which Card Is That?</div>
+          <p>The Barbarian has <strong>Battle Cry</strong> in hand. The description fits. They play it.</p>
+
+          <div class="card-example">
+            <div class="card-header card-header-act">
+              <span class="card-name">Battle Cry</span>
+              <span class="card-badge">Act</span>
+            </div>
+            <div class="card-body">
+              <div class="card-flavor">The sound alone changes the calculus.</div>
+              <div class="card-divider"></div>
+              <div class="card-effect-label">Effect</div>
+              <div class="card-effect">Perform an Intimidation check. On success, all enemies in the Scene are <span class="tp tp-cond">Rattled</span> — all allies gain a <span class="tp tp-boost" style="font-size:11px">Boost</span> die on their next Action.</div>
+              <div class="card-crit-label">Crit</div>
+              <div class="card-crit-option">1 Flourish — Add a Rage die to your pool.</div>
+            </div>
+            <div class="card-footer">
+              <span class="card-class">Barbarian</span>
+              <div class="card-cost">1</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">Build the Pool</div>
+          <p>The GM places the opposing pool on the table — three d6s representing the guards' collective resistance, two showing 4, one showing 5.</p>
+          <p>Tier 1 base: 2d6. The Warlock's player glances at their hand, sees a card they can spare: <span class="speech">"I'll Aid — I'm reinforcing the threat from behind."</span> They discard one card. <strong>3 player dice total.</strong></p>
+          <div class="note">Only one ally can Aid a check. The Warlock stepped up — no one else can add dice to this roll.</div>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">Roll</div>
+          <div class="dice-display">
+            <div class="die die-crit">6</div>
+            <div class="die die-normal">3</div>
+            <div class="die die-miss">1</div>
+            <div class="dice-label">Player pool. Read them in order.</div>
+          </div>
+          <div class="dice-display">
+            <div class="die die-gm">4</div>
+            <div class="die die-gm">4</div>
+            <div class="die die-gm">5</div>
+            <div class="dice-label">GM's opposing pool — already placed before the roll.</div>
+          </div>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">Read the Dice</div>
+          <div class="toll-note">⚠️ <strong>Miss die (the 1):</strong> Removed immediately. GM gains 1 Toll right now — even though this roll is about to succeed. One guard's backup is somewhere unseen.</div>
+          <div class="crit-note">✦ <strong>Crit die (the 6):</strong> Explodes — roll a bonus die, comes up 4. The 6 also earns 1 Flourish to spend if the pool is cleared.</div>
+          <div class="success-note">✓ <strong>Clearing the pool:</strong> Player dice (6, bonus 4, 3) clear the GM's dice (4, 4, 5) one at a time. All three opposing dice cleared. <strong>Full success.</strong></div>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">The Result</div>
+          <p>All three guards are <span class="tp tp-cond">Rattled</span>. The Rogue and Warlock each get a <span class="tp tp-boost" style="font-size:11px">Boost</span> die on their next action. The Barbarian spends their Flourish: <em>"Add a Rage die to your pool."</em> Physical dice hit the table.</p>
+
+          <p>Then the Rogue's player leans in: <span class="speech">"My ally just applied a condition to a target I can reach. That's my trigger."</span> They play <strong>Exploit Opening</strong> as a React — cost zero, window right now:</p>
+
+          <div class="card-example">
+            <div class="card-header card-header-react">
+              <span class="card-name">Exploit Opening</span>
+              <span class="card-badge">React</span>
+            </div>
+            <div class="card-body">
+              <div class="card-flavor">You were waiting for exactly that.</div>
+              <div class="card-trigger">Trigger: When an ally applies any negative condition to a target.</div>
+              <div class="card-effect-label">Effect</div>
+              <div class="card-effect">Perform an Acrobatics check. On success, <span class="tp tp-verb">Strike</span> that target immediately.</div>
+              <div class="card-crit-label">Crit</div>
+              <div class="card-crit-option">1 Flourish — Add a second negative condition.</div>
+            </div>
+            <div class="card-footer">
+              <span class="card-class">Rogue</span>
+              <span style="font-family:'Cinzel',serif;font-size:10px;color:#6a5030;font-weight:700;">0</span>
+            </div>
+          </div>
+
+          <p>The Rogue threads through the Rattled guard before anyone has time to react.</p>
+        </div>
+
+        <div class="scene-divider"></div>
+
+        <div class="scene-step">
+          <div class="scene-step-label">And the Toll?</div>
+          <p>The GM holds that 1 Toll. Three beats later, when the Rogue tries to vanish into the chaos, the GM spends it: the guard's backup rounds a corner. The fight gets complicated. The scene never stopped — it only got more interesting.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 10 — THE GOLDEN RULE ═══ -->
+  <section class="section">
+    <div class="section-number">10</div>
+    <h2 class="section-title">The Golden Rule</h2>
+
+    <div class="golden-rule">
+      <div class="golden-rule-text">Describe the action. Then find the card.</div>
+      <div class="golden-rule-sub">You never play a card cold. The description always comes first.</div>
+    </div>
+
+    <p>You say what your character is doing — what they attempt, what they reach for, how they move. Then you look at your hand and ask: does any card here fit what I just described? If it does, play it. The card confirms what that action is capable of achieving and tells you what to roll.</p>
+
+    <p>That order doesn't reverse. You don't pick up a card and work backward to justify it. You describe first, find the card second. If no card fits, the action can still happen — it just resolves as a basic check without card mechanics attached.</p>
+
+    <p>Your cards aren't a menu. They're a hand. Look at what you're holding and ask what your character would actually do right now — then find the card that earns the mechanics for it.</p>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="label">Card Studio</div>
+    <a href="https://elequin-sandbox.github.io/instinct-ttrpg/" target="_blank" rel="noopener">
+      elequin-sandbox.github.io/instinct-ttrpg
+    </a>
+    <div class="fine-print">Browse cards · Leave in-session feedback · Build My Deck (early beta)</div>
+  </footer>
+
+</div>
+</body>
+</html>

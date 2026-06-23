@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -95,6 +95,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-bane{background:#7A1F1F;color:#FEE2E2;}
 .kw-cond{background:#C2620E;color:#FFF7ED;}
 .kw-status{background:#475569;color:#F1F5F9;}
+.kw-mill{background:#78350F;color:#FEF3C7;}
 /* loadout recipe pill types */
 .kw-background{background:#633806;color:#fef3c7;}
 .kw-ancestry{background:#14532D;color:#dcfce7;}
@@ -600,6 +601,11 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-ancestry .bf-head{background:#2a1a08;border-bottom-color:#bfa060;}
 .scope-boon .bf-ancestry .bf-name{color:#d8c080;}
 .scope-boon .bf-ancestry .bf-badge,.scope-boon .bf-ancestry .bf-orn{color:#bfa060;}
+.scope-boon .bf-connection .bf-head{background:#4A2B08;border-bottom-color:#854D0E;}
+.scope-boon .bf-connection .bf-name{color:#FEF3C7;}
+.scope-boon .bf-connection .bf-badge,.scope-boon .bf-connection .bf-orn{color:#854D0E;}
+.scope-boon .bf-discard{font-size:8.5px;color:#5a3010;line-height:1.5;border-top:0.5px solid #c8a96e;margin-top:auto;padding-top:3px;font-style:italic;}
+.ctype-item-lbl{position:absolute;bottom:22px;right:5px;font-size:6px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#92400E;background:#FEF3C7;border:1px solid #92400E;border-radius:2px;padding:1px 4px;pointer-events:none;z-index:2;}
 .class-divider{grid-column:1/-1;width:100%;padding:18px 4px 8px;font-family:system-ui,-apple-system,sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--cls-color,#c8a96e);border-bottom:1px solid var(--cls-color,#c8a96e);}
 .rework-burst{position:absolute;top:-18px;right:-18px;z-index:10;width:62px;height:62px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
 .rework-burst::before,.rework-burst::after{content:'';position:absolute;inset:6px;background:#c8a96e;z-index:0;}
@@ -684,51 +690,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
-/* ---------- submit idea view ---------- */
-.tab-submit{color:#c8a96e !important;font-weight:600;}
-.tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
-.submit-wrap{display:flex;justify-content:center;padding:40px 18px 60px;min-height:60vh;}
-.submit-card{background:#1d140b;border:1px solid #3a2c19;border-radius:12px;padding:36px 40px;max-width:640px;width:100%;}
-.submit-title{font-family:system-ui,-apple-system,sans-serif;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.submit-sub{font-size:13px;color:#8a7a5a;line-height:1.6;margin-bottom:28px;}
-.submit-field{margin-bottom:22px;}
-.submit-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px;}
-.submit-opt{font-weight:400;font-size:10px;text-transform:none;letter-spacing:0;color:#5a4a30;}
-.submit-hint{font-size:12px;color:#7a6a4a;line-height:1.5;margin-bottom:8px;}
-.submit-chips{display:flex;flex-wrap:wrap;gap:6px;}
-.schip{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:5px 13px;border-radius:14px;font-size:12px;font-family:inherit;cursor:pointer;transition:all .12s;letter-spacing:.3px;}
-.schip:hover{border-color:var(--gold-d);color:var(--gold);}
-.schip.on{font-weight:700;}
-.schip.type-act{border-color:#1D4ED8;color:#93b8ff;} .schip.type-act.on{background:#1D4ED8;color:#EFF6FF;}
-.schip.type-react{border-color:#6D28D9;color:#c4b0e8;} .schip.type-react.on{background:#6D28D9;color:#EDE9FE;}
-.schip.type-background{border-color:#6aa0c0;color:#9ac8e0;} .schip.type-background.on{background:#6aa0c0;color:#fff;}
-.schip.type-ancestry{border-color:#bfa060;color:#d8c080;} .schip.type-ancestry.on{background:#bfa060;color:#1a1208;}
-.schip.type-bond{border-color:#8aa880;color:#aac8a0;} .schip.type-bond.on{background:#8aa880;color:#1a2a1a;}
-.schip.type-flaw{border-color:#c87070;color:#e09090;} .schip.type-flaw.on{background:#c87070;color:#fff;}
-.schip.type-instinct{border-color:#7a90c0;color:#9aace0;} .schip.type-instinct.on{background:#7a90c0;color:#fff;}
-.schip.cls-barbarian{border-color:#9E2B2B;color:#e07070;} .schip.cls-barbarian.on{background:#9E2B2B;color:#fff;}
-.schip.cls-fighter{border-color:#B45309;color:#e09050;} .schip.cls-fighter.on{background:#B45309;color:#fff;}
-.schip.cls-paladin{border-color:#B8860B;color:#e0c040;} .schip.cls-paladin.on{background:#B8860B;color:#fff;}
-.schip.cls-cleric{border-color:#5E81AC;color:#9ab8d8;} .schip.cls-cleric.on{background:#5E81AC;color:#fff;}
-.schip.cls-ranger{border-color:#2F6B3D;color:#6ab880;} .schip.cls-ranger.on{background:#2F6B3D;color:#fff;}
-.schip.cls-rogue{border-color:#6C5BA8;color:#b0a0e0;} .schip.cls-rogue.on{background:#6C5BA8;color:#fff;}
-.schip.cls-druid{border-color:#5A7D2A;color:#9ac050;} .schip.cls-druid.on{background:#5A7D2A;color:#fff;}
-.schip.cls-warlock{border-color:#9A2B5E;color:#e070a0;} .schip.cls-warlock.on{background:#9A2B5E;color:#fff;}
-.schip.cls-bard{border-color:#B5388D;color:#e070c0;} .schip.cls-bard.on{background:#B5388D;color:#fff;}
-.submit-textarea{width:100%;padding:12px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;line-height:1.6;resize:vertical;min-height:120px;}
-.submit-textarea:focus{outline:none;border-color:var(--gold-d);}
-.submit-input{width:100%;padding:10px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;}
-.submit-input:focus{outline:none;border-color:var(--gold-d);}
-.submit-btn{width:100%;padding:13px;background:var(--gold);color:#1a1108;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:6px;transition:opacity .12s;}
-.submit-btn:hover{opacity:.88;}
-.submit-btn:disabled{opacity:.4;cursor:not-allowed;}
-.submit-error{background:#3a1010;border:1px solid #7a2020;color:#e07070;border-radius:6px;padding:10px 14px;font-size:13px;margin-bottom:14px;}
-.submit-success{text-align:center;padding:32px 0 8px;display:flex;flex-direction:column;align-items:center;gap:14px;}
-.submit-success-icon{font-size:32px;color:var(--gold);}
-.submit-success-msg{font-size:15px;color:#c8b88e;line-height:1.5;}
-.submit-again{background:transparent;border:1px solid var(--gold-d);color:var(--gold);padding:8px 20px;border-radius:6px;font-family:inherit;font-size:13px;cursor:pointer;letter-spacing:.5px;}
-.submit-again:hover{background:#2a1d10;}
-
 </style>
 </head>
 <body>
@@ -749,7 +710,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
-    <button class="tab tab-submit" data-view="submit" onclick="showView('submit')">✦ Submit Idea</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
@@ -824,64 +784,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   </div>
 </section>
 
-
-<section class="view hidden" id="view-submit">
-  <div class="submit-wrap">
-    <div class="submit-card">
-      <h2 class="submit-title">Submit a Card Idea</h2>
-      <p class="submit-sub">Got a card concept? Share it in your own words — no game-design jargon needed. We read every one.</p>
-
-      <div class="submit-field">
-        <div class="submit-label">Card Type</div>
-        <div class="submit-chips" id="submitTypeChips">
-          <button class="schip type-act"        data-group="type" data-val="Act"        onclick="toggleSubmitChip(this)">Act</button>
-          <button class="schip type-react"      data-group="type" data-val="React"      onclick="toggleSubmitChip(this)">React</button>
-          <button class="schip type-background" data-group="type" data-val="Background" onclick="toggleSubmitChip(this)">Background</button>
-          <button class="schip type-ancestry"   data-group="type" data-val="Ancestry"   onclick="toggleSubmitChip(this)">Ancestry</button>
-          <button class="schip type-bond"       data-group="type" data-val="Bond"       onclick="toggleSubmitChip(this)">Bond</button>
-          <button class="schip type-flaw"       data-group="type" data-val="Flaw"       onclick="toggleSubmitChip(this)">Flaw</button>
-          <button class="schip type-instinct"   data-group="type" data-val="Instinct"   onclick="toggleSubmitChip(this)">Instinct</button>
-          <button class="schip"                 data-group="type" data-val="Not Sure"   onclick="toggleSubmitChip(this)">Not Sure</button>
-        </div>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Class <span class="submit-opt">(optional)</span></div>
-        <div class="submit-chips" id="submitClassChips">
-          <button class="schip cls-barbarian" data-group="cls" data-val="Barbarian"    onclick="toggleSubmitChip(this)">Barbarian</button>
-          <button class="schip cls-fighter"   data-group="cls" data-val="Fighter"      onclick="toggleSubmitChip(this)">Fighter</button>
-          <button class="schip cls-paladin"   data-group="cls" data-val="Paladin"      onclick="toggleSubmitChip(this)">Paladin</button>
-          <button class="schip cls-cleric"    data-group="cls" data-val="Cleric"       onclick="toggleSubmitChip(this)">Cleric</button>
-          <button class="schip cls-ranger"    data-group="cls" data-val="Ranger"       onclick="toggleSubmitChip(this)">Ranger</button>
-          <button class="schip cls-rogue"     data-group="cls" data-val="Rogue"        onclick="toggleSubmitChip(this)">Rogue</button>
-          <button class="schip cls-druid"     data-group="cls" data-val="Druid"        onclick="toggleSubmitChip(this)">Druid</button>
-          <button class="schip cls-warlock"   data-group="cls" data-val="Warlock"      onclick="toggleSubmitChip(this)">Warlock</button>
-          <button class="schip cls-bard"      data-group="cls" data-val="Bard"         onclick="toggleSubmitChip(this)">Bard</button>
-          <button class="schip"               data-group="cls" data-val="Any / Generic" onclick="toggleSubmitChip(this)">Any / Generic</button>
-        </div>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Your Idea</div>
-        <p class="submit-hint">Describe what the card does in plain language. What's the fantasy? What would feel awesome to play?</p>
-        <textarea id="submitIdeaText" class="submit-textarea" placeholder="e.g. A Rogue card where if you're outnumbered you can vanish from the fight entirely and reappear somewhere nearby…" rows="6"></textarea>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Your Name <span class="submit-opt">(optional)</span></div>
-        <input id="submitName" class="submit-input" type="text" placeholder="How should we credit you?">
-      </div>
-
-      <div id="submitError" class="submit-error hidden"></div>
-      <button class="submit-btn" id="submitBtn" onclick="submitIdea()">Send It In ✦</button>
-      <div id="submitSuccess" class="submit-success hidden">
-        <div class="submit-success-icon">✦</div>
-        <div class="submit-success-msg">Got it! Thanks for the idea — we'll take a look.</div>
-        <button class="submit-again" onclick="resetSubmitForm()">Submit Another</button>
-      </div>
-    </div>
-  </div>
-</section>
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
@@ -889,7 +791,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <script src="config.js"></script>
 <script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "tableIdeas": 1041581, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -900,16 +802,18 @@ let RECENT_CMTS = {}, RECENT_CMTS_LOADED = false;
 let modalKey=null, modalVerIdx=0, modalVersions=[];
 const SS = window.sessionStorage;
 const ACT_IC='▶', REACT_IC='⚡';
-const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Instinct'];
+const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Connection','Flaw','Instinct'];
 const ACTION_TYPES=['Act','React'];
-const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Instinct':'#7a90c0'};
+const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Connection':'#854D0E','Flaw':'#c87070','Instinct':'#7a90c0'};
 
 /* ---------- keyword restyle engine ---------- */
 const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
  'boon':'boon','boons':'boon','bane':'bane','banes':'bane',
  'condition':'cond','conditions':'cond','status':'status','statuses':'status',
- 'act':'act','acts':'act','react':'react','reacts':'react'};
-const KWICON={act:ACT_IC,react:REACT_IC};
+ 'act':'act','acts':'act','react':'react','reacts':'react',
+ 'mill':'mill'};
+const KWICON={act:ACT_IC,react:REACT_IC,mill:'↺'};
+const KWTIP={mill:'At scene start, you may discard this to draw 1.'};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function getCookieName(){
@@ -937,7 +841,8 @@ function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
 function kwPill(text,id){
   const ic=KWICON[id]?('<span class="ic">'+KWICON[id]+'</span>'):'';
-  return '<span class="kw kw-'+id+'">'+ic+esc(titleCase(text))+'</span>';
+  const tip=KWTIP[id]?' title="'+escAttr(KWTIP[id])+'"':'';
+  return '<span class="kw kw-'+id+'"'+tip+'>'+ic+esc(titleCase(text))+'</span>';
 }
 function inSkip(node){
   let p=node.parentElement;
@@ -950,7 +855,8 @@ function inSkip(node){
   }
   return false;
 }
-const SCAN_RE=/\b(Hit Dice|Hit Die|Guard|Boost|Boons?|Banes?|Conditions?|Statuses|Status|Acts?|Reacts?)\b/gi;
+const SCAN_RE=/\b(Hit Dice|Hit Die|Guard|Boost|Boons?|Banes?|Conditions?|Statuses|Status|Acts?|Reacts?|Rattled|Exposed|Rooted|Mill)\b/gi;
+const BOLD_CONDS=new Set(['rattled','exposed','rooted']);
 function scanText(bodyEl){
   if(!bodyEl) return;
   const walker=document.createTreeWalker(bodyEl,NodeFilter.SHOW_TEXT,null);
@@ -963,7 +869,8 @@ function scanText(bodyEl){
       if(lw==='act'||lw==='acts'||lw==='react'||lw==='reacts'){
         if(w[0]===w[0].toLowerCase()) continue; // lowercase verb -> not the card type
       }
-      const id=kwId(w); if(!id) continue;
+      const id=kwId(w);
+      if(!id){if(BOLD_CONDS.has(lw)){res+=esc(txt.slice(last,m.index))+'<strong>'+esc(w)+'</strong>';last=m.index+w.length;hit=true;}continue;}
       res+=esc(txt.slice(last,m.index))+kwPill(w,id); last=m.index+w.length; hit=true;
     }
     if(hit){ res+=esc(txt.slice(last)); const sp=document.createElement('span'); sp.innerHTML=res; tn.replaceWith(sp); }
@@ -976,6 +883,14 @@ function restyle(root){
     const txt=sp.textContent, id=kwId(txt);
     if(id){ const tmp=document.createElement('span'); tmp.innerHTML=kwPill(txt,id); sp.replaceWith(tmp.firstChild); }
     else { const st=document.createElement('strong'); st.textContent=txt; sp.replaceWith(st); }
+  });
+  // 1b. Convert inline-styled condition spans (Rattled/Exposed/Rooted) to bold
+  root.querySelectorAll('.bf-body,.cbody,.card-body').forEach(function(bd){
+    bd.querySelectorAll('span').forEach(function(sp){
+      if(sp.classList.contains('kw')||sp.classList.contains('tp')) return;
+      const txt=(sp.textContent||'').trim();
+      if(BOLD_CONDS.has(txt.toLowerCase())){const st=document.createElement('strong');st.textContent=txt;sp.replaceWith(st);}
+    });
   });
   // 2. plain-text keyword scan in the body zone
   scanText(root.querySelector('.cbody, .card-body, .bf-body'));
@@ -1045,7 +960,7 @@ function cardHTML(c,opts){opts=opts||{};
   const burst=(!opts.noBtn&&!opts.noBurst&&isRecentRework(c))?'<div class="rework-burst"><span class="burst-text">REWORKED<br>'+reworkLabel(c.rd)+'</span></div>':'';
   const cburst=(!opts.noBtn&&!opts.noBurst&&isRecentComment(c))?'<div class="discuss-burst"><span class="burst-text">COMMENT<br>'+commentLabel(c)+'</span></div>':'';
   const zstyle=opts.zoom&&opts.zoom!='1'?' style="zoom:'+opts.zoom+'"':'';
-  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'"'+zstyle+' data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+btn+burst+cburst+'</div>';
+  return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+sel+'"'+zstyle+' data-key="'+c.k+'" onclick="openCard(\''+c.k+'\')">'+(c.hs||c.h)+(c.t==='Item'?'<div class="ctype-item-lbl">ITEM</div>':'')+btn+burst+cburst+'</div>';
 }
 
 /* ---------- sort / group ---------- */
@@ -1088,7 +1003,7 @@ function buildGroupedHTML(cards,opts){
 
 /* ---------- filters ---------- */
 function buildChips(){
-  const classes=[...new Set(LIVE.map(c=>c.c))].filter(c=>c&&c.toLowerCase()!=='instinct').sort();
+  const classes=[...new Set(LIVE.map(c=>c.c))].sort();
   const allTypes=[...new Set(LIVE.map(c=>c.t))];
   document.getElementById('classChips').innerHTML=classes.map(c=>'<button class="chip cls-'+c+'" onclick="toggleFilter(\'cls\',\''+c+'\',this)">'+classLabel(c)+'</button>').join('');
   const orderedBoon=BOON_TYPE_ORDER.filter(t=>allTypes.includes(t));
@@ -1156,12 +1071,13 @@ function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
   if(!cards.length){document.getElementById('deckGrid').innerHTML='<div class="empty">Your deck is empty. Add cards from Browse.</div>';return;}
-  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Instinct'];
+  const BOON_TYPES=['Background','Ancestry','Bond','Connection','Flaw','Instinct'];
   const groups=[
     {lbl:'Core',       chipClass:'',                  cards:cards.filter(c=>c.s==='core')},
     {lbl:'Background', chipClass:'type-background',   cards:cards.filter(c=>c.t==='Background')},
     {lbl:'Ancestry',   chipClass:'type-ancestry',     cards:cards.filter(c=>c.t==='Ancestry')},
     {lbl:'Bond',       chipClass:'type-bond',         cards:cards.filter(c=>c.t==='Bond')},
+    {lbl:'Connection', chipClass:'type-connection',   cards:cards.filter(c=>c.t==='Connection')},
     {lbl:'Flaw',       chipClass:'type-flaw',         cards:cards.filter(c=>c.t==='Flaw')},
     {lbl:'Instincts',  chipClass:'type-instinct',     cards:cards.filter(c=>c.t==='Instinct')},
     {lbl:'Abilities',  chipClass:'',                  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
@@ -1651,6 +1567,7 @@ function obStep9(){
     {lbl:'Background',cards:all.filter(function(c){return c.t==='Background';})},
     {lbl:'Ancestry',  cards:all.filter(function(c){return c.t==='Ancestry';})},
     {lbl:'Bond',      cards:all.filter(function(c){return c.t==='Bond';})},
+    {lbl:'Connection',cards:all.filter(function(c){return c.t==='Connection';})},
     {lbl:'Flaw',      cards:all.filter(function(c){return c.t==='Flaw';})},
     {lbl:'Instincts', cards:all.filter(function(c){return c.t==='Instinct';})},
   ];
@@ -1672,75 +1589,6 @@ function obFinish(){
   toast('Deck ready — draw your opening hand to begin!');
 }
 /* ===== END ONBOARDING ===== */
-/* ---------- submit idea form ---------- */
-function toggleSubmitChip(btn){
-  const group = btn.dataset.group;
-  // single-select per group
-  document.querySelectorAll('.schip[data-group="'+group+'"]').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
-
-async function submitIdea(){
-  const ideaText = document.getElementById('submitIdeaText').value.trim();
-  const errEl    = document.getElementById('submitError');
-  errEl.classList.add('hidden');
-
-  if(!ideaText){
-    errEl.textContent = 'Please describe your card idea before submitting.';
-    errEl.classList.remove('hidden');
-    return;
-  }
-
-  const cardType  = (document.querySelector('.schip[data-group="type"].on') || {}).dataset?.val || '';
-  const cardClass = (document.querySelector('.schip[data-group="cls"].on')  || {}).dataset?.val || '';
-  const name      = document.getElementById('submitName').value.trim();
-
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-
-  if(CONFIG.useLive && CONFIG.tableIdeas){
-    try{
-      const payload = {
-        Card_Type:      cardType  || 'Not specified',
-        Card_Class:     cardClass || 'Not specified',
-        Idea_Text:      ideaText,
-        Submitter_Name: name      || 'Anonymous',
-        Submitted_At:   new Date().toISOString(),
-        Status:         'new'
-      };
-      const resp = await fetch(CONFIG.apiBase + CONFIG.tableIdeas + '/?user_field_names=true', {
-        method: 'POST',
-        headers: Object.assign({'Content-Type':'application/json'}, authHeaders()),
-        body: JSON.stringify(payload)
-      });
-      if(!resp.ok) throw new Error('HTTP '+resp.status);
-    } catch(e){
-      btn.disabled = false;
-      btn.textContent = 'Send It In ✦';
-      errEl.textContent = 'Could not submit — please try again.';
-      errEl.classList.remove('hidden');
-      return;
-    }
-  }
-
-  // success
-  btn.classList.add('hidden');
-  document.getElementById('submitSuccess').classList.remove('hidden');
-}
-
-function resetSubmitForm(){
-  document.getElementById('submitIdeaText').value = '';
-  document.getElementById('submitName').value = '';
-  document.querySelectorAll('.schip.on').forEach(b=>b.classList.remove('on'));
-  document.getElementById('submitError').classList.add('hidden');
-  document.getElementById('submitSuccess').classList.add('hidden');
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = false;
-  btn.textContent = 'Send It In ✦';
-  btn.classList.remove('hidden');
-}
-
 </script>
 </body>
 </html>

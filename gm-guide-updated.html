@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instinct RPG — GM Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep:       #0a0d14;
+      --bg-mid:        #0e1420;
+      --bg-card:       #111928;
+      --bg-gm:         #120d1a;
+      --text-main:     #ddd0c0;
+      --text-muted:    #7a8ea0;
+      --text-faint:    #3d5060;
+      --gold:          #c8a96e;
+      --gold-light:    #dfc98e;
+      --gold-glow:     rgba(200, 169, 110, 0.10);
+      --border:        rgba(200, 169, 110, 0.22);
+      --border-bright: rgba(200, 169, 110, 0.50);
+      --red:           #c04040;
+      --red-glow:      rgba(192, 64, 64, 0.12);
+      --red-border:    rgba(192, 64, 64, 0.35);
+      --max-w:         700px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--text-main);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.72;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 28px 90px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 60px 0 36px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 8px;
+    }
+    .hero-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .hero-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-stars {
+      color: var(--gold);
+      letter-spacing: 0.4em;
+      font-size: 13px;
+      opacity: 0.50;
+    }
+
+    /* ── NAV ── */
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 36px 0 0;
+    }
+    .toc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .toc-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 24px;
+    }
+    .toc-list li a {
+      font-size: 14px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .toc-list li a:hover { color: var(--gold-light); }
+    .toc-num {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: var(--gold);
+      margin-right: 6px;
+      opacity: 0.6;
+    }
+
+    /* ── SECTION ── */
+    .section { margin-top: 60px; scroll-margin-top: 20px; }
+    .section-number {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      opacity: 0.60;
+    }
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(18px, 5vw, 25px);
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section p { margin-bottom: 16px; font-size: 17px; color: var(--text-main); }
+    .section p:last-child { margin-bottom: 0; }
+    .section em { color: var(--gold-light); font-style: italic; }
+    strong { color: var(--text-main); font-weight: 600; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--gold-glow);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .callout-label {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .callout p { font-size: 16px; margin: 0 0 10px; }
+    .callout p:last-child { margin: 0; }
+
+    /* ── GM CALLOUT (red-tinted) ── */
+    .gm-callout {
+      background: var(--red-glow);
+      border: 1px solid var(--red-border);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+    .gm-callout .callout-label { color: #e08080; }
+    .gm-callout p { font-size: 16px; margin: 0 0 10px; color: var(--text-main); }
+    .gm-callout p:last-child { margin: 0; }
+
+    /* ── NOTE ── */
+    .note {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-style: italic;
+      padding: 8px 14px;
+      border-left: 2px solid var(--border);
+      margin: 14px 0;
+      line-height: 1.6;
+    }
+
+    /* ── TABLE ── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 15px;
+    }
+    .data-table th {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-bright);
+      text-align: left;
+      background: rgba(200,169,110,0.07);
+    }
+    .data-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-main);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(200,169,110,0.04); }
+
+    /* ── ROWS ── */
+    .rows { display: flex; flex-direction: column; gap: 2px; margin: 16px 0; }
+    .row { display: grid; grid-template-columns: 140px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .row-label { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; padding: 12px 12px; background: rgba(200,169,110,0.08); color: var(--gold-light); display: flex; align-items: center; border-right: 1px solid var(--border); }
+    .row-desc { padding: 12px 16px; font-size: 15px; color: var(--text-main); background: var(--bg-card); }
+
+    /* ── TECHNIQUES ── */
+    .techniques { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .technique { background: var(--bg-card); border: 1px solid var(--border); border-radius: 7px; padding: 16px 18px; }
+    .technique-label { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .technique p { font-size: 16px; color: var(--text-main); margin: 0; }
+
+    /* ── STEPS ── */
+    .steps { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
+    .step { display: grid; grid-template-columns: 36px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
+    .step-num { font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700; text-align: center; padding: 12px 8px; background: rgba(200,169,110,0.08); color: var(--gold); display: flex; align-items: center; justify-content: center; }
+    .step-content { padding: 12px 16px; font-size: 16px; color: var(--text-main); background: var(--bg-card); }
+
+    /* ── FOOTER ── */
+    footer { margin-top: 70px; padding-top: 28px; border-top: 1px solid var(--border); text-align: center; }
+    footer .fine-print { font-size: 13px; color: var(--text-faint); font-style: italic; }
+    footer .label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+
+    @media (max-width: 520px) {
+      .wrapper { padding: 0 16px 60px; }
+      .toc-list { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 110px 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-eyebrow">Game Master's Guide · Post-Playtest #1 · June 2026</div>
+    <h1 class="hero-title">Instinct RPG</h1>
+    <div class="hero-sub">Running the Table</div>
+    <div class="hero-stars">✦ &nbsp; ✦ &nbsp; ✦</div>
+  </header>
+
+  <!-- ═══ TOC ═══ -->
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span>Your Role</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span>Building Opposition</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span>Toll</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span>Deadly Contests</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span>Social Contests</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span>Reading the Table</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span>Character Creation</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span>Class Notes</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══ §1 — YOUR ROLE ═══ -->
+  <section class="section" id="s1">
+    <div class="section-number">01</div>
+    <h2 class="section-title">Your Role</h2>
+
+    <p>You are the world. You describe what the characters encounter, adjudicate what their actions achieve, and keep the fiction moving forward. You do not play against the players — you play the world, which has its own logic and pressures and will.</p>
+
+    <p><strong>Fiction first.</strong> Before any roll, the fiction has to call for it. If a player narrates something and the outcome is obvious given the scene, it just happens — no roll needed. Only reach for dice when the outcome is genuinely uncertain and the stakes of that uncertainty matter. Every roll generates Toll. Make sure the roll is worth it.</p>
+
+    <p><strong>A Miss is never a stop.</strong> When a check produces Miss dice (natural 1s), you gain Toll and the scene advances — somewhere more interesting than nothing. Miss is your turn, not the player's punishment. Give them something to react to.</p>
+
+    <p><strong>The north star.</strong> Ben, the first playtester, said it best: <em>"The core of the game is giving people funny excuses to use their cards in unexpected ways."</em> Every ruling, every scene, every NPC should be measured against that. If something makes it harder to use cards unexpectedly, reconsider it.</p>
+
+    <div class="callout">
+      <div class="callout-label">Your three primary moves</div>
+      <p><strong>Make the world react.</strong> Spend Toll to escalate, introduce complications, or give NPCs moves they've been holding back. Every player action should change something in the world — including successful ones.</p>
+      <p><strong>Make the stakes visible.</strong> Place opposing dice on the table before players commit. Show them what they're walking into. Deadly Contests are tactical decisions with known costs, not ambushes.</p>
+      <p><strong>Read the room by reading the hands.</strong> Watch card counts. When hands run thin, the scene is ready to turn or close. Player card economy is your pacing meter.</p>
+    </div>
+  </section>
+
+  <!-- ═══ §2 — BUILDING OPPOSITION ═══ -->
+  <section class="section" id="s2">
+    <div class="section-number">02</div>
+    <h2 class="section-title">Building Opposition — The Dice Pool</h2>
+
+    <p>There is no DC ladder or hidden target number in Instinct RPG. Difficulty is represented by a <strong>physical opposing dice pool</strong> placed on the table before the roll. Player dice clear opposing dice one at a time. When all opposing dice are cleared, the check succeeds. Partial resolution (some dice remain) = partial success; the GM adjudicates what was and wasn't achieved.</p>
+
+    <p>This applies to <em>every</em> check — exploration, social, combat, investigation, skill challenges. One engine, always visible.</p>
+
+    <div class="techniques">
+      <div class="technique">
+        <div class="technique-label">Random Method</div>
+        <p>Roll dice appropriate to the scene's danger level and let them land. The resulting face values become the opposition. Fast and generates unpredictability — even you don't know exactly how hard this moment will be.</p>
+      </div>
+      <div class="technique">
+        <div class="technique-label">Hand-Placed Method</div>
+        <p>Select specific die values before placing them. Use this when precise difficulty matters — a specific obstacle with a known challenge level, or a boss who needs to hit differently than the mooks around them. A named villain can be hand-placed as a d10 showing 9, while generic enemies around them are randomly rolled d6s. Same table, same Contest, legibly differentiated. No separate stat blocks needed.</p>
+      </div>
+    </div>
+
+    <p>You can combine both methods in a single pool: hand-place a die for the dominant threat and randomly roll the rest for the chaos around it.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Difficulty Feel</th>
+          <th>Suggested Pool</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Easy</td>
+          <td>1–2 dice, low values (2–3 on a d6)</td>
+        </tr>
+        <tr>
+          <td>Moderate</td>
+          <td>2–3 mixed dice</td>
+        </tr>
+        <tr>
+          <td>Hard</td>
+          <td>3–4 dice, some high values</td>
+        </tr>
+        <tr>
+          <td>Very Hard</td>
+          <td>4–5 dice, mostly high values</td>
+        </tr>
+        <tr>
+          <td>Boss / Climactic</td>
+          <td>Mixed pool with hand-placed high-face dice for named threats alongside random dice for everything else</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="gm-callout">
+      <div class="callout-label">GM Dice — Use a Visually Distinct Color</div>
+      <p>Your dice should be immediately visually different from the players' dice. <strong>Red dice are the recommended choice.</strong> When your opposing pool is sitting on the table next to player dice, it should be unmistakably clear which are which. This isn't just aesthetics — it eliminates mistakes at a busy table and reinforces that the opposing pool is a distinct object the players are trying to clear.</p>
+    </div>
+  </section>
+
+  <!-- ═══ §3 — TOLL ═══ -->
+  <section class="section" id="s3">
+    <div class="section-number">03</div>
+    <h2 class="section-title">Toll</h2>
+
+    <p><strong>[Toll]</strong> is generated by Miss dice — any die in a player's pool that rolls a natural 1. Each 1 = 1 Toll added to your pool, immediately, regardless of whether the check otherwise succeeds. A player can roll brilliantly and still give you Toll if their pool contained a 1.</p>
+
+    <p>Toll is your scene-pressure resource. It is not a punishment mechanism — it is the world reacting. Spend it to make things more interesting, not to make things more miserable.</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">Escalate</div>
+        <div class="row-desc">A new element enters the scene. Reinforcements arrive. A door opens. Something the party thought settled turns out not to be.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">NPC Reaction</div>
+        <div class="row-desc">An NPC makes a move they'd been holding back. An ally's hesitation becomes obvious. An enemy smells opportunity.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Complication</div>
+        <div class="row-desc">The environment shifts. A resource becomes contested. Time pressure materializes. The thing they succeeded at comes with an asterisk.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Enemy Ability</div>
+        <div class="row-desc">A named NPC activates a special move or trump card. Reserve this for significant moments — Toll makes it feel earned.</div>
+      </div>
+    </div>
+
+    <p>Toll accumulates across the scene. You don't have to spend it immediately. Sitting on unspent Toll is a legitimate pressure the players can feel — they know you're holding something. Use it when the moment is right.</p>
+
+    <div class="callout">
+      <div class="callout-label">Players can spend Toll too</div>
+      <p>Some cards reference Toll explicitly and let players spend it. If a player's card effect removes Toll from your pool, that's the system working correctly — they spent a resource to defuse pressure. Don't resist it.</p>
+    </div>
+  </section>
+
+  <!-- ═══ §4 — DEADLY CONTESTS ═══ -->
+  <section class="section" id="s4">
+    <div class="section-number">04</div>
+    <h2 class="section-title">Deadly Contests</h2>
+
+    <p>A <strong>Deadly Contest</strong> is any scene where Hit Dice can be lost and characters are eligible to die. It uses the standard resolution engine (opposing dice pool, Misses generate Toll, Crits give Flourishes) with this additional structure.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Starting a Deadly Contest</h3>
+
+    <p>When a Deadly Contest begins, two things happen simultaneously — before anyone acts:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Reveal Threat.</strong> Place Threat dice visibly in front of each relevant player. This is the damage they will take from enemies — locked in at Contest start, resolved regardless of player order. Threat is not hidden. Players see exactly what's coming.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Resolve sets up.</strong> Each player moves a portion of their Hit Dice forward as their Resolve pool. Resolve absorbs incoming Threat before it touches actual health.</div>
+      </div>
+    </div>
+
+    <p>After this setup, players decide: <strong>fight</strong> (accepting the Threat they can see), <strong>flee</strong>, or <strong>negotiate</strong>. Engaging means accepting the Threat. This is a deliberate choice with known stakes.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Open Floor</h3>
+
+    <p>Deadly Contests have no fixed turn order. After Threat is revealed, any player may act in whatever sequence makes narrative sense. The group decides who goes when, moment to moment. This is the <strong>Open Floor</strong>.</p>
+
+    <p>The Open Floor means Threat is resolved separately from player action order. Players don't "dodge" Threat by going first — it lands at the end of the round regardless. They can redirect it, reduce it, or absorb it through cards and defensive actions, but they can't simply outpace it.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Defensive Spillover</h3>
+
+    <p>When a player deploys defensive dice and those dice fully clear an incoming Threat pool, any leftover dice may be directed to <strong>any target of the player's choice — including themselves.</strong> Spillover is not restricted to allies. This rewards efficient defense and creates meaningful decisions about where to send surplus protection.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">NPC Threats — Two Valid Techniques</h3>
+
+    <p>When an NPC is in harm's way, you have two legitimate approaches. Choose based on how mechanically significant that NPC's survival is to the scene.</p>
+
+    <div class="techniques">
+      <div class="technique">
+        <div class="technique-label">(a) Real Threat Dice</div>
+        <p>Roll actual Threat dice against the NPC, exactly as a player would face them. This means defensive actions by players have something physical to intercept — they can spend dice to protect the NPC just like they'd protect each other. Use this when the NPC's survival matters mechanically to the scene outcome.</p>
+      </div>
+      <div class="technique">
+        <div class="technique-label">(b) Abstracted Severity</div>
+        <p>Give the NPC a narrative health or severity description instead of tracked dice. "Defend this NPC" actions change the narrated outcome rather than removing physical dice. Use this for NPCs whose survival is important to the story but mechanically simple to resolve — bystanders, minor allies, quest-givers in the crossfire.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Enemy Hit Dice</h3>
+
+    <p>Place enemy Hit Dice visibly in front of the relevant player at Contest start — this is what players are working to clear. Use fixed or maximized arrangements. A guard with one d8 and two d4s is immediately legible; players can plan around it.</p>
+
+    <p>Prefer d6s wherever possible. Most enemies can be represented entirely in d6s. Named villains warrant d8s or d10s. The die size signals importance as much as the value.</p>
+
+    <div class="callout">
+      <div class="callout-label">When Resolve Breaks</div>
+      <p>Any remaining Threat that wasn't cleared hits the player's Hit Dice directly. At that point, the player chooses: <strong>retreat</strong> (they're safe but out of the fight for this Contest) or <strong>stay in</strong> (future Threat hits Hit Dice directly, no buffer). If a player's last Hit Die falls, they take a <strong>Scar</strong> — a permanent card added to their deck. Three Scars = character death or retirement (story decides).</p>
+    </div>
+  </section>
+
+  <!-- ═══ §5 — SOCIAL CONTESTS ═══ -->
+  <section class="section" id="s5">
+    <div class="section-number">05</div>
+    <h2 class="section-title">Social Contests</h2>
+
+    <p>A <strong>Social Contest</strong> is any scene where Resolve is at risk but characters are <em>not</em> eligible to lose Hit Dice. Tense interrogations, high-stakes debates, a verbal confrontation where someone is actively trying to break a character down — these are Social Contests.</p>
+
+    <p><strong>The mechanics are identical to a Deadly Contest.</strong> Same opposing dice pool. Same Open Floor. Same Miss/Crit/Toll rules. Same Resolve setup. The only difference is the narrative register:</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">Threat</div>
+        <div class="row-desc">Pressure applied to Resolve — verbal challenges, emotional appeals, credibility attacks, rhetorical maneuvers.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Resolve</div>
+        <div class="row-desc">Composure, credibility, emotional momentum. Narrated per character: a Bard's wit being worn down, a Paladin's certainty being tested, a Rogue's careful fabrication unraveling.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Depletion</div>
+        <div class="row-desc">When one side's Resolve is gone, the confrontation ends — they concede, break, or lose the argument. Hit Dice are never at risk in a Social Contest.</div>
+      </div>
+    </div>
+
+    <p>Don't treat Social Contests as a softer version of Deadly Contests. The stakes are real — relationships, credibility, leverage, and narrative momentum hang on them. Give Social Contests the same structural gravity.</p>
+
+    <div class="callout">
+      <div class="callout-label">Cards work the same way</div>
+      <p>There are no "social cards" and "combat cards." A card that applies <strong>Rattled</strong> can do so with a cutting remark as easily as a fist. <strong>Exposed</strong> can mean socially exposed — caught in a lie, caught without a response. The table's job is to narrate why a card fits. Your job is to let them.</p>
+    </div>
+  </section>
+
+  <!-- ═══ §6 — READING THE TABLE ═══ -->
+  <section class="section" id="s6">
+    <div class="section-number">06</div>
+    <h2 class="section-title">Reading the Table</h2>
+
+    <p>Card counts are your primary pacing instrument. Watch hands, not clocks.</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">Full hands</div>
+        <div class="row-desc">Scene is fresh. Players have options. Lean into complexity — add wrinkles, introduce competing objectives, let the moment breathe.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">2–3 cards avg</div>
+        <div class="row-desc">Scene is mid-burn. Players are starting to feel constraint. Good time for a climactic move or a turn that forces a decision.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">≤ 2 cards avg</div>
+        <div class="row-desc"><strong>Pacing signal.</strong> Aim to transition or end the scene. Players falling below this threshold are running on fumes — mechanically and narratively. The scene has had its moment; let it close.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Empty hand</div>
+        <div class="row-desc">That player falls back to narrative/basic actions only — no card effects. This is survivable but should be brief. If the scene is still going, prioritize a close.</div>
+      </div>
+    </div>
+
+    <p>You don't have to count cards obsessively — a quick glance at how many cards each player is holding is enough. Players with thick hands should be getting screen time. Players nearly empty have already spent everything they had; they've given the scene what they could.</p>
+
+    <div class="callout">
+      <div class="callout-label">As hands deplete, spotlight shifts</div>
+      <p>Players with more cards will naturally dominate the later part of a scene — they have more options. This is intended. As cards deplete, the scene naturally migrates toward whoever still has resources. Honor this drift. Don't artificially force depleted players to do more than they have resources for.</p>
+    </div>
+  </section>
+
+  <!-- ═══ §7 — CHARACTER CREATION ═══ -->
+  <section class="section" id="s7">
+    <div class="section-number">07</div>
+    <h2 class="section-title">Character Creation at the Table</h2>
+
+    <p>Character creation takes roughly one hour and is itself a form of play. Cards have fill-in stems — prompted first-person sentences players complete at the table. Characters emerge from this process. You're not handing them a stat sheet; you're prompting them into a backstory.</p>
+
+    <p>Follow this order exactly:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content"><strong>Background</strong> — Player chooses 1 from the available set (12 options). What did they do before this? Completes a fill-in stem.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content"><strong>Ancestry</strong> — Player chooses 1 from the available set (10 options). Where do they come from? Completes a fill-in stem.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content"><strong>Bond / Connection</strong> — Assigned or chosen based on party setup (~2 per character). Bond stems are player-initiated — the player names the moment, names the connection. A <strong>Connection</strong> is a Bond to a specific named party member; these are earned through Rest, Growth rewards, or by discarding a Bond as a Super Aid during play.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content"><strong>Flaw</strong> — Draw <strong>2 Flaw cards</strong> from the single shared Flaw pool. No sub-categories — it's one pool. Complete the fill-in stem for each at the table. Both Flaws go into the deck.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content"><strong>Instinct</strong> — Draw 5 Instinct cards at random from the tableau; player keeps and shuffles in 6 (accounting for one added via a different source). Each is a single word naming a quality. No stem to fill in.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-content"><strong>Item</strong> — Player selects an Item card appropriate to the character. Item cards may carry the <strong>Mill</strong> keyword: at scene start, the player may discard it to draw 1. This lets them trade a situational Item for a fresh draw when the scene doesn't call for it.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-content"><strong>Class Abilities</strong> — Class ability cards fill out the remaining deck slots. Target total is 20 cards. Core cards sit face-up in the Active area and never enter the deck.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Stems are soft doorways</div>
+      <p>Every fill-in stem is a prompt, not a corridor. Players should feel invited to complete them in unexpected ways. A Flaw that reads <em>"I can't resist ___"</em> could be anything from a vulnerability to an obsession to a compulsion nobody at the table anticipated. Let it be theirs.</p>
+    </div>
+
+    <p><strong>Deck target: 20 cards total.</strong> Background (1) + Ancestry (1) + Bonds (~2) + Flaws (2) + Instincts (6) + Item (1) + Class ability cards (remaining to reach 20) = complete deck. Core cards don't count toward this total — they live in the Active area.</p>
+  </section>
+
+  <!-- ═══ §8 — CLASS NOTES ═══ -->
+  <section class="section" id="s8">
+    <div class="section-number">08</div>
+    <h2 class="section-title">Class Notes for the GM</h2>
+
+    <p>These are the mechanics most likely to create GM questions at the table. For full class detail, see the at-class-quick-ref skill.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Equipment — No Universal Keyword</h3>
+
+    <p>There is no universal <strong>Equip</strong> keyword or equipment slot system. The "I always have my gear" fantasy is built directly into specific class Core cards, applied on a class-by-class basis. Fighter and Paladin are the current examples — their Core cards handle equipment access. If a class doesn't have a Core card that establishes equipment access, they don't have a formal equipment mechanic. Don't improvise one at the table; this is intentional.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Warlock — Patron Invocation</h3>
+
+    <p>The Patron invocation cost works as follows. This should be clear on the card itself, but reinforce it at the table if needed:</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">First invocation</div>
+        <div class="row-desc"><strong>Free.</strong> The Warlock chooses which Mark to assign. No cost, no roll.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Later invocations</div>
+        <div class="row-desc">The GM rolls randomly to determine the Mark cost. The Warlock doesn't get to choose — the Patron does.</div>
+      </div>
+    </div>
+
+    <p>This structure makes the Patron feel genuinely unpredictable on repeated invocations without making first invocations punishing. The Warlock can plan around the first call; the Patron reasserts control on anything after.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Barbarian — Rage Pool</h3>
+
+    <p>The Barbarian accumulates d6s in their Rage pool from two sources: <strong>Miss dice</strong> (natural 1s rolled by the Barbarian) and <strong>incoming Threat dice</strong>. These are physical dice placed on the table.</p>
+
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">Frenzy trigger</div>
+        <div class="row-desc">When the Rage pool reaches <strong>5 or more dice</strong>, the Barbarian may trigger Frenzy: grant flat Boost 3 to the frenzied action, then fully empty the Rage pool. The pool does not halve — it fully depletes.</div>
+      </div>
+    </div>
+
+    <p>The threshold is 5 (not 6) because Miss dice are rarer under the current Miss = natural-1-only definition. The full-depletion rule prevents chain re-triggers in the same scene.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">The Mill Keyword</h3>
+
+    <p><strong>Mill</strong> appears on Item cards and React-subtype class ability cards only. Its text reads: <em>"At scene start, you may discard this to draw 1."</em></p>
+
+    <p>This is the formal replacement for the previously undocumented soft Mulligan. Players can trade a situational Mill card for a fresh draw before the scene gets going. It does not apply to other card types — if a non-Mill card is in hand at scene start, it stays.</p>
+
+    <h3 style="font-family:'Cinzel',serif;font-size:16px;color:var(--gold-light);margin:24px 0 12px;">Conditions — Narrative vs. Mechanical</h3>
+
+    <p>Most conditions (<strong>Exposed</strong>, <strong>Rattled</strong>, <strong>Rooted</strong>) are purely narrative vocabulary — no enforced mechanical fallback. What they mean in any given moment is what you decide in real time. A card may include a parenthetical <em>(here: [interpretation])</em> as a suggestion — it is not a rule.</p>
+
+    <p>Conditions with enforced mechanical behavior: <strong>Hidden</strong>, <strong>Bolstered</strong>, <strong>Marked</strong>, <strong>Sundered</strong>. These carry specific rules — see the condition reference card. Note that <strong>Rattled</strong> is currently undefined mechanically and should not be used on new cards; what it means at the table is your call, case by case.</p>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="label">Instinct RPG · GM Guide · June 2026</div>
+    <div class="fine-print">Post-Playtest #1 · For internal playtesting use only</div>
+  </footer>
+
+</div>
+</body>
+</html>
