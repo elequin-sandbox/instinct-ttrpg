@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1100">
+<title>Instinct RPG — Project Completion Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f0f14;
+    color: #e8e4d8;
+    padding: 40px 32px 80px;
+    min-width: 900px;
+  }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
+    border-bottom: 1px solid #2a2440;
+    padding-bottom: 32px;
+  }
+  .page-title {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c8a96e;
+    margin-bottom: 8px;
+  }
+  .page-subtitle {
+    font-size: 13px;
+    color: #7a6a50;
+    font-style: italic;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 40px;
+    padding: 16px 20px;
+    background: #161220;
+    border: 1px solid #2a2440;
+    border-radius: 8px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #9a8a70;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+  .ld-done  { background: #22c55e; }
+  .ld-you   { background: #f59e0b; }
+  .ld-me    { background: #6366f1; }
+
+  /* ── DONE BADGE ── */
+  .done-block {
+    background: #0a2010;
+    border: 1px solid #22c55e44;
+    border-left: 3px solid #22c55e;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .done-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .done-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: #22c55e22;
+    color: #22c55e;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #22c55e44;
+  }
+  .done-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #86efac;
+  }
+  .done-desc {
+    font-size: 12px;
+    color: #4a7a5a;
+    line-height: 1.6;
+  }
+
+  /* ── STEP CARD ── */
+  .step {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .step-main {
+    background: #161220;
+    border: 1px solid #2a2440;
+    border-left: 3px solid #f59e0b;
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .step-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #f59e0b;
+    color: #0f0f14;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fde68a;
+  }
+  .step-body {
+    font-size: 13px;
+    color: #c8bfa0;
+    line-height: 1.7;
+  }
+  .step-body p { margin-bottom: 8px; }
+  .step-body p:last-child { margin-bottom: 0; }
+  .step-body ol { padding-left: 20px; margin: 8px 0; }
+  .step-body ol li { margin-bottom: 5px; }
+  .step-body code {
+    background: #0a0810;
+    border: 1px solid #2a2440;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 11px;
+    color: #93c5fd;
+  }
+  .step-body pre {
+    background: #0a0810;
+    border: 1px solid #2a2440;
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin: 10px 0;
+    font-family: 'Cascadia Code', 'Fira Code', monospace;
+    font-size: 11px;
+    color: #93c5fd;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+  .step-body .path {
+    background: #0a0810;
+    border: 1px solid #2a2440;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 10.5px;
+    color: #a78bfa;
+    margin: 6px 0;
+    word-break: break-all;
+    display: block;
+  }
+  .step-body .note {
+    background: #1a1408;
+    border-left: 2px solid #f59e0b88;
+    padding: 8px 12px;
+    margin: 8px 0;
+    font-size: 11.5px;
+    color: #a08060;
+    border-radius: 0 4px 4px 0;
+  }
+  .step-body .then-i-can {
+    background: #0e0e22;
+    border: 1px solid #4338ca44;
+    border-left: 2px solid #6366f1;
+    padding: 8px 12px;
+    margin: 10px 0 0;
+    font-size: 11.5px;
+    color: #818cf8;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ── SIDEBAR ── */
+  .step-sidebar {
+    background: #0e0e20;
+    border: 1px solid #2a2440;
+    border-left: 3px solid #6366f1;
+    border-radius: 8px;
+    padding: 18px 18px;
+    align-self: start;
+  }
+  .sidebar-label {
+    font-size: 8.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #6366f1;
+    margin-bottom: 10px;
+  }
+  .sidebar-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #a5b4fc;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .sidebar-body {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.65;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    margin: 36px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-divider-line { flex: 1; height: 1px; background: #2a2440; }
+  .section-divider-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #4a3a60;
+    white-space: nowrap;
+  }
+
+  /* ── COME BACK NOTE ── */
+  .come-back {
+    background: #0e0e22;
+    border: 1px solid #4338ca66;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+  .come-back-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #a5b4fc;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .come-back-body {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.65;
+  }
+  .come-back-body strong { color: #a5b4fc; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 56px;
+    text-align: center;
+    font-size: 11px;
+    color: #3a3050;
+    border-top: 1px solid #1e1a2e;
+    padding-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">Instinct RPG — Project Completion Guide</div>
+  <div class="page-subtitle">Everything Claude finished automatically · Everything you need to do · What each step unlocks</div>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot ld-done"></span> Already done by Claude</div>
+  <div class="legend-item"><span class="legend-dot ld-you"></span> You need to do this</div>
+  <div class="legend-item"><span class="legend-dot ld-me"></span> Claude does this after you complete the prior step</div>
+</div>
+
+
+<!-- ═══ DONE SECTION ═══ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <div class="section-divider-label">✓ Already Complete</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="done-block">
+  <div class="done-header"><span class="done-badge">Done</span><span class="done-title">GitHub Action pushed — .github/workflows/discord-notify.yml</span></div>
+  <div class="done-desc">The workflow file is live in <code>Nathan-Elequin/instinct-ttrpg</code>. It watches every push to main and posts an embed to #app-feedback whenever a commit subject starts with <code>[Feature Update]</code>. It will silently skip any other commit. Waiting on you to add the Discord secret (Step 2 below).</div>
+</div>
+
+<div class="done-block">
+  <div class="done-header"><span class="done-badge">Done</span><span class="done-title">All 12 Flaw cards updated in Baserow (rows 493–504)</span></div>
+  <div class="done-desc">Applied Direction A flavors (first-person voice, 11 of 12 — Haunted intentionally kept baseline per co-designer recommendation). Added "The Way Out" aspirational line to every Dismiss. Updated stems on 6 cards to Direction D observational format: Paranoid, Vengeful, Vain, Reckless, Soft-Hearted, Greedy. All 12 Last_Rework_Date fields set to 2026-06-14.</div>
+</div>
+
+<div class="done-block">
+  <div class="done-header"><span class="done-badge">Done</span><span class="done-title">Design Topics tab integrated into index.html — saved to your project folder</span></div>
+  <div class="done-desc">A new "Design Topics" tab has been added to the card viewer. It contains a sidebar of Keywords and Card Types (37 + 17 topics), a threaded comment area, and a 🚩 flag button per topic. The file is saved as <code>index_integrated.html</code> in your Cowork project folder — you need to push it to GitHub (Step 3 below) and fill in 3 config values after creating the Baserow tables (Step 4–5).</div>
+</div>
+
+
+<!-- ═══ YOUR STEPS ═══ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <div class="section-divider-label">↓ Your Steps — In Order</div>
+  <div class="section-divider-line"></div>
+</div>
+
+
+<!-- STEP 1 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Create two Discord webhooks</div>
+    </div>
+    <div class="step-body">
+      <p>You need two webhooks — one per channel. Do this for both <strong>#app-feedback</strong> and <strong>#card-design</strong>:</p>
+      <ol>
+        <li>Open the channel in Discord → click the gear icon ⚙️ next to the channel name</li>
+        <li>Go to <strong>Integrations → Webhooks → New Webhook</strong></li>
+        <li>Name it (e.g. <code>Instinct RPG</code>), then click <strong>Copy Webhook URL</strong> and save it somewhere safe</li>
+        <li>Click <strong>Save</strong></li>
+      </ol>
+      <p>You'll end up with two URLs that look like:<br><code>https://discord.com/api/webhooks/1234.../xxxx</code></p>
+      <div class="note">⚠ Webhook URLs are only shown once. Copy both to a note before closing Discord.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">Without webhooks, there's no endpoint to post to.</div>
+    <div class="sidebar-body">Discord notifications work by Claude (or GitHub Actions) posting a JSON payload to a unique URL Discord gives you. Step 1 generates those URLs. Without them, Steps 2, 4, and the card rework skill can't fire any notifications — they'd have nowhere to send.</div>
+  </div>
+</div>
+
+
+<!-- STEP 2 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Add DISCORD_APP_WEBHOOK secret to GitHub Actions</div>
+    </div>
+    <div class="step-body">
+      <p>This wires the #app-feedback webhook into the GitHub Action that's already live:</p>
+      <ol>
+        <li>Go to <a style="color:#93c5fd" href="https://github.com/Nathan-Elequin/instinct-ttrpg/settings/secrets/actions" target="_blank">github.com/Nathan-Elequin/instinct-ttrpg → Settings → Secrets and variables → Actions</a></li>
+        <li>Click <strong>New repository secret</strong></li>
+        <li>Name: <code>DISCORD_APP_WEBHOOK</code></li>
+        <li>Value: paste the <strong>#app-feedback</strong> webhook URL from Step 1</li>
+        <li>Click <strong>Add secret</strong></li>
+      </ol>
+      <div class="note">Test it: push any commit to main with the subject line starting with <code>[Feature Update]</code> — a Discord embed should appear in #app-feedback within ~30 seconds.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">The GitHub Action is live but blind — it has no URL to post to yet.</div>
+    <div class="sidebar-body">The <code>discord-notify.yml</code> file references <code>secrets.DISCORD_APP_WEBHOOK</code>. Without the secret set, the Action will run but the curl command will fail with a 401 or 404. Adding the secret gives it the destination. The secret stays out of the repo code, which is the right security pattern.</div>
+  </div>
+</div>
+
+
+<!-- STEP 3 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Push index_integrated.html to GitHub as index.html</div>
+    </div>
+    <div class="step-body">
+      <p>The updated card viewer with the Design Topics tab is ready in your Cowork project folder:</p>
+      <span class="path">C:\Users\Natha\Claude\Projects\Instinct RPG - Design Cowork Project\index_integrated.html</span>
+      <p>To deploy it:</p>
+      <ol>
+        <li>Copy <code>index_integrated.html</code> into your local <code>instinct-ttrpg</code> repo and rename it to <code>index.html</code> (replacing the existing one)</li>
+        <li>Commit and push using the at-feature-commit format (Step 7 below installs that skill):<br>
+          <pre>[Feature Update] Design Topics discussion tab
+
+- New "Design Topics" tab in the card viewer sidebar
+- Browse Keywords and Card Types, leave threaded comments
+- Flag any topic for the next design session
+- Comments saved to Baserow, visible to all collaborators
+
+🔗 nathan-elequin.github.io/act-tactics</pre>
+        </li>
+      </ol>
+      <div class="note">Note: The tab will appear in the UI immediately, but it will show "Loading…" until the Baserow tables are created and configured (Steps 4–5 below).</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">Claude can't push large files to GitHub directly from the shell — no credentials available.</div>
+    <div class="sidebar-body">The GitHub MCP can create/update files, but at 110KB the index.html is too large to pass as a raw string parameter in a single API call from this session. The file is fully ready on your machine — it just needs a manual <code>git push</code> to go live. This also lets you review the changes locally before they go public.</div>
+  </div>
+</div>
+
+
+<!-- STEP 4 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Create two tables in Baserow (database 407659)</div>
+    </div>
+    <div class="step-body">
+      <p>Open <a style="color:#93c5fd" href="https://baserow.io/database/407659" target="_blank">baserow.io/database/407659</a> and create two new tables:</p>
+      <p><strong>Table 1: Discussion_Topics</strong></p>
+      <pre>Name         → Text (Primary field)
+Category     → Single Select   options: Keyword | Card Type
+Flag_Design_Session → Boolean  default: false
+Description  → Long Text       (optional notes)</pre>
+      <p><strong>Table 2: Discussion_Comments</strong></p>
+      <pre>Topic_ID     → Number          (row ID of the linked topic)
+Topic_Name   → Text (Primary)  (denormalized name for display)
+Comment      → Long Text
+Author       → Text
+Created_At   → Date (enable "Include time", use ISO 8601)</pre>
+      <p>After creating each table, note the table ID from the URL:<br><code>baserow.io/database/407659/table/<strong>XXXXXX</strong></code></p>
+      <div class="then-i-can">🤖 Once you have both table IDs, tell me and I'll automatically pre-populate Discussion_Topics with all 54 rows (37 keywords + 17 card types) using the Baserow MCP — no manual data entry.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">The Baserow MCP can write rows but can't create tables.</div>
+    <div class="sidebar-body">The MCP tools available to Claude are <code>create_rows</code>, <code>update_rows</code>, and <code>list_table_rows</code> — there's no <code>create_table</code> tool. Baserow table creation requires the UI. Once the tables exist, Claude can fully take over: populating all 54 topics, updating flags, and reading comments automatically in every design session.</div>
+  </div>
+</div>
+
+
+<!-- STEP 5 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Fill in 3 config values in index.html and push again</div>
+    </div>
+    <div class="step-body">
+      <p>After creating the tables (Step 4), open <code>index.html</code> in your local repo and find this section near the bottom of the JS (search for <code>DISCUSS_TOKEN</code>):</p>
+      <pre>const DISCUSS_TOKEN          = 'YOUR_BASEROW_TOKEN_HERE';
+const DISCUSS_TOPICS_TABLE   = 'YOUR_DISCUSSION_TOPICS_TABLE_ID';
+const DISCUSS_COMMENTS_TABLE = 'YOUR_DISCUSSION_COMMENTS_TABLE_ID';</pre>
+      <p>Replace each placeholder:</p>
+      <ol>
+        <li><strong>DISCUSS_TOKEN</strong> — your Baserow API token. Find it by searching <code>Authorization: Token</code> anywhere else in index.html — it's already used by the existing card-loading code.</li>
+        <li><strong>DISCUSS_TOPICS_TABLE</strong> — the ID you noted from the Discussion_Topics table URL</li>
+        <li><strong>DISCUSS_COMMENTS_TABLE</strong> — the ID you noted from the Discussion_Comments table URL</li>
+      </ol>
+      <p>Then push to GitHub. The Design Topics tab will fully activate.</p>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">The table IDs don't exist yet, so they can't be hardcoded.</div>
+    <div class="sidebar-body">The table IDs are assigned by Baserow when the tables are created. They couldn't be filled in ahead of time. The token is already in the file for other features — this just extends it to the Discussion tab. Once filled in and pushed, the tab becomes fully live and connected to Baserow.</div>
+  </div>
+</div>
+
+
+<!-- STEP 6 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Install the updated at-card-rework skill</div>
+    </div>
+    <div class="step-body">
+      <p>The updated skill adds a Discord notification step at the end of every card rework session. The new SKILL.md is already on your machine:</p>
+      <span class="path">C:\Users\Natha\OneDrive\Desktop\Claude Temp Folder Storage (Nathan)\at-card-rework-updated\SKILL.md</span>
+      <ol>
+        <li>Open Claude Desktop → <strong>Settings → Capabilities → Skills</strong></li>
+        <li>Find the folder path shown for <code>at-card-rework</code></li>
+        <li>Copy the file above into that folder, replacing the existing <code>SKILL.md</code></li>
+        <li>Open the new SKILL.md and replace both instances of <code>YOUR_WEBHOOK_URL_HERE</code> with the <strong>#card-design</strong> webhook URL from Step 1</li>
+      </ol>
+      <div class="note">There are two places in the file where the URL needs to go — one at the top (the constant) and one inside the curl command in Step 7 of the skill.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">Skill files are read-only in Claude sessions — they can only be changed in Settings.</div>
+    <div class="sidebar-body">Skill files live outside the session sandbox at a path Claude can read but not write. The updated SKILL.md is already prepared with the full Discord notification workflow — Step 7 fires a curl command to #card-design after every successful rework. Installing it replaces the old skill. The webhook URL has to go in manually since it was generated in Step 1.</div>
+  </div>
+</div>
+
+
+<!-- STEP 7 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div class="step-title">Install the at-feature-commit skill</div>
+    </div>
+    <div class="step-body">
+      <p>This is a new skill that helps write properly-formatted <code>[Feature Update]</code> commits — the ones that trigger the Discord notification to #app-feedback. The SKILL.md is ready:</p>
+      <span class="path">C:\Users\Natha\OneDrive\Desktop\Claude Temp Folder Storage (Nathan)\at-feature-commit\SKILL.md</span>
+      <ol>
+        <li>Open Claude Desktop → <strong>Settings → Capabilities → Skills</strong></li>
+        <li>Find the skills folder path (same place you went in Step 6)</li>
+        <li>Create a new folder named <code>at-feature-commit</code> inside it</li>
+        <li>Copy the SKILL.md file above into that new folder</li>
+      </ol>
+      <div class="note">No webhook URL needed here — the skill just formats the commit message. The GitHub Action handles the actual Discord post after you push.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">Gives Claude a structured workflow for writing feature announcements.</div>
+    <div class="sidebar-body">Without this skill, you'd have to remember the <code>[Feature Update]</code> prefix format every time. With it, you can say "write the feature commit for this session" and Claude will produce a properly-formatted player-facing commit message that automatically triggers the Discord notification when pushed. It also enforces tone guidelines (no dev-speak, concrete and exciting).</div>
+  </div>
+</div>
+
+
+<!-- STEP 8 -->
+<div class="step">
+  <div class="step-main">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div class="step-title">Update the at-design-session skill with the Step 0 flagged items check</div>
+    </div>
+    <div class="step-body">
+      <p>This adds a "Step 0" to every design session that automatically surfaces flagged discussion topics and pending card change requests from Baserow.</p>
+      <ol>
+        <li>Open Claude Desktop → <strong>Settings → Capabilities → Skills → at-design-session → Edit</strong></li>
+        <li>Find the line that says <code>## Step 1 — Read Sources First</code></li>
+        <li>Insert the following block <em>before</em> Step 1. You can find the exact text to copy in:</li>
+      </ol>
+      <span class="path">C:\Users\Natha\AppData\Roaming\Claude\local-agent-mode-sessions\[session]\447c8b33...\local_...\uploads\design-session-skill-updates.md</span>
+      <div class="note">The full text is in the file you uploaded at the start of this session under the heading "STEP 0 — Surface Flagged Items (run every session)".</div>
+      <div class="then-i-can">🤖 Once the Discussion_Topics table is live and this step is added, Claude will automatically open every design session by checking Baserow for flagged topics and pending change requests — you'll never have to manually track what needs attention.</div>
+    </div>
+  </div>
+  <div class="step-sidebar">
+    <div class="sidebar-label">Why this step</div>
+    <div class="sidebar-title">Closes the loop between the Discussion tab and actual design sessions.</div>
+    <div class="sidebar-body">The Design Topics tab lets you flag keywords and card types for discussion during a session. But that flag is useless if Claude doesn't check it. Step 0 queries Baserow at the start of every design session, surfaces anything flagged, and offers to address it before jumping into card work. It also checks for pending change requests in Comments. Without this, the whole flagging workflow is just a button with nowhere to go.</div>
+  </div>
+</div>
+
+
+<!-- COME BACK NOTE -->
+<div class="come-back">
+  <div class="come-back-title">🤖 After completing Steps 4–5: come back to Claude</div>
+  <div class="come-back-body">
+    Once you've created the <strong>Discussion_Topics</strong> and <strong>Discussion_Comments</strong> tables in Baserow, give Claude the two table IDs and Claude will immediately pre-populate Discussion_Topics with all <strong>54 rows</strong> — 37 keywords (Move, Strike, Exposed, Rally Token, Iron Palm, etc.) and 17 card types (Act, React, Flaw, Background, etc.) — using the Baserow MCP. No manual entry needed.
+  </div>
+</div>
+
+
+<!-- ═══ SUMMARY ═══ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <div class="section-divider-label">Quick Reference</div>
+  <div class="section-divider-line"></div>
+</div>
+
+<table style="width:100%;border-collapse:collapse;font-size:12px;">
+  <thead>
+    <tr style="background:#1a1428;color:#9a8ab0;">
+      <th style="padding:10px 14px;text-align:left;border-bottom:1px solid #2a2440;">Step</th>
+      <th style="padding:10px 14px;text-align:left;border-bottom:1px solid #2a2440;">Where</th>
+      <th style="padding:10px 14px;text-align:left;border-bottom:1px solid #2a2440;">Unlocks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #1e1a2e;">
+      <td style="padding:9px 14px;color:#fde68a;">1. Create Discord webhooks</td>
+      <td style="padding:9px 14px;color:#6b7280;">Discord → channel settings</td>
+      <td style="padding:9px 14px;color:#818cf8;">Steps 2, 6, and card rework notifications</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;background:#0f0f14;">
+      <td style="padding:9px 14px;color:#fde68a;">2. Add GitHub secret</td>
+      <td style="padding:9px 14px;color:#6b7280;">GitHub repo → Settings → Secrets</td>
+      <td style="padding:9px 14px;color:#818cf8;">[Feature Update] → #app-feedback pipeline</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;">
+      <td style="padding:9px 14px;color:#fde68a;">3. Push index_integrated.html</td>
+      <td style="padding:9px 14px;color:#6b7280;">Your local repo → git push</td>
+      <td style="padding:9px 14px;color:#818cf8;">Design Topics tab appears in live app</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;background:#0f0f14;">
+      <td style="padding:9px 14px;color:#fde68a;">4. Create Baserow tables</td>
+      <td style="padding:9px 14px;color:#6b7280;">baserow.io/database/407659</td>
+      <td style="padding:9px 14px;color:#818cf8;">Claude auto-populates 54 discussion topics</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;">
+      <td style="padding:9px 14px;color:#fde68a;">5. Fill in 3 config values + push</td>
+      <td style="padding:9px 14px;color:#6b7280;">index.html → DISCUSS_ constants</td>
+      <td style="padding:9px 14px;color:#818cf8;">Discussion tab connects to Baserow and goes live</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;background:#0f0f14;">
+      <td style="padding:9px 14px;color:#fde68a;">6. Install updated at-card-rework skill</td>
+      <td style="padding:9px 14px;color:#6b7280;">Settings → Capabilities → Skills</td>
+      <td style="padding:9px 14px;color:#818cf8;">Card rework sessions post to #card-design</td>
+    </tr>
+    <tr style="border-bottom:1px solid #1e1a2e;">
+      <td style="padding:9px 14px;color:#fde68a;">7. Install at-feature-commit skill</td>
+      <td style="padding:9px 14px;color:#6b7280;">Settings → Capabilities → Skills</td>
+      <td style="padding:9px 14px;color:#818cf8;">Structured [Feature Update] commit workflow</td>
+    </tr>
+    <tr style="background:#0f0f14;">
+      <td style="padding:9px 14px;color:#fde68a;">8. Update at-design-session skill</td>
+      <td style="padding:9px 14px;color:#6b7280;">Settings → Capabilities → Skills → edit</td>
+      <td style="padding:9px 14px;color:#818cf8;">Step 0 auto-surfaces flagged items every session</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="page-footer">
+  Instinct RPG · Completion Guide · Generated by Claude · June 2026<br>
+  Steps marked 🤖 are handled automatically once you complete the prior step.
+</div>
+
+</body>
+</html>

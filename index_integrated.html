@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,6 +16,7 @@ button{font-family:inherit;cursor:pointer;}
 #gate p{color:var(--gold-d);font-size:13px;}
 #gate input{padding:10px 14px;background:#211810;border:1px solid var(--gold-d);color:#f0e6cf;border-radius:6px;font-family:inherit;font-size:15px;width:240px;text-align:center;}
 #gate button{padding:10px 24px;background:var(--gold);color:#1a1108;border:none;border-radius:6px;font-weight:700;letter-spacing:1px;}
+#gateErr{color:#d4604a;font-size:12px;height:14px;}
 
 header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px solid var(--gold);padding:10px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
 .brand{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);letter-spacing:2px;font-size:15px;text-transform:uppercase;white-space:nowrap;}
@@ -61,8 +62,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .chip.type-bond:hover,.chip.type-bond.on{background:#8aa880;color:#1a2a1a;border-color:#8aa880;}
 .chip.type-flaw{border-color:#c87070;color:#e09090;}
 .chip.type-flaw:hover,.chip.type-flaw.on{background:#c87070;color:#fff;border-color:#c87070;}
-.chip.type-instinct{border-color:#7a90c0;color:#9aace0;}
-.chip.type-instinct:hover,.chip.type-instinct.on{background:#7a90c0;color:#fff;border-color:#7a90c0;}
+.chip.type-trait{border-color:#7a90c0;color:#9aace0;}
+.chip.type-trait:hover,.chip.type-trait.on{background:#7a90c0;color:#fff;border-color:#7a90c0;}
 .chip.type-act{border-color:#1D4ED8;color:#93b8ff;}
 .chip.type-act:hover,.chip.type-act.on{background:#1D4ED8;color:#EFF6FF;border-color:#1D4ED8;}
 .chip.type-react{border-color:#6D28D9;color:#c4b0e8;}
@@ -100,7 +101,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-ancestry{background:#14532D;color:#dcfce7;}
 .kw-bond{background:#0f2b15;color:#8aa880;}
 .kw-flaw{background:#5a1010;color:#f0b0a8;}
-.kw-instinct{background:#1e2540;color:#7a90c0;}
+.kw-trait{background:#1e2540;color:#7a90c0;}
 .kw-item{background:#3a2a10;color:#e0d0a0;}
 /* per-class ability card pills */
 .kw-barbarian{background:#9E2B2B;color:#fff;}
@@ -149,7 +150,13 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
 .cmtform{display:flex;flex-direction:column;gap:6px;}
 .cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
-.name-input{width:100%;}
+.name-picker{display:flex;gap:6px;align-items:stretch;}
+.name-picker select{flex:1;}
+.name-hint-wrap{position:relative;flex-shrink:0;}
+.name-hint-btn{background:#2a1d10;border:1px solid #3a2c19;color:var(--gold);border-radius:6px;padding:0 9px;font-size:13px;cursor:pointer;font-family:inherit;height:100%;}
+.name-hint-btn:hover{background:#3a2814;}
+.name-hint-wrap::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);right:0;background:#1a1108;border:1px solid var(--gold-d);color:#cbb98e;font-size:11px;padding:5px 9px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:200;}
+.name-hint-wrap:hover::after{opacity:1;}
 .cmtform textarea{resize:vertical;min-height:48px;}
 .cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
 .cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
@@ -585,9 +592,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-stem{font-style:italic;color:#3a2c10;font-size:10px;line-height:1.45;}
 .scope-boon .bf-fill{display:inline-block;min-width:54px;border-bottom:1px solid #b09050;}
 .scope-boon .bf-foot{padding:3.5px 8px;border-top:0.5px solid #c8a96e;display:flex;justify-content:space-between;font-size:6.8pt;color:#8a6a30;text-transform:uppercase;letter-spacing:1px;background:#ece0c4;font-family:system-ui,-apple-system,sans-serif;}
-.scope-boon .bf-instinct .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
-.scope-boon .bf-instinct .bf-name{color:#d4e0f0;}
-.scope-boon .bf-instinct .bf-badge,.scope-boon .bf-instinct .bf-orn{color:#7a90c0;}
+.scope-boon .bf-trait .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
+.scope-boon .bf-trait .bf-name{color:#d4e0f0;}
+.scope-boon .bf-trait .bf-badge,.scope-boon .bf-trait .bf-orn{color:#7a90c0;}
 .scope-boon .bf-bg .bf-head{background:#0f2d45;border-bottom-color:#6aa0c0;}
 .scope-boon .bf-bg .bf-name{color:#c4d8e8;}
 .scope-boon .bf-bg .bf-badge,.scope-boon .bf-bg .bf-orn{color:#6aa0c0;}
@@ -684,89 +691,165 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
-/* ---------- submit idea view ---------- */
-.tab-submit{color:#c8a96e !important;font-weight:600;}
-.tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
-.submit-wrap{display:flex;justify-content:center;padding:40px 18px 60px;min-height:60vh;}
-.submit-card{background:#1d140b;border:1px solid #3a2c19;border-radius:12px;padding:36px 40px;max-width:640px;width:100%;}
-.submit-title{font-family:system-ui,-apple-system,sans-serif;font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
-.submit-sub{font-size:13px;color:#8a7a5a;line-height:1.6;margin-bottom:28px;}
-.submit-field{margin-bottom:22px;}
-.submit-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px;}
-.submit-opt{font-weight:400;font-size:10px;text-transform:none;letter-spacing:0;color:#5a4a30;}
-.submit-hint{font-size:12px;color:#7a6a4a;line-height:1.5;margin-bottom:8px;}
-.submit-chips{display:flex;flex-wrap:wrap;gap:6px;}
-.schip{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:5px 13px;border-radius:14px;font-size:12px;font-family:inherit;cursor:pointer;transition:all .12s;letter-spacing:.3px;}
-.schip:hover{border-color:var(--gold-d);color:var(--gold);}
-.schip.on{font-weight:700;}
-.schip.type-act{border-color:#1D4ED8;color:#93b8ff;} .schip.type-act.on{background:#1D4ED8;color:#EFF6FF;}
-.schip.type-react{border-color:#6D28D9;color:#c4b0e8;} .schip.type-react.on{background:#6D28D9;color:#EDE9FE;}
-.schip.type-background{border-color:#6aa0c0;color:#9ac8e0;} .schip.type-background.on{background:#6aa0c0;color:#fff;}
-.schip.type-ancestry{border-color:#bfa060;color:#d8c080;} .schip.type-ancestry.on{background:#bfa060;color:#1a1208;}
-.schip.type-bond{border-color:#8aa880;color:#aac8a0;} .schip.type-bond.on{background:#8aa880;color:#1a2a1a;}
-.schip.type-flaw{border-color:#c87070;color:#e09090;} .schip.type-flaw.on{background:#c87070;color:#fff;}
-.schip.type-instinct{border-color:#7a90c0;color:#9aace0;} .schip.type-instinct.on{background:#7a90c0;color:#fff;}
-.schip.cls-barbarian{border-color:#9E2B2B;color:#e07070;} .schip.cls-barbarian.on{background:#9E2B2B;color:#fff;}
-.schip.cls-fighter{border-color:#B45309;color:#e09050;} .schip.cls-fighter.on{background:#B45309;color:#fff;}
-.schip.cls-paladin{border-color:#B8860B;color:#e0c040;} .schip.cls-paladin.on{background:#B8860B;color:#fff;}
-.schip.cls-cleric{border-color:#5E81AC;color:#9ab8d8;} .schip.cls-cleric.on{background:#5E81AC;color:#fff;}
-.schip.cls-ranger{border-color:#2F6B3D;color:#6ab880;} .schip.cls-ranger.on{background:#2F6B3D;color:#fff;}
-.schip.cls-rogue{border-color:#6C5BA8;color:#b0a0e0;} .schip.cls-rogue.on{background:#6C5BA8;color:#fff;}
-.schip.cls-druid{border-color:#5A7D2A;color:#9ac050;} .schip.cls-druid.on{background:#5A7D2A;color:#fff;}
-.schip.cls-warlock{border-color:#9A2B5E;color:#e070a0;} .schip.cls-warlock.on{background:#9A2B5E;color:#fff;}
-.schip.cls-bard{border-color:#B5388D;color:#e070c0;} .schip.cls-bard.on{background:#B5388D;color:#fff;}
-.submit-textarea{width:100%;padding:12px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;line-height:1.6;resize:vertical;min-height:120px;}
-.submit-textarea:focus{outline:none;border-color:var(--gold-d);}
-.submit-input{width:100%;padding:10px 14px;background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:8px;font-family:inherit;font-size:14px;}
-.submit-input:focus{outline:none;border-color:var(--gold-d);}
-.submit-btn{width:100%;padding:13px;background:var(--gold);color:#1a1108;border:none;border-radius:8px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:6px;transition:opacity .12s;}
-.submit-btn:hover{opacity:.88;}
-.submit-btn:disabled{opacity:.4;cursor:not-allowed;}
-.submit-error{background:#3a1010;border:1px solid #7a2020;color:#e07070;border-radius:6px;padding:10px 14px;font-size:13px;margin-bottom:14px;}
-.submit-success{text-align:center;padding:32px 0 8px;display:flex;flex-direction:column;align-items:center;gap:14px;}
-.submit-success-icon{font-size:32px;color:var(--gold);}
-.submit-success-msg{font-size:15px;color:#c8b88e;line-height:1.5;}
-.submit-again{background:transparent;border:1px solid var(--gold-d);color:var(--gold);padding:8px 20px;border-radius:6px;font-family:inherit;font-size:13px;cursor:pointer;letter-spacing:.5px;}
-.submit-again:hover{background:#2a1d10;}
 
+/* ================================================================
+   DESIGN TOPICS TAB — Discussion for keywords & card types
+   ================================================================ */
+#view-topics { height: calc(100vh - 56px); overflow: hidden; padding: 0; }
+.discuss-container {
+  display: flex;
+  height: 100%;
+  background: #f5f4f0;
+}
+.discuss-sidebar {
+  width: 240px; min-width: 200px; max-width: 260px;
+  background: #1a1a2e; color: #e8e6f0;
+  display: flex; flex-direction: column;
+  overflow-y: auto; flex-shrink: 0;
+  border-right: 2px solid #111;
+}
+.discuss-sidebar-header {
+  padding: 14px 14px 8px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: #9b99b0; border-bottom: 1px solid #2e2d45;
+}
+.discuss-section-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px 8px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: #b8b6cc; cursor: pointer; user-select: none;
+  transition: color 0.15s;
+}
+.discuss-section-toggle:hover { color: #e8e6f0; }
+.discuss-section-toggle .chevron { font-size: 10px; transition: transform 0.2s; }
+.discuss-section-toggle.collapsed .chevron { transform: rotate(-90deg); }
+.discuss-topic-list { padding: 0 0 8px 0; }
+.discuss-topic-list.hidden { display: none; }
+.discuss-topic-item {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px 7px 20px;
+  font-size: 12px; color: #c4c2d8;
+  cursor: pointer; transition: background 0.1s, color 0.1s;
+  border-left: 3px solid transparent;
+}
+.discuss-topic-item:hover { background: #25243f; color: #fff; border-left-color: #6b5ae8; }
+.discuss-topic-item.active { background: #2e2d55; color: #fff; border-left-color: #8b7aff; font-weight: 600; }
+.discuss-flag-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #f97316; flex-shrink: 0;
+  box-shadow: 0 0 4px #f9731688;
+}
+.discuss-sidebar-empty { padding: 8px 14px; font-size: 11px; color: #6b6980; font-style: italic; }
+.discuss-divider { height: 1px; background: #2e2d45; margin: 4px 0; }
+.discuss-panel {
+  flex: 1; display: flex; flex-direction: column;
+  overflow: hidden; background: #f9f8f4;
+}
+.discuss-panel-empty {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #aaa; gap: 10px;
+}
+.discuss-panel-empty .empty-icon { font-size: 36px; }
+.discuss-panel-empty .empty-text { font-size: 14px; }
+.discuss-topic-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px 12px; border-bottom: 1px solid #e0ddd5;
+  background: #fff; flex-shrink: 0;
+}
+.discuss-topic-title {
+  font-size: 17px; font-weight: 700; color: #1a1a2e;
+  display: flex; align-items: center; gap: 8px;
+}
+.discuss-topic-category-badge {
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; padding: 2px 7px; border-radius: 10px;
+  background: #ede9fe; color: #5b21b6;
+}
+.discuss-topic-category-badge.card-type { background: #fef3c7; color: #92400e; }
+.discuss-flag-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; cursor: pointer;
+  border: 1.5px solid #d0cec8; background: #fff; color: #666;
+  transition: all 0.15s;
+}
+.discuss-flag-btn:hover { border-color: #f97316; color: #f97316; }
+.discuss-flag-btn.flagged { background: #fff7ed; border-color: #f97316; color: #c2410c; }
+.discuss-composer {
+  padding: 14px 20px; border-bottom: 1px solid #e8e5de;
+  background: #fff; flex-shrink: 0;
+}
+.discuss-composer-row { display: flex; gap: 8px; margin-bottom: 8px; }
+.discuss-author-input {
+  width: 140px; padding: 6px 10px;
+  border: 1.5px solid #d0cec8; border-radius: 6px;
+  font-size: 12px; background: #faf9f6; color: #333;
+  outline: none; transition: border-color 0.15s;
+}
+.discuss-author-input:focus { border-color: #6b5ae8; }
+.discuss-author-input::placeholder { color: #bbb; }
+.discuss-textarea {
+  width: 100%; min-height: 70px; padding: 8px 10px;
+  border: 1.5px solid #d0cec8; border-radius: 6px;
+  font-size: 12px; font-family: inherit; line-height: 1.5;
+  background: #faf9f6; color: #222; resize: vertical;
+  outline: none; transition: border-color 0.15s; box-sizing: border-box;
+}
+.discuss-textarea:focus { border-color: #6b5ae8; }
+.discuss-textarea::placeholder { color: #bbb; }
+.discuss-submit-row { display: flex; justify-content: flex-end; margin-top: 6px; }
+.discuss-submit-btn {
+  padding: 6px 16px; background: #1a1a2e; color: #fff;
+  border: none; border-radius: 6px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: background 0.15s; box-shadow: 2px 2px 0 #111;
+}
+.discuss-submit-btn:hover { background: #2e2d55; }
+.discuss-submit-btn:disabled { background: #999; cursor: default; box-shadow: none; }
+.discuss-comments {
+  flex: 1; overflow-y: auto; padding: 14px 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.discuss-comments-loading { text-align: center; color: #aaa; font-size: 12px; padding: 20px; }
+.discuss-no-comments { text-align: center; color: #bbb; font-size: 13px; font-style: italic; padding: 32px 20px; }
+.discuss-comment-card {
+  background: #fff; border: 1px solid #e5e2da;
+  border-radius: 8px; padding: 10px 14px; box-shadow: 2px 2px 0 #e0ddd5;
+}
+.discuss-comment-meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 5px; }
+.discuss-comment-author { font-size: 11px; font-weight: 700; color: #1a1a2e; text-transform: capitalize; }
+.discuss-comment-date { font-size: 10px; color: #aaa; }
+.discuss-comment-body { font-size: 12px; color: #333; line-height: 1.6; white-space: pre-wrap; }
 </style>
 </head>
 <body>
 
 <div id="gate">
   <h1>Instinct RPG</h1>
-  <p>Card Studio - enter your name to continue</p>
-  <input id="gateName" type="text" placeholder="Your name" autocomplete="off">
+  <p>Card Studio - enter the playtest password</p>
+  <input id="gatePass" type="password" placeholder="password" autocomplete="off">
   <button onclick="checkGate()">Enter</button>
+  <div id="gateErr"></div>
 </div>
 
-<header class="hidden" id="appHeader" style="position:relative;">
+<header class="hidden" id="appHeader">
   <span class="brand">Instinct RPG - Card Studio</span>
   <div class="tabs">
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
-    <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
-    <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
-    <button class="tab tab-submit" data-view="submit" onclick="showView('submit')">✦ Submit Idea</button>
+    <button class="tab" data-view="users" onclick="showView('users')">Add Playtester</button>
+    <button class="tab" data-view="topics" onclick="showView('topics')">Design Topics</button>
   </div>
   <button class="hbtn ob-launch-btn" onclick="startOnboarding()">✦ Build My Deck</button>
   <span class="spacer"></span>
   <button class="hbtn" onclick="printSelected()">Print Selected (<span id="printN">0</span>)</button>
   <button class="hbtn" onclick="reload()">Reload</button>
-  <div id="nameDisplay" style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg2,#aaa);">
-    <span id="nameLabel"></span>
-    <button id="logoutBtn" onclick="doLogout()" style="background:#1e1610;border:1px solid #3a2c19;color:#8a7a5a;padding:4px 10px;border-radius:5px;font-size:11px;font-family:inherit;cursor:pointer;letter-spacing:.3px;">Log out</button>
-  </div>
 </header>
-
-<section class="view hidden" id="view-primer">
-  <iframe src="instinct-rpg-primer.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
-</section>
-<section class="view hidden" id="view-quickref">
-  <iframe src="instinct-rpg-quick-ref.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
-</section>
 
 <div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
 
@@ -785,6 +868,17 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   <div class="grid" id="grid"></div>
 </section>
 
+<section class="view hidden" id="view-users">
+  <div class="panel">
+    <h2>Add Playtester</h2>
+    <div class="sub">Add a name to the commenter dropdown. Playtesters are listed in the order they were added.</div>
+    <div class="cmtform" id="userAddForm" style="max-width:360px;margin-top:14px;">
+      <input id="newUserName" placeholder="Name" autocomplete="off">
+      <button onclick="addPlaytester()">Add to list</button>
+    </div>
+    <div id="usersList" style="margin-top:20px;max-width:360px;"></div>
+  </div>
+</section>
 
 <section class="view hidden" id="view-discuss">
   <div class="filters">
@@ -794,6 +888,65 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     </div>
   </div>
   <div id="discuss-list" class="discuss-list"></div>
+</section>
+
+
+<section class="view hidden" id="view-topics">
+  <div class="discuss-container">
+
+    <!-- Left Sidebar -->
+    <div class="discuss-sidebar">
+      <div class="discuss-sidebar-header">Design Discussion</div>
+
+      <div class="discuss-section-toggle" id="dt-toggle-keywords" onclick="discussTab.toggleSection('keywords')">
+        <span>Keywords</span><span class="chevron">▾</span>
+      </div>
+      <div class="discuss-topic-list" id="dt-topics-keywords">
+        <div class="discuss-sidebar-empty">Loading…</div>
+      </div>
+
+      <div class="discuss-divider"></div>
+
+      <div class="discuss-section-toggle" id="dt-toggle-cardtypes" onclick="discussTab.toggleSection('cardtypes')">
+        <span>Card Types</span><span class="chevron">▾</span>
+      </div>
+      <div class="discuss-topic-list" id="dt-topics-cardtypes">
+        <div class="discuss-sidebar-empty">Loading…</div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="discuss-panel" id="dt-panel">
+      <div class="discuss-panel-empty" id="dt-empty-state">
+        <div class="empty-icon">💬</div>
+        <div class="empty-text">Select a keyword or card type to discuss</div>
+      </div>
+      <div id="dt-thread" style="display:none;flex-direction:column;height:100%;overflow:hidden;">
+        <div class="discuss-topic-header">
+          <div class="discuss-topic-title">
+            <span id="dt-thread-title">—</span>
+            <span class="discuss-topic-category-badge" id="dt-thread-badge">Keyword</span>
+          </div>
+          <button class="discuss-flag-btn" id="dt-flag-btn" onclick="discussTab.toggleFlag()">
+            🚩 Flag for design session
+          </button>
+        </div>
+        <div class="discuss-composer">
+          <div class="discuss-composer-row">
+            <input class="discuss-author-input" id="dt-author" type="text" placeholder="Your name" maxlength="40">
+          </div>
+          <textarea class="discuss-textarea" id="dt-body" placeholder="Share a thought about this keyword or card type…" rows="3"></textarea>
+          <div class="discuss-submit-row">
+            <button class="discuss-submit-btn" id="dt-submit" onclick="discussTab.submitComment()">Post Comment</button>
+          </div>
+        </div>
+        <div class="discuss-comments" id="dt-comments">
+          <div class="discuss-comments-loading">Loading comments…</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <section class="view hidden" id="view-deck">
@@ -824,72 +977,13 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   </div>
 </section>
 
-
-<section class="view hidden" id="view-submit">
-  <div class="submit-wrap">
-    <div class="submit-card">
-      <h2 class="submit-title">Submit a Card Idea</h2>
-      <p class="submit-sub">Got a card concept? Share it in your own words — no game-design jargon needed. We read every one.</p>
-
-      <div class="submit-field">
-        <div class="submit-label">Card Type</div>
-        <div class="submit-chips" id="submitTypeChips">
-          <button class="schip type-act"        data-group="type" data-val="Act"        onclick="toggleSubmitChip(this)">Act</button>
-          <button class="schip type-react"      data-group="type" data-val="React"      onclick="toggleSubmitChip(this)">React</button>
-          <button class="schip type-background" data-group="type" data-val="Background" onclick="toggleSubmitChip(this)">Background</button>
-          <button class="schip type-ancestry"   data-group="type" data-val="Ancestry"   onclick="toggleSubmitChip(this)">Ancestry</button>
-          <button class="schip type-bond"       data-group="type" data-val="Bond"       onclick="toggleSubmitChip(this)">Bond</button>
-          <button class="schip type-flaw"       data-group="type" data-val="Flaw"       onclick="toggleSubmitChip(this)">Flaw</button>
-          <button class="schip type-instinct"   data-group="type" data-val="Instinct"   onclick="toggleSubmitChip(this)">Instinct</button>
-          <button class="schip"                 data-group="type" data-val="Not Sure"   onclick="toggleSubmitChip(this)">Not Sure</button>
-        </div>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Class <span class="submit-opt">(optional)</span></div>
-        <div class="submit-chips" id="submitClassChips">
-          <button class="schip cls-barbarian" data-group="cls" data-val="Barbarian"    onclick="toggleSubmitChip(this)">Barbarian</button>
-          <button class="schip cls-fighter"   data-group="cls" data-val="Fighter"      onclick="toggleSubmitChip(this)">Fighter</button>
-          <button class="schip cls-paladin"   data-group="cls" data-val="Paladin"      onclick="toggleSubmitChip(this)">Paladin</button>
-          <button class="schip cls-cleric"    data-group="cls" data-val="Cleric"       onclick="toggleSubmitChip(this)">Cleric</button>
-          <button class="schip cls-ranger"    data-group="cls" data-val="Ranger"       onclick="toggleSubmitChip(this)">Ranger</button>
-          <button class="schip cls-rogue"     data-group="cls" data-val="Rogue"        onclick="toggleSubmitChip(this)">Rogue</button>
-          <button class="schip cls-druid"     data-group="cls" data-val="Druid"        onclick="toggleSubmitChip(this)">Druid</button>
-          <button class="schip cls-warlock"   data-group="cls" data-val="Warlock"      onclick="toggleSubmitChip(this)">Warlock</button>
-          <button class="schip cls-bard"      data-group="cls" data-val="Bard"         onclick="toggleSubmitChip(this)">Bard</button>
-          <button class="schip"               data-group="cls" data-val="Any / Generic" onclick="toggleSubmitChip(this)">Any / Generic</button>
-        </div>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Your Idea</div>
-        <p class="submit-hint">Describe what the card does in plain language. What's the fantasy? What would feel awesome to play?</p>
-        <textarea id="submitIdeaText" class="submit-textarea" placeholder="e.g. A Rogue card where if you're outnumbered you can vanish from the fight entirely and reappear somewhere nearby…" rows="6"></textarea>
-      </div>
-
-      <div class="submit-field">
-        <div class="submit-label">Your Name <span class="submit-opt">(optional)</span></div>
-        <input id="submitName" class="submit-input" type="text" placeholder="How should we credit you?">
-      </div>
-
-      <div id="submitError" class="submit-error hidden"></div>
-      <button class="submit-btn" id="submitBtn" onclick="submitIdea()">Send It In ✦</button>
-      <div id="submitSuccess" class="submit-success hidden">
-        <div class="submit-success-icon">✦</div>
-        <div class="submit-success-msg">Got it! Thanks for the idea — we'll take a look.</div>
-        <button class="submit-again" onclick="resetSubmitForm()">Submit Another</button>
-      </div>
-    </div>
-  </div>
-</section>
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
 
 <script src="config.js"></script>
-<script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
-const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "tableIdeas": 1041581, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
+const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "gatePassword": "instinct", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
 
 
 let LIVE = [];
@@ -900,9 +994,9 @@ let RECENT_CMTS = {}, RECENT_CMTS_LOADED = false;
 let modalKey=null, modalVerIdx=0, modalVersions=[];
 const SS = window.sessionStorage;
 const ACT_IC='▶', REACT_IC='⚡';
-const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Instinct'];
+const BOON_TYPE_ORDER=['Background','Ancestry','Bond','Flaw','Trait'];
 const ACTION_TYPES=['Act','React'];
-const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Instinct':'#7a90c0'};
+const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Trait':'#7a90c0'};
 
 /* ---------- keyword restyle engine ---------- */
 const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
@@ -912,27 +1006,19 @@ const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
 const KWICON={act:ACT_IC,react:REACT_IC};
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function escAttr(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function getCookieName(){
-  const m=document.cookie.match(/(?:^|;\s*)irpg_name=([^;]*)/);
-  return m?decodeURIComponent(m[1]):'';
+let USERS=[];
+function namePickerHTML(savedName){
+  const opts=USERS.length
+    ? USERS.map(u=>'<option value="'+escAttr(u.name)+'"'+(savedName===u.name?' selected':'')+'>'+esc(u.name)+'</option>').join('')
+    : '<option value="" disabled selected>Loading…</option>';
+  return '<div class="name-picker">'
+    +'<select class="name-sel">'+opts+'</select>'
+    +'<div class="name-hint-wrap" data-tip="Not listed? Add yourself via the Add Playtester tab.">'
+      +'<button class="name-hint-btn" onclick="event.preventDefault();showView(\'users\')">+ Add</button>'
+    +'</div>'
+    +'</div>';
 }
-function setCookieName(name){
-  document.cookie='irpg_name='+encodeURIComponent(name)+'; max-age=315360000; path=/';
-}
-function clearCookieName(){
-  document.cookie='irpg_name=; max-age=0; path=/';
-}
-function namePickerHTML(){
-  const name=getCookieName();
-  if(name) return '';
-  return '<input class="name-input" type="text" placeholder="Your name" autocomplete="off" style="background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;">';
-}
-function getPickerName(form){
-  const cookieName=getCookieName();
-  if(cookieName)return cookieName;
-  const input=form?form.querySelector('.name-input'):null;
-  return (input&&input.value.trim())?input.value.trim().toLowerCase():'';
-}
+function getPickerName(form){const sel=form.querySelector('.name-sel');return sel?(sel.value||'Anon'):'Anon';}
 function kwId(raw){return KWMAP[(raw||'').trim().toLowerCase()]||null;}
 function titleCase(s){return (s||'').replace(/\b([a-z])/g,function(m,c){return c.toUpperCase();});}
 function kwPill(text,id){
@@ -1006,34 +1092,13 @@ function prestyleAll(){ LIVE.forEach(function(c){ c.hs = styleHTML(c.h); }); }
 
 /* ---------- gate ---------- */
 function checkGate(){
-  const nameIn=(document.getElementById('gateName').value||'').trim().toLowerCase();
-  if(nameIn) setCookieName(nameIn);
-  document.getElementById('gate').classList.add('hidden');
-  document.getElementById('appHeader').classList.remove('hidden');
-  updateNameDisplay();
-}
-function doLogout(){
-  clearCookieName();
-  document.getElementById('gate').classList.remove('hidden');
-  document.getElementById('appHeader').classList.add('hidden');
-  const gn=document.getElementById('gateName');
-  if(gn)gn.value='';
-}
-function updateNameDisplay(){
-  const name=getCookieName();
-  const lbl=document.getElementById('nameLabel');
-  if(lbl)lbl.textContent=name?'Logged in as: '+name:'';
-}
-(function prefillGateName(){
-  const saved=getCookieName();
-  if(saved){
-    const gn=document.getElementById('gateName');if(gn)gn.value=saved;
+  const v=document.getElementById('gatePass').value.trim();
+  if(v===CONFIG.gatePassword || v===''){
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('appHeader').classList.remove('hidden');
-    updateNameDisplay();
-  }
-})();
-document.getElementById('gateName').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
+  } else document.getElementById('gateErr').textContent='Not quite - ask Annie for the password.';
+}
+document.getElementById('gatePass').addEventListener('keydown',e=>{if(e.key==='Enter')checkGate();});
 
 /* ---------- helpers ---------- */
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1400);}
@@ -1088,7 +1153,7 @@ function buildGroupedHTML(cards,opts){
 
 /* ---------- filters ---------- */
 function buildChips(){
-  const classes=[...new Set(LIVE.map(c=>c.c))].filter(c=>c&&c.toLowerCase()!=='instinct').sort();
+  const classes=[...new Set(LIVE.map(c=>c.c))].sort();
   const allTypes=[...new Set(LIVE.map(c=>c.t))];
   document.getElementById('classChips').innerHTML=classes.map(c=>'<button class="chip cls-'+c+'" onclick="toggleFilter(\'cls\',\''+c+'\',this)">'+classLabel(c)+'</button>').join('');
   const orderedBoon=BOON_TYPE_ORDER.filter(t=>allTypes.includes(t));
@@ -1156,14 +1221,14 @@ function renderDeck(){
   const cards=[...deck].map(k=>byKey[k]).filter(Boolean);
   document.getElementById('deckSummary').textContent=cards.length?cards.length+' cards in deck.':'No cards yet.';
   if(!cards.length){document.getElementById('deckGrid').innerHTML='<div class="empty">Your deck is empty. Add cards from Browse.</div>';return;}
-  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Instinct'];
+  const BOON_TYPES=['Background','Ancestry','Bond','Flaw','Trait'];
   const groups=[
     {lbl:'Core',       chipClass:'',                  cards:cards.filter(c=>c.s==='core')},
     {lbl:'Background', chipClass:'type-background',   cards:cards.filter(c=>c.t==='Background')},
     {lbl:'Ancestry',   chipClass:'type-ancestry',     cards:cards.filter(c=>c.t==='Ancestry')},
     {lbl:'Bond',       chipClass:'type-bond',         cards:cards.filter(c=>c.t==='Bond')},
     {lbl:'Flaw',       chipClass:'type-flaw',         cards:cards.filter(c=>c.t==='Flaw')},
-    {lbl:'Instincts',  chipClass:'type-instinct',     cards:cards.filter(c=>c.t==='Instinct')},
+    {lbl:'Traits',     chipClass:'type-trait',        cards:cards.filter(c=>c.t==='Trait')},
     {lbl:'Abilities',  chipClass:'',                  cards:cards.filter(c=>c.s!=='core'&&!BOON_TYPES.includes(c.t))},
   ];
   const cardFn=c=>cardHTML(c,{noSel:true,deckRemove:true,noBurst:true});
@@ -1175,7 +1240,7 @@ function showView(v){
   document.querySelectorAll('.view').forEach(s=>s.classList.add('hidden'));
   document.getElementById('view-'+v).classList.remove('hidden');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
+  if(v==='topics')discussTab.load(); if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss(); if(v==='users'){renderUsersView();loadUsers();}
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1270,11 +1335,10 @@ async function renderComments(){
   const list=await readComments(k,since),box=document.getElementById('cmts');if(!box)return;
   box.innerHTML='<h3>Comments ('+list.length+')</h3>'+
     (list.map(function(c,i){return '<div class="cmt"><div>'+esc(c.body)+'</div><div class="cmt-meta"><span class="who">'+esc(c.name||'Anon')+'</span><span class="when">'+esc(c.when||'')+'</span><button class="cmt-del" title="Delete comment" onclick="deleteComment(\''+k+'\','+i+')">\u2715</button></div><label class="cmt-chk'+(c.change?' on':'')+'"><input type="checkbox" '+(c.change?'checked':'')+' onchange="toggleChange(\''+k+'\','+i+',this.checked)"> apply this as a change on next push</label></div>';}).join('')||'<div class="meta">No comments yet.</div>')+
-    '<div class="cmtform" id="modalCmtForm">'+namePickerHTML()+'<textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
+    '<div class="cmtform" id="modalCmtForm">'+namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')+'<textarea id="cmtBody" placeholder="Leave feedback on this card..."></textarea><label class="cmt-chk"><input type="checkbox" id="cmtChange"> Mark as a change to apply to this card on the next push</label><button onclick="postComment(\''+k+'\')">Post comment</button></div>';
 }
 async function postComment(k){
   const name=getPickerName(document.getElementById('modalCmtForm'));
-  if(!name||name==='anon'){toast('Enter your name first');return;}
   const body=(document.getElementById('cmtBody').value||'').trim();
   if(!body){toast('Write a comment first');return;}
   const chk=document.getElementById('cmtChange');const change=!!(chk&&chk.checked);
@@ -1311,10 +1375,6 @@ function guessType(h){
   return '';
 }
 async function fetchCards(){
-  const isLocal=location.hostname==='';
-  if(isLocal&&window.LOCAL_CARDS){
-    return window.LOCAL_CARDS.map(c=>{const s=guessSet(c.h);return{k:c.k,n:c.n,c:guessClass(c.h),t:guessType(c.h)||(s==='core'?'Core':''),s,h:c.h,u:c.updated||'',rd:c.rework||''};});
-  }
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
   return rows
     .filter(r=>{const v=(r.Status&&r.Status.value)||r.Status||'';return v.toLowerCase()!=='legacy';})
@@ -1368,9 +1428,9 @@ async function postDiscussComment(k){
   const bodyEl=form.querySelector('.df-body'),chkEl=form.querySelector('.df-chk');
   const name=getPickerName(form);
   const body=(bodyEl.value||'').trim();
-  if(!name||name==='anon'){toast('Enter your name first');return;}
   if(!body){toast('Write a comment first');return;}
   const change=!!(chkEl&&chkEl.checked);
+  SS.setItem('irpg_cmt_name',name);
   if(CONFIG.useLive){try{await postCommentLive(k,name,body,change);}catch(e){toast('Could not post');return;}}
   const now=new Date().toISOString().slice(0,16).replace('T',' ');
   if(!RECENT_CMTS[k])RECENT_CMTS[k]=[];
@@ -1379,6 +1439,37 @@ async function postDiscussComment(k){
   const badge=document.getElementById('discussBadge');if(badge)badge.textContent=cnt;
   toast('Comment posted');
   renderDiscuss(false);
+}
+async function loadUsers(){
+  if(!CONFIG.useLive)return;
+  try{
+    const rows=await fetchAll(CONFIG.tableUsers,'');
+    USERS=rows
+      .filter(r=>r.Active===true)
+      .sort((a,b)=>(a.User_Created_On||'').localeCompare(b.User_Created_On||''))
+      .map(r=>({name:r.Name,id:r.id}));
+    const discView=document.getElementById('view-discuss');
+    if(discView&&!discView.classList.contains('hidden'))renderDiscuss(false);
+    renderUsersView();
+  }catch(e){}
+}
+async function addPlaytester(){
+  const el=document.getElementById('newUserName');
+  const name=(el.value||'').trim();
+  if(!name){toast('Enter a name');return;}
+  if(USERS.some(u=>u.name.toLowerCase()===name.toLowerCase())){toast(name+' is already in the list');return;}
+  try{
+    await fetch(CONFIG.apiBase+CONFIG.tableUsers+'/?user_field_names=true',{method:'POST',headers:Object.assign({'Content-Type':'application/json'},authHeaders()),body:JSON.stringify({Name:name,Active:true})});
+    el.value='';
+    toast(name+' added!');
+    await loadUsers();
+  }catch(e){toast('Could not add playtester');}
+}
+function renderUsersView(){
+  const box=document.getElementById('usersList');if(!box)return;
+  if(!USERS.length){box.innerHTML='<div class="empty" style="padding:16px 0;text-align:left;font-size:13px;">No playtesters yet.</div>';return;}
+  box.innerHTML='<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);margin-bottom:8px;">Current Playtesters</div>'
+    +USERS.map(u=>'<div style="padding:7px 0;border-bottom:1px solid #2a1d10;font-size:13px;color:#f0e6cf;">'+esc(u.name)+'</div>').join('');
 }
 async function loadRecentComments(){
   if(!CONFIG.useLive){RECENT_CMTS_LOADED=true;return;}
@@ -1442,7 +1533,7 @@ async function renderDiscuss(force){
         +'<div class="discuss-cmts-list">'+cmtHTML+'</div>'
         +'<div class="discuss-form-wrap">'
           +'<div class="cmtform discuss-form" data-key="'+escAttr(c.k)+'">'
-            +namePickerHTML()
+            +namePickerHTML(SS.getItem('irpg_cmt_name')||'Nathan')
             +'<textarea class="df-body" placeholder="Leave feedback on this card..."></textarea>'
             +'<label class="cmt-chk"><input type="checkbox" class="df-chk"> Mark as a change to apply on next push</label>'
             +'<button onclick="postDiscussComment(this.closest(\'.discuss-form\').dataset.key)">Post comment</button>'
@@ -1474,15 +1565,9 @@ async function reload(){
 
 /* ---------- init ---------- */
 async function init(){
-  const isLocal=location.hostname==='';
   loadDeck();
-  if(isLocal&&window.LOCAL_CARDS){
-    await loadCards();
-    RECENT_CMTS_LOADED=true;
-  }else{
-    await loadCards();
-    loadRecentComments();
-  }
+  await Promise.all([loadCards(),loadUsers()]);
+  loadRecentComments();
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -1596,19 +1681,19 @@ function obPickCard(key,nextStep,_type){
   if(nextStep===3){ob.pool=obSample('Ancestry',5);}
   else if(nextStep===4){ob.pool=obSample('Bond',5);}
   else if(nextStep===5){ob.pool=obSample('Flaw',5);}
-  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Instinct';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
+  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Trait';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
   renderObStep();
 }
 
-/* STEP 6 — Instincts × 5 rounds */
+/* STEP 6 — Traits × 5 rounds */
 function obStep6(){
   var round=ob.traitRound+1;
   var cards=ob.traitPool.map(function(c){
     return '<div class="ob-card-option" onclick="obPickTrait(\''+c.k+'\')">'+
       '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
   }).join('');
-  return obHead('Choose an Instinct','Step 6 of 9 — Round '+round+' of 5')+
-    '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 instinct to keep.</div>'+
+  return obHead('Choose a Trait','Step 6 of 9 — Round '+round+' of 5')+
+    '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 trait to keep.</div>'+
     '<div class="ob-cards-row">'+cards+'</div>';
 }
 
@@ -1652,7 +1737,7 @@ function obStep9(){
     {lbl:'Ancestry',  cards:all.filter(function(c){return c.t==='Ancestry';})},
     {lbl:'Bond',      cards:all.filter(function(c){return c.t==='Bond';})},
     {lbl:'Flaw',      cards:all.filter(function(c){return c.t==='Flaw';})},
-    {lbl:'Instincts', cards:all.filter(function(c){return c.t==='Instinct';})},
+    {lbl:'Traits',    cards:all.filter(function(c){return c.t==='Trait';})},
   ];
   var cardFn=function(c){
     return '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:default">'+(c.hs||c.h)+'</div>';
@@ -1672,74 +1757,183 @@ function obFinish(){
   toast('Deck ready — draw your opening hand to begin!');
 }
 /* ===== END ONBOARDING ===== */
-/* ---------- submit idea form ---------- */
-function toggleSubmitChip(btn){
-  const group = btn.dataset.group;
-  // single-select per group
-  document.querySelectorAll('.schip[data-group="'+group+'"]').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-}
 
-async function submitIdea(){
-  const ideaText = document.getElementById('submitIdeaText').value.trim();
-  const errEl    = document.getElementById('submitError');
-  errEl.classList.add('hidden');
 
-  if(!ideaText){
-    errEl.textContent = 'Please describe your card idea before submitting.';
-    errEl.classList.remove('hidden');
-    return;
+// ================================================================
+//  DESIGN TOPICS TAB — Configuration
+//  Fill these in after creating the Baserow tables per setup guide.
+// ================================================================
+const DISCUSS_TOKEN          = 'YOUR_BASEROW_TOKEN_HERE';
+const DISCUSS_TOPICS_TABLE   = 'YOUR_DISCUSSION_TOPICS_TABLE_ID';
+const DISCUSS_COMMENTS_TABLE = 'YOUR_DISCUSSION_COMMENTS_TABLE_ID';
+const DISCUSS_API_BASE       = 'https://api.baserow.io/api/database/rows/table';
+
+const discussTab = (() => {
+  let topics       = [];
+  let activeTopic  = null;
+  let sectionState = { keywords: true, cardtypes: true };
+  let loaded       = false;
+
+  function dtHeaders() {
+    return { 'Authorization': `Token ${DISCUSS_TOKEN}`, 'Content-Type': 'application/json' };
+  }
+  async function dtGet(tableId, params = {}) {
+    const qs = new URLSearchParams({ user_field_names: 'true', size: 200, ...params });
+    const res = await fetch(`${DISCUSS_API_BASE}/${tableId}/?${qs}`, { headers: { 'Authorization': `Token ${DISCUSS_TOKEN}` } });
+    if (!res.ok) throw new Error(`Baserow error ${res.status}`);
+    return res.json();
+  }
+  async function dtPatch(tableId, rowId, fields) {
+    const res = await fetch(`${DISCUSS_API_BASE}/${tableId}/${rowId}/?user_field_names=true`, {
+      method: 'PATCH', headers: dtHeaders(), body: JSON.stringify(fields)
+    });
+    if (!res.ok) throw new Error(`Baserow error ${res.status}`);
+    return res.json();
+  }
+  async function dtPost(tableId, fields) {
+    const res = await fetch(`${DISCUSS_API_BASE}/${tableId}/?user_field_names=true`, {
+      method: 'POST', headers: dtHeaders(), body: JSON.stringify(fields)
+    });
+    if (!res.ok) throw new Error(`Baserow error ${res.status}`);
+    return res.json();
   }
 
-  const cardType  = (document.querySelector('.schip[data-group="type"].on') || {}).dataset?.val || '';
-  const cardClass = (document.querySelector('.schip[data-group="cls"].on')  || {}).dataset?.val || '';
-  const name      = document.getElementById('submitName').value.trim();
+  function dtEsc(s) {
+    if (!s) return '';
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function renderTopicItem(topic) {
+    const dot = topic.Flag_Design_Session ? '<span class="discuss-flag-dot" title="Flagged for design session"></span>' : '';
+    return `<div class="discuss-topic-item" id="dt-item-${topic.id}" onclick="discussTab.selectTopic(${topic.id})">${dot}${dtEsc(topic.Name)}</div>`;
+  }
+  function renderSidebar() {
+    const kw = topics.filter(t=>t.Category==='Keyword').sort((a,b)=>a.Name.localeCompare(b.Name));
+    const ct = topics.filter(t=>t.Category==='Card Type').sort((a,b)=>a.Name.localeCompare(b.Name));
+    const kwEl = document.getElementById('dt-topics-keywords');
+    const ctEl = document.getElementById('dt-topics-cardtypes');
+    kwEl.innerHTML = kw.length ? kw.map(renderTopicItem).join('') : '<div class="discuss-sidebar-empty">No topics yet</div>';
+    ctEl.innerHTML = ct.length ? ct.map(renderTopicItem).join('') : '<div class="discuss-sidebar-empty">No topics yet</div>';
+  }
+  function formatDate(d) {
+    if (!d) return '';
+    try {
+      const dt = new Date(d);
+      return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) + ' · ' +
+             dt.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+    } catch { return d; }
+  }
+  function renderComment(c) {
+    return `<div class="discuss-comment-card">
+      <div class="discuss-comment-meta">
+        <span class="discuss-comment-author">${dtEsc(c.Author||'Anonymous')}</span>
+        <span class="discuss-comment-date">${formatDate(c.Created_At)}</span>
+      </div>
+      <div class="discuss-comment-body">${dtEsc(c.Comment||'')}</div>
+    </div>`;
+  }
+  function setFlagState(flagged) {
+    const btn = document.getElementById('dt-flag-btn');
+    if (!btn) return;
+    btn.classList.toggle('flagged', !!flagged);
+    btn.textContent = flagged ? '✓ Flagged for design session' : '🚩 Flag for design session';
+  }
 
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-
-  if(CONFIG.useLive && CONFIG.tableIdeas){
-    try{
-      const payload = {
-        Card_Type:      cardType  || 'Not specified',
-        Card_Class:     cardClass || 'Not specified',
-        Idea_Text:      ideaText,
-        Submitter_Name: name      || 'Anonymous',
-        Submitted_At:   new Date().toISOString(),
-        Status:         'new'
-      };
-      const resp = await fetch(CONFIG.apiBase + CONFIG.tableIdeas + '/?user_field_names=true', {
-        method: 'POST',
-        headers: Object.assign({'Content-Type':'application/json'}, authHeaders()),
-        body: JSON.stringify(payload)
-      });
-      if(!resp.ok) throw new Error('HTTP '+resp.status);
-    } catch(e){
-      btn.disabled = false;
-      btn.textContent = 'Send It In ✦';
-      errEl.textContent = 'Could not submit — please try again.';
-      errEl.classList.remove('hidden');
-      return;
+  async function load() {
+    if (loaded) return;
+    try {
+      const data = await dtGet(DISCUSS_TOPICS_TABLE);
+      topics = data.results || [];
+      loaded = true;
+    } catch(e) {
+      topics = [];
+      console.warn('[DiscussTab] Could not load topics:', e.message);
+    }
+    renderSidebar();
+  }
+  function toggleSection(key) {
+    sectionState[key] = !sectionState[key];
+    const listEl   = document.getElementById(`dt-topics-${key}`);
+    const toggleEl = document.getElementById(`dt-toggle-${key}`);
+    if (listEl)   listEl.classList.toggle('hidden', !sectionState[key]);
+    if (toggleEl) toggleEl.classList.toggle('collapsed', !sectionState[key]);
+  }
+  async function selectTopic(topicId) {
+    activeTopic = topics.find(t=>t.id===topicId) || null;
+    if (!activeTopic) return;
+    document.querySelectorAll('.discuss-topic-item').forEach(el=>el.classList.remove('active'));
+    const item = document.getElementById(`dt-item-${topicId}`);
+    if (item) item.classList.add('active');
+    document.getElementById('dt-empty-state').style.display = 'none';
+    const thread = document.getElementById('dt-thread');
+    thread.style.display = 'flex';
+    document.getElementById('dt-thread-title').textContent = activeTopic.Name;
+    const badge = document.getElementById('dt-thread-badge');
+    badge.textContent = activeTopic.Category || 'Keyword';
+    badge.className = 'discuss-topic-category-badge' + (activeTopic.Category==='Card Type'?' card-type':'');
+    setFlagState(activeTopic.Flag_Design_Session);
+    await loadComments(topicId);
+  }
+  async function loadComments(topicId) {
+    const el = document.getElementById('dt-comments');
+    el.innerHTML = '<div class="discuss-comments-loading">Loading…</div>';
+    try {
+      const data = await dtGet(DISCUSS_COMMENTS_TABLE, { filter__Topic_ID__equal: topicId, order_by: '-Created_At' });
+      const cmts = data.results || [];
+      el.innerHTML = cmts.length ? cmts.map(renderComment).join('') : '<div class="discuss-no-comments">No discussion yet — start the conversation.</div>';
+    } catch(e) {
+      el.innerHTML = '<div class="discuss-no-comments">Could not load comments.</div>';
     }
   }
+  async function submitComment() {
+    if (!activeTopic) return;
+    const authorEl = document.getElementById('dt-author');
+    const bodyEl   = document.getElementById('dt-body');
+    const submitEl = document.getElementById('dt-submit');
+    const author   = (authorEl.value||'').trim();
+    const comment  = (bodyEl.value||'').trim();
+    if (!author) { authorEl.focus(); authorEl.style.borderColor='#ef4444'; return; }
+    if (!comment) { bodyEl.focus(); bodyEl.style.borderColor='#ef4444'; return; }
+    authorEl.style.borderColor=''; bodyEl.style.borderColor='';
+    submitEl.disabled=true; submitEl.textContent='Posting…';
+    try {
+      await dtPost(DISCUSS_COMMENTS_TABLE, {
+        Topic_ID: activeTopic.id, Topic_Name: activeTopic.Name,
+        Comment: comment, Author: author, Created_At: new Date().toISOString()
+      });
+      bodyEl.value = '';
+      await loadComments(activeTopic.id);
+    } catch(e) {
+      alert('Could not post comment: '+e.message);
+    } finally {
+      submitEl.disabled=false; submitEl.textContent='Post Comment';
+    }
+    try { localStorage.setItem('dt_author', author); } catch {}
+  }
+  async function toggleFlag() {
+    if (!activeTopic) return;
+    const newFlag = !activeTopic.Flag_Design_Session;
+    try {
+      await dtPatch(DISCUSS_TOPICS_TABLE, activeTopic.id, { Flag_Design_Session: newFlag });
+      activeTopic.Flag_Design_Session = newFlag;
+      setFlagState(newFlag);
+      const item = document.getElementById(`dt-item-${activeTopic.id}`);
+      if (item) {
+        const existing = item.querySelector('.discuss-flag-dot');
+        if (newFlag && !existing) item.insertAdjacentHTML('afterbegin','<span class="discuss-flag-dot"></span>');
+        else if (!newFlag && existing) existing.remove();
+      }
+    } catch(e) { alert('Could not update flag: '+e.message); }
+  }
+  function restoreAuthor() {
+    try {
+      const saved = localStorage.getItem('dt_author');
+      if (saved) { const el=document.getElementById('dt-author'); if(el) el.value=saved; }
+    } catch {}
+  }
+  return { load, toggleSection, selectTopic, submitComment, toggleFlag, restoreAuthor };
+})();
 
-  // success
-  btn.classList.add('hidden');
-  document.getElementById('submitSuccess').classList.remove('hidden');
-}
-
-function resetSubmitForm(){
-  document.getElementById('submitIdeaText').value = '';
-  document.getElementById('submitName').value = '';
-  document.querySelectorAll('.schip.on').forEach(b=>b.classList.remove('on'));
-  document.getElementById('submitError').classList.add('hidden');
-  document.getElementById('submitSuccess').classList.add('hidden');
-  const btn = document.getElementById('submitBtn');
-  btn.disabled = false;
-  btn.textContent = 'Send It In ✦';
-  btn.classList.remove('hidden');
-}
+document.addEventListener('DOMContentLoaded', ()=>discussTab.restoreAuthor());
 
 </script>
 </body>
