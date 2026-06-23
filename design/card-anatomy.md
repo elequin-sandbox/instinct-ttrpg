@@ -31,6 +31,9 @@ Bane (umbrella — negative)
 Instinct (independent)  ◇◇◇   Slate indigo  #1e2540
    (formerly "Trait" — renamed everywhere June 2026)
 
+Connection (session-start template)  *(no ornament — name blank)*   Deep rose  #2d1020
+   One per player; filled in at session start with character name; shuffled into other players' decks.
+
 Ability (class deck)
   ├── Act
   ├── React
@@ -55,6 +58,7 @@ replaces ⚡). 🔒 never appears on Boon/Instinct cards.
 | Bond | `#0f2b15` | `#7a9070` | `#b8d0b0` | `◦ ◦ ◦` |
 | Flaw | `#3d0a0a` | `#a85050` | `#f0c0b8` | `✖ ✖ ✖` |
 | Ancestry | `#2a1a08` | `#9a7a40` | `#d8c080` | `◆ ◆ ◆` |
+| Connection | `#2d1020` | `#905070` | `#f0d0e0` | *(no ornament — name blank + italic instruction)* |
 
 **Shared shell (all types):** body `#f7f0e0` parchment · border `1.5px solid #c8a96e` gold · footer
 `#ede0c4` with the same gold border · shadow hard offset `5px 5px 0 #1a1a1a` (woodblock — never soft
@@ -96,7 +100,7 @@ Every word that carries a real gameplay effect. Rendered as a filled inline pill
 |---|---|---|
 | **Boost** | `#0F766E` (teal) | `#CCFBF1` |
 | **Resolve** | `#166534` (green) | `#F0FDF4` |
-| **Hit Dice** | `#6B21A8` (purple) | `#EDE9FE` |
+| **Hit Dice** | `#991B1B` (deep red) | `#FEF2F2` |
 | **Threat** | `#991B1B` (deep red) | `#FEF2F2` |
 | **Crit** *(player-facing: Flourish)* | `#B8860B` (gold) | `#FFFDE7` |
 | **Toll** | `#B45309` (bronze) | `#FFFBEB` |
@@ -170,6 +174,17 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 - Two choices: **Dramatic path** (narrate reaction + GM makes one free move) · **Suppression path**
   (ongoing cost/disadvantage while held)
 - Footer: `any · flaw` · ✕ pip · *(no writing box — the stem fill-in is the written record)*
+
+**Connection** *(session-start template — one per player, filled at table)*
+- Header top row: `CONNECTION` badge (left) · `Act` badge (right) — no ⚡, no 🔒
+- Name area: large fill-in blank with italic instruction *"write your character's name"* below — no ornament row
+- Preamble (italic): *"Find a moment in this scene to connect with this character. Choose one:"*
+- Three bold-imperative choose-one options (PbtA parallel syntax): **Share** · **Ask** · **Challenge them —**
+- Reward line: *"Then, each player chooses: gain* `[Boost 1]` *, reclaim a* `[Hit Die]` *, or* **Draw 1***."*
+- OR divider: horizontal gold rule with **OR** centered in it
+- Aid clause (italic): *"When discarding this card to* `[Aid]` *this character, grant* `[Boost 2]`*."*
+- Footer: `any · connection` · ★ pip · no flavor text · no origin stem
+- Deck placement: shuffled into class deck like Bonds/Flaws
 
 **Ability (Act / React / Core)** — class-deck cards. Header = class color + name + type badge; body =
 labeled zones; cost pip in footer. Full design system in `at-card-renderer` + `at-design-session`.

@@ -122,6 +122,15 @@
 
 ---
 
+## CONNECTION CARDS (1 template) — Deep rose · name blank · Act · Shuffle into class deck
+*Designed June 2026 — session-start template; players write character name at table*
+
+| # | Name | Baserow Key | Status |
+|---|---|---|---|
+| 1 | Connection (template) | connection-template | 🗄️ |
+
+---
+
 ## CLASS ABILITY CARDS (tutorial decks)
 
 All 4 tutorial decks at 14 cards each — in Baserow.
