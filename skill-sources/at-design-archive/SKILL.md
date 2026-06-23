@@ -26,6 +26,35 @@ These were once part of the game. They are no longer in the game. Do not use the
 
 ---
 
+### A0 — Item Check / Placed Dice / Saves (Retired: June 2026)
+
+**What it was:** A late item subsystem. An *Item Check* (roll 2d6) let a player physically *place*
+the rolled dice on a target as a condition — **[Rooted]**, **[Exposed]** (debuffs, filled pills) or
+**[Disguised]** (buff, outline pill). The target cleared them with a **Save** (GM rolls equal dice;
+each that matched-or-beat a placed die removed it). Came with buff/debuff pill distinction, fixed vs.
+variable placement (e.g. `Rooted 1`), and item card anatomy built around it.
+
+**Why cut:** Too complex. Stripped back to the simplest possible item system for the next playtest.
+As of June 2026 there is **no** Item Check, no placed dice, and no Saves. Items remain a classless
+card type but use only Flavor + Effect (+ optional Crit) until the simpler version is designed. All
+former condition words (Rooted, Exposed, Hidden, etc.) are now plain-bold **narrative** terms with no
+mechanics (see `design/core-rules.md §11`).
+
+### A0b — Bolstered (Retired: June 2026 — folded into Boost)
+
+**What it was:** A positive-state condition (deep-green pill) meaning strengthened/healed/fortified;
+several class abilities "blocked Bolstered." **Why cut:** Boost was elevated to the general
+dice-adding / strengthening keyword and absorbed Bolstered's role. Do not use Bolstered; use
+**[Boost]**.
+
+### A0c — Catch Your Breath (FUTURE-SCOPE, not yet designed)
+
+**Direction:** A planned short-rest effect that lives *in the deck* as a card, replacing the old
+post-Contest "breather" recovery (which was removed). Currently there is no recovery rule. Annie will
+design Catch Your Breath later; noted here so the intent isn't lost.
+
+---
+
 ### A1 — Guard (Retired: Playtest #1, June 2025)
 
 **What it was:** A temporary protective pool placed at the start of combat. Guard dice absorbed incoming damage before hitting the health pool. Paladin was the proactive Guard specialist; Cleric was the reactive provider.
@@ -82,7 +111,17 @@ These were once part of the game. They are no longer in the game. Do not use the
 
 ---
 
-### A6 — Luck Check as a Pill (Retired: June 2026 language audit)
+### A6 — 4-Band Result System (Retired: June 2026, replaced by DC Ladder)
+
+**What it was:** An earlier resolution framework describing four result tiers — **Crit** (success + bonus options), **Success** (clean hit), **Partial** (success with cost), **Miss** (failure). Referenced in some design session files and class-identity.md.
+
+**Why it was retired:** Annie confirmed in June 2026 that the DC Ladder (Binary succeed/fail against a target number, 3–16) is the actual resolution system. The 4-band framework was never implemented in the v3 tutorial and was not recognized as the active system. "Partial" has no equivalent in the current ruleset.
+
+**What replaced it:** The DC Ladder (§6 in at-core-rules). Toll comes from rolling 1s (miss dice), not from a result tier. Crit options come from rolling max-face dice (6s), not from a result tier. Failure is simply falling short of the DC.
+
+---
+
+### A7 — Luck Check as a Pill (Retired: June 2026 language audit)
 
 **What it was:** `[Luck Check]` was formatted as an inline colored pill, like `[Boost 2]`.
 
@@ -230,22 +269,4 @@ See B2. The written rule and the felt experience don't match. Worth closing deli
 
 **What existed:** Multiple Warlock ability design experiments including different Patron mark architectures. Some early Patron designs used per-patron color schemes.
 
-**Current state:** Unified standard Warlock color for all Patron cards. Patron Bane section uses boxed treatment. Mark tables per Patron are locked (see project knowledge). The per-patron color system was abandoned in favor of visual unity.
-
----
-
-### B14 — Boon/Act Naming Collision (Open Rename Question)
-
-**The problem (Playtest #1, C1):** Jordan asked: "What's the difference between a boon being active and an act?" "Boon" and "active" overlap phonetically and semantically in play.
-
-**Proposed directions (not resolved):**
-- Rename "Boon" → **Bless**, **Grace**, or a thematic in-world term
-- Extreme visual differentiation (distinct shape, border, or color)
-- Collapse Boons and Acts into one type with a subtype tag
-
-**Status:** No decision made. Keep in mind whenever the card type taxonomy is discussed.
-
----
-
-## Changelog
-- [June 2026] — Created. Populated from Playtest #1 report, project memory, and cross-referencing with post-Playtest #1 decisions in existing skill files. All deprecated decisions marked as locked; all future-scope items marked as open/unresolved.
+**Current state:** Unified standard Warlock color for all Patron cards. Patron Bane section uses boxed treatment. Mark tables per Patron are locked (see project knowledge). The per-p
