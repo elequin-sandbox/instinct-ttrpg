@@ -177,7 +177,7 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Connection** *(session-start template — one per player, filled at table)*
 - Header top row: `CONNECTION` badge (left) · `Act` badge (right) — no ⚡, no 🔒
-- Name area: large fill-in blank with italic instruction *"write your character's name"* below — no ornament row
+- Name area: large fill-in blank with italic placeholder *"(name)"* below — no ornament row
 - Preamble (italic): *"Find a moment in this scene to connect with this character. Choose one:"*
 - Three bold-imperative choose-one options (PbtA parallel syntax): **Share** · **Ask** · **Challenge them —**
 - Reward line: *"Then, each player chooses: gain* `[Boost 1]` *, reclaim a* `[Hit Die]` *, or* **Draw 1***."*
