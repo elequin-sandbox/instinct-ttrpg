@@ -32,6 +32,16 @@ Shuffle · Cleanse · Luck Check · Scene** (plus **Combat · Rest** as scene/ti
 **CRPG action verbs** (Move, Strike, Speak, Sense, Know, Focus, Enter, Exit, Read, Summon, Lift,
 Restrain) — effect-syntax verbs, rendered as steel-blue pills. Used for choose-one option lines.
 
+**Choose-one list syntax — bold imperative verb leads every option (PbtA parallel syntax).** 🔒
+Each bullet in a choose-one list opens with a bold imperative verb or verb phrase, followed by the
+elaboration. All options in a list must follow the same pattern.
+- ✓ **Share** a memory between you that feels like this moment.
+- ✓ **Challenge them** — push them to grow or change in a way this scene requires.
+- ✗ ~~A memory you share that feels like this moment.~~ (no leading verb)
+- ✗ ~~You can ask them a question.~~ (not imperative, not parallel)
+When workshopping choose-one option language, pitch **6–8 distinct phrasings** per option so
+Annie can select. Don't settle on one phrasing and ask "is this good?" — show the range.
+
 **Rule of thumb for a new term:** can it carry a number / change the dice? → Impact pill. Does it
 sort/filter a card? → Index chip. Is it just a named scene/action? → Bold+Cap. A fictional descriptor?
 → plain bold. Otherwise → lowercase prose. **Do not invent new pill terms without explicit approval.**
