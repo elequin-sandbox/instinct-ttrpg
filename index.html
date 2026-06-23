@@ -1176,6 +1176,7 @@ function showView(v){
   document.getElementById('view-'+v).classList.remove('hidden');
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
   if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
+  if(v==='submit'){const n=getCookieName();if(n)document.getElementById('submitName').value=n;}
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1674,10 +1675,7 @@ function obFinish(){
 /* ===== END ONBOARDING ===== */
 /* ---------- submit idea form ---------- */
 function toggleSubmitChip(btn){
-  const group = btn.dataset.group;
-  // single-select per group
-  document.querySelectorAll('.schip[data-group="'+group+'"]').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
+  btn.classList.toggle('on');
 }
 
 async function submitIdea(){
@@ -1691,8 +1689,8 @@ async function submitIdea(){
     return;
   }
 
-  const cardType  = (document.querySelector('.schip[data-group="type"].on') || {}).dataset?.val || '';
-  const cardClass = (document.querySelector('.schip[data-group="cls"].on')  || {}).dataset?.val || '';
+  const cardType  = [...document.querySelectorAll('.schip[data-group="type"].on')].map(b=>b.dataset.val).join(', ') || 'Not specified';
+  const cardClass = [...document.querySelectorAll('.schip[data-group="cls"].on')].map(b=>b.dataset.val).join(', ')  || 'Not specified';
   const name      = document.getElementById('submitName').value.trim();
 
   const btn = document.getElementById('submitBtn');
@@ -1702,8 +1700,8 @@ async function submitIdea(){
   if(CONFIG.useLive && CONFIG.tableIdeas){
     try{
       const payload = {
-        Card_Type:      cardType  || 'Not specified',
-        Card_Class:     cardClass || 'Not specified',
+        Card_Type:      cardType,
+        Card_Class:     cardClass,
         Idea_Text:      ideaText,
         Submitter_Name: name      || 'Anonymous',
         Submitted_At:   new Date().toISOString(),
