@@ -782,6 +782,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .acc-flaw{--a:#b3261e;--ad:#931f19;--al:#e5b5b2;--ah:#f7e9e8;--at:#f4e1e0;}
 .acc-ancestry{--a:#9a6a2e;--ad:#7e5726;--al:#ddccb8;--ah:#f5f0ea;--at:#f1eae2;}
 .acc-connection{--a:#9a3b6b;--ad:#7e3058;--al:#ddbccd;--ah:#f5ebf0;--at:#f1e4ea;}
+.acc-any{--a:#92400E;--ad:#7a3409;--al:#e6cdb5;--ah:#f5ece4;--at:#f0e4d8;}
 
 /* === Instinct RPG canonical header system (var-driven, no inline color) === */
 .card{position:relative;border-left:5px solid var(--a,transparent);}
@@ -1369,14 +1370,41 @@ async function fetchAll(tableId,params){
   while(url){const r=await fetch(url,{headers:authHeaders(),cache:'no-store'});const j=await r.json();out=out.concat(j.results||[]);url=j.next?j.next.replace('http://','https://'):null;}
   return out;
 }
-function guessSet(h){return /core-header/.test(h)?'core':/bf-head/.test(h)?'boon':'ability';}
-function guessClass(h){const m=/class="(?:fclass|core-class-name)"[^>]*>([^<]+)</.exec(h||'');return m?m[1].toLowerCase():'any';}
+const _TYPE_ACCS=new Set(['bond','flaw','ancestry','background','instinct','connection','any']);
+function guessSet(h){
+  if(!h)return 'ability';
+  if(/core-header/.test(h))return 'core';                                           // old format core
+  if(/bf-head/.test(h))return 'boon';                                               // old format boon
+  if(/\bbf-bond\b|\bbf-flaw\b|\bbf-ancestry\b|\bbf-background\b|\bbf-instinct\b|\bbf-connection\b/.test(h))return 'boon'; // new format boon
+  if(/class="cap cap-neutral"[^>]*>Core<\/span>/.test(h))return 'core';            // new format core
+  return 'ability';
+}
+function guessClass(h){
+  const m=/class="(?:fclass|core-class-name)"[^>]*>([^<]+)</.exec(h||'');          // old format
+  if(m)return m[1].toLowerCase();
+  const am=/\bacc-([a-z]+)\b/.exec(h||'');                                          // new format
+  if(am&&!_TYPE_ACCS.has(am[1]))return am[1];
+  return 'any';
+}
 function guessType(h){
-  const b=/class="bf-badge"[^>]*>BOON\s*(?:&mdash;|-|—)\s*([A-Z]+)/.exec(h||'');
+  if(!h)return '';
+  const b=/class="bf-badge"[^>]*>BOON\s*(?:&mdash;|-|—)\s*([A-Z]+)/.exec(h);      // old format boon
   if(b)return b[1].charAt(0)+b[1].slice(1).toLowerCase();
-  const m=/class="cb"[^>]*>([^<]+)</.exec(h||'');
+  const m=/class="cb"[^>]*>([^<]+)</.exec(h);                                       // old format ability
   if(m)return m[1].trim();
-  if(/class="core-header"/.test(h||''))return 'Core';
+  if(/class="core-header"/.test(h))return 'Core';                                   // old format core
+  const ca=/class="cap cap-accent"[^>]*>([^<]+)</.exec(h);                          // new format boon type
+  if(ca){const t=ca[1].trim();if(['Background','Ancestry','Bond','Flaw','Instinct'].includes(t))return t;}
+  const cn1=/<span[^>]*class="cap cap-neutral"[^>]*>([^<]+)<\/span>/.exec(h);       // new format ability/core
+  if(cn1){
+    const first=cn1[1].trim();
+    if(first==='Core')return 'Core';
+    if(first==='Ability'){
+      const rest=h.slice(cn1.index+cn1[0].length);
+      const cn2=/<span[^>]*class="cap cap-neutral"[^>]*>([^<]+)<\/span>/.exec(rest);
+      if(cn2){const t=cn2[1].trim();if(t==='Act'||t==='React')return t;}
+    }
+  }
   return '';
 }
 async function fetchCards(){
