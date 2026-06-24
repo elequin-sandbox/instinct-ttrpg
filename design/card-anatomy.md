@@ -201,3 +201,47 @@ Card width `195px` · grid `repeat(auto-fill, minmax(195px, 1fr))` · print `rep
 
 *Rules/keyword meanings → `design/core-rules.md` · wording & forbidden terms →
 `design/writing-conventions.md` · classes → `design/classes.md`.*
+                     
+
+---
+
+## §7 — Unified header system (LOCKED June 24 2026) 🔒  *(supersedes §3 header row & §6 footer)*
+
+The whole card library was normalized to ONE structure so every card reads as the same game.
+**There are no footers.** Everything lives in the header + two floating corner marks.
+
+**Per-card structure**
+- **Header bar** (`.hdr`): light wash background tinted with the card's accent color; dark text.
+  - **Top-left** (`.cap`): the **card TYPE** — `Ability`, `Core`, `Background`, `Bond`, `Flaw`,
+    `Ancestry`, `Instinct`, `Connection`. Outlined capsule, sans-serif, 800 weight.
+    On class cards the type is neutral ink; on non-class cards it carries the type's accent color.
+  - **Top-right** (`.cap`): the **play COST** — `Act` / `React`. Blank on Core (no cost) except
+    dual-purpose cards (e.g. Warlock Patron, flagged manually). Neutral-ink outlined capsule.
+  - **Name ribbon** (`.hdr-name`): centered, EB Garamond 700, **banner ribbon** with notched ends
+    (clip-path), filled with a light tint of the accent, dark accent text, accent top/bottom borders.
+    Connection's ribbon is left blank for writing the character name in (tiny faint placeholder).
+  - **Subtitle** (`.hdr-sub`): italic flavor line under the name (Core cards keep their flavor here).
+- **Bottom-left** (`.idtag`, floating, no footer): the **CLASS** name (Rogue, Fighter, …) in an
+  accent-colored capsule. **Class cards only** — empty on Instinct/Boon-family/Connection.
+- **Bottom-right** (`.tier-float`, floating): muted-gray italic **tier** circle (`t1`). **Ability +
+  Item cards only**; everything else leaves it blank.
+- **Left edge**: 5px accent-color border on the whole card — carries color identity in print.
+
+**Color authority is centralized.** Accent colors live as CSS variables in `.acc-<key>` classes
+(`canon_accents.css`, injected into `index.html`). Recolor a class/type in ONE place. Brighter
+"accent" hues are used here (e.g. Flaw `#b3261e`) than the deep doctrine band colors in §2, because
+the header is now light — §2's deep colors are retired for the header layer.
+
+**Keyword layer (LOCKED June 24 2026)** — pills are now **class-based**, colored from `canon_keywords.css`:
+- **Impact keywords** → `<span class="kw kw-ID">` filled pills: Boost, Resolve, Hit Dice/Die (`hd`),
+  Threat, Crit, Toll, Miss, Aid, Mill. Crit-count numbers use `kw-crit` (gold).
+- **CRPG action verbs** (Move, Strike, Enter, …) → **DEMOTED to plain bold** (no longer pills).
+- **Skill / check names** (Athletics, Stealth, Faith, Nature, Spellcast, Item Check, …) → **plain bold**
+  ("generic checks").
+- **Narrative conditions** (Exposed, Rattled, Rooted, Hidden, Marked, …) → **plain bold**.
+- **In-text card-type / class names** → outlined **Index chips** (`<span class="ix ix-KEY">`).
+- **Term renames applied:** Bolstered→Boost, Trait→Instinct.
+
+Implementation (CSS + normalizer) lives in the project workspace (`canon_*.css`, `normalize.py`) and is
+injected into `index.html`. Status: current.
+

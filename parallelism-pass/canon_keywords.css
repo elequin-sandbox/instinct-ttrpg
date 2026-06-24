@@ -1,0 +1,31 @@
+/* === Instinct RPG canonical keyword + chip styles (single source of color truth) === */
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.6;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-hd{background:#991B1B;color:#FEF2F2;}
+.kw-threat{background:#991B1B;color:#FEF2F2;}
+.kw-crit{background:#B8860B;color:#FFFDE7;}
+.kw-toll{background:#B45309;color:#FFFBEB;}
+.kw-miss{background:#7F1D1D;color:#FEF2F2;}
+.kw-aid{background:#2563EB;color:#EFF6FF;}
+.kw-mill{background:#0C4A6E;color:#BAE6FD;}
+.ix{display:inline-block;background:transparent;border:1.5px solid;border-radius:3px;padding:0 4px;font-weight:700;font-size:10px;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif;}
+.ix-instinct{border-color:#1e2540;color:#1e2540;}
+.ix-background{border-color:#0f2d45;color:#0f2d45;}
+.ix-bond{border-color:#0f2b15;color:#0f2b15;}
+.ix-flaw{border-color:#3d0a0a;color:#3d0a0a;}
+.ix-ancestry{border-color:#2a1a08;color:#2a1a08;}
+.ix-act{border-color:#1C3A5E;color:#1C3A5E;}
+.ix-react{border-color:#0C4A6E;color:#0C4A6E;}
+.ix-item{border-color:#92400E;color:#92400E;}
+.ix-barbarian{border-color:#9E2B2B;color:#9E2B2B;}
+.ix-fighter{border-color:#B45309;color:#B45309;}
+.ix-paladin{border-color:#8a6608;color:#8a6608;}
+.ix-cleric{border-color:#4d6a90;color:#4d6a90;}
+.ix-ranger{border-color:#2F6B3D;color:#2F6B3D;}
+.ix-rogue{border-color:#6C5BA8;color:#6C5BA8;}
+.ix-druid{border-color:#4d6b24;color:#4d6b24;}
+.ix-warlock{border-color:#9A2B5E;color:#9A2B5E;}
+.ix-bard{border-color:#B5388D;color:#B5388D;}
+.ix-wizard{border-color:#3C3489;color:#3C3489;}
+.ix-monk{border-color:#164E63;color:#164E63;}

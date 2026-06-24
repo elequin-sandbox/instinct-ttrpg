@@ -173,5 +173,6 @@ When a new card is designed and approved:
 ---
 
 ## Changelog
-- [June 2025] — Initial inventory created. 66 character creation cards in artifacts, not yet in Baserow. 4 tutorial class decks in Baserow.
-- [June 2026] — **Trait → Instinct** (section header renamed; card type renamed everywhere).
+- [June 2025] — Initial inventor
+
+- [June 24 2026] — **Visual parallelism pass.** All 245 Status:current cards in Baserow normalized to the unified header system (§7 of card-anatomy.md): no footers, type top-left, cost top-right, class bottom-left, tier bottom-right, banner-ribbon name, centralized class-based keyword/accent CSS. Full pre-pass snapshot backup at `cards-backup-2026-06-24.json`. Viewer (`index.html`) updated with `canon_*.css` + EB Garamond.
