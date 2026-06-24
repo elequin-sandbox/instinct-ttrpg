@@ -2,9 +2,9 @@
 
 *Living document — update this file whenever cards are created, revised, or pushed to Baserow.*
 
-**Last updated:** June 2026
-**Total cards designed:** 66 (character creation) + tutorial class decks
-**In Baserow (table 911939):** Class ability cards only — character creation cards NOT YET PUSHED
+**Last updated:** June 24 2026
+**Total cards designed:** 66 (character creation) + tutorial class decks + Items
+**In Baserow (table 911939):** ALL Status:current cards — character creation, class abilities, items, connections (245+ rows)
 
 ---
 
@@ -176,3 +176,4 @@ When a new card is designed and approved:
 - [June 2025] — Initial inventor
 
 - [June 24 2026] — **Visual parallelism pass.** All 245 Status:current cards in Baserow normalized to the unified header system (§7 of card-anatomy.md): no footers, type top-left, cost top-right, class bottom-left, tier bottom-right, banner-ribbon name, centralized class-based keyword/accent CSS. Full pre-pass snapshot backup at `cards-backup-2026-06-24.json`. Viewer (`index.html`) updated with `canon_*.css` + EB Garamond.
+- [June 24 2026] — **Parallelism pass push complete.** All 6 batches (upd_00–06) pushed to Baserow (IDs ~368–636). All Status:current rows now have new-format HTML. Viewer `index.html` bugfixed: `guessSet/guessClass/guessType` updated for new card format (was returning wrong scope/class/type for all new-format cards → filter chips missing, text colors wrong); added `.acc-any` CSS vars for Item cards; fixed `bf-bg` Background detection + `cap-accent` fallback.
