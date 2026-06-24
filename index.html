@@ -1375,7 +1375,8 @@ function guessSet(h){
   if(!h)return 'ability';
   if(/core-header/.test(h))return 'core';                                           // old format core
   if(/bf-head/.test(h))return 'boon';                                               // old format boon
-  if(/\bbf-bond\b|\bbf-flaw\b|\bbf-ancestry\b|\bbf-background\b|\bbf-instinct\b|\bbf-connection\b/.test(h))return 'boon'; // new format boon
+  if(/\bbf-bond\b|\bbf-flaw\b|\bbf-ancestry\b|\bbf-background\b|\bbf-bg\b|\bbf-instinct\b|\bbf-connection\b/.test(h))return 'boon'; // new format boon
+  const _ca=/class="cap cap-accent"[^>]*>([^<]+)</.exec(h);if(_ca&&['Background','Ancestry','Bond','Flaw','Instinct'].includes(_ca[1].trim()))return 'boon'; // cap-accent fallback
   if(/class="cap cap-neutral"[^>]*>Core<\/span>/.test(h))return 'core';            // new format core
   return 'ability';
 }
