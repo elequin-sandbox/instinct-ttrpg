@@ -1,0 +1,18 @@
+/* === per-accent color variables (single place to recolor a card type/class) === */
+.acc-barbarian{--a:#9E2B2B;--ad:#822323;--al:#deb7b7;--ah:#f5eaea;--at:#f1e1e1;}
+.acc-fighter{--a:#B45309;--ad:#944407;--al:#e6c5ab;--ah:#f8eee6;--at:#f4e7dd;}
+.acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
+.acc-cleric{--a:#5E81AC;--ad:#4d6a8d;--al:#c8d4e3;--ah:#eff2f7;--at:#e8edf3;}
+.acc-ranger{--a:#2F6B3D;--ad:#275832;--al:#b8cdbd;--ah:#eaf0ec;--at:#e2eae4;}
+.acc-rogue{--a:#6C5BA8;--ad:#594b8a;--al:#cdc7e1;--ah:#f0eff6;--at:#eae8f3;}
+.acc-druid{--a:#5A7D2A;--ad:#4a6722;--al:#c7d3b7;--ah:#eef2ea;--at:#e8ede1;}
+.acc-warlock{--a:#9A2B5E;--ad:#7e234d;--al:#ddb7c8;--ah:#f5eaef;--at:#f1e1e8;}
+.acc-bard{--a:#B5388D;--ad:#942e74;--al:#e6bbd8;--ah:#f8ebf4;--at:#f5e3ef;}
+.acc-wizard{--a:#3C3489;--ad:#312b70;--al:#bdbad7;--ah:#ecebf3;--at:#e4e3ee;}
+.acc-monk{--a:#164E63;--ad:#124051;--al:#b0c3ca;--ah:#e8edef;--at:#dee6e9;}
+.acc-instinct{--a:#4453a8;--ad:#38448a;--al:#bfc5e1;--ah:#eceef6;--at:#e5e7f3;}
+.acc-background{--a:#2f6da8;--ad:#27598a;--al:#b8cde1;--ah:#eaf0f6;--at:#e2ebf3;}
+.acc-bond{--a:#2f7d4f;--ad:#276741;--al:#b8d3c3;--ah:#eaf2ed;--at:#e2ede6;}
+.acc-flaw{--a:#b3261e;--ad:#931f19;--al:#e5b5b2;--ah:#f7e9e8;--at:#f4e1e0;}
+.acc-ancestry{--a:#9a6a2e;--ad:#7e5726;--al:#ddccb8;--ah:#f5f0ea;--at:#f1eae2;}
+.acc-connection{--a:#9a3b6b;--ad:#7e3058;--al:#ddbccd;--ah:#f5ebf0;--at:#f1e4ea;}
