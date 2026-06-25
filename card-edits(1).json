@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-06-25T07:08:04.878Z",
+  "edits": [
+    {
+      "action": "update",
+      "id": 344,
+      "Card_Key": "grin-and-bear-it-barbarian",
+      "Name": "Grin And Bear It",
+      "Class": "barbarian",
+      "Card_Type": "React",
+      "Scope": "Ability",
+      "Ruleset": "base",
+      "Status": "current",
+      "Last_Rework_Date": "2026-06-25",
+      "EffectText_Plain": "Effect | When you would lose any Hit Dice from a single Action or round of Combat , narrate the physical scar it gives you. \n\nThen replace all lost Hit Dice by rolling new ones. | Barbarian | t1",
+      "FlavorText_Plain": "Add it to the collection.",
+      "Change_Note": ""
+    }
+  ]
+}

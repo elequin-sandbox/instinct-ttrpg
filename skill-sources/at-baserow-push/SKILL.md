@@ -1,6 +1,6 @@
 ---
 name: at-baserow-push
-description: Act Tactics Baserow database workflow. Use this skill any time a session needs to add cards to Baserow, save cards to the database, push cards to the viewer, update an existing card in Baserow, query what cards exist, or sync card data. Triggers on phrases like "add to Baserow," "save to Baserow," "push to the viewer," "update the card in the database," "check what's in Baserow," or "sync these cards." Contains table ID, MCP tool names, HTML field rules, create and update workflows, batch add pattern, and viewer regeneration script.
+description: Act Tactics Baserow database workflow. Use this skill any time a session needs to add cards to Baserow, save cards to the database, push cards to the viewer, update an existing card in Baserow, query what cards exist, or sync card data. Triggers on phrases like "add to Baserow," "save to Baserow," "push to the viewer," "update the card in the database," "check what's in Baserow," "sync these cards," "sync my edits," "push my edits," or "update Baserow." Contains table ID, MCP tool names, HTML field rules, create and update workflows, batch add pattern, card-editor sync procedure, and viewer regeneration script.
 ---
 
 # Act Tactics — Baserow Push
@@ -84,6 +84,63 @@ The Baserow table stores **complete rendered card HTML markup** in the HTML fiel
 3. Add cards sequentially with create_row — one row per call
 4. Final list_table_rows to confirm the full set
 ```
+
+---
+
+## Workflow: Sync Card Editor Edits ("sync my edits" / "push my edits" / "update Baserow")
+
+This is the Card Editor sync flow. Trigger whenever Annie says anything like "sync my edits," "push my edits," or "update Baserow."
+
+```
+1. FIND the edits file
+   → Look in the repo root for card-edits*.json files
+   → Use the most recently modified one (may be card-edits(1).json, card-edits(2).json, etc.)
+   → Read it — if edits[] is empty, tell Annie and stop
+
+2. FOR EACH edit in edits[]:
+
+   If action == "update":
+   a. Fetch current Baserow row by Card_Key:
+      → list_table_rows(table_id=911939, search=Card_Key)
+      → Note the row id
+   b. Archive old version to Versions table (1014012):
+      → create_row(table_id=1014012, fields={
+          Card_Key, Card_Name: Name, HTML: <old HTML>, Change_Note, Date: today
+        })
+   c. Translate EffectText_Plain → card HTML body
+      → Read design/card-anatomy.md for pill/chip/bold rules
+      → Wrap in correct .cbody structure with .bf-body divs
+      → Build full card HTML (hdr + cbody + flv + idtag)
+   d. Push update:
+      → update_row(table_id=911939, row_id=<id>, fields={
+          Name, HTML: <new full HTML>, Last_Rework_Date: today,
+          Class, Card_Type, Ruleset, Status
+        })
+
+   If action == "create":
+   a. Confirm Card_Key doesn't already exist:
+      → list_table_rows(table_id=911939, search=Card_Key)
+   b. Generate full card HTML from plain fields
+   c. create_row(table_id=911939, fields={...})
+
+3. REGENERATE card-data.js
+   → Fetch all Status=current rows from table 911939 (paginate if needed)
+   → Write updated card-data.js to repo root
+   → See at-session-close step 3b for extraction details
+
+4. CLEAN UP the edits file graveyard
+   → Delete ALL files matching card-edits*.json in the repo root
+     (card-edits.json, card-edits(1).json, card-edits(2).json, etc.)
+   → Write a fresh empty card-edits.json:
+     {"timestamp": "", "edits": []}
+   → This resets the queue — next Firefox download becomes card-edits(1).json again
+
+5. CONFIRM
+   → Tell Annie: how many cards updated/created, that card-data.js is refreshed,
+     and that the edit queue is cleared
+```
+
+**Why the cleanup matters:** Firefox creates numbered duplicates on every download because it never overwrites. Without step 4, the repo fills with stale files and future syncs could read the wrong file. Always clean up after syncing.
 
 ---
 
