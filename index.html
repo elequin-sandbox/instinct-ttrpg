@@ -787,7 +787,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .acc-any{--a:#92400E;--ad:#7a3409;--al:#e6cdb5;--ah:#f5ece4;--at:#f0e4d8;}
 
 /* === Instinct RPG canonical header system (var-driven, no inline color) === */
-.card{position:relative;border-left:5px solid var(--a,transparent);}
+.card{position:relative;border-left:5px solid var(--a,transparent);display:flex;flex-direction:column;}
 .cardwrap .card .cbody,.cardwrap .card .bf-body,.cardwrap .card .card-body{padding-bottom:26px;}
 .hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah,#faf6ec);border-bottom:1px solid rgba(0,0,0,.10);}
 .hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
@@ -800,7 +800,17 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;}
 .tier-float{position:absolute;right:8px;bottom:7px;width:18px;height:18px;border:1px solid #9a9a9a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#7d7d7d;font-family:Georgia,serif;font-style:italic;background:rgba(255,255,255,.55);}
 
+/* Dual-purpose Instinct — legacy OR divider (version history) + shared fork CSS in instinct-dual-styles.css */
+.or-divider{display:flex;align-items:center;gap:5px;margin:2px 0;}
+.or-line{flex:1;height:1px;background:#c8a96e;opacity:0.35;}
+.or-lbl{font-size:7.5px;font-weight:700;color:#c8a96e;letter-spacing:1.5px;}
+.instinct-split{display:flex;align-items:stretch;gap:0;min-height:0;flex:1;}
+.instinct-col{flex:1;min-width:0;padding:0 3px;}
+.instinct-col .etxt{font-size:9px;line-height:1.38;}
+.instinct-vrule{width:1px;background:#c8a96e;opacity:0.35;flex-shrink:0;margin:0 2px;}
+
 </style>
+<link rel="stylesheet" href="instinct-dual-styles.css">
 </head>
 <body>
 
@@ -1016,7 +1026,7 @@ function inSkip(node){
     const tag=p.tagName, cl=' '+(p.className||'')+' ';
     if(tag==='STRONG') return true;
     if(/ kw /.test(cl)) return true;
-    if(/(bf-stem-label|bf-foot|bf-head|bf-badge|bf-name|card-name|core-class-name|core-header|core-keyword|fclass|footer-left|footer-right|fright|cfooter|chead| ch |cbadge|cname|zone-label|clbl|elbl|srlbl|flbl|slbl|bf-choose|card-subtitle)/.test(cl)) return true;
+    if(/(bf-stem-label|bf-foot|bf-head|bf-badge|bf-name|card-name|core-class-name|core-header|core-keyword|fclass|footer-left|footer-right|fright|cfooter|chead| ch |cbadge|cname|zone-label|clbl|elbl|srlbl|flbl|slbl|bf-choose|card-subtitle|inst-path-lbl|inst-path-txt|instinct-preamble|inst-divider-or)/.test(cl)) return true;
     p=p.parentElement;
   }
   return false;
@@ -1412,7 +1422,8 @@ function guessType(h){
 }
 async function fetchCards(){
   const isLocal=location.hostname==='';
-  if(isLocal&&window.LOCAL_CARDS){
+  const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
+  if(isLocal&&window.LOCAL_CARDS&&!hasToken){
     return window.LOCAL_CARDS.map(c=>{const s=guessSet(c.h);return{k:c.k,n:c.n,c:guessClass(c.h),t:guessType(c.h)||(s==='core'?'Core':''),s,h:c.h,u:c.updated||'',rd:c.rework||''};});
   }
   const rows=await fetchAll(CONFIG.tableCards,'&filter__Status__single_select_equal=current');
@@ -1600,11 +1611,11 @@ const CLASSES = [
   {id:'warlock',   name:'Warlock',   color:'#9A2B5E', tagline:'Your body is the price — and you keep paying.'},
 ];
 
-let ob = {active:false,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[]};
+let ob = {active:false,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[],instinctMode:null,mulligan:new Set()};
 
 function startOnboarding(){
   if(!LIVE.length){toast('Cards are still loading…');return;}
-  ob={active:true,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[]};
+  ob={active:true,step:1,deck:new Set(),cls:null,pool:[],traitRound:0,traitPool:[],traitDeck:[],instinctMode:null,mulligan:new Set()};
   document.getElementById('ob-overlay').classList.remove('hidden');
   renderObStep();
 }
@@ -1614,7 +1625,7 @@ function closeOnboarding(){
   ob.active=false;
 }
 
-function obPct(s){return Math.round((s-1)/9*100);}
+function obPct(s){return Math.round((s-1)/8*100);}
 
 function obHead(title,lbl){
   return '<div class="ob-header"><div><div class="ob-title">'+esc(title)+'</div><div class="ob-step-lbl">'+esc(lbl)+'</div></div>'+
@@ -1634,7 +1645,6 @@ function renderObStep(){
     case 6:el.innerHTML=obStep6();break;
     case 7:el.innerHTML=obStep7();break;
     case 8:el.innerHTML=obStep8();break;
-    case 9:el.innerHTML=obStep9();break;
     default:obFinish();
   }
   document.getElementById('ob-overlay').scrollTop=0;
@@ -1649,7 +1659,7 @@ function obStep1(){
       '<div class="ob-class-tag">'+esc(cl.tagline)+'</div>'+
       '<div class="ob-class-count">'+n+' core cards included</div></div>';
   }).join('');
-  return obHead('Choose Your Class','Step 1 of 9')+
+  return obHead('Choose Your Class','Step 1 of 8')+
     '<div class="ob-subtext">Your class defines your core mechanics. All core cards are added automatically when you pick.</div>'+
     '<div class="ob-class-grid">'+tiles+'</div>';
 }
@@ -1685,29 +1695,87 @@ function obPickPanel(title,lbl,type,nextStep){
     '<div class="ob-btns"><button class="ob-btn" onclick="ob.pool=obSample(\''+type+'\',5);renderObStep()">↻ Reroll</button></div>';
 }
 
-function obStep2(){return obPickPanel('Choose a Background','Step 2 of 9','Background',3);}
-function obStep3(){return obPickPanel('Choose an Ancestry','Step 3 of 9','Ancestry',4);}
-function obStep4(){return obPickPanel('Choose a Bond','Step 4 of 9','Bond',5);}
-function obStep5(){return obPickPanel('Choose a Flaw','Step 5 of 9','Flaw',6);}
+function obStep2(){return obPickPanel('Choose a Background','Step 2 of 8','Background',3);}
+function obStep3(){return obPickPanel('Choose an Ancestry','Step 3 of 8','Ancestry',4);}
+function obStep4(){return obPickPanel('Choose a Bond','Step 4 of 8','Bond',5);}
 
 function obPickCard(key,nextStep,_type){
   ob.deck.add(key);
   ob.step=nextStep;
   if(nextStep===3){ob.pool=obSample('Ancestry',5);}
   else if(nextStep===4){ob.pool=obSample('Bond',5);}
-  else if(nextStep===5){ob.pool=obSample('Flaw',5);}
-  else if(nextStep===6){ob.traitRound=0;ob.traitDeck=LIVE.filter(function(c){return c.t==='Instinct';}).slice().sort(function(){return Math.random()-.5;});ob.traitPool=ob.traitDeck.splice(0,3);}
+  else if(nextStep===5){ob.instinctMode=null;ob.traitRound=0;ob.mulligan=new Set();}
   renderObStep();
 }
 
-/* STEP 6 — Instincts × 5 rounds */
-function obStep6(){
+/* STEP 5 — Instincts (quick draw 5 OR full draw 3 pick 1 × 5) */
+function obStartInstinctQuick(){
+  ob.instinctMode='quick';
+  ob.pool=obSample('Instinct',5);
+  ob.mulligan=new Set();
+  renderObStep();
+}
+function obStartInstinctFull(){
+  ob.instinctMode='full';
+  ob.traitRound=0;
+  ob.traitDeck=LIVE.filter(function(c){return c.t==='Instinct';}).slice().sort(function(){return Math.random()-.5;});
+  ob.traitPool=ob.traitDeck.splice(0,3);
+  renderObStep();
+}
+function obStep5(){
+  if(!ob.instinctMode){
+    return obHead('Choose Instincts','Step 5 of 8')+
+      '<div class="ob-subtext">Pick 5 dual-purpose Instinct cards for your deck. Each can help your party (<span class="kw kw-boost" style="font-size:11px">Boost 2</span>) or hinder it (<strong>Draw 2</strong>).</div>'+
+      '<div class="ob-btns" style="justify-content:center;gap:14px;margin-top:8px">'+
+      '<button class="ob-btn primary" onclick="obStartInstinctQuick()">Quick — Draw 5</button>'+
+      '<button class="ob-btn primary" onclick="obStartInstinctFull()">Full — Draw 3, Pick 1 × 5</button></div>';
+  }
+  if(ob.instinctMode==='quick')return obStep5Quick();
+  return obStep5Full();
+}
+function obStep5Quick(){
+  var cards=ob.pool.map(function(c,i){
+    var sel=ob.mulligan.has(i);
+    return '<div class="ob-card-option'+(sel?' style="outline:2px dashed #c87070;outline-offset:3px;border-radius:8px"':'')+'" onclick="obToggleMulligan('+i+')">'+
+      '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
+  }).join('');
+  return obHead('Your 5 Instincts','Step 5 of 8')+
+    '<div class="ob-subtext">Tap cards to mark for replacement, then reroll selected — or reroll all. Keep all 5 when ready.</div>'+
+    '<div class="ob-cards-row">'+cards+'</div>'+
+    '<div class="ob-btns">'+
+    '<button class="ob-btn" onclick="obRerollMulliganInstincts()">↻ Replace selected</button>'+
+    '<button class="ob-btn" onclick="ob.pool=obSample(\'Instinct\',5);ob.mulligan=new Set();renderObStep()">↻ Reroll all</button>'+
+    '<button class="ob-btn primary" onclick="obConfirmQuickInstincts()">Keep all 5 →</button></div>';
+}
+function obToggleMulligan(i){
+  if(ob.mulligan.has(i))ob.mulligan.delete(i);else ob.mulligan.add(i);
+  renderObStep();
+}
+function obRerollMulliganInstincts(){
+  if(!ob.mulligan.size){toast('Tap cards to mark for replacement first');return;}
+  var used=new Set(ob.pool.map(function(c){return c.k;}));
+  ob.mulligan.forEach(function(i){
+    var pool=LIVE.filter(function(c){return c.t==='Instinct'&&!used.has(c.k);});
+    if(!pool.length)return;
+    var pick=pool[Math.floor(Math.random()*pool.length)];
+    used.delete(ob.pool[i].k);
+    ob.pool[i]=pick;
+    used.add(pick.k);
+  });
+  ob.mulligan=new Set();
+  renderObStep();
+}
+function obConfirmQuickInstincts(){
+  ob.pool.forEach(function(c){ob.deck.add(c.k);});
+  ob.step=6;renderObStep();
+}
+function obStep5Full(){
   var round=ob.traitRound+1;
   var cards=ob.traitPool.map(function(c){
     return '<div class="ob-card-option" onclick="obPickTrait(\''+c.k+'\')">'+
       '<div class="cardwrap scope-'+c.s+' cls-'+c.c+'" style="cursor:pointer">'+(c.hs||c.h)+'</div></div>';
   }).join('');
-  return obHead('Choose an Instinct','Step 6 of 9 — Round '+round+' of 5')+
+  return obHead('Choose an Instinct','Step 5 of 8 — Round '+round+' of 5')+
     '<div class="ob-round-lbl">Round '+round+' of 5 — Pick 1 instinct to keep.</div>'+
     '<div class="ob-cards-row">'+cards+'</div>';
 }
@@ -1716,42 +1784,41 @@ function obPickTrait(key){
   ob.deck.add(key);
   ob.traitRound++;
   if(ob.traitRound<5){ob.traitPool=ob.traitDeck.splice(0,3);renderObStep();}
-  else{ob.step=7;renderObStep();}
+  else{ob.step=6;renderObStep();}
 }
 
-/* STEP 7 — Class-Specific Placeholder */
-function obStep7(){
+/* STEP 6 — Class-Specific Placeholder */
+function obStep6(){
   var cl=CLASSES.find(function(c){return c.id===ob.cls;});
   var name=cl?cl.name+' ':'';
-  return obHead('Class Setup','Step 7 of 9')+
+  return obHead('Class Setup','Step 6 of 8')+
     '<div class="ob-placeholder">'+
       '<div class="ob-placeholder-icon">⚙️</div>'+
       '<div class="ob-placeholder-title">'+esc(name)+'Special Setup</div>'+
       '<div class="ob-placeholder-body">Your class has a special setup step — coming soon!<br>This will be customized per class (e.g. Warlock picks a patron).</div>'+
     '</div>'+
-    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=8;renderObStep()">Continue →</button></div>';
+    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=7;renderObStep()">Continue →</button></div>';
 }
 
-/* STEP 8 — Item Placeholder */
-function obStep8(){
-  return obHead('Choose an Item','Step 8 of 9')+
+/* STEP 7 — Item Placeholder */
+function obStep7(){
+  return obHead('Choose an Item','Step 7 of 8')+
     '<div class="ob-placeholder">'+
       '<div class="ob-placeholder-icon">⚔️</div>'+
       '<div class="ob-placeholder-title">Item Selection</div>'+
       '<div class="ob-placeholder-body">Item cards don\'t exist yet — coming soon!<br>Check back after the next content update.</div>'+
     '</div>'+
-    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=9;renderObStep()">Continue →</button></div>';
+    '<div class="ob-btns"><button class="ob-btn primary" onclick="ob.step=8;renderObStep()">Continue →</button></div>';
 }
 
-/* STEP 9 — Deck Review */
-function obStep9(){
+/* STEP 8 — Deck Review */
+function obStep8(){
   var all=[...ob.deck].map(function(k){return byKey[k];}).filter(Boolean);
   var groups=[
     {lbl:'Core Cards',cards:all.filter(function(c){return c.s==='core';})},
     {lbl:'Background',cards:all.filter(function(c){return c.t==='Background';})},
     {lbl:'Ancestry',  cards:all.filter(function(c){return c.t==='Ancestry';})},
     {lbl:'Bond',      cards:all.filter(function(c){return c.t==='Bond';})},
-    {lbl:'Flaw',      cards:all.filter(function(c){return c.t==='Flaw';})},
     {lbl:'Instincts', cards:all.filter(function(c){return c.t==='Instinct';})},
   ];
   var cardFn=function(c){

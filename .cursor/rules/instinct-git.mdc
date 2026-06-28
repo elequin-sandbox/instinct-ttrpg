@@ -1,0 +1,43 @@
+---
+description: Instinct RPG — always commit, PR, and ship to main (Option A workflow)
+alwaysApply: true
+---
+
+# Instinct RPG — Git & ship workflow
+
+This project rule **overrides** conservative global “ask before commit/push” rules for Instinct RPG work.
+
+## When to ship
+
+After completing a **coherent unit of work** (feature, fix, doctrine update, Baserow push + matching repo sync), **do not wait to be asked** — commit, push, and open a PR.
+
+Skip auto-ship only when:
+- The user said **“don’t push”**, **“WIP”**, or **“plan only”**
+- The change is exploratory / not ready for review
+- Nothing meaningful changed
+
+## Branch → PR → main (Option A)
+
+1. **Branch** — `cursor/<short-description>` off `main` (create if not already on one).
+2. **Stage** — only files for this work. **Exclude** ephemeral artifacts:
+   - `scripts/*_batch*.json`, `scripts/instinct_v1_push.json`, `scripts/instinct_old_html.json`
+   - `scripts/__pycache__/`, `.env`, credentials
+3. **Commit** — concise message focused on *why* (1–2 sentences).
+4. **Push** — `git push -u origin HEAD`
+5. **PR** — `gh pr create` to `main` with Summary + Test plan; return the PR URL.
+6. **Merge** — only if the user asked to merge, or CI is green and they said “ship it.” Default: open PR and stop.
+
+## Safety (always)
+
+- **Never** `git push --force` to `main`/`master`
+- **Never** amend a commit already pushed to remote unless the user explicitly asks
+- **Never** commit secrets (`.env`, tokens in `config.js` — placeholder only in repo)
+- **Never** update `git config`
+
+## Deploy note
+
+Pushing/merging to `main` triggers GitHub Actions → GitHub Pages (Card Studio). Baserow card HTML is live separately; repo must stay in sync (`card-data.js`, `index.html`, doctrine).
+
+## If blocked
+
+If Auto-review blocks git/gh commands, retry with approval. If `gh` auth fails, report once and ask the user to run `gh auth login`.

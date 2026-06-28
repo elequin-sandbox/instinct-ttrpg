@@ -75,12 +75,11 @@ scenes) · **Effect** (main outcome; CRPG verb format for choose-one; hint direc
 · **Crit** (only when the fiction earns it; 3–6 words/option, 2–3 options max) · **Discard** (one
 short clause).
 
-**Character-creation cards:** **Flavor / Universal Flavor** (Instinct uses fixed universal flavor —
-the header word is the personality) · **Effect Line** (Instinct, Bond) · **Trigger** (Background,
-Ancestry, Flaw) · **Body** (Background/Ancestry: choose-one / luck-check / passive-question) ·
-**Origin Stem** (all — 1st person, past tense, incomplete sentence with `___`, unique per card,
-never generic) · **Writing Lines** · **Flaw fill-in stem** (Format A `___ sets me off.` / Format B
-`I won't back down when ___`) · **Dismiss** (Flaw: act on it, or an ally **Cleanses** it).
+**Character-creation cards:** **Flavor / Universal Flavor** (Bond, Ancestry) · **Preamble + choose-one fork**
+(Instinct — dual-path; see `card-anatomy.md` §5) · **Trigger** (Background, Ancestry) · **Body**
+(Background/Ancestry: choose-one / luck-check / passive-question) · **Origin Stem** (Background, Bond,
+Ancestry — 1st person, past tense, incomplete sentence with `___`) · **Writing Lines** · ~~**Flaw
+fill-in stem**~~ *(retired June 2026)* · ~~**Dismiss**~~ *(retired with Flaw type)*
 
 **Item cards:** Items remain a classless card type, but ⚠️ the item system is being **stripped back to
 its simplest form for the next playtest** — the old Item Check / placed-dice / Save anatomy is retired

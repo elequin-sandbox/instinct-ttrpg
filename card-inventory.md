@@ -2,8 +2,8 @@
 
 *Living document — update this file whenever cards are created, revised, or pushed to Baserow.*
 
-**Last updated:** June 24 2026
-**Total cards designed:** 66 (character creation) + tutorial class decks + Items
+**Last updated:** June 28 2026
+**Total cards designed:** 64 (character creation) + tutorial class decks + Items
 **In Baserow (table 911939):** ALL Status:current cards — character creation, class abilities, items, connections (245+ rows)
 
 ---
@@ -14,33 +14,48 @@
 - 🗄️ Also pushed to Baserow
 - ⚠️ Needs revision
 - 🔲 Planned but not yet designed
+- 🏛️ Legacy (retired from play)
 
 ---
 
-## INSTINCTS (20) — Slate indigo · ◇◇◇ · Draw 5 randomly at creation
+## INSTINCTS (30) — Slate indigo · ◇◇◇ · Choose 5 at creation (dual-purpose V1 Band Wash, June 2026)
 
-| # | Word | Origin Stem (truncated) | Status |
-|---|---|---|---|
-| 1 | Bold | I stopped waiting and started moving the day | ✅ |
-| 2 | Perceptive | I started seeing more than others after | ✅ |
-| 3 | Tenacious | I learned to hold on after | ✅ |
-| 4 | Resourceful | I learned to make something from nothing after | ✅ |
-| 5 | Charismatic | People first looked to me when | ✅ |
-| 6 | Cunning | I started thinking three steps ahead after | ✅ |
-| 7 | Nimble | I learned the value of being quick after | ✅ |
-| 8 | Steadfast | My loyalty was tested and held when | ✅ |
-| 9 | Intuitive | I stopped ignoring what I already knew after | ✅ |
-| 10 | Fierce | I discovered my own intensity when | ✅ |
-| 11 | Learned | I first felt the weight of knowledge when | ✅ |
-| 12 | Empathic | I first saw past someone's surface when | ✅ |
-| 13 | Vigilant | I learned to never stop watching after | ✅ |
-| 14 | Resilient | I found out how much I could take when | ✅ |
-| 15 | Subtle | I learned that silence had power after | ✅ |
-| 16 | Diplomatic | I found the words that changed everything when | ✅ |
-| 17 | Commanding | Others first looked to me to lead when | ✅ |
-| 18 | Daring | I took the risk others wouldn't when | ✅ |
-| 19 | Resolute | I refused to bend when | ✅ |
-| 20 | Primal | I stopped thinking and trusted my body after | ✅ |
+*Each Instinct is a single word with a positive path ([Boost 2]) OR negative path (Draw 2). Flaw cards retired — see `design/card-anatomy.md`.*
+
+| # | Word | Status |
+|---|---|---|
+| 1 | Bold | 🗄️ V1 Band Wash |
+| 2 | Perceptive | 🗄️ V1 Band Wash |
+| 3 | Tenacious | 🗄️ V1 Band Wash |
+| 4 | Resourceful | 🗄️ V1 Band Wash |
+| 5 | Charismatic | 🗄️ V1 Band Wash |
+| 6 | Cunning | 🗄️ V1 Band Wash |
+| 7 | Nimble | 🗄️ V1 Band Wash |
+| 8 | Steadfast | 🗄️ V1 Band Wash |
+| 9 | Intuitive | 🗄️ V1 Band Wash |
+| 10 | Fierce | 🗄️ V1 Band Wash |
+| 11 | Learned | 🗄️ V1 Band Wash |
+| 12 | Empathic | 🗄️ V1 Band Wash |
+| 13 | Vigilant | 🗄️ V1 Band Wash |
+| 14 | Resilient | 🗄️ V1 Band Wash |
+| 15 | Subtle | 🗄️ V1 Band Wash |
+| 16 | Diplomatic | 🗄️ V1 Band Wash |
+| 17 | Commanding | 🗄️ V1 Band Wash |
+| 18 | Daring | 🗄️ V1 Band Wash |
+| 19 | Resolute | 🗄️ V1 Band Wash |
+| 20 | Primal | 🗄️ V1 Band Wash |
+| 21 | Stoic | 🗄️ new — kuudere calm |
+| 22 | Impulsive | 🗄️ new — hot-blooded / genki |
+| 23 | Wistful | 🗄️ new — melancholic romantic |
+| 24 | Sardonic | 🗄️ new — dry rival wit |
+| 25 | Devoted | 🗄️ new — loyal darling |
+| 26 | Impish | 🗄️ new — trickster mischief |
+| 27 | Brooding | 🗄️ new — dark mysterious |
+| 28 | Earnest | 🗄️ new — sincere hero |
+| 29 | Guarded | 🗄️ new — dandere walls-up |
+| 30 | Gregarious | 🗄️ new — social glue |
+
+*Pilot proof:* [`instinct-dual-pilot-proof.html`](instinct-dual-pilot-proof.html) · HTML generator: [`instinct-dual-render.js`](instinct-dual-render.js)
 
 ---
 
@@ -80,27 +95,15 @@
 | 9 | Quiet Respect | Find something worth naming and say it | ✅ |
 | 10 | The Protector | Find someone exposed or in over their head | ✅ |
 | 11 | Honest Mirror | Find someone avoiding something real | ✅ |
-| 12 | The Witness | Find someone whose moment deserves to be seen | ✅ |
+| 12 | The Witness | Find someone's moment deserves to be seen | ✅ |
 
 ---
 
-## FLAWS (12) — Crimson · ✖✖✖ · 🔒 · Shuffle into class deck
-*Converted from Bane cards; 5 new Flaws designed June 2025*
+## FLAWS (12) — 🏛️ RETIRED June 2026 · merged into dual-purpose Instinct cards
 
-| # | Name | Stem Fill-In | Origin | Status |
-|---|---|---|---|---|
-| 1 | Hot-Headed | ___ sets me off. | original Bane | ✅ |
-| 2 | Phobia | ___ stops me cold. | original Bane | ✅ |
-| 3 | Greedy | ___ and I want it. | original Bane | ✅ |
-| 4 | Haunted | ___ takes me back. | original Bane | ✅ |
-| 5 | Stubborn | I won't back down when ___ | original Bane | ✅ |
-| 6 | Soft-Hearted | ___ and I have to help. | original Bane | ✅ |
-| 7 | Paranoid | ___ and I don't trust it. | original Bane | ✅ |
-| 8 | Reckless | ___ and I go for it anyway. | new June 2025 | ✅ |
-| 9 | Vengeful | ___ and I haven't forgiven it. | new June 2025 | ✅ |
-| 10 | Vain | ___ and I can't let them see me like this. | new June 2025 | ✅ |
-| 11 | Jealous | ___ and I want what they have. | new June 2025 | ✅ |
-| 12 | Bloodlust | ___ and I want to settle this with force. | new June 2025 | ✅ |
+| # | Name | Status |
+|---|---|---|
+| 1–12 | Hot-Headed … Bloodlust | 🏛️ Baserow Status: legacy |
 
 ---
 
@@ -151,12 +154,10 @@ All 4 tutorial decks at 14 cards each — in Baserow.
 
 | File | Contents | Location |
 |---|---|---|
-| `act-tactics-all-cards.jsx` | All 66 character creation cards, React viewer | Claude artifact |
-| `act-tactics-print.html` | Print-ready 66-card sheet, 9/page | Claude artifact |
-| `act-tactics-how-to-play-v3.html` | How-to-play doc (pending update from June session) | Project file |
-| `act-tactics-design-record-june6.html` | Full session design record | Claude artifact |
-| `index.html` | Live card viewer (GitHub) | Nathan-Elequin/act-tactics |
-| Baserow table 911939 | Class ability card data | Baserow MCP |
+| `instinct-dual-pilot-proof.html` | Dual-purpose Instinct pilot (Layout A + B) | Project file |
+| `instinct-dual-render.js` | Instinct HTML generator | Project file |
+| `index.html` | Live card viewer (GitHub Pages) | Repo root |
+| Baserow table 911939 | All card data | Baserow MCP |
 
 ---
 
@@ -168,12 +169,13 @@ When a new card is designed and approved:
 3. If pushed to Baserow, change to 🗄️
 4. Update the total count at the top
 5. Update "Last updated" date
-6. Generate an updated `card-inventory.md` and present for download
 
 ---
 
 ## Changelog
-- [June 2025] — Initial inventor
 
-- [June 24 2026] — **Visual parallelism pass.** All 245 Status:current cards in Baserow normalized to the unified header system (§7 of card-anatomy.md): no footers, type top-left, cost top-right, class bottom-left, tier bottom-right, banner-ribbon name, centralized class-based keyword/accent CSS. Full pre-pass snapshot backup at `cards-backup-2026-06-24.json`. Viewer (`index.html`) updated with `canon_*.css` + EB Garamond.
-- [June 24 2026] — **Parallelism pass push complete.** All 6 batches (upd_00–06) pushed to Baserow (IDs ~368–636). All Status:current rows now have new-format HTML. Viewer `index.html` bugfixed: `guessSet/guessClass/guessType` updated for new card format (was returning wrong scope/class/type for all new-format cards → filter chips missing, text colors wrong); added `.acc-any` CSS vars for Item cards; fixed `bf-bg` Background detection + `cap-accent` fallback.
+- [June 28 2026] — **V1 Band Wash shipped + pool expanded to 30.** All 20 existing Instincts archived to Versions table, updated with fork-v1 HTML; 10 new Instincts added (Stoic, Impulsive, Wistful, Sardonic, Devoted, Impish, Brooding, Earnest, Guarded, Gregarious). VN-archetype inspired expansion.
+- [June 28 2026] — **Dual-purpose Instinct redesign.** All 20 Instinct cards rewritten (preamble + choose-one fork); 12 Flaw cards set to Status:legacy in Baserow. Deck math: 5 Instincts (no separate Flaws). Pilot: `instinct-dual-pilot-proof.html`.
+- [June 24 2026] — **Visual parallelism pass.** All 245 Status:current cards in Baserow normalized to the unified header system (§7 of card-anatomy.md).
+- [June 24 2026] — **Parallelism pass push complete.** All 6 batches pushed to Baserow.
+- [June 2025] — Initial inventory

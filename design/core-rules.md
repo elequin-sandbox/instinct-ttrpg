@@ -70,8 +70,8 @@ being **Exposed**) carries forward only if the GM rules the fiction says so.
 ## §4 — The hand & card draw
 
 **Your hand is your character's instincts — what they're feeling right now.** An **Instinct** in hand =
-that quality is alive in this moment. A **Bond** = that connection is active. A **Flaw** = that
-pressure is being felt. A **Background**/**Ancestry** = past experience is being called on.
+that quality is alive in this moment — it can lift the party or pull everyone under. A **Bond** =
+that connection is active. A **Background**/**Ancestry** = past experience is being called on.
 
 - **Hand size:** players draw a full hand at the start of each scene. Not fixed — set by the table
   (typically 5). GM sets the scene; players draw.
@@ -244,11 +244,10 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 | **Act** | 1 (your spotlight) | On your turn — primary action |
 | **React** | 0 | Any time, in response to another player's or the GM's action |
 | **Core** | — | Always-active; face-up in Active area; never enters the deck |
-| **Instinct** | — | Reveal from hand when the quality drives the action; gain **[Boost 2]** |
+| **Instinct** | — | **Reveal** when the quality drives an **Action**; choose one path — if the GM agrees: benefit party → `[Boost 2]`, or hinder → **Draw 2** |
 | **Background** | — | When its fictional trigger fires; choose-one or Luck Check effect |
 | **Ancestry** | — | When its fictional trigger fires |
-| **Bond** | — | Find the moment; you and the named person each gain **[Boost 1]** |
-| **Flaw** | — | Find a fitting scene element; choose Dramatic path or Suppression path |
+| **Bond** | — | Find the moment; you and the named person each gain `[Boost 1]` |
 
 **React window:** after every roll, before narration, there is a brief beat where React cards may be
 played. Name it at the table.
@@ -342,27 +341,24 @@ Break is retired; they are descriptions now.)*
 *Good enough for now; subject to change.* Character creation is itself play — roughly one hour.
 Characters emerge from card stems; players are prompted into a backstory, not filling a stat sheet.
 
-**Steps:** (1) **Draw 5 Instincts** at random; (2) **Choose 1 Background** (of 12); (3) **Choose 1
-Ancestry** (of 10); (4) **Bonds** assigned/chosen by party setup (~2); (5) **Draw 2 Flaws** from the
-single Flaw pool and complete each fill-in stem at the table — both come from the same pool, no
-sub-category; (6) **Class deck** added to finish the deck.
+**Steps:** (1) **Choose 5 Instincts** from a pool of **30** — *quick:* draw 5 at random (mulligan any); *full:* draw 3, pick 1, repeat 5 times;
+(2) **Choose 1 Background** (of 12); (3) **Choose 1 Ancestry** (of 10); (4) **Bonds** assigned/chosen by
+party setup (~2); (5) **Class deck** added to finish the deck.
 
-**Fill-in / Origin Stems:** every creation card carries a prompted 1st-person past-tense incomplete
-sentence the player completes at the table — soft doorways, not corridors.
+**Fill-in / Origin Stems:** Background, Ancestry, and Bond cards still carry prompted stems at the table.
+Instinct cards no longer use Origin stems (June 2026 redesign).
 
 **Deck math — target 20 cards total:**
 
 | Component | Count |
 |---|---|
-| Instinct cards (shuffled in) | 6 |
+| Instinct cards (dual-purpose, shuffled in) | 5 |
 | Background | 1 |
 | Ancestry | 1 |
 | Bond(s) | ~2 |
-| Flaw(s) | 2 |
 | Class ability cards | Remaining to total 20 |
 
-*Hypergeometric note:* 6 Instincts in 20 cards → median 1 Instinct per 5-card hand (~13% chance of a
-zero-Instinct scene).
+*Hypergeometric note:* 5 Instincts in 20 cards → median ~1 Instinct per 5-card hand. Draft pool: 30 Instinct options at creation.
 
 ---
 
