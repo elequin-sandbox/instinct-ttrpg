@@ -28,11 +28,10 @@ whenever the session changed game truth.
 If a change seems to belong in two places, it belongs in one — pick the primary home and
 cross-reference. Never duplicate the text.
 
-## ⛔ NEVER touch git
+## Git — commit and push to main
 
-**Never run `git add`, `git commit`, `git push`, or any other git command — ever.** Annie pushes
-all changes herself from Sourcetree. Your job is to edit the files; her job is to version them.
-Running git commands causes lock file conflicts and broken state. There is no exception to this rule.
+Follow **`.cursor/rules/instinct-git.mdc`**. After doctrine/card/web-app changes are saved, **commit
+on `main` and `git push origin main`** — no PRs, no asking. Exclude ephemeral batch JSON and secrets.
 
 ## Workflow
 
@@ -77,8 +76,8 @@ Running git commands causes lock file conflicts and broken state. There is no ex
 5. **Verify.** Run `python skill-audit.py` from the repo root. Resolve issues until clean (a
    "needs reinstall" drift warning is expected until Annie installs a freshly repackaged skill).
 
-6. **Close the loop.** Confirm in one or two lines: what changed, which file(s) hold it, any `.skill`
-   needing install, and that the audit is clean. Remind Annie to push from Sourcetree.
+6. **Close the loop.** Confirm in one or two lines: what changed, which file(s) hold it, commit hash,
+   push status, any `.skill` needing install, and that the audit is clean.
 
 ## Honesty note
 Routine game-truth changes are cheap `design/` edits with **no reinstall** — that is the whole point

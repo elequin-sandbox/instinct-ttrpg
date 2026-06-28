@@ -1,44 +1,44 @@
 ---
-description: Instinct RPG — always commit, PR, and ship to main (Option A workflow)
+description: Instinct RPG — commit and push directly to main (no PRs)
 alwaysApply: true
 ---
 
-# Instinct RPG — Git & ship workflow
+# Instinct RPG — Git workflow (direct to main)
 
-This project rule **overrides** conservative global “ask before commit/push” rules for Instinct RPG work.
+This project rule **overrides** all global “ask before commit/push” and PR-based workflows for this repo.
 
-## When to ship
+## Default assumption
 
-After completing a **coherent unit of work** (feature, fix, doctrine update, Baserow push + matching repo sync), **do not wait to be asked** — commit, push, and open a PR.
+When you change anything in this project — **especially the web app** (`index.html`, `config.js`, `card-data.js`, `instinct-dual-*.css/js/html`, doctrine, inventory) — **assume Annie wants it committed and pushed to `main` immediately.** Do not ask “should I commit?” or “want me to push?”
 
-Skip auto-ship only when:
-- The user said **“don’t push”**, **“WIP”**, or **“plan only”**
-- The change is exploratory / not ready for review
-- Nothing meaningful changed
+Only skip commit/push when Annie explicitly says:
+- **“don’t push”** / **“don’t commit”** / **“WIP”** / **“plan only”** / **“local only”**
+- Or she specifies a different git workflow (branch, PR, etc.)
 
-## Branch → PR → main (Option A)
+## No pull requests
 
-1. **Branch** — `cursor/<short-description>` off `main` (create if not already on one).
-2. **Stage** — only files for this work. **Exclude** ephemeral artifacts:
+**Do not create branches or PRs** for routine work unless Annie explicitly asks for a branch or PR.
+
+Workflow:
+1. Work on **`main`** (checkout `main`, pull first if behind `origin/main`).
+2. **Stage** only files for this task. **Exclude** ephemeral artifacts:
    - `scripts/*_batch*.json`, `scripts/instinct_v1_push.json`, `scripts/instinct_old_html.json`
    - `scripts/__pycache__/`, `.env`, credentials
-3. **Commit** — concise message focused on *why* (1–2 sentences).
-4. **Push** — `git push -u origin HEAD`
-5. **PR** — `gh pr create` to `main` with Summary + Test plan; return the PR URL.
-6. **Merge** — **automatically** when the PR is mergeable and required checks are not failing. Use `gh pr merge --merge --delete-branch`. Do not wait for the user to say “merge” unless they said **“open PR only”** or **“don’t merge.”**
-7. **Confirm** — report PR URL, merge result, and that GitHub Actions deploy to Pages has started.
+3. **Commit** on `main` — concise message focused on *why* (1–2 sentences).
+4. **Push** — `git push origin main` (no `-u` feature branch).
+5. **Confirm** — commit hash, that push succeeded, and that GitHub Actions deploy to Pages has started.
 
 ## Safety (always)
 
 - **Never** `git push --force` to `main`/`master`
-- **Never** amend a commit already pushed to remote unless the user explicitly asks
-- **Never** commit secrets (`.env`, tokens in `config.js` — placeholder only in repo)
+- **Never** amend a commit already pushed to remote unless Annie explicitly asks
+- **Never** commit secrets (real tokens in `config.js` — placeholder only in repo)
 - **Never** update `git config`
 
 ## Deploy note
 
-Pushing/merging to `main` triggers GitHub Actions → GitHub Pages (Card Studio). Baserow card HTML is live separately; repo must stay in sync (`card-data.js`, `index.html`, doctrine).
+Push to `main` triggers GitHub Actions → GitHub Pages (Card Studio). Keep Baserow and repo in sync when card HTML changes (`card-data.js`, etc.).
 
 ## If blocked
 
-If Auto-review blocks git/gh commands, retry with approval. If `gh` auth fails, report once and ask the user to run `gh auth login`.
+If Auto-review blocks git commands, retry with approval. If push fails, fix and retry once before reporting.
