@@ -1,0 +1,283 @@
+/* Dual-purpose Instinct card body — shared by proof page and Card Studio */
+
+/* --- Legacy minimal layout (superseded by fork stack) --- */
+.scope-boon .cbody,
+.cardwrap .cbody {
+  flex: 1;
+  padding: 7px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  line-height: 1.45;
+  color: #1c1408;
+  overflow: hidden;
+}
+.scope-boon .flv,
+.cardwrap .flv {
+  font-style: italic;
+  color: #5a4520;
+  font-size: 9.8px;
+  line-height: 1.42;
+}
+.scope-boon .etxt,
+.cardwrap .etxt {
+  font-size: 9.8px;
+  line-height: 1.42;
+  color: #1c1408;
+}
+
+/* --- Dual fork stack: preamble + equal Strength / Flaw halves --- */
+.cbody-dual {
+  padding: 6px 0 0 !important;
+  gap: 0 !important;
+}
+.instinct-preamble {
+  flex-shrink: 0;
+  padding: 0 10px 5px;
+  font-style: italic;
+  color: #5a4520;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.instinct-fork {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+}
+.inst-path {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  padding: 6px 10px;
+  min-height: 0;
+}
+.inst-path-lbl {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  flex-shrink: 0;
+}
+.inst-path-txt {
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: #1c1408;
+}
+.inst-divider {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Variant 1 — Band Wash: soft teal / crimson fills, centered content */
+.fork-v1 .inst-path-strength {
+  background: linear-gradient(180deg, #e6f4f1 0%, #d4ebe6 100%);
+  border-top: 2px solid #0f766e;
+}
+.fork-v1 .inst-path-strength .inst-path-lbl {
+  color: #0f766e;
+  align-self: center;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  padding: 2px 10px;
+  border-radius: 2px;
+  background: rgba(15, 118, 110, 0.14);
+}
+.fork-v1 .inst-path-flaw {
+  background: linear-gradient(180deg, #f8eaea 0%, #efcfcf 100%);
+  border-bottom: 2px solid #991b1b;
+}
+.fork-v1 .inst-path-flaw .inst-path-lbl {
+  color: #991b1b;
+  align-self: center;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  padding: 2px 10px;
+  border-radius: 2px;
+  background: rgba(153, 27, 27, 0.12);
+}
+.fork-v1 .inst-divider {
+  height: 10px;
+  background: #f4ecd8;
+}
+.fork-v1 .inst-divider::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 50%;
+  height: 3px;
+  background: #c8a96e;
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+.fork-v1 .inst-divider-or {
+  position: relative;
+  z-index: 1;
+  background: #f4ecd8;
+  border: 2px solid #c8a96e;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 800;
+  color: #7a6030;
+  letter-spacing: 0.5px;
+}
+
+/* Variant 2 — Banner Strip: full-width colored title bars */
+.fork-v2 .inst-path {
+  padding: 0;
+  justify-content: flex-start;
+}
+.fork-v2 .inst-path-lbl {
+  width: 100%;
+  margin: 0;
+  padding: 4px 10px;
+  font-size: 8.5px;
+  letter-spacing: 2.5px;
+  text-align: center;
+}
+.fork-v2 .inst-path-strength .inst-path-lbl {
+  background: #0f766e;
+  color: #ccfbf1;
+}
+.fork-v2 .inst-path-flaw .inst-path-lbl {
+  background: #991b1b;
+  color: #fef2f2;
+}
+.fork-v2 .inst-path-txt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  font-size: 11px;
+  line-height: 1.42;
+}
+.fork-v2 .inst-path-strength { background: #f0faf8; }
+.fork-v2 .inst-path-flaw { background: #faf0f0; }
+.fork-v2 .inst-divider {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #0f766e 0,
+    #0f766e 45%,
+    #c8a96e 45%,
+    #c8a96e 55%,
+    #991b1b 55%,
+    #991b1b 100%
+  );
+}
+
+/* Variant 3 — Flaw Inferno: top stays parchment; bottom is old Flaw crimson shell */
+.fork-v3 .inst-path-strength {
+  background: #f7f0e0;
+  border-bottom: 1px dashed rgba(200, 169, 110, 0.5);
+}
+.fork-v3 .inst-path-strength .inst-path-lbl {
+  color: #4453a8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.fork-v3 .inst-path-strength .inst-path-lbl::before {
+  content: '◇';
+  font-size: 7px;
+  opacity: 0.7;
+}
+.fork-v3 .inst-path-flaw {
+  background: linear-gradient(180deg, #5a1414 0%, #3d0a0a 100%);
+  border-top: 3px solid #c87070;
+}
+.fork-v3 .inst-path-flaw .inst-path-lbl {
+  color: #f0c0b8;
+  letter-spacing: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fork-v3 .inst-path-flaw .inst-path-lbl::after {
+  content: '✖ ✖ ✖';
+  font-size: 6px;
+  opacity: 0.55;
+  letter-spacing: 2px;
+}
+.fork-v3 .inst-path-flaw .inst-path-txt{color:#f5ddd8;font-size:11px;}
+.fork-v3 .inst-path-flaw .inst-path-txt strong{color:#fff;}
+.fork-v3 .inst-divider {
+  height: 0;
+  border-top: 3px double #c87070;
+  margin: 0 6px;
+}
+
+/* Variant 4 — Framed Zones: bordered panels, large type, gold rail divider */
+.fork-v4 .inst-path-strength {
+  margin: 0 8px 0;
+  border: 2px solid #0f766e;
+  border-radius: 4px 4px 0 0;
+  background: #fff;
+  box-shadow: inset 0 2px 8px rgba(15, 118, 110, 0.08);
+}
+.fork-v4 .inst-path-flaw {
+  margin: 0 8px 6px;
+  border: 2px solid #b3261e;
+  border-radius: 0 0 4px 4px;
+  background: #fff;
+  box-shadow: inset 0 -2px 8px rgba(179, 38, 30, 0.1);
+}
+.fork-v4 .inst-path-lbl {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  margin-bottom: 6px;
+}
+.fork-v4 .inst-path-strength .inst-path-lbl { color: #0f766e; }
+.fork-v4 .inst-path-flaw .inst-path-lbl { color: #b3261e; }
+.fork-v4 .inst-path-txt {
+  font-size: 11px;
+  line-height: 1.48;
+  text-align: center;
+}
+.fork-v4 .inst-divider {
+  height: 14px;
+  margin: -1px 8px;
+  z-index: 2;
+}
+.fork-v4 .inst-divider-or {
+  background: #c8a96e;
+  color: #1a1108;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  padding: 2px 14px;
+  border-radius: 2px;
+  box-shadow: 0 1px 0 #1a1a1a;
+}
+
+/* Card Studio shell — fork stack must fill the card body */
+.cardwrap .cbody.cbody-dual,
+.scope-boon .cbody.cbody-dual {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.cardwrap .card,
+.scope-boon .card.acc-instinct {
+  display: flex;
+  flex-direction: column;
+}
