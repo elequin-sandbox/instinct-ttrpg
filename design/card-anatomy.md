@@ -4,7 +4,7 @@
 > ornaments, per-type body anatomy, and the **keyword formatting gospel** (`core-rules.md` points
 > here for it). Design/tokens live here; the copy-paste rendering **code** that implements them lives
 > in the `at-card-renderer` skill.
-> **Status:** current. **Last updated:** June 2026.
+> **Status:** current. **Last updated:** June 28 2026.
 >
 > **Sibling docs:** rules/keyword meanings → `design/core-rules.md` · wording & forbidden terms →
 > `design/writing-conventions.md` · classes → `design/classes.md` · inventory → `card-inventory.md`.
@@ -26,10 +26,10 @@ Boon (umbrella — positive)
   └── Ancestry     ◆◆◆   Amber-brown   #2a1a08
 
 Bane (umbrella — negative)
-  └── Flaw         ✖✖✖   Crimson       #3d0a0a  🔒
+  └── Flaw         ✖✖✖   Crimson       #3d0a0a  *(retired June 2026 — merged into Instinct)*
 
 Instinct (independent)  ◇◇◇   Slate indigo  #1e2540
-   (formerly "Trait" — renamed everywhere June 2026)
+   Dual-purpose: positive path [Boost 2] OR negative path Draw 2 (formerly separate Flaw cards)
 
 Connection (session-start template)  *(no ornament — name blank)*   Deep rose  #2d1020
    One per player; filled in at session start with character name; shuffled into other players' decks.
@@ -141,12 +141,18 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 ## §5 — Body anatomy per type
 
-**Instinct** *(the card name IS the word — e.g. Bold, Perceptive — shown very large)*
-- Universal flavor (italic): *"True to their nature, your character is moved by this quality in this scene."*
-- Thin rule (0.35 opacity)
-- Universal effect: *"When you perform any action, reveal this card and explain how your character is driven by this quality. Gain* `[Boost 2]`*."*
-- **ORIGIN** label → word-specific stem (1st person, past tense) → 3 writing lines
-- Footer: `any · instinct` · ★ pip
+**Instinct** *(the card name IS the word — e.g. Bold, Perceptive — shown very large)* 🔒 *redesigned June 2026*
+- **Preamble** (italic): *"This instinct is driving your behavior this scene."* When you **Reveal** this card, perform an **Action** in a **[Word]** manner. **Choose one:**
+- **Fork stack** (fills remaining card height, split **50/50** vertically) — **visual: V1 Band Wash** (locked):
+  - **Strength** (top half, centered subtitle chip): Describe how it benefits your party. If the GM agrees, gain `[Boost 2]` on the **Action**.
+  - **Divider**: gold rail + circular **OR** medallion
+  - **Flaw** (bottom half, centered subtitle chip): Describe how it hinders you or your party. If the GM agrees, **Draw 2**.
+- No Origin stem, no Crit, no post-path text. Playing the card spends it (implicit).
+- Header: `Instinct` badge · `Act` cost · ★ pip
+- Design proofs: [`instinct-dual-pilot-proof.html`](../instinct-dual-pilot-proof.html) (Bold × 4 variants)
+
+**Flaw** *(retired June 2026 — merged into Instinct; legacy Baserow rows only)*
+- Former anatomy: flavor · stem fill-in · Dramatic/Suppression choose-one · Dismiss/Cleanse · ✕ pip
 
 **Background**
 - Trigger (italic): the conditional situation that activates the card (no separate flavor line)
@@ -165,15 +171,6 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 - Flavor (italic, 2nd person present): 1 sentence
 - Trigger: *"Find [someone/something]. [Action]. If the moment happens, you both gain* `[Boost 1]`*."*
 - **ORIGIN** → stem → 3 writing lines · Footer: `any · bond` · ★ pip
-
-**Flaw**
-- Flavor (italic, 2nd person present): the core truth of the flaw
-- Stem fill-in (dotted-underline blank, 1st person, filled at creation): Format A `___ sets me off.`
-  / Format B `I won't back down when ___.`
-- Thin rule → Universal trigger: *"Find something in this scene that fits. Name it aloud, then choose:"*
-- Two choices: **Dramatic path** (narrate reaction + GM makes one free move) · **Suppression path**
-  (ongoing cost/disadvantage while held)
-- Footer: `any · flaw` · ✕ pip · *(no writing box — the stem fill-in is the written record)*
 
 **Connection** *(session-start template — one per player, filled at table)*
 - Header top row: `CONNECTION` badge (left) · `Act` badge (right) — no ⚡, no 🔒
