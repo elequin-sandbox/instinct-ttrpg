@@ -25,7 +25,8 @@ Skip auto-ship only when:
 3. **Commit** — concise message focused on *why* (1–2 sentences).
 4. **Push** — `git push -u origin HEAD`
 5. **PR** — `gh pr create` to `main` with Summary + Test plan; return the PR URL.
-6. **Merge** — only if the user asked to merge, or CI is green and they said “ship it.” Default: open PR and stop.
+6. **Merge** — **automatically** when the PR is mergeable and required checks are not failing. Use `gh pr merge --merge --delete-branch`. Do not wait for the user to say “merge” unless they said **“open PR only”** or **“don’t merge.”**
+7. **Confirm** — report PR URL, merge result, and that GitHub Actions deploy to Pages has started.
 
 ## Safety (always)
 
