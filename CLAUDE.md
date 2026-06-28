@@ -82,6 +82,12 @@ Run `python skill-audit.py` (repo root) before closing a session. It checks: dri
 exist. Aim for 0 violations (a "needs reinstall" drift warning is expected until Annie installs a
 freshly repackaged skill).
 
+## 7. Git — direct to main (no PRs)
+
+**`.cursor/rules/instinct-git.mdc`** is binding for this repo. After any coherent change (especially
+the web app), **commit on `main` and `git push origin main`** without asking. No feature branches or
+PRs unless Annie explicitly requests them. See that file for exclusions and safety rules.
+
 ---
 
 ## Repo orientation
