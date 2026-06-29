@@ -43,7 +43,8 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cardwrap{position:relative;width:2.5in;margin:0 auto;}
 .cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
-.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+.card-body{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
 section{margin-bottom:44px;}
 h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
 .h2-note{font-size:12px;color:#8a7a5a;margin-bottom:16px;line-height:1.5;max-width:920px;}
@@ -76,7 +77,7 @@ html = f"""<!doctype html>
 </head>
 <body>
 <h1>Paladin Oath — Scene Vow Proof</h1>
-<p class="sub">Five Oath Core cards + blank templates. L→R mad-lib: dice in top slots, numbered verb/noun columns. Header tags <strong>Core</strong> + <strong>Oath</strong>; ribbon reads <em>Oath of …</em></p>
+<p class="sub">Five Oath Core cards + blank templates. L→R mad-lib with centered index spine: dice in top slots, verb/noun columns meet at <em>the</em>. Header tags <strong>Core</strong> + <strong>Oath</strong>; ribbon reads <em>Oath of …</em>. Cards render at fixed <strong>2.5″ × 3.5″</strong> (standard TCG) — same frame as Card Studio.</p>
 <div class="rule-box">
 <strong>Vow</strong> — At <strong>Scene start</strong>, place 2d6 in the top slots; each die face picks its column row. Read left → right: <em>Verb the Noun</em>. <strong>Fulfill</strong> once per Scene — <strong>Boost 2</strong> from both dice.<br><br>
 <strong>Break Your Oath</strong> — Defiance → dice to <strong>Resolve</strong>; GM <strong>Toll 2</strong> vs you this scene.<br><br>
