@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Ancestry Snap Check pass.** All 10 Ancestry deck cards retooled to once-per-Scene PbtA bands (1–3 fail · 4–8 choose 1 · 9+ choose 2). Builder: `scripts/build_ancestry_snap.py`. Proof: `ancestry-snap-proof.html`.
 - [June 29 2026] — **Origin stems killed.** All 34 Background/Ancestry/Bond deck cards stripped of Origin/Bond stems; Backgrounds gained 1-line flavor; Bonds reformatted to Find/Act/Then zones. Write-in deferred to Character/Class/Ancestry sheet cards. Script: `scripts/strip_origin_stems.py`.
 - [June 29 2026] — **Paladin Oath v7.** L→R mad-lib layout (production); larger gold type + row index chips; alignment compare page (outward vs meet-at-the).
 - [June 29 2026] — **Paladin Oath v6b.** Dotted phrase frame; golden Garamond verb/*the*/noun; smaller Boost/Resolve/Toll pills.

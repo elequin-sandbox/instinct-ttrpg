@@ -116,6 +116,32 @@ Choose one:
 
 ---
 
+## Framework D — Ancestry Snap Check (locked June 2026)
+
+**Use for:** All **Ancestry** deck cards only. Backgrounds keep Frameworks A–C.
+
+```
+[Flavor — 1 line]
+Once per Scene, [niche fictional trigger], try to [ancestry-flavored attempt] and make a Snap Check.
+
+Snap Check:
+1–3 — [thematic failure]
+4–8 — Choose 1: **Verb** — … · **Verb** — … · **Verb** — …
+9+ — Choose 2 from the above.
+```
+
+**Rules:**
+- **Once per Scene** on every Ancestry card
+- Shared bands: **1–3** fail · **4–8** choose 1 · **9+** choose 2 (requires 6 + explode)
+- Setup uses *try to* — never presuppose success
+- Options: niche fiction; **[Boost 1]** max; no rerolls, no Hit Die costs, no guaranteed success
+- **Act** (player spots opening) or **React** (defensive/underdog triggers — Halfling, Dwarf, Half-Orc)
+- Proof: `ancestry-snap-proof.html` · Builder: `scripts/build_ancestry_snap.py`
+
+**Do not** use Framework A (Luck Check) or Framework B (passive questions) on Ancestry cards.
+
+---
+
 ## CRPG Verb Syntax
 
 | Flavor | Example | Best for |
