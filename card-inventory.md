@@ -148,7 +148,7 @@ All 4 tutorial decks at 14 cards each — in Baserow.
 | Bard | 14 | 🗄️ | Includes: Showstopper, Lift, Curtain Call, Closing Verse |
 | Warlock | 14 | 🗄️ | Includes: Offering |
 
-### Paladin Core — Oath pool (Scene Stand)
+### Paladin Core — Oath pool (Scene Vow)
 
 | Oath | Baserow Key | Status |
 |---|---|---|
@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Paladin Oath v3.** Compact card layout; scene keyword **Vow** (replaces Stand); Verb / *the* / Noun visual read-aloud; Boost keyword on fulfill.
 - [June 28 2026] — **Paladin Oath v2.** Renamed scene term **Stand**; 5 lateral oaths + Break-at-Enter; blank Oath/Patron templates. Retired D&D-subtype names.
 - [June 28 2026] — **Paladin Oath rework (v1).** Conviction·Defiance → legacy; first 3 Oath prototypes. Proof: `paladin-oath-proof.html`. All 20 existing Instincts archived to Versions table, updated with fork-v1 HTML; 10 new Instincts added (Stoic, Impulsive, Wistful, Sardonic, Devoted, Impish, Brooding, Earnest, Guarded, Gregarious). VN-archetype inspired expansion.
 - [June 28 2026] — **Dual-purpose Instinct redesign.** All 20 Instinct cards rewritten (preamble + choose-one fork); 12 Flaw cards set to Status:legacy in Baserow. Deck math: 5 Instincts (no separate Flaws). Pilot: `instinct-dual-pilot-proof.html`.

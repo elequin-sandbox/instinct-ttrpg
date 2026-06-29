@@ -23,6 +23,18 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
 .acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
 .acc-warlock{--a:#9A2B5E;--ad:#7e234d;--al:#ddb7c8;--ah:#f5eaef;--at:#f1e1e8;}
+.kw{display:inline-block;padding:0 4px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.5;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-crit{background:#B8860B;color:#FFFDE7;}
+.hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah);border-bottom:1px solid rgba(0,0,0,.10);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
+.cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
+.cap-neutral{border-color:#3a3320;color:#3a3320;}
+.hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:15px;line-height:1.08;text-align:center;padding:3px 10px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-sub{font-style:italic;font-size:9px;color:#5a4020;text-align:center;line-height:1.35;padding:0 4px 2px;}
+.zone-label{font-family:'EB Garamond',Georgia,serif;font-size:6px;letter-spacing:0.8px;text-transform:uppercase;color:#7a6030;}
+.rule{height:0.5px;background:#c8a96e;opacity:.45;}
+.idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cardwrap{position:relative;width:2.5in;margin:0 auto;}
 .cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
 .card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
@@ -51,16 +63,16 @@ html = f"""<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
-<title>Instinct RPG — Paladin Oath / Scene Stand Proof</title>
+<title>Instinct RPG — Paladin Oath / Scene Vow Proof</title>
 <style>
 {CSS}
 </style>
 </head>
 <body>
-<h1>Paladin Oath — Scene Stand Proof</h1>
-<p class="sub">Five Oath Core cards + blank templates. Permanent <strong>Oath</strong> at creation; per-scene <strong>Stand</strong> (Verb + Noun). Optional <strong>Break</strong> at Enter.</p>
+<h1>Paladin Oath — Scene Vow Proof</h1>
+<p class="sub">Five Oath Core cards + blank templates. Permanent <strong>Oath</strong> at creation; per-scene <strong>Vow</strong> (Verb + <em>the</em> + Noun). Optional <strong>Break</strong> at Enter.</p>
 <div class="rule-box">
-<strong>Stand</strong> — Roll 2d6 at <strong>Enter</strong>. <strong>Fulfill</strong> once/scene when the <em>primary purpose</em> of your <strong>Action</strong> serves your Stand. <strong>Break</strong> before rolling: mulligan hand, skip Stand, Oath stays Active.
+<strong>Vow</strong> — Roll 2d6 at <strong>Enter</strong> (GM explains dice placement). <strong>Fulfill</strong> once/scene when your <strong>Action</strong> serves your Vow — both dice <strong>Boost</strong> the roll. <strong>Break</strong> before rolling: mulligan hand, skip Vow, Oath stays Active.
 </div>
 <section><div class="grid">{cards}</div></section>
 {templates}

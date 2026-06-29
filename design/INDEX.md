@@ -17,7 +17,7 @@ current truth; never answer from memory or from old HTML/notes. They are cheap t
 | **`card-anatomy.md`** | Any card visual/structure work — types, colors, ornaments, per-type body anatomy, and the **keyword formatting gospel** (Impact pills / Index chips / Narrative bold + the canonical pill colors). |
 | **`writing-conventions.md`** | Writing or reviewing any card text — formatting tiers, voice, section names, the forbidden-terms list, and the pre-push **Term Audit**. |
 | **`classes.md`** | Any class work — identity, term/mechanic ownership, what's locked, what's open (Paladin Oath/Charge, Cleric/Bard post-Bolstered, etc.). |
-| **`paladin-oath-charge.md`** | Paladin Oath pick + Scene **Stand** mechanic — draft/prototype detail. |
+| **`paladin-oath-charge.md`** | Paladin Oath pick + Scene **Vow** mechanic — draft/prototype detail. |
 | **`../card-inventory.md`** | What cards exist and what's pushed to Baserow (live production tally). |
 
 ## What is NOT doctrine

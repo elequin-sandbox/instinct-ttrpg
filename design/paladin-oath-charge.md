@@ -1,7 +1,7 @@
-# Paladin — Oath & Scene Stand (design draft)
+# Paladin — Oath & Scene Vow (design draft)
 
 > **Status:** draft — June 2026. Replaces **Conviction · Defiance** for the Paladin **core** loop.
-> The **Oath** card is your permanent creation pick; your **Stand** is the scene phrase rolled on it.
+> The **Oath** card is your permanent creation pick; your **Vow** is the scene phrase rolled on it.
 >
 > **Sibling docs:** `design/classes.md` · `design/card-anatomy.md` · `design/core-rules.md`
 
@@ -12,11 +12,13 @@
 | Term | Scope | Notes |
 |---|---|---|
 | **Oath** | Campaign — the Core card you pick at creation | Stays in Active area; defines your word pools |
-| **Stand** | Scene — Verb + Noun phrase | Lighter than *Vow*; changes every scene. Colloquial: *"What's your stand this scene?"* |
-| **Fulfill** | Once per scene | Primary purpose of the **Action** must serve the **Stand** (GM gate) |
+| **Vow** | Scene — Verb + *the* + Noun phrase | Changes every scene. Colloquial: *"What's your vow this scene?"* |
+| **Fulfill** | Once per scene | GM agrees your **Action** fulfills your **Vow** → add both dice to **Boost** the roll |
 | **Break** | Optional at **Enter** | Old Defiance fantasy — without losing the Oath card for the session |
 
-*Rejected:* Charge (too generic), Mandate (clunky), Vow (too weighty for scene-to-scene).
+*Rejected:* Charge (too generic), Mandate (clunky), Stand (June 2026 interim — replaced by **Vow**).
+
+**Card vs table:** Oath cards show the minimum text; GM / creation supplement explains placing dice on Verb + Noun lists and reading the phrase aloud.
 
 ---
 
@@ -32,15 +34,17 @@ Mirrors Warlock **Patron** pick:
 
 ---
 
-## Oath card anatomy
+## Oath card anatomy (on-card text)
 
 | Zone | Content |
 |---|---|
-| **Verbs** | 6 indexed (1–5 + ★ Choose) — lateral, spread-out word choice |
-| **Nouns** | 6 indexed — avoid redundant pairs (not Innocent + Weak) |
-| **Set Your Stand** | Roll 2d6 at **Enter**, place dice on Verb + Noun |
-| **Fulfill Your Stand** | Once/scene: primary-purpose GM yes → add both dice to roll |
-| **Break Your Stand** | Optional at **Enter** before rolling (see below) |
+| **Enter line** | Roll 2d6 to determine your **Vow** |
+| **Verb** | 6 indexed pills (1–5 + ★ Choose), centered |
+| ***the*** | Centered divider (visual read-aloud cue) |
+| **Noun** | 6 indexed pills, centered |
+| **Priority** | One line — priority above all else this **Scene** |
+| **Fulfill** | Once/scene GM yes → both dice **Boost** the roll |
+| **Break** | Optional at **Enter** before rolling (italic box) |
 
 ### Word-pool design rules
 
@@ -50,34 +54,36 @@ Mirrors Warlock **Patron** pick:
 
 ---
 
-## Procedure (canonical — every Oath card)
+## Procedure (canonical — full rules; not all on card)
 
-### Set Your Stand
+### Determine your Vow
 
-When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun**. Your **Stand** is that phrase. It is your priority above all else this **Scene**. On **6**, choose any word in that list.
+When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun**. Your **Vow** is that phrase (*Verb the Noun*). On **6**, choose any word in that list.
 
-### Fulfill Your Stand
+### Priority
 
-Once per **Scene**, when the GM agrees your **Action**'s *primary purpose* fulfills your **Stand**, add **both dice** from the card to that roll, then remove them.
+It is your priority above all else in this **Scene**.
 
-Defensive stands naturally pair with **Bulwark** / **[Resolve]** cards in combat — no extra rule required on the Oath card.
+### Fulfill your Vow
 
-### Break Your Stand (replaces old Defiance shuffle)
+Once per **Scene**, if the GM agrees that your **Action** fulfills your **Vow**, add both dice from this card to **Boost** the roll, then remove them.
 
-When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Stand** — narrate turning from it.
+Defensive vows naturally pair with **Bulwark** / **[Resolve]** cards in combat — no extra rule required on the Oath card.
+
+### Break your Vow (replaces old Defiance shuffle)
+
+When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Vow** — narrate turning from it.
 
 - **Discard** your hand, **Draw** that many (hand cleanse — rare debuff/bane relief path).
-- You do **not** roll a **Stand** this scene.
+- You do **not** roll a **Vow** this scene.
 - Your Oath card **stays in the Active area** — no shuffle into the deck.
-
-**Why not shuffle the Oath into the deck?** In a ≤4-scene session the card may never return — anticlimactic inverse of Warlock Patron highs. Break is a **scene mulligan**, not exiling your class identity.
 
 #### Break — open tuning (pick one after playtest)
 
 | Option | Extra cost | Feel |
 |---|---|---|
-| **A — Free once/session** | None beyond skipping Stand | Generous; enables big narrative pivots |
-| **B — Stand debt** | Cannot **Fulfill** next scene | Soft cooldown |
+| **A — Free** | None beyond skipping Vow | Generous; enables big narrative pivots |
+| **B — Vow debt** | Cannot **Fulfill** next scene | Soft cooldown |
 | **C — Remorse chip** | GM places 1 Remorse; clear via hard narrative act or **Cleanse** | Fiction-forward |
 | **D — Stain bane** | Shuffle **Stain** (single-scene bane, auto-clears at scene end) | Mechanical bite without losing Oath |
 
@@ -87,7 +93,7 @@ When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Stand
 
 ## Oath pool (current)
 
-| Oath | Subtitle | Sample Stand |
+| Oath | Subtitle | Sample Vow |
 |---|---|---|
 | **The Open Hand** | What you reach for defines you. | *Shelter the Frail* · *Witness the Stranger* |
 | **The Severed Ledger** | Some accounts refuse to stay closed. | *Name the Liar* · *Settle the Debt* |
@@ -104,7 +110,7 @@ When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Stand
 ## Retired
 
 - **Conviction · Defiance** — archived.
-- Scene **Charge** terminology — renamed **Stand** (June 2026).
+- Scene **Charge** and **Stand** terminology — superseded by **Vow** (June 2026).
 - D&D-subtype names (Devotion / Vengeance / Crown) — replaced with lateral titles.
 
 ---
