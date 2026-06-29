@@ -75,8 +75,11 @@ VOW_THE = (
     "color:var(--ad,#976e09);letter-spacing:0.5px;line-height:1;"
 )
 
+# Center spine width — index chips and die slots share this column.
+SPINE_W = "22px"
+
 ROW_INDEX = (
-    '<span class="vow-ix" style="flex-shrink:0;min-width:12px;height:12px;padding:0 2px;'
+    '<span class="vow-ix" style="flex-shrink:0;width:{w};height:12px;padding:0;'
     "display:inline-flex;align-items:center;justify-content:center;"
     "font-family:system-ui,-apple-system,sans-serif;font-size:8px;font-weight:800;"
     "color:#fffef8;background:var(--a,#B8860B);border-radius:3px;"
@@ -91,7 +94,7 @@ DIE_TARGET = (
 
 VOW_PHRASE = (
     '<div class="vow-phrase" style="border:1px dotted rgba(184,134,11,0.55);border-radius:10px;'
-    'padding:5px 6px 6px;margin:2px 0;">{inner}</div>'
+    'padding:3px 5px 4px;margin:1px 0;">{inner}</div>'
 )
 
 KW_SM = (
@@ -115,8 +118,8 @@ BREAK_VOW = (
     '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
 )
 
-BODY_STYLE = "gap:4px;padding:4px 9px 32px;"
-TEMPLATE_BODY_STYLE = "gap:4px;padding:3px 8px 30px;"
+BODY_STYLE = "gap:3px;padding:3px 9px 28px;"
+TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 28px;"
 WRITEIN = (
     '<div class="writein-line" style="flex:1;min-height:15px;'
     'border-bottom:1px dashed rgba(184,134,11,0.45);"></div>'
@@ -166,8 +169,37 @@ def etxt_break(content: str) -> str:
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
-def _row_index(n: int) -> str:
-    return ROW_INDEX.format(n=n)
+def _row_index(n: int, *, width: str = SPINE_W) -> str:
+    return ROW_INDEX.format(n=n, w=width)
+
+
+def _ornate_the() -> str:
+    """Weighty center pivot — fleur-de-lis caps on a golden ring."""
+    return (
+        '<span class="vow-the-ring" style="position:relative;display:inline-flex;'
+        "align-items:center;justify-content:center;min-width:30px;min-height:18px;"
+        "padding:2px 8px 3px;border:1.5px solid var(--a,#B8860B);border-radius:14px;"
+        "background:linear-gradient(180deg,rgba(255,252,245,0.95),rgba(247,240,224,0.55));"
+        "box-shadow:inset 0 0 0 0.5px rgba(184,134,11,0.35),0 0 0 1px rgba(184,134,11,0.12);"
+        'flex-shrink:0;">'
+        '<span style="position:absolute;top:-5px;left:50%;transform:translateX(-50%);'
+        "font-size:7px;line-height:1;color:var(--ad,#976e09);opacity:0.9;"
+        'pointer-events:none;">⚜</span>'
+        f'<span style="{VOW_THE}">the</span>'
+        '<span style="position:absolute;bottom:-5px;left:50%;transform:translateX(-50%) scaleY(-1);'
+        "font-size:7px;line-height:1;color:var(--ad,#976e09);opacity:0.9;"
+        'pointer-events:none;">⚜</span>'
+        "</span>"
+    )
+
+
+def _term_cell(word: str | None, *, side: str, blank: bool) -> str:
+    term = WRITEIN if blank else f'<span style="{VOW_TERM}">{word}</span>'
+    justify = "flex-end" if side == "verb" else "flex-start"
+    return (
+        f'<div class="vow-row" style="display:flex;align-items:center;justify-content:{justify};'
+        f'min-height:14px;padding:1px 0;width:100%;">{term}</div>'
+    )
 
 
 def _indexed_row(
@@ -180,9 +212,9 @@ def _indexed_row(
 ) -> str:
     """side: verb | noun. align: outward (default) | meet (verbs→right, nouns→left)."""
     gap = "gap:5px;"
-    base = f"display:flex;align-items:center;{gap}min-height:15px;padding:2px 0;width:100%;"
+    base = f"display:flex;align-items:center;{gap}min-height:14px;padding:1px 0;width:100%;"
     term = WRITEIN if blank else f'<span style="{VOW_TERM}">{word}</span>'
-    ix = _row_index(n)
+    ix = _row_index(n, width="12px")
 
     if align == "meet" and side == "verb":
         style = base + "justify-content:flex-end;"
@@ -197,17 +229,55 @@ def _indexed_row(
     return f'<div class="vow-row" style="{style}">{inner}</div>'
 
 
+def _word_stack_meet(
+    *,
+    blank: bool = False,
+    verbs: list[str] | None = None,
+    nouns: list[str] | None = None,
+) -> str:
+    """L→R mad lib — 3-column spine: dice + *the* on top; indices centered below."""
+    grid = f"display:grid;grid-template-columns:1fr {SPINE_W} 1fr;column-gap:6px;align-items:center;"
+    phrase_top = (
+        f'<div class="vow-skeleton" style="{grid}margin:0 0 3px;padding:0;">'
+        f'<div style="display:flex;justify-content:flex-end;">{DIE_TARGET}</div>'
+        f'<div style="display:flex;justify-content:center;">{_ornate_the()}</div>'
+        f'<div style="display:flex;justify-content:flex-start;">{DIE_TARGET}</div>'
+        "</div>"
+    )
+    vlist = verbs or []
+    nlist = nouns or []
+    row_cells = []
+    for i in range(6):
+        n = i + 1
+        row_cells.append(
+            _term_cell(None if blank else vlist[i], side="verb", blank=blank)
+            + f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>'
+            + _term_cell(None if blank else nlist[i], side="noun", blank=blank)
+        )
+    rows = f'<div style="{grid}row-gap:0;">{"".join(row_cells)}</div>'
+    inner = (
+        phrase_top
+        + '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.4);padding-top:3px;">'
+        + rows
+        + "</div>"
+    )
+    return VOW_PHRASE.format(inner=inner)
+
+
 def word_stack(
     *,
     blank: bool = False,
     verbs: list[str] | None = None,
     nouns: list[str] | None = None,
-    align: str = "outward",
+    align: str = "meet",
 ) -> str:
     """L→R mad lib — dice in top slots; numbered verb/noun columns below."""
+    if align == "meet":
+        return _word_stack_meet(blank=blank, verbs=verbs, nouns=nouns)
+
     phrase_top = (
         '<div class="vow-skeleton" style="display:flex;align-items:center;justify-content:center;'
-        'gap:10px;margin:0 0 7px;padding:2px 0 4px;">'
+        'gap:10px;margin:0 0 3px;padding:0;">'
         + DIE_TARGET
         + f'<span style="{VOW_THE}">the</span>'
         + DIE_TARGET
@@ -226,7 +296,7 @@ def word_stack(
     )
     inner = (
         phrase_top
-        + '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.4);padding-top:5px;">'
+        + '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.4);padding-top:3px;">'
         + rows
         + "</div>"
     )
@@ -240,7 +310,7 @@ def _patron_mark_grid() -> str:
         n = i + 1
         cells.append(
             '<div style="display:flex;align-items:center;gap:3px;padding:1px 0;">'
-            + _row_index(n)
+            + _row_index(n, width="12px")
             + '<div class="writein-line" style="flex:1;min-height:14px;'
             'border-bottom:1px dashed rgba(184,134,11,0.4);"></div></div>'
         )
@@ -254,7 +324,7 @@ def _patron_mark_grid() -> str:
 
 def _break_section() -> str:
     return (
-        '<div class="rule" style="margin:5px 0 3px;"></div>'
+        '<div class="rule" style="margin:4px 0 2px;"></div>'
         '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;'
         "letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;"
         'margin-bottom:2px;">Break Your Oath:</div>'
@@ -272,7 +342,7 @@ def _body_block(
     return (
         etxt(ENTER_VOW, extra_style="margin-bottom:2px;")
         + word_stack(blank=blank, verbs=verbs, nouns=nouns, align=align)
-        + '<div class="rule" style="margin:4px 0 2px;"></div>'
+        + '<div class="rule" style="margin:3px 0 2px;"></div>'
         + etxt(FULFILL_VOW)
     )
 
@@ -287,7 +357,7 @@ def _hdr(*, name: str = "", sub: str = "", blank: bool = False) -> str:
     )
 
 
-def build(oath: dict, *, include_break: bool = True, phrase_align: str = "outward") -> str:
+def build(oath: dict, *, include_break: bool = True, phrase_align: str = "meet") -> str:
     return (
         '<div class="card paladin acc-paladin">'
         + _hdr(name=oath["name"], sub=oath["sub"])

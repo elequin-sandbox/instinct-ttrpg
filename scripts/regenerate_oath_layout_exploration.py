@@ -40,7 +40,8 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cardwrap{position:relative;width:2.5in;margin:0 auto;}
 .cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
-.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+.card-body{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0;}
 """
 
 OPEN_HAND = OATHS[0]
@@ -59,7 +60,7 @@ VARIANTS = [
     (
         build(OPEN_HAND, phrase_align="meet"),
         "Current — L→R mad lib (meet at *the*)",
-        "Verbs right-aligned; nouns left-aligned toward center.",
+        "3-column spine: indices centered under dice; ornate fleur-de-lis ring on *the*.",
     ),
 ]
 
