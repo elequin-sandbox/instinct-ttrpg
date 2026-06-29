@@ -27,7 +27,7 @@ Mirrors the keyword taxonomy in `core-rules.md §11`; exact colors live in `card
    (**Exposed, Rattled, Rooted, Hidden, Marked, Sundered, Break**). Bold title case, no pill, no color.
 
 **Declared Actions → Bold + Capitalized** (not pills): **Action · Reaction · Draw · Discard ·
-Shuffle · Cleanse · Luck Check · Scene** (plus **Combat · Rest** as scene/time terms).
+Shuffle · Cleanse · Snap Check · Scene** (plus **Combat · Rest** as scene/time terms).
 
 **CRPG action verbs** (Move, Strike, Speak, Sense, Know, Focus, Enter, Exit, Read, Summon, Lift,
 Restrain) — effect-syntax verbs, rendered as steel-blue pills. Used for choose-one option lines.
@@ -74,6 +74,16 @@ the card earns framing) · **Trigger** (italic conditional, soft fiction-first g
 scenes) · **Effect** (main outcome; CRPG verb format for choose-one; hint direction, never prescribe)
 · **Crit** (only when the fiction earns it; 3–6 words/option, 2–3 options max) · **Discard** (one
 short clause).
+
+**React + Snap Check cards** (high-variance Reactions — see `core-rules.md` §10): **Flavor** ·
+**Setup** (everything *before* the Snap Check bands — describes the **attempt**, never a guaranteed
+outcome; ends with *make a* **Snap Check***) · **Snap Check** section (card-printed bands or face
+table — one of three formats, no global scheme):
+1. **Threshold** — success/fail breakpoints only (e.g. 1–5 / 6, or 1–3 / 4–6).
+2. **Step ladder** — each band names its own mixed or full result (e.g. 1–2 fail · 3–4 partial · 5–6 full).
+3. **Face oracle** — six distinct outcomes keyed to die face (wild-surge table; read the face rolled).
+No Crit block unless the card also uses pool checks. Snap Check cards may omit Crit spend — the bands
+*are* the payoff. A natural 1 is always a **[Miss]**; a natural 6 always **explodes** per §5.
 
 **Character-creation cards:** **Flavor / Universal Flavor** (Bond, Ancestry) · **Preamble + choose-one fork**
 (Instinct — dual-path; see `card-anatomy.md` §5) · **Trigger** (Background, Ancestry) · **Body**
@@ -124,6 +134,7 @@ described in `core-rules.md`.
 | ~~Buff/debuff pill distinction~~ | **retired** with the placed-dice system |
 | ~~"while held, [negative effect]"~~ on Flaws | the hand-slot cost IS the consequence |
 | ~~"the fiction advances"~~ | designer-speak — never on player-facing text |
+| ~~Luck Check~~ | **retired** — full checks use §5 pools; Reactions use **Snap Check** (1d6 subset) |
 
 ---
 

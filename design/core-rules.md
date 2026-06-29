@@ -245,7 +245,7 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 | **React** | 0 | Any time, in response to another player's or the GM's action |
 | **Core** | — | Always-active; face-up in Active area; never enters the deck |
 | **Instinct** | — | **Reveal** when the quality drives an **Action**; choose one path — if the GM agrees: benefit party → `[Boost 2]`, or hinder → **Draw 2** |
-| **Background** | — | When its fictional trigger fires; choose-one or Luck Check effect |
+| **Background** | — | When its fictional trigger fires; choose-one or open-narration effect |
 | **Ancestry** | — | When its fictional trigger fires |
 | **Bond** | — | Find the moment; you and the named person each gain `[Boost 1]` |
 
@@ -267,8 +267,14 @@ Class-specific zones (Druid Grove, Rogue Ace Pile) → `design/classes.md`.
 gear" fantasy is baked into specific classes' own Core cards, case by case (currently Fighter and
 Paladin). Other classes have no general equipment mechanic.
 
-**Luck Check:** the player rolls a single die (a d6) with no stats applied; Boost dice are eligible;
-the GM interprets the result in context.
+**Snap Check:** a **reaction check** — a one-die subset of the normal check procedure. Used on React
+cards when the table needs a fast, high-variance resolution without building a pool or opposing dice.
+Roll **1d6** (no Tier base pool, no opposing pool). Read the card's outcome bands or face table.
+**Same Miss/Crit rules as any check:** a natural **1** is a **[Miss]** → 1 **[Toll]**; a natural **6**
+**explodes** (roll one bonus die and add it). Most Snap Checks resolve on the single die; cards may
+require a total of **7+** (i.e. must Crit) for the highest band. Cards print their own breakpoints or
+face effects — there is no global Snap Check band scheme. *(Former **Luck Check** is retired — all
+full checks use the pool-vs-pool model in §5.)*
 
 ---
 
@@ -303,7 +309,7 @@ Every word that carries a real, functional gameplay effect — the load-bearing 
 | **Mill** | Printed keyword on Item cards and React-subtype class cards only: *"At scene start, you may discard this to draw 1."* Replaces the old soft Mulligan. Not for other card types. |
 
 **Declared Actions** (a related mechanical set, formatted **Bold + Capitalized**, not as pills):
-**Action · Reaction · Draw · Discard · Shuffle · Cleanse · Luck Check · Scene**.
+**Action · Reaction · Draw · Discard · Shuffle · Cleanse · Snap Check · Scene**.
 
 ### 2. Index Keywords (sorting/filtering — outlined color chips)
 
