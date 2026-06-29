@@ -163,8 +163,10 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Ancestry** *(Snap Check — locked June 2026; proof: `ancestry-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
-- Trigger + setup (italic): **Once per Scene** · niche fictional gate · ends with *make a*
-  **Snap Check:** (colon — no duplicate label, no *try to*)
+- Trigger callout (`anc-callout`) — **not italic**; left-rail highlight the player scans for:
+  - **Act:** *Once per Scene, you may take an **Action** to [ancestry thing] by making a **Snap Check**:*
+  - **React:** *Once per Scene, when [condition], **React** with a **Snap Check**:* (violet rail —
+    signals interrupt timing)
 - **Three options** — CRPG verb stack (`bf-choice` rows), same list for all bands
 - **Snap bands** — one compact footer line: **1–3** Fails · **4–8** Choose 1 · **9+** Choose 2
 - Header: `Ancestry` chip + **`Act`** or **`React`** (defensive/underdog cards may be React)
