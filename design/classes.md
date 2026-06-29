@@ -32,13 +32,14 @@
 | **Warlock** | Transactional engine — two cost currencies (Hit Dice & Debt) | *Desperate:* I am spending myself. Every hit is a deal with darkness. |
 | **Druid** | Terrain owner — cards read differently in Beastform | *Accepting:* Failure grows into something. Nothing is wasted. |
 | **Monk** | Momentum builder — stances modify chaining rules, not damage | *Present:* I am the stillness before the strike. Then everything. |
-| **Paladin** | Oath-bound defender — **Scene Charge** each scene; **[Resolve]** via Bulwark | *Righteous:* I know what I'm for this scene — and when it matters, I put everything behind it. |
+| **Paladin** | Oath-bound defender — **Stand** each scene; **[Resolve]** via Bulwark | *Righteous:* I know what I'm standing for this scene — and when it matters, I put everything behind it. |
 | **Rogue** | Information broker — Stow as intentional planning | *Inevitable (other direction):* I already know how this ends. |
 | **Ranger** | Patient planner — Trap cards, environmental control | *Patient:* I already planned for this. I'm three steps ahead. |
 
 > 🔒 **Paladin (June 2026):** Player picks 1 **Oath** Core card at creation (Warlock Patron parallel).
-> Each scene: roll 2d6 onto Verb + Noun lists → **Charge** phrase; once per scene, GM-gated fulfill
-> adds both dice to a roll. **Bulwark** = **[Resolve]** specialist. Detail → `design/paladin-oath-charge.md`.
+> Each scene: roll 2d6 onto Verb + Noun lists → **Stand** phrase; once per scene, GM-gated fulfill
+> (primary purpose) adds both dice to a roll. Optional **Break** at Enter = hand mulligan, skip Stand,
+> Oath stays Active. **Bulwark** = **[Resolve]** specialist (no Oath tie-in). Detail → `design/paladin-oath-charge.md`.
 
 ---
 
@@ -58,7 +59,7 @@ a design problem; retire it from one class or build a distinct parallel.
 | **Warlock** | Debt (GM-held), Pact, Hunger | Hit Die cost, Debt resolution, Patron Entry windows |
 | **Druid** | Beastform, Living Ground | Living Ground presence, Beastform alternate effects |
 | **Monk** | Iron Palm / Wind Step / Cobra (stances) | Strike-chain states, prior-contact flags |
-| **Paladin** | **Charge** (scene Verb+Noun), **[Resolve]** via Bulwark | Charge left unfulfilled (table narrative) |
+| **Paladin** | **Stand** (scene Verb+Noun), **[Resolve]** via Bulwark | Stand broken / left unfulfilled (table narrative) |
 | **Rogue** | Exposed, Hidden (narrative), Stow | Stow (own), Exposed targets for strikes |
 | **Ranger** | Marked, Rooted (narrative), trap placement | Marked targets, Exposed, environmental states |
 
@@ -86,9 +87,9 @@ a design problem; retire it from one class or build a distinct parallel.
 - **Monk:** Owns stance-switching (modifies chaining, not damage). Iron Palm: Strike→Strike chain
   (cap 2; Crit removes cap once/scene). Wind Step: Move↔Strike freely; full Rooted immunity. Cobra:
   prior-contact becomes a standing counter.
-- **Paladin:** Pick 1 **Oath** at creation (Active area). **Scene Charge:** 2d6 on Verb+Noun at
-  **Enter**; once/scene GM-gated fulfill adds both dice to roll. **Bulwark:** +2 **[Resolve]** rolls,
-  armor always on. Replaces Conviction·Defiance + GM-awarded story Oath.
+- **Paladin:** Pick 1 **Oath** at creation (Active area). **Stand:** 2d6 on Verb+Noun at **Enter**;
+  once/scene GM-gated fulfill (primary purpose) adds both dice. **Break** at Enter: hand mulligan,
+  skip Stand, Oath stays Active. **Bulwark:** +2 **[Resolve]** rolls. Replaces Conviction·Defiance.
 - **Rogue:** Owns **Stow** (intentional planning). Primary Exposed user. Hidden = primary defensive
   framing. Stow = cards hidden from other players.
 - **Ranger:** Owns **Trap** cards (place roll → trigger-condition fire). Shares Rooted framing with
@@ -100,7 +101,7 @@ a design problem; retire it from one class or build a distinct parallel.
 
 | Class | Open items |
 |---|---|
-| **Paladin** | Oath pool expansion (beyond 3 prototypes); playtest Charge fulfill pivots (see `paladin-oath-charge.md`). |
+| **Paladin** | Oath pool expansion; playtest Break tuning (see `paladin-oath-charge.md`). |
 | **Fighter** | Redesign in progress — 9 Act cards drafted; Crit blanks need Nathan; Arms at the Ready + Arsenal revised for weapon slots. |
 | **Cleric / Bard** | ⚠️ Re-confirm identity now that Bolstered is folded into [Boost]. |
 | **Wizard / Fighter** | Sundered consumption hooks needed. |

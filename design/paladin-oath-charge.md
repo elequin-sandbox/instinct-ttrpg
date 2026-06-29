@@ -1,99 +1,111 @@
-# Paladin — Oath & Scene Charge (design draft)
+# Paladin — Oath & Scene Stand (design draft)
 
-> **Status:** draft — June 28 2026. Replaces **Conviction · Defiance** and the GM-awarded story-Oath model for the Paladin **core** loop. Story-level oath-break tokens may still exist at the table; this doc is the **class mechanic**.
+> **Status:** draft — June 2026. Replaces **Conviction · Defiance** for the Paladin **core** loop.
+> The **Oath** card is your permanent creation pick; your **Stand** is the scene phrase rolled on it.
 >
 > **Sibling docs:** `design/classes.md` · `design/card-anatomy.md` · `design/core-rules.md`
 
 ---
 
-## One-line identity (updated)
+## Terminology
 
-**Paladin:** Oath-bound defender who rolls a fresh **Charge** each scene and spends it to stand for something — Resolve specialist via **Bulwark**.
+| Term | Scope | Notes |
+|---|---|---|
+| **Oath** | Campaign — the Core card you pick at creation | Stays in Active area; defines your word pools |
+| **Stand** | Scene — Verb + Noun phrase | Lighter than *Vow*; changes every scene. Colloquial: *"What's your stand this scene?"* |
+| **Fulfill** | Once per scene | Primary purpose of the **Action** must serve the **Stand** (GM gate) |
+| **Break** | Optional at **Enter** | Old Defiance fantasy — without losing the Oath card for the session |
 
-**Emotional core:** *Righteous — I know what I'm for this scene, and when it matters, I put everything behind it.*
+*Rejected:* Charge (too generic), Mandate (clunky), Vow (too weighty for scene-to-scene).
 
 ---
 
-## Character creation — pick your Oath
+## Character creation
 
-Mirrors the Warlock **Patron** pick:
+Mirrors Warlock **Patron** pick:
 
-1. Player receives the pool of Oath Core cards (currently 3 prototypes).
-2. Chooses **one** at character creation.
-3. That card lives in the **Active area** for the whole campaign (never shuffled into the deck).
+1. Pool of Oath Core cards (5 prototypes + blank template for homebrew).
+2. Pick **one** — lives in **Active area** permanently.
+3. Auto cores: Loadout · Bulwark · Build Your Deck.
 
-**Core auto-cards:** Loadout · Bulwark · Build Your Deck · **+ 1 chosen Oath**.
+**Blank template:** `oath-template-paladin-core` — fill title, subtitle, verbs, nouns; procedure is pre-printed.
 
 ---
 
 ## Oath card anatomy
 
-Each Oath card has two indexed word lists and one shared procedure (printed on every Oath):
-
 | Zone | Content |
 |---|---|
-| **Verbs** | 6 verbs, d6-indexed (1–5 + ★ Choose on 6) |
-| **Nouns** | 6 nouns, d6-indexed (1–5 + ★ Choose on 6) |
-| **Set Your Charge** | Scene-start procedure |
-| **Fulfill Your Charge** | Once-per-scene payoff |
+| **Verbs** | 6 indexed (1–5 + ★ Choose) — lateral, spread-out word choice |
+| **Nouns** | 6 indexed — avoid redundant pairs (not Innocent + Weak) |
+| **Set Your Stand** | Roll 2d6 at **Enter**, place dice on Verb + Noun |
+| **Fulfill Your Stand** | Once/scene: primary-purpose GM yes → add both dice to roll |
+| **Break Your Stand** | Optional at **Enter** before rolling (see below) |
 
-### Term: **Charge**
+### Word-pool design rules
 
-The scene phrase formed from one **Verb** + one **Noun** — e.g. *Protect the Innocent*, *Hunt the Betrayer*, *Serve the Realm*.
-
-Non-religious, table-facing. Avoid "prayer" on cards.
-
----
-
-## Procedure (canonical — must match every Oath card)
-
-### Set Your Charge (scene start)
-
-When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun**. Read the matching words as your scene **Charge** — your priority above all else this **Scene**. Leave both dice on the card.
-
-On **6**, choose any word in that list (★ Choose).
-
-### Fulfill Your Charge (once per scene)
-
-Once per **Scene**, when the GM agrees your **Action** fulfills your **Charge**, add **both dice** from the card to that roll, then remove them. Your **Charge** is spent until the next **Scene**.
-
-*(Dice on the card = Charge is live and unpaid. Empty card = Charge spent or not yet set.)*
+- Prefer **lateral nouns** (Frail, Threshold, Silence) over literal class-fiction (Innocent, Guilty, Realm).
+- Verbs should span modes: protect *and* witness *and* carry — not five synonyms for "hit."
+- Goal: players **argue creatively** what *Shelter the Ember* means this scene.
 
 ---
 
-## Design pivots under consideration
+## Procedure (canonical — every Oath card)
 
-These are **alternatives** to the baseline (GM-gated double-dice → effective **[Boost 2]**). Pick one direction after playtest.
+### Set Your Stand
 
-| Pivot | Change | Pros | Cons |
-|---|---|---|---|
-| **A — Baseline (Annie's pitch)** | Add both d6 to the roll when GM agrees | Physical, memorable, variance 2–12 | Can feel swingy; GM gate every time |
-| **B — Resolve gift** | On fulfill: add dice to roll **or** convert them to **[Resolve]** for an ally (player chooses before rolling) | Ties to Bulwark / protector identity | Less explosive moment |
-| **C — Partial fulfill** | Strong GM yes = both dice; "close enough" = one die only | Softer gate, less all-or-nothing | More GM negotiation |
-| **D — Ally echo** | On fulfill: you add both dice; one adjacent ally gains **[Boost 1]** on the same **Action** | Party-facing, less self-centralizing | Complexity on multi-target actions |
-| **E — Unused Charge tax** | If both dice still on card at **Scene** end, you start next scene **Rattled** (narrative) or discard 1 card | Incentivizes using it | Punitive; may force bad plays |
-| **F — Enter mulligan** | After rolling Charge, once per scene you may reroll **one** die before acting | Fixes bad combos without killing randomness | Extra step at scene open |
+When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun**. Your **Stand** is that phrase. It is your priority above all else this **Scene**. On **6**, choose any word in that list.
 
-**Recommendation for first playtest:** **A** (baseline) with **F** (one die reroll at Enter) as an optional table rule if phrases misfire.
+### Fulfill Your Stand
+
+Once per **Scene**, when the GM agrees your **Action**'s *primary purpose* fulfills your **Stand**, add **both dice** from the card to that roll, then remove them.
+
+Defensive stands naturally pair with **Bulwark** / **[Resolve]** cards in combat — no extra rule required on the Oath card.
+
+### Break Your Stand (replaces old Defiance shuffle)
+
+When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Stand** — narrate turning from it.
+
+- **Discard** your hand, **Draw** that many (hand cleanse — rare debuff/bane relief path).
+- You do **not** roll a **Stand** this scene.
+- Your Oath card **stays in the Active area** — no shuffle into the deck.
+
+**Why not shuffle the Oath into the deck?** In a ≤4-scene session the card may never return — anticlimactic inverse of Warlock Patron highs. Break is a **scene mulligan**, not exiling your class identity.
+
+#### Break — open tuning (pick one after playtest)
+
+| Option | Extra cost | Feel |
+|---|---|---|
+| **A — Free once/session** | None beyond skipping Stand | Generous; enables big narrative pivots |
+| **B — Stand debt** | Cannot **Fulfill** next scene | Soft cooldown |
+| **C — Remorse chip** | GM places 1 Remorse; clear via hard narrative act or **Cleanse** | Fiction-forward |
+| **D — Stain bane** | Shuffle **Stain** (single-scene bane, auto-clears at scene end) | Mechanical bite without losing Oath |
+
+**Recommendation:** **A** for first playtest; add **B** if Break dominates.
 
 ---
 
-## Oath prototypes (mock set)
+## Oath pool (current)
 
-| Oath | Subtitle | Verb flavor | Noun flavor |
-|---|---|---|---|
-| **Oath of Devotion** | The good is not safe. You stand anyway. | Protect, Shield, Uphold, Shelter, Answer, Guard | Innocent, Vow, Light, Weak, Truth, Sacred |
-| **Oath of Vengeance** | Someone will answer for what was done. | Hunt, Break, Punish, Avenge, Expose, End | Guilty, Betrayer, Debt, Wrath, Wrong, Traitor |
-| **Oath of the Crown** | The realm does not hold itself. | Serve, Keep, Hold, Lead, Stand, Guard | Realm, Crown, Law, Banner, Gate, People |
+| Oath | Subtitle | Sample Stand |
+|---|---|---|
+| **The Open Hand** | What you reach for defines you. | *Shelter the Frail* · *Witness the Stranger* |
+| **The Severed Ledger** | Some accounts refuse to stay closed. | *Name the Liar* · *Settle the Debt* |
+| **The Last Bastion** | When everything else gives way, something must not. | *Hold the Line* · *Seal the Gate* |
+| **The Wax and the Wick** | You carry fire where the map runs out. | *Reveal the Path* · *Kindle the Spark* |
+| **The Old Compass** | North is whoever needs you when you arrive. | *Find the Lost* · *Answer the Promise* |
 
 **Visual proof:** [`paladin-oath-proof.html`](../paladin-oath-proof.html)
+
+**Templates:** `oath-template-paladin-core` · `patron-template-warlock-core`
 
 ---
 
 ## Retired
 
-- **Conviction · Defiance** — archived; superseded by Oath pick + Scene Charge loop.
-- GM-awarded story Oath card in Loadout / Build Your Deck — replaced by player-chosen Oath at creation.
+- **Conviction · Defiance** — archived.
+- Scene **Charge** terminology — renamed **Stand** (June 2026).
+- D&D-subtype names (Devotion / Vengeance / Crown) — replaced with lateral titles.
 
 ---
 

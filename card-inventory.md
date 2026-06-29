@@ -148,15 +148,19 @@ All 4 tutorial decks at 14 cards each — in Baserow.
 | Bard | 14 | 🗄️ | Includes: Showstopper, Lift, Curtain Call, Closing Verse |
 | Warlock | 14 | 🗄️ | Includes: Offering |
 
-### Paladin Core — Oath pool (Scene Charge)
+### Paladin Core — Oath pool (Scene Stand)
 
 | Oath | Baserow Key | Status |
 |---|---|---|
-| Oath of Devotion | `oath-of-devotion-paladin-core` | 🗄️ prototype |
-| Oath of Vengeance | `oath-of-vengeance-paladin-core` | 🗄️ prototype |
-| Oath of the Crown | `oath-of-the-crown-paladin-core` | 🗄️ prototype |
+| The Open Hand | `the-open-hand-paladin-core` | 🗄️ |
+| The Severed Ledger | `the-severed-ledger-paladin-core` | 🗄️ |
+| The Last Bastion | `the-last-bastion-paladin-core` | 🗄️ |
+| The Wax and the Wick | `the-wax-and-the-wick-paladin-core` | 🗄️ |
+| The Old Compass | `the-old-compass-paladin-core` | 🗄️ |
+| Oath Template (blank) | `oath-template-paladin-core` | 🗄️ |
+| Patron Template (blank) | `patron-template-warlock-core` | 🗄️ |
 
-**Retired:** Conviction · Defiance (`conviction-defiance-paladin-core`) → legacy June 2026.
+**Retired keys:** `oath-of-devotion-paladin-core`, `oath-of-vengeance-paladin-core`, `oath-of-the-crown-paladin-core`, `conviction-defiance-paladin-core`.
 
 ---
 
@@ -184,7 +188,8 @@ When a new card is designed and approved:
 
 ## Changelog
 
-- [June 28 2026] — **Paladin Oath rework.** Conviction·Defiance → legacy; 3 Oath Core cards (Devotion, Vengeance, Crown) with Scene Charge mechanic. Loadout + Build Your Deck updated. Proof: `paladin-oath-proof.html`; doctrine: `design/paladin-oath-charge.md`. All 20 existing Instincts archived to Versions table, updated with fork-v1 HTML; 10 new Instincts added (Stoic, Impulsive, Wistful, Sardonic, Devoted, Impish, Brooding, Earnest, Guarded, Gregarious). VN-archetype inspired expansion.
+- [June 28 2026] — **Paladin Oath v2.** Renamed scene term **Stand**; 5 lateral oaths + Break-at-Enter; blank Oath/Patron templates. Retired D&D-subtype names.
+- [June 28 2026] — **Paladin Oath rework (v1).** Conviction·Defiance → legacy; first 3 Oath prototypes. Proof: `paladin-oath-proof.html`. All 20 existing Instincts archived to Versions table, updated with fork-v1 HTML; 10 new Instincts added (Stoic, Impulsive, Wistful, Sardonic, Devoted, Impish, Brooding, Earnest, Guarded, Gregarious). VN-archetype inspired expansion.
 - [June 28 2026] — **Dual-purpose Instinct redesign.** All 20 Instinct cards rewritten (preamble + choose-one fork); 12 Flaw cards set to Status:legacy in Baserow. Deck math: 5 Instincts (no separate Flaws). Pilot: `instinct-dual-pilot-proof.html`.
 - [June 24 2026] — **Visual parallelism pass.** All 245 Status:current cards in Baserow normalized to the unified header system (§7 of card-anatomy.md).
 - [June 24 2026] — **Parallelism pass push complete.** All 6 batches pushed to Baserow.
