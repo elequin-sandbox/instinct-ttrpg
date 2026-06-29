@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Paladin Oath v4.** Tighter Enter line; drop Verb/Noun labels + priority line; Boost 2 pill; fulfill in purpose; shortened Break; ★ on slot 6.
 - [June 29 2026] — **Paladin Oath v3.** Compact card layout; scene keyword **Vow** (replaces Stand); Verb / *the* / Noun visual read-aloud; Boost keyword on fulfill.
 - [June 28 2026] — **Paladin Oath v2.** Renamed scene term **Stand**; 5 lateral oaths + Break-at-Enter; blank Oath/Patron templates. Retired D&D-subtype names.
 - [June 28 2026] — **Paladin Oath rework (v1).** Conviction·Defiance → legacy; first 3 Oath prototypes. Proof: `paladin-oath-proof.html`. All 20 existing Instincts archived to Versions table, updated with fork-v1 HTML; 10 new Instincts added (Stoic, Impulsive, Wistful, Sardonic, Devoted, Impish, Brooding, Earnest, Guarded, Gregarious). VN-archetype inspired expansion.

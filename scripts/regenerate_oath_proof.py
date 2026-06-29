@@ -72,7 +72,7 @@ html = f"""<!doctype html>
 <h1>Paladin Oath — Scene Vow Proof</h1>
 <p class="sub">Five Oath Core cards + blank templates. Permanent <strong>Oath</strong> at creation; per-scene <strong>Vow</strong> (Verb + <em>the</em> + Noun). Optional <strong>Break</strong> at Enter.</p>
 <div class="rule-box">
-<strong>Vow</strong> — Roll 2d6 at <strong>Enter</strong> (GM explains dice placement). <strong>Fulfill</strong> once/scene when your <strong>Action</strong> serves your Vow — both dice <strong>Boost</strong> the roll. <strong>Break</strong> before rolling: mulligan hand, skip Vow, Oath stays Active.
+<strong>Vow</strong> — At <strong>Enter</strong>, roll 2d6 (GM explains dice placement). <strong>Fulfill</strong> once/scene when your <strong>Action</strong> serves your <strong>Vow</strong> in purpose — <strong>Boost 2</strong> from both dice. <strong>Break</strong> before rolling: mulligan hand, skip Vow, Oath stays Active.
 </div>
 <section><div class="grid">{cards}</div></section>
 {templates}

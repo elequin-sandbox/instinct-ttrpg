@@ -62,62 +62,54 @@ PILL = (
 
 BLANK_PILL = (
     '<div class="mark-pill" style="display:inline-flex;align-items:stretch;border-radius:2px;'
-    'overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);min-width:24px;">'
+    'overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);min-width:22px;">'
     '<span class="kw kw-crit" style="font-size:7px;padding:1px 3px;">{n}</span>'
-    '<strong style="color:#1a1008;font-size:7px;font-weight:700;padding:1px 6px;'
+    '<strong style="color:#1a1008;font-size:7px;font-weight:700;padding:1px 5px;'
     'font-family:system-ui,-apple-system,sans-serif;letter-spacing:0.3px;">&nbsp;</strong></div>'
 )
 
 CENTER_ROW = (
     '<div class="marks-row" style="display:flex;flex-wrap:wrap;gap:2px;'
-    'justify-content:center;">{pills}</div>'
-)
-
-ZONE_LBL = (
-    '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;'
-    'text-align:center;">{label}</div>'
+    'justify-content:center;margin:1px 0;">{pills}</div>'
 )
 
 THE_DIVIDER = (
     '<div style="display:flex;align-items:center;justify-content:center;position:relative;'
-    'height:12px;margin:2px 0;">'
+    'height:10px;margin:1px 0;">'
     '<span style="position:absolute;left:4px;right:4px;top:50%;height:1px;'
     'background:#c8a96e;opacity:0.45;"></span>'
-    '<span style="position:relative;z-index:1;background:#f7f0e0;padding:0 7px;'
+    '<span style="position:relative;z-index:1;background:#f7f0e0;padding:0 6px;'
     "font-family:'EB Garamond',Georgia,serif;font-size:8px;font-style:italic;"
     'color:#7a6030;">the</span></div>'
 )
 
 ENTER_VOW = (
-    "When you <strong>Enter</strong> a <strong>Scene</strong>, roll 2d6 to determine your "
-    "<strong>Vow</strong>."
+    "At <strong>Enter</strong>, roll 2d6 for your scene <strong>Vow</strong> on this "
+    "<strong>Oath</strong>."
 )
 
-PRIORITY = "It is your priority above all else in this <strong>Scene</strong>."
-
 FULFILL_VOW = (
-    "Once per <strong>Scene</strong>, if the GM agrees that your <strong>Action</strong> "
-    "fulfills your <strong>Vow</strong>, add both dice from this card to "
-    '<span class="kw kw-boost">Boost</span> the roll.'
+    "Once per <strong>Scene</strong>, if the GM agrees your <strong>Action</strong> fulfills "
+    "your <strong>Vow</strong> in purpose, add both dice — "
+    '<span class="kw kw-boost">Boost 2</span> on that roll.'
 )
 
 BREAK_VOW = (
-    "When you <strong>Enter</strong> a <strong>Scene</strong>, before rolling, you may "
-    "<strong>Break</strong> your <strong>Vow</strong> — narrate turning from it. "
-    "<strong>Discard</strong> your hand, <strong>Draw</strong> that many. You do not roll a "
-    "<strong>Vow</strong> this scene. Your Oath card stays in the Active area."
+    "At <strong>Enter</strong>, before rolling, you may <strong>Break</strong> your "
+    "<strong>Vow</strong>. <strong>Discard</strong> your hand, <strong>Draw</strong> that many. "
+    "No <strong>Vow</strong> this scene; <strong>Oath</strong> stays Active."
 )
 
-BODY_STYLE = 'gap:2px;padding:4px 9px 26px;'
+BODY_STYLE = "gap:2px;padding:4px 9px 32px;"
 
 
 def etxt(content: str, *, extra_style: str = "") -> str:
-    style = f"font-size:8.5px;line-height:1.38;text-align:center;{extra_style}"
+    style = f"font-size:8.5px;line-height:1.35;text-align:center;{extra_style}"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
 def etxt_break(content: str) -> str:
-    style = "font-size:7.5px;line-height:1.4;color:#5a4020;font-style:italic;text-align:left;"
+    style = "font-size:7px;line-height:1.35;color:#5a4020;font-style:italic;text-align:left;"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
@@ -126,42 +118,46 @@ def row(words: list[str] | None = None, *, blank: bool = False) -> str:
         pills = [BLANK_PILL.format(n=i + 1) for i in range(6)]
     else:
         pills = [PILL.format(n=i + 1, word=words[i]) for i in range(5)]
-        pills.append(PILL.format(n=6, word="★ Choose"))
+        pills.append(PILL.format(n=6, word="★"))
     return CENTER_ROW.format(pills="".join(pills))
 
 
 def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
     verb_row = row(blank=blank) if blank else row(verbs or [])
     noun_row = row(blank=blank) if blank else row(nouns or [])
-    return ZONE_LBL.format(label="Verb") + verb_row + THE_DIVIDER + ZONE_LBL.format(label="Noun") + noun_row
+    return verb_row + THE_DIVIDER + noun_row
 
 
 def _break_box() -> str:
     return (
-        '<div class="rule"></div>'
+        '<div class="rule" style="margin:2px 0 1px;"></div>'
         '<div style="background:rgba(90,74,32,0.08);border:0.5px solid rgba(90,74,32,0.35);'
-        'border-radius:3px;padding:3px 5px 4px;">'
+        'border-radius:3px;padding:2px 5px 3px;margin-bottom:2px;">'
         + etxt_break(BREAK_VOW)
         + "</div>"
     )
 
 
+def _body_block(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
+    return (
+        etxt(ENTER_VOW, extra_style="margin-bottom:2px;")
+        + word_stack(blank=blank, verbs=verbs, nouns=nouns)
+        + '<div class="rule" style="margin:3px 0 2px;"></div>'
+        + etxt(FULFILL_VOW)
+    )
+
+
 def build(oath: dict, *, include_break: bool = True) -> str:
-    body = (
+    return (
         '<div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top">'
         '<span class="cap cap-neutral">Core</span><span></span></div>'
         f'<div class="hdr-name">{oath["name"]}</div>'
         f'<div class="hdr-sub">{oath["sub"]}</div></div>'
         f'<div class="card-body" style="{BODY_STYLE}">'
-        + etxt(ENTER_VOW)
-        + word_stack(verbs=oath["verbs"], nouns=oath["nouns"])
-        + etxt(PRIORITY, extra_style="margin-top:2px;")
-        + '<div class="rule" style="margin:2px 0;"></div>'
-        + etxt(FULFILL_VOW)
+        + _body_block(verbs=oath["verbs"], nouns=oath["nouns"])
         + (_break_box() if include_break else "")
         + "</div><div class=\"idtag\">Paladin</div></div>"
     )
-    return body
 
 
 def build_oath_template() -> str:
@@ -179,11 +175,7 @@ def build_oath_template() -> str:
         + blank_name
         + blank_sub
         + f'</div><div class="card-body" style="{BODY_STYLE}">'
-        + etxt(ENTER_VOW)
-        + word_stack(blank=True)
-        + etxt(PRIORITY, extra_style="margin-top:2px;")
-        + '<div class="rule" style="margin:2px 0;"></div>'
-        + etxt(FULFILL_VOW)
+        + _body_block(blank=True)
         + _break_box()
         + "</div><div class=\"idtag\">Paladin</div></div>"
     )
