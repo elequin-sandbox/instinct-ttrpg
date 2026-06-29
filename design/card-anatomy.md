@@ -156,9 +156,8 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Background**
 - Trigger (italic): the conditional situation that activates the card (no separate flavor line)
-- Body — one of three variants: *Choose-one* (3 options in CRPG verb format) · *Luck-check*
-  (narration + `[Luck Check]` + GM adjudicates) · *Passive-question* (3 GM-answerable questions +
-  "The GM answers honestly.")
+- Body — one of two variants: *Choose-one* (3 options in CRPG verb format) · *Passive-question*
+  (3 GM-answerable questions + "The GM answers honestly.")
 - **ORIGIN** label → past-tense stem → 4 writing lines · Footer: `any · background` · ★ pip
 
 **Ancestry**
@@ -185,6 +184,12 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Ability (Act / React / Core)** — class-deck cards. Header = class color + name + type badge; body =
 labeled zones; cost pip in footer. Full design system in `at-card-renderer` + `at-design-session`.
+
+**React + Snap Check** *(prototype anatomy — see `snap-check-react-proof.html`)*:
+- **Flavor** · **Effect** setup (attempt language only — what you *try* to do; ends with **Snap Check**)
+- **Snap Check** label + outcome block — violet band pills (`1–2`, `1–5`, etc.) for threshold/step
+  formats, or six face-keyed rows for face-oracle format. Mirrors Crit-block layout but band-colored,
+  not gold Crit-count pills. Cards do not re-explain Snap Check procedure.
 
 ---
 
