@@ -183,6 +183,22 @@
 
 <script>
 const SESSIONS = {
+  'primer-chargen-followup': {
+    title: 'Primer — chargen follow-up',
+    subtitle: 'One quick pick.',
+    questions: [
+      {
+        id: 'background-ancestry',
+        prompt: 'Your new chargen list drops Background & Ancestry. For this playtest, should the primer and table flow…',
+        more: 'Doctrine §12 now matches your 5 Instinct / 1 Bond / Connection / Item / Core / 12 abilities flow. Background and Ancestry cards still exist in Card Studio.',
+        options: [
+          { id: 'a', label: 'A — Skip entirely this playtest', desc: 'Not in chargen; don’t mention them in the primer.' },
+          { id: 'b', label: 'B — Optional add-ons', desc: 'One line: “if your table uses them, pick 1 each.”' },
+          { id: 'c', label: 'C — Still required', desc: 'I misspoke — put them back in the primer steps.' }
+        ]
+      }
+    ]
+  },
   'primer-playtest': {
     title: 'Player Primer — playtest prep',
     subtitle: 'Three quick picks. One question at a time.',
