@@ -80,7 +80,7 @@ html = f"""<!doctype html>
 <div class="rule-box">
 <strong>Vow</strong> — At <strong>Scene start</strong>, place 2d6 in the top slots; each die face picks its column row. Read left → right: <em>Verb the Noun</em>. <strong>Fulfill</strong> once per Scene — <strong>Boost 2</strong> from both dice.<br><br>
 <strong>Break Your Oath</strong> — Defiance → dice to <strong>Resolve</strong>; GM <strong>Toll 2</strong> vs you this scene.<br><br>
-Alignment comparison (outward vs meet-at-the): <a href="paladin-oath-layout-exploration.html" style="color:var(--gold);">paladin-oath-layout-exploration.html</a>
+Alignment comparison (classic grid vs mad-lib): <a href="paladin-oath-layout-exploration.html" style="color:var(--gold);">paladin-oath-layout-exploration.html</a>
 </div>
 <section><div class="grid">{cards}</div></section>
 {templates}
