@@ -123,10 +123,8 @@
       width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
       border-radius: 7px; font-family: Cinzel, serif; font-size: 18px; font-weight: 700; border: 2px solid;
     }
-    .die-crit { background: rgba(240,208,80,0.10); border-color: #B8860B; color: #f0d060; }
-    .die-miss { background: rgba(192,80,80,0.10); border-color: #7F1D1D; color: #e07070; }
-    .die-normal { background: rgba(100,130,180,0.10); border-color: #4d6080; color: #a0b4cc; }
-    .die-gm { background: rgba(180,60,60,0.12); border-color: #991B1B; color: #cc8080; }
+    .die-player { background: #f5f0e8; border-color: #d4cfc4; color: #2a2520; }
+    .die-gm { background: #5c2020; border-color: #991B1B; color: #fce8e8; }
     .die-label { font-size: 12px; color: var(--text-muted); font-style: italic; }
     .outcomes { display: flex; flex-direction: column; gap: 5px; margin: 14px 0; }
     .outcome { display: grid; grid-template-columns: 100px 1fr; border-radius: 5px; overflow: hidden; border: 1px solid var(--border); }
@@ -250,19 +248,20 @@
 
   <section class="section">
     <div class="section-eyebrow">02</div>
-    <h2 class="section-title">Your Deck, Your Hand &amp; Scene Start</h2>
+    <h2 class="section-title">Your Character &amp; Their Instincts</h2>
     <div class="dh-grid">
       <div class="dh-block">
-        <div class="dh-label">Your Deck</div>
-        <div class="dh-sub">Who your character is — abilities, past, relationships, and the qualities that define them.</div>
+        <div class="dh-label">Your Character</div>
+        <div class="dh-sub">Your full <strong>deck</strong> — every card that makes up who they are. Past, bonds, class abilities, the qualities they carry. This is the whole person.</div>
       </div>
       <div class="dh-block is-hand">
-        <div class="dh-label">Your Hand</div>
-        <div class="dh-sub">Who they are <strong>right now</strong>, in this scene, under this pressure. This is what you play with.</div>
+        <div class="dh-label">Their Instincts</div>
+        <div class="dh-sub">Your <strong>hand</strong> — only part of that person, right now. What’s surfacing under this scene’s pressure. This is what you play with.</div>
       </div>
     </div>
-    <p>Those aren’t the same thing. At the <strong>start of each scene</strong>, you draw a fresh hand (typically 5 cards). You don’t choose what arrives — you choose what to do with it. When the scene ends, your hand is discarded and you draw again.</p>
-    <p>An <strong>Instinct</strong> in hand means that quality is driving you right now. A <strong>Bond</strong> means that connection is present and ready. Your hand is a portrait of your character in this moment.</p>
+    <p>You never have access to all of your character’s abilities at once. That’s intentional — and it’s what makes Instinct RPG different. Each scene you draw a fresh hand (typically 5 cards). You don’t pick what shows up. You discover what your character <em>wants</em> to do, then narrate why or how they act on it.</p>
+    <p>The game is named for this: your character’s <strong>Instincts</strong> are telling a story through you. Your job isn’t to optimize a build — it’s to freestyle a fun scene from whatever lands in your hand and make it make sense.</p>
+    <p>At scene end, the hand is discarded and you draw again. A Bold Instinct in one scene might be gone the next. That’s the game.</p>
     <div class="callout">
       <div class="callout-label">When hands run low</div>
       <p>As a scene goes on, hands thin out. When the party’s average hand drops to about 2 cards, expect the GM to transition or close the scene. An empty hand is a <em>pacing signal</em>, not a punishment.</p>
@@ -289,13 +288,14 @@
         <div class="step-name">Read</div>
         <div class="step-body">
           <p><strong>Pull the 1s.</strong> Each natural 1 is a <span class="kw kw-miss">Miss</span> — removed immediately. Each Miss gives the GM 1 <span class="kw kw-toll">Toll</span>, whether you succeed or not.</p>
-          <p><strong>Count the 6s.</strong> Each 6 is a <span class="kw kw-crit">Flourish</span> — it explodes (roll one bonus die). Count Flourishes to spend bonus options on your card.</p>
+          <p><strong>Count the 6s.</strong> Each 6 is a <span class="kw kw-crit">Crit</span> — it explodes (roll one bonus die). Count your Crits after all dice resolve.</p>
+          <p><strong>Spend Crits on Flourishes.</strong> Some ability cards list bonus options called <strong>Flourishes</strong> — spend earned Crits to take them.</p>
           <p><strong>Clear the pool.</strong> Remaining dice clear the GM’s dice one at a time. Clear them all: success. Some remain: partial — the GM says what landed.</p>
         </div>
       </div>
     </div>
     <div class="outcomes">
-      <div class="outcome out-success"><div class="outcome-lbl">Cleared</div><div class="outcome-desc">Full success. Narrate it. Spend Flourishes if you earned any.</div></div>
+      <div class="outcome out-success"><div class="outcome-lbl">Cleared</div><div class="outcome-desc">Full success. Narrate it. Spend Crits on Flourishes if you earned any.</div></div>
       <div class="outcome out-partial"><div class="outcome-lbl">Partial</div><div class="outcome-desc">Some GM dice remain — not a Miss. The GM adjudicates what was achieved.</div></div>
       <div class="outcome out-miss"><div class="outcome-lbl">Miss (1s)</div><div class="outcome-desc">Already handled in step 1. GM gains Toll. The scene keeps moving — a Miss is never a full stop.</div></div>
     </div>
@@ -303,13 +303,13 @@
       <div class="callout-label">Example</div>
       <p>3d6 vs GM pool [4] [5]:</p>
       <div class="dice-row">
-        <div class="die die-crit">6</div><div class="die die-normal">3</div><div class="die die-miss">1</div>
+        <div class="die die-player">6</div><div class="die die-player">3</div><div class="die die-player">1</div>
         <span class="die-label">yours</span>
         <span style="color:var(--text-faint);margin:0 4px">vs</span>
         <div class="die die-gm">4</div><div class="die die-gm">5</div>
         <span class="die-label">GM</span>
       </div>
-      <p>The 1 is removed — GM gains 1 <span class="kw kw-toll">Toll</span>. The 6 explodes (bonus 4). Your dice (6, 4, 3) clear the GM’s pool. <strong>Success — 1 Flourish to spend.</strong></p>
+      <p>The 1 is removed — GM gains 1 <span class="kw kw-toll">Toll</span>. The 6 is a <span class="kw kw-crit">Crit</span> and explodes (bonus 4). Your dice (6, 4, 3) clear the GM’s pool. <strong>Success — 1 Crit to spend on a Flourish.</strong></p>
     </div>
     <p class="note">Specialized check formats on cards? Your GM explains those when a card calls for them — you don’t need them memorized now.</p>
   </section>
@@ -342,73 +342,86 @@
     <div class="section-eyebrow">06</div>
     <h2 class="section-title">How a Card Plays</h2>
     <div class="golden-rule" style="border-color:rgba(200,169,110,0.45);padding:16px 20px">
-      <div class="golden-rule-text" style="font-size:clamp(14px,3.5vw,18px)">Describe the action. Then find the card.</div>
-      <div class="golden-rule-sub">You never play a card cold. Description always comes first.</div>
+      <div class="golden-rule-text" style="font-size:clamp(14px,3.5vw,18px)">Your hand shows what your character wants.<br>You show the table how.</div>
+      <div class="golden-rule-sub">You don’t pick a card and invent a reason. You look at what surfaced and narrate why it fits.</div>
     </div>
-    <p>Say what your character does. Then look at your hand: does any card fit? If yes, play it. The card confirms scope and tells you whether to roll.</p>
-    <p>That order doesn’t reverse. No card, no card mechanics — the action can still happen as a basic check.</p>
-    <p><strong>Cards trigger when the fiction supports them.</strong> Triggers are soft gates — read one and you should know if this scene qualifies.</p>
-    <p>After every roll, there’s a brief beat where <strong>React</strong> cards (cost 0) may fire.</p>
-
-    <p style="margin-top:22px;font-size:15px;color:var(--text-muted)">Live cards from Card Studio:</p>
-    <div class="primer-cards">
-      <div id="bold-card-wrap"></div>
-      <div id="vanish-card-wrap"></div>
-    </div>
-    <p class="note" style="margin-top:4px"><strong>Bold</strong> — an Instinct you Reveal when that quality is at work. <strong>Vanish</strong> — a React at cost 0; the trigger tells you exactly when it’s valid.</p>
+    <p>Glance at your hand. Something there is pulling at your character — an Instinct, a Bond, an ability itching to fire. Describe what they do in the scene. <em>Then</em> play the card that matches.</p>
+    <p>If nothing in your hand fits what you described, the action can still happen as a basic check — just without card effects.</p>
+    <p>Many cards have a <strong>Trigger</strong> line: a plain-language “when you can play this.” If what’s happening in the scene matches that moment, you’re good. When in doubt, ask the GM.</p>
   </section>
 
   <section class="section">
     <div class="section-eyebrow">07</div>
     <h2 class="section-title">Building Your Deck</h2>
-    <p>Character creation is play — about an hour. You’re building a story through cards and stems, not filling a sheet.</p>
-    <p>Target: <strong>~20 cards</strong> in your deck. Core and Item live in your Active area and don’t count toward the 20.</p>
+    <p>Character creation is play — about an hour. Gather these in order. Each step below shows a sample card of that type.</p>
     <div class="chargen-steps">
       <div class="chargen-step">
         <div class="chargen-num">1</div>
         <div>
-          <div class="chargen-label">Choose 5 Instincts</div>
-          <div class="chargen-desc"><strong>Quick:</strong> draw 5, mulligan any. <strong>Full:</strong> draw 3, pick 1 — repeat 5 times.</div>
+          <div class="chargen-label">5 Instincts</div>
+          <div class="chargen-desc"><strong>Quick:</strong> draw 5, mulligan any. <strong>Full:</strong> draw 3, pick 1 — repeat 5 times. Shuffle all 5 into your deck.</div>
+          <div class="primer-cards"><div id="instinct-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">2</div>
         <div>
-          <div class="chargen-label">Background &amp; Ancestry</div>
-          <div class="chargen-desc">One of each. Complete the <strong>ORIGIN</strong> stem on the card at the table.</div>
-          <div class="primer-cards"><div id="fieldmedic-card-wrap"></div></div>
+          <div class="chargen-label">1 Bond</div>
+          <div class="chargen-desc">Choose one Bond card and add it to your deck.</div>
+          <div class="primer-cards"><div id="bond-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">3</div>
         <div>
-          <div class="chargen-label">Bonds &amp; Connections</div>
-          <div class="chargen-desc"><strong>Bonds</strong> go in your deck. <strong>Connection</strong> cards get a party member’s name at session start, then shuffle into <em>other players’</em> decks.</div>
-          <div class="primer-cards" style="flex-wrap:wrap">
-            <div id="warmpresence-card-wrap"></div>
-            <div id="connection-card-wrap"></div>
-          </div>
+          <div class="chargen-label">1 Connection</div>
+          <div class="chargen-desc">Write a party member’s name on the card. <strong>Keep it to the side</strong> — it will shuffle into <em>their</em> deck, not yours.</div>
+          <div class="primer-cards"><div id="connection-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">4</div>
         <div>
-          <div class="chargen-label">Item + Class deck</div>
-          <div class="chargen-desc">One Item in Active. Class Acts, Reacts, and Core — Core stays face-up in Active.</div>
+          <div class="chargen-label">1 Item</div>
+          <div class="chargen-desc">Place in your Active area (not the deck).</div>
+          <div class="primer-cards"><div id="item-card-wrap"></div></div>
+        </div>
+      </div>
+      <div class="chargen-step">
+        <div class="chargen-num">5</div>
+        <div>
+          <div class="chargen-label">Class Core</div>
+          <div class="chargen-desc">Put your Core card(s) face-up <strong>in front of you</strong> — always available, never shuffled.</div>
+          <div class="primer-cards"><div id="core-card-wrap"></div></div>
+        </div>
+      </div>
+      <div class="chargen-step">
+        <div class="chargen-num">6</div>
+        <div>
+          <div class="chargen-label">12 Class Ability cards</div>
+          <div class="chargen-desc">Select 12 Acts and Reacts from your class. These make up the rest of your deck.</div>
+          <div class="primer-cards"><div id="ability-card-wrap"></div></div>
+        </div>
+      </div>
+      <div class="chargen-step">
+        <div class="chargen-num">7</div>
+        <div>
+          <div class="chargen-label">Check your Core</div>
+          <div class="chargen-desc">Read your Core card(s). If they tell you to grab additional cards at character creation — a weapon, stance, or kit — do that now.</div>
         </div>
       </div>
     </div>
     <div class="deck-math">
       <table>
-        <tr><th>Component</th><th>Count</th></tr>
+        <tr><th>In your deck (18)</th><th>Count</th></tr>
         <tr><td>Instincts</td><td>5</td></tr>
-        <tr><td>Background + Ancestry</td><td>2</td></tr>
-        <tr><td>Bonds</td><td>~2</td></tr>
-        <tr><td>Class ability cards</td><td>~11</td></tr>
-        <tr><td style="font-weight:700;color:var(--gold-light)">Total</td><td>~20</td></tr>
+        <tr><td>Bond</td><td>1</td></tr>
+        <tr><td>Class ability cards</td><td>12</td></tr>
+        <tr><th style="padding-top:12px">Active area (not in deck)</th><th></th></tr>
+        <tr><td>Item + Class Core</td><td>—</td></tr>
+        <tr><td>Connection</td><td>→ other player’s deck</td></tr>
       </table>
     </div>
-    <p class="note">Connection cards sit in other players’ decks, not yours.</p>
   </section>
 
   <section class="section" id="glossary">
@@ -422,7 +435,7 @@
           <span class="gloss-term-left"><strong style="font-size:17px;color:var(--gold-light)">Check</strong><span class="gloss-hook">When the dice come out</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
-        <div class="gloss-body"><p>Any uncertain action resolved with dice. You build a pool, roll against the GM’s opposing pool, read Misses and Flourishes, then clear dice. Most checks work the same way — some cards use a shorter format your GM explains when it comes up.</p></div>
+        <div class="gloss-body"><p>Any uncertain action resolved with dice. You build a pool, roll against the GM’s opposing pool, read Misses and Crits, then clear dice. Most checks work the same way — some cards use a shorter format your GM explains when it comes up.</p></div>
       </details>
 
       <details class="gloss-term" id="kw-boost">
@@ -457,12 +470,20 @@
         <div class="gloss-body"><p>GM currency from Misses. Spent to escalate scenes — complications, NPC reactions, sharper consequences. The table should always feel the world responding.</p></div>
       </details>
 
-      <details class="gloss-term" id="kw-flourish">
+      <details class="gloss-term" id="kw-crit">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-crit">Flourish</span><span class="gloss-hook">A 6 on the die</span></span>
+          <span class="gloss-term-left"><span class="kw kw-crit">Crit</span><span class="gloss-hook">A 6 on the die</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
-        <div class="gloss-body"><p>Player-facing name for a <strong>Crit</strong>. A 6 explodes (one bonus die). Count Flourishes after all dice resolve — that’s how many bonus options you may spend from the card you played.</p></div>
+        <div class="gloss-body"><p>A natural <strong>6</strong>. It explodes — roll one bonus die and add it. After all dice resolve, count how many dice still show a 6. That’s how many Crits you earned to spend.</p></div>
+      </details>
+
+      <details class="gloss-term" id="kw-flourish">
+        <summary>
+          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Flourish</strong><span class="gloss-hook">Spend a Crit to take this</span></span>
+          <span class="gloss-arrow">▼</span>
+        </summary>
+        <div class="gloss-body"><p>A bonus option listed on an ability card — not a die result. After a check, spend earned <span class="kw kw-crit">Crits</span> to take Flourishes from the card you played. Each Flourish costs one Crit unless the card says otherwise.</p></div>
       </details>
 
       <details class="gloss-term" id="kw-hd">
@@ -509,7 +530,7 @@
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body">
-          <p>Some React cards call for a fast roll — <strong>1d6</strong>, no full pool. Same Miss (1) and Flourish (6) rules. Outcomes are printed on the card.</p>
+          <p>Some React cards call for a fast roll — <strong>1d6</strong>, no full pool. Same Miss (1) and Crit (6) rules. Outcomes are printed on the card.</p>
           <span class="gloss-defer">Your GM explains the first time a card asks for one. Not on your pre-session checklist.</span>
         </div>
       </details>
@@ -530,11 +551,12 @@
 <script>
 (function () {
   const MOUNTS = {
-    'bold-card-wrap': 'bold-instinct',
-    'vanish-card-wrap': 'vanish-rogue',
-    'fieldmedic-card-wrap': 'field-medic-background',
-    'warmpresence-card-wrap': 'warm-presence-bond',
-    'connection-card-wrap': 'connection-template'
+    'instinct-card-wrap': 'bold-instinct',
+    'bond-card-wrap': 'warm-presence-bond',
+    'connection-card-wrap': 'connection-template',
+    'item-card-wrap': 'immovable-rod-item',
+    'core-card-wrap': 'weapon-master-fighter-core',
+    'ability-card-wrap': 'find-the-gap-rogue'
   };
 
   function mountCards() {
