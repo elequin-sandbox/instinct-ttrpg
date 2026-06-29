@@ -1,0 +1,36 @@
+---
+description: Instinct RPG — primer typography tiers (serif narrative, sans labels only)
+globs: instinct-rpg-primer*.html
+alwaysApply: false
+---
+
+# Instinct RPG — Primer typography tiers
+
+Three tiers — **do not mix without Annie explicitly asking.**
+
+| Tier | Font | Use for |
+|------|------|---------|
+| **1 — Chrome** | `Cinzel` | Hero, section eyebrows, section titles, callout labels, step column names (`Build` / `Roll` / `Read`), card-type chips, footer labels |
+| **2 — Narrative body** | `Crimson Pro` (inherits from `body`) | Section paragraphs, step bodies, walkthrough text, glossary/FAQ answers, card-type descriptions, chargen descriptions, callout body, golden-rule quotes |
+| **3 — Sub-labels** | `system-ui` stack | `.step-sub-title`, `.ex-step-num`, `.chargen-label` only |
+
+## Hard rules
+
+1. **Never** move tier-2 detail paragraphs to sans-serif unless Annie explicitly requests it (June 2026
+   playtest reverted a sans-body experiment).
+2. **Card-mounted text** uses Card Studio typography inside `.cardwrap` (`system-ui` / EB Garamond per
+   card template) — separate from primer page tiers.
+3. Dice numeric labels (`.die`, `.die-label`) may stay as defined in the primer stylesheet; don’t
+   extend sans into prose blocks.
+4. New sub-topic headings in the primer → tier **3**, not tier 1, unless they are true section titles.
+
+## Adding new UI text
+
+- New **section** → tier 1 for title, tier 2 for body.  
+- New **in-step label** (Aid, Misses, Step 2) → tier 3.  
+- New **FAQ/glossary** content → tier 2.
+
+## Related rules
+
+- Tone: `instinct-playtest-tone.mdc`
+- Primer hub: `instinct-player-primer.mdc`

@@ -1,0 +1,47 @@
+---
+description: Instinct RPG — Aid requires discard + narrated relevance (not card effect)
+globs: design/core-rules.md,*primer*.html,gm-guide*.html,*quick-ref*.html
+alwaysApply: false
+---
+
+# Instinct RPG — Aid narration
+
+**Single source of truth:** `design/core-rules.md` §5 (checks) and the **[Aid]** row in the keyword
+table. Edit doctrine first, then sync player/GM assets.
+
+## What Aid is
+
+An ally may **discard a card from their hand**, **describe how that card is relevant** to the active
+player’s check (Instinct, Ability, or Item), and add **1 die** to that player’s pool if the **GM
+agrees**.
+
+They are **not** playing the discarded card for its normal effect — they are narrating the assist.
+
+## Hard constraints (locked)
+
+- **One ally per check** — capped.
+- **No self-Aid** — Aid must come from another player.
+- Class-specific names (**Stack**, **Rally**, etc.) point here; see `design/classes.md`.
+
+## When writing or editing copy
+
+Any sentence that mentions Aid in a primer, FAQ, glossary, quick ref, or GM guide must convey:
+
+1. Discard a card  
+2. Narrate relevance to the active check  
+3. Not the card’s normal effect  
+4. GM agrees  
+5. Adds 1 die  
+
+**Short form (first mention):**  
+*One ally discards a card, describes how it helps your check (not the card’s normal effect — GM agrees), and adds 1 die.*
+
+**Worked example (walkthroughs):** ally discards something fitting (e.g. Fighter sheds **Bold** to
+brace a door frame while a Barbarian **Break**s it) — spend the card for Aid, don’t trigger Bold’s
+usual benefit.
+
+## Do not
+
+- Imply Aid is “free Boost” without discard or narration.
+- Allow self-Aid or multiple allies on one check.
+- Drift from doctrine into card-specific exceptions without updating `core-rules.md` first.

@@ -1,0 +1,45 @@
+---
+description: Instinct RPG — primer chargen card samples use locked Card_Key mounts
+globs: instinct-rpg-primer*.html,card-data.js
+alwaysApply: false
+---
+
+# Instinct RPG — Primer chargen sample keys
+
+The live primer mounts one Baserow card per chargen step via the `MOUNTS` object in
+`instinct-rpg-primer-v2.html`. **Do not hand-paste card HTML** — always pull from `card-data.js`.
+
+## Current mounts (keep in sync with the file)
+
+| DOM id | Card_Key | Chargen step |
+|--------|----------|--------------|
+| `instinct-card-wrap` | `bold-instinct` | 5 Instincts |
+| `bond-card-wrap` | `warm-presence-bond` | 1 Bond |
+| `connection-card-wrap` | `connection-template` | 1 Connection |
+| `background-card-wrap` | `field-medic-background` | 1 Background |
+| `ancestry-card-wrap` | `human-ancestry` | 1 Ancestry |
+| `item-card-wrap` | `immovable-rod-item` | 1 Item |
+| `core-card-wrap-a` | `weapon-master-fighter-core` | Class Core (sample 1) |
+| `core-card-wrap-b` | `battlemaster-fighter-core` | Class Core (sample 2) |
+| `ability-card-wrap` | `find-the-gap-rogue` | 12 Abilities (sample) |
+
+When you change a key in the primer script, **update this table** in the same commit.
+
+## Swapping a sample
+
+1. Pick a replacement from `card-data.js` with `Status: current` and the right card type/class.
+2. Update the `MOUNTS` entry (and HTML `id` only if the wrap element is renamed).
+3. Confirm the card renders in the primer — check `instinct-primer-card-parity.mdc` if the template
+   differs (Core vs `.cbody` vs `.bf-body`).
+4. Prefer cards that **teach the type** clearly (readable at primer scale, representative anatomy).
+5. Commit + push; no Baserow push unless you also changed card HTML in Baserow.
+
+## Regenerating `card-data.js`
+
+If Baserow card HTML changed during the session, regenerate `card-data.js` per
+`instinct-agent-ops.mdc` / `at-session-close` step 3b — samples read live data on page load.
+
+## Related rules
+
+- Render CSS: `instinct-primer-card-parity.mdc`
+- Primer hub: `instinct-player-primer.mdc`

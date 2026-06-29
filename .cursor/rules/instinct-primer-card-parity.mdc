@@ -1,0 +1,60 @@
+---
+description: Instinct RPG — primer card CSS must cover every Baserow HTML template
+globs: primer-card-scope.css,card-data.js,instinct-rpg-primer*.html,instinct-dual-styles.css
+alwaysApply: false
+---
+
+# Instinct RPG — Primer card render parity
+
+The primer does **not** load Card Studio’s full card CSS from `index.html`. It loads only
+`primer-card-scope.css` + `instinct-dual-styles.css`. Any gap here shows up as broken or overflowing
+cards in chargen samples (e.g. Core `.card-body` templates).
+
+## Template checklist
+
+When card HTML changes in Baserow or `card-data.js`, verify scoped styles exist for every body
+template used in primer samples:
+
+| Template | Body class | Required scoped selectors |
+|----------|------------|---------------------------|
+| Ability / Act / React | `.cbody` | `.flv`, `.etxt`, `.elbl`, `.csec`, `.clbl`, `.crow`, `.ci` |
+| Bond / Instinct / Connection forks | `.bf-body` | `.bf-trig`, `.bf-eff`, `.bf-choose`, etc. + `instinct-dual-styles.css` |
+| Core | `.card-body` | `.zone-label`, `.effect-text`, `.rule` |
+| Oath / special Core layouts | `.card-body` + custom | Match whatever the live HTML uses |
+
+Shared rules already in `primer-card-scope.css`:
+
+- `.card` — `2.5in × 3.5in`, flex column, `overflow: hidden`
+- Body regions — `padding-bottom: 26px` to clear absolute `.idtag`
+- `.cardwrap` — `scale(0.58)`, `transform-origin: top left`
+
+## Layout rule — one scaled card per slot
+
+```html
+<!-- Correct: one card per .primer-cards -->
+<div class="primer-cards"><div id="some-wrap"></div></div>
+
+<!-- Correct: side-by-side Core pair -->
+<div class="primer-core-pair">
+  <div class="primer-cards"><div id="core-a"></div></div>
+  <div class="primer-cards"><div id="core-b"></div></div>
+</div>
+
+<!-- Wrong: two cardwraps inside one .primer-cards without .primer-core-pair -->
+```
+
+Never stack two mounted cards in a single `.primer-cards` container — negative margins and scale
+transforms are tuned for **one** card per slot.
+
+## Agent workflow after template changes
+
+1. Identify which `Card_Key` samples use the new/changed HTML shape.
+2. Add or update rules under `.primer-cards …` in `primer-card-scope.css`.
+3. Open the live primer (or local `instinct-rpg-primer-v2.html`) and visually confirm **every**
+   chargen sample — especially Core, Bond forks, and longest text cards.
+4. Commit + push per `instinct-git.mdc`.
+
+## Related rules
+
+- Sample keys: `instinct-chargen-sample-keys.mdc`
+- Primer hub: `instinct-player-primer.mdc`

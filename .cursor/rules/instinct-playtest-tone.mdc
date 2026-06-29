@@ -1,0 +1,48 @@
+---
+description: Instinct RPG — playtest player copy is welcoming and hand-first
+globs: "*primer*.html,*quick-ref*.html,instinct-mc.html"
+alwaysApply: false
+---
+
+# Instinct RPG — Playtest tone
+
+Copy for **players** (primer, quick ref, MC wizards) should feel like an invitation to the table —
+not a rules lawyer or a behavior cop.
+
+## Voice principles
+
+1. **Hand-first** — Start from what surfaced in the hand (“look at what’s live right now”), not from
+   pre-planned builds or optimal plays.
+2. **Welcoming FAQ** — Answer “can I…?” with yes-when / how-to / ask-the-GM. Avoid scolding (“don’t
+   plan three turns ago”, “you’re doing it wrong”).
+3. **GM as teacher** — Normalize not knowing everything upfront; point to glossary taps and table
+   teaching for advanced mechanics (see `instinct-teach-the-table.mdc`).
+4. **Partial control is a feature** — Weird hands, thin hands, and “wrong” cards are story fuel, not
+   failures of system literacy.
+
+## Locked rhetoric (do not drift without doctrine update)
+
+- Deck = character; hand = Instincts right now  
+- Crit = natural **6**; Flourish = **gain** options from the card (don’t “give up” 6s)  
+- Partial ≠ failure; Miss = natural **1** only  
+- Empty / thin hand = pacing signal, not punishment  
+
+## Multiple-choice delivery
+
+When refining scope or tone with Annie, use **one question per turn** with tappable options:
+
+1. `AskQuestion` tool (when available)  
+2. `instinct-mc.html?session=…` (Cloud Agents / no AskQuestion)  
+3. Plain-text A/B/C — last resort  
+
+See `instinct-collaboration.mdc`.
+
+## Glossary & golden rules
+
+- Glossary `<summary>`: **keyword only** — no subtitle stems (“When the dice come out”).
+- Golden rules: short, memorable, attributed when quoted (playtester voice is fine).
+- Walkthroughs: named fiction + show the math (e.g. 2d6 + Aid = 3d6).
+
+## Ship
+
+After tone/copy passes on player assets: commit + push `main` per `instinct-git.mdc`.
