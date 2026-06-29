@@ -163,12 +163,10 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Ancestry** *(Snap Check — locked June 2026; proof: `ancestry-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
-- Trigger + setup (italic): **Once per Scene** · niche fictional gate · attempt language ending in
-  **Snap Check** (*try to … and make a Snap Check*)
-- **Snap Check** block — shared bands on every Ancestry card:
-  - **1–3** — one-line thematic failure
-  - **4–8** — choose **1** of three CRPG-verb options
-  - **9+** — choose **2** of the same three
+- Trigger + setup (italic): **Once per Scene** · niche fictional gate · ends with *make a*
+  **Snap Check:** (colon — no duplicate label, no *try to*)
+- **Three options** — CRPG verb stack (`bf-choice` rows), same list for all bands
+- **Snap bands** — one compact footer line: **1–3** Fails · **4–8** Choose 1 · **9+** Choose 2
 - Header: `Ancestry` chip + **`Act`** or **`React`** (defensive/underdog cards may be React)
 - No Origin stem (heritage write-in lives on Ancestry sheet card) · ★ pip
 

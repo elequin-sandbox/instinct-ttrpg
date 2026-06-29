@@ -122,12 +122,11 @@ Choose one:
 
 ```
 [Flavor — 1 line]
-Once per Scene, [niche fictional trigger], try to [ancestry-flavored attempt] and make a Snap Check.
-
-Snap Check:
-1–3 — [thematic failure]
-4–8 — Choose 1: **Verb** — … · **Verb** — … · **Verb** — …
-9+ — Choose 2 from the above.
+Once per Scene, [niche trigger], make a Snap Check:
+**Verb** — …
+**Verb** — …
+**Verb** — …
+1–3 Fails · 4–8 Choose 1 · 9+ Choose 2
 ```
 
 **Rules:**

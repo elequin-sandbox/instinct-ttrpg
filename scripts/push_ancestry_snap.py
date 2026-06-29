@@ -19,7 +19,7 @@ def main() -> None:
         raise SystemExit(f"Batch file missing: {BATCH_OUT} — run build_ancestry_snap.py --write first")
     batch = json.loads(BATCH_OUT.read_text(encoding="utf-8"))
     for item in batch:
-        if "snap-sec" not in item.get("HTML", ""):
+        if "snap-compact" not in item.get("HTML", ""):
             raise SystemExit(f"Batch missing Snap Check block: {item.get('Card_Key')}")
     print(f"Prepared {len(batch)} rows from {BATCH_OUT.name}")
     push_baserow(batch)
