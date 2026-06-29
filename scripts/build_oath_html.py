@@ -64,69 +64,39 @@ OATH_OF_PREFIX = (
     'border-radius:3px;line-height:1.2;">Oath of</span>'
 )
 
-# Shared phrase styling — verb, *the*, noun read as one golden constructed line.
+# Phrase typography — verb, *the*, noun as one golden constructed line.
 VOW_TERM = (
-    "font-family:'EB Garamond',Georgia,serif;font-size:7.5px;font-weight:700;font-style:italic;"
-    "color:var(--ad,#976e09);letter-spacing:0.25px;line-height:1.1;"
+    "font-family:'EB Garamond',Georgia,serif;font-size:9px;font-weight:700;font-style:italic;"
+    "color:var(--ad,#976e09);letter-spacing:0.35px;line-height:1.2;"
 )
 
-KW_SM = (
-    "font-size:7px;padding:0 2px;border-radius:2px;line-height:1.35;"
-    "vertical-align:baseline;font-weight:700;"
+VOW_THE = (
+    "font-family:'EB Garamond',Georgia,serif;font-size:11px;font-weight:700;font-style:italic;"
+    "color:var(--ad,#976e09);letter-spacing:0.5px;line-height:1;"
 )
 
-DIE_SLOT = (
-    '<span class="die-slot kw kw-crit" style="flex-shrink:0;width:16px;height:16px;'
-    "display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:700;"
-    'border-radius:3px;margin:1px;line-height:1;">{n}</span>'
+ROW_INDEX = (
+    '<span class="vow-ix" style="flex-shrink:0;min-width:12px;height:12px;padding:0 2px;'
+    "display:inline-flex;align-items:center;justify-content:center;"
+    "font-family:system-ui,-apple-system,sans-serif;font-size:8px;font-weight:800;"
+    "color:#fffef8;background:var(--a,#B8860B);border-radius:3px;"
+    'line-height:1;box-shadow:0 0 0 0.5px var(--ad,#976e09);">{n}</span>'
 )
 
-PILL = (
-    '<div class="vow-entry" style="display:flex;align-items:stretch;width:100%;min-height:18px;'
-    'border:0.5px solid rgba(184,134,11,0.2);border-radius:3px;overflow:hidden;background:rgba(255,252,245,0.5);">'
-    + DIE_SLOT
-    + '<span class="vow-term" style="flex:1;display:flex;align-items:center;justify-content:center;'
-    "padding:1px 4px 1px 2px;"
-    + VOW_TERM
-    + 'word-break:break-word;text-align:center;text-transform:none;">'
-    "{word}</span></div>"
-)
-
-BLANK_PILL = (
-    '<div class="vow-entry vow-entry-blank" style="display:flex;align-items:center;width:100%;'
-    "min-height:24px;border:0.5px solid rgba(184,134,11,0.25);border-radius:3px;overflow:hidden;"
-    'background:rgba(255,252,245,0.55);">'
-    + DIE_SLOT
-    + '<div class="writein-line" style="flex:1;min-height:16px;margin:3px 6px 3px 2px;'
-    'border-bottom:1px dashed rgba(184,134,11,0.4);"></div></div>'
-)
-
-VOW_GRID = (
-    '<div class="vow-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'
-    'gap:2px;margin:2px 0;width:100%;">{cells}</div>'
-)
-
-BLANK_VOW_GRID = (
-    '<div class="vow-grid vow-grid-blank" style="display:grid;'
-    'grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(24px,auto));'
-    'gap:3px;margin:2px 0;width:100%;">{cells}</div>'
-)
-
-VOW_CELL = '<div class="vow-cell" style="display:flex;min-width:0;">{pill}</div>'
-
-THE_DIVIDER = (
-    '<div class="vow-the" style="display:flex;align-items:center;justify-content:center;'
-    'gap:5px;height:11px;margin:1px 0;">'
-    '<span style="flex:1;border-top:1px dotted rgba(184,134,11,0.3);"></span>'
-    '<span class="vow-term" style="'
-    + VOW_TERM
-    + 'padding:0 3px;">the</span>'
-    '<span style="flex:1;border-top:1px dotted rgba(184,134,11,0.3);"></span></div>'
+DIE_TARGET = (
+    '<span class="die-target" style="flex-shrink:0;width:22px;height:22px;'
+    "border:1.5px dashed rgba(184,134,11,0.55);border-radius:5px;"
+    'background:rgba(255,252,245,0.65);display:inline-block;"></span>'
 )
 
 VOW_PHRASE = (
-    '<div class="vow-phrase" style="border:1px dotted rgba(184,134,11,0.5);border-radius:10px;'
-    'padding:4px 5px 5px;margin:1px 0;">{inner}</div>'
+    '<div class="vow-phrase" style="border:1px dotted rgba(184,134,11,0.55);border-radius:10px;'
+    'padding:5px 6px 6px;margin:2px 0;">{inner}</div>'
+)
+
+KW_SM = (
+    "font-size:7.5px;padding:0 2px;border-radius:2px;line-height:1.35;"
+    "vertical-align:baseline;font-weight:700;"
 )
 
 ENTER_VOW = (
@@ -145,8 +115,12 @@ BREAK_VOW = (
     '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
 )
 
-BODY_STYLE = "gap:3px;padding:4px 9px 32px;"
-TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 30px;"
+BODY_STYLE = "gap:4px;padding:4px 9px 32px;"
+TEMPLATE_BODY_STYLE = "gap:4px;padding:3px 8px 30px;"
+WRITEIN = (
+    '<div class="writein-line" style="flex:1;min-height:15px;'
+    'border-bottom:1px dashed rgba(184,134,11,0.45);"></div>'
+)
 
 
 def _hdr_name(name: str = "", *, blank: bool = False) -> str:
@@ -183,52 +157,121 @@ def _hdr_sub(sub: str = "", *, blank: bool = False) -> str:
 
 
 def etxt(content: str, *, extra_style: str = "") -> str:
-    style = f"font-size:8px;line-height:1.42;text-align:left;{extra_style}"
+    style = f"font-size:8.5px;line-height:1.45;text-align:left;{extra_style}"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
 def etxt_break(content: str) -> str:
-    style = "font-size:7.5px;line-height:1.42;color:#1a1008;text-align:left;"
+    style = "font-size:8px;line-height:1.45;color:#1a1008;text-align:left;"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
-def _pill(n: int, word: str | None = None) -> str:
-    if word is None:
-        return BLANK_PILL.format(n=n)
-    return PILL.format(n=n, word=word)
+def _row_index(n: int) -> str:
+    return ROW_INDEX.format(n=n)
 
 
-def word_grid(words: list[str] | None = None, *, blank: bool = False) -> str:
+def _indexed_row(
+    n: int,
+    word: str | None,
+    *,
+    side: str,
+    align: str,
+    blank: bool,
+) -> str:
+    """side: verb | noun. align: outward (default) | meet (verbs→right, nouns→left)."""
+    gap = "gap:5px;"
+    base = f"display:flex;align-items:center;{gap}min-height:15px;padding:2px 0;width:100%;"
+    term = WRITEIN if blank else f'<span style="{VOW_TERM}">{word}</span>'
+    ix = _row_index(n)
+
+    if align == "meet" and side == "verb":
+        style = base + "justify-content:flex-end;"
+        inner = term + ix
+    elif align == "meet" and side == "noun":
+        style = base + "justify-content:flex-start;"
+        inner = ix + term
+    else:
+        style = base + "justify-content:flex-start;"
+        inner = ix + term
+
+    return f'<div class="vow-row" style="{style}">{inner}</div>'
+
+
+def word_stack(
+    *,
+    blank: bool = False,
+    verbs: list[str] | None = None,
+    nouns: list[str] | None = None,
+    align: str = "outward",
+) -> str:
+    """L→R mad lib — dice in top slots; numbered verb/noun columns below."""
+    phrase_top = (
+        '<div class="vow-skeleton" style="display:flex;align-items:center;justify-content:center;'
+        'gap:10px;margin:0 0 7px;padding:2px 0 4px;">'
+        + DIE_TARGET
+        + f'<span style="{VOW_THE}">the</span>'
+        + DIE_TARGET
+        + "</div>"
+    )
+    vlist = verbs or []
+    nlist = nouns or []
+    rows = (
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:baseline;">'
+        + "".join(
+            f'<div>{_indexed_row(i + 1, None if blank else vlist[i], side="verb", align=align, blank=blank)}</div>'
+            f'<div>{_indexed_row(i + 1, None if blank else nlist[i], side="noun", align=align, blank=blank)}</div>'
+            for i in range(6)
+        )
+        + "</div>"
+    )
+    inner = (
+        phrase_top
+        + '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.4);padding-top:5px;">'
+        + rows
+        + "</div>"
+    )
+    return VOW_PHRASE.format(inner=inner)
+
+
+def _patron_mark_grid() -> str:
+    """Six blank mark slots for Warlock patron template (3×2)."""
     cells = []
     for i in range(6):
         n = i + 1
-        pill = _pill(n, None if blank else words[i])  # type: ignore[index]
-        cells.append(VOW_CELL.format(pill=pill))
-    grid = BLANK_VOW_GRID if blank else VOW_GRID
-    return grid.format(cells="".join(cells))
-
-
-def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
-    verb_grid = word_grid(blank=blank) if blank else word_grid(verbs or [])
-    noun_grid = word_grid(blank=blank) if blank else word_grid(nouns or [])
-    inner = verb_grid + THE_DIVIDER + noun_grid
-    return VOW_PHRASE.format(inner=inner)
+        cells.append(
+            '<div style="display:flex;align-items:center;gap:3px;padding:1px 0;">'
+            + _row_index(n)
+            + '<div class="writein-line" style="flex:1;min-height:14px;'
+            'border-bottom:1px dashed rgba(184,134,11,0.4);"></div></div>'
+        )
+    return (
+        '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'
+        'gap:3px 4px;margin:2px 0;">'
+        + "".join(cells)
+        + "</div>"
+    )
 
 
 def _break_section() -> str:
     return (
         '<div class="rule" style="margin:5px 0 3px;"></div>'
-        '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7px;'
+        '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;'
         "letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;"
         'margin-bottom:2px;">Break Your Oath:</div>'
         + etxt_break(BREAK_VOW)
     )
 
 
-def _body_block(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
+def _body_block(
+    *,
+    blank: bool = False,
+    verbs: list[str] | None = None,
+    nouns: list[str] | None = None,
+    align: str = "outward",
+) -> str:
     return (
-        etxt(ENTER_VOW, extra_style="margin-bottom:1px;")
-        + word_stack(blank=blank, verbs=verbs, nouns=nouns)
+        etxt(ENTER_VOW, extra_style="margin-bottom:2px;")
+        + word_stack(blank=blank, verbs=verbs, nouns=nouns, align=align)
         + '<div class="rule" style="margin:4px 0 2px;"></div>'
         + etxt(FULFILL_VOW)
     )
@@ -244,12 +287,12 @@ def _hdr(*, name: str = "", sub: str = "", blank: bool = False) -> str:
     )
 
 
-def build(oath: dict, *, include_break: bool = True) -> str:
+def build(oath: dict, *, include_break: bool = True, phrase_align: str = "outward") -> str:
     return (
         '<div class="card paladin acc-paladin">'
         + _hdr(name=oath["name"], sub=oath["sub"])
         + f'<div class="card-body" style="{BODY_STYLE}">'
-        + _body_block(verbs=oath["verbs"], nouns=oath["nouns"])
+        + _body_block(verbs=oath["verbs"], nouns=oath["nouns"], align=phrase_align)
         + (_break_section() if include_break else "")
         + '</div><div class="idtag">Paladin</div></div>'
     )
@@ -292,7 +335,7 @@ def build_patron_template() -> str:
         + blank_sub
         + '</div><div class="card-body" style="gap:3px;padding:4px 9px 28px;">'
         '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">The Marks of</div>'
-        + word_grid(blank=True)
+        + _patron_mark_grid()
         + '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">Invoke Their Name</div>'
         + f'<div class="effect-text" style="font-size:9px;line-height:1.4;">{invoke}</div>'
         + '<div class="rule"></div>'

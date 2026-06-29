@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Paladin Oath v7.** L→R mad-lib layout (production); larger gold type + row index chips; alignment compare page (outward vs meet-at-the).
 - [June 29 2026] — **Paladin Oath v6b.** Dotted phrase frame; golden Garamond verb/*the*/noun; smaller Boost/Resolve/Toll pills.
 - [June 29 2026] — **Paladin Oath v6.** Horizontal die-slot rows; Core+Oath caps; *Oath of* ribbon title; Scene start / Break Your Oath copy.
 - [June 29 2026] — **Paladin Oath v5b.** Blank Oath/Patron templates: larger dashed write-in cells (3×2 grid, pen-sized); hdr-blankname title/subtitle hints.
