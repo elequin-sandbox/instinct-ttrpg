@@ -15,9 +15,24 @@ trade-offs. Use them proactively — not only in card-design sessions.
 - Doctrine or assets could diverge (primer vs cards vs GM guide).
 - A playtest deadline forces prioritization.
 
-Prefer **labeled options (A / B / C or 1 / 2 / 3)** over open-ended “what do you want?” questions.
-Keep each option concrete enough to pick in one reply. Add a short **“other”** escape hatch when
-useful.
+## Delivery format (tappable MC — required)
+
+Present MC questions **one at a time** with **clickable buttons**, not a wall of A/B/C text.
+
+**Priority order:**
+
+1. **`AskQuestion` tool** (when available in the agent environment) — one question per call;
+   `allowMultiple: false`; concrete option labels.
+2. **`instinct-mc.html` wizard** (when `AskQuestion` is unavailable — e.g. Cloud Agents) — publish a
+   session in that file (or extend `SESSIONS`), link Annie to
+   `instinct-mc.html?session=<id>&step=1`, and wait for her copied reply or letter picks. Only the
+   active question is shown; optional context lives behind **Need context?** (collapsed).
+3. **Text fallback** — last resort only; still **one question per message**.
+
+Never dump all MC questions in a single chat turn.
+
+Option labels stay **A / B / C** (or **1 / 2 / 3**) with a one-line description each. Add an **Other**
+escape only when genuinely needed.
 
 ## When not to block on questions
 
