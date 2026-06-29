@@ -135,6 +135,7 @@ Once per Scene, when [condition], React with a Snap Check:
 - Shared bands: **1–3** fail · **4–8** choose 1 · **9+** choose 2 (requires 6 + explode)
 - Setup uses *try to* — never presuppose success
 - Options: niche fiction; **[Boost 1]** max; no rerolls, no Hit Die costs, no guaranteed success
+- **9+ synergy:** three options use **self / ally / scene** vectors — any pair should combine narratively (e.g. Orc Rush + Roar, not Rush + Hold)
 - **Act** (player spots opening) or **React** (defensive/underdog triggers — Halfling, Dwarf, Half-Orc)
 - Proof: `ancestry-snap-proof.html` · Builder: `scripts/build_ancestry_snap.py`
 
