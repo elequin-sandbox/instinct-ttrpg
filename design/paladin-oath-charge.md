@@ -30,7 +30,7 @@ Mirrors Warlock **Patron** pick:
 2. Pick **one** — lives in **Active area** permanently.
 3. Auto cores: Loadout · Bulwark · Build Your Deck.
 
-**Blank template:** `oath-template-paladin-core` — fill title, subtitle, verbs, nouns; procedure is pre-printed.
+**Blank template:** `oath-template-paladin-core` — fill title, subtitle, verbs, nouns; procedure is pre-printed. Word slots use dashed **write-in lines** (3×2 grid, pen-sized).
 
 ---
 

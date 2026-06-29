@@ -34,6 +34,8 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .hdr-sub{font-style:italic;font-size:9px;color:#5a4020;text-align:center;line-height:1.35;padding:0 4px 2px;}
 .zone-label{font-family:'EB Garamond',Georgia,serif;font-size:6px;letter-spacing:0.8px;text-transform:uppercase;color:#7a6030;}
 .rule{height:0.5px;background:#c8a96e;opacity:.45;}
+.hdr-blankname{display:flex;align-items:center;justify-content:center;}
+.writein-line{box-sizing:border-box;}
 .idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cardwrap{position:relative;width:2.5in;margin:0 auto;}
 .cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
