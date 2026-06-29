@@ -76,10 +76,11 @@ html = f"""<!doctype html>
 </head>
 <body>
 <h1>Paladin Oath — Scene Vow Proof</h1>
-<p class="sub">Five Oath Core cards + blank templates. Header tags <strong>Core</strong> + <strong>Oath</strong>; ribbon reads <em>Oath of …</em> Per-scene <strong>Vow</strong> from the 3×2 grid.</p>
+<p class="sub">Five Oath Core cards + blank templates. L→R mad-lib: dice in top slots, numbered verb/noun columns. Header tags <strong>Core</strong> + <strong>Oath</strong>; ribbon reads <em>Oath of …</em></p>
 <div class="rule-box">
-<strong>Vow</strong> — At <strong>Scene start</strong>, roll 2d6 (one die per row; same column = matching face). <strong>Fulfill</strong> once per Scene when your <strong>Action</strong> serves your <strong>Vow</strong> — <strong>Boost 2</strong> from both dice.<br><br>
-<strong>Break Your Oath</strong> — Describe defying your <strong>Vow</strong>; place dice into <strong>Resolve</strong>. GM gains <strong>Toll 2</strong> and must spend it against you this scene.
+<strong>Vow</strong> — At <strong>Scene start</strong>, place 2d6 in the top slots; each die face picks its column row. Read left → right: <em>Verb the Noun</em>. <strong>Fulfill</strong> once per Scene — <strong>Boost 2</strong> from both dice.<br><br>
+<strong>Break Your Oath</strong> — Defiance → dice to <strong>Resolve</strong>; GM <strong>Toll 2</strong> vs you this scene.<br><br>
+Alignment comparison (outward vs meet-at-the): <a href="paladin-oath-layout-exploration.html" style="color:var(--gold);">paladin-oath-layout-exploration.html</a>
 </div>
 <section><div class="grid">{cards}</div></section>
 {templates}
