@@ -60,7 +60,7 @@ VARIANTS = [
     (
         build(OPEN_HAND, phrase_align="meet"),
         "Current — L→R mad lib (meet at *the*)",
-        "3-column spine: indices centered under dice; ornate fleur-de-lis ring on *the*.",
+        "Paired index columns — each die slot gets its own 1–6 spine underneath.",
     ),
 ]
 
