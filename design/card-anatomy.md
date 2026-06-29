@@ -4,7 +4,7 @@
 > ornaments, per-type body anatomy, and the **keyword formatting gospel** (`core-rules.md` points
 > here for it). Design/tokens live here; the copy-paste rendering **code** that implements them lives
 > in the `at-card-renderer` skill.
-> **Status:** current. **Last updated:** June 28 2026.
+> **Status:** current. **Last updated:** June 29 2026.
 >
 > **Sibling docs:** rules/keyword meanings → `design/core-rules.md` · wording & forbidden terms →
 > `design/writing-conventions.md` · classes → `design/classes.md` · inventory → `card-inventory.md`.
@@ -155,21 +155,22 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 - Former anatomy: flavor · stem fill-in · Dramatic/Suppression choose-one · Dismiss/Cleanse · ✕ pip
 
 **Background**
-- Trigger (italic): the conditional situation that activates the card (no separate flavor line)
-- Body — one of two variants: *Choose-one* (3 options in CRPG verb format) · *Passive-question*
-  (3 GM-answerable questions + "The GM answers honestly.")
-- **ORIGIN** label → past-tense stem → 4 writing lines · Footer: `any · background` · ★ pip
+- Flavor (italic, 2nd person present): 1 sentence thematic core
+- Trigger (italic): the conditional situation that activates the card
+- Body — one of three variants: *Choose-one* (3 options in CRPG verb format) · *Luck-check*
+  · *Passive-question* (3 GM-answerable questions + "The GM answers honestly.")
+- No Origin stem, no writing lines (backstory write-in lives on Character sheet cards) · ★ pip
 
 **Ancestry**
 - Flavor (italic, 2nd person present): 1 sentence thematic core
 - Trigger (italic) + Body: same three variants as Background
-- **ORIGIN** → stem → 3 writing lines · Footer: `any · ancestry` · ★ pip
-- *(Dragonborn special two-blank stem: "My blood runs ___ — I claimed it when ___")*
+- No Origin stem (heritage write-in lives on Ancestry sheet card) · ★ pip
 
 **Bond**
 - Flavor (italic, 2nd person present): 1 sentence
-- Trigger: *"Find [someone/something]. [Action]. If the moment happens, you both gain* `[Boost 1]`*."*
-- **ORIGIN** → stem → 3 writing lines · Footer: `any · bond` · ★ pip
+- **Find / Act / Then** zones: *Find* (who or what to look for) · *Act* (what to do in conversation)
+  · *Then* (if it lands, you both gain `[Boost 1]`)
+- No Bond stem (relationship write-in lives on Character sheet card) · ★ pip
 
 **Connection** *(session-start template — one per player, filled at table)*
 - Header top row: `CONNECTION` badge (left) · `Act` badge (right) — no ⚡, no 🔒
