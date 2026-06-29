@@ -140,6 +140,43 @@
       border-radius: 4px; text-align: center; letter-spacing: 0.04em; line-height: 1.3;
     }
     .ct-desc { font-size: 15.5px; padding-top: 2px; }
+    .step-sub {
+      margin-top: 12px; padding: 12px 14px; background: rgba(200,169,110,0.06);
+      border: 1px solid var(--border); border-radius: 6px;
+    }
+    .step-sub-title {
+      font-family: Cinzel, serif; font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+    }
+    .step-sub p { font-size: 15px; margin: 0 0 8px; }
+    .step-sub p:last-child { margin: 0; }
+    .ex-steps { display: flex; flex-direction: column; gap: 14px; margin: 14px 0; }
+    .ex-step {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
+    }
+    .ex-step-num {
+      font-family: Cinzel, serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+    }
+    .ex-step p { font-size: 15px; margin: 8px 0 0; }
+    .die-removed { opacity: 0.35; text-decoration: line-through; }
+    .lead-pair { margin: 20px 0 18px; }
+    .lead-pair-line {
+      font-family: Cinzel, serif; font-size: clamp(16px, 4vw, 20px); font-weight: 600;
+      color: var(--gold-light); line-height: 1.45; margin-bottom: 6px;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 8px; }
+    .faq-item {
+      border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-card);
+    }
+    .faq-item summary {
+      list-style: none; cursor: pointer; padding: 14px 16px; font-weight: 600; color: var(--gold-light);
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { background: rgba(200,169,110,0.06); }
+    .faq-body { padding: 0 16px 16px; font-size: 16px; color: var(--text-main); line-height: 1.6; border-top: 1px solid var(--border); }
+    .faq-body p { margin: 12px 0 0; }
     .note { font-size: 14px; color: var(--text-muted); font-style: italic; padding: 7px 12px; border-left: 2px solid var(--border); margin: 10px 0; }
     .chargen-steps { display: flex; flex-direction: column; gap: 20px; margin: 20px 0; }
     .chargen-step { display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; }
@@ -249,19 +286,14 @@
   <section class="section">
     <div class="section-eyebrow">02</div>
     <h2 class="section-title">Your Character &amp; Their Instincts</h2>
-    <div class="dh-grid">
-      <div class="dh-block">
-        <div class="dh-label">Your Character</div>
-        <div class="dh-sub">Your full <strong>deck</strong> — every card that makes up who they are. Past, bonds, class abilities, the qualities they carry. This is the whole person.</div>
-      </div>
-      <div class="dh-block is-hand">
-        <div class="dh-label">Their Instincts</div>
-        <div class="dh-sub">Your <strong>hand</strong> — only part of that person, right now. What’s surfacing under this scene’s pressure. This is what you play with.</div>
-      </div>
+    <div class="lead-pair">
+      <div class="lead-pair-line">Your Deck = Your Character.</div>
+      <div class="lead-pair-line">Your Hand = Their Instincts Right Now.</div>
     </div>
-    <p>You never have access to all of your character’s abilities at once. That’s intentional — and it’s what makes Instinct RPG different. Each scene you draw a fresh hand (typically 5 cards). You don’t pick what shows up. You discover what your character <em>wants</em> to do, then narrate why or how they act on it.</p>
-    <p>The game is named for this: your character’s <strong>Instincts</strong> are telling a story through you. Your job isn’t to optimize a build — it’s to freestyle a fun scene from whatever lands in your hand and make it make sense.</p>
-    <p>At scene end, the hand is discarded and you draw again. A Bold Instinct in one scene might be gone the next. That’s the game.</p>
+    <p>Your <strong>deck</strong> is the full person — every card that makes up who they are. Your <strong>hand</strong> is only a slice of that person in this scene: the Instincts, bonds, and abilities surfacing under right-now pressure.</p>
+    <p>You never have your whole character available at once. That’s the point. Each scene you draw a fresh hand (typically 5 cards). You don’t choose what shows up — you discover what your character <em>wants</em> to do, then narrate why or how they act on it. The fun is justifying the weird hand you got, not optimizing a build.</p>
+    <p>The game is named for this. Your character’s <strong>Instincts</strong> are telling a story through you — and you’re along for the ride, freestyling how it looks at the table.</p>
+    <p>At scene end, the hand is discarded and you draw again. What drove them last scene might be gone next scene. That’s the game.</p>
     <div class="callout">
       <div class="callout-label">When hands run low</div>
       <p>As a scene goes on, hands thin out. When the party’s average hand drops to about 2 cards, expect the GM to transition or close the scene. An empty hand is a <em>pacing signal</em>, not a punishment.</p>
@@ -271,45 +303,101 @@
   <section class="section">
     <div class="section-eyebrow">03</div>
     <h2 class="section-title">Basic Checks</h2>
-    <p>Roll only when the outcome is genuinely uncertain. When you do roll, you build a pool of d6s and roll against the GM’s opposing pool on the table. Your dice clear theirs one at a time. That’s the core of resolution.</p>
+    <p>Roll only when the outcome is genuinely uncertain. You build a pool of d6s and roll against the GM’s opposing pool on the table. Then you match your dice against theirs. That’s the core of resolution.</p>
     <div class="steps">
       <div class="step">
         <div class="step-name">Build</div>
         <div class="step-body">
-          <p>Your base pool at Tier 1 (levels 1–3) is <strong>2d6.</strong> Cards add dice as <span class="kw kw-boost">Boost N</span>. One ally may discard a card to add 1 die — that’s <span class="kw kw-aid">Aid</span>. <strong>Only one ally per check; no self-Aid.</strong></p>
+          <p>Your base pool at Tier 1 (levels 1–3) is <strong>2d6.</strong></p>
+          <p><span class="kw kw-boost">Boost</span> dice can come from card effects — and sometimes from the GM rewarding sharp play or great roleplay. Each Boost adds dice to your pool.</p>
           <p>The GM places their opposing dice <em>before you roll</em> — you can see what you’re up against.</p>
+          <div class="step-sub">
+            <div class="step-sub-title">Aid</div>
+            <p>One ally may discard a card from their hand to add 1 die to <em>your</em> check. That’s <span class="kw kw-aid">Aid</span>.</p>
+            <p><strong>Only one ally per check. No self-Aid.</strong></p>
+          </div>
         </div>
       </div>
       <div class="step">
         <div class="step-name">Roll</div>
-        <div class="step-body"><p>Roll all your dice at once. Don’t rearrange until you’ve read them.</p></div>
+        <div class="step-body">
+          <p>Roll all your dice at once. Don’t rearrange until you’ve read them.</p>
+          <div class="step-sub">
+            <div class="step-sub-title">Misses — the 1s</div>
+            <p>Any die showing a natural <strong>1</strong> is a <span class="kw kw-miss">Miss</span>. Remove it immediately — it won’t help clear the GM’s pool.</p>
+          </div>
+          <div class="step-sub">
+            <div class="step-sub-title">Crits — the 6s</div>
+            <p>Any die showing a <strong>6</strong> is a <span class="kw kw-crit">Crit</span>. It <strong>explodes</strong>: roll one bonus die and add it to your pool. A bonus die showing 6 counts as another Crit but does not explode again.</p>
+          </div>
+        </div>
       </div>
       <div class="step">
         <div class="step-name">Read</div>
         <div class="step-body">
-          <p><strong>Pull the 1s.</strong> Each natural 1 is a <span class="kw kw-miss">Miss</span> — removed immediately. Each Miss gives the GM 1 <span class="kw kw-toll">Toll</span>, whether you succeed or not.</p>
-          <p><strong>Count the 6s.</strong> Each 6 is a <span class="kw kw-crit">Crit</span> — it explodes (roll one bonus die). Count your Crits after all dice resolve.</p>
-          <p><strong>Spend Crits on Flourishes.</strong> Some ability cards list bonus options called <strong>Flourishes</strong> — spend earned Crits to take them.</p>
-          <p><strong>Clear the pool.</strong> Remaining dice clear the GM’s dice one at a time. Clear them all: success. Some remain: partial — the GM says what landed.</p>
+          <p><strong>Toll.</strong> Each Miss (each 1 you removed) gives the GM 1 <span class="kw kw-toll">Toll</span> — whether you succeed or not.</p>
+          <p><strong>Flourishes.</strong> Count your Crits (dice still showing 6). Each Crit lets you <strong>gain</strong> one Flourish from the ability card you played — bonus options listed on the card. You don’t give up your 6s; you’re just counting them.</p>
+          <p><strong>Clear the pool.</strong> Assign your remaining dice against the GM’s dice:</p>
+          <p>• If your die shows <strong>equal or higher</strong> than a GM die, remove both.<br>
+          • If yours is <strong>lower</strong>, you may <strong>reduce</strong> that GM die by 1 and remove yours.</p>
+          <p>Repeat until you’re out of dice or GM dice. Clear them all: success. Some GM dice remain: partial.</p>
         </div>
       </div>
     </div>
-    <div class="outcomes">
-      <div class="outcome out-success"><div class="outcome-lbl">Cleared</div><div class="outcome-desc">Full success. Narrate it. Spend Crits on Flourishes if you earned any.</div></div>
-      <div class="outcome out-partial"><div class="outcome-lbl">Partial</div><div class="outcome-desc">Some GM dice remain — not a Miss. The GM adjudicates what was achieved.</div></div>
-      <div class="outcome out-miss"><div class="outcome-lbl">Miss (1s)</div><div class="outcome-desc">Already handled in step 1. GM gains Toll. The scene keeps moving — a Miss is never a full stop.</div></div>
-    </div>
+
     <div class="callout">
-      <div class="callout-label">Example</div>
-      <p>3d6 vs GM pool [4] [5]:</p>
-      <div class="dice-row">
-        <div class="die die-player">6</div><div class="die die-player">3</div><div class="die die-player">1</div>
-        <span class="die-label">yours</span>
-        <span style="color:var(--text-faint);margin:0 4px">vs</span>
-        <div class="die die-gm">4</div><div class="die die-gm">5</div>
-        <span class="die-label">GM</span>
+      <div class="callout-label">Walkthrough example</div>
+      <div class="ex-steps">
+        <div class="ex-step">
+          <div class="ex-step-num">Step 1 — Roll</div>
+          <p>You roll <strong>3d6</strong> against the GM’s pool <strong>[4] [5]</strong>:</p>
+          <div class="dice-row">
+            <div class="die die-player">6</div><div class="die die-player">3</div><div class="die die-player">1</div>
+            <span class="die-label">yours</span>
+            <span style="color:var(--text-faint);margin:0 4px">vs</span>
+            <div class="die die-gm">4</div><div class="die die-gm">5</div>
+            <span class="die-label">GM</span>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">Step 2 — Remove Misses</div>
+          <p>The <strong>1</strong> comes out. GM gains 1 <span class="kw kw-toll">Toll</span>. You keep <strong>6</strong> and <strong>3</strong>.</p>
+          <div class="dice-row">
+            <div class="die die-player die-removed">1</div>
+            <div class="die die-player">6</div><div class="die die-player">3</div>
+            <span class="die-label">yours</span>
+            <span style="color:var(--text-faint);margin:0 4px">vs</span>
+            <div class="die die-gm">4</div><div class="die die-gm">5</div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">Step 3 — Crit explodes</div>
+          <p>The <strong>6</strong> is a Crit — roll a bonus die. It comes up <strong>4</strong>. You now have <strong>6, 3, 4</strong> and <strong>1 Crit</strong> toward Flourishes.</p>
+          <div class="dice-row">
+            <div class="die die-player">6</div><div class="die die-player">3</div><div class="die die-player">4</div>
+            <span class="die-label">yours</span>
+            <span style="color:var(--text-faint);margin:0 4px">vs</span>
+            <div class="die die-gm">4</div><div class="die die-gm">5</div>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">Step 4 — Clear dice</div>
+          <p>Assign your <strong>4</strong> against the GM’s <strong>4</strong> — both removed. Assign your <strong>6</strong> against the GM’s <strong>5</strong> — both removed. Your <strong>3</strong> is unused.</p>
+          <div class="dice-row">
+            <div class="die die-player">3</div>
+            <span class="die-label">leftover</span>
+          </div>
+        </div>
+        <div class="ex-step">
+          <div class="ex-step-num">Step 5 — Result</div>
+          <p>All GM dice cleared → <strong>full success.</strong> You gained <strong>1 Flourish</strong> option from your Crit. Narrate what you pulled off.</p>
+        </div>
       </div>
-      <p>The 1 is removed — GM gains 1 <span class="kw kw-toll">Toll</span>. The 6 is a <span class="kw kw-crit">Crit</span> and explodes (bonus 4). Your dice (6, 4, 3) clear the GM’s pool. <strong>Success — 1 Crit to spend on a Flourish.</strong></p>
+    </div>
+
+    <div class="outcomes">
+      <div class="outcome out-success"><div class="outcome-lbl">Success</div><div class="outcome-desc">All GM dice cleared. You achieved what you were going for. Gain Flourishes for any Crits you earned.</div></div>
+      <div class="outcome out-partial"><div class="outcome-lbl">Partial</div><div class="outcome-desc">Some GM dice remain after you’ve assigned all yours. Not a failure — the GM says what you got and what fell short.</div></div>
     </div>
     <p class="note">Specialized check formats on cards? Your GM explains those when a card calls for them — you don’t need them memorized now.</p>
   </section>
@@ -325,16 +413,17 @@
   <section class="section">
     <div class="section-eyebrow">05</div>
     <h2 class="section-title">Your Card Types</h2>
+    <p>There are a lot of card types — that’s on purpose. They let your character be expressive. Every card explains itself; read the card to learn how it works. You don’t need this list memorized.</p>
     <div class="card-types">
       <div class="ct-row"><div class="ct-chip" style="background:#1e2540;color:#d4e0f0">Instinct</div><div class="ct-desc">A single word — <em>Bold, Perceptive, Fierce</em>. <strong>Reveal</strong> when that quality drives an <strong>Action</strong>; choose benefit (<span class="kw kw-boost">Boost 2</span>) or hinder (<strong>Draw 2</strong>). GM agrees either way.</div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#1C3A5E;color:#dbeafe">Act</div><div class="ct-desc">Your primary move. One per spotlight moment. <em>Cost: 1.</em></div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#0C4A6E;color:#bae6fd">React</div><div class="ct-desc">Responses and interrupts — any time, in reaction to something. <em>Cost: 0.</em> Some carry <span class="kw kw-mill">Mill</span> (swap at scene start).</div></div>
-      <div class="ct-row"><div class="ct-chip" style="background:#1a3a1a;color:#9fd4a8">Core</div><div class="ct-desc">Your class’s permanent rules. Face-up in your Active area — never shuffled into the deck.</div></div>
+      <div class="ct-row"><div class="ct-chip" style="background:#1a3a1a;color:#9fd4a8">Core</div><div class="ct-desc">Your class’s permanent rules — usually <strong>at least 2</strong> cards. Place them face-up in front of you; they never shuffle into the deck.</div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#0f2d45;color:#c4d8e8">Background</div><div class="ct-desc">Your past and what it taught you. Fires when the fiction calls on that expertise.</div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#2a1a08;color:#d8c080">Ancestry</div><div class="ct-desc">Where you come from. Fires when heritage does something useful.</div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#0f2b15;color:#b8d0b0">Bond</div><div class="ct-desc">A connection you name in the moment — you and the other person each gain <span class="kw kw-boost">Boost 1</span>.</div></div>
-      <div class="ct-row"><div class="ct-chip" style="background:#2d1020;color:#f0d0e0">Connection</div><div class="ct-desc">A Bond to a specific party member, filled in at session start. Shuffled into <em>other players’</em> decks. Special rewards + an <span class="kw kw-aid">Aid</span> clause.</div></div>
-      <div class="ct-row"><div class="ct-chip" style="background:#92400E;color:#FEF3C7">Item</div><div class="ct-desc">Gear in your Active area. Most carry <span class="kw kw-mill">Mill</span> — swap at scene start if you don’t need it.</div></div>
+      <div class="ct-row"><div class="ct-chip" style="background:#2d1020;color:#f0d0e0">Connection</div><div class="ct-desc">A card about <em>you</em> — write <strong>your own character’s name</strong> on it at session start. It shuffles into <em>other players’</em> decks so they can connect with your character in play.</div></div>
+      <div class="ct-row"><div class="ct-chip" style="background:#92400E;color:#FEF3C7">Item</div><div class="ct-desc">Gear shuffled into your deck like any other card. Many carry <span class="kw kw-mill">Mill</span> — swap at scene start if the scene doesn’t call for it.</div></div>
     </div>
   </section>
 
@@ -353,7 +442,7 @@
   <section class="section">
     <div class="section-eyebrow">07</div>
     <h2 class="section-title">Building Your Deck</h2>
-    <p>Character creation is play — about an hour. Gather these in order. Each step below shows a sample card of that type. Backstory write-in lives on <strong>Character</strong>, <strong>Class</strong>, and <strong>Ancestry sheet cards</strong> (designed separately) — deck cards are triggers and mechanics only.</p>
+    <p>Character creation is play — about an hour. Gather these in order. Each step shows a sample card of that type. Backstory write-in lives on <strong>Character</strong>, <strong>Class</strong>, and <strong>Ancestry sheet cards</strong> (designed separately) — deck cards are triggers and mechanics only.</p>
     <div class="chargen-steps">
       <div class="chargen-step">
         <div class="chargen-num">1</div>
@@ -367,7 +456,7 @@
         <div class="chargen-num">2</div>
         <div>
           <div class="chargen-label">1 Bond</div>
-          <div class="chargen-desc">Choose one Bond card and add it to your deck. Each Bond has <strong>Find</strong>, <strong>Act</strong>, and <strong>Then</strong> zones — if it lands, you both gain <span class="kw kw-boost">Boost 1</span>.</div>
+          <div class="chargen-desc">Choose one Bond card and shuffle it into your deck. Each Bond has <strong>Find</strong>, <strong>Act</strong>, and <strong>Then</strong> zones — if it lands, you both gain <span class="kw kw-boost">Boost 1</span>.</div>
           <div class="primer-cards"><div id="bond-card-wrap"></div></div>
         </div>
       </div>
@@ -375,51 +464,73 @@
         <div class="chargen-num">3</div>
         <div>
           <div class="chargen-label">1 Connection</div>
-          <div class="chargen-desc">Write a party member’s name on the card. <strong>Keep it to the side</strong> — it will shuffle into <em>their</em> deck, not yours.</div>
+          <div class="chargen-desc">Write <strong>your own character’s name</strong> on the card. <strong>Keep it to the side</strong> — at session start it shuffles into other players’ decks, not yours.</div>
           <div class="primer-cards"><div id="connection-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">4</div>
         <div>
-          <div class="chargen-label">1 Item</div>
-          <div class="chargen-desc">Place in your Active area (not the deck).</div>
-          <div class="primer-cards"><div id="item-card-wrap"></div></div>
+          <div class="chargen-label">1 Background</div>
+          <div class="chargen-desc">Choose one of 12. Complete the <strong>ORIGIN</strong> stem on the card at the table. Shuffle into your deck.</div>
+          <div class="primer-cards"><div id="background-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">5</div>
         <div>
-          <div class="chargen-label">Class Core</div>
-          <div class="chargen-desc">Put your Core card(s) face-up <strong>in front of you</strong> — always available, never shuffled.</div>
-          <div class="primer-cards"><div id="core-card-wrap"></div></div>
+          <div class="chargen-label">1 Ancestry</div>
+          <div class="chargen-desc">Choose one of 10. Complete the ORIGIN stem. Shuffle into your deck.</div>
+          <div class="primer-cards"><div id="ancestry-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">6</div>
         <div>
-          <div class="chargen-label">12 Class Ability cards</div>
-          <div class="chargen-desc">Select 12 Acts and Reacts from your class. These make up the rest of your deck.</div>
-          <div class="primer-cards"><div id="ability-card-wrap"></div></div>
+          <div class="chargen-label">1 Item</div>
+          <div class="chargen-desc">Choose one Item and shuffle it into your deck like any other card.</div>
+          <div class="primer-cards"><div id="item-card-wrap"></div></div>
         </div>
       </div>
       <div class="chargen-step">
         <div class="chargen-num">7</div>
         <div>
+          <div class="chargen-label">Class Core — at least 2</div>
+          <div class="chargen-desc">Most classes give you <strong>two Core cards</strong>. Place them face-up <strong>in front of you</strong> — always available, never shuffled.</div>
+          <div class="primer-cards" style="flex-wrap:wrap">
+            <div id="core-card-wrap-a"></div>
+            <div id="core-card-wrap-b"></div>
+          </div>
+        </div>
+      </div>
+      <div class="chargen-step">
+        <div class="chargen-num">8</div>
+        <div>
+          <div class="chargen-label">12 Ability cards</div>
+          <div class="chargen-desc">Select 12 Ability cards from your class. Shuffle them into your deck.</div>
+          <div class="primer-cards"><div id="ability-card-wrap"></div></div>
+        </div>
+      </div>
+      <div class="chargen-step">
+        <div class="chargen-num">9</div>
+        <div>
           <div class="chargen-label">Check your Core</div>
-          <div class="chargen-desc">Read your Core card(s). If they tell you to grab additional cards at character creation — a weapon, stance, or kit — do that now.</div>
+          <div class="chargen-desc">Read your Core cards. If they tell you to grab additional cards at character creation — a weapon, kit, or extra pick — do that now.</div>
         </div>
       </div>
     </div>
     <div class="deck-math">
       <table>
-        <tr><th>In your deck (18)</th><th>Count</th></tr>
+        <tr><th>In your deck (21)</th><th>Count</th></tr>
         <tr><td>Instincts</td><td>5</td></tr>
         <tr><td>Bond</td><td>1</td></tr>
-        <tr><td>Class ability cards</td><td>12</td></tr>
-        <tr><th style="padding-top:12px">Active area (not in deck)</th><th></th></tr>
-        <tr><td>Item + Class Core</td><td>—</td></tr>
-        <tr><td>Connection</td><td>→ other player’s deck</td></tr>
+        <tr><td>Background</td><td>1</td></tr>
+        <tr><td>Ancestry</td><td>1</td></tr>
+        <tr><td>Item</td><td>1</td></tr>
+        <tr><td>Ability cards</td><td>12</td></tr>
+        <tr><th style="padding-top:12px">Not in the deck</th><th></th></tr>
+        <tr><td>Connection</td><td>→ other players’ decks</td></tr>
+        <tr><td>Class Core (2+)</td><td>face-up in front of you</td></tr>
       </table>
     </div>
   </section>
@@ -443,7 +554,7 @@
           <span class="gloss-term-left"><span class="kw kw-boost">Boost N</span><span class="gloss-hook">More dice in the pool</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
-        <div class="gloss-body"><p>Add <strong>N</strong> dice to a check pool from a card effect or ally help. Bonus dice expire at scene end. A Boost die showing a 1 is removed like any other Miss.</p></div>
+        <div class="gloss-body"><p>Add dice to a check pool — from card effects, <span class="kw kw-aid">Aid</span>, or sometimes the GM rewarding creative play or strong roleplay. Bonus dice expire at scene end. A Boost die showing a 1 is removed like any other Miss.</p></div>
       </details>
 
       <details class="gloss-term" id="kw-aid">
@@ -475,15 +586,15 @@
           <span class="gloss-term-left"><span class="kw kw-crit">Crit</span><span class="gloss-hook">A 6 on the die</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
-        <div class="gloss-body"><p>A natural <strong>6</strong>. It explodes — roll one bonus die and add it. After all dice resolve, count how many dice still show a 6. That’s how many Crits you earned to spend.</p></div>
+        <div class="gloss-body"><p>After a check, count dice still showing <strong>6</strong>. Each one lets you <strong>gain</strong> one Flourish option from the ability card you played. You keep your 6s on the table — you’re counting them, not giving them up.</p></div>
       </details>
 
       <details class="gloss-term" id="kw-flourish">
         <summary>
-          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Flourish</strong><span class="gloss-hook">Spend a Crit to take this</span></span>
+          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Flourish</strong><span class="gloss-hook">Bonus option on a card</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
-        <div class="gloss-body"><p>A bonus option listed on an ability card — not a die result. After a check, spend earned <span class="kw kw-crit">Crits</span> to take Flourishes from the card you played. Each Flourish costs one Crit unless the card says otherwise.</p></div>
+        <div class="gloss-body"><p>A bonus line listed on an ability card — not a die result. When you earn <span class="kw kw-crit">Crits</span>, you may gain Flourishes from the card you played. One Crit typically unlocks one Flourish.</p></div>
       </details>
 
       <details class="gloss-term" id="kw-hd">
@@ -539,6 +650,70 @@
     <a class="gloss-jump" href="#">Back to top ↑</a>
   </section>
 
+  <section class="section" id="faq">
+    <div class="section-eyebrow">09</div>
+    <h2 class="section-title">FAQ</h2>
+    <p class="gloss-intro">Questions that came up in playtests — tap to expand.</p>
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary>Do I need to know all the rules before we start? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>No. Read this primer once, then play. Your GM teaches Contests, Threat, Resolve, and anything else when it comes up. Pick up cards because they sound cool — the GM will tell you how to resolve them.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if I don’t have the “right” card in my hand? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>That’s normal — you never have your whole character at once. Describe what you want to do anyway. If nothing fits, it can still happen as a basic check without card effects. The fun is making the hand you <em>do</em> have matter.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I play a card just because I want to? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>Start from what’s in your hand, not a plan you made three turns ago. If the card’s Trigger describes what’s happening in the scene, you’re fine. When unsure, ask the GM.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does my weapon or build matter mechanically? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>Not in the way most RPGs mean it. There’s no stat sheet, no gear slots to track, no map grid. Say what your character does; cards and checks handle the rest. Class Core cards cover class-specific equipment fantasies when they matter.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What’s on my Connection card — whose name goes there? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p><strong>Your own character’s name.</strong> That card goes into other players’ decks so they can find moments to connect with <em>you</em> in play.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I Aid myself? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>No. <span class="kw kw-aid">Aid</span> must come from an ally discarding a card. Only one ally can Aid a single check.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is a partial result a failure? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>No — and a Miss (a natural 1) isn’t a full stop either. Partial means some GM dice remained after you assigned all yours; the GM says what you achieved and what didn’t land. The scene keeps moving.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What are Threat and Resolve? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>High-stakes scene tools your GM introduces when combat or tense confrontations begin. You don’t need them memorized from this page — tap them in the <a href="#glossary" style="color:var(--gold-light)">glossary</a> for a quick definition, then let the GM walk you through the first time.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>When does a scene end? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>When the dramatic question is answered, or when hands are running low. If the party’s average hand drops to about 2 cards, expect a transition. Your GM may also telegraph when a scene is winding down.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What if a card in my hand seems useless this scene? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>Hold it — scenes end and hands refresh. Some Items and Reacts have <span class="kw kw-mill">Mill</span>, letting you swap the card at scene start if it’s not what you need. Otherwise, lean into the constraint; that’s where the story gets interesting.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do I need a character sheet? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>No. Your deck <em>is</em> your character. Core cards sit in front of you; everything else cycles through your hand.</p></div>
+      </details>
+
+    </div>
+  </section>
+
   <footer>
     <div class="label">Card Studio</div>
     <a href="https://elequin-sandbox.github.io/instinct-ttrpg/" target="_blank" rel="noopener">elequin-sandbox.github.io/instinct-ttrpg</a>
@@ -554,8 +729,11 @@
     'instinct-card-wrap': 'bold-instinct',
     'bond-card-wrap': 'warm-presence-bond',
     'connection-card-wrap': 'connection-template',
+    'background-card-wrap': 'field-medic-background',
+    'ancestry-card-wrap': 'human-ancestry',
     'item-card-wrap': 'immovable-rod-item',
-    'core-card-wrap': 'weapon-master-fighter-core',
+    'core-card-wrap-a': 'weapon-master-fighter-core',
+    'core-card-wrap-b': 'battlemaster-fighter-core',
     'ability-card-wrap': 'find-the-gap-rogue'
   };
 
@@ -579,10 +757,11 @@
   }
 
   // One-open accordion feel on glossary (optional polish)
-  document.querySelectorAll('.gloss-term').forEach(function (det) {
+  document.querySelectorAll('.gloss-term, .faq-item').forEach(function (det) {
     det.addEventListener('toggle', function () {
       if (!det.open) return;
-      document.querySelectorAll('.gloss-term').forEach(function (other) {
+      const group = det.classList.contains('faq-item') ? '.faq-item' : '.gloss-term';
+      document.querySelectorAll(group).forEach(function (other) {
         if (other !== det) other.open = false;
       });
     });
