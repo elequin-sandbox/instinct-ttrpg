@@ -61,7 +61,7 @@ ANCESTRIES: list[dict] = [
         "react_condition": "a blow — physical, social, or emotional — would stagger you",
         "options": [
             ("Absorb It", "take the hit and stay standing; narrate what you refuse to show"),
-            ("Brace", "dig in; the <strong>Scene</strong> must work around you this beat"),
+            ("Dig In", "anchor the beat; the <strong>Scene</strong> must work around you"),
             ("Answer Back", "a short, grounded reply that shifts the pressure"),
         ],
     },
@@ -88,7 +88,7 @@ ANCESTRIES: list[dict] = [
         "options": [
             ("Stand", "stay on your feet; narrate what keeps you there"),
             ("Snarl", "let your heritage show; one foe hesitates"),
-            ("Survive", "draw on scars; take <span class=\"kw kw-boost\">Boost 1</span> on your very next check"),
+            ("Press", "ride the refusal; take <span class=\"kw kw-boost\">Boost 1</span> on your very next check"),
         ],
     },
     {
@@ -152,8 +152,8 @@ ANCESTRIES: list[dict] = [
         "act_phrase": "bring raw force or presence to shift the moment",
         "options": [
             ("Rush", "close distance; name what gives way before you"),
-            ("Hold", "plant yourself; the <strong>Scene</strong> works around your mass"),
             ("Roar", "your voice carries; one ally takes <span class=\"kw kw-boost\">Boost 1</span> on their next <strong>Action</strong>"),
+            ("Break", "name what cracks, splinters, or yields under your weight"),
         ],
     },
 ]
@@ -162,18 +162,23 @@ ANCESTRIES: list[dict] = [
 def _trigger_callout_html(card: dict) -> str:
     timing = card["timing"]
     if timing == "React":
-        text = (
-            f"Once per <strong>Scene</strong>, when {card['react_condition']}, "
+        body = (
+            f"When {card['react_condition']}, "
             f"<strong>React</strong> with a <strong>Snap Check</strong>:"
         )
         kind = "react"
     else:
-        text = (
-            f"Once per <strong>Scene</strong>, you may take an <strong>Action</strong> to "
-            f"{card['act_phrase']} by making a <strong>Snap Check</strong>:"
+        body = (
+            f"You may take an <strong>Action</strong> to {card['act_phrase']} "
+            f"by making a <strong>Snap Check</strong>:"
         )
         kind = "act"
-    return f'<div class="anc-callout anc-callout-{kind}">{text}</div>'
+    return (
+        '<div class="anc-trigger">'
+        '<div class="anc-freq">Once per Scene</div>'
+        f'<div class="anc-callout anc-callout-{kind}">{body}</div>'
+        "</div>"
+    )
 
 
 def _options_list_html(options: list[Option]) -> str:
@@ -293,7 +298,9 @@ section{margin-bottom:44px;}h2{font-size:13px;letter-spacing:1.5px;text-transfor
 .cap-neutral{border-color:#3a3320;color:#3a3320;}.cap-accent{border-color:var(--ad);color:var(--ad);}
 .hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:16.5px;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
 .bf-body{flex:1;padding:7px 9px 10px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.42;}
-.bf-flv{font-style:italic;color:#5a4020;font-size:10px;}.anc-callout{font-style:normal;font-weight:600;font-size:10px;line-height:1.45;color:#1c1408;padding:5px 7px;border-left:3px solid var(--ad);background:rgba(0,0,0,.04);border-radius:0 4px 4px 0;}
+.bf-flv{font-style:italic;color:#5a4020;font-size:10px;}.anc-trigger{display:flex;flex-direction:column;gap:2px;}
+.anc-freq{font-size:7.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a6a40;}
+.anc-callout{font-style:normal;font-weight:600;font-size:10px;line-height:1.45;color:#1c1408;padding:5px 7px;border-left:3px solid var(--ad);background:rgba(0,0,0,.04);border-radius:0 4px 4px 0;}
 .anc-callout-act{border-left-color:#1C3A5E;background:rgba(28,58,94,.07);}.anc-callout-react{border-left-color:#6D28D9;background:rgba(109,40,217,.08);}
 .bf-choices{display:flex;flex-direction:column;gap:4px;}.bf-choice{font-size:10px;line-height:1.45;color:#1c1408;}
 .snap-compact{margin-top:auto;padding-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
