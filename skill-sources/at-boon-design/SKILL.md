@@ -121,12 +121,13 @@ Choose one:
 **Use for:** All **Ancestry** deck cards only. Backgrounds keep Frameworks A–C.
 
 ```
-[Flavor — 1 line]
-Once per Scene, [niche trigger], make a Snap Check:
+[Flavor — 1 line, italic]
+[Act callout — anc-callout-act, roman semibold]
+Once per Scene, you may take an Action to [thing] by making a Snap Check:
+— OR —
+[React callout — anc-callout-react, violet rail]
+Once per Scene, when [condition], React with a Snap Check:
 **Verb** — …
-**Verb** — …
-**Verb** — …
-1–3 Fails · 4–8 Choose 1 · 9+ Choose 2
 ```
 
 **Rules:**

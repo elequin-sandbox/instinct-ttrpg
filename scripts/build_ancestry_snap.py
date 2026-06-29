@@ -32,10 +32,7 @@ ANCESTRIES: list[dict] = [
         "key": "human-ancestry",
         "timing": "Act",
         "flavor": "You were not born with magic or ancient lineage. You were born with will.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when sheer determination could tip a stuck moment, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "push through with sheer determination when a moment is stuck",
         "options": [
             ("Press On", "name what you're reaching for; take <span class=\"kw kw-boost\">Boost 1</span> on your next check toward it"),
             ("Find a Way", "improvise an angle nobody else thought of; the GM names what opens"),
@@ -48,10 +45,7 @@ ANCESTRIES: list[dict] = [
         "key": "elf-ancestry",
         "timing": "Act",
         "flavor": "Something in you is older than this world, and it always notices.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when old memory or a hidden detail might matter, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "attune to old memory or a hidden detail",
         "options": [
             ("Listen", "ask the GM one honest question about this <strong>Scene</strong>; they answer truthfully"),
             ("Trace", "name one detail others missed; the GM confirms if it's there"),
@@ -64,10 +58,7 @@ ANCESTRIES: list[dict] = [
         "key": "dwarf-ancestry",
         "timing": "React",
         "flavor": "You were carved from stone and stubbornness — and it shows.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when a blow — physical, social, or emotional — would stagger you, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "react_condition": "a blow — physical, social, or emotional — would stagger you",
         "options": [
             ("Absorb It", "take the hit and stay standing; narrate what you refuse to show"),
             ("Brace", "dig in; the <strong>Scene</strong> must work around you this beat"),
@@ -80,10 +71,7 @@ ANCESTRIES: list[dict] = [
         "key": "halfling-ancestry",
         "timing": "React",
         "flavor": "You've gotten away with things that should have ended you more times than you can count.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when a bad roll would cost you in a tight moment, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "react_condition": "a bad roll would cost you in a tight moment",
         "options": [
             ("Slip Away", "narrate how you duck the worst of it"),
             ("Look Harmless", "seem too small to bother; someone looks past you"),
@@ -96,10 +84,7 @@ ANCESTRIES: list[dict] = [
         "key": "half-orc-ancestry",
         "timing": "React",
         "flavor": "You have been underestimated your whole life. You have learned to use that.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when the <strong>Scene</strong> pushes you to yield or fall, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "react_condition": "the <strong>Scene</strong> pushes you to yield or fall",
         "options": [
             ("Stand", "stay on your feet; narrate what keeps you there"),
             ("Snarl", "let your heritage show; one foe hesitates"),
@@ -112,10 +97,7 @@ ANCESTRIES: list[dict] = [
         "key": "tiefling-ancestry",
         "timing": "Act",
         "flavor": "You carry something ancient and unholy in your blood. It is not a curse. It is yours.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when your unsettling heritage could bend a social beat, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "bend a social beat with your unsettling heritage",
         "options": [
             ("Shadow", "your presence shifts the mood; name what changes"),
             ("Bargain", "offer a small infernal favor; the GM names the price"),
@@ -128,10 +110,7 @@ ANCESTRIES: list[dict] = [
         "key": "dragonborn-ancestry",
         "timing": "Act",
         "flavor": "Every choice you make is an answer to what your bloodline means.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when your draconic nature could unsettle or awe, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "let your draconic nature unsettle or awe",
         "options": [
             ("Bearing", "your stillness or voice changes the room's temperature"),
             ("Ember", "a small elemental tell; name it; the GM plays it fairly"),
@@ -144,10 +123,7 @@ ANCESTRIES: list[dict] = [
         "key": "gnome-ancestry",
         "timing": "Act",
         "flavor": "Your mind moves in directions that simply do not occur to anyone else.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when an odd angle or trick could help, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "find an odd angle or trick that could help",
         "options": [
             ("Tinker", "use something here in an unintended way; name how"),
             ("Misdirect", "draw eyes elsewhere; take <span class=\"kw kw-boost\">Boost 1</span> on your next sneaky check"),
@@ -160,10 +136,7 @@ ANCESTRIES: list[dict] = [
         "key": "half-elf-ancestry",
         "timing": "Act",
         "flavor": "You belong to neither world completely. You have learned to make that a strength.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when you could bridge two peoples or ways of seeing, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "bridge two peoples or ways of seeing",
         "options": [
             ("Translate", "name the thread between two opposed parties; they hear you"),
             ("Soften", "ease tension with the right tone; one NPC shifts their stance"),
@@ -176,10 +149,7 @@ ANCESTRIES: list[dict] = [
         "key": "orc-ancestry",
         "timing": "Act",
         "flavor": "You are built for things that require more than most people have.",
-        "trigger": (
-            "Once per <strong>Scene</strong>, when raw force or presence could shift the moment, "
-            "make a <strong>Snap Check</strong>:"
-        ),
+        "act_phrase": "bring raw force or presence to shift the moment",
         "options": [
             ("Rush", "close distance; name what gives way before you"),
             ("Hold", "plant yourself; the <strong>Scene</strong> works around your mass"),
@@ -187,6 +157,23 @@ ANCESTRIES: list[dict] = [
         ],
     },
 ]
+
+
+def _trigger_callout_html(card: dict) -> str:
+    timing = card["timing"]
+    if timing == "React":
+        text = (
+            f"Once per <strong>Scene</strong>, when {card['react_condition']}, "
+            f"<strong>React</strong> with a <strong>Snap Check</strong>:"
+        )
+        kind = "react"
+    else:
+        text = (
+            f"Once per <strong>Scene</strong>, you may take an <strong>Action</strong> to "
+            f"{card['act_phrase']} by making a <strong>Snap Check</strong>:"
+        )
+        kind = "act"
+    return f'<div class="anc-callout anc-callout-{kind}">{text}</div>'
 
 
 def _options_list_html(options: list[Option]) -> str:
@@ -221,7 +208,7 @@ def render_ancestry_snap(card: dict) -> str:
         f"</div>"
         f'<div class="bf-body">'
         f'<div class="bf-flv">{card["flavor"]}</div>'
-        f'<div class="bf-trig">{card["trigger"]}</div>'
+        f"{_trigger_callout_html(card)}"
         f"{_options_list_html(card['options'])}"
         f"{_snap_compact_html()}"
         f"</div>"
@@ -306,7 +293,8 @@ section{margin-bottom:44px;}h2{font-size:13px;letter-spacing:1.5px;text-transfor
 .cap-neutral{border-color:#3a3320;color:#3a3320;}.cap-accent{border-color:var(--ad);color:var(--ad);}
 .hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:16.5px;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
 .bf-body{flex:1;padding:7px 9px 10px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.42;}
-.bf-flv{font-style:italic;color:#5a4020;font-size:10px;}.bf-trig{font-style:italic;color:#3a2a0a;font-size:10px;line-height:1.4;}
+.bf-flv{font-style:italic;color:#5a4020;font-size:10px;}.anc-callout{font-style:normal;font-weight:600;font-size:10px;line-height:1.45;color:#1c1408;padding:5px 7px;border-left:3px solid var(--ad);background:rgba(0,0,0,.04);border-radius:0 4px 4px 0;}
+.anc-callout-act{border-left-color:#1C3A5E;background:rgba(28,58,94,.07);}.anc-callout-react{border-left-color:#6D28D9;background:rgba(109,40,217,.08);}
 .bf-choices{display:flex;flex-direction:column;gap:4px;}.bf-choice{font-size:10px;line-height:1.45;color:#1c1408;}
 .snap-compact{margin-top:auto;padding-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
 .snap-chip{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}.snap-dot{opacity:.45;}
