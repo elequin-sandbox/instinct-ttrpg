@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Paladin Oath v5b.** Blank Oath/Patron templates: larger dashed write-in cells (3×2 grid, pen-sized); hdr-blankname title/subtitle hints.
 - [June 29 2026] — **Paladin Oath v5.** Full 6×6 word pools (no wild ★); 3×2 grid layout so die faces line up by column.
 - [June 29 2026] — **Paladin Oath v4.** Tighter Enter line; drop Verb/Noun labels + priority line; Boost 2 pill; fulfill in purpose; shortened Break; ★ on slot 6.
 - [June 29 2026] — **Paladin Oath v3.** Compact card layout; scene keyword **Vow** (replaces Stand); Verb / *the* / Noun visual read-aloud; Boost keyword on fulfill.

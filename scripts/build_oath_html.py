@@ -62,19 +62,26 @@ PILL = (
     "{word}</strong></div>"
 )
 
+# Template-only — roomy dashed write lines (matches scope-core writein-line; sized for pen).
 BLANK_PILL = (
-    '<div class="mark-pill" style="display:flex;flex-direction:column;align-items:stretch;'
-    'width:100%;min-height:18px;border-radius:2px;overflow:hidden;'
-    'border:0.5px solid rgba(0,0,0,0.2);">'
-    '<span class="kw kw-crit" style="font-size:6.5px;padding:1px 0;line-height:1.1;text-align:center;">'
-    "{n}</span>"
-    '<strong style="color:#1a1008;font-size:6.5px;font-weight:700;padding:0 2px 2px;'
-    'font-family:system-ui,-apple-system,sans-serif;letter-spacing:0.2px;">&nbsp;</strong></div>'
+    '<div class="mark-pill mark-pill-blank" style="display:flex;flex-direction:column;'
+    'align-items:stretch;width:100%;min-height:34px;border-radius:3px;overflow:hidden;'
+    'border:0.5px solid rgba(90,74,32,0.3);background:rgba(255,252,245,0.65);">'
+    '<span class="kw kw-crit" style="font-size:7px;padding:2px 0 1px;line-height:1;'
+    'text-align:center;flex-shrink:0;">{n}</span>'
+    '<div class="writein-line" style="flex:1;min-height:22px;margin:1px 6px 6px;'
+    'border-bottom:1px dashed rgba(90,74,32,0.45);background:transparent;"></div></div>'
 )
 
 VOW_GRID = (
     '<div class="vow-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'
     'gap:2px;margin:1px 0;width:100%;">{cells}</div>'
+)
+
+BLANK_VOW_GRID = (
+    '<div class="vow-grid vow-grid-blank" style="display:grid;'
+    'grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(34px,auto));'
+    'gap:3px;margin:2px 0;width:100%;">{cells}</div>'
 )
 
 VOW_CELL = (
@@ -109,6 +116,16 @@ BREAK_VOW = (
 )
 
 BODY_STYLE = "gap:2px;padding:4px 9px 32px;"
+TEMPLATE_BODY_STYLE = "gap:2px;padding:3px 8px 30px;"
+TEMPLATE_HDR_NAME = (
+    '<div class="hdr-name hdr-blankname" style="min-height:28px;">'
+    '<span style="opacity:.2;font-style:italic;font-weight:600;font-size:7.5px;">title</span></div>'
+)
+TEMPLATE_HDR_SUB = (
+    '<div class="hdr-sub" style="min-height:18px;border-bottom:1px dashed rgba(90,74,32,0.35);'
+    'margin:0 10px 5px;padding-bottom:3px;">'
+    '<span style="opacity:.2;font-style:italic;font-size:7px;">subtitle</span></div>'
+)
 
 
 def etxt(content: str, *, extra_style: str = "") -> str:
@@ -133,7 +150,8 @@ def word_grid(words: list[str] | None = None, *, blank: bool = False) -> str:
         n = i + 1
         pill = _pill(n, None if blank else words[i])  # type: ignore[index]
         cells.append(VOW_CELL.format(pill=pill))
-    return VOW_GRID.format(cells="".join(cells))
+    grid = BLANK_VOW_GRID if blank else VOW_GRID
+    return grid.format(cells="".join(cells))
 
 
 def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
@@ -175,20 +193,12 @@ def build(oath: dict, *, include_break: bool = True) -> str:
 
 
 def build_oath_template() -> str:
-    blank_name = (
-        '<div class="hdr-name" style="min-height:18px;border-bottom:1px dashed rgba(0,0,0,0.25);'
-        'background:transparent;">&nbsp;</div>'
-    )
-    blank_sub = (
-        '<div class="hdr-sub" style="min-height:12px;border-bottom:1px dashed rgba(0,0,0,0.15);'
-        'margin:0 12px 4px;">&nbsp;</div>'
-    )
     return (
         '<div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top">'
         '<span class="cap cap-neutral">Core</span><span></span></div>'
-        + blank_name
-        + blank_sub
-        + f'</div><div class="card-body" style="{BODY_STYLE}">'
+        + TEMPLATE_HDR_NAME
+        + TEMPLATE_HDR_SUB
+        + f'</div><div class="card-body" style="{TEMPLATE_BODY_STYLE}">'
         + _body_block(blank=True)
         + _break_box()
         + "</div><div class=\"idtag\">Paladin</div></div>"
@@ -196,14 +206,6 @@ def build_oath_template() -> str:
 
 
 def build_patron_template() -> str:
-    blank_name = (
-        '<div class="hdr-name" style="min-height:18px;border-bottom:1px dashed rgba(0,0,0,0.25);'
-        'background:transparent;">&nbsp;</div>'
-    )
-    blank_sub = (
-        '<div class="hdr-sub" style="min-height:12px;border-bottom:1px dashed rgba(0,0,0,0.15);'
-        'margin:0 12px 4px;">&nbsp;</div>'
-    )
     invoke = (
         "Call them forth and select one of the <strong>Marks</strong> above to warp the "
         "<strong>Scene</strong> in your favor. Then <strong>Shuffle</strong> this card into your "
@@ -216,9 +218,9 @@ def build_patron_template() -> str:
     return (
         '<div class="card warlock acc-warlock"><div class="hdr"><div class="hdr-top">'
         '<span class="cap cap-neutral">Core</span><span></span></div>'
-        + blank_name
-        + blank_sub
-        + '</div><div class="card-body" style="gap:3px;padding:5px 10px;">'
+        + TEMPLATE_HDR_NAME
+        + TEMPLATE_HDR_SUB
+        + '</div><div class="card-body" style="gap:3px;padding:4px 9px 28px;">'
         '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">The Marks of</div>'
         + word_grid(blank=True)
         + '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">Invoke Their Name</div>'
