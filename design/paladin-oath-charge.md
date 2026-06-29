@@ -38,13 +38,10 @@ Mirrors Warlock **Patron** pick:
 
 | Zone | Content |
 |---|---|
-| **Enter line** | Roll 2d6 to determine your **Vow** |
-| **Verb** | 6 indexed pills (1–5 + ★ Choose), centered |
-| ***the*** | Centered divider (visual read-aloud cue) |
-| **Noun** | 6 indexed pills, centered |
-| **Priority** | One line — priority above all else this **Scene** |
-| **Fulfill** | Once/scene GM yes → both dice **Boost** the roll |
-| **Break** | Optional at **Enter** before rolling (italic box) |
+| **Enter line** | At **Enter**, roll 2d6 for your scene **Vow** on this **Oath** |
+| **Word stack** | Centered indexed pills (1–5 + ★), *the* divider — no Verb/Noun labels |
+| **Fulfill** | Once/scene, **Vow** in purpose → both dice = `[Boost 2]` |
+| **Break** | Optional at **Enter** before rolling (italic box, shortened) |
 
 ### Word-pool design rules
 
@@ -66,17 +63,16 @@ It is your priority above all else in this **Scene**.
 
 ### Fulfill your Vow
 
-Once per **Scene**, if the GM agrees that your **Action** fulfills your **Vow**, add both dice from this card to **Boost** the roll, then remove them.
+Once per **Scene**, if the GM agrees your **Action** fulfills your **Vow** in purpose, add both dice — **[Boost 2]** on that roll, then remove them.
 
 Defensive vows naturally pair with **Bulwark** / **[Resolve]** cards in combat — no extra rule required on the Oath card.
 
 ### Break your Vow (replaces old Defiance shuffle)
 
-When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Vow** — narrate turning from it.
+When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Vow**.
 
-- **Discard** your hand, **Draw** that many (hand cleanse — rare debuff/bane relief path).
-- You do **not** roll a **Vow** this scene.
-- Your Oath card **stays in the Active area** — no shuffle into the deck.
+- **Discard** your hand, **Draw** that many.
+- No **Vow** this scene; **Oath** stays Active.
 
 #### Break — open tuning (pick one after playtest)
 
