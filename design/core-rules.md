@@ -112,9 +112,12 @@ resolution.
   boost their own rolls** (the old self-discard-to-add-a-die mechanic is retired — **Aid** took its
   place). All bonus dice behave identically regardless of source; they expire at scene end and are
   removed if they show a 1.
-- **Aid (ally assist):** an ally may discard a card to add 1 die to **another** player's check
-  ([Boost 1]). 🔒 **Capped at one assist per check. Self-Aid does not exist — Aid must come from an
-  ally.** When a card names this mechanic it's **Stack** or **Rally** (see §10 / `classes.md`).
+- **Aid (ally assist):** an ally may discard a card from their hand, **describe how that card is
+  relevant to the active player's check** (Instinct, Ability, or Item), and add 1 die to **another**
+  player's pool ([Boost 1]) if the GM agrees. They are **not** playing the discarded card for its
+  normal effect — they are narrating the assist. 🔒 **Capped at one assist per check. Self-Aid does not
+  exist — Aid must come from an ally.** When a card names this mechanic it's **Stack** or **Rally**
+  (see §10 / `classes.md`).
 
 **Roll** all dice simultaneously.
 
@@ -319,7 +322,7 @@ Every word that carries a real, functional gameplay effect — the load-bearing 
 | **[Hit Die] / [Hit Dice]** | Player health resource. Always capitalized. Never "HP." |
 | **[Resolve]** | Player's *defensive* pool, set up at Contest start via a Resolve check. Lost before the health pool. Replaces retired Guard. |
 | **[Threat]** | The GM's *offensive* check — the **inverse of Resolve**. The damage an encounter will deal, determined by the GM from the encounter and revealed upfront. Primarily Deadly Contests; can also appear in Social Contests. |
-| **[Aid]** | Ally-only assist (add a die to another player's check). Capped at one per check. No Self-Aid. |
+| **[Aid]** | Ally-only assist: discard a card, narrate how it helps another player's check (not the card's normal effect — GM agrees), add 1 die. Capped at one per check. No Self-Aid. |
 | **Mill** | Printed keyword on Item cards and React-subtype class cards only: *"At scene start, you may discard this to draw 1."* Replaces the old soft Mulligan. Not for other card types. |
 
 **Declared Actions** (a related mechanical set, formatted **Bold + Capitalized**, not as pills):
