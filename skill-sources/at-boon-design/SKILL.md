@@ -15,8 +15,8 @@ Boons are **permanently in the player's deck from character creation.** They rep
 
 **Core rules (locked):**
 - Passive OR active effect — never both
-- Always includes a fill-in blank (Origin stem or Anchor stem)
-- Stems are soft gates — suggest narration without enforcing it
+- ~~Always includes a fill-in blank (Origin stem or Anchor stem)~~ *(retired June 2026 — write-in on Character/Class/Ancestry sheet cards)*
+- Stems are soft gates — suggest narration without enforcing it *(retired with stems)*
 - Trigger when the player narrates a fictional connection
 - Subject to RNG draw (in the deck, not permanently visible)
 
@@ -45,11 +45,10 @@ Do not add new concepts without Annie's direction.
 Boon structure differs from class ability cards:
 
 ```
-[Card Name]                         [Boon]
+[Card Name]                         [Type badge]
 ─────────────────────────────────────
-[NO flavor text — stem takes this space]
+[Flavor — 1 line, italic, 2nd person present]
 ─────────────────────────────────────
-EFFECT
 [Trigger sentence, italic — one line]
 
 Choose one:  ← or passive text, or Luck Check line
@@ -57,22 +56,14 @@ Choose one:  ← or passive text, or Luck Check line
 **Bold Verb** — brief description
 **Bold Verb** — brief description
 
-[Luck Check pill — if roll needed]
-─────────────────────────────────────
-[Origin / Anchor label]
-[Stem sentence, italic]
-[_________________________]
-[__________________]
-─────────────────────────────────────
-[Boon · Base]                    [—]
+[Bond only: Find / Act / Then zones]
 ```
 
 **Key differences from class cards:**
-- No flavor text (stem replaces it — the two compete for space)
+- Flavor line on Background, Ancestry, and Bond (not on class abilities)
 - No failure line
 - No strong roll section
-- Cost pip is `—`
-- Writing box is the emotional center of the card
+- No Origin stem or writing box *(retired June 2026)*
 
 ---
 
@@ -136,21 +127,14 @@ Description after `—` is direction, not instruction. One clause. Hints at fict
 
 ---
 
-## Stem Rules
+## Stem Rules — RETIRED June 2026
 
-**Origin Stems** (past tense — where the quality came from):
-- First person, past tense, prompts a noun or short phrase
-- "I learned this the hard way when ___"
-- "My hands were steady because I had to be ___"
+Origin stems, Anchor stems, and writing boxes are **no longer on deck cards**. Persistent backstory write-in lives on **Character**, **Class**, and **Ancestry sheet cards** (separate design). See `design/card-anatomy.md` §5 and `design/core-rules.md` §12.
 
-**Anchor Stems** (a person, place, or thing that grounds the quality):
-- First person, present tense, specific noun anchor
-- "The one I keep this for is ___"
-- "I carry this from ___"
-
-**Expression stems were rejected** — only Origin and Anchor stems exist.
-
-**Writing box:** `border-bottom: 1px dotted #c8a96e` · 18px line height · fills remaining card height after effect text · full-width first line, shorter second line.
+*(Legacy reference — do not use on new cards:)*
+- Origin Stems: past tense, first person, incomplete sentence with `___`
+- Anchor Stems: present tense, specific noun anchor
+- Writing box: dotted rules filling remaining card height
 
 ---
 
@@ -200,8 +184,6 @@ Ask: "If I'm robbing a train, does this work? Negotiating with a noble? Lost in 
 - [ ] Options are meaningfully distinct (different vectors)
 - [ ] No negation-passive language
 - [ ] Luck Check pill used if roll needed; none if no roll
-- [ ] Origin OR Anchor stem — not Expression
-- [ ] Stem is one italic sentence, past tense or anchor phrasing
-- [ ] Writing box uses dotted rules, fills remaining card height
-- [ ] Card_Key format: `card-name-boon`
+- [ ] ~~Origin OR Anchor stem~~ *(retired — sheet cards hold write-in)*
+- [ ] Card_Key format: `card-name-background` / `-ancestry` / `-bond`
 - [ ] Ruleset: `base`

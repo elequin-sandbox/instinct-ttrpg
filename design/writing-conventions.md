@@ -85,11 +85,12 @@ table — one of three formats, no global scheme):
 No Crit block unless the card also uses pool checks. Snap Check cards may omit Crit spend — the bands
 *are* the payoff. A natural 1 is always a **[Miss]**; a natural 6 always **explodes** per §5.
 
-**Character-creation cards:** **Flavor / Universal Flavor** (Bond, Ancestry) · **Preamble + choose-one fork**
+**Character-creation cards:** **Flavor** (Background, Bond, Ancestry) · **Preamble + choose-one fork**
 (Instinct — dual-path; see `card-anatomy.md` §5) · **Trigger** (Background, Ancestry) · **Body**
-(Background/Ancestry: choose-one / luck-check / passive-question) · **Origin Stem** (Background, Bond,
-Ancestry — 1st person, past tense, incomplete sentence with `___`) · **Writing Lines** · ~~**Flaw
-fill-in stem**~~ *(retired June 2026)* · ~~**Dismiss**~~ *(retired with Flaw type)*
+(Background/Ancestry: choose-one / luck-check / passive-question) · **Find / Act / Then** (Bond) ·
+~~**Origin Stem**~~ *(retired June 2026 — write-in lives on Character / Class / Ancestry sheet cards)* ·
+~~**Writing Lines**~~ *(retired with Origin stems)* · ~~**Flaw fill-in stem**~~ *(retired June 2026)* ·
+~~**Dismiss**~~ *(retired with Flaw type)*
 
 **Item cards:** Items remain a classless card type, but ⚠️ the item system is being **stripped back to
 its simplest form for the next playtest** — the old Item Check / placed-dice / Save anatomy is retired

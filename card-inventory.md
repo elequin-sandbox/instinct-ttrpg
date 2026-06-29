@@ -2,7 +2,7 @@
 
 *Living document — update this file whenever cards are created, revised, or pushed to Baserow.*
 
-**Last updated:** June 28 2026
+**Last updated:** June 29 2026
 **Total cards designed:** 64 (character creation) + tutorial class decks + Items
 **In Baserow (table 911939):** ALL Status:current cards — character creation, class abilities, items, connections (245+ rows)
 
@@ -60,7 +60,7 @@
 ---
 
 ## BACKGROUNDS (12) — Ocean blue · ✦✦✦ · Choose 1 at creation
-*Converted from Boon cards June 2025*
+*Converted from Boon cards June 2025 · Origin stems removed June 2026 — flavor line + trigger + body only*
 
 | # | Name | Converted From | Body Type | Status |
 |---|---|---|---|---|
@@ -80,7 +80,7 @@
 ---
 
 ## BONDS (12) — Forest green · ◦◦◦ · Shuffle into class deck
-*Content unchanged; visual shell updated June 2025*
+*Bond stems removed June 2026 — flavor + Find/Act/Then zones only*
 
 | # | Name | Trigger Core | Status |
 |---|---|---|---|
@@ -108,7 +108,7 @@
 ---
 
 ## ANCESTRIES (10) — Amber-brown · ◆◆◆ · Choose 1 at creation
-*Designed June 2025*
+*Designed June 2025 · Origin stems removed June 2026 — flavor + trigger + body only*
 
 | # | Name | Body Type | Dice? | Status |
 |---|---|---|---|---|
@@ -188,6 +188,7 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [June 29 2026] — **Origin stems killed.** All 34 Background/Ancestry/Bond deck cards stripped of Origin/Bond stems; Backgrounds gained 1-line flavor; Bonds reformatted to Find/Act/Then zones. Write-in deferred to Character/Class/Ancestry sheet cards. Script: `scripts/strip_origin_stems.py`.
 - [June 29 2026] — **Paladin Oath v7.** L→R mad-lib layout (production); larger gold type + row index chips; alignment compare page (outward vs meet-at-the).
 - [June 29 2026] — **Paladin Oath v6b.** Dotted phrase frame; golden Garamond verb/*the*/noun; smaller Boost/Resolve/Toll pills.
 - [June 29 2026] — **Paladin Oath v6.** Horizontal die-slot rows; Core+Oath caps; *Oath of* ribbon title; Scene start / Break Your Oath copy.

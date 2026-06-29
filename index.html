@@ -575,18 +575,17 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .scope-boon .bf-orn{font-size:8.5px;letter-spacing:3px;line-height:1;}
 .scope-boon .bf-badge{font-family:system-ui,-apple-system,sans-serif;font-size:6.5pt;font-weight:700;letter-spacing:1.6pt;margin:2px 0;}
 .scope-boon .bf-name{font-family:system-ui,-apple-system,sans-serif;font-weight:900;text-transform:uppercase;font-size:13.5px;letter-spacing:.6px;line-height:1.05;}
-.scope-boon .bf-body{flex:1;padding:7px 10px 5px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.5;overflow:hidden;}
-.scope-boon .bf-flv{font-style:italic;color:#5a4520;}
+.scope-boon .bf-body{flex:1;padding:7px 10px 5px;display:flex;flex-direction:column;gap:7px;font-size:11px;line-height:1.5;overflow:hidden;}
+.scope-boon .bf-flv{font-style:italic;color:#5a4520;font-size:11px;line-height:1.45;}
 .scope-boon .bf-trig{font-style:italic;color:#3a2c10;}
 .scope-boon .bf-eff{color:#1c1408;}
-.scope-boon .bf-type{align-self:flex-start;font-size:7.5px;text-transform:uppercase;letter-spacing:1px;background:#e7d9ba;border:1px solid #c8a96e;border-radius:3px;padding:1px 7px;color:#6a5020;}
 .scope-boon .bf-choose{font-weight:700;font-size:9.5px;color:#5a4520;margin-top:1px;}
 .scope-boon .bf-choices{display:flex;flex-direction:column;gap:3px;}
-.scope-boon .bf-choice{font-size:9.8px;line-height:1.42;}
+.scope-boon .bf-choice{font-size:10.5px;line-height:1.5;}
 .scope-boon .bf-dismiss{font-size:9px;color:#7a2a1a;line-height:1.4;}
-.scope-boon .bf-stem-label{margin-top:auto;font-family:system-ui,-apple-system,sans-serif;font-size:7pt;letter-spacing:1.4pt;text-transform:uppercase;color:#8a6a30;padding-top:3px;}
-.scope-boon .bf-stem{font-style:italic;color:#3a2c10;font-size:10px;line-height:1.45;}
-.scope-boon .bf-fill{display:inline-block;min-width:54px;border-bottom:1px solid #b09050;}
+.scope-boon .bf-zone{display:flex;flex-direction:column;gap:1px;}
+.scope-boon .bf-zone-lbl{font-family:system-ui,-apple-system,sans-serif;font-size:7pt;font-weight:700;letter-spacing:1.2pt;text-transform:uppercase;color:#8a6a30;}
+.scope-boon .bf-zone-txt{font-size:10.5px;line-height:1.45;color:#1c1408;}
 .scope-boon .bf-foot{padding:3.5px 8px;border-top:0.5px solid #c8a96e;display:flex;justify-content:space-between;font-size:6.8pt;color:#8a6a30;text-transform:uppercase;letter-spacing:1px;background:#ece0c4;font-family:system-ui,-apple-system,sans-serif;}
 .scope-boon .bf-instinct .bf-head{background:#1e2540;border-bottom-color:#7a90c0;}
 .scope-boon .bf-instinct .bf-name{color:#d4e0f0;}
@@ -1026,7 +1025,7 @@ function inSkip(node){
     const tag=p.tagName, cl=' '+(p.className||'')+' ';
     if(tag==='STRONG') return true;
     if(/ kw /.test(cl)) return true;
-    if(/(bf-stem-label|bf-foot|bf-head|bf-badge|bf-name|card-name|core-class-name|core-header|core-keyword|fclass|footer-left|footer-right|fright|cfooter|chead| ch |cbadge|cname|zone-label|clbl|elbl|srlbl|flbl|slbl|bf-choose|card-subtitle|inst-path-lbl|inst-path-txt|instinct-preamble|inst-divider-or)/.test(cl)) return true;
+    if(/(bf-zone-lbl|bf-foot|bf-head|bf-badge|bf-name|card-name|core-class-name|core-header|core-keyword|fclass|footer-left|footer-right|fright|cfooter|chead| ch |cbadge|cname|zone-label|clbl|elbl|srlbl|flbl|slbl|bf-choose|card-subtitle|inst-path-lbl|inst-path-txt|instinct-preamble|inst-divider-or)/.test(cl)) return true;
     p=p.parentElement;
   }
   return false;

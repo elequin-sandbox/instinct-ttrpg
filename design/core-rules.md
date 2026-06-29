@@ -352,7 +352,7 @@ Break is retired; they are descriptions now.)*
 ## §12 — Character creation (creation = play)
 
 *Good enough for now; subject to change.* Character creation is itself play — roughly one hour.
-Characters emerge from card stems; players are prompted into a backstory, not filling a stat sheet.
+Characters emerge from the cards they choose and the sheet cards they fill in at the table — not from a stat block.
 
 **Steps (playtest flow):** (1) **Choose 5 Instincts** from a pool of **30** — *quick:* draw 5 at random
 (mulligan any); *full:* draw 3, pick 1, repeat 5 times; (2) **Choose 1 Bond**; (3) **1 Connection**
@@ -360,6 +360,8 @@ Characters emerge from card stems; players are prompted into a backstory, not fi
 (4) **Choose 1 Item** → Active area; (5) **Class Core** → face-up in front of you; (6) **Select 12
 Class Ability cards** (Acts/Reacts) for your deck; (7) **Read your Core** — grab any extra cards it
 requires at character creation.
+
+**Deck cards vs sheet cards:** Background, Ancestry, and Bond **deck cards** are fiction triggers + mechanics only (no Origin stems as of June 2026). Persistent backstory and write-in slots live on separate **Character**, **Class**, and **Ancestry sheet cards** (designed separately). Instinct cards use the dual-path fork only — no stems.
 
 **Deck math — 18 cards in the deck:**
 

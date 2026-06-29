@@ -1,0 +1,240 @@
+[
+  {
+    "id": 469,
+    "Name": "Gambler",
+    "Card_Key": "gambler-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Gambler</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have learned that fortune favors the prepared — and the reckless.</div><div class=\"bf-trig\">When luck could plausibly tip your way,</div><div class=\"bf-eff\">make a <strong>Luck Check</strong>. On a success, name one small true thing about this <strong>Scene</strong>. The GM builds from it.</div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 470,
+    "Name": "Field Medic",
+    "Card_Key": "field-medic-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Field Medic</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You know what to do when someone is bleeding and the clock is running.</div><div class=\"bf-trig\">When precision matters and the pressure is high,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Steady the Hand</strong> — your hands do exactly what they must — take <span class=\"kw kw-boost\">Boost 1</span> on the careful action</div><div class=\"bf-choice\"><strong>Hold Them Together</strong> — keep someone beside you calm enough to do their part</div><div class=\"bf-choice\"><strong>Work the Margin</strong> — narrate the small, exact thing that keeps it from getting worse</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 471,
+    "Name": "Inspector",
+    "Card_Key": "inspector-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Inspector</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You notice what others walk past — the detail that changes everything.</div><div class=\"bf-trig\">While this card is in your hand, once per <strong>Scene</strong> study someone or something closely and ask one:</div><div class=\"bf-eff\"><div><em>What here is not what it appears to be?</em></div><div><em>What is this person trying not to show?</em></div><div><em>What’s the fastest way this goes wrong?</em></div><div style=\"margin-top:3px\">The GM answers honestly.</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 472,
+    "Name": "Trade Road Courier",
+    "Card_Key": "trade-road-courier-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Trade Road Courier</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have carried messages and names across distances most people never cross.</div><div class=\"bf-trig\">When a familiar face could change how this moment goes,</div><div class=\"bf-eff\">declare who or what recognizes you and what you do. Make a <strong>Luck Check</strong> — the GM plays it accordingly.</div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 473,
+    "Name": "Cutpurse",
+    "Card_Key": "cutpurse-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Cutpurse</div></div><div class=\"bf-body\"><div class=\"bf-flv\">Your hands know routes that eyes never track.</div><div class=\"bf-trig\">When precision and control matter more than force,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Leave No Trace</strong> — do it, and narrate why no one will know it was you</div><div class=\"bf-choice\"><strong>Light Fingers</strong> — take or place something small, unseen</div><div class=\"bf-choice\"><strong>Slip the Notice</strong> — move through a watched space as if you belong</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 474,
+    "Name": "Pit Fighter",
+    "Card_Key": "pit-fighter-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Pit Fighter</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have stood in places that would break most people and walked out standing.</div><div class=\"bf-trig\">When you deliberately face something that would shake anyone else,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Walk Into It</strong> — close the distance you’re meant to flee — take <span class=\"kw kw-boost\">Boost 1</span> on what it takes</div><div class=\"bf-choice\"><strong>Set the Tone</strong> — let them see you unbothered, and steady them by it</div><div class=\"bf-choice\"><strong>Stare It Down</strong> — make the threatening thing hesitate</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 475,
+    "Name": "Musician",
+    "Card_Key": "musician-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Musician</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You feel the rhythm of a room before anyone else names it.</div><div class=\"bf-trig\">Your internal clock never lies.</div><div class=\"bf-eff\"><div class=\"bf-choose\">When timing is everything, choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Right on the Beat</strong> — act at the exact moment it lands hardest</div><div class=\"bf-choice\"><strong>Set the Pace</strong> — give the group a rhythm to move on together</div><div class=\"bf-choice\"><strong>Feel the Turn</strong> — sense when the moment is about to change, and call it</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 476,
+    "Name": "Street-Raised",
+    "Card_Key": "street-raised-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Street-Raised</div></div><div class=\"bf-body\"><div class=\"bf-flv\">The city taught you early that nothing stays still for long.</div><div class=\"bf-trig\">You’ve seen enough that very little surprises you anymore.</div><div class=\"bf-eff\"><div class=\"bf-choose\">When things turn sharp or strange, choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Already Knew</strong> — react as if you saw it coming, because part of you did</div><div class=\"bf-choice\"><strong>Read the Angle</strong> — spot who benefits, and say so</div><div class=\"bf-choice\"><strong>Keep Your Footing</strong> — stay steady, and give the others something to hold to</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 477,
+    "Name": "Caravan Guard",
+    "Card_Key": "caravan-guard-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Caravan Guard</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have learned to read people faster than you read terrain.</div><div class=\"bf-trig\">When differences would be a barrier,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Find Common Ground</strong> — name the thing you both actually want</div><div class=\"bf-choice\"><strong>Speak Their Way</strong> — frame it so it lands for them, not you</div><div class=\"bf-choice\"><strong>Vouch</strong> — put your own standing behind someone to bridge the gap</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 478,
+    "Name": "Pilgrim",
+    "Card_Key": "pilgrim-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Pilgrim</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You walk toward something larger than any single road.</div><div class=\"bf-trig\">When you meet someone driven by the same devotion,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Recognize the Road</strong> — name what you share; you both move easier for it</div><div class=\"bf-choice\"><strong>Offer the Path</strong> — give them a reason to walk alongside you</div><div class=\"bf-choice\"><strong>Invoke It</strong> — call on the shared cause to ask something of them</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 479,
+    "Name": "Ascetic",
+    "Card_Key": "ascetic-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Ascetic</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have tested what you believe against pain, pressure, and doubt.</div><div class=\"bf-trig\">When your conviction is tested — by pain, pressure, or doubt —</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Endure It</strong> — take the cost without bending, and let it show</div><div class=\"bf-choice\"><strong>Steady the Doubting</strong> — hold someone else’s faith up when theirs slips</div><div class=\"bf-choice\"><strong>Refuse the Bargain</strong> — turn down the easy way, and narrate why</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 480,
+    "Name": "Pathfinder",
+    "Card_Key": "pathfinder-background",
+    "HTML": "<div class=\"card bf-bg acc-background\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Background</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Pathfinder</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You read uncertain ground the way others read faces.</div><div class=\"bf-trig\">When you’re navigating uncertain or dangerous ground,</div><div class=\"bf-eff\"><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Read the Land</strong> — name a feature of the terrain and how you’ll use it — take <span class=\"kw kw-boost\">Boost 1</span> on the crossing</div><div class=\"bf-choice\"><strong>Find the Way Through</strong> — pick the route others would miss</div><div class=\"bf-choice\"><strong>Set the Trail</strong> — lead so the group moves safe and quick</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 481,
+    "Name": "Warm Presence",
+    "Card_Key": "warm-presence-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Warm Presence</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You don't have to do anything. You just have to be there.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone carrying weight they have not named.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Offer care or support without being asked.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 482,
+    "Name": "The Spark",
+    "Card_Key": "the-spark-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Spark</div></div><div class=\"bf-body\"><div class=\"bf-flv\">When things stall, you're the reason they start moving again.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone who has disengaged or stalled.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Draw them back in — a question, a nudge, a small invitation.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 483,
+    "Name": "Steady Hands",
+    "Card_Key": "steady-hands-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Steady Hands</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You've seen worse. More importantly, they know you've seen worse.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone facing a moment that could shake them.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Stay grounded and steady while the tension holds.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 484,
+    "Name": "The Listener",
+    "Card_Key": "the-listener-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Listener</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You don't offer answers. You offer space.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone with something they have not said aloud.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Ask a genuine question and hold space for whatever comes back.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 485,
+    "Name": "Sharp Eye",
+    "Card_Key": "sharp-eye-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Sharp Eye</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You notice what people need before they do.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone who missed what you noticed.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Share something specific you saw that they did not.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 486,
+    "Name": "The Confessor",
+    "Card_Key": "the-confessor-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Confessor</div></div><div class=\"bf-body\"><div class=\"bf-flv\">People tell you things they haven't told anyone else.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone who needs a witness, not advice.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Make yourself fully open — no agenda, no judgment, just presence.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 487,
+    "Name": "Loyal to a Fault",
+    "Card_Key": "loyal-to-a-fault-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Loyal to a Fault</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You've never needed a reason beyond: they're yours.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone you would stand beside without needing a reason.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Make clear, without qualification, that you are with them.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 488,
+    "Name": "The Levity",
+    "Card_Key": "the-levity-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Levity</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You know when the room needs to breathe.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">A room that needs to breathe.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Ease tension with something light — a joke, a story, a moment of warmth.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 489,
+    "Name": "Quiet Respect",
+    "Card_Key": "quiet-respect-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Quiet Respect</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You don't say much. What you do say lands.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone whose effort deserves to be named.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Name something specific you noticed or respect about them.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 490,
+    "Name": "The Protector",
+    "Card_Key": "the-protector-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Protector</div></div><div class=\"bf-body\"><div class=\"bf-flv\">It's not about strength. It's about who you put yourself in front of.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone who should not face what comes next alone.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Commit, plainly, to facing it with them.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 491,
+    "Name": "Honest Mirror",
+    "Card_Key": "honest-mirror-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Honest Mirror</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You tell people the truth because you respect them too much not to.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone who needs truth more than comfort.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Tell them something true and necessary, even when it is uncomfortable.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 492,
+    "Name": "The Witness",
+    "Card_Key": "the-witness-bond",
+    "HTML": "<div class=\"card bf-bond acc-bond\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Bond</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">The Witness</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You remember. You always remember.</div><div class=\"bf-eff\"><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Find</div><div class=\"bf-zone-txt\">Someone whose moment deserves to be held.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Act</div><div class=\"bf-zone-txt\">Tell them specifically what you have seen them do or endure.</div></div><div class=\"bf-zone\"><div class=\"bf-zone-lbl\">Then</div><div class=\"bf-zone-txt\">If it lands, you both gain <span class=\"kw kw-boost\">Boost 1</span>.</div></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 505,
+    "Name": "Human",
+    "Card_Key": "human-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Human</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You were not born with magic or ancient lineage. You were born with will.</div><div class=\"bf-trig\">When drive, adaptability, or sheer human determination tips the balance,</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Press On</strong> &mdash; name what you're reaching toward — your ambition shapes what happens next</div><div class=\"bf-choice\"><strong>Find a Way</strong> &mdash; improvise, adapt, or simply refuse to be stumped; the GM confirms what opens up</div><div class=\"bf-choice\"><strong>Burn Bright</strong> &mdash; throw yourself in completely and succeed — the GM names what it costs you</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 506,
+    "Name": "Elf",
+    "Card_Key": "elf-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Elf</div></div><div class=\"bf-body\"><div class=\"bf-flv\">Something in you is older than this world, and it always notices.</div><div class=\"bf-type\">passive</div><div class=\"bf-trig\">While this card is in your hand, once per <strong>Scene</strong> attune to your surroundings and ask one:</div><div class=\"bf-eff\"><div><em>What here holds a history others have forgotten?</em></div><div><em>Is there magic at work in this place — obvious or not?</em></div><div><em>What should I know about this place that nobody thought to mention?</em></div><div style=\"margin-top:3px\">The GM answers honestly.</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 507,
+    "Name": "Dwarf",
+    "Card_Key": "dwarf-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Dwarf</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You were carved from stone and stubbornness — and it shows.</div><div class=\"bf-trig\">When a blow — physical, social, or emotional — would stagger someone else,</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Absorb It</strong> — take it and stay standing; you don't let the cost show</div><div class=\"bf-choice\"><strong>Shake It Off</strong> — make a <strong>Luck Check</strong> — on a success, your resilience turns the tide</div><div class=\"bf-choice\"><strong>Dig In</strong> — your refusal to be moved becomes a statement the <strong>Scene</strong> must acknowledge</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 508,
+    "Name": "Halfling",
+    "Card_Key": "halfling-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Halfling</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You've gotten away with things that should have ended you more times than you can count.</div><div class=\"bf-type\">luck</div><div class=\"bf-trig\">Once per <strong>Scene</strong>, when you fail any check,</div><div class=\"bf-eff\">make a <strong>Luck Check</strong>. On a success, describe the absurd small thing that saves you — then reroll the failed check and take the new result.</div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 509,
+    "Name": "Half-Orc",
+    "Card_Key": "half-orc-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Half-Orc</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You have been underestimated your whole life. You have learned to use that.</div><div class=\"bf-trig\">When the <strong>Scene</strong> demands you give in, fall, or yield —</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Relentless</strong> — stay standing on pure will; narrate how you refuse to go down</div><div class=\"bf-choice\"><strong>Show Your Fury</strong> — let your heritage surface; the room recalibrates around what it just saw</div><div class=\"bf-choice\"><strong>Survivor's Advantage</strong> — your familiarity with being hit gives you <span class=\"kw kw-boost\">Boost 2</span> on your very next roll</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 510,
+    "Name": "Tiefling",
+    "Card_Key": "tiefling-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Tiefling</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You carry something ancient and unholy in your blood. It is not a curse. It is yours.</div><div class=\"bf-trig\">When your fiendish heritage — the unease you inspire, the fire in your blood —</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Cast the Shadow</strong> — your presence unsettles; name exactly what shifts in the <strong>Scene</strong></div><div class=\"bf-choice\"><strong>Dark Gift</strong> — spend a <span class=\"kw kw-hd\">Hit Die</span> to gain <span class=\"kw kw-boost\">Boost 2</span> on any one roll this <strong>Scene</strong></div><div class=\"bf-choice\"><strong>Infernal Tongue</strong> — something in this <strong>Scene</strong> answers to what you carry; the GM confirms what opens</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 511,
+    "Name": "Dragonborn",
+    "Card_Key": "dragonborn-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Dragonborn</div></div><div class=\"bf-body\"><div class=\"bf-flv\">Every choice you make is an answer to the question of what your bloodline means.</div><div class=\"bf-trig\">When the full weight of your draconic heritage — elemental, ancestral, primal —</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Breath</strong> &mdash; unleash what runs in your veins; all in range must respond, evade, or endure</div><div class=\"bf-choice\"><strong>Dragon's Bearing</strong> &mdash; your stillness, your voice, your presence changes the room's temperature</div><div class=\"bf-choice\"><strong>Scaled</strong> &mdash; your natural resistance means a threat that stops others doesn't land the same on you</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 512,
+    "Name": "Gnome",
+    "Card_Key": "gnome-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Gnome</div></div><div class=\"bf-body\"><div class=\"bf-flv\">Your mind moves in directions that simply do not occur to anyone else.</div><div class=\"bf-trig\">When cleverness, invention, or an angle nobody spotted changes what's possible,</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Lateral Thinking</strong> — see the solution others missed; name it — the GM confirms it works</div><div class=\"bf-choice\"><strong>Tinker's Touch</strong> — use something in this <strong>Scene</strong> in a way its maker never intended</div><div class=\"bf-choice\"><strong>Gnomish Cunning</strong> — when magic or deception is aimed at you, gain <span class=\"kw kw-boost\">Boost 2</span> to resist or see through it</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 513,
+    "Name": "Half-Elf",
+    "Card_Key": "half-elf-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Half-Elf</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You belong to neither world completely. You have learned to make that a strength.</div><div class=\"bf-trig\">When being a bridge — between peoples, cultures, or ways of seeing — matters,</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Common Ground</strong> &mdash; find the thread connecting two apparently opposed parties; name it and they both feel it</div><div class=\"bf-choice\"><strong>Read the Room</strong> &mdash; your experience across cultures means you know the rules here; act on it</div><div class=\"bf-choice\"><strong>Best of Both</strong> &mdash; name which heritage you're drawing on — elven grace or human drive — and show it</div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  },
+  {
+    "id": 514,
+    "Name": "Orc",
+    "Card_Key": "orc-ancestry",
+    "HTML": "<div class=\"card bf-ancestry acc-ancestry\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-accent\">Ancestry</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Orc</div></div><div class=\"bf-body\"><div class=\"bf-flv\">You are built for things that require more than most people have.</div><div class=\"bf-trig\">When raw power, momentum, or the force of your presence is what the moment needs,</div><div class=\"bf-choose\">Choose one:</div><div class=\"bf-choices\"><div class=\"bf-choice\"><strong>Rush</strong> — your momentum carries the <strong>Scene</strong>; name what breaks or gives way before you</div><div class=\"bf-choice\"><strong>Tower</strong> — plant yourself and refuse to move; your mass and will make you a wall the <strong>Scene</strong> works around</div><div class=\"bf-choice\"><strong>Battle Cry</strong> — your voice carries something older than words; all allies who hear it gain <span class=\"kw kw-boost\">Boost</span> on their next <strong>Action</strong></div></div></div></div>",
+    "Last_Rework_Date": "2026-06-29"
+  }
+]
