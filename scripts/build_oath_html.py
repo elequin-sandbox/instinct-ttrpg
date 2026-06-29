@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build Paladin Oath Core card HTML (compact Vow layout)."""
+"""Build Paladin Oath Core card HTML (Vow grid + Oath-of ribbon header)."""
 from __future__ import annotations
 
 # Permanent Oath pick at creation — each has lateral, spread-out word pools (6×6).
@@ -51,90 +51,127 @@ OATH_ROW_IDS = {
     "patron-template-warlock-core": 703,
 }
 
+HDR_TOP = (
+    '<div class="hdr-top"><span style="display:inline-flex;gap:3px;align-items:center;">'
+    '<span class="cap cap-neutral">Core</span><span class="cap cap-neutral">Oath</span>'
+    "</span><span></span></div>"
+)
+
+OATH_OF_PREFIX = (
+    '<span style="flex-shrink:0;font-family:system-ui,-apple-system,sans-serif;font-size:7px;'
+    "font-weight:800;letter-spacing:0.5px;text-transform:uppercase;padding:2px 6px;"
+    "background:var(--ad,#976e09);color:var(--at,#f5eedd);border:1px solid var(--a,#B8860B);"
+    'border-radius:3px;line-height:1.2;">Oath of</span>'
+)
+
+DIE_SLOT = (
+    '<span class="die-slot kw kw-crit" style="flex-shrink:0;width:16px;height:16px;'
+    "display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:700;"
+    'border-radius:3px;margin:1px;line-height:1;">{n}</span>'
+)
+
 PILL = (
-    '<div class="mark-pill" style="display:flex;flex-direction:column;align-items:stretch;'
-    'width:100%;border-radius:2px;overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);">'
-    '<span class="kw kw-crit" style="font-size:6.5px;padding:1px 0;line-height:1.1;text-align:center;">'
-    "{n}</span>"
-    '<strong style="color:#1a1008;font-size:6.5px;font-weight:700;padding:0 2px 2px;'
-    "font-family:system-ui,-apple-system,sans-serif;text-transform:uppercase;"
-    'letter-spacing:0.2px;line-height:1.15;text-align:center;word-break:break-word;">'
+    '<div class="vow-entry" style="display:flex;align-items:stretch;width:100%;min-height:18px;'
+    'border:0.5px solid rgba(0,0,0,0.22);border-radius:3px;overflow:hidden;background:#faf6ec;">'
+    + DIE_SLOT
+    + '<strong style="flex:1;display:flex;align-items:center;justify-content:center;padding:1px 4px 1px 2px;'
+    "color:#1a1008;font-size:6.5px;font-weight:700;font-family:system-ui,-apple-system,sans-serif;"
+    'text-transform:uppercase;letter-spacing:0.2px;line-height:1.1;word-break:break-word;text-align:center;">'
     "{word}</strong></div>"
 )
 
-# Template-only — roomy dashed write lines (matches scope-core writein-line; sized for pen).
 BLANK_PILL = (
-    '<div class="mark-pill mark-pill-blank" style="display:flex;flex-direction:column;'
-    'align-items:stretch;width:100%;min-height:34px;border-radius:3px;overflow:hidden;'
-    'border:0.5px solid rgba(90,74,32,0.3);background:rgba(255,252,245,0.65);">'
-    '<span class="kw kw-crit" style="font-size:7px;padding:2px 0 1px;line-height:1;'
-    'text-align:center;flex-shrink:0;">{n}</span>'
-    '<div class="writein-line" style="flex:1;min-height:22px;margin:1px 6px 6px;'
-    'border-bottom:1px dashed rgba(90,74,32,0.45);background:transparent;"></div></div>'
+    '<div class="vow-entry vow-entry-blank" style="display:flex;align-items:center;width:100%;'
+    "min-height:24px;border:0.5px solid rgba(90,74,32,0.32);border-radius:3px;overflow:hidden;"
+    'background:rgba(255,252,245,0.7);">'
+    + DIE_SLOT
+    + '<div class="writein-line" style="flex:1;min-height:16px;margin:3px 6px 3px 2px;'
+    'border-bottom:1px dashed rgba(90,74,32,0.45);"></div></div>'
 )
 
 VOW_GRID = (
     '<div class="vow-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'
-    'gap:2px;margin:1px 0;width:100%;">{cells}</div>'
+    'gap:2px;margin:2px 0;width:100%;">{cells}</div>'
 )
 
 BLANK_VOW_GRID = (
     '<div class="vow-grid vow-grid-blank" style="display:grid;'
-    'grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(34px,auto));'
+    'grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(24px,auto));'
     'gap:3px;margin:2px 0;width:100%;">{cells}</div>'
 )
 
-VOW_CELL = (
-    '<div class="vow-cell" style="display:flex;min-width:0;">{pill}</div>'
-)
+VOW_CELL = '<div class="vow-cell" style="display:flex;min-width:0;">{pill}</div>'
 
 THE_DIVIDER = (
     '<div style="display:flex;align-items:center;justify-content:center;position:relative;'
-    'height:10px;margin:1px 0;">'
-    '<span style="position:absolute;left:4px;right:4px;top:50%;height:1px;'
-    'background:#c8a96e;opacity:0.45;"></span>'
-    '<span style="position:relative;z-index:1;background:#f7f0e0;padding:0 6px;'
-    "font-family:'EB Garamond',Georgia,serif;font-size:8px;font-style:italic;"
-    'color:#7a6030;">the</span></div>'
+    'height:16px;margin:4px 0;">'
+    '<span style="position:absolute;left:0;right:0;top:50%;height:1px;background:#c8a96e;opacity:0.55;"></span>'
+    '<span style="position:relative;z-index:1;background:#f7f0e0;padding:2px 12px;'
+    "font-family:'EB Garamond',Georgia,serif;font-size:11px;font-weight:700;font-style:italic;"
+    "color:var(--ad,#976e09);border:1.5px solid var(--a,#B8860B);border-radius:10px;"
+    'letter-spacing:0.6px;box-shadow:0 0 0 2px rgba(247,240,224,0.9);">the</span></div>'
 )
 
 ENTER_VOW = (
-    "At <strong>Enter</strong>, roll 2d6 for your scene <strong>Vow</strong> on this "
-    "<strong>Oath</strong>."
+    "At <strong>Scene start</strong>: roll 2d6 to determine your new <strong>Vow</strong>:"
 )
 
 FULFILL_VOW = (
-    "Once per <strong>Scene</strong>, if the GM agrees your <strong>Action</strong> fulfills "
-    "your <strong>Vow</strong> in purpose, add both dice — "
-    '<span class="kw kw-boost">Boost 2</span> on that roll.'
+    "Once per <strong>Scene</strong>: if any <strong>Action</strong> you are taking fulfills your "
+    "<strong>Vow</strong> and the GM agrees, add these dice to give that roll "
+    '<span class="kw kw-boost">Boost 2</span>'
 )
 
 BREAK_VOW = (
-    "At <strong>Enter</strong>, before rolling, you may <strong>Break</strong> your "
-    "<strong>Vow</strong>. <strong>Discard</strong> your hand, <strong>Draw</strong> that many. "
-    "No <strong>Vow</strong> this scene; <strong>Oath</strong> stays Active."
+    "Describe how you are defying your <strong>Vow</strong>, then place these dice into your "
+    '<span class="kw kw-resolve">Resolve</span>. The GM gains '
+    '<span class="kw kw-toll">Toll 2</span> and must use it against you this scene.'
 )
 
-BODY_STYLE = "gap:2px;padding:4px 9px 32px;"
-TEMPLATE_BODY_STYLE = "gap:2px;padding:3px 8px 30px;"
-TEMPLATE_HDR_NAME = (
-    '<div class="hdr-name hdr-blankname" style="min-height:28px;">'
-    '<span style="opacity:.2;font-style:italic;font-weight:600;font-size:7.5px;">title</span></div>'
-)
-TEMPLATE_HDR_SUB = (
-    '<div class="hdr-sub" style="min-height:18px;border-bottom:1px dashed rgba(90,74,32,0.35);'
-    'margin:0 10px 5px;padding-bottom:3px;">'
-    '<span style="opacity:.2;font-style:italic;font-size:7px;">subtitle</span></div>'
-)
+BODY_STYLE = "gap:3px;padding:4px 9px 32px;"
+TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 30px;"
+
+
+def _hdr_name(name: str = "", *, blank: bool = False) -> str:
+    ribbon = (
+        'display:flex;align-items:center;justify-content:flex-start;gap:5px;'
+        "padding-left:8px;padding-right:10px;text-align:left;"
+    )
+    if blank:
+        title = (
+            '<span style="flex:1;min-height:14px;border-bottom:1px dashed rgba(90,74,32,0.35);'
+            'margin-right:4px;">&nbsp;</span>'
+        )
+        return (
+            f'<div class="hdr-name hdr-blankname" style="{ribbon}min-height:26px;">'
+            + OATH_OF_PREFIX
+            + title
+            + "</div>"
+        )
+    return (
+        f'<div class="hdr-name" style="{ribbon}">'
+        + OATH_OF_PREFIX
+        + f'<span style="flex:1;line-height:1.08;">{name}</span></div>'
+    )
+
+
+def _hdr_sub(sub: str = "", *, blank: bool = False) -> str:
+    if blank:
+        return (
+            '<div class="hdr-sub" style="min-height:16px;border-bottom:1px dashed rgba(90,74,32,0.35);'
+            'margin:0 10px 5px;padding-bottom:3px;text-align:left;">'
+            '<span style="opacity:.2;font-style:italic;font-size:7px;">subtitle</span></div>'
+        )
+    return f'<div class="hdr-sub">{sub}</div>'
 
 
 def etxt(content: str, *, extra_style: str = "") -> str:
-    style = f"font-size:8.5px;line-height:1.35;text-align:center;{extra_style}"
+    style = f"font-size:8px;line-height:1.42;text-align:left;{extra_style}"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
 def etxt_break(content: str) -> str:
-    style = "font-size:7px;line-height:1.35;color:#5a4020;font-style:italic;text-align:left;"
+    style = "font-size:7.5px;line-height:1.42;color:#1a1008;text-align:left;"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
@@ -160,48 +197,54 @@ def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: li
     return verb_grid + THE_DIVIDER + noun_grid
 
 
-def _break_box() -> str:
+def _break_section() -> str:
     return (
-        '<div class="rule" style="margin:2px 0 1px;"></div>'
-        '<div style="background:rgba(90,74,32,0.08);border:0.5px solid rgba(90,74,32,0.35);'
-        'border-radius:3px;padding:2px 5px 3px;margin-bottom:2px;">'
+        '<div class="rule" style="margin:5px 0 3px;"></div>'
+        '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7px;'
+        "letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;"
+        'margin-bottom:2px;">Break Your Oath:</div>'
         + etxt_break(BREAK_VOW)
-        + "</div>"
     )
 
 
 def _body_block(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
     return (
-        etxt(ENTER_VOW, extra_style="margin-bottom:2px;")
+        etxt(ENTER_VOW, extra_style="margin-bottom:1px;")
         + word_stack(blank=blank, verbs=verbs, nouns=nouns)
-        + '<div class="rule" style="margin:3px 0 2px;"></div>'
+        + '<div class="rule" style="margin:4px 0 2px;"></div>'
         + etxt(FULFILL_VOW)
+    )
+
+
+def _hdr(*, name: str = "", sub: str = "", blank: bool = False) -> str:
+    return (
+        '<div class="hdr">'
+        + HDR_TOP
+        + _hdr_name(name, blank=blank)
+        + _hdr_sub(sub, blank=blank)
+        + "</div>"
     )
 
 
 def build(oath: dict, *, include_break: bool = True) -> str:
     return (
-        '<div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top">'
-        '<span class="cap cap-neutral">Core</span><span></span></div>'
-        f'<div class="hdr-name">{oath["name"]}</div>'
-        f'<div class="hdr-sub">{oath["sub"]}</div></div>'
-        f'<div class="card-body" style="{BODY_STYLE}">'
+        '<div class="card paladin acc-paladin">'
+        + _hdr(name=oath["name"], sub=oath["sub"])
+        + f'<div class="card-body" style="{BODY_STYLE}">'
         + _body_block(verbs=oath["verbs"], nouns=oath["nouns"])
-        + (_break_box() if include_break else "")
-        + "</div><div class=\"idtag\">Paladin</div></div>"
+        + (_break_section() if include_break else "")
+        + '</div><div class="idtag">Paladin</div></div>'
     )
 
 
 def build_oath_template() -> str:
     return (
-        '<div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top">'
-        '<span class="cap cap-neutral">Core</span><span></span></div>'
-        + TEMPLATE_HDR_NAME
-        + TEMPLATE_HDR_SUB
-        + f'</div><div class="card-body" style="{TEMPLATE_BODY_STYLE}">'
+        '<div class="card paladin acc-paladin">'
+        + _hdr(blank=True)
+        + f'<div class="card-body" style="{TEMPLATE_BODY_STYLE}">'
         + _body_block(blank=True)
-        + _break_box()
-        + "</div><div class=\"idtag\">Paladin</div></div>"
+        + _break_section()
+        + '</div><div class="idtag">Paladin</div></div>'
     )
 
 
@@ -215,11 +258,20 @@ def build_patron_template() -> str:
         "Announce that your Patron has arrived. Roll a d6 to determine which <strong>Mark</strong> "
         "you must pay. The GM decides the cost before this <strong>Scene</strong> ends."
     )
+    blank_name = (
+        '<div class="hdr-name hdr-blankname" style="min-height:28px;">'
+        '<span style="opacity:.2;font-style:italic;font-weight:600;font-size:7.5px;">title</span></div>'
+    )
+    blank_sub = (
+        '<div class="hdr-sub" style="min-height:16px;border-bottom:1px dashed rgba(90,74,32,0.35);'
+        'margin:0 10px 5px;padding-bottom:3px;">'
+        '<span style="opacity:.2;font-style:italic;font-size:7px;">subtitle</span></div>'
+    )
     return (
         '<div class="card warlock acc-warlock"><div class="hdr"><div class="hdr-top">'
         '<span class="cap cap-neutral">Core</span><span></span></div>'
-        + TEMPLATE_HDR_NAME
-        + TEMPLATE_HDR_SUB
+        + blank_name
+        + blank_sub
         + '</div><div class="card-body" style="gap:3px;padding:4px 9px 28px;">'
         '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">The Marks of</div>'
         + word_grid(blank=True)

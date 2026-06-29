@@ -11,12 +11,12 @@
 
 | Term | Scope | Notes |
 |---|---|---|
-| **Oath** | Campaign — the Core card you pick at creation | Stays in Active area; defines your word pools |
+| **Oath** | Campaign — the Core card you pick at creation | Stays in Active area; defines your word pools. Header tags: **Core** + **Oath**; ribbon reads *Oath of …* |
 | **Vow** | Scene — Verb + *the* + Noun phrase | Changes every scene. Colloquial: *"What's your vow this scene?"* |
-| **Fulfill** | Once per scene | GM agrees your **Action** fulfills your **Vow** → add both dice to **Boost** the roll |
-| **Break** | Optional at **Enter** | Old Defiance fantasy — without losing the Oath card for the session |
+| **Fulfill** | Once per scene | GM agrees your **Action** fulfills your **Vow** → add both dice to **Boost 2** on that roll |
+| **Break** | Defy your **Vow** mid-scene | Describe defiance; place dice into **Resolve**; GM gains **Toll 2** (must use against you this scene) |
 
-*Rejected:* Charge (too generic), Mandate (clunky), Stand (June 2026 interim — replaced by **Vow**).
+*Rejected:* Charge (too generic), Mandate (clunky), Stand (June 2026 interim — replaced by **Vow**). Old Break (hand mulligan at Enter) — replaced June 2026 v6.
 
 **Card vs table:** Oath cards show the minimum text; GM / creation supplement explains placing dice on Verb + Noun lists and reading the phrase aloud.
 
@@ -38,10 +38,12 @@ Mirrors Warlock **Patron** pick:
 
 | Zone | Content |
 |---|---|
-| **Enter line** | At **Enter**, roll 2d6 for your scene **Vow** on this **Oath** |
-| **Word stack** | 3×2 grid of indexed pills (1–6), *the* divider — no Verb/Noun labels; same column = same die face |
-| **Fulfill** | Once/scene, **Vow** in purpose → both dice = `[Boost 2]` |
-| **Break** | Optional at **Enter** before rolling (italic box, shortened) |
+| **Header caps** | **Core** · **Oath** (sorting) |
+| **Ribbon title** | **Oath of** prefix pill + card name (e.g. *Oath of The Open Hand*) |
+| **Scene start line** | At **Scene start**: roll 2d6 to determine your new **Vow**: |
+| **Word stack** | 3×2 grid — die-slot square (left) + term (right); prominent *the* divider |
+| **Fulfill** | Once per **Scene** … add these dice → **Boost 2** |
+| **Break Your Oath:** | Defiance → dice to **Resolve**; GM **Toll 2** vs you this scene |
 
 ### Word-pool design rules
 
@@ -55,35 +57,15 @@ Mirrors Warlock **Patron** pick:
 
 ### Determine your Vow
 
-When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun** (same column on the card). Your **Vow** is that phrase (*Verb the Noun*).
-
-### Priority
-
-It is your priority above all else in this **Scene**.
+At **Scene start**, roll **2d6**. Place one die on a **Verb** and one on a **Noun** (same column on the card). Your **Vow** is that phrase (*Verb the Noun*).
 
 ### Fulfill your Vow
 
-Once per **Scene**, if the GM agrees your **Action** fulfills your **Vow** in purpose, add both dice — **[Boost 2]** on that roll, then remove them.
+Once per **Scene**, if any **Action** you are taking fulfills your **Vow** and the GM agrees, add both dice to give that roll **Boost 2**, then remove them.
 
-Defensive vows naturally pair with **Bulwark** / **[Resolve]** cards in combat — no extra rule required on the Oath card.
+### Break Your Oath
 
-### Break your Vow (replaces old Defiance shuffle)
-
-When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Vow**.
-
-- **Discard** your hand, **Draw** that many.
-- No **Vow** this scene; **Oath** stays Active.
-
-#### Break — open tuning (pick one after playtest)
-
-| Option | Extra cost | Feel |
-|---|---|---|
-| **A — Free** | None beyond skipping Vow | Generous; enables big narrative pivots |
-| **B — Vow debt** | Cannot **Fulfill** next scene | Soft cooldown |
-| **C — Remorse chip** | GM places 1 Remorse; clear via hard narrative act or **Cleanse** | Fiction-forward |
-| **D — Stain bane** | Shuffle **Stain** (single-scene bane, auto-clears at scene end) | Mechanical bite without losing Oath |
-
-**Recommendation:** **A** for first playtest; add **B** if Break dominates.
+Describe how you are defying your **Vow**, then place these dice into your **Resolve**. The GM gains **Toll 2** and must use it against you this scene.
 
 ---
 
@@ -108,6 +90,7 @@ When you **Enter** a **Scene**, *before* rolling, you may **Break** your **Vow**
 - **Conviction · Defiance** — archived.
 - Scene **Charge** and **Stand** terminology — superseded by **Vow** (June 2026).
 - D&D-subtype names (Devotion / Vengeance / Crown) — replaced with lateral titles.
+- Break-at-Enter hand mulligan — superseded by **Break Your Oath** (Resolve + GM Toll 2).
 
 ---
 
