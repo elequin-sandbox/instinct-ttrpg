@@ -100,6 +100,8 @@
     .dh-block.is-hand .dh-label { color: var(--gold-light); }
     .dh-sub { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
     .dh-block.is-hand .dh-sub { color: var(--text-main); }
+    .dh-icon { margin-bottom: 10px; line-height: 0; opacity: 0.9; }
+    .dh-icon svg { display: block; }
     .golden-rule {
       background: var(--bg-card); border: 2px solid var(--gold); border-radius: 10px;
       padding: 24px 22px; margin: 20px 0; text-align: center;
@@ -145,7 +147,8 @@
       border: 1px solid var(--border); border-radius: 6px;
     }
     .step-sub-title {
-      font-family: Cinzel, serif; font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
     }
     .step-sub p { font-size: 15px; margin: 0 0 8px; }
@@ -155,16 +158,12 @@
       background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px;
     }
     .ex-step-num {
-      font-family: Cinzel, serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
     }
     .ex-step p { font-size: 15px; margin: 8px 0 0; }
     .die-removed { opacity: 0.35; text-decoration: line-through; }
-    .lead-pair { margin: 20px 0 18px; }
-    .lead-pair-line {
-      font-family: Cinzel, serif; font-size: clamp(16px, 4vw, 20px); font-weight: 600;
-      color: var(--gold-light); line-height: 1.45; margin-bottom: 6px;
-    }
     .faq-list { display: flex; flex-direction: column; gap: 8px; }
     .faq-item {
       border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-card);
@@ -185,7 +184,10 @@
       border: 1px solid var(--border-hi); display: flex; align-items: center; justify-content: center;
       font-family: Cinzel, serif; font-size: 14px; font-weight: 700; color: var(--gold);
     }
-    .chargen-label { font-family: Cinzel, serif; font-size: 13px; font-weight: 700; color: var(--gold-light); margin-bottom: 4px; }
+    .chargen-label {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-size: 13px; font-weight: 700; color: var(--gold-light); margin-bottom: 4px;
+    }
     .chargen-desc { font-size: 15.5px; margin-bottom: 8px; }
     .deck-math { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin: 16px 0; }
     .deck-math table { width: 100%; border-collapse: collapse; }
@@ -214,7 +216,6 @@
     .gloss-term summary::-webkit-details-marker { display: none; }
     .gloss-term summary:hover { background: rgba(200,169,110,0.06); }
     .gloss-term-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
-    .gloss-hook { font-size: 15px; color: var(--text-muted); font-style: italic; }
     .gloss-arrow { color: var(--gold); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; }
     .gloss-term[open] .gloss-arrow { transform: rotate(180deg); }
     .gloss-body {
@@ -249,7 +250,6 @@
       .ct-row { grid-template-columns: 88px 1fr; }
       .step { grid-template-columns: 76px 1fr; }
       .outcome { grid-template-columns: 84px 1fr; }
-      .gloss-hook { display: none; }
     }
   </style>
 </head>
@@ -276,8 +276,8 @@
     <div class="section-eyebrow">01</div>
     <h2 class="section-title">What This Game Is</h2>
     <div class="golden-rule">
-      <div class="golden-rule-text">The core of the game is giving people funny excuses<br>to use their cards in unexpected ways.</div>
-      <div class="golden-rule-sub" style="font-size:14px;margin-top:8px;opacity:0.7">— Ben, Playtest #1</div>
+      <div class="golden-rule-text">“The core of the game is giving people funny excuses<br>to use their cards in unexpected ways.”</div>
+      <div class="golden-rule-sub" style="font-size:14px;margin-top:8px;opacity:0.7">— a Playtester</div>
     </div>
     <p>Instinct RPG is a card-driven tabletop RPG. You describe what your character does. The cards confirm what that action is capable of achieving. That’s it.</p>
     <p>No stat sheet, no ability-score math, no spell slots. You have a hand of cards that changes every scene — and a table working together to make each moment worth remembering.</p>
@@ -286,9 +286,32 @@
   <section class="section">
     <div class="section-eyebrow">02</div>
     <h2 class="section-title">Your Character &amp; Their Instincts</h2>
-    <div class="lead-pair">
-      <div class="lead-pair-line">Your Deck = Your Character.</div>
-      <div class="lead-pair-line">Your Hand = Their Instincts Right Now.</div>
+    <div class="dh-grid">
+      <div class="dh-block">
+        <div class="dh-icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="12" width="20" height="15" rx="2.5" stroke="#c8a96e" stroke-width="1.5" fill="rgba(200,169,110,0.10)"/>
+            <rect x="7.5" y="8.5" width="20" height="15" rx="2.5" stroke="#c8a96e" stroke-width="1.5" fill="rgba(200,169,110,0.16)"/>
+            <rect x="10" y="5" width="20" height="15" rx="2.5" stroke="#dfc98e" stroke-width="1.5" fill="rgba(200,169,110,0.24)"/>
+          </svg>
+        </div>
+        <div class="dh-label">Your Deck</div>
+        <div class="dh-sub"><strong>Your Deck = Your Character.</strong> The full person — every card that makes up who they are.</div>
+      </div>
+      <div class="dh-block is-hand">
+        <div class="dh-icon" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 20v-5a2.5 2.5 0 0 1 5 0v9" stroke="#dfc98e" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 20v-7a2.5 2.5 0 0 1 5 0v11" stroke="#dfc98e" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M17 20v-4a2.5 2.5 0 0 1 5 0v8" stroke="#dfc98e" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M22 20v-2.5a2.5 2.5 0 0 1 5 0v6" stroke="#dfc98e" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 21.5c2 3.5 6 5.5 12 5.5s10-2 12-5.5" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="14" y="14" width="10" height="7" rx="1.5" stroke="#c8a96e" stroke-width="1.2" fill="rgba(200,169,110,0.18)" transform="rotate(-8 19 17.5)"/>
+          </svg>
+        </div>
+        <div class="dh-label">Your Hand</div>
+        <div class="dh-sub"><strong>Your Hand = Their Instincts Right Now.</strong> Only what surfaces in this scene — under right-now pressure.</div>
+      </div>
     </div>
     <p>Your <strong>deck</strong> is the full person — every card that makes up who they are. Your <strong>hand</strong> is only a slice of that person in this scene: the Instincts, bonds, and abilities surfacing under right-now pressure.</p>
     <p>You never have your whole character available at once. That’s the point. Each scene you draw a fresh hand (typically 5 cards). You don’t choose what shows up — you discover what your character <em>wants</em> to do, then narrate why or how they act on it. The fun is justifying the weird hand you got, not optimizing a build.</p>
@@ -347,10 +370,11 @@
 
     <div class="callout">
       <div class="callout-label">Walkthrough example</div>
+      <p style="font-size:15.5px;margin:0 0 14px">A <strong>Barbarian</strong> is blocked by a heavy barred door. <strong>Break</strong> is in their hand — play it to perform an <strong>Athletics</strong> check and smash part of the scene. Their fighter ally discards a card to <span class="kw kw-aid">Aid</span>, adding 1 die. That’s <strong>3d6</strong> on the roll: <strong>2d6</strong> base at Tier 1, plus <strong>1</strong> from Aid. The GM sets the door’s opposing pool at <strong>[4] [5]</strong> before anyone rolls.</p>
       <div class="ex-steps">
         <div class="ex-step">
           <div class="ex-step-num">Step 1 — Roll</div>
-          <p>You roll <strong>3d6</strong> against the GM’s pool <strong>[4] [5]</strong>:</p>
+          <p>The Barbarian rolls <strong>3d6</strong> against the door’s pool <strong>[4] [5]</strong>:</p>
           <div class="dice-row">
             <div class="die die-player">6</div><div class="die die-player">3</div><div class="die die-player">1</div>
             <span class="die-label">yours</span>
@@ -390,7 +414,7 @@
         </div>
         <div class="ex-step">
           <div class="ex-step-num">Step 5 — Result</div>
-          <p>All GM dice cleared → <strong>full success.</strong> You gained <strong>1 Flourish</strong> option from your Crit. Narrate what you pulled off.</p>
+          <p>All GM dice cleared → <strong>full success.</strong> The door gives way. You gained <strong>1 Flourish</strong> from your Crit on <strong>Break</strong> — maybe the guard on the other side is <strong>Exposed</strong>. Narrate the smash.</p>
         </div>
       </div>
     </div>
@@ -431,8 +455,7 @@
     <div class="section-eyebrow">06</div>
     <h2 class="section-title">How a Card Plays</h2>
     <div class="golden-rule" style="border-color:rgba(200,169,110,0.45);padding:16px 20px">
-      <div class="golden-rule-text" style="font-size:clamp(14px,3.5vw,18px)">Your hand shows what your character wants.<br>You show the table how.</div>
-      <div class="golden-rule-sub">You don’t pick a card and invent a reason. You look at what surfaced and narrate why it fits.</div>
+      <div class="golden-rule-text" style="font-size:clamp(14px,3.5vw,18px)">Your Hand Shows What Your Character Wants To Do.<br>You Show The Table How.</div>
     </div>
     <p>Glance at your hand. Something there is pulling at your character — an Instinct, a Bond, an ability itching to fire. Describe what they do in the scene. <em>Then</em> play the card that matches.</p>
     <p>If nothing in your hand fits what you described, the action can still happen as a basic check — just without card effects.</p>
@@ -543,7 +566,7 @@
 
       <details class="gloss-term" id="kw-check">
         <summary>
-          <span class="gloss-term-left"><strong style="font-size:17px;color:var(--gold-light)">Check</strong><span class="gloss-hook">When the dice come out</span></span>
+          <span class="gloss-term-left"><strong style="font-size:17px;color:var(--gold-light)">Check</strong></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>Any uncertain action resolved with dice. You build a pool, roll against the GM’s opposing pool, read Misses and Crits, then clear dice. Most checks work the same way — some cards use a shorter format your GM explains when it comes up.</p></div>
@@ -551,7 +574,7 @@
 
       <details class="gloss-term" id="kw-boost">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-boost">Boost N</span><span class="gloss-hook">More dice in the pool</span></span>
+          <span class="gloss-term-left"><span class="kw kw-boost">Boost N</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>Add dice to a check pool — from card effects, <span class="kw kw-aid">Aid</span>, or sometimes the GM rewarding creative play or strong roleplay. Bonus dice expire at scene end. A Boost die showing a 1 is removed like any other Miss.</p></div>
@@ -559,7 +582,7 @@
 
       <details class="gloss-term" id="kw-aid">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-aid">Aid</span><span class="gloss-hook">An ally backs you up</span></span>
+          <span class="gloss-term-left"><span class="kw kw-aid">Aid</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>An ally discards a card to add 1 die to <em>your</em> check. Capped at <strong>one ally per check</strong>. You cannot Aid yourself.</p></div>
@@ -567,7 +590,7 @@
 
       <details class="gloss-term" id="kw-miss">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-miss">Miss</span><span class="gloss-hook">A natural 1 only</span></span>
+          <span class="gloss-term-left"><span class="kw kw-miss">Miss</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>Strictly a die showing <strong>1</strong>. Removed immediately; gives the GM 1 <span class="kw kw-toll">Toll</span>. A partial result — some GM dice left uncleared — is <em>not</em> a Miss.</p></div>
@@ -575,7 +598,7 @@
 
       <details class="gloss-term" id="kw-toll">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-toll">Toll</span><span class="gloss-hook">The world pushes back</span></span>
+          <span class="gloss-term-left"><span class="kw kw-toll">Toll</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>GM currency from Misses. Spent to escalate scenes — complications, NPC reactions, sharper consequences. The table should always feel the world responding.</p></div>
@@ -583,7 +606,7 @@
 
       <details class="gloss-term" id="kw-crit">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-crit">Crit</span><span class="gloss-hook">A 6 on the die</span></span>
+          <span class="gloss-term-left"><span class="kw kw-crit">Crit</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>After a check, count dice still showing <strong>6</strong>. Each one lets you <strong>gain</strong> one Flourish option from the ability card you played. You keep your 6s on the table — you’re counting them, not giving them up.</p></div>
@@ -591,7 +614,7 @@
 
       <details class="gloss-term" id="kw-flourish">
         <summary>
-          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Flourish</strong><span class="gloss-hook">Bonus option on a card</span></span>
+          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Flourish</strong></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>A bonus line listed on an ability card — not a die result. When you earn <span class="kw kw-crit">Crits</span>, you may gain Flourishes from the card you played. One Crit typically unlocks one Flourish.</p></div>
@@ -599,7 +622,7 @@
 
       <details class="gloss-term" id="kw-hd">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-hd">Hit Dice</span><span class="gloss-hook">Your health pool</span></span>
+          <span class="gloss-term-left"><span class="kw kw-hd">Hit Dice</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>Physical d6s on the table — never “HP.” Damage removes or reduces them. When you’re out of Hit Dice, you’re out of the fight.</p></div>
@@ -607,7 +630,7 @@
 
       <details class="gloss-term" id="kw-resolve">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-resolve">Resolve</span><span class="gloss-hook">Your buffer before health</span></span>
+          <span class="gloss-term-left"><span class="kw kw-resolve">Resolve</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body">
@@ -618,7 +641,7 @@
 
       <details class="gloss-term" id="kw-threat">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-threat">Threat</span><span class="gloss-hook">Incoming danger, revealed upfront</span></span>
+          <span class="gloss-term-left"><span class="kw kw-threat">Threat</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body">
@@ -629,7 +652,7 @@
 
       <details class="gloss-term" id="kw-mill">
         <summary>
-          <span class="gloss-term-left"><span class="kw kw-mill">Mill</span><span class="gloss-hook">Swap at scene start</span></span>
+          <span class="gloss-term-left"><span class="kw kw-mill">Mill</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body"><p>On Item cards and some Reacts: at scene start, you may discard this card to draw 1. Use it when the scene doesn’t call for what you’re holding.</p></div>
@@ -637,7 +660,7 @@
 
       <details class="gloss-term" id="kw-snap">
         <summary>
-          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Snap Check</strong><span class="gloss-hook">A one-die reaction</span></span>
+          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Snap Check</strong></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body">
@@ -668,7 +691,7 @@
 
       <details class="faq-item">
         <summary>Can I play a card just because I want to? <span class="gloss-arrow">▼</span></summary>
-        <div class="faq-body"><p>Start from what’s in your hand, not a plan you made three turns ago. If the card’s Trigger describes what’s happening in the scene, you’re fine. When unsure, ask the GM.</p></div>
+        <div class="faq-body"><p>Yes — if what’s happening in the scene matches the card’s Trigger, you’re in good shape. Look at your hand first and narrate from there. When you’re not sure whether the moment fits, ask the GM.</p></div>
       </details>
 
       <details class="faq-item">
