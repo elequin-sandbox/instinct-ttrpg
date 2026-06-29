@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+"""Regenerate paladin-oath-proof.html from build_oath_html."""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.build_oath_html import OATHS, build, build_oath_template, build_patron_template  # noqa: E402
+
+CSS = """\
+:root{--ink:#1e1810;--gold:#c8a96e;--gold-d:#7a6030;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;padding:24px 18px 60px;}
+h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:920px;}
+.rule-box{max-width:920px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid #B8860B;border-radius:8px;padding:14px 16px;margin-bottom:32px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
+.rule-box strong{color:var(--gold);}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:start;}
+.sample{display:flex;flex-direction:column;gap:10px;}
+.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
+.acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
+.acc-warlock{--a:#9A2B5E;--ad:#7e234d;--al:#ddb7c8;--ah:#f5eaef;--at:#f1e1e8;}
+.cardwrap{position:relative;width:2.5in;margin:0 auto;}
+.cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
+.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+section{margin-bottom:44px;}
+h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
+.h2-note{font-size:12px;color:#8a7a5a;margin-bottom:16px;line-height:1.5;max-width:920px;}
+"""
+
+cards = "".join(
+    f'<div class="sample"><div class="stag">{o["name"]}</div>'
+    f'<div class="cardwrap">{build(o)}</div></div>'
+    for o in OATHS
+)
+
+templates = (
+    '<section><h2>Blank templates</h2><p class="h2-note">Fill title, subtitle, and word lists only. '
+    "Procedure text stays printed.</p><div class=\"grid\">"
+    f'<div class="sample"><div class="stag">Oath template</div><div class="cardwrap">{build_oath_template()}</div></div>'
+    f'<div class="sample"><div class="stag">Patron template</div><div class="cardwrap">{build_patron_template()}</div></div>'
+    "</div></section>"
+)
+
+html = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<title>Instinct RPG — Paladin Oath / Scene Stand Proof</title>
+<style>
+{CSS}
+</style>
+</head>
+<body>
+<h1>Paladin Oath — Scene Stand Proof</h1>
+<p class="sub">Five Oath Core cards + blank templates. Permanent <strong>Oath</strong> at creation; per-scene <strong>Stand</strong> (Verb + Noun). Optional <strong>Break</strong> at Enter.</p>
+<div class="rule-box">
+<strong>Stand</strong> — Roll 2d6 at <strong>Enter</strong>. <strong>Fulfill</strong> once/scene when the <em>primary purpose</em> of your <strong>Action</strong> serves your Stand. <strong>Break</strong> before rolling: mulligan hand, skip Stand, Oath stays Active.
+</div>
+<section><div class="grid">{cards}</div></section>
+{templates}
+</body>
+</html>
+"""
+
+OUT = ROOT / "paladin-oath-proof.html"
+OUT.write_text(html, encoding="utf-8")
+print("Wrote", OUT)
