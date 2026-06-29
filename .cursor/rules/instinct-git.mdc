@@ -37,7 +37,7 @@ Workflow:
 
 ## Deploy note
 
-Push to `main` triggers GitHub Actions → GitHub Pages (Card Studio). Keep Baserow and repo in sync when card HTML changes (`card-data.js`, etc.).
+Push to `main` triggers GitHub Actions → GitHub Pages (Card Studio). Keep Baserow and repo in sync when card HTML changes (`card-data.js`, etc.). **Agent pushes Baserow** — see `instinct-agent-ops.mdc`; never hand off sync scripts to Annie.
 
 ## If blocked
 
