@@ -235,13 +235,19 @@ def _word_stack_meet(
     verbs: list[str] | None = None,
     nouns: list[str] | None = None,
 ) -> str:
-    """L→R mad lib — 3-column spine: dice + *the* on top; indices centered below."""
-    grid = f"display:grid;grid-template-columns:1fr {SPINE_W} 1fr;column-gap:6px;align-items:center;"
+    """L→R mad lib — paired index columns under left/right dice; verbs & nouns meet at *the*."""
+    grid = (
+        "display:grid;"
+        "grid-template-columns:1fr 22px minmax(26px,auto) 22px 1fr;"
+        "column-gap:4px;align-items:center;"
+    )
     phrase_top = (
         f'<div class="vow-skeleton" style="{grid}margin:0 0 3px;padding:0;">'
-        f'<div style="display:flex;justify-content:flex-end;">{DIE_TARGET}</div>'
+        "<div></div>"
+        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>'
         f'<div style="display:flex;justify-content:center;">{_ornate_the()}</div>'
-        f'<div style="display:flex;justify-content:flex-start;">{DIE_TARGET}</div>'
+        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>'
+        "<div></div>"
         "</div>"
     )
     vlist = verbs or []
@@ -251,6 +257,8 @@ def _word_stack_meet(
         n = i + 1
         row_cells.append(
             _term_cell(None if blank else vlist[i], side="verb", blank=blank)
+            + f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>'
+            + "<div></div>"
             + f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>'
             + _term_cell(None if blank else nlist[i], side="noun", blank=blank)
         )
@@ -347,12 +355,13 @@ def _body_block(
     )
 
 
-def _hdr(*, name: str = "", sub: str = "", blank: bool = False) -> str:
+def _hdr(*, name: str = "", sub: str = "", blank: bool = False, include_sub: bool = False) -> str:
+    sub_html = _hdr_sub(sub, blank=blank) if include_sub else ""
     return (
         '<div class="hdr">'
         + HDR_TOP
         + _hdr_name(name, blank=blank)
-        + _hdr_sub(sub, blank=blank)
+        + sub_html
         + "</div>"
     )
 
@@ -360,7 +369,7 @@ def _hdr(*, name: str = "", sub: str = "", blank: bool = False) -> str:
 def build(oath: dict, *, include_break: bool = True, phrase_align: str = "meet") -> str:
     return (
         '<div class="card paladin acc-paladin">'
-        + _hdr(name=oath["name"], sub=oath["sub"])
+        + _hdr(name=oath["name"])
         + f'<div class="card-body" style="{BODY_STYLE}">'
         + _body_block(verbs=oath["verbs"], nouns=oath["nouns"], align=phrase_align)
         + (_break_section() if include_break else "")

@@ -39,9 +39,9 @@ Mirrors Warlock **Patron** pick:
 | Zone | Content |
 |---|---|
 | **Header caps** | **Core** · **Oath** (sorting) |
-| **Ribbon title** | **Oath of** prefix pill + card name (e.g. *Oath of The Open Hand*) |
+| **Ribbon title** | **Oath of** prefix pill + card name (e.g. *Oath of The Open Hand*) — no subtitle on card (flavor lives in pool docs only) |
 | **Scene start line** | At **Scene start**: roll 2d6 to determine your new **Vow**: |
-| **Word stack** | L→R mad lib — dice in top slots; verb column left, noun column right; **index chips centered on spine** under dice; *the* in fleur-de-lis ring |
+| **Word stack** | L→R mad lib — left/right dice in top slots; **paired index columns** (each die gets its own 1–6 spine); verbs/nouns meet at fleur-de-lis *the* |
 | **Fulfill** | Once per **Scene** … add these dice → **Boost 2** |
 | **Break Your Oath:** | Defiance → dice to **Resolve**; GM **Toll 2** vs you this scene |
 
