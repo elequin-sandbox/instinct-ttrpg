@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<title>Instinct RPG — Spark React Design Lab</title>
+<style>
+:root{--ink:#1e1810;--gold:#c8a96e;--gold-d:#7a6030;--spark:#6D28D9;--spark-l:#EDE9FE;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;padding:24px 18px 60px;}
+h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:920px;}
+.rule-box{max-width:920px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--spark);border-radius:8px;padding:14px 16px;margin-bottom:32px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
+.rule-box strong{color:var(--gold);letter-spacing:.5px;}
+.rule-box em{color:#9a8a6a;font-style:italic;}
+section{margin-bottom:44px;}
+h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
+.h2-note{font-size:12px;color:#8a7a5a;margin-bottom:16px;line-height:1.5;max-width:920px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:start;}
+.sample{display:flex;flex-direction:column;gap:10px;}
+.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--spark-l);text-align:center;}
+.sdesc{font-size:11px;color:#9a8a6a;text-align:center;line-height:1.45;max-width:280px;margin:0 auto;}
+
+/* === canonical card shell (from index.html / canon pass) === */
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.6;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-threat{background:#991B1B;color:#FEF2F2;}
+.kw-toll{background:#B45309;color:#FFFBEB;}
+.kw-miss{background:#7F1D1D;color:#FEF2F2;}
+.kw-spark{background:var(--spark);color:var(--spark-l);font-size:9px;min-width:2.1em;text-align:center;}
+.acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
+.acc-rogue{--a:#6C5BA8;--ad:#594b8a;--al:#cdc7e1;--ah:#f0eff6;--at:#eae8f3;}
+.acc-bard{--a:#B5388D;--ad:#942e74;--al:#e6bbd8;--ah:#f8ebf4;--at:#f5e3ef;}
+.cardwrap{position:relative;width:2.5in;margin:0 auto;}
+.cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
+.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;font-family:system-ui,-apple-system,sans-serif;color:#241a08;overflow:hidden;}
+.hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah);border-bottom:1px solid rgba(0,0,0,.10);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
+.cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;white-space:nowrap;}
+.cap-neutral{border-color:#3a3320;color:#3a3320;}
+.hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:16.5px;line-height:1.08;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.cbody{flex:1;padding:7px 9px 28px;display:flex;flex-direction:column;gap:3px;font-size:10.5px;line-height:1.45;min-height:0;}
+.flv{font-style:italic;color:#5a4020;font-size:10px;line-height:1.35;flex-shrink:0;}
+.hr{height:0.5px;background:#c8a96e;opacity:.45;margin:2px 0;flex-shrink:0;}
+.elbl{font-size:8px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#7a6030;flex-shrink:0;}
+.etxt{color:#1c1408;flex-shrink:0;}
+.trig{font-style:italic;color:#3a2a0a;}
+.spark-sec{margin-top:2px;flex-shrink:0;}
+.spark-lbl{font-size:8px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--spark);margin-bottom:3px;}
+.spark-row{display:flex;gap:4px;align-items:flex-start;margin-bottom:3px;line-height:1.38;}
+.spark-row:last-child{margin-bottom:0;}
+.spark-band{flex:0 0 auto;}
+.spark-txt{flex:1;color:#2a1e08;}
+.co{font-size:9px;font-weight:700;color:#5a4020;margin-top:3px;margin-bottom:2px;letter-spacing:.2px;}
+.opt{font-size:10px;line-height:1.38;color:#2a1e08;margin-bottom:2px;padding-left:1px;}
+.opt:last-child{margin-bottom:0;}
+.idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
+.tier-float{position:absolute;right:8px;bottom:7px;width:18px;height:18px;border:1px solid #9a9a9a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#7d7d7d;font-family:Georgia,serif;font-style:italic;background:rgba(255,255,255,.55);}
+</style>
+</head>
+<body>
+
+<h1>Spark React — Design Lab</h1>
+<p class="sub">Three prototype <strong>React</strong> cards showing different ways a single d6 resolves — without pool-vs-pool checks. Cards reference the global procedure; they do not re-explain it.</p>
+
+<div class="rule-box">
+<strong>Spark</strong> (global rule — primer / GM guide, not on every card): When a card tells you to <strong>Spark</strong>, roll <strong>1d6</strong> and read that card's outcome bands. No opposing pool, no Tier base dice. The card prints what each band means; moving breakpoints (1–3 vs 1–5 vs three tiers) is how power is budgeted. A natural 1 is not automatically a <span class="kw kw-miss">Miss</span> unless the card says so — Spark is its own procedure, separate from checks and from <strong>Luck Check</strong>.
+</div>
+
+<section>
+<h2>Three band templates</h2>
+<p class="h2-note"><strong>A — Three-tier gradient</strong> (fail / partial / full) · <strong>B — PbtA pick-list</strong> (bands gate how many options you take) · <strong>C — Binary gate</strong> (move the success threshold to tune rarity)</p>
+<div class="grid">
+
+<div class="sample">
+<div class="stag">A — Three-tier gradient</div>
+<div class="cardwrap">
+<div class="card acc-paladin">
+<div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Into the Blow</div></div>
+<div class="cbody">
+<div class="flv">You put yourself between them and harm.</div>
+<div class="hr"></div>
+<div class="elbl">Effect</div>
+<div class="etxt"><span class="trig">When an ally is about to take</span> <span class="kw kw-threat">Threat</span><span class="trig">,</span> throw yourself in the way and make a <strong>Spark</strong>.</div>
+<div class="spark-sec">
+<div class="spark-lbl">Spark</div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">1–2</span></span><span class="spark-txt">Too slow — they take full <span class="kw kw-threat">Threat</span>.</span></div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">3–4</span></span><span class="spark-txt">You take 1 <span class="kw kw-threat">Threat</span> die; they take the rest.</span></div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">5–6</span></span><span class="spark-txt">You become the target — absorb all <span class="kw kw-threat">Threat</span> with <span class="kw kw-resolve">Resolve</span>.</span></div>
+</div>
+</div>
+<div class="idtag">Paladin</div>
+<div class="tier-float"><span>t1</span></div>
+</div>
+</div>
+<p class="sdesc">Same fictional act every time; the die only decides <em>how much</em> your interposition mattered. Threat-phase language (P7 fix).</p>
+</div>
+
+<div class="sample">
+<div class="stag">B — PbtA pick-list</div>
+<div class="cardwrap">
+<div class="card acc-rogue">
+<div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Ruthless Angle</div></div>
+<div class="cbody">
+<div class="flv">You were already moving when they slipped.</div>
+<div class="hr"></div>
+<div class="elbl">Effect</div>
+<div class="etxt"><span class="trig">When a target becomes</span> <strong>Exposed</strong>, <strong>Rattled</strong>, <span class="trig">or</span> <strong>Rooted</strong><span class="trig">,</span> make a <strong>Spark</strong>.</div>
+<div class="spark-sec">
+<div class="spark-lbl">Spark</div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">1–2</span></span><span class="spark-txt">You miss the window.</span></div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">3–4</span></span><span class="spark-txt">Choose one:</span></div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">5–6</span></span><span class="spark-txt">Choose two:</span></div>
+</div>
+<div class="co">Options</div>
+<div class="opt"><strong>Strike</strong> — hit them while they're vulnerable.</div>
+<div class="opt"><strong>Move</strong> — slip to a better position.</div>
+<div class="opt"><strong>Mark</strong> — they stay <strong>Marked</strong> until scene end.</div>
+</div>
+<div class="idtag">Rogue</div>
+<div class="tier-float"><span>t1</span></div>
+</div>
+</div>
+<p class="sdesc">Classic PbtA 7–9 / 10+ structure on one die: bands gate <em>how many</em> options you take from a fixed list.</p>
+</div>
+
+<div class="sample">
+<div class="stag">C — Binary gate (rare)</div>
+<div class="cardwrap">
+<div class="card acc-bard">
+<div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Catch Them</div></div>
+<div class="cbody">
+<div class="flv">Your hand is already out before you think.</div>
+<div class="hr"></div>
+<div class="elbl">Effect</div>
+<div class="etxt"><span class="trig">When someone tries to climb, leap, or fall from a dangerous height,</span> reach for them and make a <strong>Spark</strong>.</div>
+<div class="spark-sec">
+<div class="spark-lbl">Spark</div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">1–5</span></span><span class="spark-txt">You don't get there — the GM narrates the cost.</span></div>
+<div class="spark-row"><span class="spark-band"><span class="kw kw-spark">6</span></span><span class="spark-txt">You catch them, break their fall, or make the climb together.</span></div>
+</div>
+</div>
+<div class="idtag">Bard</div>
+<div class="tier-float"><span>t1</span></div>
+</div>
+</div>
+<p class="sdesc">Strong payoff, steep gate — only a six lands. Exploration / physical-fiction trigger, no combat required.</p>
+</div>
+
+</div>
+</section>
+
+<section>
+<h2>Comparison at a glance</h2>
+<p class="h2-note">Power budgeting levers on one die — no second roll, no pool.</p>
+<table style="width:100%;max-width:920px;border-collapse:collapse;font-size:12px;color:#cbb98e;">
+<thead>
+<tr style="border-bottom:1px solid #3a2c19;color:var(--gold);text-align:left;">
+<th style="padding:8px 10px;">Card</th>
+<th style="padding:8px 10px;">Template</th>
+<th style="padding:8px 10px;">Success shape</th>
+<th style="padding:8px 10px;">Rough hit rate</th>
+</tr>
+</thead>
+<tbody>
+<tr style="border-bottom:1px solid #2a1d10;">
+<td style="padding:8px 10px;">Into the Blow</td>
+<td style="padding:8px 10px;">Three-tier gradient</td>
+<td style="padding:8px 10px;">Escalating protection (none → shared → full)</td>
+<td style="padding:8px 10px;">~67% partial+, ~33% full</td>
+</tr>
+<tr style="border-bottom:1px solid #2a1d10;">
+<td style="padding:8px 10px;">Ruthless Angle</td>
+<td style="padding:8px 10px;">PbtA pick-list</td>
+<td style="padding:8px 10px;">0 / 1 / 2 options from three</td>
+<td style="padding:8px 10px;">~67% any option, ~33% two options</td>
+</tr>
+<tr style="padding:8px 10px;">Catch Them</td>
+<td style="padding:8px 10px;">Binary gate</td>
+<td style="padding:8px 10px;">All-or-nothing rescue</td>
+<td style="padding:8px 10px;">~17% success</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</body>
+</html>
