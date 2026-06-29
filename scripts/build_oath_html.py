@@ -64,6 +64,17 @@ OATH_OF_PREFIX = (
     'border-radius:3px;line-height:1.2;">Oath of</span>'
 )
 
+# Shared phrase styling — verb, *the*, noun read as one golden constructed line.
+VOW_TERM = (
+    "font-family:'EB Garamond',Georgia,serif;font-size:7.5px;font-weight:700;font-style:italic;"
+    "color:var(--ad,#976e09);letter-spacing:0.25px;line-height:1.1;"
+)
+
+KW_SM = (
+    "font-size:7px;padding:0 2px;border-radius:2px;line-height:1.35;"
+    "vertical-align:baseline;font-weight:700;"
+)
+
 DIE_SLOT = (
     '<span class="die-slot kw kw-crit" style="flex-shrink:0;width:16px;height:16px;'
     "display:flex;align-items:center;justify-content:center;font-size:7.5px;font-weight:700;"
@@ -72,21 +83,22 @@ DIE_SLOT = (
 
 PILL = (
     '<div class="vow-entry" style="display:flex;align-items:stretch;width:100%;min-height:18px;'
-    'border:0.5px solid rgba(0,0,0,0.22);border-radius:3px;overflow:hidden;background:#faf6ec;">'
+    'border:0.5px solid rgba(184,134,11,0.2);border-radius:3px;overflow:hidden;background:rgba(255,252,245,0.5);">'
     + DIE_SLOT
-    + '<strong style="flex:1;display:flex;align-items:center;justify-content:center;padding:1px 4px 1px 2px;'
-    "color:#1a1008;font-size:6.5px;font-weight:700;font-family:system-ui,-apple-system,sans-serif;"
-    'text-transform:uppercase;letter-spacing:0.2px;line-height:1.1;word-break:break-word;text-align:center;">'
-    "{word}</strong></div>"
+    + '<span class="vow-term" style="flex:1;display:flex;align-items:center;justify-content:center;'
+    "padding:1px 4px 1px 2px;"
+    + VOW_TERM
+    + 'word-break:break-word;text-align:center;text-transform:none;">'
+    "{word}</span></div>"
 )
 
 BLANK_PILL = (
     '<div class="vow-entry vow-entry-blank" style="display:flex;align-items:center;width:100%;'
-    "min-height:24px;border:0.5px solid rgba(90,74,32,0.32);border-radius:3px;overflow:hidden;"
-    'background:rgba(255,252,245,0.7);">'
+    "min-height:24px;border:0.5px solid rgba(184,134,11,0.25);border-radius:3px;overflow:hidden;"
+    'background:rgba(255,252,245,0.55);">'
     + DIE_SLOT
     + '<div class="writein-line" style="flex:1;min-height:16px;margin:3px 6px 3px 2px;'
-    'border-bottom:1px dashed rgba(90,74,32,0.45);"></div></div>'
+    'border-bottom:1px dashed rgba(184,134,11,0.4);"></div></div>'
 )
 
 VOW_GRID = (
@@ -103,13 +115,18 @@ BLANK_VOW_GRID = (
 VOW_CELL = '<div class="vow-cell" style="display:flex;min-width:0;">{pill}</div>'
 
 THE_DIVIDER = (
-    '<div style="display:flex;align-items:center;justify-content:center;position:relative;'
-    'height:16px;margin:4px 0;">'
-    '<span style="position:absolute;left:0;right:0;top:50%;height:1px;background:#c8a96e;opacity:0.55;"></span>'
-    '<span style="position:relative;z-index:1;background:#f7f0e0;padding:2px 12px;'
-    "font-family:'EB Garamond',Georgia,serif;font-size:11px;font-weight:700;font-style:italic;"
-    "color:var(--ad,#976e09);border:1.5px solid var(--a,#B8860B);border-radius:10px;"
-    'letter-spacing:0.6px;box-shadow:0 0 0 2px rgba(247,240,224,0.9);">the</span></div>'
+    '<div class="vow-the" style="display:flex;align-items:center;justify-content:center;'
+    'gap:5px;height:11px;margin:1px 0;">'
+    '<span style="flex:1;border-top:1px dotted rgba(184,134,11,0.3);"></span>'
+    '<span class="vow-term" style="'
+    + VOW_TERM
+    + 'padding:0 3px;">the</span>'
+    '<span style="flex:1;border-top:1px dotted rgba(184,134,11,0.3);"></span></div>'
+)
+
+VOW_PHRASE = (
+    '<div class="vow-phrase" style="border:1px dotted rgba(184,134,11,0.5);border-radius:10px;'
+    'padding:4px 5px 5px;margin:1px 0;">{inner}</div>'
 )
 
 ENTER_VOW = (
@@ -119,13 +136,13 @@ ENTER_VOW = (
 FULFILL_VOW = (
     "Once per <strong>Scene</strong>: if any <strong>Action</strong> you are taking fulfills your "
     "<strong>Vow</strong> and the GM agrees, add these dice to give that roll "
-    '<span class="kw kw-boost">Boost 2</span>'
+    '<span class="kw kw-boost" style="' + KW_SM + '">Boost 2</span>'
 )
 
 BREAK_VOW = (
     "Describe how you are defying your <strong>Vow</strong>, then place these dice into your "
-    '<span class="kw kw-resolve">Resolve</span>. The GM gains '
-    '<span class="kw kw-toll">Toll 2</span> and must use it against you this scene.'
+    '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>. The GM gains '
+    '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
 )
 
 BODY_STYLE = "gap:3px;padding:4px 9px 32px;"
@@ -194,7 +211,8 @@ def word_grid(words: list[str] | None = None, *, blank: bool = False) -> str:
 def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
     verb_grid = word_grid(blank=blank) if blank else word_grid(verbs or [])
     noun_grid = word_grid(blank=blank) if blank else word_grid(nouns or [])
-    return verb_grid + THE_DIVIDER + noun_grid
+    inner = verb_grid + THE_DIVIDER + noun_grid
+    return VOW_PHRASE.format(inner=inner)
 
 
 def _break_section() -> str:

@@ -188,7 +188,8 @@ When a new card is designed and approved:
 
 ## Changelog
 
-- [June 29 2026] — **Paladin Oath v6.** Horizontal die-slot rows; Core+Oath caps; *Oath of* ribbon title; prominent *the* divider; Scene start / Break Your Oath (Resolve + Toll 2) copy.
+- [June 29 2026] — **Paladin Oath v6b.** Dotted phrase frame; golden Garamond verb/*the*/noun; smaller Boost/Resolve/Toll pills.
+- [June 29 2026] — **Paladin Oath v6.** Horizontal die-slot rows; Core+Oath caps; *Oath of* ribbon title; Scene start / Break Your Oath copy.
 - [June 29 2026] — **Paladin Oath v5b.** Blank Oath/Patron templates: larger dashed write-in cells (3×2 grid, pen-sized); hdr-blankname title/subtitle hints.
 - [June 29 2026] — **Paladin Oath v5.** Full 6×6 word pools (no wild ★); 3×2 grid layout so die faces line up by column.
 - [June 29 2026] — **Paladin Oath v4.** Tighter Enter line; drop Verb/Noun labels + priority line; Boost 2 pill; fulfill in purpose; shortened Break; ★ on slot 6.
