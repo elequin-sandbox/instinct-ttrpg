@@ -107,15 +107,21 @@ ENTER_VOW = (
 )
 
 FULFILL_VOW = (
-    "Once per <strong>Scene</strong>: if any <strong>Action</strong> you are taking fulfills your "
-    "<strong>Vow</strong> and the GM agrees, add these dice to give that roll "
-    '<span class="kw kw-boost" style="' + KW_SM + '">Boost 2</span>'
+    "If any <strong>Action</strong> fulfills your <strong>Vow</strong>,<br>"
+    "add these dice to "
+    '<span class="kw kw-boost" style="' + KW_SM + '">Boost</span> the roll.'
+)
+
+DEFIANCE_LABEL = (
+    '<span style="font-family:system-ui,-apple-system,sans-serif;font-size:8px;'
+    "letter-spacing:0.6px;text-transform:uppercase;color:#5a4020;font-weight:800;"
+    '">Defiance:</span>'
 )
 
 BREAK_VOW = (
-    "Describe how you are defying your <strong>Vow</strong>, then place these dice into your "
-    '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>.<br>'
-    "The GM gains "
+    DEFIANCE_LABEL
+    + " Describe how you are defying your <strong>Vow</strong> and place these dice into your "
+    '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>. The GM gains '
     '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
 )
 
@@ -327,16 +333,9 @@ def _patron_mark_grid() -> str:
 
 
 def _break_section() -> str:
-    break_style = (
-        "font-size:8px;line-height:1.45;color:#1a1008;text-align:left;"
-        "padding-left:50px;padding-bottom:1px;"
-    )
     return (
         '<div class="rule" style="margin:4px 0 2px;"></div>'
-        '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;'
-        "letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;"
-        'margin-bottom:2px;">Break Your Oath:</div>'
-        + f'<div class="effect-text oath-break" style="{break_style}">{BREAK_VOW}</div>'
+        + etxt_break(BREAK_VOW)
     )
 
 
