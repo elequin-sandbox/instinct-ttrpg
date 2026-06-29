@@ -64,9 +64,9 @@ OATH_OF_PREFIX = (
     'border-radius:3px;line-height:1.2;">Oath of</span>'
 )
 
-# Phrase typography — verb, *the*, noun as one golden constructed line.
+# Phrase typography — verb/noun lists: bold serif, not italic (readability at print size).
 VOW_TERM = (
-    "font-family:'EB Garamond',Georgia,serif;font-size:9px;font-weight:700;font-style:italic;"
+    "font-family:'EB Garamond',Georgia,serif;font-size:9px;font-weight:700;font-style:normal;"
     "color:var(--ad,#976e09);letter-spacing:0.35px;line-height:1.2;"
 )
 
@@ -114,12 +114,13 @@ FULFILL_VOW = (
 
 BREAK_VOW = (
     "Describe how you are defying your <strong>Vow</strong>, then place these dice into your "
-    '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>. The GM gains '
+    '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>.<br>'
+    "The GM gains "
     '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
 )
 
-BODY_STYLE = "gap:3px;padding:3px 9px 28px;"
-TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 28px;"
+BODY_STYLE = "gap:3px;padding:3px 9px 32px;"
+TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 32px;"
 WRITEIN = (
     '<div class="writein-line" style="flex:1;min-height:15px;'
     'border-bottom:1px dashed rgba(184,134,11,0.45);"></div>'
@@ -235,40 +236,35 @@ def _word_stack_meet(
     verbs: list[str] | None = None,
     nouns: list[str] | None = None,
 ) -> str:
-    """L→R mad lib — paired index columns under left/right dice; verbs & nouns meet at *the*."""
+    """L→R mad lib — one shared grid so dice columns track with index columns."""
     grid = (
         "display:grid;"
-        "grid-template-columns:1fr 22px minmax(26px,auto) 22px 1fr;"
-        "column-gap:4px;align-items:center;"
+        "grid-template-columns:minmax(0,1fr) 22px minmax(26px,auto) 22px minmax(0,1fr);"
+        "column-gap:4px;row-gap:0;align-items:center;"
     )
-    phrase_top = (
-        f'<div class="vow-skeleton" style="{grid}margin:0 0 3px;padding:0;">'
-        "<div></div>"
-        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>'
-        f'<div style="display:flex;justify-content:center;">{_ornate_the()}</div>'
-        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>'
-        "<div></div>"
-        "</div>"
-    )
+    cells = [
+        "<div></div>",
+        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>',
+        f'<div style="display:flex;justify-content:center;">{_ornate_the()}</div>',
+        f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>',
+        "<div></div>",
+        '<div style="grid-column:1/-1;border-top:1px dotted rgba(184,134,11,0.4);'
+        'height:0;margin:2px 0 1px;padding:0;"></div>',
+    ]
     vlist = verbs or []
     nlist = nouns or []
-    row_cells = []
     for i in range(6):
         n = i + 1
-        row_cells.append(
-            _term_cell(None if blank else vlist[i], side="verb", blank=blank)
-            + f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>'
-            + "<div></div>"
-            + f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>'
-            + _term_cell(None if blank else nlist[i], side="noun", blank=blank)
+        cells.extend(
+            [
+                _term_cell(None if blank else vlist[i], side="verb", blank=blank),
+                f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>',
+                "<div></div>",
+                f'<div style="display:flex;justify-content:center;">{_row_index(n)}</div>',
+                _term_cell(None if blank else nlist[i], side="noun", blank=blank),
+            ]
         )
-    rows = f'<div style="{grid}row-gap:0;">{"".join(row_cells)}</div>'
-    inner = (
-        phrase_top
-        + '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.4);padding-top:3px;">'
-        + rows
-        + "</div>"
-    )
+    inner = f'<div class="vow-grid" style="{grid}">{"".join(cells)}</div>'
     return VOW_PHRASE.format(inner=inner)
 
 
@@ -331,12 +327,16 @@ def _patron_mark_grid() -> str:
 
 
 def _break_section() -> str:
+    break_style = (
+        "font-size:8px;line-height:1.45;color:#1a1008;text-align:left;"
+        "padding-left:50px;padding-bottom:1px;"
+    )
     return (
         '<div class="rule" style="margin:4px 0 2px;"></div>'
         '<div class="zone-label" style="font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;'
         "letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;"
         'margin-bottom:2px;">Break Your Oath:</div>'
-        + etxt_break(BREAK_VOW)
+        + f'<div class="effect-text oath-break" style="{break_style}">{BREAK_VOW}</div>'
     )
 
 
