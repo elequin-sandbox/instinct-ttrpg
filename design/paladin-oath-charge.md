@@ -39,7 +39,7 @@ Mirrors Warlock **Patron** pick:
 | Zone | Content |
 |---|---|
 | **Enter line** | At **Enter**, roll 2d6 for your scene **Vow** on this **Oath** |
-| **Word stack** | Centered indexed pills (1–5 + ★), *the* divider — no Verb/Noun labels |
+| **Word stack** | 3×2 grid of indexed pills (1–6), *the* divider — no Verb/Noun labels; same column = same die face |
 | **Fulfill** | Once/scene, **Vow** in purpose → both dice = `[Boost 2]` |
 | **Break** | Optional at **Enter** before rolling (italic box, shortened) |
 
@@ -55,7 +55,7 @@ Mirrors Warlock **Patron** pick:
 
 ### Determine your Vow
 
-When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun**. Your **Vow** is that phrase (*Verb the Noun*). On **6**, choose any word in that list.
+When you **Enter** a **Scene**, roll **2d6**. Place one die on a **Verb** and one on a **Noun** (same column on the card). Your **Vow** is that phrase (*Verb the Noun*).
 
 ### Priority
 

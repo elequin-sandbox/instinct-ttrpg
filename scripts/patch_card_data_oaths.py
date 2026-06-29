@@ -28,7 +28,7 @@ LEGACY_KEYS = {
     "conviction-defiance-paladin-core",
 }
 
-REWORK_DATE = "2026-06-29"
+REWORK_DATE = "2026-06-29"  # v5: 6×6 pools + 3×2 grid
 
 
 def card_obj(row_id: int, name: str, key: str, html: str) -> dict:

@@ -1,0 +1,20 @@
+name: Sync Paladin Oath to Baserow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/build_oath_html.py
+      - scripts/push_oath_baserow.py
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push Oath HTML to Baserow
+        env:
+          BASEROW_TOKEN: ${{ secrets.BASEROW_TOKEN }}
+        run: python3 scripts/push_oath_baserow.py
