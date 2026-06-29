@@ -86,8 +86,9 @@ No Crit block unless the card also uses pool checks. Snap Check cards may omit C
 *are* the payoff. A natural 1 is always a **[Miss]**; a natural 6 always **explodes** per §5.
 
 **Character-creation cards:** **Flavor** (Background, Bond, Ancestry) · **Preamble + choose-one fork**
-(Instinct — dual-path; see `card-anatomy.md` §5) · **Trigger** (Background, Ancestry) · **Body**
-(Background/Ancestry: choose-one / luck-check / passive-question) · **Find / Act / Then** (Bond) ·
+(Instinct — dual-path; see `card-anatomy.md` §5) · **Trigger** (Background) · **Body**
+(Background: choose-one / luck-check / passive-question) · **Trigger + Snap Check bands** (Ancestry —
+once per Scene; 1–3 fail · 4–8 choose 1 · 9+ choose 2) · **Find / Act / Then** (Bond) ·
 ~~**Origin Stem**~~ *(retired June 2026 — write-in lives on Character / Class / Ancestry sheet cards)* ·
 ~~**Writing Lines**~~ *(retired with Origin stems)* · ~~**Flaw fill-in stem**~~ *(retired June 2026)* ·
 ~~**Dismiss**~~ *(retired with Flaw type)*

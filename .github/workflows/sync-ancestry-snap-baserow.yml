@@ -1,0 +1,21 @@
+name: Sync Ancestry Snap Check to Baserow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/ancestry_snap_batch.json
+      - scripts/push_ancestry_snap.py
+      - scripts/build_ancestry_snap.py
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push Ancestry Snap Check HTML to Baserow
+        env:
+          BASEROW_TOKEN: ${{ secrets.BASEROW_TOKEN }}
+        run: python3 scripts/push_ancestry_snap.py

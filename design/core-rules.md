@@ -254,7 +254,7 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 | **Core** | — | Always-active; face-up in Active area; never enters the deck |
 | **Instinct** | — | **Reveal** when the quality drives an **Action**; choose one path — if the GM agrees: benefit party → `[Boost 2]`, or hinder → **Draw 2** |
 | **Background** | — | When its fictional trigger fires; choose-one or open-narration effect |
-| **Ancestry** | — | When its fictional trigger fires |
+| **Ancestry** | — | **Once per Scene** when its fictional trigger fires; **Snap Check** (shared bands: 1–3 fail · 4–8 choose 1 · 9+ choose 2). Act or React per card. |
 | **Bond** | — | Find the moment; you and the named person each gain `[Boost 1]` |
 
 **React window:** after every roll, before narration, there is a brief beat where React cards may be
@@ -281,8 +281,13 @@ Roll **1d6** (no Tier base pool, no opposing pool). Read the card's outcome band
 **Same Miss/Crit rules as any check:** a natural **1** is a **[Miss]** → 1 **[Toll]**; a natural **6**
 **explodes** (roll one bonus die and add it). Most Snap Checks resolve on the single die; cards may
 require a total of **7+** (i.e. must Crit) for the highest band. Cards print their own breakpoints or
-face effects — there is no global Snap Check band scheme. *(Former **Luck Check** is retired — all
-full checks use the pool-vs-pool model in §5.)*
+face effects — there is no global Snap Check band scheme *(except **Ancestry** cards — see below)*.
+*(Former **Luck Check** is retired — all full checks use the pool-vs-pool model in §5.)*
+
+**Ancestry Snap Check bands** (locked June 2026 — all 10 Ancestry deck cards): roll **1d6** with
+standard Miss/Crit rules. Read bands: **1–3** thematic failure · **4–8** choose **1** of three printed
+options · **9+** choose **2** of the same three (requires **6** + explode). Options cap at niche fiction
+and **[Boost 1]** max. Proof: `ancestry-snap-proof.html`.
 
 ---
 
