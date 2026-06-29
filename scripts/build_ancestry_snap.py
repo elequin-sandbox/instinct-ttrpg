@@ -34,9 +34,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "You were not born with magic or ancient lineage. You were born with will.",
         "trigger": (
             "Once per <strong>Scene</strong>, when sheer determination could tip a stuck moment, "
-            "try to push through with human grit and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The moment slips — you overreach or misread the room.",
         "options": [
             ("Press On", "name what you're reaching for; take <span class=\"kw kw-boost\">Boost 1</span> on your next check toward it"),
             ("Find a Way", "improvise an angle nobody else thought of; the GM names what opens"),
@@ -51,9 +50,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "Something in you is older than this world, and it always notices.",
         "trigger": (
             "Once per <strong>Scene</strong>, when old memory or a hidden detail might matter, "
-            "try to attune to what others overlook and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The thread fades — what you sensed stays out of reach for now.",
         "options": [
             ("Listen", "ask the GM one honest question about this <strong>Scene</strong>; they answer truthfully"),
             ("Trace", "name one detail others missed; the GM confirms if it's there"),
@@ -68,13 +66,12 @@ ANCESTRIES: list[dict] = [
         "flavor": "You were carved from stone and stubbornness — and it shows.",
         "trigger": (
             "Once per <strong>Scene</strong>, when a blow — physical, social, or emotional — would stagger you, "
-            "try to hold your ground and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The hit lands clean — you show the cost, and the <strong>Scene</strong> keeps pushing.",
         "options": [
-            ("Absorb It", "take the hit without losing your footing; narrate what you refuse to show"),
-            ("Brace", "plant your weight; take <span class=\"kw kw-boost\">Boost 1</span> on your next check to stay in the fight"),
-            ("Answer Back", "meet pressure with a short, grounded reply that shifts the tone"),
+            ("Absorb It", "take the hit and stay standing; narrate what you refuse to show"),
+            ("Brace", "dig in; the <strong>Scene</strong> must work around you this beat"),
+            ("Answer Back", "a short, grounded reply that shifts the pressure"),
         ],
     },
     {
@@ -84,14 +81,13 @@ ANCESTRIES: list[dict] = [
         "timing": "React",
         "flavor": "You've gotten away with things that should have ended you more times than you can count.",
         "trigger": (
-            "Once per <strong>Scene</strong>, when a check doesn't go your way, "
-            "try to wriggle out with halfling luck and make a <strong>Snap Check</strong>."
+            "Once per <strong>Scene</strong>, when a bad roll would cost you in a tight moment, "
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "No reprieve — you own the bad beat and the <strong>Scene</strong> moves on.",
         "options": [
-            ("Slip Away", "narrate how you get clear of the worst of it"),
-            ("Look Harmless", "shrink the target; an enemy hesitates or looks elsewhere"),
-            ("Small Fortune", "name one absurd small thing that softens the blow; the GM plays it fairly"),
+            ("Slip Away", "narrate how you duck the worst of it"),
+            ("Look Harmless", "seem too small to bother; someone looks past you"),
+            ("Small Fortune", "name one absurd lucky break; the GM plays it fairly"),
         ],
     },
     {
@@ -102,9 +98,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "You have been underestimated your whole life. You have learned to use that.",
         "trigger": (
             "Once per <strong>Scene</strong>, when the <strong>Scene</strong> pushes you to yield or fall, "
-            "try to refuse and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "You buckle — the pressure wins this beat.",
         "options": [
             ("Stand", "stay on your feet; narrate what keeps you there"),
             ("Snarl", "let your heritage show; one foe hesitates"),
@@ -119,9 +114,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "You carry something ancient and unholy in your blood. It is not a curse. It is yours.",
         "trigger": (
             "Once per <strong>Scene</strong>, when your unsettling heritage could bend a social beat, "
-            "try to lean on what you carry and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The wrong kind of attention — folk pull back or misread you.",
         "options": [
             ("Shadow", "your presence shifts the mood; name what changes"),
             ("Bargain", "offer a small infernal favor; the GM names the price"),
@@ -136,9 +130,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "Every choice you make is an answer to what your bloodline means.",
         "trigger": (
             "Once per <strong>Scene</strong>, when your draconic nature could unsettle or awe, "
-            "try to let it surface and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The tell backfires — others read it wrong or resist.",
         "options": [
             ("Bearing", "your stillness or voice changes the room's temperature"),
             ("Ember", "a small elemental tell; name it; the GM plays it fairly"),
@@ -153,9 +146,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "Your mind moves in directions that simply do not occur to anyone else.",
         "trigger": (
             "Once per <strong>Scene</strong>, when an odd angle or trick could help, "
-            "try to see what others miss and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "The bit falls flat — cleverness without payoff.",
         "options": [
             ("Tinker", "use something here in an unintended way; name how"),
             ("Misdirect", "draw eyes elsewhere; take <span class=\"kw kw-boost\">Boost 1</span> on your next sneaky check"),
@@ -170,9 +162,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "You belong to neither world completely. You have learned to make that a strength.",
         "trigger": (
             "Once per <strong>Scene</strong>, when you could bridge two peoples or ways of seeing, "
-            "try to read both sides and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "You miss the thread — neither side quite lands.",
         "options": [
             ("Translate", "name the thread between two opposed parties; they hear you"),
             ("Soften", "ease tension with the right tone; one NPC shifts their stance"),
@@ -187,9 +178,8 @@ ANCESTRIES: list[dict] = [
         "flavor": "You are built for things that require more than most people have.",
         "trigger": (
             "Once per <strong>Scene</strong>, when raw force or presence could shift the moment, "
-            "try to bring orcish weight to bear and make a <strong>Snap Check</strong>."
+            "make a <strong>Snap Check</strong>:"
         ),
-        "fail": "You overcommit — momentum turns against you.",
         "options": [
             ("Rush", "close distance; name what gives way before you"),
             ("Hold", "plant yourself; the <strong>Scene</strong> works around your mass"),
@@ -199,35 +189,27 @@ ANCESTRIES: list[dict] = [
 ]
 
 
-def _options_html(options: list[Option]) -> str:
-    parts = []
+def _options_list_html(options: list[Option]) -> str:
+    rows = []
     for verb, desc in options:
-        parts.append(f"<strong>{verb}</strong> — {desc}")
-    return " · ".join(parts)
+        rows.append(f'<div class="bf-choice"><strong>{verb}</strong> — {desc}</div>')
+    return '<div class="bf-choices">' + "".join(rows) + "</div>"
 
 
-def _snap_row(band: str, text: str) -> str:
+def _snap_compact_html() -> str:
     return (
-        f'<div class="snap-row">'
-        f'<span class="snap-band"><span class="kw kw-snap">{band}</span></span>'
-        f'<span class="snap-txt">{text}</span>'
-        f"</div>"
+        '<div class="snap-compact">'
+        '<span class="snap-chip"><span class="kw kw-snap">1–3</span> Fails</span>'
+        '<span class="snap-dot">·</span>'
+        '<span class="snap-chip"><span class="kw kw-snap">4–8</span> Choose 1</span>'
+        '<span class="snap-dot">·</span>'
+        '<span class="snap-chip"><span class="kw kw-snap">9+</span> Choose 2</span>'
+        "</div>"
     )
 
 
 def render_ancestry_snap(card: dict) -> str:
     timing = card["timing"]
-    opts = _options_html(card["options"])
-    choose1 = f"Choose <strong>1</strong>: {opts}"
-    choose2 = f"Choose <strong>2</strong> from the above."
-    snap = (
-        '<div class="snap-sec">'
-        '<div class="snap-lbl">Snap Check</div>'
-        + _snap_row("1–3", card["fail"])
-        + _snap_row("4–8", choose1)
-        + _snap_row("9+", choose2)
-        + "</div>"
-    )
     return (
         f'<div class="card bf-ancestry acc-ancestry">'
         f'<div class="hdr">'
@@ -240,7 +222,8 @@ def render_ancestry_snap(card: dict) -> str:
         f'<div class="bf-body">'
         f'<div class="bf-flv">{card["flavor"]}</div>'
         f'<div class="bf-trig">{card["trigger"]}</div>'
-        f"{snap}"
+        f"{_options_list_html(card['options'])}"
+        f"{_snap_compact_html()}"
         f"</div>"
         f"</div>"
     )
@@ -287,6 +270,64 @@ def write_card_data(cards: list[dict]) -> None:
     )
 
 
+PROOF_OUT = ROOT / "ancestry-snap-proof.html"
+
+
+def write_proof_html() -> None:
+    acts = [c for c in ANCESTRIES if c["timing"] == "Act"]
+    reacts = [c for c in ANCESTRIES if c["timing"] == "React"]
+
+    def section(title: str, cards: list[dict]) -> str:
+        rows = []
+        for c in cards:
+            rows.append(
+                f'<div class="sample"><div class="stag">{c["name"]}</div>'
+                f'<div class="cardwrap">{render_ancestry_snap(c)}</div></div>'
+            )
+        return f'<section><h2>{title}</h2><div class="grid">{"".join(rows)}</div></section>'
+
+    css = """\
+:root{--snap:#6D28D9;--snap-l:#EDE9FE;--gold:#c8a96e;--gold-d:#7a6030;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;padding:24px 18px 60px;}
+h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:920px;}
+section{margin-bottom:44px;}h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:start;}
+.sample{display:flex;flex-direction:column;gap:10px;}.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--snap-l);text-align:center;}
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.6;font-family:system-ui,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}.kw-snap{background:var(--snap);color:var(--snap-l);font-size:9px;min-width:1.6em;text-align:center;}
+.acc-ancestry{--a:#9a6a2e;--ad:#7e5726;--al:#ddccb8;--ah:#f5f0ea;}
+.cardwrap{width:2.5in;margin:0 auto;}.cardwrap .card{box-shadow:5px 5px 0 rgba(0,0,0,.55);}
+.card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;width:2.5in;min-height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;color:#241a08;overflow:hidden;}
+.hdr{padding:7px 9px 5px;background:var(--ah);border-bottom:1px solid rgba(0,0,0,.1);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;min-height:16px;}
+.cap{display:inline-flex;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;}
+.cap-neutral{border-color:#3a3320;color:#3a3320;}.cap-accent{border-color:var(--ad);color:var(--ad);}
+.hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:16.5px;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.bf-body{flex:1;padding:7px 9px 10px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.42;}
+.bf-flv{font-style:italic;color:#5a4020;font-size:10px;}.bf-trig{font-style:italic;color:#3a2a0a;font-size:10px;line-height:1.4;}
+.bf-choices{display:flex;flex-direction:column;gap:4px;}.bf-choice{font-size:10px;line-height:1.45;color:#1c1408;}
+.snap-compact{margin-top:auto;padding-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
+.snap-chip{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}.snap-dot{opacity:.45;}
+"""
+    html = (
+        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+        "<link href=\"https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600;700&display=swap\" rel=\"stylesheet\">"
+        "<title>Instinct RPG — Ancestry Snap Check Proof</title>"
+        f"<style>{css}</style></head><body>"
+        "<h1>Ancestry Snap Check — Proof</h1>"
+        "<p class=\"sub\">Trigger → three options → compact bands. "
+        "<strong>1–3</strong> Fails · <strong>4–8</strong> Choose 1 · <strong>9+</strong> Choose 2.</p>"
+        + section("React (3)", reacts)
+        + section("Act (7)", acts)
+        + "</body></html>"
+    )
+    PROOF_OUT.write_text(html, encoding="utf-8")
+    print(f"Wrote {PROOF_OUT.name}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
@@ -304,6 +345,7 @@ def main() -> None:
             raise SystemExit(f"Expected {len(ANCESTRIES)} ancestry rows, got {len(batch)}")
         write_card_data(cards)
         BATCH_OUT.write_text(json.dumps(batch, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        write_proof_html()
         print(f"Wrote {CARD_DATA.name} and {BATCH_OUT.name}")
         if args.push:
             push_baserow(batch)
