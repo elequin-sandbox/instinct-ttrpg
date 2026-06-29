@@ -20,7 +20,7 @@ template used in primer samples:
 | Ability / Act / React | `.cbody` | `.flv`, `.etxt`, `.elbl`, `.csec`, `.clbl`, `.crow`, `.ci` |
 | Bond / Instinct / Connection forks | `.bf-body` | `.bf-trig`, `.bf-eff`, `.bf-choose`, etc. + `instinct-dual-styles.css` |
 | Core | `.card-body` | `.zone-label`, `.effect-text`, `.rule` |
-| Oath / special Core layouts | `.card-body` + custom | Match whatever the live HTML uses |
+| Oath / special Core layouts | `.card-body` + custom | `.vow-grid`, `.vow-phrase`, `.vow-ix`, `.die-target`, `.vow-the-ring`, `.effect-text`, `.rule` — see `instinct-core-card-design.mdc` |
 
 Shared rules already in `primer-card-scope.css`:
 

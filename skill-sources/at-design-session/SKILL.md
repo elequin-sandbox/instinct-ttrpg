@@ -154,5 +154,17 @@ Before committing a card name, test it against a mundane scene (shopping, travel
 
 ---
 
+## Core card design (creation picks)
+
+When designing **Core** cards (Oath, Patron, Loadout-class picks), follow
+**`.cursor/rules/instinct-core-card-design.mdc`** in addition to this workflow:
+
+- Render proof HTML before committing; link GitHub Pages URL.
+- Respect **2.5″ × 3.5″** fixed print frame and idtag clearance.
+- Oath reference: `design/paladin-oath-charge.md`, `scripts/build_oath_html.py`,
+  `paladin-oath-proof.html`.
+
+---
+
 ## Changelog
 - [June 2025, Playtest #1] — `strongRoll` field in card schema renamed to `crit`. Self-audit checklist updated: "Strong roll" → "Crit" throughout. cardType list updated: `condition` type removed (Condition cards redesigned as Act cards).

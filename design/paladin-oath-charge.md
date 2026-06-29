@@ -3,7 +3,8 @@
 > **Status:** draft — June 2026. Replaces **Conviction · Defiance** for the Paladin **core** loop.
 > The **Oath** card is your permanent creation pick; your **Vow** is the scene phrase rolled on it.
 >
-> **Sibling docs:** `design/classes.md` · `design/card-anatomy.md` · `design/core-rules.md`
+> **Sibling docs:** `design/classes.md` · `design/card-anatomy.md` · `design/core-rules.md`  
+> **Agent workflow:** `.cursor/rules/instinct-core-card-design.mdc` (layout, print fit, Annie’s design prefs)
 
 ---
 
