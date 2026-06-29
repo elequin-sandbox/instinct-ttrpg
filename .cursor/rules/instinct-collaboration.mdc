@@ -1,0 +1,36 @@
+---
+description: Instinct RPG — collaboration style (multiple-choice prompts)
+alwaysApply: true
+---
+
+# Instinct RPG — Collaboration style
+
+Annie overwhelmingly welcomes **multiple-choice questions** to refine understanding, goals, and
+trade-offs. Use them proactively — not only in card-design sessions.
+
+## When to ask (MC first)
+
+- Scope is ambiguous (what to include, how deep, which audience).
+- Several valid approaches exist (structure, tone, what to cut).
+- Doctrine or assets could diverge (primer vs cards vs GM guide).
+- A playtest deadline forces prioritization.
+
+Prefer **labeled options (A / B / C or 1 / 2 / 3)** over open-ended “what do you want?” questions.
+Keep each option concrete enough to pick in one reply. Add a short **“other”** escape hatch when
+useful.
+
+## When not to block on questions
+
+- The answer is already in `design/` or an explicit user instruction.
+- The change is mechanical sync (doctrine → primer keyword glossary, forbidden-term purge).
+- Annie said “just do it” / “ship it” / “use your judgment.”
+
+## After she picks
+
+Lock the decision in the running change list; don’t re-ask unless she reopens it or new doctrine
+contradicts the choice.
+
+## Related skills
+
+Card design sessions: `at-design-session` (same MC convention, plus visual render-before-commit).
+Session wrap-up: `at-session-close` (confirm doctrine mapping before edits).
