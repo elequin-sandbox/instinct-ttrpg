@@ -64,14 +64,18 @@ OATH_OF_PREFIX = (
     'border-radius:3px;line-height:1.2;">Oath of</span>'
 )
 
+# Body typography — +5% vs prior oath baseline (post-header only).
+BODY_FONT = "9px"
+BODY_FONT_SM = "8.5px"
+
 # Phrase typography — verb/noun lists: bold serif, not italic (readability at print size).
 VOW_TERM = (
-    "font-family:'EB Garamond',Georgia,serif;font-size:9px;font-weight:700;font-style:normal;"
+    "font-family:'EB Garamond',Georgia,serif;font-size:9.5px;font-weight:700;font-style:normal;"
     "color:var(--ad,#976e09);letter-spacing:0.35px;line-height:1.2;"
 )
 
 VOW_THE = (
-    "font-family:'EB Garamond',Georgia,serif;font-size:11px;font-weight:700;font-style:italic;"
+    "font-family:'EB Garamond',Georgia,serif;font-size:11.5px;font-weight:700;font-style:italic;"
     "color:var(--ad,#976e09);letter-spacing:0.5px;line-height:1;"
 )
 
@@ -81,7 +85,7 @@ SPINE_W = "22px"
 ROW_INDEX = (
     '<span class="vow-ix" style="flex-shrink:0;width:{w};height:12px;padding:0;'
     "display:inline-flex;align-items:center;justify-content:center;"
-    "font-family:system-ui,-apple-system,sans-serif;font-size:8px;font-weight:800;"
+    "font-family:system-ui,-apple-system,sans-serif;font-size:8.5px;font-weight:800;"
     "color:#fffef8;background:var(--a,#B8860B);border-radius:3px;"
     'line-height:1;box-shadow:0 0 0 0.5px var(--ad,#976e09);">{n}</span>'
 )
@@ -98,7 +102,7 @@ VOW_PHRASE = (
 )
 
 KW_SM = (
-    "font-size:7.5px;padding:0 2px;border-radius:2px;line-height:1.35;"
+    "font-size:7.9px;padding:0 2px;border-radius:2px;line-height:1.35;"
     "vertical-align:baseline;font-weight:700;"
 )
 
@@ -108,12 +112,14 @@ ENTER_VOW = (
 
 FULFILL_VOW = (
     "If any <strong>Action</strong> fulfills your <strong>Vow</strong>,<br>"
-    "add these dice to "
+    "use these dice to "
     '<span class="kw kw-boost" style="' + KW_SM + '">Boost</span> the roll.'
 )
 
 DEFIANCE_LABEL = (
-    '<span style="font-family:system-ui,-apple-system,sans-serif;font-size:8px;'
+    '<span style="font-family:system-ui,-apple-system,sans-serif;font-size:'
+    + BODY_FONT_SM
+    + ";"
     "letter-spacing:0.6px;text-transform:uppercase;color:#5a4020;font-weight:800;"
     '">Defiance:</span>'
 )
@@ -167,12 +173,12 @@ def _hdr_sub(sub: str = "", *, blank: bool = False) -> str:
 
 
 def etxt(content: str, *, extra_style: str = "") -> str:
-    style = f"font-size:8.5px;line-height:1.45;text-align:left;{extra_style}"
+    style = f"font-size:{BODY_FONT};line-height:1.45;text-align:left;{extra_style}"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
 def etxt_break(content: str) -> str:
-    style = "font-size:8px;line-height:1.45;color:#1a1008;text-align:left;"
+    style = f"font-size:{BODY_FONT_SM};line-height:1.45;color:#1a1008;text-align:left;"
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
