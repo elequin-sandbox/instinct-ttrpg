@@ -94,6 +94,8 @@ PRs unless Annie explicitly requests them. See that file for exclusions and safe
 
 - `design/` — **the living doctrine** (`INDEX.md`, `core-rules.md`, `card-anatomy.md`,
   `writing-conventions.md`, `classes.md`). Edit game truth here.
+- `.cursor/rules/` — agent workflow rules (git, Baserow ops, **Core card design** →
+  `instinct-core-card-design.mdc`, primer parity, collaboration MC).
 - `card-inventory.md` — living tally of which cards exist / are pushed to Baserow. Keep current.
 - `index.html` + `config.js` + `local-cards.js` — the LIVE card-viewer app (deployed to GitHub Pages
   via `.github/workflows/deploy.yml`; the whole dir is published). Do not break these.

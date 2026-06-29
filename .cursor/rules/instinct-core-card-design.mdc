@@ -1,0 +1,159 @@
+---
+description: Instinct RPG — Core card layout, print fit, and Annie’s design workflow (Oath lab canon)
+alwaysApply: true
+---
+
+# Instinct RPG — Core card design (Annie’s preferences)
+
+Use this when designing or reworking **Core** ability cards (creation picks, permanent Active-area
+cards — Paladin **Oath**, Warlock **Patron**, etc.). Oath is the reference implementation; the same
+principles apply to other dense Core layouts.
+
+**Doctrine:** `design/paladin-oath-charge.md` · `design/card-anatomy.md` · `design/classes.md`  
+**Builder:** `scripts/build_oath_html.py` · **Proof:** [paladin-oath-proof.html](https://elequin-sandbox.github.io/instinct-ttrpg/paladin-oath-proof.html)
+
+---
+
+## Workflow Annie expects
+
+1. **Render before committing** — never describe a layout in prose and ask for approval. Build HTML,
+   publish a proof page (`*-proof.html` or `*-layout-exploration.html`), link the **GitHub Pages URL**
+   (`instinct-proof-links.mdc`).
+2. **Side-by-side variants** when layout is in flux — same card, same rules, different structure
+   (see `paladin-oath-layout-exploration.html`).
+3. **Multiple-choice, one question at a time** when forks exist (`instinct-collaboration.mdc`).
+4. **Agent runs the full pipeline** — builder → regen proof → patch `card-data.js` → Baserow push →
+   commit + push `main` (`instinct-agent-ops.mdc`, `instinct-git.mdc`). Never hand scripts to Annie.
+
+---
+
+## Print frame (non-negotiable)
+
+| Constant | Value |
+|---|---|
+| Card size | **2.5″ × 3.5″** (240×336px at 96dpi) |
+| Overflow | `overflow: hidden` on `.card` |
+| Proof pages | **`height: 3.5in`** — never `min-height` (min-height makes cards look taller than print) |
+| idtag clearance | `card-body` / `.cbody` **`padding-bottom: 26–32px`** for absolute `.idtag` |
+
+If text clips, **rewrite copy or line-break** — do not rely on negative margins, arbitrary indents, or
+hiding the idtag. The bottom-left **class idtag** (e.g. **Paladin**) is required on class Core cards.
+
+---
+
+## Oath vow block — canonical L→R mad-lib (“meet at *the*”)
+
+**Player read:** place 2d6 in top slots → left die picks verb row, right die picks noun row → read
+*Verb the Noun* left to right.
+
+### Grid rule (critical)
+
+Use **one shared CSS grid** for the dice row **and** all word rows.  
+**Never** two separate grids with `1fr` columns — they compute different track widths and index chips
+will **not** sit under die slots.
+
+**5-column template:**
+
+```
+grid-template-columns: minmax(0,1fr) 22px minmax(26px,auto) 22px minmax(0,1fr);
+```
+
+| Col | Top row | Data rows |
+|---|---|---|
+| 1 | (empty) | verb — **right-aligned** toward center |
+| 2 | left **die slot** (22px, centered) | left **index 1–6** (same 22px column) |
+| 3 | ornate ***the*** (fleur-de-lis ring) | (empty spacer) |
+| 4 | right **die slot** | right **index 1–6** |
+| 5 | (empty) | noun — **left-aligned** toward center |
+
+**Paired spines:** each die gets its **own** 1–6 column underneath — not a single center spine.
+
+### Visual details Annie locked
+
+- **Word-pool terms:** EB Garamond, **bold, not italic** (print readability).
+- ***the* pivot:** italic inside golden oval ring with **⚜** caps (weighty center).
+- **Index chips:** 22px-wide column, centered; match die column width.
+- **Phrase frame:** dotted rounded border around the whole vow block.
+- **No on-card subtitle** for Oath picks — flavor lives in doctrine / pool table only (reclaims header height).
+
+### Body typography (post-header, Oath baseline)
+
+| Element | Size |
+|---|---|
+| Effect text | 9px |
+| Defiance / secondary | 8.5px |
+| Vow terms | 9.5px bold |
+| *the* in ring | 11.5px italic |
+| Keyword pills | ~7.9px (`KW_SM`) |
+
+Scale proportionally if Annie asks for ±5%; header ribbon stays unchanged.
+
+---
+
+## On-card copy patterns (Oath — locked June 2026)
+
+**Scene start:** `At **Scene start**: roll 2d6 to determine your new **Vow**:`
+
+**Fulfill** (two lines — manual `<br>` after *Vow*):
+
+> If any **Action** fulfills your **Vow**,  
+> use these dice to **Boost** the roll.
+
+**Defiance** — **no subheader** (`Break Your Oath:` zone-label is retired on-card). Inline label in
+uppercase tracked sans, same line as body:
+
+> **Defiance:** Describe how you are defying your **Vow** and place these dice into your **Resolve**.
+> The GM gains **Toll 2** and must use it against you this scene.
+
+Full procedure (once/scene, GM agrees, Boost 2 from both dice) stays in `design/paladin-oath-charge.md`
+— on-card text is the **minimum**.
+
+### Fixing idtag overlap
+
+Preferred order:
+
+1. **Shorter copy** / tighter wording  
+2. **Manual `<br>`** to shorten the last line  
+3. Slightly more `padding-bottom` on card-body  
+
+**Avoid:** large `padding-left` indents on break text — Annie rejected that approach.
+
+---
+
+## Builder & sync checklist
+
+When Oath HTML changes:
+
+```bash
+python3 scripts/regenerate_oath_proof.py
+python3 scripts/regenerate_oath_layout_exploration.py   # if comparing layouts
+python3 scripts/patch_card_data_oaths.py
+python3 scripts/push_oath_baserow.py                    # rows 697–702, table 911939
+git add … && git commit && git push origin main
+```
+
+| Card | Key | Baserow row |
+|---|---|---|
+| The Open Hand | `the-open-hand-paladin-core` | 697 |
+| The Severed Ledger | `the-severed-ledger-paladin-core` | 698 |
+| The Last Bastion | `the-last-bastion-paladin-core` | 699 |
+| The Wax and the Wick | `the-wax-and-the-wick-paladin-core` | 700 |
+| The Old Compass | `the-old-compass-paladin-core` | 701 |
+| Oath Template | `oath-template-paladin-core` | 702 |
+
+---
+
+## Extending to other Core cards
+
+- **Patron** (Warlock): separate builder pattern; 3×2 mark grid — do not blindly copy Oath grid.
+- **Loadout / Bulwark:** simpler `.card-body` prose — still respect print frame + idtag.
+- New dense Core UI: prototype on proof page first; add `scripts/build_<name>_html.py` when the layout
+  stabilizes; patch `card-data.js` via dedicated `patch_card_data_*.py` when possible.
+
+---
+
+## Related rules
+
+- Ops / Baserow: `instinct-agent-ops.mdc` · Git: `instinct-git.mdc` · Proofs: `instinct-proof-links.mdc`
+- Primer card CSS parity: `instinct-primer-card-parity.mdc`
+- Collaboration / MC: `instinct-collaboration.mdc`

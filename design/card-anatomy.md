@@ -203,9 +203,16 @@ labeled zones; cost pip in footer. Full design system in `at-card-renderer` + `a
 
 ## §6 — Layout constants
 
-Card width `195px` · grid `repeat(auto-fill, minmax(195px, 1fr))` · print `repeat(3, 63mm)` +
-`@page { size: A4 }` · pip cost circle in footer. Implementation: `at-card-renderer` (CSS, `parse()`,
+**Card Studio / print (Core & Ability):** **2.5″ × 3.5″** fixed (`width: 2.5in; height: 3.5in` in
+`index.html` `.scope-core .card`). Proof HTML must use **fixed height**, not `min-height`, so layout
+matches print. Body regions reserve **~26–32px bottom padding** for the floating `.idtag`.
+
+Legacy renderer grid: card width `195px` · grid `repeat(auto-fill, minmax(195px, 1fr))` · print
+`repeat(3, 63mm)` + `@page { size: A4 }`. Implementation: `at-card-renderer` (CSS, `parse()`,
 `resolveBase()`, `renderCard()`).
+
+**Dense Core layouts** (Oath vow grid, Patron marks): see `design/paladin-oath-charge.md` and
+`.cursor/rules/instinct-core-card-design.mdc`.
 
 ---
 
@@ -230,7 +237,8 @@ The whole card library was normalized to ONE structure so every card reads as th
   - **Name ribbon** (`.hdr-name`): centered, EB Garamond 700, **banner ribbon** with notched ends
     (clip-path), filled with a light tint of the accent, dark accent text, accent top/bottom borders.
     Connection's ribbon is left blank for writing the character name in (tiny faint placeholder).
-  - **Subtitle** (`.hdr-sub`): italic flavor line under the name (Core cards keep their flavor here).
+  - **Subtitle** (`.hdr-sub`): italic flavor line under the name. **Exception:** Paladin **Oath** Core
+    cards omit on-card subtitle — flavor lives in `design/paladin-oath-charge.md` only (print space).
 - **Bottom-left** (`.idtag`, floating, no footer): the **CLASS** name (Rogue, Fighter, …) in an
   accent-colored capsule. **Class cards only** — empty on Instinct/Boon-family/Connection.
 - **Bottom-right** (`.tier-float`, floating): muted-gray italic **tier** circle (`t1`). **Ability +

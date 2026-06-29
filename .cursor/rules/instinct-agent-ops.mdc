@@ -13,7 +13,10 @@ After editing card HTML (`scripts/build_*_html.py`, `card-data.js`, oath/patron 
 
 1. **Push to Baserow** yourself — Instinct Baserow MCP (`update_rows` / `create_rows` on table **911939**) or the Baserow API via `config.js` token.
 2. **Patch or regen `card-data.js`** if needed (`scripts/patch_card_data_oaths.py` or `scripts/regenerate_card_data.py`).
-3. **Commit + push `main`** per `instinct-git.mdc`.
+3. **Regen proof HTML** when Core layouts change (`scripts/regenerate_oath_proof.py`, etc.).
+4. **Commit + push `main`** per `instinct-git.mdc`.
+
+**Oath-specific pipeline:** `build_oath_html.py` → `regenerate_oath_proof.py` → `patch_card_data_oaths.py` → `push_oath_baserow.py` (rows **697–702**). See `instinct-core-card-design.mdc`.
 
 Never end a card task with “run `python3 scripts/…` to sync Baserow” or “push when you’re ready.” If push is blocked by Auto-review, **retry with approval** — do not hand off.
 
