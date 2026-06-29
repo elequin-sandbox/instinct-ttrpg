@@ -17,7 +17,7 @@ from scripts.build_oath_html import (  # noqa: E402
     build_patron_template,
 )
 
-DATE = "2026-06-29"
+DATE = "2026-06-29"  # v5: 6×6 pools + 3×2 grid
 
 updates = []
 for o in OATHS:

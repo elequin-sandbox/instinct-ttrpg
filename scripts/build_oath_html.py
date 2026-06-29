@@ -2,42 +2,42 @@
 """Build Paladin Oath Core card HTML (compact Vow layout)."""
 from __future__ import annotations
 
-# Permanent Oath pick at creation — each has lateral, spread-out word pools.
+# Permanent Oath pick at creation — each has lateral, spread-out word pools (6×6).
 OATHS = [
     {
         "name": "The Open Hand",
         "key": "the-open-hand-paladin-core",
         "sub": "What you reach for defines you.",
-        "verbs": ["Shelter", "Mend", "Witness", "Carry", "Welcome"],
-        "nouns": ["Frail", "Stranger", "Threshold", "Burden", "Ember"],
+        "verbs": ["Shelter", "Mend", "Witness", "Carry", "Welcome", "Tend"],
+        "nouns": ["Frail", "Stranger", "Threshold", "Burden", "Ember", "Need"],
     },
     {
         "name": "The Severed Ledger",
         "key": "the-severed-ledger-paladin-core",
         "sub": "Some accounts refuse to stay closed.",
-        "verbs": ["Name", "Trace", "Unmask", "Settle", "Refuse"],
-        "nouns": ["Debt", "Liar", "Scar", "Silence", "Price"],
+        "verbs": ["Name", "Trace", "Unmask", "Settle", "Refuse", "Reckon"],
+        "nouns": ["Debt", "Liar", "Scar", "Silence", "Price", "Account"],
     },
     {
         "name": "The Last Bastion",
         "key": "the-last-bastion-paladin-core",
         "sub": "When everything else gives way, something must not.",
-        "verbs": ["Hold", "Keep", "Rally", "Seal", "Bind"],
-        "nouns": ["Gate", "Line", "Banner", "Bastion", "Standard"],
+        "verbs": ["Hold", "Keep", "Rally", "Seal", "Bind", "Endure"],
+        "nouns": ["Gate", "Line", "Banner", "Bastion", "Standard", "Refuge"],
     },
     {
         "name": "The Wax and the Wick",
         "key": "the-wax-and-the-wick-paladin-core",
         "sub": "You carry fire where the map runs out.",
-        "verbs": ["Kindle", "Reveal", "Mark", "Chase", "Weather"],
-        "nouns": ["Fog", "Path", "Spark", "Shadow", "Crossroads"],
+        "verbs": ["Kindle", "Reveal", "Mark", "Chase", "Weather", "Light"],
+        "nouns": ["Fog", "Path", "Spark", "Shadow", "Crossroads", "Flame"],
     },
     {
         "name": "The Old Compass",
         "key": "the-old-compass-paladin-core",
         "sub": "North is whoever needs you when you arrive.",
-        "verbs": ["Find", "Follow", "Return", "Chart", "Answer"],
-        "nouns": ["Lost", "Horizon", "Anchor", "Mile", "Promise"],
+        "verbs": ["Find", "Follow", "Return", "Chart", "Answer", "Seek"],
+        "nouns": ["Lost", "Horizon", "Anchor", "Mile", "Promise", "Call"],
     },
 ]
 
@@ -52,25 +52,33 @@ OATH_ROW_IDS = {
 }
 
 PILL = (
-    '<div class="mark-pill" style="display:inline-flex;align-items:stretch;border-radius:2px;'
-    'overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);">'
-    '<span class="kw kw-crit" style="font-size:7px;padding:1px 3px;">{n}</span>'
-    '<strong style="color:#1a1008;font-size:7px;font-weight:700;padding:1px 4px;'
-    'font-family:system-ui,-apple-system,sans-serif;text-transform:uppercase;letter-spacing:0.3px;">'
+    '<div class="mark-pill" style="display:flex;flex-direction:column;align-items:stretch;'
+    'width:100%;border-radius:2px;overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);">'
+    '<span class="kw kw-crit" style="font-size:6.5px;padding:1px 0;line-height:1.1;text-align:center;">'
+    "{n}</span>"
+    '<strong style="color:#1a1008;font-size:6.5px;font-weight:700;padding:0 2px 2px;'
+    "font-family:system-ui,-apple-system,sans-serif;text-transform:uppercase;"
+    'letter-spacing:0.2px;line-height:1.15;text-align:center;word-break:break-word;">'
     "{word}</strong></div>"
 )
 
 BLANK_PILL = (
-    '<div class="mark-pill" style="display:inline-flex;align-items:stretch;border-radius:2px;'
-    'overflow:hidden;border:0.5px solid rgba(0,0,0,0.2);min-width:22px;">'
-    '<span class="kw kw-crit" style="font-size:7px;padding:1px 3px;">{n}</span>'
-    '<strong style="color:#1a1008;font-size:7px;font-weight:700;padding:1px 5px;'
-    'font-family:system-ui,-apple-system,sans-serif;letter-spacing:0.3px;">&nbsp;</strong></div>'
+    '<div class="mark-pill" style="display:flex;flex-direction:column;align-items:stretch;'
+    'width:100%;min-height:18px;border-radius:2px;overflow:hidden;'
+    'border:0.5px solid rgba(0,0,0,0.2);">'
+    '<span class="kw kw-crit" style="font-size:6.5px;padding:1px 0;line-height:1.1;text-align:center;">'
+    "{n}</span>"
+    '<strong style="color:#1a1008;font-size:6.5px;font-weight:700;padding:0 2px 2px;'
+    'font-family:system-ui,-apple-system,sans-serif;letter-spacing:0.2px;">&nbsp;</strong></div>'
 )
 
-CENTER_ROW = (
-    '<div class="marks-row" style="display:flex;flex-wrap:wrap;gap:2px;'
-    'justify-content:center;margin:1px 0;">{pills}</div>'
+VOW_GRID = (
+    '<div class="vow-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));'
+    'gap:2px;margin:1px 0;width:100%;">{cells}</div>'
+)
+
+VOW_CELL = (
+    '<div class="vow-cell" style="display:flex;min-width:0;">{pill}</div>'
 )
 
 THE_DIVIDER = (
@@ -113,19 +121,25 @@ def etxt_break(content: str) -> str:
     return f'<div class="effect-text" style="{style}">{content}</div>'
 
 
-def row(words: list[str] | None = None, *, blank: bool = False) -> str:
-    if blank:
-        pills = [BLANK_PILL.format(n=i + 1) for i in range(6)]
-    else:
-        pills = [PILL.format(n=i + 1, word=words[i]) for i in range(5)]
-        pills.append(PILL.format(n=6, word="★"))
-    return CENTER_ROW.format(pills="".join(pills))
+def _pill(n: int, word: str | None = None) -> str:
+    if word is None:
+        return BLANK_PILL.format(n=n)
+    return PILL.format(n=n, word=word)
+
+
+def word_grid(words: list[str] | None = None, *, blank: bool = False) -> str:
+    cells = []
+    for i in range(6):
+        n = i + 1
+        pill = _pill(n, None if blank else words[i])  # type: ignore[index]
+        cells.append(VOW_CELL.format(pill=pill))
+    return VOW_GRID.format(cells="".join(cells))
 
 
 def word_stack(*, blank: bool = False, verbs: list[str] | None = None, nouns: list[str] | None = None) -> str:
-    verb_row = row(blank=blank) if blank else row(verbs or [])
-    noun_row = row(blank=blank) if blank else row(nouns or [])
-    return verb_row + THE_DIVIDER + noun_row
+    verb_grid = word_grid(blank=blank) if blank else word_grid(verbs or [])
+    noun_grid = word_grid(blank=blank) if blank else word_grid(nouns or [])
+    return verb_grid + THE_DIVIDER + noun_grid
 
 
 def _break_box() -> str:
@@ -206,7 +220,7 @@ def build_patron_template() -> str:
         + blank_sub
         + '</div><div class="card-body" style="gap:3px;padding:5px 10px;">'
         '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">The Marks of</div>'
-        + row(blank=True)
+        + word_grid(blank=True)
         + '<div class="zone-label" style="font-size:6px;letter-spacing:0.8px;margin-top:0;">Invoke Their Name</div>'
         + f'<div class="effect-text" style="font-size:9px;line-height:1.4;">{invoke}</div>'
         + '<div class="rule"></div>'
