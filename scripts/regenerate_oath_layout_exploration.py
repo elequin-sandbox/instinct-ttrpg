@@ -64,7 +64,7 @@ html = f"""<!doctype html>
 </head>
 <body>
 <h1>Oath layout exploration</h1>
-<p class="sub">Three graphic-design directions for <strong>The Open Hand</strong> — same rules text and header; only the <strong>Vow phrase zone</strong> changes. Pick a direction to implement across all oaths.</p>
+<p class="sub">Layout explorations for <strong>The Open Hand</strong> — same rules text and header; only the <strong>Vow phrase zone</strong> changes. <strong>Rec 3b</strong> is the two-column mad-lib: dice sit in the top slots; their values point down to verb (left) and noun (right) for a left-to-right read.</p>
 <section><div class="grid">{cards}</div></section>
 </body>
 </html>
