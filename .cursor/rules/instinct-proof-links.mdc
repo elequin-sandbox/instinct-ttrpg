@@ -1,0 +1,36 @@
+# Instinct RPG — Proof HTML must be clickable (GitHub Pages)
+
+When you create or reference a **design proof HTML** file (card renders, layout labs, compare pages):
+
+## Always give Annie a live link she can click
+
+**Base URL:** `https://elequin-sandbox.github.io/instinct-ttrpg/`
+
+**Format:** markdown link to the deployed file — not a repo path alone.
+
+Example:
+- Good: [Ancestry Snap Check proof](https://elequin-sandbox.github.io/instinct-ttrpg/ancestry-snap-proof.html)
+- Bad: `ancestry-snap-proof.html` or `/workspace/ancestry-snap-proof.html` with no URL
+
+## Before sharing the link
+
+1. Proof HTML lives in the **repo root** (or another path included in Pages `publish_dir: .`).
+2. **Commit + push `main`** so GitHub Actions deploys to Pages.
+3. Confirm deploy started (or that the file was already deployed).
+
+## When creating new proofs
+
+- Name: `*-proof.html` or `*-design-lab.html` in repo root.
+- Self-contained CSS (proofs should render without Card Studio JS).
+- In your reply, lead with the **clickable Pages URL** — file path is secondary context only.
+
+## Known proof pages
+
+| Proof | URL |
+|-------|-----|
+| Ancestry Snap Check | https://elequin-sandbox.github.io/instinct-ttrpg/ancestry-snap-proof.html |
+| Snap Check React lab | https://elequin-sandbox.github.io/instinct-ttrpg/snap-check-react-proof.html |
+| Paladin Oath | https://elequin-sandbox.github.io/instinct-ttrpg/paladin-oath-proof.html |
+| Instinct dual pilot | https://elequin-sandbox.github.io/instinct-ttrpg/instinct-dual-pilot-proof.html |
+| Parallelism pass | https://elequin-sandbox.github.io/instinct-ttrpg/parallelism-proof.html |
+| Card Studio (live cards) | https://elequin-sandbox.github.io/instinct-ttrpg/ |
