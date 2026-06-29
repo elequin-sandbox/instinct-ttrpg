@@ -26,6 +26,18 @@ DIE_NEUTRAL = (
     'background:rgba(255,252,248,0.85);line-height:1;">{n}</span>'
 )
 
+# Empty receptacle at phrase top — physical dice land here; face value picks the row below.
+DIE_TARGET = (
+    '<span class="die-target" style="flex-shrink:0;width:18px;height:18px;'
+    "border:1.5px dashed rgba(184,134,11,0.5);border-radius:4px;"
+    'background:rgba(255,252,245,0.55);display:inline-block;"></span>'
+)
+
+ROW_INDEX = (
+    '<span style="font-size:6px;font-weight:700;color:#8a7350;width:8px;text-align:right;'
+    'flex-shrink:0;line-height:1;">{n}</span>'
+)
+
 VOW_TERM_SPAN = f'<span class="vow-term" style="{VOW_TERM}">{{word}}</span>'
 
 
@@ -141,6 +153,44 @@ def word_stack_skeleton(*, verbs: list[str], nouns: list[str]) -> str:
     return VOW_PHRASE.format(inner=inner)
 
 
+def word_stack_lr_madlib(*, verbs: list[str], nouns: list[str]) -> str:
+    """Rec 3b — dice in top ghost slots; verb column left, noun column right; read L→R."""
+    phrase_top = (
+        '<div class="vow-skeleton" style="display:flex;align-items:center;justify-content:center;'
+        'gap:8px;margin:0 0 6px;padding:1px 0 3px;">'
+        + DIE_TARGET
+        + f'<span style="{VOW_TERM}font-size:8.5px;padding:0 2px;">the</span>'
+        + DIE_TARGET
+        + "</div>"
+    )
+
+    def indexed_row(n: int, word: str) -> str:
+        return (
+            '<div class="vow-row" style="display:flex;align-items:baseline;gap:4px;'
+            'min-height:12px;padding:1px 0;">'
+            + ROW_INDEX.format(n=n)
+            + f'<span style="{VOW_TERM}flex:1;">{word}</span>'
+            + "</div>"
+        )
+
+    rows = (
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px;align-items:baseline;">'
+        + "".join(
+            f'<div>{indexed_row(i + 1, verbs[i])}</div><div>{indexed_row(i + 1, nouns[i])}</div>'
+            for i in range(6)
+        )
+        + "</div>"
+    )
+    word_columns = (
+        '<div class="vow-lr-columns" style="border-top:1px dotted rgba(184,134,11,0.35);'
+        'padding-top:4px;">'
+        + rows
+        + "</div>"
+    )
+    inner = phrase_top + word_columns
+    return VOW_PHRASE.format(inner=inner)
+
+
 def _body_block_variant(
     layout: str,
     *,
@@ -152,6 +202,7 @@ def _body_block_variant(
         "columns": word_stack_columns,
         "layered": word_stack_layered,
         "skeleton": word_stack_skeleton,
+        "lr_madlib": word_stack_lr_madlib,
     }
     stack_fn = stacks[layout]
     if layout == "current":
@@ -180,9 +231,10 @@ def build_variant(oath: dict, layout: str) -> str:
 OPEN_HAND = OATHS[0]
 
 LAYOUTS = [
+    ("lr_madlib", "Rec 3b — L→R mad lib (NEW)", "Dice land in top slots; face value picks the numbered row — verb column left, noun right."),
     ("columns", "Rec 1 — Column strips", "Three vertical columns; die targets stack above words; no cell boxes."),
     ("layered", "Rec 2 — Two-layer grid", "Same 3×2 grid; neutral die squares; phrase words only (no inner chrome)."),
-    ("skeleton", "Rec 3 — Sentence skeleton", "Ghost ____ the ____ line first; word bank subordinate below."),
+    ("skeleton", "Rec 3 — Sentence skeleton (original)", "Ghost ____ the ____ line first; 3×2 word bank below."),
 ]
 
 if __name__ == "__main__":
