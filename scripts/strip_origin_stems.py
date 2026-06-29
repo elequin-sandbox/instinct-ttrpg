@@ -27,7 +27,12 @@ ROOT = Path(__file__).resolve().parents[1]
 CARD_DATA = ROOT / "card-data.js"
 BATCH_OUT = ROOT / "scripts" / "strip_origin_stems_batch.json"
 API = "https://api.baserow.io/api/database/rows/table/911939/batch/?user_field_names=true"
+ROW_API = "https://api.baserow.io/api/database/rows/table/911939/{row_id}/?user_field_names=true"
 DATE = "2026-06-29"
+BROWSER_UA = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+)
 
 # Tier 2 — one-line flavor per Background (2nd person, present tense)
 BACKGROUND_FLAVOR: dict[str, str] = {
@@ -215,6 +220,38 @@ def write_card_data(cards: list[dict]) -> None:
     )
 
 
+def _baserow_headers(token: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Token {token}",
+        "Content-Type": "application/json",
+        "User-Agent": BROWSER_UA,
+        "Accept": "application/json",
+    }
+
+
+def _push_baserow_rows(batch: list[dict], token: str) -> None:
+    for item in batch:
+        row_id = item["id"]
+        url = ROW_API.format(row_id=row_id)
+        fields = {k: v for k, v in item.items() if k != "id"}
+        body = json.dumps(fields).encode("utf-8")
+        req = urllib.request.Request(
+            url,
+            data=body,
+            method="PATCH",
+            headers=_baserow_headers(token),
+        )
+        try:
+            with urllib.request.urlopen(req) as resp:
+                resp.read()
+        except urllib.error.HTTPError as e:
+            raise SystemExit(
+                f"Baserow row PATCH failed for {item.get('Card_Key')} "
+                f"({e.code}): {e.read().decode('utf-8', errors='replace')}"
+            ) from e
+        print(f"  row {row_id}: {item.get('Card_Key')}")
+
+
 def push_baserow(batch: list[dict]) -> None:
     token = read_token()
     if not token:
@@ -226,22 +263,23 @@ def push_baserow(batch: list[dict]) -> None:
         API,
         data=body,
         method="PATCH",
-        headers={
-            "Authorization": f"Token {token}",
-            "Content-Type": "application/json",
-        },
+        headers=_baserow_headers(token),
     )
     try:
         with urllib.request.urlopen(req) as resp:
             result = json.loads(resp.read().decode("utf-8"))
+        items = result.get("items") or batch
+        print(f"Pushed {len(items)} rows to Baserow table 911939 (batch):")
+        for item in batch:
+            print(f"  row {item['id']}: {item['Card_Key']}")
     except urllib.error.HTTPError as e:
-        raise SystemExit(
-            f"Baserow PATCH failed ({e.code}): {e.read().decode('utf-8', errors='replace')}"
-        ) from e
-    items = result.get("items") or batch
-    print(f"Pushed {len(items)} rows to Baserow table 911939:")
-    for item in batch:
-        print(f"  row {item['id']}: {item['Card_Key']}")
+        err = e.read().decode("utf-8", errors="replace")
+        if e.code == 403 and "1010" in err:
+            print("Batch PATCH blocked by Cloudflare; falling back to per-row updates...")
+            print(f"Pushed {len(batch)} rows to Baserow table 911939 (per-row):")
+            _push_baserow_rows(batch, token)
+            return
+        raise SystemExit(f"Baserow PATCH failed ({e.code}): {err}") from e
 
 
 def main() -> None:
