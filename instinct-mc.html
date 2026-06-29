@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instinct RPG — Agent Question</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #090f1c;
+      --card: #111e30;
+      --text: #e2d4b8;
+      --muted: #8499aa;
+      --gold: #c8a96e;
+      --gold-light: #dfc98e;
+      --border: rgba(200,169,110,0.28);
+      --border-hi: rgba(200,169,110,0.55);
+    }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      padding: 24px 16px 48px;
+    }
+    .wrap { max-width: 520px; margin: 0 auto; }
+    .eyebrow {
+      font-family: Cinzel, serif;
+      font-size: 10px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-family: Cinzel, serif;
+      font-size: clamp(20px, 5vw, 26px);
+      color: var(--gold-light);
+      margin-bottom: 6px;
+    }
+    .session-sub { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
+    .progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+    .dot {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(200,169,110,0.15);
+    }
+    .dot.done { background: var(--gold); opacity: 0.5; }
+    .dot.active { background: var(--gold); opacity: 1; }
+    .q-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 22px 20px 18px;
+      margin-bottom: 16px;
+    }
+    .q-prompt {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: #0e1827;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 17px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
+    }
+    .opt:hover { border-color: var(--border-hi); background: #132030; }
+    .opt:active { transform: scale(0.99); }
+    .opt.selected {
+      border-color: var(--gold);
+      background: rgba(200,169,110,0.12);
+      box-shadow: 0 0 0 1px rgba(200,169,110,0.2);
+    }
+    .opt-label {
+      font-weight: 700;
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+    .opt-desc { font-size: 15px; color: var(--muted); line-height: 1.45; }
+    details.more {
+      margin-top: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    details.more summary {
+      cursor: pointer;
+      color: var(--gold);
+      font-family: Cinzel, serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .nav {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: Cinzel, serif;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #1a1108;
+      border-color: var(--gold);
+      font-weight: 700;
+    }
+    .btn-primary:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .done-panel { text-align: center; }
+    .done-panel p { margin-bottom: 16px; color: var(--muted); }
+    .summary {
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin: 20px 0;
+      font-size: 15px;
+    }
+    .summary div { margin-bottom: 10px; }
+    .summary strong { color: var(--gold-light); }
+    .copy-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--gold);
+      color: #1a1108;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      transition: transform 0.25s, opacity 0.25s;
+      pointer-events: none;
+    }
+    .copy-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .err { color: #f0a0a0; text-align: center; padding: 40px 20px; }
+  </style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div class="copy-toast" id="toast">Copied — paste in agent chat</div>
+
+<script>
+const SESSIONS = {
+  'primer-playtest': {
+    title: 'Player Primer — playtest prep',
+    subtitle: 'Three quick picks. One question at a time.',
+    questions: [
+      {
+        id: 'depth',
+        prompt: 'How deep should the primer update go before your playtest?',
+        more: 'The live primer is instinct-rpg-primer-v2.html. Doctrine has moved on (Snap Check, retired Flaws, deck math).',
+        options: [
+          { id: 'a', label: 'A — Minimal patch', desc: 'Fix wrong or retired rules only (Snap Check, deck math, forbidden terms).' },
+          { id: 'b', label: 'B — Full doctrine sync', desc: 'Restructure sections and align every mechanical claim to design/.' },
+          { id: 'c', label: 'C — Teach-the-table focus', desc: 'Stay short — only what brand-new players need before scene 1.' }
+        ]
+      },
+      {
+        id: 'examples',
+        prompt: 'What should we do with example cards embedded in the primer?',
+        more: 'The primer renders mini cards from hardcoded JS at the file bottom — they may not match live Baserow.',
+        options: [
+          { id: 'a', label: 'A — Refresh from Baserow', desc: 'Pull current HTML from card-data.js / live cards.' },
+          { id: 'b', label: 'B — Drop embedded cards', desc: 'Link to Card Studio class views instead.' },
+          { id: 'c', label: 'C — Hero examples only', desc: 'Keep 2–3 (Instinct + React + Contest).' }
+        ]
+      },
+      {
+        id: 'connection',
+        prompt: 'Connection cards in the chargen section?',
+        more: 'Primer v2 describes Connections in deck-building. Doctrine does not lock them yet — only a template exists in card-inventory.',
+        options: [
+          { id: 'a', label: 'A — Keep for playtest', desc: 'You are playtesting Connections tomorrow.' },
+          { id: 'b', label: 'B — Remove or mark experimental', desc: 'Not doctrine-locked yet.' },
+          { id: 'c', label: 'C — Collapsible optional gate', desc: 'Same pattern as the Contests section.' }
+        ]
+      }
+    ]
+  }
+};
+
+function getSessionId() {
+  const p = new URLSearchParams(location.search);
+  return p.get('session') || 'primer-playtest';
+}
+function getStep() {
+  const p = new URLSearchParams(location.search);
+  const n = parseInt(p.get('step') || '1', 10);
+  return isNaN(n) || n < 1 ? 1 : n;
+}
+function storageKey(sid) { return 'instinct-mc:' + sid; }
+function loadAnswers(sid) {
+  try { return JSON.parse(localStorage.getItem(storageKey(sid)) || '{}'); }
+  catch { return {}; }
+}
+function saveAnswers(sid, answers) {
+  localStorage.setItem(storageKey(sid), JSON.stringify(answers));
+}
+function go(sid, step) {
+  const u = new URL(location.href);
+  u.searchParams.set('session', sid);
+  u.searchParams.set('step', String(step));
+  location.href = u.pathname + u.search;
+}
+
+function buildReply(sid, session, answers) {
+  const lines = ['**MC answers (' + session.title + '):**'];
+  session.questions.forEach(q => {
+    const pick = answers[q.id];
+    const opt = q.options.find(o => o.id === pick);
+    lines.push('- **' + q.prompt.split('?')[0] + ':** ' + (opt ? opt.label : pick || '(skipped)'));
+  });
+  return lines.join('\n');
+}
+
+function render() {
+  const app = document.getElementById('app');
+  const sid = getSessionId();
+  const session = SESSIONS[sid];
+  if (!session) {
+    app.innerHTML = '<p class="err">Unknown session. Try <code>?session=primer-playtest</code></p>';
+    return;
+  }
+  const step = getStep();
+  const total = session.questions.length;
+  const answers = loadAnswers(sid);
+
+  if (step > total) {
+    const reply = buildReply(sid, session, answers);
+    app.innerHTML = `
+      <div class="done-panel">
+        <div class="eyebrow">All done</div>
+        <h1>${session.title}</h1>
+        <p>Your picks are saved. Copy the block below into the agent chat — or just tell the agent your letter choices.</p>
+        <div class="summary" id="summary">${reply.split('\n').map(l => '<div>' + l.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>') + '</div>').join('')}</div>
+        <div class="nav">
+          <button class="btn btn-ghost" type="button" id="restart">Start over</button>
+          <button class="btn btn-primary" type="button" id="copy">Copy for agent</button>
+        </div>
+      </div>`;
+    document.getElementById('copy').onclick = () => {
+      navigator.clipboard.writeText(reply).then(() => {
+        const t = document.getElementById('toast');
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+      });
+    };
+    document.getElementById('restart').onclick = () => {
+      localStorage.removeItem(storageKey(sid));
+      go(sid, 1);
+    };
+    return;
+  }
+
+  const q = session.questions[step - 1];
+  const selected = answers[q.id] || null;
+
+  const dots = session.questions.map((_, i) => {
+    const n = i + 1;
+    let cls = 'dot';
+    if (n < step) cls += ' done';
+    if (n === step) cls += ' active';
+    return '<div class="' + cls + '"></div>';
+  }).join('');
+
+  const opts = q.options.map(o => `
+    <button type="button" class="opt${selected === o.id ? ' selected' : ''}" data-id="${o.id}">
+      <div class="opt-label">${o.label}</div>
+      <div class="opt-desc">${o.desc}</div>
+    </button>`).join('');
+
+  const more = q.more ? `<details class="more"><summary>Need context?</summary><p>${q.more}</p></details>` : '';
+
+  app.innerHTML = `
+    <div class="eyebrow">Question ${step} of ${total}</div>
+    <h1>${session.title}</h1>
+    <p class="session-sub">${session.subtitle || ''}</p>
+    <div class="progress">${dots}</div>
+    <div class="q-card">
+      <div class="q-prompt">${q.prompt}</div>
+      <div class="options" id="opts">${opts}</div>
+      ${more}
+    </div>
+    <div class="nav">
+      ${step > 1 ? '<button class="btn btn-ghost" type="button" id="back">Back</button>' : '<span style="flex:1"></span>'}
+      <button class="btn btn-primary" type="button" id="next" ${selected ? '' : 'disabled'}>${step < total ? 'Next' : 'Finish'}</button>
+    </div>`;
+
+  document.querySelectorAll('.opt').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[q.id] = btn.dataset.id;
+      saveAnswers(sid, answers);
+      document.getElementById('next').disabled = false;
+    };
+  });
+  const back = document.getElementById('back');
+  if (back) back.onclick = () => go(sid, step - 1);
+  document.getElementById('next').onclick = () => go(sid, step + 1);
+}
+
+render();
+</script>
+</body>
+</html>
