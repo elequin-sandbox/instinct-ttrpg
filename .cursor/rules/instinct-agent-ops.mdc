@@ -1,0 +1,26 @@
+---
+description: Instinct RPG — agent runs ops (Baserow, scripts); never delegate to Annie
+alwaysApply: true
+---
+
+# Instinct RPG — Agent owns ops (no handoffs)
+
+When card HTML, Baserow, or repo tooling changes as part of a task, **you run it end-to-end.** Do not tell Annie to run Python scripts, shell commands, or MCP steps you can execute yourself.
+
+## Baserow (required when cards change)
+
+After editing card HTML (`scripts/build_*_html.py`, `card-data.js`, oath/patron builders, etc.):
+
+1. **Push to Baserow** yourself — Instinct Baserow MCP (`update_rows` / `create_rows` on table **911939**) or the Baserow API via `config.js` token.
+2. **Patch or regen `card-data.js`** if needed (`scripts/patch_card_data_oaths.py` or `scripts/regenerate_card_data.py`).
+3. **Commit + push `main`** per `instinct-git.mdc`.
+
+Never end a card task with “run `python3 scripts/…` to sync Baserow” or “push when you’re ready.” If push is blocked by Auto-review, **retry with approval** — do not hand off.
+
+## Scripts are for the agent, not the user
+
+Repo scripts (`emit_*_push.py`, `regenerate_*`, `patch_card_data_*`, `skill-audit.py`) are **your** implementation tools. Run them in-session; only mention them if Annie is debugging or extending the toolchain.
+
+## Confirm after Baserow push
+
+Report: row IDs updated/created, card keys, and that Card Studio / Baserow match the repo.
