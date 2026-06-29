@@ -37,9 +37,9 @@
 | **Ranger** | Patient planner — Trap cards, environmental control | *Patient:* I already planned for this. I'm three steps ahead. |
 
 > 🔒 **Paladin (June 2026):** Player picks 1 **Oath** Core card at creation (Warlock Patron parallel).
-> Each scene: roll 2d6 onto Verb + Noun lists → **Vow** phrase; once per scene, GM-gated fulfill
-> adds both dice to **Boost** the roll. Optional **Break** at Enter = hand mulligan, skip Vow,
-> Oath stays Active. **Bulwark** = **[Resolve]** specialist (no Oath tie-in). Detail → `design/paladin-oath-charge.md`.
+> Each scene: at **Scene start**, roll 2d6 onto Verb + Noun lists → **Vow** phrase; once per scene,
+> GM-gated fulfill adds both dice → **Boost 2**. **Break Your Oath:** defiance → dice to **Resolve**;
+> GM **Toll 2** vs you. **Bulwark** = **[Resolve]** specialist (no Oath tie-in). Detail → `design/paladin-oath-charge.md`.
 
 ---
 
@@ -87,9 +87,9 @@ a design problem; retire it from one class or build a distinct parallel.
 - **Monk:** Owns stance-switching (modifies chaining, not damage). Iron Palm: Strike→Strike chain
   (cap 2; Crit removes cap once/scene). Wind Step: Move↔Strike freely; full Rooted immunity. Cobra:
   prior-contact becomes a standing counter.
-- **Paladin:** Pick 1 **Oath** at creation (Active area). **Vow:** 2d6 on Verb+Noun at **Enter**;
-  once/scene GM-gated fulfill adds both dice to **Boost** the roll. **Break** at Enter: hand mulligan,
-  skip Vow, Oath stays Active. **Bulwark:** +2 **[Resolve]** rolls. Replaces Conviction·Defiance.
+- **Paladin:** Pick 1 **Oath** at creation (Active area). **Vow:** 2d6 at **Scene start** on Verb+Noun;
+  once/scene GM-gated fulfill adds both dice → **Boost 2**. **Break Your Oath:** defiance → dice to
+  **Resolve**; GM **Toll 2** vs you this scene. **Bulwark:** +2 **[Resolve]** rolls. Replaces Conviction·Defiance.
 - **Rogue:** Owns **Stow** (intentional planning). Primary Exposed user. Hidden = primary defensive
   framing. Stow = cards hidden from other players.
 - **Ranger:** Owns **Trap** cards (place roll → trigger-condition fire). Shares Rooted framing with
@@ -101,7 +101,7 @@ a design problem; retire it from one class or build a distinct parallel.
 
 | Class | Open items |
 |---|---|
-| **Paladin** | Oath pool expansion; playtest Break tuning (see `paladin-oath-charge.md`). |
+| **Paladin** | Oath pool expansion; playtest Break (Resolve + Toll 2) at table. |
 | **Fighter** | Redesign in progress — 9 Act cards drafted; Crit blanks need Nathan; Arms at the Ready + Arsenal revised for weapon slots. |
 | **Cleric / Bard** | ⚠️ Re-confirm identity now that Bolstered is folded into [Boost]. |
 | **Wizard / Fighter** | Sundered consumption hooks needed. |

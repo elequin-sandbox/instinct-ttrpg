@@ -26,11 +26,15 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .kw{display:inline-block;padding:0 4px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.5;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
 .kw-boost{background:#0F766E;color:#CCFBF1;}
 .kw-crit{background:#B8860B;color:#FFFDE7;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-toll{background:#B45309;color:#FFFBEB;}
+.die-slot{box-sizing:border-box;}
 .hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah);border-bottom:1px solid rgba(0,0,0,.10);}
 .hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
 .cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cap-neutral{border-color:#3a3320;color:#3a3320;}
 .hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:15px;line-height:1.08;text-align:center;padding:3px 10px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-name[style*="text-align:left"]{clip-path:none;}
 .hdr-sub{font-style:italic;font-size:9px;color:#5a4020;text-align:center;line-height:1.35;padding:0 4px 2px;}
 .zone-label{font-family:'EB Garamond',Georgia,serif;font-size:6px;letter-spacing:0.8px;text-transform:uppercase;color:#7a6030;}
 .rule{height:0.5px;background:#c8a96e;opacity:.45;}
@@ -72,9 +76,10 @@ html = f"""<!doctype html>
 </head>
 <body>
 <h1>Paladin Oath — Scene Vow Proof</h1>
-<p class="sub">Five Oath Core cards + blank templates. Permanent <strong>Oath</strong> at creation; per-scene <strong>Vow</strong> (Verb + <em>the</em> + Noun). Optional <strong>Break</strong> at Enter.</p>
+<p class="sub">Five Oath Core cards + blank templates. Header tags <strong>Core</strong> + <strong>Oath</strong>; ribbon reads <em>Oath of …</em> Per-scene <strong>Vow</strong> from the 3×2 grid.</p>
 <div class="rule-box">
-<strong>Vow</strong> — At <strong>Enter</strong>, roll 2d6 (GM explains dice placement). <strong>Fulfill</strong> once/scene when your <strong>Action</strong> serves your <strong>Vow</strong> in purpose — <strong>Boost 2</strong> from both dice. <strong>Break</strong> before rolling: mulligan hand, skip Vow, Oath stays Active.
+<strong>Vow</strong> — At <strong>Scene start</strong>, roll 2d6 (one die per row; same column = matching face). <strong>Fulfill</strong> once per Scene when your <strong>Action</strong> serves your <strong>Vow</strong> — <strong>Boost 2</strong> from both dice.<br><br>
+<strong>Break Your Oath</strong> — Describe defying your <strong>Vow</strong>; place dice into <strong>Resolve</strong>. GM gains <strong>Toll 2</strong> and must spend it against you this scene.
 </div>
 <section><div class="grid">{cards}</div></section>
 {templates}
