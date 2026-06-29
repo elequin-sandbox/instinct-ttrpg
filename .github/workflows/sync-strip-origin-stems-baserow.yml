@@ -1,0 +1,21 @@
+name: Sync Origin Stems Strip to Baserow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/strip_origin_stems_batch.json
+      - scripts/push_strip_origin_stems.py
+      - scripts/strip_origin_stems.py
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push stem-stripped B&A/Bond HTML to Baserow
+        env:
+          BASEROW_TOKEN: ${{ secrets.BASEROW_TOKEN }}
+        run: python3 scripts/push_strip_origin_stems.py
