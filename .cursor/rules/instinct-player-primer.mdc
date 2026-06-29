@@ -1,64 +1,37 @@
 ---
-description: Instinct RPG — Player Primer (v2) scope, tone, and render parity
+description: Instinct RPG — Player Primer (v2) hub — live file, scope, ship checklist
 globs: instinct-rpg-primer*.html,primer-card-scope.css,index.html
 alwaysApply: false
 ---
 
-# Instinct RPG — Player Primer
+# Instinct RPG — Player Primer (hub)
 
 The **live** player-facing primer is `instinct-rpg-primer-v2.html`, embedded in Card Studio via the
 **Player Primer** tab (`index.html` → iframe). Older `instinct-rpg-primer*.html` files are not live
 unless Annie explicitly switches the iframe.
 
-## Audience & scope (teach-the-table)
+## Related rules (read when editing the primer)
 
-- **Goal:** get first-time players to the table — not full rules mastery.
-- **GM defers:** Contests, Snap Check procedure, Threat, Resolve — mention + glossary tap; GM teaches
-  at the table when they arise. Do not expand into full procedures unless Annie asks.
-- **In scope:** deck/hand philosophy, basic checks (Build/Roll/Read), Hit Dice intro, card types at a
-  glance, how a card plays, 21-card chargen flow, keyword glossary, playtest FAQ.
-- **Locked rhetoric:** deck = character; hand = Instincts right now; partial control / freestyling;
-  Crit = natural 6; Flourish = gain bonus options from the card (don't "give up" 6s); pacing when
-  hands run low (~2 average).
+| Rule file | Covers |
+|-----------|--------|
+| `instinct-teach-the-table.mdc` | Pre-read vs GM-at-table mechanics |
+| `instinct-aid-narration.mdc` | Aid discard + narrate (doctrine sync) |
+| `instinct-primer-card-parity.mdc` | `primer-card-scope.css` template coverage |
+| `instinct-playtest-tone.mdc` | Welcoming, hand-first copy |
+| `instinct-chargen-sample-keys.mdc` | `MOUNTS` / `Card_Key` contract |
+| `instinct-typography-tiers.mdc` | Cinzel / Crimson Pro / sans sub-labels |
+| `instinct-proof-links.mdc` | Live Pages URLs |
 
-## Card samples
+## In scope (summary)
 
-- Mount Baserow HTML from `card-data.js` via the `MOUNTS` map in the primer script — one sample per
-  chargen step. Do not hand-paste stale card HTML.
-- When adding a new card type to chargen samples, pick a **current** `Card_Key` from `card-data.js`
-  and verify render in-browser.
-
-## Render parity (`primer-card-scope.css`)
-
-Primer loads `primer-card-scope.css` + `instinct-dual-styles.css` — **not** Card Studio's full
-`index.html` card CSS. Every card HTML template used in samples must have scoped styles here:
-
-| Template | Body class | Notes |
-|----------|------------|--------|
-| Ability / React / Act | `.cbody` | `.flv`, `.etxt`, `.csec` |
-| Bond / Instinct / B&A forks | `.bf-body` | dual-path fork CSS in `instinct-dual-styles.css` |
-| Core | `.card-body` | `.zone-label`, `.effect-text`, `.rule` — **required**; Core cards break without them |
-
-- Fixed card frame: `2.5in × 3.5in`, scaled `.cardwrap` at `0.58` — **one card per** `.primer-cards`
-  slot. For side-by-side Core samples, wrap each in its own `.primer-cards` inside `.primer-core-pair`.
-- `padding-bottom: 26px` on body regions clears absolutely positioned `.idtag`.
-
-## Typography
-
-- **Serif** (`Crimson Pro`): section narrative paragraphs and golden-rule quotes.
-- **Sans-serif** (`system-ui` stack): sub-topic labels only — `.step-sub-title`, `.ex-step-num`,
-  `.chargen-label`. Do not switch detail/body paragraphs to sans without Annie explicitly asking.
-
-## Tone & FAQ
-
-- Playtest FAQ: welcoming, non-confrontational. Hand-first framing ("look at what surfaced") over
-  policing player intent.
-- Glossary: keyword only in `<summary>` — no subtitle stems/hooks after the term.
-- Walkthrough example should use **named fiction** (e.g. Barbarian **Break** + ally **Aid**) and show
-  how pool size is built (2d6 base + Aid = 3d6).
+Deck/hand philosophy, basic checks (Build/Roll/Read), Hit Dice intro, card types at a glance, how a
+card plays, 21-card chargen flow, keyword glossary, playtest FAQ. GM defers Contests, Threat, Resolve,
+Snap Check procedure — see teach-the-table rule.
 
 ## Ship checklist
 
-After primer edits: commit + push `main` (see `instinct-git.mdc`). No Baserow push unless card HTML
-changed. Share the live link:
-https://elequin-sandbox.github.io/instinct-ttrpg/instinct-rpg-primer-v2.html
+1. Visual pass on **all** chargen samples (especially Core pair).
+2. Commit + push `main` per `instinct-git.mdc`.
+3. No Baserow push unless card HTML changed (`instinct-agent-ops.mdc`).
+4. Share live link:
+   https://elequin-sandbox.github.io/instinct-ttrpg/instinct-rpg-primer-v2.html

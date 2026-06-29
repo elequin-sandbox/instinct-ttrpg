@@ -1,0 +1,33 @@
+---
+description: Instinct RPG — player-facing assets defer to GM-at-table teaching
+globs: "*primer*.html,*quick-ref*.html,gm-guide*.html"
+alwaysApply: false
+---
+
+# Instinct RPG — Teach the table
+
+Player-facing assets exist to **get people playing**, not to replace the GM. Before adding or expanding
+any mechanic in a primer, quick ref, or GM guide section aimed at **new players**, classify it:
+
+| Class | Default | Examples |
+|-------|---------|----------|
+| **Pre-read** | Include in player primer | Deck/hand, basic checks, Hit Dice intro, card types at a glance, chargen steps, keyword one-liners |
+| **Table-teach** | GM introduces when it happens | Contests, Threat pool procedure, Resolve setup, Snap Check full procedure, specialized check formats |
+
+## Rules
+
+1. **Table-teach mechanics** get at most: a name, a one-sentence pointer, and a glossary `<details>` or
+   “your GM will walk you through this” callout. Do **not** write full procedures unless Annie
+   explicitly promotes them to pre-read.
+2. **Pre-read** content must match `design/core-rules.md` — never invent shortcuts that contradict
+   doctrine.
+3. When Annie chooses depth for a playtest (“teach-the-table” vs “full rules upfront”), **lock that
+   scope** for the session and do not creep table-teach content into the main flow.
+4. GM-facing guides may go deeper, but still distinguish “say at session start” vs “say when it
+   first appears.”
+
+## Related rules
+
+- Player Primer file + ship: `instinct-player-primer.mdc`
+- Tone for playtest copy: `instinct-playtest-tone.mdc`
+- Doctrine source: `design/core-rules.md`, `design/INDEX.md`
