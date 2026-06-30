@@ -43,8 +43,8 @@ Mirrors Warlock **Patron** pick:
 | **Ribbon title** | **Oath of** prefix pill + card name (e.g. *Oath of The Open Hand*) — no subtitle on card (flavor lives in pool docs only) |
 | **Scene start line** | At **Scene start**: roll 2d6 to determine your new **Vow**: |
 | **Word stack** | L→R mad lib — left/right dice in top slots; **paired index columns** (each die gets its own 1–6 spine); verbs/nouns meet at fleur-de-lis *the* |
-| **Fulfill** | If any **Action** fulfills your **Vow**, use these dice to **Boost** the roll. |
-| **Defiance** | Inline **Defiance:** — describe defying your **Vow** → dice to **Resolve**; GM **Toll 2** vs you this scene |
+| **Fulfill** | When an **Action** fulfills your **Vow**, add these dice to **Boost** the roll. |
+| **Defiance** | Inline **Defiance:** — describe defying your **Vow** → dice to **Resolve**; GM gains **Toll 2** to use against you |
 
 ### Word-pool design rules
 

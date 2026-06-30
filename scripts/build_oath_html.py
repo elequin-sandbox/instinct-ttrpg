@@ -98,7 +98,7 @@ DIE_TARGET = (
 
 VOW_PHRASE = (
     '<div class="vow-phrase" style="border:1px dotted rgba(184,134,11,0.55);border-radius:10px;'
-    'padding:3px 5px 4px;margin:1px 0;">{inner}</div>'
+    'padding:2px 4px 3px;margin:0;">{inner}</div>'
 )
 
 KW_SM = (
@@ -111,8 +111,7 @@ ENTER_VOW = (
 )
 
 FULFILL_VOW = (
-    "If any <strong>Action</strong> fulfills your <strong>Vow</strong>,<br>"
-    "use these dice to "
+    "When an <strong>Action</strong> fulfills your <strong>Vow</strong>, add these dice to "
     '<span class="kw kw-boost" style="' + KW_SM + '">Boost</span> the roll.'
 )
 
@@ -128,11 +127,11 @@ BREAK_VOW = (
     DEFIANCE_LABEL
     + " Describe how you are defying your <strong>Vow</strong> and place these dice into your "
     '<span class="kw kw-resolve" style="' + KW_SM + '">Resolve</span>. The GM gains '
-    '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> and must use it against you this scene.'
+    '<span class="kw kw-toll" style="' + KW_SM + '">Toll 2</span> to use against you.'
 )
 
-BODY_STYLE = "gap:3px;padding:3px 9px 32px;"
-TEMPLATE_BODY_STYLE = "gap:3px;padding:3px 8px 32px;"
+BODY_STYLE = "gap:2px;padding:2px 9px 28px;"
+TEMPLATE_BODY_STYLE = "gap:2px;padding:2px 8px 28px;"
 WRITEIN = (
     '<div class="writein-line" style="flex:1;min-height:15px;'
     'border-bottom:1px dashed rgba(184,134,11,0.45);"></div>'
@@ -140,25 +139,21 @@ WRITEIN = (
 
 
 def _hdr_name(name: str = "", *, blank: bool = False) -> str:
-    ribbon = (
-        'display:flex;align-items:center;justify-content:flex-start;gap:5px;'
-        "padding-left:8px;padding-right:10px;text-align:left;"
-    )
     if blank:
         title = (
-            '<span style="flex:1;min-height:14px;border-bottom:1px dashed rgba(90,74,32,0.35);'
-            'margin-right:4px;">&nbsp;</span>'
+            '<span class="hdr-title" style="flex:1;min-width:0;min-height:14px;'
+            'border-bottom:1px dashed rgba(90,74,32,0.35);margin-right:4px;">&nbsp;</span>'
         )
         return (
-            f'<div class="hdr-name hdr-blankname" style="{ribbon}min-height:26px;">'
+            '<div class="hdr-name hdr-bar">'
             + OATH_OF_PREFIX
             + title
             + "</div>"
         )
     return (
-        f'<div class="hdr-name" style="{ribbon}">'
+        '<div class="hdr-name hdr-bar">'
         + OATH_OF_PREFIX
-        + f'<span style="flex:1;line-height:1.08;">{name}</span></div>'
+        + f'<span class="hdr-title">{name}</span></div>'
     )
 
 
@@ -190,8 +185,8 @@ def _ornate_the() -> str:
     """Weighty center pivot — fleur-de-lis caps on a golden ring."""
     return (
         '<span class="vow-the-ring" style="position:relative;display:inline-flex;'
-        "align-items:center;justify-content:center;min-width:30px;min-height:18px;"
-        "padding:2px 8px 3px;border:1.5px solid var(--a,#B8860B);border-radius:14px;"
+        "align-items:center;justify-content:center;min-width:28px;min-height:16px;"
+        "padding:1px 7px 2px;border:1.5px solid var(--a,#B8860B);border-radius:14px;"
         "background:linear-gradient(180deg,rgba(255,252,245,0.95),rgba(247,240,224,0.55));"
         "box-shadow:inset 0 0 0 0.5px rgba(184,134,11,0.35),0 0 0 1px rgba(184,134,11,0.12);"
         'flex-shrink:0;">'
@@ -211,7 +206,7 @@ def _term_cell(word: str | None, *, side: str, blank: bool) -> str:
     justify = "flex-end" if side == "verb" else "flex-start"
     return (
         f'<div class="vow-row" style="display:flex;align-items:center;justify-content:{justify};'
-        f'min-height:14px;padding:1px 0;width:100%;">{term}</div>'
+        f'min-height:13px;padding:0;width:100%;">{term}</div>'
     )
 
 
@@ -261,7 +256,7 @@ def _word_stack_meet(
         f'<div style="display:flex;justify-content:center;">{DIE_TARGET}</div>',
         "<div></div>",
         '<div style="grid-column:1/-1;border-top:1px dotted rgba(184,134,11,0.4);'
-        'height:0;margin:2px 0 1px;padding:0;"></div>',
+        'height:0;margin:1px 0 0;padding:0;"></div>',
     ]
     vlist = verbs or []
     nlist = nouns or []

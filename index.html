@@ -833,7 +833,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;white-space:nowrap;}
 .cap-neutral{border-color:#3a3320;color:#3a3320;}
 .cap-accent{border-color:var(--ad);color:var(--ad);}
-.hdr-name{font-family:'EB Garamond',Georgia,'Times New Roman',serif;font-weight:700;font-size:16.5px;line-height:1.08;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-name{font-family:'EB Garamond',Georgia,'Times New Roman',serif;font-weight:700;font-size:14px;line-height:1.08;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-name.hdr-bar{clip-path:none;margin:4px 0 2px;padding:3px 8px;text-align:left;display:flex;align-items:center;gap:5px;min-height:22px;}
+.hdr-name.hdr-bar .hdr-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;line-height:1.08;}
 .hdr-blankname{display:flex;align-items:center;justify-content:center;min-height:24px;}
 .hdr-sub{text-align:center;font-style:italic;font-size:8.5px;color:#6a5b38;line-height:1.22;margin-top:2px;}
 .idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;}
@@ -1089,6 +1091,39 @@ function scanText(bodyEl){
     if(hit){ res+=esc(txt.slice(last)); const sp=document.createElement('span'); sp.innerHTML=res; tn.replaceWith(sp); }
   });
 }
+function isCoreCard(root){
+  const tops=root.querySelector('.hdr-top');
+  if(!tops)return false;
+  return [...tops.querySelectorAll('.cap')].some(function(c){return c.textContent.trim()==='Core';});
+}
+function normalizeCoreHeader(root){
+  if(!isCoreCard(root))return;
+  const hdr=root.querySelector('.hdr-name');
+  if(!hdr)return;
+  hdr.classList.add('hdr-bar');
+  if(!hdr.querySelector('.hdr-title')){
+    const kids=[...hdr.childNodes].filter(function(n){return n.nodeType===1||(n.nodeType===3&&n.textContent.trim());});
+    if(kids.length===1&&kids[0].nodeType===3){
+      const span=document.createElement('span');
+      span.className='hdr-title';
+      span.textContent=kids[0].textContent.trim();
+      hdr.textContent='';
+      hdr.appendChild(span);
+    }
+  }
+}
+function fitHdrTitle(el){
+  if(!el)return;
+  let size=14;
+  el.style.fontSize=size+'px';
+  while(el.scrollWidth>el.clientWidth&&size>7.5){
+    size-=0.5;
+    el.style.fontSize=size+'px';
+  }
+}
+function fitCoreHdrTitles(container){
+  (container||document).querySelectorAll('.hdr-name.hdr-bar .hdr-title').forEach(fitHdrTitle);
+}
 function restyle(root){
   // 1. existing .tp / .tp-luck spans -> keyword pill or bold (keep crit-cost .tc)
   root.querySelectorAll('span.tp, span.tp-luck').forEach(function(sp){
@@ -1117,6 +1152,7 @@ function restyle(root){
   root.querySelectorAll('.fright').forEach(function(f){
     f.innerHTML=f.innerHTML.replace(/(^|[^>])\bAct\b/, '$1'+ACT_IC+' Act').replace(/(^|[^>])\bReact\b/, '$1'+REACT_IC+' React');
   });
+  normalizeCoreHeader(root);
   return root;
 }
 function styleHTML(rawHtml){
@@ -1235,6 +1271,7 @@ function applyFilters(){
   const list=filtered();
   document.getElementById('grid').innerHTML=list.length?buildGroupedHTML(list):'<div class="empty">No cards match these filters.</div>';
   document.getElementById('count').textContent=list.length+' of '+LIVE.length+' cards';
+  requestAnimationFrame(function(){fitCoreHdrTitles(document.getElementById('grid'));});
 }
 
 /* ---------- deck ---------- */
