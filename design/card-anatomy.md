@@ -286,7 +286,7 @@ Proof: `core-leading-upright-proof.html`.
 |---|---|
 | Fold | Horizontal dashed line at mid-height |
 | Ribbon | Spectral uppercase at fold band (angled end caps) |
-| Retired | **Loadout** cards — Player Primer v2 owns chargen setup |
+| Retired | **Loadout** + **Build Your Deck** cards — Player Primer v2 owns chargen setup |
 
 Builder: `scripts/build_core_upright_html.py` · regen: `scripts/regenerate_core_upright_proof.py`.
 

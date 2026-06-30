@@ -1,0 +1,20 @@
+[
+  {"id": 412, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-fighter-core"},
+  {"id": 415, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-paladin-core"},
+  {"id": 418, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-ranger-core"},
+  {"id": 421, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-cleric-core"},
+  {"id": 424, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-bard-core"},
+  {"id": 427, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-warlock-core"},
+  {"id": 430, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-druid-core"},
+  {"id": 433, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-barbarian-core"},
+  {"id": 436, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "loadout-rogue-core"},
+  {"id": 595, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-fighter"},
+  {"id": 596, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-paladin"},
+  {"id": 597, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-ranger"},
+  {"id": 598, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-cleric"},
+  {"id": 599, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-bard"},
+  {"id": 600, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-warlock"},
+  {"id": 601, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-druid"},
+  {"id": 602, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-barbarian"},
+  {"id": 603, "Status": "legacy", "Last_Rework_Date": "2026-06-30", "Card_Key": "build-your-deck-rogue"}
+]
