@@ -163,6 +163,22 @@
       text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
     }
     .ex-step p { font-size: 15px; margin: 8px 0 0; }
+    .walkthrough-setup {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(148px, 168px);
+      gap: 14px 16px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+    .walkthrough-intro p { font-size: 15.5px; margin: 0; line-height: 1.55; }
+    .walkthrough-card.primer-cards {
+      margin: 0;
+      justify-content: center;
+    }
+    .walkthrough-card .cardwrap {
+      margin-bottom: -58px;
+      margin-right: 0;
+    }
     .die-removed { opacity: 0.35; text-decoration: line-through; }
     .faq-list { display: flex; flex-direction: column; gap: 8px; }
     .faq-item {
@@ -250,6 +266,8 @@
       .ct-row { grid-template-columns: 88px 1fr; }
       .step { grid-template-columns: 76px 1fr; }
       .outcome { grid-template-columns: 84px 1fr; }
+      .walkthrough-setup { grid-template-columns: 1fr; }
+      .walkthrough-card { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -370,7 +388,12 @@
 
     <div class="callout">
       <div class="callout-label">Walkthrough example</div>
-      <p style="font-size:15.5px;margin:0 0 14px">A <strong>Barbarian</strong> is blocked by a heavy barred door. <strong>Break</strong> is in their hand — play it to perform an <strong>Athletics</strong> check and smash part of the scene. Their <strong>Fighter</strong> ally discards a related card — say, an Instinct like <em>Bold</em> — and describes how they’re helping: bracing the frame, shouting encouragement, clearing debris. They’re <strong>not</strong> using that card’s normal effect; they’re spending it to <span class="kw kw-aid">Aid</span>, and the GM agrees. That adds 1 die. That’s <strong>3d6</strong> on the roll: <strong>2d6</strong> base at Tier 1, plus <strong>1</strong> from Aid. The GM sets the door’s opposing pool at <strong>[4] [5]</strong> before anyone rolls.</p>
+      <div class="walkthrough-setup">
+        <div class="walkthrough-intro">
+          <p>A <strong>Barbarian</strong> is blocked by a heavy barred door. They play <strong>Break</strong> from hand — an <strong>Athletics</strong> check to smash part of the scene. Their <strong>Fighter</strong> ally discards a related card — say, an Instinct like <em>Bold</em> — and describes how they’re helping: bracing the frame, shouting encouragement, clearing debris. They’re <strong>not</strong> using that card’s normal effect; they’re spending it to <span class="kw kw-aid">Aid</span>, and the GM agrees. That adds 1 die. That’s <strong>3d6</strong> on the roll: <strong>2d6</strong> base at Tier 1, plus <strong>1</strong> from Aid. The GM sets the door’s opposing pool at <strong>[4] [5]</strong> before anyone rolls.</p>
+        </div>
+        <div class="primer-cards walkthrough-card"><div id="walkthrough-card-wrap"></div></div>
+      </div>
       <div class="ex-steps">
         <div class="ex-step">
           <div class="ex-step-num">Step 1 — Roll</div>
@@ -757,7 +780,8 @@
     'item-card-wrap': 'immovable-rod-item',
     'core-card-wrap-a': 'weapon-master-fighter-core',
     'core-card-wrap-b': 'battlemaster-fighter-core',
-    'ability-card-wrap': 'find-the-gap-rogue'
+    'ability-card-wrap': 'find-the-gap-rogue',
+    'walkthrough-card-wrap': 'break-barbarian'
   };
 
   function mountCards() {
