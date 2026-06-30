@@ -784,6 +784,23 @@
     'walkthrough-card-wrap': 'break-barbarian'
   };
 
+  function wrapCritLines(root) {
+    root.querySelectorAll('.ci').forEach(function (ci) {
+      if (ci.querySelector('.ci-txt')) return;
+      var cost = ci.querySelector('.kw-crit, .tc');
+      if (!cost) return;
+      var wrap = document.createElement('span');
+      wrap.className = 'ci-txt';
+      var nx = cost.nextSibling;
+      while (nx) {
+        var after = nx.nextSibling;
+        wrap.appendChild(nx);
+        nx = after;
+      }
+      ci.appendChild(wrap);
+    });
+  }
+
   function mountCards() {
     if (!window.CARD_DATA) return;
     const byKey = Object.create(null);
@@ -793,6 +810,7 @@
       const card = byKey[key];
       if (el && card && card.HTML) {
         el.innerHTML = '<div class="cardwrap">' + card.HTML + '</div>';
+        wrapCritLines(el);
       }
     }
   }

@@ -27,6 +27,9 @@ Shared rules already in `primer-card-scope.css`:
 - `.card` — `2.5in × 3.5in`, flex column, `overflow: hidden`
 - Body regions — `padding-bottom: 26px` to clear absolute `.idtag`
 - `.cardwrap` — `scale(0.58)`, `transform-origin: top left`
+- **Crit lines (`.ci`):** after mount, wrap text following `.kw-crit` in `.ci-txt` (see primer
+  `wrapCritLines`) — otherwise flex splits the sentence into jumbled fragments. CSS:
+  `.primer-cards .ci .ci-txt { flex: 1; min-width: 0; }`.
 
 ## Layout rule — one scaled card per slot
 
