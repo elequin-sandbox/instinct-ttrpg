@@ -19,16 +19,17 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.boon_snap_render import (  # noqa: E402
     Option,
-    render_mill_line,
+    render_bg_react_gate,
+    render_mill_float,
     render_options_list,
-    render_react_trigger,
     render_snap_compact,
+    render_snap_intro,
 )
 from scripts.strip_origin_stems import BACKGROUND_FLAVOR, CARD_DATA, push_baserow  # noqa: E402
 
 BATCH_OUT = ROOT / "scripts" / "background_snap_batch.json"
 PROOF_OUT = ROOT / "background-snap-proof.html"
-DATE = "2026-06-29"
+DATE = "2026-06-30"
 BOOST = '<span class="kw kw-boost">Boost 1</span>'
 
 BACKGROUNDS: list[dict] = [
@@ -176,17 +177,17 @@ def render_background_snap(card: dict) -> str:
         f'<div class="hdr">'
         f'<div class="hdr-top">'
         f'<span class="cap cap-accent">Background</span>'
-        f'<span class="cap cap-neutral">React</span>'
         f"</div>"
         f'<div class="hdr-name">{card["name"]}</div>'
         f"</div>"
         f'<div class="bf-body">'
         f'<div class="bf-flv">{flavor}</div>'
-        f"{render_react_trigger(card['react_condition'])}"
+        f"{render_bg_react_gate(card['react_condition'])}"
+        f"{render_snap_intro()}"
         f"{render_options_list(card['options'])}"
         f"{render_snap_compact()}"
-        f"{render_mill_line()}"
         f"</div>"
+        f"{render_mill_float()}"
         f"</div>"
     )
 
@@ -260,12 +261,16 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:16.5px;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
 .bf-body{flex:1;padding:7px 9px 10px;display:flex;flex-direction:column;gap:5px;font-size:10.5px;line-height:1.42;}
 .bf-flv{font-style:italic;color:#5a4020;font-size:10px;}
-.anc-trigger{display:flex;flex-direction:column;gap:2px;}.anc-freq{font-size:7.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a6a40;}
-.anc-callout{font-style:normal;font-weight:600;font-size:10px;line-height:1.45;color:#1c1408;padding:5px 7px;border-left:3px solid #6D28D9;background:rgba(109,40,217,.08);border-radius:0 4px 4px 0;}
+.bf-react-gate{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;line-height:1.45;font-size:10px;color:#1c1408;}
+.cap-react-gate{border-color:#6D28D9;color:#6D28D9;background:rgba(109,40,217,.06);font-size:8px;padding:0 5px;}
+.bf-react-when{font-style:italic;color:#3a2a0a;font-weight:500;}
+.snap-intro{font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6D28D9;margin-top:3px;}
 .bf-choices{display:flex;flex-direction:column;gap:4px;}.bf-choice{font-size:10px;line-height:1.45;color:#1c1408;}
 .snap-compact{margin-top:auto;padding-top:5px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
 .snap-chip{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}.snap-dot{opacity:.45;}
-.bf-mill{font-size:9px;line-height:1.4;color:#4a6080;padding-top:3px;border-top:0.5px dashed rgba(12,74,110,.35);}
+.mill-float{position:absolute;right:7px;bottom:6px;opacity:.65;line-height:1;z-index:2;}
+.mill-float .kw-mill{font-size:7px;padding:1px 4px;letter-spacing:.2px;}
+.cardwrap .card .bf-body{padding-bottom:22px;}
 """
     html = (
         "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
