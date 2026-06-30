@@ -6,6 +6,7 @@
 .kw-hd{background:#991B1B;color:#FEF2F2;}
 .kw-threat{background:#991B1B;color:#FEF2F2;}
 .kw-crit{background:#B8860B;color:#FFFDE7;}
+.kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
 .kw-toll{background:#B45309;color:#FFFBEB;}
 .kw-miss{background:#7F1D1D;color:#FEF2F2;}
 .kw-aid{background:#2563EB;color:#EFF6FF;}
