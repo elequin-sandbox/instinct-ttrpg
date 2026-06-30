@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Instinct RPG — Figma CSS viewer (readable)</title>
+<style>
+:root{--gold:#c8a96e;--gold-d:#7a6030;--bg:#16110a;--panel:#1d140b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#f0e6cf;padding:20px 16px 48px;}
+h1{font-size:17px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.sub{color:var(--gold-d);font-size:13px;line-height:1.55;max-width:920px;margin-bottom:18px;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+.tab{border:1px solid #4a3820;background:#241a0e;color:#e7d6ac;padding:8px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}
+.tab.active{background:#3a2c19;border-color:var(--gold);color:var(--gold);}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px;padding:10px 12px;background:var(--panel);border:1px solid #3a2c19;border-radius:8px;}
+.toolbar label{font-size:11px;color:#cbb98e;text-transform:uppercase;letter-spacing:.6px;}
+.zoom-btn{border:1px solid #4a3820;background:#2a1d10;color:#e7d6ac;padding:6px 10px;border-radius:5px;font-size:12px;cursor:pointer;}
+.zoom-btn.active{border-color:var(--gold);color:var(--gold);}
+.zoom-btn:hover{background:#352618;}
+#zoom-label{font-size:12px;color:var(--gold);min-width:3.5em;text-align:center;}
+.viewport-wrap{background:#0d0a06;border:1px solid #3a2c19;border-radius:8px;padding:12px;overflow:auto;max-height:calc(100vh - 200px);min-height:420px;}
+.viewport{display:inline-block;transform-origin:top left;}
+.artboard{position:relative;box-shadow:6px 6px 0 rgba(0,0,0,.45);border:1px solid #555;}
+.panel{display:none;}.panel.active{display:block;}
+.panel h2{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.hint{font-size:11px;color:#8a7350;margin-top:8px;}
+</style>
+</head>
+<body>
+<h1>Figma CSS viewer</h1>
+<p class="sub">Uploaded Figma Dev Mode exports recreated as HTML. Use the tabs and zoom controls — the character sheet needs <strong>Fit width</strong> or <strong>100%+</strong> on smaller screens. Scroll inside the gray frame.</p>
+<div class="tabs" role="tablist">
+  <button class="tab active" data-panel="ancestry" type="button">ancestry-card.css</button>
+  <button class="tab" data-panel="loadout" type="button">loadout-card.css</button>
+  <button class="tab" data-panel="sheet" type="button">full-card-base.css</button>
+</div>
+<div class="toolbar">
+  <label>Zoom</label>
+  <button class="zoom-btn" data-zoom="0.75" type="button">75%</button>
+  <button class="zoom-btn active" data-zoom="1" type="button">100%</button>
+  <button class="zoom-btn" data-zoom="1.25" type="button">125%</button>
+  <button class="zoom-btn" data-zoom="1.5" type="button">150%</button>
+  <button class="zoom-btn" data-zoom="fit" type="button">Fit width</button>
+  <span id="zoom-label">100%</span>
+</div>
+<div id="panel-ancestry" class="panel active" data-w="360.0" data-h="1008.0">
+  <h2>ancestry-card.css — Dwarf</h2>
+  <div class="viewport-wrap"><div class="viewport"><div class="artboard">
+<div class="fig-ancestry" style="width:360.0px;height:1008.0px;position:relative;background:#fff;">
+  <div style="position:absolute;left:6.24px;top:6.24px;width:347.52px;height:995.52px;border:1.92px solid #7D5725;border-radius:11.52px;box-sizing:border-box;"></div>
+  <div style="position:absolute;left:6.24px;top:404.64px;width:347.52px;height:214.9536px;background:#F5F0E9;"></div>
+  <div style="position:absolute;left:0;top:504.0px;width:360.0px;border-top:1px dashed #C5C5C5;"></div>
+  <!-- ribbon bottom -->
+  <div style="position:absolute;left:42.1392px;top:526.3199999999999px;width:266.3808px;height:48.873599999999996px;background:#DDCBB8;"></div>
+  <div style="position:absolute;left:17.2656px;top:526.3199999999999px;width:34.56px;height:34.56px;background:#DDCBB8;transform:rotate(45deg);"></div>
+  <div style="position:absolute;left:284.52px;top:526.3199999999999px;width:34.56px;height:34.56px;background:#DDCBB8;transform:rotate(45deg);"></div>
+  <div style="position:absolute;left:53.76px;top:526.3199999999999px;width:252.48px;height:48.873599999999996px;font-family:Spectral,serif;font-size:34.871088px;line-height:39.36px;letter-spacing:.04em;text-transform:uppercase;color:#7D5725;display:flex;align-items:center;justify-content:center;">Dwarf</div>
+  <!-- ribbon top inverted -->
+  <div style="position:absolute;left:42.1392px;top:435.92639999999994px;width:266.3808px;height:48.873599999999996px;background:#DDCBB8;transform:rotate(-180deg);"></div>
+  <div style="position:absolute;left:44.419200000000004px;top:435.92639999999994px;width:252.48px;height:48.873599999999996px;font-family:Spectral,serif;font-size:34.871088px;line-height:39.36px;letter-spacing:.04em;text-transform:uppercase;color:#7D5725;display:flex;align-items:center;justify-content:center;transform:rotate(-180deg);">Dwarf</div>
+  <div style="position:absolute;left:78.71039999999999px;top:586.4735999999999px;width:202.56px;font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:11.52px;line-height:15.36px;text-align:center;color:#7D5725;">You were carved from stone and stubbornness, and it shows</div>
+  <div style="position:absolute;left:29.6496px;top:653.7312000000001px;width:296.64px;font-family:Inter,sans-serif;font-size:13.44px;font-weight:600;line-height:19.2px;color:#7D5725;">
+    <div>When a blow would stagger someone else, choose one:</div>
+    <div style="margin-top:7.68px">Absorb it — take it and stay standing; you don't let the cost show.</div>
+    <div style="margin-top:7.68px">Shake it off — make a Luck Check. On a success, your resilience turns the tide.</div>
+    <div style="margin-top:7.68px">Dig in — your refusal to be moved becomes a statement the Scene must acknowledge</div>
+  </div>
+  <div style="position:absolute;left:33.6px;top:976.3199999999999px;width:292.8px;font-family:Spectral,serif;font-size:11.52px;text-transform:uppercase;text-align:center;color:#623807;">⁘ Ancestry | action ⁘</div>
+</div></div></div></div>
+</div>
+<div id="panel-loadout" class="panel" data-w="360.0" data-h="1008.0">
+  <h2>loadout-card.css — Rogue</h2>
+  <div class="viewport-wrap"><div class="viewport"><div class="artboard">
+<div style="width:360.0px;height:1008.0px;position:relative;background:#fff;">
+  <div style="position:absolute;left:6.24px;top:6.24px;width:347.52px;height:995.52px;border:1.92px solid #6D5BA8;border-radius:11.52px;box-sizing:border-box;"></div>
+  <div style="position:absolute;left:6.24px;top:404.64px;width:347.52px;height:214.9536px;background:#F0EFF6;"></div>
+  <div style="position:absolute;left:0;top:504.0px;width:360.0px;border-top:1px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:46.809599999999996px;top:522.96px;width:266.3808px;height:48.873599999999996px;background:#CDC7E1;"></div>
+  <div style="position:absolute;left:53.76px;top:522.96px;width:252.48px;height:48.873599999999996px;font-family:Spectral,serif;font-size:34.871088px;text-transform:uppercase;color:#6D5BA8;display:flex;align-items:center;justify-content:center;">Rogue</div>
+  <div style="position:absolute;left:46.809599999999996px;top:435.92639999999994px;width:266.3808px;height:48.873599999999996px;background:#CDC7E1;transform:rotate(-180deg);"></div>
+  <div style="position:absolute;left:53.76px;top:435.92639999999994px;width:252.48px;height:48.873599999999996px;font-family:Spectral,serif;font-size:34.871088px;text-transform:uppercase;color:#6D5BA8;display:flex;align-items:center;justify-content:center;transform:rotate(-180deg);">Rogue</div>
+  <div style="position:absolute;left:78.71039999999999px;top:585.9935999999999px;width:202.56px;font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:11.52px;text-align:center;color:#8353A7;">Build your character deck</div>
+  <div style="position:absolute;left:53.76px;top:633.9648px;width:213.12px;font-family:Inter,sans-serif;">
+    <div style="font-size:13.44px;font-weight:600;color:#4B4B4B;">Character draft</div>
+    <div style="font-size:11.52px;color:#4B4B4B;">Draw 3, pick 1 to add to your deck</div>
+  </div>
+  <div style="position:absolute;left:53.76px;top:683.04px;font-family:Inter,sans-serif;font-size:11.52px;color:#4B4B4B;">
+    <span style="background:#623807;color:#fff;padding:1.92px 5.76px;border-radius:5.76px;font-weight:600;">Background</span> ×1
+  </div>
+  <div style="position:absolute;left:97.92px;top:973.92px;font-family:Spectral,serif;font-size:11.52px;text-transform:uppercase;color:#6D5BA8;">⁘ ROGUE | Loadout ⁘</div>
+</div></div></div></div>
+</div>
+<div id="panel-sheet" class="panel" data-w="1913.9999999999998" data-h="1479.0">
+  <h2>full-card-base.css — 3-panel character sheet</h2>
+  <div class="viewport-wrap"><div class="viewport"><div class="artboard">
+<div style="width:1913.9999999999998px;height:1479.0px;position:relative;background:#faf8f4;">
+  <div style="position:absolute;left:204.45px;top:739.5px;width:684.8349999999999px;border-top:2px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:1000.0649999999999px;top:739.5px;width:684.8349999999999px;border-top:2px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:733.12px;top:716.88px;font-family:Spectral,serif;font-size:13.919999999999998px;color:#A0A0A0;text-transform:uppercase;">Fold here</div>
+  <!-- class slot -->
+  <div style="position:absolute;left:283.03999999999996px;top:138.04px;width:419.91999999999996px;height:1202.9199999999998px;border:2px solid #C5C5C5;border-radius:13.919999999999998px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46.4px;padding:115.99999999999999px 57.419999999999995px;">
+    <div style="font-family:Spectral,serif;font-size:42.135898px;text-transform:uppercase;color:#4B4B4B;">Class</div>
+    <div style="font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:23.2px;text-align:center;color:#4B4B4B;line-height:1.35;">Fold and place your class loadout card here</div>
+  </div>
+  <!-- ancestry slot -->
+  <div style="position:absolute;left:733.12px;top:138.04px;width:419.91999999999996px;height:1202.9199999999998px;border:2px solid #C5C5C5;border-radius:13.919999999999998px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:46.4px;">
+    <div style="font-family:Spectral,serif;font-size:42.135898px;text-transform:uppercase;color:#4B4B4B;">Ancestry</div>
+    <div style="font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:23.2px;text-align:center;color:#4B4B4B;">Fold and place your ancestry card here</div>
+  </div>
+  <!-- character slot -->
+  <div style="position:absolute;left:1183.1999999999998px;top:138.04px;width:419.91999999999996px;height:1202.9199999999998px;border:2px solid #C5C5C5;border-radius:13.919999999999998px;">
+    <div style="position:absolute;left:17.98px;top:43.5px;width:383.96px;height:353.21999999999997px;border:3px solid #C5C5C5;border-radius:4.64px;"></div>
+    <div style="position:absolute;left:27.259999999999998px;top:677.4399999999999px;width:367.14px;border-top:2px solid #C5C5C5;"></div>
+    <div style="position:absolute;left:27.259999999999998px;top:684.4px;font-family:Spectral,serif;font-size:13.919999999999998px;color:#A0A0A0;text-transform:uppercase;">Character name</div>
+    <div style="position:absolute;left:27.259999999999998px;top:770.8199999999999px;font-family:Spectral,serif;font-size:23.2px;text-transform:uppercase;">Appearance</div>
+    <div style="position:absolute;left:27.259999999999998px;top:800.4px;font-family:Inter,sans-serif;font-size:13.919999999999998px;color:#4B4B4B;">Choose one for each, or write your own:</div>
+  </div>
+</div></div></div></div>
+  <p class="hint">Wide artboard (3300×2550 in Figma). Fit width is the easiest way to read panel labels.</p>
+</div>
+<script>
+(function() {
+  let zoom = 1;
+  let activePanel = document.querySelector('.panel.active');
+  const label = document.getElementById('zoom-label');
+  const btns = document.querySelectorAll('.zoom-btn');
+
+  function applyZoom() {
+    if (!activePanel) return;
+    const wrap = activePanel.querySelector('.viewport-wrap');
+    const vp = activePanel.querySelector('.viewport');
+    const baseW = parseFloat(activePanel.dataset.w);
+    const baseH = parseFloat(activePanel.dataset.h);
+    let z = zoom;
+    if (zoom === 'fit' && wrap) {
+      const pad = 24;
+      z = Math.min(1.5, Math.max(0.5, (wrap.clientWidth - pad) / baseW));
+    }
+    vp.style.transform = 'scale(' + z + ')';
+    vp.style.width = (baseW * z) + 'px';
+    vp.style.height = (baseH * z) + 'px';
+    label.textContent = (typeof zoom === 'number' ? Math.round(zoom * 100) : Math.round(z * 100)) + '%';
+  }
+
+  document.querySelectorAll('.tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+      btn.classList.add('active');
+      activePanel = document.getElementById('panel-' + btn.dataset.panel);
+      activePanel.classList.add('active');
+      applyZoom();
+    });
+  });
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      const v = btn.dataset.zoom;
+      zoom = v === 'fit' ? 'fit' : parseFloat(v);
+      applyZoom();
+    });
+  });
+
+  window.addEventListener('resize', applyZoom);
+  applyZoom();
+})();
+</script>
+</body>
+</html>
