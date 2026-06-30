@@ -144,12 +144,11 @@ Choose one:
 
 ```
 [Flavor — 1 line, italic]
-[anc-freq] Once per Scene
-[React callout — anc-callout-react, violet rail]
-When [condition], React with a Snap Check:
+[React] When [condition],
+Snap Check
 **Verb** — … (×3)
 1–3 Fails · 4–8 Choose 1 · 9+ Choose 2
-[Mill] — At scene start, you may discard this to draw 1.
+[Mill icon — bottom right]
 ```
 
 **Rules:** Same bands and **9+ synergy** as Framework D. **All Backgrounds are React.** Every Background carries **[Mill]** so players can swap at scene start when the fiction doesn't call for it.

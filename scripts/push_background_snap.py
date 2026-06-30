@@ -20,7 +20,7 @@ def main() -> None:
     batch = json.loads(BATCH_OUT.read_text(encoding="utf-8"))
     for item in batch:
         html = item.get("HTML", "")
-        if "anc-callout-react" not in html or "bf-mill" not in html:
+        if "bf-react-gate" not in html or "mill-float" not in html:
             raise SystemExit(f"Batch invalid: {item.get('Card_Key')}")
     print(f"Prepared {len(batch)} rows from {BATCH_OUT.name}")
     push_baserow(batch)

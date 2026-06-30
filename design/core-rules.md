@@ -256,7 +256,7 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 | **React** | 0 | Any time, in response to another player's or the GM's action |
 | **Core** | — | Always-active; face-up in Active area; never enters the deck |
 | **Instinct** | — | **Reveal** when the quality drives an **Action**; choose one path — if the GM agrees: benefit party → `[Boost 2]`, or hinder → **Draw 2** |
-| **Background** | — | **Once per Scene** · **React** + Snap Check (1–3 / 4–8 / 9+) · **[Mill]** at scene start |
+| **Background** | — | **React** + Snap Check when trigger fires (card spent on play) · **[Mill]** at scene start |
 | **Ancestry** | — | **Once per Scene** when its fictional trigger fires; **Snap Check** (shared bands: 1–3 fail · 4–8 choose 1 · 9+ choose 2). Act or React per card. |
 | **Bond** | — | Find the moment; you and the named person each gain `[Boost 1]` |
 

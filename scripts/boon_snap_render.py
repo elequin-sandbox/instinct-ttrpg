@@ -4,6 +4,28 @@ from __future__ import annotations
 Option = tuple[str, str]
 
 
+def render_bg_react_gate(react_condition: str) -> str:
+    """Background trigger: [React] pill + when-line (no Once per Scene)."""
+    return (
+        '<div class="bf-react-gate">'
+        '<span class="cap cap-react-gate">React</span>'
+        f'<span class="bf-react-when"> When {react_condition},</span>'
+        "</div>"
+    )
+
+
+def render_snap_intro() -> str:
+    return '<div class="snap-intro">Snap Check</div>'
+
+
+def render_mill_float() -> str:
+    return (
+        '<div class="mill-float" title="At scene start, you may discard this to draw 1.">'
+        '<span class="kw kw-mill">Mill</span>'
+        "</div>"
+    )
+
+
 def render_react_trigger(react_condition: str) -> str:
     body = (
         f"When {react_condition}, "

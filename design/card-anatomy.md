@@ -156,12 +156,10 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 
 **Background** *(Snap Check + Mill — locked June 2026; proof: `background-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
-- **Once per Scene** — muted label (`anc-freq`) above the callout
-- **React callout** (`anc-callout-react`): *When [condition], **React** with a **Snap Check**:*
-- **Three options** — self / ally / scene vectors; combinable on **9+**
-- **Snap bands** — compact footer: **1–3** Fails · **4–8** Choose 1 · **9+** Choose 2
-- **[Mill]** line — *At scene start, you may discard this to draw 1.*
-- Header: `Background` chip + **`React`** · No Origin stem · ★ pip
+- **React gate** — `[React]` pill + *When [condition],* (no Once per Scene — card is spent on play)
+- **Snap Check** intro label → three option rows → compact bands
+- **[Mill]** — small icon, bottom-right corner (tooltip: discard at scene start to draw 1)
+- Header: `Background` chip only · No Origin stem · ★ pip
 
 **Ancestry** *(Snap Check — locked June 2026; proof: `ancestry-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
