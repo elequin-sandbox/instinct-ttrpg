@@ -192,11 +192,12 @@ tactical choice — not a surprise tax.
 incoming Threat pool, leftover dice may be applied defensively to **any target, including themselves**
 — spillover is not restricted to allies.
 
-**🔒 Resolve pool (replaces Guard):** at the start of any Contest (Deadly or Social), players set up a
-**[Resolve]** layer — a temporary Hit Die pool that absorbs damage *before* the health pool. When
-Resolve is depleted, damage hits actual Hit Dice. Narrated per class (*Bard's wit worn down /
-Paladin's armor battered / Barbarian's rage fueling recklessness*). Cards that once made **Guard** now
-heal Resolve or grant rerolls — Guard is eliminated.
+**🔒 Resolve pool (replaces Guard — Guard does not exist):** at the start of any Contest (Deadly or
+Social), players set up a **[Resolve]** layer — a temporary Hit Die pool that absorbs damage *before*
+the health pool. When Resolve is depleted, damage hits actual Hit Dice. Narrated per class (*Bard's
+wit worn down / Paladin's armor battered / Barbarian's rage fueling recklessness*). **Never write
+Guard** on cards, in keywords, or as a defensive pool — **[Resolve]** is the only defensive-pool
+term. Legacy cards that granted or spent Guard are rewritten to **[Resolve]**.
 - **Setup = a Resolve check.** Players establish Resolve by rolling a check like any other (they can
   Miss or Crit on it). ⚠️ Default pool is **2d6**; exact parameters still settling (see *Open
   questions*).

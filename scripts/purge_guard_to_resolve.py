@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""Replace retired Guard mechanic with Resolve on all current cards; optional Baserow push."""
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.regenerate_card_data import effect_plain, flavor_plain, guess_class, guess_type  # noqa: E402
+from scripts.strip_origin_stems import push_baserow  # noqa: E402
+
+OUT = ROOT / "card-data.js"
+BATCH_DIR = ROOT / "scripts" / "guard_purge_batches"
+REWORK_DATE = date.today().isoformat()
+RESOLVE = '<span class="kw kw-resolve">Resolve</span>'
+
+
+def _is_false_positive(html: str, start: int, end: int) -> bool:
+    ctx = html[max(0, start - 40) : end + 40].lower()
+    if "caravan guard" in ctx or "spirit guardians" in ctx or "guarded" in ctx:
+        return True
+    # narrative fencing / prose — lowercase guard in gloss
+    snippet = html[start:end]
+    if snippet == "guard" or snippet == "Guard" and "your guard" in ctx:
+        return True
+    if "their guard drops" in ctx or "left your guard" in ctx or "behind your guard" in ctx:
+        return True
+    return False
+
+
+def purge_html(html: str) -> str:
+    if not html:
+        return html
+
+    out = html
+
+    # Legacy pills / chips
+    out = re.sub(
+        r'<span class="kw kw-guard">Guard</span>',
+        RESOLVE,
+        out,
+        flags=re.IGNORECASE,
+    )
+    out = re.sub(
+        r'<span class="kw kw-guard">(\d+)</span>',
+        RESOLVE,
+        out,
+        flags=re.IGNORECASE,
+    )
+    out = re.sub(
+        r'<span class="tp[^"]*">Guard</span>',
+        RESOLVE,
+        out,
+        flags=re.IGNORECASE,
+    )
+    out = re.sub(r"\bkw-guard\b", "kw-resolve", out, flags=re.IGNORECASE)
+
+    # Strong Guard as mechanic — skip hdr-name (card titles like Spirit Guardians are rare)
+    body_parts = re.split(r"(<div class=\"hdr-name\">.*?</div>)", out, flags=re.DOTALL)
+    for i, part in enumerate(body_parts):
+        if i % 2 == 1:
+            continue
+        body_parts[i] = re.sub(r"<strong>Guard</strong>", RESOLVE, part)
+    out = "".join(body_parts)
+
+    # Phrase-level mechanical Guard → Resolve
+    phrase_rules: list[tuple[str, str]] = [
+        (r"\bGuard dice\b", f"{RESOLVE} dice"),
+        (r"\bGuard pool\b", f"{RESOLVE} pool"),
+        (r"\bGuard roll\b", f"{RESOLVE} roll"),
+        (r"\bGrant Guard\b", f"Grant {RESOLVE}"),
+        (r"\bgrant Guard\b", f"grant {RESOLVE}"),
+        (r"\bgain (\d+) Guard\b", rf"gain \1 {RESOLVE}"),
+        (r"\bgain Guard\b", f"gain {RESOLVE}"),
+        (r"\blose Guard\b", f"lose {RESOLVE}"),
+        (r"\bspend Guard\b", f"spend {RESOLVE}"),
+        (r"\badd Guard\b", f"add {RESOLVE}"),
+        (r"\byour Guard pool\b", f"your {RESOLVE} pool"),
+        (r"\byour Guard dice\b", f"your {RESOLVE} dice"),
+        (r"\bevery Guard\b", f"every {RESOLVE}"),
+    ]
+    for pat, repl in phrase_rules:
+        out = re.sub(pat, repl, out)
+
+    return out
+
+
+def has_mechanical_guard(html: str) -> bool:
+    if re.search(r"kw-guard|kw kw-guard", html, re.I):
+        return True
+    if re.search(
+        r"\b(?:Guard dice|Guard pool|Grant Guard|gain \d+ Guard|lose Guard|spend Guard|add Guard)\b",
+        re.sub(r"<[^>]+>", " ", html),
+    ):
+        return True
+    if re.search(r"<strong>Guard</strong>", html):
+        parts = re.split(r'<div class="hdr-name">.*?</div>', html, flags=re.DOTALL)
+        return any("<strong>Guard</strong>" in p for p in parts[1:])
+    return False
+
+
+def patch_card_data(sync_all: bool) -> tuple[list[dict], list[dict]]:
+    text = OUT.read_text(encoding="utf-8")
+    m = re.search(r"window\.CARD_DATA\s*=\s*", text)
+    if not m:
+        raise SystemExit("CARD_DATA assignment not found")
+    cards = json.loads(text[m.end() :].strip().rstrip(";"))
+    batch: list[dict] = []
+
+    for card in cards:
+        if card.get("Status") != "current":
+            continue
+        old_html = card.get("HTML", "")
+        new_html = purge_html(old_html)
+        changed = new_html != old_html
+        if not changed and not sync_all:
+            continue
+        if new_html != old_html:
+            card["HTML"] = new_html
+            card["Last_Rework_Date"] = REWORK_DATE
+            card["FlavorText_Plain"] = flavor_plain(new_html)
+            card["EffectText_Plain"] = effect_plain(new_html)
+            card["Card_Type"] = guess_type(new_html) or card.get("Card_Type", "")
+            card["Class"] = guess_class(new_html) or card.get("Class", "any")
+        batch.append(
+            {
+                "id": card["id"],
+                "HTML": card["HTML"],
+                "Name": card["Name"],
+                "Card_Key": card["Card_Key"],
+                "Last_Rework_Date": card.get("Last_Rework_Date", REWORK_DATE),
+            }
+        )
+
+    cards_sorted = sorted(cards, key=lambda c: c["id"])
+    header = (
+        f"// Generated by scripts/purge_guard_to_resolve.py — do not edit manually. Last updated: {REWORK_DATE}\n"
+        f"// Guard → Resolve purge\n"
+    )
+    OUT.write_text(
+        header + "window.CARD_DATA = " + json.dumps(cards_sorted, separators=(",", ":")) + ";\n",
+        encoding="utf-8",
+    )
+    return cards_sorted, batch
+
+
+def write_mcp_batches(batch: list[dict], chunk: int = 25) -> list[Path]:
+    BATCH_DIR.mkdir(parents=True, exist_ok=True)
+    paths: list[Path] = []
+    for i in range(0, len(batch), chunk):
+        part = batch[i : i + chunk]
+        path = BATCH_DIR / f"batch_{i // chunk + 1:02d}.json"
+        path.write_text(json.dumps(part, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        paths.append(path)
+    return paths
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--sync-all",
+        action="store_true",
+        help="Push all current cards (reconcile Baserow with card-data.js)",
+    )
+    parser.add_argument("--push", action="store_true", help="Push batch to Baserow API")
+    parser.add_argument("--emit-batches", action="store_true", help="Write MCP batch JSON files")
+    args = parser.parse_args()
+
+    _, batch = patch_card_data(sync_all=args.sync_all or args.emit_batches)
+    print(f"Patched {OUT.name}; {len(batch)} row(s) for Baserow")
+    for item in batch:
+        flag = " [purged]" if has_mechanical_guard(item["HTML"]) else ""
+        print(f"  row {item['id']}: {item['Card_Key']}{flag}")
+
+    if args.emit_batches and batch:
+        paths = write_mcp_batches(batch)
+        print(f"Wrote {len(paths)} batch file(s) under {BATCH_DIR}/")
+
+    if args.push and batch:
+        push_baserow(batch)
+
+
+if __name__ == "__main__":
+    main()

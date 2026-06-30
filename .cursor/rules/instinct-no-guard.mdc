@@ -1,0 +1,25 @@
+# Instinct RPG — Guard is retired; use Resolve only
+
+**Guard does not exist** in Instinct RPG. The defensive pool is **[Resolve]** — full stop.
+
+## Rule
+
+- **Never** use Guard as a game mechanic, Impact keyword, pill (`.kw-guard`), or pool name on any
+  **current** card.
+- **Always** write **[Resolve]** (`<span class="kw kw-resolve">Resolve</span>`) for defensive-pool
+  grants, spends, dice, and pools.
+- **NPC / prose guard** is fine in flavor (*a city guard*, *behind your guard*) — not the retired
+  mechanic. Do not “fix” lowercase narrative fencing language.
+
+## When auditing cards
+
+1. Run `python3 scripts/purge_guard_to_resolve.py` on `card-data.js`.
+2. Push changed rows to Baserow table **911939** via **Instinct Baserow MCP** `update_rows`.
+3. Term Audit: `design/writing-conventions.md` §5 — ~~Guard~~ → **[Resolve]**.
+
+## Card Studio / viewer
+
+- `index.html` keyword scanner maps **Resolve**, not Guard (`KWMAP`, `SCAN_RE`).
+- No `.kw-guard` CSS — use `.kw-resolve` only.
+
+Doctrine: `design/core-rules.md` (Resolve pool); archive context: `at-design-archive` A1.
