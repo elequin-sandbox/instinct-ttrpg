@@ -15,12 +15,18 @@ Only skip commit/push when Annie explicitly says:
 - **“don’t push”** / **“don’t commit”** / **“WIP”** / **“plan only”** / **“local only”**
 - Or she specifies a different git workflow (branch, PR, etc.)
 
+## Session scope (parallel chats)
+
+Cards actively designed **in the current chat** are always shipped to **`main`** (commit + push + Baserow).
+
+If `card-data.js`, Baserow, or a feature branch disagrees on **other** classes/cards not touched in this session, **assume this chat is out of date** for those — do not merge, reconcile, or push foreign-class edits from another branch unless Annie explicitly asks. Pull `origin/main` and work from there; only patch rows for the class/cards this session owns.
+
 ## No pull requests
 
 **Do not create branches or PRs** for routine work unless Annie explicitly asks for a branch or PR.
 
 Workflow:
-1. Work on **`main`** (checkout `main`, pull first if behind `origin/main`).
+1. Work on **`main`** (checkout `main`, pull or reset to `origin/main` if behind).
 2. **Stage** only files for this task. **Exclude** ephemeral artifacts:
    - `scripts/*_batch*.json`, `scripts/instinct_v1_push.json`, `scripts/instinct_old_html.json`
    - `scripts/__pycache__/`, `.env`, credentials
