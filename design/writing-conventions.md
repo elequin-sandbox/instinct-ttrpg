@@ -122,7 +122,7 @@ described in `core-rules.md`.
 
 | Don't write | Use instead / status |
 |---|---|
-| ~~Guard~~ | **[Resolve]** |
+| ~~Guard~~ | **[Resolve]** only — Guard does not exist; never a pill, keyword, or pool name on cards |
 | ~~Bolstered~~ | **[Boost]** (Boost absorbed it) |
 | ~~Strong Roll~~ | **[Crit]** |
 | ~~Rattled~~ | plain-bold narrative only — carries no mechanic |

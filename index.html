@@ -87,7 +87,6 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 /* keyword pills + bold + icons */
 .kw{display:inline-block;padding:0 5px;border-radius:3px;font-weight:700;font-size:.92em;line-height:1.5;white-space:nowrap;vertical-align:baseline;}
 .kw .ic{font-style:normal;margin-right:2px;font-weight:400;}
-.kw-guard{background:#166534;color:#F0FDF4;}
 .kw-boost{background:#0F766E;color:#CCFBF1;}
 .kw-hd{background:#7F1D1D;color:#FEE2E2;}
 .kw-act{background:#1D4ED8;color:#EFF6FF;}
@@ -1028,7 +1027,7 @@ const ACTION_TYPES=['Act','React'];
 const TYPE_PALETTE={'Background':'#6aa0c0','Ancestry':'#bfa060','Bond':'#8aa880','Flaw':'#c87070','Instinct':'#7a90c0'};
 
 /* ---------- keyword restyle engine ---------- */
-const KWMAP={'guard':'guard','boost':'boost','hit dice':'hd','hit die':'hd',
+const KWMAP={'resolve':'resolve','boost':'boost','hit dice':'hd','hit die':'hd',
  'boon':'boon','boons':'boon','bane':'bane','banes':'bane',
  'condition':'cond','conditions':'cond','status':'status','statuses':'status',
  'act':'act','acts':'act','react':'react','reacts':'react'};
@@ -1073,7 +1072,7 @@ function inSkip(node){
   }
   return false;
 }
-const SCAN_RE=/\b(Hit Dice|Hit Die|Guard|Boost|Boons?|Banes?|Conditions?|Statuses|Status|Acts?|Reacts?)\b/gi;
+const SCAN_RE=/\b(Hit Dice|Hit Die|Resolve|Boost|Boons?|Banes?|Conditions?|Statuses|Status|Acts?|Reacts?)\b/gi;
 function scanText(bodyEl){
   if(!bodyEl) return;
   const walker=document.createTreeWalker(bodyEl,NodeFilter.SHOW_TEXT,null);
