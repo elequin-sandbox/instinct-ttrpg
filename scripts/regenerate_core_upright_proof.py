@@ -52,6 +52,9 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 .ribbon-text{display:flex;align-items:center;justify-content:center;height:24px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--a);}
 
 .public-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 40px);gap:8px;padding:8px;}
+/* On flat die: public half prints upside-down — folding flips it right-side up for the table */
+.double-die .die-public .public-hero{transform:rotate(180deg);}
+.double-die .die-public .half-tag{transform:rotate(180deg);display:inline-block;}
 .public-name{font-family:'Spectral',serif;font-size:28px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);line-height:1.1;text-align:center;}
 .public-icon{display:flex;align-items:center;justify-content:center;opacity:.85;}
 .char-public-name{font-size:24px;text-transform:none;letter-spacing:.02em;}
@@ -142,7 +145,7 @@ def main() -> None:
 <div class="rule-box">
 <strong>Fixes from your notes:</strong><br>
 • Private half embeds the <strong>real 2.5″×3.5″ card</strong> — same as every other ability card.<br>
-• Public half shows class name <strong>once</strong> + icon — no duplicate ribbon or second label.
+• Public half on the <strong>flat die</strong> is rotated 180° — prints upside-down so it reads correctly across the table after folding.
 • Public text oriented <strong>right-side up for across-the-table</strong> readers.<br>
 • <strong>Icon</strong> under class name on public face.<br>
 • Full double-tall <strong>Ancestry</strong> + <strong>Character</strong> dies included.<br>
