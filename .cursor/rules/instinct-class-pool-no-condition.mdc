@@ -1,0 +1,32 @@
+# Instinct RPG — No Condition cards in class pools
+
+**Class ability decks** (Act, React, Core, and any future class-scoped ability types) must **never**
+use the **Condition** index subtype again.
+
+## Rule
+
+- **Forbidden in class pools:** header badge `Condition`, `Card_Type: Condition`, or any card framed
+  as a persistent “condition” subtype in a class deck.
+- **Allowed elsewhere:** Boon-family cards, Instincts, and other non-class scopes may still use
+  whatever anatomy their type requires — this rule targets **class ability pools only**.
+
+## While-in-hand passives (the replacement pattern)
+
+Ongoing “while this card is in hand” abilities belong in class pools as **Ability** cards with:
+
+1. **Flavor** opening `While in hand: …` (present tense, one sentence).
+2. **Single `Ability` header cap** — second cap slot empty (`<span></span>`), **not** `Condition`.
+3. **Fiction-first effect** — lateral utility and table narration, not dice-tutorial text.
+
+Reference: Rogue *In the Shadows*, Barbarian *Frenzy*, Warlock *Hungering Darkness* use the same
+*while in hand* pattern but retain a `Condition` badge from an older pass — **do not copy that badge
+for new or reworked class cards.**
+
+## When editing existing class cards
+
+If you touch a class ability card that still shows `Condition` in HTML or Baserow:
+
+1. Remove the `Condition` cap.
+2. Rework copy toward thematic utility (see `instinct-core-card-design.mdc` for Core; ability cards
+   follow Rogue/Barbarian/Warlock voice in `design/writing-conventions.md`).
+3. Patch `card-data.js` and push Baserow table **911939**.
