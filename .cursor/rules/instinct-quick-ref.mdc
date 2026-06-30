@@ -1,0 +1,40 @@
+---
+description: Instinct RPG — At-Table Quick Reference (v2) scope and primer alignment
+globs: instinct-rpg-quick-ref*.html,index.html
+alwaysApply: false
+---
+
+# Instinct RPG — Quick Reference (v2)
+
+**Live file:** `instinct-rpg-quick-ref-v2.html` — Card Studio **Quick Ref** tab (`index.html` iframe).
+**Retired:** `instinct-rpg-quick-ref.html` (DC, Flaws, full Contest procedure — do not use).
+
+## Role vs Player Primer
+
+| Asset | When | Format |
+|-------|------|--------|
+| **Player Primer v2** | Before session — read once | Long, dark, examples + FAQ |
+| **Quick Ref v2** | During session — glance / print | Narrow (~440px), light, dense rows |
+
+Quick Ref is **lookup**, not onboarding. No chargen walkthrough, no FAQ accordion, no card samples.
+
+## Content scope
+
+**Include:** golden rule, deck/hand one-liner, Build/Roll/Read, tier base dice, Miss/Crit/Toll/Flourish,
+clear-pool rules, Aid, Boost, success vs partial, Hit Dice, card-type chips, Trigger reminder,
+conditions as shared vocabulary (GM decides), scene hand pacing.
+
+**Defer (one box only):** Resolve, Threat, Contests, Snap Check — “GM teaches when it comes up.”
+
+**Never:** DC language, Flaws, self-discard Boost, mechanical condition auto-rules, full Contest
+procedure, Scar/knockout loops unless doctrine promotes them to pre-read.
+
+## Alignment
+
+Must match `design/core-rules.md` and `instinct-rpg-primer-v2.html` rhetoric. When checks or Aid
+change, update **doctrine → primer → quick ref** in that order.
+
+## Ship
+
+Commit + push `main`. Live link:
+https://elequin-sandbox.github.io/instinct-ttrpg/instinct-rpg-quick-ref-v2.html
