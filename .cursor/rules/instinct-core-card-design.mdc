@@ -75,6 +75,7 @@ grid-template-columns: minmax(0,1fr) 22px minmax(26px,auto) 22px minmax(0,1fr);
 - **Index chips:** 22px-wide column, centered; match die column width.
 - **Phrase frame:** dotted rounded border around the whole vow block.
 - **No on-card subtitle** for Oath picks — flavor lives in doctrine / pool table only (reclaims header height).
+- **Title bar:** class `hdr-bar` — rectangular (no clip-path swallowtail); `.hdr-title` one line, shrink in Card Studio.
 
 ### Body typography (post-header, Oath baseline)
 
@@ -94,16 +95,15 @@ Scale proportionally if Annie asks for ±5%; header ribbon stays unchanged.
 
 **Scene start:** `At **Scene start**: roll 2d6 to determine your new **Vow**:`
 
-**Fulfill** (two lines — manual `<br>` after *Vow*):
+**Fulfill:**
 
-> If any **Action** fulfills your **Vow**,  
-> use these dice to **Boost** the roll.
+> When an **Action** fulfills your **Vow**, add these dice to **Boost** the roll.
 
 **Defiance** — **no subheader** (`Break Your Oath:` zone-label is retired on-card). Inline label in
 uppercase tracked sans, same line as body:
 
 > **Defiance:** Describe how you are defying your **Vow** and place these dice into your **Resolve**.
-> The GM gains **Toll 2** and must use it against you this scene.
+> The GM gains **Toll 2** to use against you.
 
 Full procedure (once/scene, GM agrees, Boost 2 from both dice) stays in `design/paladin-oath-charge.md`
 — on-card text is the **minimum**.

@@ -31,8 +31,9 @@ h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
 .hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
 .cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;line-height:1.35;}
 .cap-neutral{border-color:#3a3320;color:#3a3320;}
-.hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:15px;line-height:1.08;text-align:center;padding:3px 10px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
-.hdr-name[style*="text-align:left"]{clip-path:none;}
+.hdr-name{font-family:'EB Garamond',Georgia,serif;font-weight:700;font-size:14px;line-height:1.08;text-align:center;padding:3px 10px;margin:4px 0 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);}
+.hdr-name.hdr-bar{clip-path:none;display:flex;align-items:center;justify-content:flex-start;gap:5px;padding:3px 8px;text-align:left;min-height:22px;}
+.hdr-name.hdr-bar .hdr-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;line-height:1.08;}
 .hdr-sub{font-style:italic;font-size:9px;color:#5a4020;text-align:center;line-height:1.35;padding:0 4px 2px;}
 .zone-label{font-family:system-ui,-apple-system,sans-serif;font-size:7.5px;letter-spacing:0.8px;text-transform:uppercase;color:#5a4020;font-weight:800;}
 .rule{height:0.5px;background:#c8a96e;opacity:.45;}

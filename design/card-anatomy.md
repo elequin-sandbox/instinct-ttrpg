@@ -236,6 +236,8 @@ The whole card library was normalized to ONE structure so every card reads as th
     dual-purpose cards (e.g. Warlock Patron, flagged manually). Neutral-ink outlined capsule.
   - **Name ribbon** (`.hdr-name`): centered, EB Garamond 700, **banner ribbon** with notched ends
     (clip-path), filled with a light tint of the accent, dark accent text, accent top/bottom borders.
+    **Core cards** use rectangular `.hdr-bar` (no clip-path) — title stays one line; Card Studio shrinks
+    type as needed. Oath cards use `.hdr-bar` with **Oath of** prefix + `.hdr-title`.
     Connection's ribbon is left blank for writing the character name in (tiny faint placeholder).
   - **Subtitle** (`.hdr-sub`): italic flavor line under the name. **Exception:** Paladin **Oath** Core
     cards omit on-card subtitle — flavor lives in `design/paladin-oath-charge.md` only (print space).
