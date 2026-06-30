@@ -256,7 +256,7 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 | **React** | 0 | Any time, in response to another player's or the GM's action |
 | **Core** | — | Always-active; face-up in Active area; never enters the deck |
 | **Instinct** | — | **Reveal** when the quality drives an **Action**; choose one path — if the GM agrees: benefit party → `[Boost 2]`, or hinder → **Draw 2** |
-| **Background** | — | When its fictional trigger fires; choose-one or open-narration effect |
+| **Background** | — | **Once per Scene** · **React** + Snap Check (1–3 / 4–8 / 9+) · **[Mill]** at scene start |
 | **Ancestry** | — | **Once per Scene** when its fictional trigger fires; **Snap Check** (shared bands: 1–3 fail · 4–8 choose 1 · 9+ choose 2). Act or React per card. |
 | **Bond** | — | Find the moment; you and the named person each gain `[Boost 1]` |
 
@@ -323,7 +323,7 @@ Every word that carries a real, functional gameplay effect — the load-bearing 
 | **[Resolve]** | Player's *defensive* pool, set up at Contest start via a Resolve check. Lost before the health pool. Replaces retired Guard. |
 | **[Threat]** | The GM's *offensive* check — the **inverse of Resolve**. The damage an encounter will deal, determined by the GM from the encounter and revealed upfront. Primarily Deadly Contests; can also appear in Social Contests. |
 | **[Aid]** | Ally-only assist: discard a card, narrate how it helps another player's check (not the card's normal effect — GM agrees), add 1 die. Capped at one per check. No Self-Aid. |
-| **Mill** | Printed keyword on Item cards and React-subtype class cards only: *"At scene start, you may discard this to draw 1."* Replaces the old soft Mulligan. Not for other card types. |
+| **Mill** | *At scene start, you may discard this to draw 1.* On **Item** cards, **Background** deck cards, and React-subtype class ability cards. Replaces the old soft Mulligan.
 
 **Declared Actions** (a related mechanical set, formatted **Bold + Capitalized**, not as pills):
 **Action · Reaction · Draw · Discard · Shuffle · Cleanse · Snap Check · Scene**.
