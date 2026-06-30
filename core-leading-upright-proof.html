@@ -3,495 +3,364 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="primer-card-scope.css">
 <title>Instinct RPG — Upright Core Layout (4 classes)</title>
 <style>
-:root{--ink:#1e1810;--gold:#c8a96e;--gold-d:#7a6030;--public:#c45c5c;--private:#6b8cce;}
+:root{--gold:#c8a96e;--gold-d:#7a6030;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;padding:24px 18px 60px;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;padding:24px 18px 60px;}
 h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:980px;}
-.rule-box{max-width:980px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:28px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
+.sub,.h2-note{color:var(--gold-d);font-size:13px;line-height:1.55;max-width:980px;margin-bottom:18px;}
+.rule-box{max-width:980px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:24px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
 .rule-box strong{color:var(--gold);}
 h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:36px 0 8px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
-.h2-note{font-size:12px;color:#8a7a5a;margin-bottom:18px;line-height:1.55;max-width:980px;}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;align-items:end;}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;align-items:end;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;align-items:start;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
 .sample{display:flex;flex-direction:column;gap:8px;align-items:center;}
-.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
-.stag-sub{font-size:9px;color:#8a7a5a;font-style:italic;text-align:center;}
+.stag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
 
-/* ── shared upright tokens (Figma 750×2100 → ~200px wide) ── */
-.upright-flat,.upright-tent{--w:200px;--h:560px;font-family:'Spectral',Georgia,serif;}
-.upright-outline{position:absolute;inset:4px;border:3px solid var(--a);border-radius:10px;pointer-events:none;z-index:2;}
-.upright-fold{position:absolute;left:0;right:0;top:50%;border-top:1px dashed #999;z-index:5;display:flex;justify-content:center;}
-.fold-label{font-family:system-ui,sans-serif;font-size:7px;color:#999;background:#fff;padding:0 6px;transform:translateY(-50%);letter-spacing:.08em;text-transform:uppercase;}
+/* ── double die (2× standard card height) ── */
+.double-die{position:relative;width:2.5in;height:7in;background:var(--bg);border-radius:10px;margin:0 auto;font-family:'Spectral',Georgia,serif;}
+.die-outline{position:absolute;inset:3px;border:3px solid var(--a);border-radius:8px;pointer-events:none;z-index:3;}
+.die-fold{position:absolute;left:0;right:0;top:50%;z-index:5;border-top:1px dashed #999;display:flex;justify-content:center;}
+.die-fold span{font-size:7px;color:#999;background:#fff;padding:0 8px;transform:translateY(-50%);text-transform:uppercase;letter-spacing:.08em;}
+.die-half{position:absolute;left:3px;right:3px;height:calc(50% - 4px);overflow:hidden;}
+.die-public{top:3px;border-radius:6px 6px 0 0;}
+.die-private{bottom:3px;border-radius:0 0 6px 6px;}
+.half-tag{font-family:system-ui,sans-serif;font-size:6px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;margin:6px 8px 0;display:inline-block;border-radius:3px;}
+.public-tag{background:rgba(196,92,92,.15);color:#e8a0a0;border:1px solid rgba(196,92,92,.35);}
+.private-tag{background:rgba(107,140,206,.15);color:#a0c0e8;border:1px solid rgba(107,140,206,.35);}
 
-.ribbon-band{position:relative;height:28px;margin:0 10px;background:var(--ribbon);}
-.ribbon-cap{position:absolute;width:20px;height:20px;top:4px;background:var(--bg);transform:rotate(45deg);}
-.ribbon-cap-l{left:-10px;}.ribbon-cap-r{right:-10px;}
-.ribbon-text{display:flex;align-items:center;justify-content:center;height:28px;font-size:16px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);text-align:center;line-height:1;}
-.ribbon-text.inverted{transform:rotate(180deg);}
+.ribbon-band{position:relative;height:24px;margin:4px 12px 0;background:var(--ribbon);}
+.ribbon-band.ribbon-inv .ribbon-text{transform:rotate(180deg);}
+.ribbon-cap{position:absolute;width:16px;height:16px;top:4px;background:var(--bg);transform:rotate(45deg);}
+.ribbon-cap-l{left:-8px;}.ribbon-cap-r{right:-8px;}
+.ribbon-text{display:flex;align-items:center;justify-content:center;height:24px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--a);}
 
-.upright-subtitle{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:8.5px;line-height:1.35;text-align:center;color:var(--ad);margin:8px 14px 4px;}
-.upright-content{padding:0 14px;display:flex;flex-direction:column;gap:5px;}
-.upright-zone{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.3;color:var(--ad);text-transform:uppercase;letter-spacing:.3px;}
-.upright-body{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.45;color:#4b4b4b;}
-.upright-body.italic{font-weight:400;font-style:italic;color:var(--ad);font-size:6.5px;}
-.upright-footer{font-size:7px;text-align:center;text-transform:uppercase;color:var(--a);letter-spacing:.02em;margin-top:8px;padding-bottom:10px;}
+.public-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 40px);gap:8px;padding:8px;}
+.public-name{font-family:'Spectral',serif;font-size:28px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);line-height:1.1;text-align:center;}
+.public-icon{display:flex;align-items:center;justify-content:center;opacity:.85;}
+.char-public-name{font-size:24px;text-transform:none;letter-spacing:.02em;}
 
-.public-class-name{font-family:'Spectral',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);text-align:center;margin-top:40px;line-height:1.1;}
-.public-class-name.large{font-size:26px;margin-top:20px;}
+/* standard card in private half */
+.std-card-slot{width:2.5in;height:3.5in;margin:0 auto;overflow:hidden;}
+.std-card-slot .cardwrap{width:2.5in;margin:0;}
+.std-card-slot .card{width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;overflow:hidden;box-shadow:5px 5px 0 rgba(0,0,0,.45);}
+.std-card-slot.sm{transform:scale(.72);transform-origin:top center;height:2.52in;}
+.std-card-slot.sm .cardwrap{width:2.5in;}
 
-.face-tag{font-family:system-ui,sans-serif;font-size:6.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin:8px 10px 4px;display:inline-block;}
-.face-tag-public{background:rgba(196,92,92,.15);color:#e8a0a0;border:1px solid rgba(196,92,92,.4);}
-.face-tag-private{background:rgba(107,140,206,.15);color:#a0c0e8;border:1px solid rgba(107,140,206,.4);}
+.upright-subtitle{font-style:italic;font-weight:300;font-size:8px;text-align:center;color:var(--ad);margin:6px 12px;}
+.upright-content{padding:0 12px;font-family:Inter,sans-serif;font-size:7px;font-weight:600;line-height:1.45;color:#7D5725;}
+.upright-body{margin-bottom:4px;}
+.upright-footer{font-size:7px;text-align:center;text-transform:uppercase;color:var(--a);margin-top:6px;padding-bottom:8px;}
 
-.kw{display:inline-block;padding:0 2px;border-radius:2px;font-size:6px;font-weight:700;font-family:system-ui,sans-serif;line-height:1.35;}
-.kw-boost{background:#0F766E;color:#CCFBF1;}.kw-resolve{background:#166534;color:#F0FDF4;}
-.kw-crit{background:#B8860B;color:#FFFDE7;}.kw-hd{background:#7F1D1D;color:#FEE2E2;}
+/* character private face */
+.char-sketch-frame{margin:8px 12px;height:70px;border:2px solid #c5c5c5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
+.char-name-blank{margin:8px 12px;}
+.char-name-label{font-size:8px;color:#a0a0a0;text-transform:uppercase;letter-spacing:.04em;}
+.char-write-line{height:22px;border-bottom:2px solid #c5c5c5;margin-top:4px;}
+.char-appearance-block{padding:8px 12px;font-family:Inter,sans-serif;font-size:7px;line-height:1.5;color:#4b4b4b;}
+.char-app-title{font-family:'Spectral',serif;font-size:11px;text-transform:uppercase;margin-bottom:2px;}
+.char-app-hint{font-size:6.5px;margin-bottom:8px;color:#666;}
+.char-field{border-top:1px solid #ddd;padding:5px 0;}
+.char-field .blank{color:#999;font-style:italic;}
 
-/* ── flat unfolded die ── */
-.upright-flat{position:relative;width:var(--w);height:var(--h);background:var(--bg);border-radius:10px;margin:0 auto;}
-.flat-half{position:absolute;left:4px;right:4px;height:calc(50% - 8px);overflow:hidden;}
-.flat-half-public{top:4px;border-radius:6px 6px 0 0;}
-.flat-half-private{bottom:4px;border-radius:0 0 6px 6px;}
+/* sheet rows */
+.sheet-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:14px;max-width:680px;margin:0 auto 40px;padding:36px 14px 20px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #bbb;border-radius:10px;}
+.player-row{border-color:#6b8cce;}
+.table-row{border-color:#c45c5c;}
+.pov-note{position:absolute;top:8px;left:14px;right:14px;font-size:9px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+.player-pov{color:#6b8cce;}
+.table-pov{color:#c45c5c;}
+.sheet-cell{text-align:center;}
+.cell-tag{font-size:7px;font-weight:700;text-transform:uppercase;color:#999;margin-bottom:6px;}
+.cell-tent{display:flex;justify-content:center;min-height:160px;align-items:flex-end;}
+.cell-foot{font-size:8px;color:#666;margin-top:6px;font-style:italic;}
+.table-row .cell-foot{font-style:normal;font-weight:700;color:#444;}
 
-/* ── folded tent ── */
-.upright-tent{position:relative;width:140px;margin:0 auto;}
-.tent-cap{font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;text-align:center;margin-bottom:6px;color:#8a7a5a;}
-.tent-body{position:relative;background:var(--bg);border:3px solid var(--a);border-radius:8px 8px 4px 4px;min-height:200px;overflow:hidden;}
-.tent-roof{height:0;border-left:70px solid transparent;border-right:70px solid transparent;border-bottom:18px solid var(--a);opacity:.25;margin:0 auto;}
-.tent-face{padding:8px 6px 10px;min-height:170px;}
-.tent-face-public{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--bg),rgba(0,0,0,.03));}
-.view-public .tent-cap{color:#e8a0a0;}
-.view-player .tent-cap{color:#a0c0e8;}
+.mini-tent{width:100px;}
+.tent-panel{min-height:140px;border:2px solid var(--a,#888);border-radius:6px 6px 2px 2px;background:var(--bg,#fff);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;box-shadow:0 2px 0 rgba(0,0,0,.15);}
+.tent-public .public-name{font-size:14px;}
+.tent-public .public-icon svg{width:28px;height:28px;}
+.tent-private .std-card-slot{transform:scale(.38);transform-origin:top center;height:1.35in;}
+.mini-rules .mini-title{font-family:'Spectral',serif;font-size:11px;color:#7D5725;text-transform:uppercase;}
+.mini-rules .mini-sub{font-size:7px;color:#7D5725;margin-top:4px;line-height:1.3;}
+.mini-sketch{height:40px;width:80%;border:1px solid #ccc;border-radius:4px;margin-bottom:6px;}
+.mini-name-line{font-size:7px;color:#aaa;text-transform:uppercase;border-top:1px solid #ccc;padding-top:4px;width:80%;}
 
-/* ── character sheet row ── */
-.sheet-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:12px;max-width:720px;margin:0 auto 48px;padding:24px 16px 32px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #bbb;border-radius:10px;}
-.sheet-panel{position:relative;border:2px solid #c5c5c5;border-radius:8px;background:#fff;min-height:240px;padding:8px;}
-.panel-tag{font-family:system-ui,sans-serif;font-size:7px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#a0a0a0;text-align:center;margin-bottom:4px;}
-.panel-foot{font-size:8px;text-align:center;color:#666;margin-top:6px;font-style:italic;}
-.panel-foot.public-read{font-style:normal;font-weight:700;letter-spacing:.06em;color:var(--a,#444);}
-.sheet-card-slot{display:flex;justify-content:center;margin-top:8px;transform:scale(.85);transform-origin:top center;}
-.char-sketch-box{margin:12px;border:2px solid #c5c5c5;border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
-.char-name-line{margin:8px 12px;border-top:2px solid #c5c5c5;padding-top:6px;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
-.char-appearance{font-size:8px;color:#555;padding:8px 12px;line-height:1.6;}
-.char-name-display{font-family:'Spectral',serif;font-size:22px;text-align:center;margin-top:80px;color:#333;letter-spacing:.04em;}
-.pov-arrow{position:absolute;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
-.pov-you{bottom:-28px;color:#6b8cce;}
-.pov-them{top:-24px;color:#c45c5c;}
-.opponent-row{opacity:.95;border-color:#c45c5c;}
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-size:11px;}
-.legend span{display:inline-flex;align-items:center;gap:6px;}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;}
+
+.figma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;align-items:start;margin-bottom:32px;}
+.figma-sample{display:flex;flex-direction:column;gap:8px;align-items:center;}
+.figma-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#cbb98e;text-align:center;max-width:280px;line-height:1.4;}
+.figma-canvas{position:relative;overflow:hidden;border:1px solid #555;box-shadow:4px 4px 0 rgba(0,0,0,.4);flex-shrink:0;}
+
+/* primer overrides for proof scope */
+.scope-core .card{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;}
+.scope-core .card-body{flex:1;padding:3px 9px 26px;font-size:9px;line-height:1.45;}
+.scope-core .zone-label{font-family:'EB Garamond',serif;font-size:6px;letter-spacing:.8px;text-transform:uppercase;color:#7a6030;}
+.scope-core .effect-text{font-size:9px;line-height:1.45;}
+.scope-core .rule{height:.5px;background:#c8a96e;opacity:.45;margin:3px 0;}
+.scope-core .cbody{flex:1;padding:4px 9px 26px;font-size:9px;}
+.scope-core .flv{font-style:italic;font-size:8.5px;color:#5a4020;margin-bottom:2px;}
+.scope-core .elbl{font-size:6px;text-transform:uppercase;letter-spacing:.8px;color:#7a6030;}
+.scope-core .etxt{font-size:9px;line-height:1.45;}
+.scope-core .hr{height:.5px;background:#c8a96e;opacity:.45;margin:3px 0;}
+.scope-core .clbl{font-size:6px;text-transform:uppercase;color:#7a6030;}
+.scope-core .ci{font-size:8.5px;line-height:1.4;}
 </style>
 </head>
 <body>
-<h1>Upright Core — Layout Understanding</h1>
-<p class="sub">Four <strong>done</strong> classes only. Leading picks locked: <strong>Rage</strong> · <strong>Ace</strong> · <strong>Bulwark</strong> · <strong>Pact</strong>. This page shows my read of the Jun 27 conversation — two-sided tent cards that fold on the dashed line and stand in the character-sheet slots.</p>
+<h1>Upright Core — Layout Understanding (v2)</h1>
+<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card. Public face = class name + icon (once). Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
 
 <div class="rule-box">
-<strong>My understanding:</strong><br>
-① <strong>Two-sided die</strong> — cut/fold one tall rectangle. Fold line at mid-height.<br>
-② <strong>Private face (you)</strong> — leading Core rules: ribbon = <em>card name</em> (Rage, Ace…), subtitle, body text, footer <em>⁘ CLASS | Core ⁘</em>.<br>
-③ <strong>Public face (across the table)</strong> — big <em>CLASS</em> name only (ROGUE, BARBARIAN…). Same geometry as ancestry’s public face (DWARF, ELF).<br>
-④ <strong>Not Loadout</strong> — permanent tent; rules you reference all campaign. Loadout retired; primer owns setup.<br>
-⑤ <strong>3-panel sheet</strong> — Class slot (left) · Ancestry slot (center) · Character slot (right, name + sketch). Opponent reads left→right: Class · Ancestry · Name.
+<strong>Fixes from your notes:</strong><br>
+• Private half embeds the <strong>real 2.5″×3.5″ card</strong> — same as every other ability card.<br>
+• Public half shows class name <strong>once</strong> + icon — no duplicate ribbon or second label.
+• Public text oriented <strong>right-side up for across-the-table</strong> readers.<br>
+• <strong>Icon</strong> under class name on public face.<br>
+• Full double-tall <strong>Ancestry</strong> + <strong>Character</strong> dies included.<br>
+• Section 0 = your uploaded Figma CSS, untouched, for comparison.
 </div>
 
-<div class="legend">
-  <span><i style="background:rgba(107,140,206,.4)"></i> Private — your eyes only</span>
-  <span><i style="background:rgba(196,92,92,.4)"></i> Public — across the table</span>
+
+<section class="figma-section">
+<h2>0 — Pure Figma uploads (comparison only)</h2>
+<p class="h2-note">Your uploaded CSS files recreated at scale — <strong>no changes</strong>. Compare against sections below.</p>
+<div class="figma-grid">
+<div class="figma-sample">
+  <div class="figma-label">ancestry-card.css — Dwarf (uploaded, unmodified)</div>
+  <div class="figma-canvas" style="width:225.0px;height:630.0px">
+<div class="fig-ancestry" style="width:225.0px;height:630.0px;position:relative;background:#fff;">
+  <div style="position:absolute;left:3.9px;top:3.9px;width:217.2px;height:622.1999999999999px;border:1.2px solid #7D5725;border-radius:7.199999999999999px;box-sizing:border-box;"></div>
+  <div style="position:absolute;left:3.9px;top:252.89999999999998px;width:217.2px;height:134.346px;background:#F5F0E9;"></div>
+  <div style="position:absolute;left:0;top:315.0px;width:225.0px;border-top:1px dashed #C5C5C5;"></div>
+  <!-- ribbon bottom -->
+  <div style="position:absolute;left:26.337px;top:328.95px;width:166.488px;height:30.545999999999996px;background:#DDCBB8;"></div>
+  <div style="position:absolute;left:10.790999999999999px;top:328.95px;width:21.599999999999998px;height:21.599999999999998px;background:#DDCBB8;transform:rotate(45deg);"></div>
+  <div style="position:absolute;left:177.825px;top:328.95px;width:21.599999999999998px;height:21.599999999999998px;background:#DDCBB8;transform:rotate(45deg);"></div>
+  <div style="position:absolute;left:33.6px;top:328.95px;width:157.79999999999998px;height:30.545999999999996px;font-family:Spectral,serif;font-size:21.79443px;line-height:24.599999999999998px;letter-spacing:.04em;text-transform:uppercase;color:#7D5725;display:flex;align-items:center;justify-content:center;">Dwarf</div>
+  <!-- ribbon top inverted -->
+  <div style="position:absolute;left:26.337px;top:272.45399999999995px;width:166.488px;height:30.545999999999996px;background:#DDCBB8;transform:rotate(-180deg);"></div>
+  <div style="position:absolute;left:27.762px;top:272.45399999999995px;width:157.79999999999998px;height:30.545999999999996px;font-family:Spectral,serif;font-size:21.79443px;line-height:24.599999999999998px;letter-spacing:.04em;text-transform:uppercase;color:#7D5725;display:flex;align-items:center;justify-content:center;transform:rotate(-180deg);">Dwarf</div>
+  <div style="position:absolute;left:49.193999999999996px;top:366.546px;width:126.6px;font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:7.199999999999999px;line-height:9.6px;text-align:center;color:#7D5725;">You were carved from stone and stubbornness, and it shows</div>
+  <div style="position:absolute;left:18.531px;top:408.582px;width:185.4px;font-family:Inter,sans-serif;font-size:8.4px;font-weight:600;line-height:12.0px;color:#7D5725;">
+    <div>When a blow would stagger someone else, choose one:</div>
+    <div style="margin-top:4.8px">Absorb it — take it and stay standing; you don't let the cost show.</div>
+    <div style="margin-top:4.8px">Shake it off — make a Luck Check. On a success, your resilience turns the tide.</div>
+    <div style="margin-top:4.8px">Dig in — your refusal to be moved becomes a statement the Scene must acknowledge</div>
+  </div>
+  <div style="position:absolute;left:21.0px;top:610.1999999999999px;width:183.0px;font-family:Spectral,serif;font-size:7.199999999999999px;text-transform:uppercase;text-align:center;color:#623807;">⁘ Ancestry | action ⁘</div>
+</div></div>
 </div>
+<div class="figma-sample">
+  <div class="figma-label">loadout-card.css — Rogue (uploaded, unmodified)</div>
+  <div class="figma-canvas" style="width:225.0px;height:630.0px">
+<div style="width:225.0px;height:630.0px;position:relative;background:#fff;">
+  <div style="position:absolute;left:3.9px;top:3.9px;width:217.2px;height:622.1999999999999px;border:1.2px solid #6D5BA8;border-radius:7.199999999999999px;box-sizing:border-box;"></div>
+  <div style="position:absolute;left:3.9px;top:252.89999999999998px;width:217.2px;height:134.346px;background:#F0EFF6;"></div>
+  <div style="position:absolute;left:0;top:315.0px;width:225.0px;border-top:1px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:29.255999999999997px;top:326.84999999999997px;width:166.488px;height:30.545999999999996px;background:#CDC7E1;"></div>
+  <div style="position:absolute;left:33.6px;top:326.84999999999997px;width:157.79999999999998px;height:30.545999999999996px;font-family:Spectral,serif;font-size:21.79443px;text-transform:uppercase;color:#6D5BA8;display:flex;align-items:center;justify-content:center;">Rogue</div>
+  <div style="position:absolute;left:29.255999999999997px;top:272.45399999999995px;width:166.488px;height:30.545999999999996px;background:#CDC7E1;transform:rotate(-180deg);"></div>
+  <div style="position:absolute;left:33.6px;top:272.45399999999995px;width:157.79999999999998px;height:30.545999999999996px;font-family:Spectral,serif;font-size:21.79443px;text-transform:uppercase;color:#6D5BA8;display:flex;align-items:center;justify-content:center;transform:rotate(-180deg);">Rogue</div>
+  <div style="position:absolute;left:49.193999999999996px;top:366.246px;width:126.6px;font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:7.199999999999999px;text-align:center;color:#8353A7;">Build your character deck</div>
+  <div style="position:absolute;left:33.6px;top:396.228px;width:133.2px;font-family:Inter,sans-serif;">
+    <div style="font-size:8.4px;font-weight:600;color:#4B4B4B;">Character draft</div>
+    <div style="font-size:7.199999999999999px;color:#4B4B4B;">Draw 3, pick 1 to add to your deck</div>
+  </div>
+  <div style="position:absolute;left:33.6px;top:426.9px;font-family:Inter,sans-serif;font-size:7.199999999999999px;color:#4B4B4B;">
+    <span style="background:#623807;color:#fff;padding:1.2px 3.5999999999999996px;border-radius:3.5999999999999996px;font-weight:600;">Background</span> ×1
+  </div>
+  <div style="position:absolute;left:61.199999999999996px;top:608.6999999999999px;font-family:Spectral,serif;font-size:7.199999999999999px;text-transform:uppercase;color:#6D5BA8;">⁘ ROGUE | Loadout ⁘</div>
+</div></div>
+</div>
+<div class="figma-sample">
+  <div class="figma-label">full-card-base.css — 3-panel sheet (uploaded, unmodified)</div>
+  <div class="figma-canvas" style="width:396.0px;height:306.0px">
+<div style="width:396.0px;height:306.0px;position:relative;background:#faf8f4;">
+  <div style="position:absolute;left:42.3px;top:153.0px;width:141.69px;border-top:2px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:206.91px;top:153.0px;width:141.69px;border-top:2px dashed #C5C5C5;"></div>
+  <div style="position:absolute;left:151.68px;top:148.32px;font-family:Spectral,serif;font-size:2.88px;color:#A0A0A0;text-transform:uppercase;">Fold here</div>
+  <!-- class slot -->
+  <div style="position:absolute;left:58.559999999999995px;top:28.56px;width:86.88px;height:248.88px;border:2px solid #C5C5C5;border-radius:2.88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9.6px;padding:24.0px 11.879999999999999px;">
+    <div style="font-family:Spectral,serif;font-size:8.717772px;text-transform:uppercase;color:#4B4B4B;">Class</div>
+    <div style="font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:4.8px;text-align:center;color:#4B4B4B;line-height:1.35;">Fold and place your class loadout card here</div>
+  </div>
+  <!-- ancestry slot -->
+  <div style="position:absolute;left:151.68px;top:28.56px;width:86.88px;height:248.88px;border:2px solid #C5C5C5;border-radius:2.88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9.6px;">
+    <div style="font-family:Spectral,serif;font-size:8.717772px;text-transform:uppercase;color:#4B4B4B;">Ancestry</div>
+    <div style="font-family:Spectral,serif;font-style:italic;font-weight:300;font-size:4.8px;text-align:center;color:#4B4B4B;">Fold and place your ancestry card here</div>
+  </div>
+  <!-- character slot -->
+  <div style="position:absolute;left:244.79999999999998px;top:28.56px;width:86.88px;height:248.88px;border:2px solid #C5C5C5;border-radius:2.88px;">
+    <div style="position:absolute;left:3.7199999999999998px;top:9.0px;width:79.44px;height:73.08px;border:3px solid #C5C5C5;border-radius:0.96px;"></div>
+    <div style="position:absolute;left:5.64px;top:140.16px;width:75.96px;border-top:2px solid #C5C5C5;"></div>
+    <div style="position:absolute;left:5.64px;top:141.6px;font-family:Spectral,serif;font-size:2.88px;color:#A0A0A0;text-transform:uppercase;">Character name</div>
+    <div style="position:absolute;left:5.64px;top:159.48px;font-family:Spectral,serif;font-size:4.8px;text-transform:uppercase;">Appearance</div>
+    <div style="position:absolute;left:5.64px;top:165.6px;font-family:Inter,sans-serif;font-size:2.88px;color:#4B4B4B;">Choose one for each, or write your own:</div>
+  </div>
+</div></div>
+</div>
+</div>
+</section>
+
 
 <section>
-<h2>1 — Unfolded print die</h2>
-<p class="h2-note">Both faces visible before folding. Top half = public (class name). Bottom half = private (Core rules). Ribbon band sits on the fold line — card name on your side, class name on theirs.</p>
-<div class="grid-4"><div class="sample"><div class="stag">Rage</div><div class="stag-sub">Unfolded die</div><div class="upright-flat cls-barbarian" style="--a:#9E2B2B;--ad:#822323;--bg:#F5EDE4;--ribbon:#E8C4A8">
-  <div class="upright-outline"></div>
-  <div class="upright-fold"><span class="fold-label">fold here</span></div>
-  <div class="flat-half flat-half-public">
-      <div class="face-tag face-tag-public">Public face — across the table sees this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text inverted">BARBARIAN</div>
-    </div>
-      <div class="public-class-name">BARBARIAN</div>
-    </div>
-  <div class="flat-half flat-half-private">
-      <div class="face-tag face-tag-private">Private face — you read this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Rage</div>
-    </div>
-      <div class="upright-subtitle">Everything that hurts you makes you worse to face.</div>
-      <div class="upright-content"><div class="upright-zone">Fuel — Rage Pool</div>
-<div class="upright-body">When you fail a <strong>Check</strong>, place those rolled dice in your Rage pool. When you take damage, place the damage dice from each hit into your Rage pool.</div>
-<div class="upright-zone">Frenzy — 5+ Dice</div>
-<div class="upright-body">Immediately top-deck and play the top card of your deck — narrate how your rage shapes it. That <strong>Action</strong> gains <span class="kw kw-boost">Boost</span> 3. Unplayable cards generate 1 <span class="kw kw-resolve">Resolve</span>. Rage pool fully clears.</div>
-<div class="upright-zone">Spend — Retribution</div>
-<div class="upright-body">At any point, spend your entire pool for Retribution (see your second Core card).</div></div>
-      <div class="upright-footer">⁘ BARBARIAN | Core ⁘</div>
-    </div>
-</div></div><div class="sample"><div class="stag">Ace</div><div class="stag-sub">Unfolded die</div><div class="upright-flat cls-rogue" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="upright-outline"></div>
-  <div class="upright-fold"><span class="fold-label">fold here</span></div>
-  <div class="flat-half flat-half-public">
-      <div class="face-tag face-tag-public">Public face — across the table sees this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text inverted">ROGUE</div>
-    </div>
-      <div class="public-class-name">ROGUE</div>
-    </div>
-  <div class="flat-half flat-half-private">
-      <div class="face-tag face-tag-private">Private face — you read this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Ace</div>
-    </div>
-      <div class="upright-subtitle">Always one more card up the sleeve.</div>
-      <div class="upright-content"><div class="upright-zone">Effect</div>
-<div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div>
-<div class="upright-zone">Crit</div>
-<div class="upright-body italic"><strong>Draw</strong> a card instead of gaining <span class="kw kw-boost">Boost</span> 1.</div></div>
-      <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
-    </div>
-</div></div><div class="sample"><div class="stag">Bulwark</div><div class="stag-sub">Unfolded die</div><div class="upright-flat cls-paladin" style="--a:#B8860B;--ad:#976e09;--bg:#F8F3E7;--ribbon:#E7D6AC">
-  <div class="upright-outline"></div>
-  <div class="upright-fold"><span class="fold-label">fold here</span></div>
-  <div class="flat-half flat-half-public">
-      <div class="face-tag face-tag-public">Public face — across the table sees this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text inverted">PALADIN</div>
-    </div>
-      <div class="public-class-name">PALADIN</div>
-    </div>
-  <div class="flat-half flat-half-private">
-      <div class="face-tag face-tag-private">Private face — you read this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Bulwark</div>
-    </div>
-      <div class="upright-subtitle">Your armor is not equipment. It is a promise.</div>
-      <div class="upright-content"><div class="upright-zone">Always Active</div>
-<div class="upright-body">Your armor and shield are always present — no equip action required.</div>
-<div class="upright-zone">Resolve Bonus</div>
-<div class="upright-body">Add +2 directly to every <span class="kw kw-resolve">Resolve</span> roll you make.</div></div>
-      <div class="upright-footer">⁘ PALADIN | Core ⁘</div>
-    </div>
-</div></div><div class="sample"><div class="stag">Pact</div><div class="stag-sub">Unfolded die</div><div class="upright-flat cls-warlock" style="--a:#9A2B5E;--ad:#7e234d;--bg:#F5EAEF;--ribbon:#DDB7C8">
-  <div class="upright-outline"></div>
-  <div class="upright-fold"><span class="fold-label">fold here</span></div>
-  <div class="flat-half flat-half-public">
-      <div class="face-tag face-tag-public">Public face — across the table sees this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text inverted">WARLOCK</div>
-    </div>
-      <div class="public-class-name">WARLOCK</div>
-    </div>
-  <div class="flat-half flat-half-private">
-      <div class="face-tag face-tag-private">Private face — you read this</div>
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Pact</div>
-    </div>
-      <div class="upright-subtitle">Power has a price. You agreed to the terms.</div>
-      <div class="upright-content"><div class="upright-zone">Before Any Check</div>
-<div class="upright-body">Spend any number of <span class="kw kw-resolve">Resolve</span> Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div>
-<div class="upright-zone">After Any Check (Before Resolution)</div>
-<div class="upright-body">Spend any number of <span class="kw kw-hd">Hit Dice</span> from your pool to <span class="kw kw-boost">Boost</span> your roll.</div></div>
-      <div class="upright-footer">⁘ WARLOCK | Core ⁘</div>
-    </div>
+<h2>1 — Leading Core double-tall dies (4 classes)</h2>
+<p class="h2-note">Top = public (class + icon). Bottom = private (standard Core card). Fold on dashed line → stand in Class slot.</p>
+<div class="grid-4"><div class="sample"><div class="stag">Barbarian · Rage</div><div class="double-die cls-barbarian" style="--a:#9E2B2B;--bg:#F5EDE4;--ribbon:#E8C4A8">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public" style="--a:#9E2B2B;--bg:#F5EDE4;--ribbon:#E8C4A8">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero">
+    <div class="public-name">BARBARIAN</div>
+    <div class="public-icon" style="color:#9E2B2B"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 36 L24 8 L40 36"/><line x1="14" y1="28" x2="34" y2="28"/></svg></div>
+  </div>
+</div>
+  <div class="die-half die-private" style="--a:#9E2B2B;--bg:#F5EDE4">
+  <div class="half-tag private-tag">Private — you read this</div>
+  <div class="std-card-slot cls-barbarian">
+    <div class="cardwrap"><div class="scope-core cls-barbarian"><div class="card barbarian acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Core</span><span></span></div><div class="hdr-name">Rage</div><div class="hdr-sub">Everything that hurts you makes you worse to face.</div></div><div class="card-body"><div class="zone-label">Fuel — Rage Pool</div><div class="effect-text">When you fail a Check, place those rolled dice in your Rage pool. When you take damage, place the damage dice from each hit into your Rage pool.</div><div class="rule"></div><div class="zone-label">Frenzy — 5+ Dice</div><div class="effect-text">Immediately top-deck and play the top card of your deck — narrate how your rage shapes it. That <strong>Action</strong> gains <span class="kw kw-boost">Boost 3</span>. Unplayable cards generate 1 <span class="kw kw-resolve">Resolve</span>. Rage pool fully clears.</div><div class="rule"></div><div class="zone-label">Spend — Retribution</div><div class="effect-text">At any point, spend your entire pool for Retribution (see Card 2).</div></div><div class="idtag">Barbarian</div></div></div></div>
+  </div>
+</div>
+</div></div><div class="sample"><div class="stag">Rogue · Ace</div><div class="double-die cls-rogue" style="--a:#6C5BA8;--bg:#F0EFF6;--ribbon:#CDC7E1">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public" style="--a:#6C5BA8;--bg:#F0EFF6;--ribbon:#CDC7E1">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero">
+    <div class="public-name">ROGUE</div>
+    <div class="public-icon" style="color:#6C5BA8"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L38 10"/><circle cx="32" cy="16" r="4"/></svg></div>
+  </div>
+</div>
+  <div class="die-half die-private" style="--a:#6C5BA8;--bg:#F0EFF6">
+  <div class="half-tag private-tag">Private — you read this</div>
+  <div class="std-card-slot cls-rogue">
+    <div class="cardwrap"><div class="scope-core cls-rogue"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Core</span></div><div class="hdr-name">Ace</div></div><div class="cbody"><div class="flv">Always one more card up the sleeve.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost 1</span> on your next check this beat. This triggers automatically — no action required.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci"><span class="kw kw-crit">1</span> Draw a card instead of gaining <span class="kw kw-boost">Boost 1</span>.</div></div></div></div><div class="idtag">Rogue</div></div></div></div>
+  </div>
+</div>
+</div></div><div class="sample"><div class="stag">Paladin · Bulwark</div><div class="double-die cls-paladin" style="--a:#B8860B;--bg:#F8F3E7;--ribbon:#E7D6AC">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public" style="--a:#B8860B;--bg:#F8F3E7;--ribbon:#E7D6AC">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero">
+    <div class="public-name">PALADIN</div>
+    <div class="public-icon" style="color:#B8860B"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 6 L38 14 V28 C38 36 24 42 24 42 C24 42 10 36 10 28 V14 Z"/></svg></div>
+  </div>
+</div>
+  <div class="die-half die-private" style="--a:#B8860B;--bg:#F8F3E7">
+  <div class="half-tag private-tag">Private — you read this</div>
+  <div class="std-card-slot cls-paladin">
+    <div class="cardwrap"><div class="scope-core cls-paladin"><div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Core</span><span></span></div><div class="hdr-name">Bulwark</div><div class="hdr-sub">Your armor is not equipment. It is a promise.</div></div><div class="card-body"><div class="zone-label">Always Active</div><div class="effect-text">Your armor and shield are always present — no equip action required.</div><div class="rule"></div><div class="zone-label">Resolve Bonus</div><div class="effect-text">Add +2 directly to every <span class="kw kw-resolve">Resolve</span> roll you make.</div></div><div class="idtag">Paladin</div></div></div></div>
+  </div>
+</div>
+</div></div><div class="sample"><div class="stag">Warlock · Pact</div><div class="double-die cls-warlock" style="--a:#9A2B5E;--bg:#F5EAEF;--ribbon:#DDB7C8">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public" style="--a:#9A2B5E;--bg:#F5EAEF;--ribbon:#DDB7C8">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero">
+    <div class="public-name">WARLOCK</div>
+    <div class="public-icon" style="color:#9A2B5E"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="14"/><path d="M24 10 L26 20 L36 22 L26 24 L24 34 L22 24 L12 22 L22 20 Z"/></svg></div>
+  </div>
+</div>
+  <div class="die-half die-private" style="--a:#9A2B5E;--bg:#F5EAEF">
+  <div class="half-tag private-tag">Private — you read this</div>
+  <div class="std-card-slot cls-warlock">
+    <div class="cardwrap"><div class="scope-core cls-warlock"><div class="card warlock acc-warlock"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Core</span><span></span></div><div class="hdr-name">Pact</div><div class="hdr-sub">Power has a price. You agreed to the terms.</div></div><div class="card-body"><div class="zone-label">Before Any Check</div><div class="effect-text">Spend any number of <span class="kw kw-resolve">Resolve</span> Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div><div class="rule"></div><div class="zone-label">After Any Check (Before Resolution)</div><div class="effect-text">Spend any number of <span class="kw kw-hd">Hit Dice</span> from your pool to <span class="kw kw-boost">Boost</span> your roll.</div></div><div class="idtag">Warlock</div></div></div></div>
+  </div>
+</div>
 </div></div></div>
 </section>
 
 <section>
-<h2>2 — Folded tent: your side vs their side</h2>
-<p class="h2-note">After folding into a tent and standing upright. Left = what you read. Right = what faces the table.</p>
-<div class="grid-2"><div class="sample"><div class="stag">Rage</div><div class="stag-sub">Barbarian</div><div style="display:flex;gap:12px;align-items:flex-end;"><div class="upright-tent cls-barbarian view-player" style="--a:#9E2B2B;--ad:#822323;--bg:#F5EDE4;--ribbon:#E8C4A8">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Rage</div>
-    </div>
-      <div class="upright-subtitle">Everything that hurts you makes you worse to face.</div>
-      <div class="upright-content"><div class="upright-zone">Fuel — Rage Pool</div>
-<div class="upright-body">When you fail a <strong>Check</strong>, place those rolled dice in your Rage pool. When you take damage, place the damage dice from each hit into your Rage pool.</div>
-<div class="upright-zone">Frenzy — 5+ Dice</div>
-<div class="upright-body">Immediately top-deck and play the top card of your deck — narrate how your rage shapes it. That <strong>Action</strong> gains <span class="kw kw-boost">Boost</span> 3. Unplayable cards generate 1 <span class="kw kw-resolve">Resolve</span>. Rage pool fully clears.</div>
-<div class="upright-zone">Spend — Retribution</div>
-<div class="upright-body">At any point, spend your entire pool for Retribution (see your second Core card).</div></div>
-      <div class="upright-footer">⁘ BARBARIAN | Core ⁘</div>
-    </div>
+<h2>2 — Ancestry double-tall die (Dwarf)</h2>
+<p class="h2-note">Top = public (DWARF + icon). Bottom = private (ancestry action text). Same tent geometry as class card.</p>
+<div class="grid-2"><div class="sample"><div class="double-die cls-ancestry" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero">
+    <div class="public-name">DWARF</div>
+    <div class="public-icon" style="color:#7D5725"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></div>
   </div>
-</div><div class="upright-tent cls-barbarian view-public" style="--a:#9E2B2B;--ad:#822323;--bg:#F5EDE4;--ribbon:#E8C4A8">
-  <div class="tent-cap">Across the table</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-public">
-      <div class="public-class-name large">BARBARIAN</div>
-    </div>
-  </div>
-</div></div></div><div class="sample"><div class="stag">Ace</div><div class="stag-sub">Rogue</div><div style="display:flex;gap:12px;align-items:flex-end;"><div class="upright-tent cls-rogue view-player" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Ace</div>
-    </div>
-      <div class="upright-subtitle">Always one more card up the sleeve.</div>
-      <div class="upright-content"><div class="upright-zone">Effect</div>
-<div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div>
-<div class="upright-zone">Crit</div>
-<div class="upright-body italic"><strong>Draw</strong> a card instead of gaining <span class="kw kw-boost">Boost</span> 1.</div></div>
-      <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
-    </div>
-  </div>
-</div><div class="upright-tent cls-rogue view-public" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="tent-cap">Across the table</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-public">
-      <div class="public-class-name large">ROGUE</div>
-    </div>
-  </div>
-</div></div></div><div class="sample"><div class="stag">Bulwark</div><div class="stag-sub">Paladin</div><div style="display:flex;gap:12px;align-items:flex-end;"><div class="upright-tent cls-paladin view-player" style="--a:#B8860B;--ad:#976e09;--bg:#F8F3E7;--ribbon:#E7D6AC">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Bulwark</div>
-    </div>
-      <div class="upright-subtitle">Your armor is not equipment. It is a promise.</div>
-      <div class="upright-content"><div class="upright-zone">Always Active</div>
-<div class="upright-body">Your armor and shield are always present — no equip action required.</div>
-<div class="upright-zone">Resolve Bonus</div>
-<div class="upright-body">Add +2 directly to every <span class="kw kw-resolve">Resolve</span> roll you make.</div></div>
-      <div class="upright-footer">⁘ PALADIN | Core ⁘</div>
-    </div>
-  </div>
-</div><div class="upright-tent cls-paladin view-public" style="--a:#B8860B;--ad:#976e09;--bg:#F8F3E7;--ribbon:#E7D6AC">
-  <div class="tent-cap">Across the table</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-public">
-      <div class="public-class-name large">PALADIN</div>
-    </div>
-  </div>
-</div></div></div><div class="sample"><div class="stag">Pact</div><div class="stag-sub">Warlock</div><div style="display:flex;gap:12px;align-items:flex-end;"><div class="upright-tent cls-warlock view-player" style="--a:#9A2B5E;--ad:#7e234d;--bg:#F5EAEF;--ribbon:#DDB7C8">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Pact</div>
-    </div>
-      <div class="upright-subtitle">Power has a price. You agreed to the terms.</div>
-      <div class="upright-content"><div class="upright-zone">Before Any Check</div>
-<div class="upright-body">Spend any number of <span class="kw kw-resolve">Resolve</span> Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div>
-<div class="upright-zone">After Any Check (Before Resolution)</div>
-<div class="upright-body">Spend any number of <span class="kw kw-hd">Hit Dice</span> from your pool to <span class="kw kw-boost">Boost</span> your roll.</div></div>
-      <div class="upright-footer">⁘ WARLOCK | Core ⁘</div>
-    </div>
-  </div>
-</div><div class="upright-tent cls-warlock view-public" style="--a:#9A2B5E;--ad:#7e234d;--bg:#F5EAEF;--ribbon:#DDB7C8">
-  <div class="tent-cap">Across the table</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-public">
-      <div class="public-class-name large">WARLOCK</div>
-    </div>
-  </div>
-</div></div></div></div>
-</section>
-
-<section>
-<h2>3 — Your POV: 3-panel character sheet</h2>
-<p class="h2-note">Rogue example — leading Core (Ace) in Class slot, Dwarf ancestry in center, character panel right. Tents stand in the cut slots.</p>
-<div class="sheet-row">
-  <div class="sheet-panel sheet-class">
-    <div class="panel-tag">Class slot</div>
-    <div class="sheet-card-slot"><div class="upright-tent cls-rogue view-player" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Ace</div>
-    </div>
-      <div class="upright-subtitle">Always one more card up the sleeve.</div>
-      <div class="upright-content"><div class="upright-zone">Effect</div>
-<div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div>
-<div class="upright-zone">Crit</div>
-<div class="upright-body italic"><strong>Draw</strong> a card instead of gaining <span class="kw kw-boost">Boost</span> 1.</div></div>
-      <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
-    </div>
-  </div>
-</div></div>
-    <div class="panel-foot">Rogue · Ace</div>
-  </div>
-  <div class="sheet-panel sheet-ancestry">
-    <div class="panel-tag">Ancestry slot</div>
-    <div class="sheet-card-slot"><div class="upright-tent cls-ancestry view-player" style="--a:#7D5725;--ad:#623807;--bg:#F5F0E9;--ribbon:#DDCBB8">
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band"><div class="ribbon-cap ribbon-cap-l"></div><div class="ribbon-cap ribbon-cap-r"></div><div class="ribbon-text">Dwarf</div></div>
-      <div class="upright-subtitle">You were carved from stone and stubbornness.</div>
-      <div class="upright-content"><div class="upright-body">When a blow would stagger someone else, choose one: Absorb it, Shake it off, or Dig in.</div></div>
-      <div class="upright-footer">⁘ Ancestry | Action ⁘</div>
-    </div>
-  </div>
-</div></div>
-    <div class="panel-foot">Dwarf</div>
-  </div>
-  <div class="sheet-panel sheet-character">
-    <div class="panel-tag">Character</div>
-    <div class="char-sketch-box">Sketch</div>
-    <div class="char-name-line">Character name</div>
-    <div class="char-appearance">
-      <div><strong>Body:</strong> Built, Lithe…</div>
-      <div><strong>Eyes:</strong> Hard, Kind…</div>
-    </div>
-  </div>
-  <div class="pov-arrow pov-you">▼ you sit here</div>
 </div>
-</section>
-
-<section>
-<h2>4 — Across the table: what they see</h2>
-<p class="h2-note">Opponent reads your row left → right: <strong>ROGUE</strong> · <strong>DWARF</strong> · <strong>Mika</strong>. No rules text visible — only identity labels.</p>
-<div class="sheet-row opponent-row">
-  <div class="sheet-panel sheet-class">
-    <div class="sheet-card-slot"><div class="upright-tent cls-rogue view-public" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="tent-cap">Across the table</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-public">
-      <div class="public-class-name large">ROGUE</div>
+  <div class="die-half die-private ancestry-private" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+  <div class="half-tag private-tag">Private — you read this</div>
+  <div class="ribbon-band">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Dwarf</div>
     </div>
+  <div class="upright-subtitle">You were carved from stone and stubbornness, and it shows</div>
+  <div class="upright-content">
+    <div class="upright-body">When a blow would stagger someone else, choose one:</div>
+    <div class="upright-body">Absorb it — take it and stay standing; you don't let the cost show.</div>
+    <div class="upright-body">Shake it off — make a Luck Check. On a success, your resilience turns the tide.</div>
+    <div class="upright-body">Dig in — your refusal to be moved becomes a statement the Scene must acknowledge</div>
   </div>
-</div></div>
-    <div class="panel-foot public-read">ROGUE</div>
-  </div>
-  <div class="sheet-panel sheet-ancestry">
-    <div class="sheet-card-slot"><div class="upright-tent cls-ancestry view-public" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
-  <div class="tent-body"><div class="tent-roof"></div>
-  <div class="tent-face tent-face-public"><div class="public-class-name large">DWARF</div></div>
-  </div></div></div>
-    <div class="panel-foot public-read">DWARF</div>
-  </div>
-  <div class="sheet-panel sheet-character">
-    <div class="char-name-display">Mika</div>
-  </div>
-  <div class="pov-arrow pov-them">▲ their POV — reads left → right: Class · Ancestry · Name</div>
+  <div class="upright-footer">⁘ Ancestry | Action ⁘</div>
 </div>
+</div></div></div>
 </section>
 
 <section>
-<h2>5 — All four done classes (your side)</h2>
-<p class="h2-note">Leading Core tents — private face only.</p>
-<div class="grid-4"><div class="sample"><div class="upright-tent cls-barbarian view-player" style="--a:#9E2B2B;--ad:#822323;--bg:#F5EDE4;--ribbon:#E8C4A8">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Rage</div>
-    </div>
-      <div class="upright-subtitle">Everything that hurts you makes you worse to face.</div>
-      <div class="upright-content"><div class="upright-zone">Fuel — Rage Pool</div>
-<div class="upright-body">When you fail a <strong>Check</strong>, place those rolled dice in your Rage pool. When you take damage, place the damage dice from each hit into your Rage pool.</div>
-<div class="upright-zone">Frenzy — 5+ Dice</div>
-<div class="upright-body">Immediately top-deck and play the top card of your deck — narrate how your rage shapes it. That <strong>Action</strong> gains <span class="kw kw-boost">Boost</span> 3. Unplayable cards generate 1 <span class="kw kw-resolve">Resolve</span>. Rage pool fully clears.</div>
-<div class="upright-zone">Spend — Retribution</div>
-<div class="upright-body">At any point, spend your entire pool for Retribution (see your second Core card).</div></div>
-      <div class="upright-footer">⁘ BARBARIAN | Core ⁘</div>
-    </div>
+<h2>3 — Character double-tall die</h2>
+<p class="h2-note">Top = public (character name for the table). Bottom = private (sketch box + appearance blanks to fill in).</p>
+<div class="grid-2"><div class="sample"><div class="double-die cls-character" style="--a:#4B4B4B;--bg:#FFFFFF">
+  <div class="die-outline"></div>
+  <div class="die-fold"><span>fold here</span></div>
+  <div class="die-half die-public char-public" style="--a:#4B4B4B;--bg:#FFFFFF;--ribbon:#E8E8E8">
+  <div class="half-tag public-tag">Public — across the table</div>
+  <div class="public-hero char-name-hero">
+    <div class="public-name char-public-name">Nathan</div>
   </div>
-</div><div class="stag">Rage</div></div><div class="sample"><div class="upright-tent cls-rogue view-player" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Ace</div>
-    </div>
-      <div class="upright-subtitle">Always one more card up the sleeve.</div>
-      <div class="upright-content"><div class="upright-zone">Effect</div>
-<div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div>
-<div class="upright-zone">Crit</div>
-<div class="upright-body italic"><strong>Draw</strong> a card instead of gaining <span class="kw kw-boost">Boost</span> 1.</div></div>
-      <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
-    </div>
+</div>
+  <div class="die-half die-private char-private" style="--a:#4B4B4B;--bg:#FFFFFF">
+  <div class="half-tag private-tag">Private — you fill in</div>
+  <div class="char-sketch-frame">Sketch</div>
+  <div class="char-name-blank">
+    <div class="char-name-label">Character name</div>
+    <div class="char-write-line"></div>
   </div>
-</div><div class="stag">Ace</div></div><div class="sample"><div class="upright-tent cls-paladin view-player" style="--a:#B8860B;--ad:#976e09;--bg:#F8F3E7;--ribbon:#E7D6AC">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Bulwark</div>
-    </div>
-      <div class="upright-subtitle">Your armor is not equipment. It is a promise.</div>
-      <div class="upright-content"><div class="upright-zone">Always Active</div>
-<div class="upright-body">Your armor and shield are always present — no equip action required.</div>
-<div class="upright-zone">Resolve Bonus</div>
-<div class="upright-body">Add +2 directly to every <span class="kw kw-resolve">Resolve</span> roll you make.</div></div>
-      <div class="upright-footer">⁘ PALADIN | Core ⁘</div>
-    </div>
+  <div class="char-appearance-block">
+    <div class="char-app-title">Appearance</div>
+    <div class="char-app-hint">Choose one for each, or write your own:</div>
+    <div class="char-field"><strong>Body:</strong> <span class="blank">Built, Lithe, Padded, Tattooed</span></div>
+    <div class="char-field"><strong>Eyes:</strong> <span class="blank">Hard, Kind, Sharp, Sad</span></div>
+    <div class="char-field"><strong>Hair:</strong> <span class="blank">Cropped, Fancy, Shaved, Wild</span></div>
+    <div class="char-field"><strong>Clothes:</strong> <span class="blank">Flowing, Finery, Common, Scavenged</span></div>
   </div>
-</div><div class="stag">Bulwark</div></div><div class="sample"><div class="upright-tent cls-warlock view-player" style="--a:#9A2B5E;--ad:#7e234d;--bg:#F5EAEF;--ribbon:#DDB7C8">
-  <div class="tent-cap">Your side</div>
-  <div class="tent-body">
-    <div class="tent-roof"></div>
-    <div class="tent-face tent-face-private">
-      <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Pact</div>
-    </div>
-      <div class="upright-subtitle">Power has a price. You agreed to the terms.</div>
-      <div class="upright-content"><div class="upright-zone">Before Any Check</div>
-<div class="upright-body">Spend any number of <span class="kw kw-resolve">Resolve</span> Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div>
-<div class="upright-zone">After Any Check (Before Resolution)</div>
-<div class="upright-body">Spend any number of <span class="kw kw-hd">Hit Dice</span> from your pool to <span class="kw kw-boost">Boost</span> your roll.</div></div>
-      <div class="upright-footer">⁘ WARLOCK | Core ⁘</div>
-    </div>
+</div>
+</div></div></div>
+</section>
+
+<section>
+<h2>4 — Your POV — sheet layout</h2>
+<p class="h2-note">Left → right: <strong>Class · Ancestry · Character</strong>. Rogue / Ace example with Dwarf ancestry.</p>
+<div class="sheet-row player-row"><div class="pov-note player-pov">Your POV — left to right: Class · Ancestry · Character</div><div class="sheet-cell"><div class="cell-tag">Class</div><div class="cell-tent"><div class="mini-tent tent-private cls-rogue">
+  <div class="std-card-slot sm cls-rogue">
+    <div class="cardwrap"><div class="scope-core cls-rogue"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Core</span></div><div class="hdr-name">Ace</div></div><div class="cbody"><div class="flv">Always one more card up the sleeve.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost 1</span> on your next check this beat. This triggers automatically — no action required.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci"><span class="kw kw-crit">1</span> Draw a card instead of gaining <span class="kw kw-boost">Boost 1</span>.</div></div></div></div><div class="idtag">Rogue</div></div></div></div>
   </div>
-</div><div class="stag">Pact</div></div></div>
+</div></div><div class="cell-foot">Rogue · Ace</div></div><div class="sheet-cell"><div class="cell-tag">Ancestry</div><div class="cell-tent"><div class="mini-tent tent-private ancestry-mini" style="--a:#7D5725;--bg:#F5F0E9">
+  <div class="tent-panel mini-rules"><div class="mini-title">Dwarf</div><div class="mini-sub">Absorb · Shake it off · Dig in</div></div></div></div><div class="cell-foot">Dwarf</div></div><div class="sheet-cell"><div class="cell-tag">Character</div><div class="cell-tent"><div class="mini-tent tent-private char-mini"><div class="tent-panel mini-char"><div class="mini-sketch"></div><div class="mini-name-line">Character name</div></div></div></div><div class="cell-foot">Nathan</div></div></div>
+</section>
+
+<section>
+<h2>5 — Across the table</h2>
+<p class="h2-note">Column order <strong>reversed</strong>. Reads left → right: <strong>Nathan · DWARF · ROGUE</strong> — "Nathan, the Dwarf Rogue."</p>
+<div class="sheet-row table-row"><div class="pov-note table-pov">Across the table — reads left → right: <strong>Nathan, the Dwarf Rogue</strong></div><div class="sheet-cell"><div class="cell-tag">Character</div><div class="cell-tent"><div class="mini-tent tent-public char-mini"><div class="tent-panel"><div class="public-name char-public-name">Nathan</div></div></div></div><div class="cell-foot">Nathan</div></div><div class="sheet-cell"><div class="cell-tag">Ancestry</div><div class="cell-tent"><div class="mini-tent tent-public cls-ancestry" style="--a:#7D5725;--bg:#F5F0E9">
+  <div class="tent-panel"><div class="public-name">DWARF</div><div class="public-icon" style="color:#7D5725"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></div></div></div></div><div class="cell-foot">DWARF</div></div><div class="sheet-cell"><div class="cell-tag">Class</div><div class="cell-tent"><div class="mini-tent tent-public cls-rogue" style="--a:#6C5BA8;--bg:#F0EFF6">
+  <div class="tent-panel">
+    <div class="public-name">ROGUE</div>
+    <div class="public-icon" style="color:#6C5BA8"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L38 10"/><circle cx="32" cy="16" r="4"/></svg></div>
+  </div>
+</div></div><div class="cell-foot">ROGUE</div></div></div>
 </section>
 
 </body>
