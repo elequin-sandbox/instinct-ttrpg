@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate core-leading-upright-proof.html — 4 done classes, full layout visualization."""
+"""Regenerate core-leading-upright-proof.html."""
 from __future__ import annotations
 
 import sys
@@ -10,183 +10,175 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.build_core_upright_html import (  # noqa: E402
     DONE_CLASSES,
-    LEADING_CORE,
+    LEADING_KEYS,
     CLASS_THEME,
-    build_character_sheet_row,
-    build_opponent_view_row,
-    build_upright_flat,
-    build_upright_tent,
+    build_ancestry_double_die,
+    build_character_double_die,
+    build_core_double_die,
+    build_sheet_row_pov,
 )
+from scripts.build_figma_reference_html import FIGMA_CSS, figma_section_html  # noqa: E402
 
 CSS = """
-:root{--ink:#1e1810;--gold:#c8a96e;--gold-d:#7a6030;--public:#c45c5c;--private:#6b8cce;}
+:root{--gold:#c8a96e;--gold-d:#7a6030;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;padding:24px 18px 60px;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;padding:24px 18px 60px;}
 h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:980px;}
-.rule-box{max-width:980px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:28px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
+.sub,.h2-note{color:var(--gold-d);font-size:13px;line-height:1.55;max-width:980px;margin-bottom:18px;}
+.rule-box{max-width:980px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:24px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
 .rule-box strong{color:var(--gold);}
 h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:36px 0 8px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
-.h2-note{font-size:12px;color:#8a7a5a;margin-bottom:18px;line-height:1.55;max-width:980px;}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;align-items:end;}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;align-items:end;}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;align-items:start;}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
 .sample{display:flex;flex-direction:column;gap:8px;align-items:center;}
-.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
-.stag-sub{font-size:9px;color:#8a7a5a;font-style:italic;text-align:center;}
+.stag{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
 
-/* ── shared upright tokens (Figma 750×2100 → ~200px wide) ── */
-.upright-flat,.upright-tent{--w:200px;--h:560px;font-family:'Spectral',Georgia,serif;}
-.upright-outline{position:absolute;inset:4px;border:3px solid var(--a);border-radius:10px;pointer-events:none;z-index:2;}
-.upright-fold{position:absolute;left:0;right:0;top:50%;border-top:1px dashed #999;z-index:5;display:flex;justify-content:center;}
-.fold-label{font-family:system-ui,sans-serif;font-size:7px;color:#999;background:#fff;padding:0 6px;transform:translateY(-50%);letter-spacing:.08em;text-transform:uppercase;}
+/* ── double die (2× standard card height) ── */
+.double-die{position:relative;width:2.5in;height:7in;background:var(--bg);border-radius:10px;margin:0 auto;font-family:'Spectral',Georgia,serif;}
+.die-outline{position:absolute;inset:3px;border:3px solid var(--a);border-radius:8px;pointer-events:none;z-index:3;}
+.die-fold{position:absolute;left:0;right:0;top:50%;z-index:5;border-top:1px dashed #999;display:flex;justify-content:center;}
+.die-fold span{font-size:7px;color:#999;background:#fff;padding:0 8px;transform:translateY(-50%);text-transform:uppercase;letter-spacing:.08em;}
+.die-half{position:absolute;left:3px;right:3px;height:calc(50% - 4px);overflow:hidden;}
+.die-public{top:3px;border-radius:6px 6px 0 0;}
+.die-private{bottom:3px;border-radius:0 0 6px 6px;}
+.half-tag{font-family:system-ui,sans-serif;font-size:6px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:2px 6px;margin:6px 8px 0;display:inline-block;border-radius:3px;}
+.public-tag{background:rgba(196,92,92,.15);color:#e8a0a0;border:1px solid rgba(196,92,92,.35);}
+.private-tag{background:rgba(107,140,206,.15);color:#a0c0e8;border:1px solid rgba(107,140,206,.35);}
 
-.ribbon-band{position:relative;height:28px;margin:0 10px;background:var(--ribbon);}
-.ribbon-cap{position:absolute;width:20px;height:20px;top:4px;background:var(--bg);transform:rotate(45deg);}
-.ribbon-cap-l{left:-10px;}.ribbon-cap-r{right:-10px;}
-.ribbon-text{display:flex;align-items:center;justify-content:center;height:28px;font-size:16px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);text-align:center;line-height:1;}
-.ribbon-text.inverted{transform:rotate(180deg);}
+.ribbon-band{position:relative;height:24px;margin:4px 12px 0;background:var(--ribbon);}
+.ribbon-band.ribbon-inv .ribbon-text{transform:rotate(180deg);}
+.ribbon-cap{position:absolute;width:16px;height:16px;top:4px;background:var(--bg);transform:rotate(45deg);}
+.ribbon-cap-l{left:-8px;}.ribbon-cap-r{right:-8px;}
+.ribbon-text{display:flex;align-items:center;justify-content:center;height:24px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--a);}
 
-.upright-subtitle{font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:8.5px;line-height:1.35;text-align:center;color:var(--ad);margin:8px 14px 4px;}
-.upright-content{padding:0 14px;display:flex;flex-direction:column;gap:5px;}
-.upright-zone{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.3;color:var(--ad);text-transform:uppercase;letter-spacing:.3px;}
-.upright-body{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.45;color:#4b4b4b;}
-.upright-body.italic{font-weight:400;font-style:italic;color:var(--ad);font-size:6.5px;}
-.upright-footer{font-size:7px;text-align:center;text-transform:uppercase;color:var(--a);letter-spacing:.02em;margin-top:8px;padding-bottom:10px;}
+.public-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:calc(100% - 40px);gap:8px;padding:8px;}
+.public-name{font-family:'Spectral',serif;font-size:28px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);line-height:1.1;text-align:center;}
+.public-icon{display:flex;align-items:center;justify-content:center;opacity:.85;}
+.char-public-name{font-size:24px;text-transform:none;letter-spacing:.02em;}
 
-.public-class-name{font-family:'Spectral',Georgia,serif;font-size:22px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);text-align:center;margin-top:40px;line-height:1.1;}
-.public-class-name.large{font-size:26px;margin-top:20px;}
+/* standard card in private half */
+.std-card-slot{width:2.5in;height:3.5in;margin:0 auto;overflow:hidden;}
+.std-card-slot .cardwrap{width:2.5in;margin:0;}
+.std-card-slot .card{width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;overflow:hidden;box-shadow:5px 5px 0 rgba(0,0,0,.45);}
+.std-card-slot.sm{transform:scale(.72);transform-origin:top center;height:2.52in;}
+.std-card-slot.sm .cardwrap{width:2.5in;}
 
-.face-tag{font-family:system-ui,sans-serif;font-size:6.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin:8px 10px 4px;display:inline-block;}
-.face-tag-public{background:rgba(196,92,92,.15);color:#e8a0a0;border:1px solid rgba(196,92,92,.4);}
-.face-tag-private{background:rgba(107,140,206,.15);color:#a0c0e8;border:1px solid rgba(107,140,206,.4);}
+.upright-subtitle{font-style:italic;font-weight:300;font-size:8px;text-align:center;color:var(--ad);margin:6px 12px;}
+.upright-content{padding:0 12px;font-family:Inter,sans-serif;font-size:7px;font-weight:600;line-height:1.45;color:#7D5725;}
+.upright-body{margin-bottom:4px;}
+.upright-footer{font-size:7px;text-align:center;text-transform:uppercase;color:var(--a);margin-top:6px;padding-bottom:8px;}
 
-.kw{display:inline-block;padding:0 2px;border-radius:2px;font-size:6px;font-weight:700;font-family:system-ui,sans-serif;line-height:1.35;}
-.kw-boost{background:#0F766E;color:#CCFBF1;}.kw-resolve{background:#166534;color:#F0FDF4;}
-.kw-crit{background:#B8860B;color:#FFFDE7;}.kw-hd{background:#7F1D1D;color:#FEE2E2;}
+/* character private face */
+.char-sketch-frame{margin:8px 12px;height:70px;border:2px solid #c5c5c5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
+.char-name-blank{margin:8px 12px;}
+.char-name-label{font-size:8px;color:#a0a0a0;text-transform:uppercase;letter-spacing:.04em;}
+.char-write-line{height:22px;border-bottom:2px solid #c5c5c5;margin-top:4px;}
+.char-appearance-block{padding:8px 12px;font-family:Inter,sans-serif;font-size:7px;line-height:1.5;color:#4b4b4b;}
+.char-app-title{font-family:'Spectral',serif;font-size:11px;text-transform:uppercase;margin-bottom:2px;}
+.char-app-hint{font-size:6.5px;margin-bottom:8px;color:#666;}
+.char-field{border-top:1px solid #ddd;padding:5px 0;}
+.char-field .blank{color:#999;font-style:italic;}
 
-/* ── flat unfolded die ── */
-.upright-flat{position:relative;width:var(--w);height:var(--h);background:var(--bg);border-radius:10px;margin:0 auto;}
-.flat-half{position:absolute;left:4px;right:4px;height:calc(50% - 8px);overflow:hidden;}
-.flat-half-public{top:4px;border-radius:6px 6px 0 0;}
-.flat-half-private{bottom:4px;border-radius:0 0 6px 6px;}
+/* sheet rows */
+.sheet-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:14px;max-width:680px;margin:0 auto 40px;padding:36px 14px 20px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #bbb;border-radius:10px;}
+.player-row{border-color:#6b8cce;}
+.table-row{border-color:#c45c5c;}
+.pov-note{position:absolute;top:8px;left:14px;right:14px;font-size:9px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+.player-pov{color:#6b8cce;}
+.table-pov{color:#c45c5c;}
+.sheet-cell{text-align:center;}
+.cell-tag{font-size:7px;font-weight:700;text-transform:uppercase;color:#999;margin-bottom:6px;}
+.cell-tent{display:flex;justify-content:center;min-height:160px;align-items:flex-end;}
+.cell-foot{font-size:8px;color:#666;margin-top:6px;font-style:italic;}
+.table-row .cell-foot{font-style:normal;font-weight:700;color:#444;}
 
-/* ── folded tent ── */
-.upright-tent{position:relative;width:140px;margin:0 auto;}
-.tent-cap{font-size:8px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;text-align:center;margin-bottom:6px;color:#8a7a5a;}
-.tent-body{position:relative;background:var(--bg);border:3px solid var(--a);border-radius:8px 8px 4px 4px;min-height:200px;overflow:hidden;}
-.tent-roof{height:0;border-left:70px solid transparent;border-right:70px solid transparent;border-bottom:18px solid var(--a);opacity:.25;margin:0 auto;}
-.tent-face{padding:8px 6px 10px;min-height:170px;}
-.tent-face-public{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--bg),rgba(0,0,0,.03));}
-.view-public .tent-cap{color:#e8a0a0;}
-.view-player .tent-cap{color:#a0c0e8;}
+.mini-tent{width:100px;}
+.tent-panel{min-height:140px;border:2px solid var(--a,#888);border-radius:6px 6px 2px 2px;background:var(--bg,#fff);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;box-shadow:0 2px 0 rgba(0,0,0,.15);}
+.tent-public .public-name{font-size:14px;}
+.tent-public .public-icon svg{width:28px;height:28px;}
+.tent-private .std-card-slot{transform:scale(.38);transform-origin:top center;height:1.35in;}
+.mini-rules .mini-title{font-family:'Spectral',serif;font-size:11px;color:#7D5725;text-transform:uppercase;}
+.mini-rules .mini-sub{font-size:7px;color:#7D5725;margin-top:4px;line-height:1.3;}
+.mini-sketch{height:40px;width:80%;border:1px solid #ccc;border-radius:4px;margin-bottom:6px;}
+.mini-name-line{font-size:7px;color:#aaa;text-transform:uppercase;border-top:1px solid #ccc;padding-top:4px;width:80%;}
 
-/* ── character sheet row ── */
-.sheet-row{position:relative;display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:12px;max-width:720px;margin:0 auto 48px;padding:24px 16px 32px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #bbb;border-radius:10px;}
-.sheet-panel{position:relative;border:2px solid #c5c5c5;border-radius:8px;background:#fff;min-height:240px;padding:8px;}
-.panel-tag{font-family:system-ui,sans-serif;font-size:7px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#a0a0a0;text-align:center;margin-bottom:4px;}
-.panel-foot{font-size:8px;text-align:center;color:#666;margin-top:6px;font-style:italic;}
-.panel-foot.public-read{font-style:normal;font-weight:700;letter-spacing:.06em;color:var(--a,#444);}
-.sheet-card-slot{display:flex;justify-content:center;margin-top:8px;transform:scale(.85);transform-origin:top center;}
-.char-sketch-box{margin:12px;border:2px solid #c5c5c5;border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
-.char-name-line{margin:8px 12px;border-top:2px solid #c5c5c5;padding-top:6px;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
-.char-appearance{font-size:8px;color:#555;padding:8px 12px;line-height:1.6;}
-.char-name-display{font-family:'Spectral',serif;font-size:22px;text-align:center;margin-top:80px;color:#333;letter-spacing:.04em;}
-.pov-arrow{position:absolute;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;}
-.pov-you{bottom:-28px;color:#6b8cce;}
-.pov-them{top:-24px;color:#c45c5c;}
-.opponent-row{opacity:.95;border-color:#c45c5c;}
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;font-size:11px;}
-.legend span{display:inline-flex;align-items:center;gap:6px;}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;}
-"""
+""" + FIGMA_CSS
+
 
 def main() -> None:
-    # Section 1: flat unfolded dies
-    flat_cards = []
-    for cls in DONE_CLASSES:
-        d = LEADING_CORE[cls]
-        flat_cards.append(
-            f'<div class="sample"><div class="stag">{d["name"]}</div>'
-            f'<div class="stag-sub">Unfolded die</div>{build_upright_flat(cls)}</div>'
-        )
-
-    # Section 2: tent both views per class
-    tent_pairs = []
-    for cls in DONE_CLASSES:
-        d = LEADING_CORE[cls]
-        tent_pairs.append(
-            f'<div class="sample"><div class="stag">{d["name"]}</div>'
-            f'<div class="stag-sub">{CLASS_THEME[cls]["label"]}</div>'
-            f'<div style="display:flex;gap:12px;align-items:flex-end;">'
-            f'{build_upright_tent(cls, "player")}'
-            f'{build_upright_tent(cls, "public")}'
-            f"</div></div>"
-        )
-
-    # Section 3: four class tents player view
-    four_tents = []
-    for cls in DONE_CLASSES:
-        d = LEADING_CORE[cls]
-        four_tents.append(
-            f'<div class="sample">{build_upright_tent(cls, "player")}'
-            f'<div class="stag">{d["name"]}</div></div>'
-        )
+    core_dies = "".join(
+        f'<div class="sample"><div class="stag">{CLASS_THEME[c]["label"]} · {LEADING_KEYS[c].split("-")[0].title()}</div>{build_core_double_die(c)}</div>'
+        for c in DONE_CLASSES
+    )
 
     page = f"""<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="primer-card-scope.css">
 <title>Instinct RPG — Upright Core Layout (4 classes)</title>
-<style>{CSS}</style>
+<style>{CSS}
+/* primer overrides for proof scope */
+.scope-core .card{{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;}}
+.scope-core .card-body{{flex:1;padding:3px 9px 26px;font-size:9px;line-height:1.45;}}
+.scope-core .zone-label{{font-family:'EB Garamond',serif;font-size:6px;letter-spacing:.8px;text-transform:uppercase;color:#7a6030;}}
+.scope-core .effect-text{{font-size:9px;line-height:1.45;}}
+.scope-core .rule{{height:.5px;background:#c8a96e;opacity:.45;margin:3px 0;}}
+.scope-core .cbody{{flex:1;padding:4px 9px 26px;font-size:9px;}}
+.scope-core .flv{{font-style:italic;font-size:8.5px;color:#5a4020;margin-bottom:2px;}}
+.scope-core .elbl{{font-size:6px;text-transform:uppercase;letter-spacing:.8px;color:#7a6030;}}
+.scope-core .etxt{{font-size:9px;line-height:1.45;}}
+.scope-core .hr{{height:.5px;background:#c8a96e;opacity:.45;margin:3px 0;}}
+.scope-core .clbl{{font-size:6px;text-transform:uppercase;color:#7a6030;}}
+.scope-core .ci{{font-size:8.5px;line-height:1.4;}}
+</style>
 </head>
 <body>
-<h1>Upright Core — Layout Understanding</h1>
-<p class="sub">Four <strong>done</strong> classes only. Leading picks locked: <strong>Rage</strong> · <strong>Ace</strong> · <strong>Bulwark</strong> · <strong>Pact</strong>. This page shows my read of the Jun 27 conversation — two-sided tent cards that fold on the dashed line and stand in the character-sheet slots.</p>
+<h1>Upright Core — Layout Understanding (v2)</h1>
+<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card. Public face = class name + icon (once). Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
 
 <div class="rule-box">
-<strong>My understanding:</strong><br>
-① <strong>Two-sided die</strong> — cut/fold one tall rectangle. Fold line at mid-height.<br>
-② <strong>Private face (you)</strong> — leading Core rules: ribbon = <em>card name</em> (Rage, Ace…), subtitle, body text, footer <em>⁘ CLASS | Core ⁘</em>.<br>
-③ <strong>Public face (across the table)</strong> — big <em>CLASS</em> name only (ROGUE, BARBARIAN…). Same geometry as ancestry’s public face (DWARF, ELF).<br>
-④ <strong>Not Loadout</strong> — permanent tent; rules you reference all campaign. Loadout retired; primer owns setup.<br>
-⑤ <strong>3-panel sheet</strong> — Class slot (left) · Ancestry slot (center) · Character slot (right, name + sketch). Opponent reads left→right: Class · Ancestry · Name.
+<strong>Fixes from your notes:</strong><br>
+• Private half embeds the <strong>real 2.5″×3.5″ card</strong> — same as every other ability card.<br>
+• Public half shows class name <strong>once</strong> + icon — no duplicate ribbon or second label.
+• Public text oriented <strong>right-side up for across-the-table</strong> readers.<br>
+• <strong>Icon</strong> under class name on public face.<br>
+• Full double-tall <strong>Ancestry</strong> + <strong>Character</strong> dies included.<br>
+• Section 0 = your uploaded Figma CSS, untouched, for comparison.
 </div>
 
-<div class="legend">
-  <span><i style="background:rgba(107,140,206,.4)"></i> Private — your eyes only</span>
-  <span><i style="background:rgba(196,92,92,.4)"></i> Public — across the table</span>
-</div>
+{figma_section_html()}
 
 <section>
-<h2>1 — Unfolded print die</h2>
-<p class="h2-note">Both faces visible before folding. Top half = public (class name). Bottom half = private (Core rules). Ribbon band sits on the fold line — card name on your side, class name on theirs.</p>
-<div class="grid-4">{"".join(flat_cards)}</div>
+<h2>1 — Leading Core double-tall dies (4 classes)</h2>
+<p class="h2-note">Top = public (class + icon). Bottom = private (standard Core card). Fold on dashed line → stand in Class slot.</p>
+<div class="grid-4">{core_dies}</div>
 </section>
 
 <section>
-<h2>2 — Folded tent: your side vs their side</h2>
-<p class="h2-note">After folding into a tent and standing upright. Left = what you read. Right = what faces the table.</p>
-<div class="grid-2">{"".join(tent_pairs)}</div>
+<h2>2 — Ancestry double-tall die (Dwarf)</h2>
+<p class="h2-note">Top = public (DWARF + icon). Bottom = private (ancestry action text). Same tent geometry as class card.</p>
+<div class="grid-2"><div class="sample">{build_ancestry_double_die()}</div></div>
 </section>
 
 <section>
-<h2>3 — Your POV: 3-panel character sheet</h2>
-<p class="h2-note">Rogue example — leading Core (Ace) in Class slot, Dwarf ancestry in center, character panel right. Tents stand in the cut slots.</p>
-{build_character_sheet_row("rogue", "Dwarf")}
+<h2>3 — Character double-tall die</h2>
+<p class="h2-note">Top = public (character name for the table). Bottom = private (sketch box + appearance blanks to fill in).</p>
+<div class="grid-2"><div class="sample">{build_character_double_die("Nathan")}</div></div>
 </section>
 
 <section>
-<h2>4 — Across the table: what they see</h2>
-<p class="h2-note">Opponent reads your row left → right: <strong>ROGUE</strong> · <strong>DWARF</strong> · <strong>Mika</strong>. No rules text visible — only identity labels.</p>
-{build_opponent_view_row("rogue", "Mika", "Dwarf")}
+<h2>4 — Your POV — sheet layout</h2>
+<p class="h2-note">Left → right: <strong>Class · Ancestry · Character</strong>. Rogue / Ace example with Dwarf ancestry.</p>
+{build_sheet_row_pov("player", "rogue", "Nathan", "Dwarf")}
 </section>
 
 <section>
-<h2>5 — All four done classes (your side)</h2>
-<p class="h2-note">Leading Core tents — private face only.</p>
-<div class="grid-4">{"".join(four_tents)}</div>
+<h2>5 — Across the table</h2>
+<p class="h2-note">Column order <strong>reversed</strong>. Reads left → right: <strong>Nathan · DWARF · ROGUE</strong> — "Nathan, the Dwarf Rogue."</p>
+{build_sheet_row_pov("table", "rogue", "Nathan", "Dwarf")}
 </section>
 
 </body>
