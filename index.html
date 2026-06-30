@@ -1155,8 +1155,7 @@ function cardHTML(c,opts){opts=opts||{};
 }
 
 /* ---------- sort / group ---------- */
-function isLoadout(c){const m=/class="core-keyword"[^>]*>([^<]+)</.exec(c.h||'');return !!m&&m[1].trim().toUpperCase()==='LOADOUT';}
-function cardTier(c){if(isLoadout(c))return 0;if(c.s==='core')return 1;return 2;}
+function cardTier(c){if(c.s==='core')return 1;return 2;}
 function daysSince(ds){if(!ds)return null;return Math.floor((Date.now()-new Date(ds))/86400000);}
 function reworkLabel(ds){const d=daysSince(ds);if(d===null)return '';if(d<=0)return 'TODAY';if(d===1)return '1 DAY AGO';return d+' DAYS AGO';}
 function isRecentRework(c){const d=daysSince(c.rd);return d!==null&&d>=0&&d<=14;}
