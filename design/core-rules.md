@@ -400,8 +400,9 @@ system-wide truths that constrain *all* class design:
 - [Resolve] is set up at Contest start (via a Resolve check), before any cards are played.
 - [Crit] options (**Flourishes** on the played card) are declared after all dice are fully resolved; spending a Crit does not remove the die from the pool.
 
-Two examples that touch core rules directly (detail in `classes.md`): **Barbarian Frenzy** triggers at
-a Rage pool of **5+** dice (grants flat [Boost 3], then fully empties the pool); **Warlock** first
+Two examples that touch core rules directly (detail in `classes.md`): **Barbarian Frenzy** triggers when
+the Barbarian has **5+ Rage Dice** in their pool — they must play the top card of their deck; if it is an
+**Action** it gains [Boost 3], otherwise they gain [Resolve 3], then the pool clears; **Warlock** first
 Patron invocation per scene is free (Warlock chooses the Mark), later invocations cost a GM-rolled
 random Mark — and this cost must be stated **on the card itself**.
 

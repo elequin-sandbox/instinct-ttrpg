@@ -1,0 +1,20 @@
+[
+  {
+    "id": 431,
+    "Name": "Rage",
+    "Card_Key": "rage-barbarian-core",
+    "Card_Type": "Core",
+    "HTML": "<div class=\"card barbarian acc-barbarian\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Core</span><span></span></div><div class=\"hdr-name\">Rage</div><div class=\"hdr-sub\">Everything that hurts you makes you worse to face.</div></div><div class=\"card-body\"><div class=\"effect-text\">Place dice into your <strong>Rage Pool</strong> whenever you:</div><div class=\"choose-list\"><div class=\"choose-item\">Roll a <span class=\"kw kw-miss\">Miss</span> (1) during any <strong>Check</strong></div><div class=\"choose-item\">Lose a <span class=\"kw kw-hd\">Hit Die</span></div></div><div class=\"rule\"></div><div class=\"effect-text\">Whenever you have 5 or more <strong>Rage Dice</strong>, you enter a <strong>Frenzy</strong>:</div><div class=\"choose-list\"><div class=\"choose-item\">You must play the top card of your deck immediately — narrate how your rage shapes it</div><div class=\"choose-item\">If it is an <strong>Action</strong>, it gains <span class=\"kw kw-boost\">Boost 3</span>. If it is not, you gain <span class=\"kw kw-resolve\">Resolve 3</span></div><div class=\"choose-item\">Then clear your <strong>Rage Pool</strong></div></div></div><div class=\"idtag\">Barbarian</div></div>",
+    "EffectText_Plain": "Core Rage Everything that hurts you makes you worse to face. Place dice into your Rage Pool whenever you: Roll a Miss (1) during any Check; Lose a Hit Die. Whenever you have 5 or more Rage Dice, you enter a Frenzy: You must play the top card of your deck immediately — narrate how your rage shapes it. If it is an Action, it gains Boost 3. If it is not, you gain Resolve 3. Then clear your Rage Pool. Barbarian",
+    "Last_Rework_Date": "2026-06-30"
+  },
+  {
+    "id": 432,
+    "Name": "Retribution",
+    "Card_Key": "retribution-barbarian-core",
+    "Card_Type": "React",
+    "HTML": "<div class=\"card barbarian acc-barbarian\"><div class=\"hdr\"><div class=\"hdr-top\"><span style=\"display:inline-flex;gap:3px;align-items:center;\"><span class=\"cap cap-neutral\">Core</span><span class=\"cap cap-neutral\">React</span></span><span></span></div><div class=\"hdr-name\">Retribution</div><div class=\"hdr-sub\">They shouldn't have touched them.</div></div><div class=\"card-body\"><div class=\"effect-text\">After an ally suffers from a negative effect, you may play an <strong>Action</strong> as a <strong>Reaction</strong> against the source of that negative effect. Spend 3 <strong>Rage Dice</strong> and roll with <span class=\"kw kw-boost\">Boost 1</span> on the attempt.</div></div><div class=\"idtag\">Barbarian</div></div>",
+    "EffectText_Plain": "Core React Retribution They shouldn't have touched them. After an ally suffers from a negative effect, you may play an Action as a Reaction against the source of that negative effect. Spend 3 Rage Dice and roll with Boost 1 on the attempt. Barbarian",
+    "Last_Rework_Date": "2026-06-30"
+  }
+]
