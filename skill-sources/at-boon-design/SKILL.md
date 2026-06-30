@@ -118,28 +118,45 @@ Choose one:
 
 ## Framework D — Ancestry Snap Check (locked June 2026)
 
-**Use for:** All **Ancestry** deck cards only. Backgrounds keep Frameworks A–C.
+**Use for:** All **Ancestry** deck cards only.
 
 ```
 [Flavor — 1 line, italic]
-[Act callout — anc-callout-act, roman semibold]
-Once per Scene, you may take an Action to [thing] by making a Snap Check:
-— OR —
-[React callout — anc-callout-react, violet rail]
-Once per Scene, when [condition], React with a Snap Check:
-**Verb** — …
+[anc-freq] Once per Scene
+[Act or React callout]
+**Verb** — … (×3)
+1–3 Fails · 4–8 Choose 1 · 9+ Choose 2
 ```
 
 **Rules:**
 - **Once per Scene** on every Ancestry card
 - Shared bands: **1–3** fail · **4–8** choose 1 · **9+** choose 2 (requires 6 + explode)
-- Setup uses *try to* — never presuppose success
 - Options: niche fiction; **[Boost 1]** max; no rerolls, no Hit Die costs, no guaranteed success
-- **9+ synergy:** three options use **self / ally / scene** vectors — any pair should combine narratively (e.g. Orc Rush + Roar, not Rush + Hold)
-- **Act** (player spots opening) or **React** (defensive/underdog triggers — Halfling, Dwarf, Half-Orc)
+- **9+ synergy:** three options use **self / ally / scene** vectors — any pair should combine narratively
+- **Act** (player spots opening) or **React** (defensive/underdog — Halfling, Dwarf, Half-Orc)
 - Proof: `ancestry-snap-proof.html` · Builder: `scripts/build_ancestry_snap.py`
 
-**Do not** use Framework A (Luck Check) or Framework B (passive questions) on Ancestry cards.
+---
+
+## Framework E — Background Snap Check + Mill (locked June 2026)
+
+**Use for:** All **Background** deck cards. Replaces Frameworks A–C on Backgrounds.
+
+```
+[Flavor — 1 line, italic]
+[anc-freq] Once per Scene
+[React callout — anc-callout-react, violet rail]
+When [condition], React with a Snap Check:
+**Verb** — … (×3)
+1–3 Fails · 4–8 Choose 1 · 9+ Choose 2
+[Mill] — At scene start, you may discard this to draw 1.
+```
+
+**Rules:** Same bands and **9+ synergy** as Framework D. **All Backgrounds are React.** Every Background carries **[Mill]** so players can swap at scene start when the fiction doesn't call for it.
+
+Proof: `background-snap-proof.html` · Builder: `scripts/build_background_snap.py`
+
+**Do not** use Luck Check, passive question lists, or bare choose-one (no roll) on Background cards.
 
 ---
 

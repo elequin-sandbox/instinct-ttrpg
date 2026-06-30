@@ -1,0 +1,22 @@
+name: Sync Background Snap Check to Baserow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/background_snap_batch.json
+      - scripts/push_background_snap.py
+      - scripts/build_background_snap.py
+      - scripts/boon_snap_render.py
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Push Background Snap Check HTML to Baserow
+        env:
+          BASEROW_TOKEN: ${{ secrets.BASEROW_TOKEN }}
+        run: python3 scripts/push_background_snap.py

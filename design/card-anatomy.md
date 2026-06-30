@@ -154,12 +154,14 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 **Flaw** *(retired June 2026 — merged into Instinct; legacy Baserow rows only)*
 - Former anatomy: flavor · stem fill-in · Dramatic/Suppression choose-one · Dismiss/Cleanse · ✕ pip
 
-**Background**
+**Background** *(Snap Check + Mill — locked June 2026; proof: `background-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
-- Trigger (italic): the conditional situation that activates the card
-- Body — one of three variants: *Choose-one* (3 options in CRPG verb format) · *Luck-check*
-  · *Passive-question* (3 GM-answerable questions + "The GM answers honestly.")
-- No Origin stem, no writing lines (backstory write-in lives on Character sheet cards) · ★ pip
+- **Once per Scene** — muted label (`anc-freq`) above the callout
+- **React callout** (`anc-callout-react`): *When [condition], **React** with a **Snap Check**:*
+- **Three options** — self / ally / scene vectors; combinable on **9+**
+- **Snap bands** — compact footer: **1–3** Fails · **4–8** Choose 1 · **9+** Choose 2
+- **[Mill]** line — *At scene start, you may discard this to draw 1.*
+- Header: `Background` chip + **`React`** · No Origin stem · ★ pip
 
 **Ancestry** *(Snap Check — locked June 2026; proof: `ancestry-snap-proof.html`)*
 - Flavor (italic, 2nd person present): 1 sentence thematic core
