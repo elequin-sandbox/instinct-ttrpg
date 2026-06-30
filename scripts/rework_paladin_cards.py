@@ -16,6 +16,8 @@ from scripts.regenerate_card_data import effect_plain, flavor_plain, guess_class
 from scripts.strip_origin_stems import push_baserow  # noqa: E402
 
 OUT = ROOT / "card-data.js"
+PROOF_OUT = ROOT / "paladin-pool-proof.html"
+BATCH_OUT = ROOT / "scripts" / "paladin_pool_batch.json"
 REWORK_DATE = "2026-06-30"
 
 
@@ -35,8 +37,8 @@ def _c1() -> str:
     return '<span class="kw kw-crit">1</span>'
 
 
-def _crep() -> str:
-    return '<span class="kw kw-crit kw-crit-repeat" title="Each Crit">↻</span>'
+def _cloop() -> str:
+    return '<span class="kw kw-crit">1↻</span>'
 
 
 def _crit_block(*lines: str) -> str:
@@ -300,7 +302,7 @@ CARDS: dict[str, dict] = {
                 "<strong>Rattled</strong> — they cannot look away; they must answer your challenge before acting on anyone else."
             ),
             crit=_crit_block(
-                f"{_crep()} <strong>Rattled</strong> — another enemy who heard you falters, fixing on you instead."
+                f"{_cloop()} <strong>Rattled</strong> — another enemy who heard you falters, fixing on you instead."
             ),
         ),
     },
@@ -324,6 +326,29 @@ def card_obj(key: str, spec: dict, html: str) -> dict:
         "FlavorText_Plain": flavor_plain(html),
         "EffectText_Plain": effect_plain(html),
     }
+
+
+def write_proof(cards: list[dict], keys: list[str]) -> None:
+    css = (ROOT / "primer-card-scope.css").read_text(encoding="utf-8")
+    by_key = {c["Card_Key"]: c for c in cards}
+    chunks = []
+    for key in keys:
+        c = by_key[key]
+        chunks.append(
+            f'<div class="sample"><div class="stag">{c["Name"]}</div>'
+            f'<div class="cardwrap scope-ability cls-paladin">{c["HTML"]}</div></div>'
+        )
+    PROOF_OUT.write_text(
+        f"<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        f"<title>Paladin pool proof</title><style>{css}"
+        "body{{background:#0f1419;padding:24px;color:#e8eef5;font-family:system-ui,sans-serif;}}"
+        ".grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}}"
+        ".stag{{font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;"
+        "margin-bottom:8px;color:#c9b896;}}</style></head><body>"
+        "<h1>Paladin pool — narrative crit audit</h1>"
+        f'<div class="grid">{"".join(chunks)}</div></body></html>',
+        encoding="utf-8",
+    )
 
 
 def patch_card_data() -> tuple[list[dict], list[dict]]:
@@ -361,10 +386,13 @@ def patch_card_data() -> tuple[list[dict], list[dict]]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--push", action="store_true", help="Push to Baserow via API fallback")
+    parser.add_argument("--push", action="store_true", help="Push to Baserow via API")
     args = parser.parse_args()
-    _, batch = patch_card_data()
+    cards, batch = patch_card_data()
+    write_proof(cards, list(CARDS.keys()))
+    BATCH_OUT.write_text(json.dumps(batch, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Patched {len(batch)} Paladin cards in {OUT}")
+    print(f"Wrote {PROOF_OUT.name}, {BATCH_OUT.name}")
     for item in batch:
         print(f"  row {item['id']}: {item['Card_Key']} → {item['Name']}")
     if args.push:
