@@ -29,7 +29,7 @@ Mirrors Warlock **Patron** pick:
 
 1. Pool of Oath Core cards (5 prototypes + blank template for homebrew).
 2. Pick **one** — lives in **Active area** permanently.
-3. Auto cores: Loadout · Bulwark · Build Your Deck.
+3. Auto cores: leading Core (upright sheet format) · Bulwark · Build Your Deck. *(Loadout cards retired June 2026 — primer chargen replaces setup recipe.)*
 
 **Blank template:** `oath-template-paladin-core` — fill title, subtitle, verbs, nouns; procedure is pre-printed. Word slots use dashed **write-in lines** (3×2 grid, pen-sized).
 

@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<title>Instinct RPG — Leading Core Upright Proof</title>
+<style>
+:root{--ink:#1e1810;--gold:#c8a96e;--gold-d:#7a6030;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#16110a;color:#f0e6cf;min-height:100vh;padding:24px 18px 60px;}
+h1{font-size:18px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.sub{color:var(--gold-d);font-size:13px;margin-bottom:20px;line-height:1.55;max-width:960px;}
+.rule-box{max-width:960px;background:#1d140b;border:1px solid #3a2c19;border-left:4px solid var(--gold);border-radius:8px;padding:14px 16px;margin-bottom:28px;font-size:12.5px;line-height:1.55;color:#cbb98e;}
+.rule-box strong{color:var(--gold);}
+h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin:32px 0 8px;padding-bottom:6px;border-bottom:1px solid #2a1d10;}
+.h2-note{font-size:12px;color:#8a7a5a;margin-bottom:16px;line-height:1.5;max-width:960px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:28px 20px;align-items:start;}
+.sample{display:flex;flex-direction:column;gap:8px;align-items:center;}
+.stag{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#e7d6ac;text-align:center;}
+.stag-sub{font-size:9px;color:#8a7a5a;font-style:italic;text-align:center;margin-top:-4px;}
+
+/* upright card — Figma 750×2100 scaled to ~190px wide */
+.upright-card{position:relative;width:190px;height:532px;margin:0 auto;font-family:'Spectral',Georgia,serif;}
+.upright-outline{position:absolute;inset:3px 3px 3px 3px;border:2.5px solid var(--a);border-radius:8px;pointer-events:none;z-index:2;}
+.upright-fold{position:absolute;left:0;right:0;top:50%;height:0;border-top:1px dashed #c5c5c5;z-index:4;pointer-events:none;}
+.upright-half{position:absolute;left:3px;right:3px;height:calc(50% - 3px);overflow:hidden;}
+.upright-half-top{top:3px;background:var(--bg);border-radius:6px 6px 0 0;}
+.upright-half-bottom{bottom:3px;background:var(--bg);border-radius:0 0 6px 6px;}
+
+.ribbon-band{position:absolute;left:8px;right:8px;height:26px;top:50%;transform:translateY(-50%);background:var(--ribbon);}
+.ribbon-cap{position:absolute;width:18px;height:18px;top:4px;background:var(--bg);transform:rotate(45deg);}
+.ribbon-cap-l{left:-9px;}
+.ribbon-cap-r{right:-9px;}
+.ribbon-text{position:absolute;left:12px;right:12px;top:0;height:26px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--a);text-align:center;line-height:1;}
+.ribbon-text.inverted{transform:rotate(180deg);}
+
+.upright-subtitle{position:absolute;left:14px;right:14px;top:58px;font-family:'Spectral',Georgia,serif;font-style:italic;font-weight:300;font-size:8px;line-height:1.35;text-align:center;color:var(--ad);}
+.upright-content{position:absolute;left:12px;right:12px;top:88px;bottom:36px;overflow:hidden;display:flex;flex-direction:column;gap:6px;}
+.upright-zone{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.3;color:var(--ad);text-transform:uppercase;letter-spacing:.3px;}
+.upright-body{font-family:Inter,system-ui,sans-serif;font-size:7px;font-weight:600;line-height:1.45;color:#4b4b4b;}
+.upright-body.italic{font-weight:400;font-style:italic;color:var(--ad);font-size:6.5px;}
+.upright-footer{position:absolute;left:0;right:0;bottom:8px;font-size:7px;text-align:center;text-transform:uppercase;color:var(--a);letter-spacing:.02em;}
+.draft-tag{position:absolute;right:10px;bottom:22px;font-family:system-ui,sans-serif;font-size:6px;font-weight:800;letter-spacing:.5px;padding:1px 5px;border:1px solid #B8860B;color:#B8860B;border-radius:3px;background:rgba(184,134,11,.12);}
+
+.kw{display:inline-block;padding:0 2px;border-radius:2px;font-size:6px;font-weight:700;vertical-align:baseline;font-family:system-ui,sans-serif;line-height:1.35;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-crit{background:#B8860B;color:#FFFDE7;}
+
+/* character sheet demo */
+.sheet-demo{position:relative;max-width:960px;height:320px;margin:0 auto 40px;background:#f5f0e8;border:1px solid #ccc;border-radius:8px;overflow:hidden;}
+.sheet-panel{position:absolute;top:30px;bottom:30px;width:28%;border:1px solid #c5c5c5;border-radius:8px;background:#fff;}
+.sheet-class{left:4%;}
+.sheet-ancestry{left:36%;}
+.sheet-appearance{left:68%;width:28%;}
+.sheet-placeholder-label{font-family:'Spectral',serif;font-size:28px;text-align:center;color:#4b4b4b;text-transform:uppercase;letter-spacing:.04em;margin-top:80px;}
+.sheet-fold-hint{font-family:'Spectral',serif;font-style:italic;font-weight:300;font-size:11px;text-align:center;color:#4b4b4b;margin-top:20px;line-height:1.4;padding:0 20px;}
+.sheet-card-slot{position:absolute;left:50%;top:55%;transform:translate(-50%,-50%) scale(.42);transform-origin:center center;z-index:5;}
+.sheet-sketch{position:absolute;top:8px;left:50%;transform:translateX(-50%) rotate(180deg);font-size:10px;color:#a0a0a0;text-transform:uppercase;}
+.sheet-name-line{position:absolute;bottom:60px;left:10%;right:10%;border-top:2px solid #c5c5c5;padding-top:8px;font-size:9px;color:#a0a0a0;text-transform:uppercase;}
+.sheet-fold-guide{position:absolute;left:33%;right:33%;top:50%;border-top:2px dashed #c5c5c5;pointer-events:none;}
+.view-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.view-tab{font-size:11px;padding:6px 12px;border:1px solid #3a2c19;border-radius:6px;color:#cbb98e;cursor:default;}
+.view-tab.on{background:#2a1d10;border-color:var(--gold);color:var(--gold);}
+</style>
+</head>
+<body>
+<h1>Leading Core — Upright Fold Format</h1>
+<p class="sub">Prototype: one leading Core card per class in the <strong>character-sheet tent format</strong> (ancestry / loadout geometry). Replaces retired Loadout cards — folds into the Class slot on the full character sheet. <strong>Not labeled</strong> as “leading”; role is invisible at the table.</p>
+<div class="rule-box">
+<strong>Format:</strong> Fold on the dashed line → stand upright in the Class panel of the 3-panel character sheet. Ribbon shows the <strong>card name</strong> (readable right-side-up on the lower half). Footer: <em>⁘ CLASS | Core ⁘</em>. Monk + Wizard are <strong>draft concepts</strong> (no Baserow row yet).<br><br>
+<strong>Retired:</strong> All 9 Loadout Core cards removed from the game — chargen now flows from the Player Primer v2 steps only.
+</div>
+
+<section>
+<h2>Character sheet context</h2>
+<p class="h2-note">Rogue / Ace shown folded into the Class slot — ancestry and appearance panels empty for reference.</p>
+<div class="sheet-demo">
+  <div class="sheet-panel sheet-class">
+    <div class="sheet-placeholder-label">Class</div>
+    <div class="sheet-fold-hint">Fold and place your<br>leading Core card<br>here</div>
+    <div class="sheet-card-slot"><div class="upright-card cls-rogue" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#CDC7E1;--bg:#F0EFF6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Ace</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#CDC7E1;--bg:#F0EFF6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Ace</div>
+    </div>
+    <div class="upright-subtitle">You already know how this ends.</div>
+    <div class="upright-content"><div class="upright-zone">Effect</div><div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div></div>
+    <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
+    
+  </div>
+</div></div>
+  </div>
+  <div class="sheet-panel sheet-ancestry">
+    <div class="sheet-placeholder-label">Ancestry</div>
+    <div class="sheet-fold-hint">Fold and place your<br>ancestry card<br>here</div>
+  </div>
+  <div class="sheet-panel sheet-appearance">
+    <div class="sheet-sketch">Sketch</div>
+    <div class="sheet-name-line">Character name</div>
+  </div>
+  <div class="sheet-fold-guide"></div>
+</div>
+</section>
+
+<section>
+<h2>All classes — upright preview</h2>
+<p class="h2-note">Lower half is the player-facing read when the card stands in the Class slot. Upper half mirrors the ribbon (upside-down) for the tent fold.</p>
+<div class="grid">
+<div class="sample"><div class="stag">Rage</div><div class="stag-sub">Barbarian</div><div class="upright-card cls-barbarian" style="--a:#9E2B2B;--ad:#822323;--bg:#F5EDE4;--ribbon:#E8C4A8">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#E8C4A8;--bg:#F5EDE4">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Rage</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#E8C4A8;--bg:#F5EDE4">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Rage</div>
+    </div>
+    <div class="upright-subtitle">Everything that hurts you makes you worse to face.</div>
+    <div class="upright-content"><div class="upright-zone">Fuel — Rage Pool</div><div class="upright-body">When you fail a <strong>Check</strong>, place those rolled dice in your Rage pool. When you take damage, place the damage dice from each hit into your Rage pool.</div>
+<div class="upright-zone">Frenzy — 5+ Dice</div><div class="upright-body">Immediately top-deck and play the top card of your deck — narrate how your rage shapes it. That <strong>Action</strong> gains <span class="kw kw-boost">Boost</span> 3. Unplayable cards generate 1 <span class="kw kw-resolve">Resolve</span>. Rage pool fully clears.</div>
+<div class="upright-zone">Spend — Retribution</div><div class="upright-body">At any point, spend your entire pool for Retribution (see your second Core card).</div></div>
+    <div class="upright-footer">⁘ BARBARIAN | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Showstopper</div><div class="stag-sub">Bard</div><div class="upright-card cls-bard" style="--a:#B5388D;--ad:#942e74;--bg:#F8EBF4;--ribbon:#E6BBD8">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#E6BBD8;--bg:#F8EBF4">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Showstopper</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#E6BBD8;--bg:#F8EBF4">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Showstopper</div>
+    </div>
+    <div class="upright-subtitle">You make everyone else look good. Or you take the stage.</div>
+    <div class="upright-content"><div class="upright-zone">Once Per Scene — Discard 1</div><div class="upright-body">Choose one:</div>
+<div class="upright-body">Mimic — copy an ally&#x27;s <strong>Action</strong> as they perform it. You roll independently.</div>
+<div class="upright-body italic">Lead — an ally copies your <strong>Action</strong> as you perform it. They roll independently.</div></div>
+    <div class="upright-footer">⁘ BARD | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Prayer</div><div class="stag-sub">Cleric</div><div class="upright-card cls-cleric" style="--a:#5E81AC;--ad:#4d6a8d;--bg:#EFF2F7;--ribbon:#C8D4E3">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#C8D4E3;--bg:#EFF2F7">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Prayer</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#C8D4E3;--bg:#EFF2F7">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Prayer</div>
+    </div>
+    <div class="upright-subtitle">You don&#x27;t ask for power. You ask for purpose.</div>
+    <div class="upright-content"><div class="upright-zone">Each Scene — Declare Aloud</div><div class="upright-body">[Verb] the [Noun] — your petition for this <strong>Scene</strong>. All <span class="kw kw-crit">Crit</span> dice from any roll bank here (up to your Level).</div>
+<div class="upright-zone">Once Per Scene</div><div class="upright-body">Spend ALL banked dice as <span class="kw kw-boost">Boost</span> on one <strong>Action</strong> that serves your prayer. Flip this card face-down. Refreshes next <strong>Scene</strong>.</div></div>
+    <div class="upright-footer">⁘ CLERIC | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Beastform</div><div class="stag-sub">Druid</div><div class="upright-card cls-druid" style="--a:#5A7D2A;--ad:#4a6722;--bg:#EEF2EA;--ribbon:#C7D3B7">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#C7D3B7;--bg:#EEF2EA">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Beastform</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#C7D3B7;--bg:#EEF2EA">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Beastform</div>
+    </div>
+    <div class="upright-subtitle">You don&#x27;t wear another shape. You remember it.</div>
+    <div class="upright-content"><div class="upright-zone">Equip System</div><div class="upright-body">You have 3 Beastform cards chosen at creation. Equipping one unequips all others → <strong>Draw</strong> 1. Swap freely between Scenes.</div>
+<div class="upright-zone">While Equipped</div><div class="upright-body">The Kinship passive on your active Beastform is always true. Transform freely — make a <strong>Check</strong> to use a Full Form ability.</div></div>
+    <div class="upright-footer">⁘ DRUID | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Weapon Master</div><div class="stag-sub">Fighter</div><div class="upright-card cls-fighter" style="--a:#B45309;--ad:#944407;--bg:#F8EEE6;--ribbon:#E6C5AB">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#E6C5AB;--bg:#F8EEE6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Weapon Master</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#E6C5AB;--bg:#F8EEE6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Weapon Master</div>
+    </div>
+    <div class="upright-subtitle">Your hands know the weight of everything.</div>
+    <div class="upright-content"><div class="upright-zone">Passive</div><div class="upright-body">Whenever you equip any Item card into your Equip zone, <strong>Draw</strong> 1.</div>
+<div class="upright-zone">Note</div><div class="upright-body italic">Triggers on any equip — weapon, armor, or otherwise. Rewards active gear management every <strong>Scene</strong>.</div></div>
+    <div class="upright-footer">⁘ FIGHTER | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Stances</div><div class="stag-sub">Monk · draft</div><div class="upright-card cls-monk" style="--a:#164E63;--ad:#124051;--bg:#E8EDEF;--ribbon:#B0C3CA">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#B0C3CA;--bg:#E8EDEF">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Stances</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#B0C3CA;--bg:#E8EDEF">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Stances</div>
+    </div>
+    <div class="upright-subtitle">You don&#x27;t change who you are. You change how you move.</div>
+    <div class="upright-content"><div class="upright-zone">The Three Forms</div><div class="upright-body">You hold one Stance — Iron Palm, Wind Step, or Cobra. Its passive is always true while held.</div>
+<div class="upright-zone">Shift</div><div class="upright-body">At the start of your turn you may switch Stance for free. Narrate the change in your footing.</div>
+<div class="upright-zone">Note</div><div class="upright-body italic">Stances modify how your actions chain — never their damage. Chosen at creation.</div></div>
+    <div class="upright-footer">⁘ MONK | Core ⁘</div>
+    <span class="draft-tag">DRAFT</span>
+  </div>
+</div></div><div class="sample"><div class="stag">Bulwark</div><div class="stag-sub">Paladin</div><div class="upright-card cls-paladin" style="--a:#B8860B;--ad:#976e09;--bg:#F8F3E7;--ribbon:#E7D6AC">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#E7D6AC;--bg:#F8F3E7">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Bulwark</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#E7D6AC;--bg:#F8F3E7">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Bulwark</div>
+    </div>
+    <div class="upright-subtitle">Your armor is not equipment. It is a promise.</div>
+    <div class="upright-content"><div class="upright-zone">Always Active</div><div class="upright-body">Your armor and shield are always present — no equip action required.</div>
+<div class="upright-zone">Resolve Bonus</div><div class="upright-body">Add +2 directly to every <span class="kw kw-resolve">Resolve</span> roll you make.</div></div>
+    <div class="upright-footer">⁘ PALADIN | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Trapper</div><div class="stag-sub">Ranger</div><div class="upright-card cls-ranger" style="--a:#2F6B3D;--ad:#275832;--bg:#EAF0EC;--ribbon:#B8CDBD">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#B8CDBD;--bg:#EAF0EC">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Trapper</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#B8CDBD;--bg:#EAF0EC">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Trapper</div>
+    </div>
+    <div class="upright-subtitle">The best ambush is one they walk into.</div>
+    <div class="upright-content"><div class="upright-zone">Setup</div><div class="upright-body">Stow up to 2 Trap cards face-down per <strong>Scene</strong>. <strong>Draw</strong> 1 for each trap prepared.</div>
+<div class="upright-zone">Trigger</div><div class="upright-body">When a trap&#x27;s trigger condition is met, reveal the card to interrupt the triggering effect before it resolves.</div></div>
+    <div class="upright-footer">⁘ RANGER | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Ace</div><div class="stag-sub">Rogue</div><div class="upright-card cls-rogue" style="--a:#6C5BA8;--ad:#594b8a;--bg:#F0EFF6;--ribbon:#CDC7E1">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#CDC7E1;--bg:#F0EFF6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Ace</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#CDC7E1;--bg:#F0EFF6">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Ace</div>
+    </div>
+    <div class="upright-subtitle">You already know how this ends.</div>
+    <div class="upright-content"><div class="upright-zone">Effect</div><div class="upright-body">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost</span> 1 on your next check this beat. This triggers automatically — no action required.</div></div>
+    <div class="upright-footer">⁘ ROGUE | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Pact</div><div class="stag-sub">Warlock</div><div class="upright-card cls-warlock" style="--a:#9A2B5E;--ad:#7e234d;--bg:#F5EAEF;--ribbon:#DDB7C8">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#DDB7C8;--bg:#F5EAEF">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Pact</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#DDB7C8;--bg:#F5EAEF">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Pact</div>
+    </div>
+    <div class="upright-subtitle">Power has a price. You agreed to the terms.</div>
+    <div class="upright-content"><div class="upright-zone">Before Any Check</div><div class="upright-body">Spend any number of <span class="kw kw-resolve">Resolve</span> Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div>
+<div class="upright-zone">After Any Check (Before Resolution)</div><div class="upright-body">Spend any number of Hit Dice from your pool to <span class="kw kw-boost">Boost</span> your roll.</div></div>
+    <div class="upright-footer">⁘ WARLOCK | Core ⁘</div>
+    
+  </div>
+</div></div><div class="sample"><div class="stag">Prepared</div><div class="stag-sub">Wizard · draft</div><div class="upright-card cls-wizard" style="--a:#3C3489;--ad:#312b70;--bg:#ECEBF3;--ribbon:#BDBAD7">
+  <div class="upright-outline"></div>
+  <div class="upright-fold"></div>
+  <div class="upright-half upright-half-top">
+    
+    <div class="ribbon-band" style="--ribbon:#BDBAD7;--bg:#ECEBF3">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text inverted">Prepared</div>
+    </div>
+  </div>
+  <div class="upright-half upright-half-bottom">
+    
+    <div class="ribbon-band" style="--ribbon:#BDBAD7;--bg:#ECEBF3">
+      <div class="ribbon-cap ribbon-cap-l"></div>
+      <div class="ribbon-cap ribbon-cap-r"></div>
+      <div class="ribbon-text">Prepared</div>
+    </div>
+    <div class="upright-subtitle">You already know how this scene begins. You wrote it.</div>
+    <div class="upright-content"><div class="upright-zone">Before the Scene</div><div class="upright-body">Set 1 Act card from your hand Prepared, face-up in your Active area. It holds no hand slot while Prepared.</div>
+<div class="upright-zone">Cast</div><div class="upright-body">Play your Prepared card at any moment without drawing it — even out of turn. Then Prepare nothing until the next scene.</div>
+<div class="upright-zone">Study</div><div class="upright-body italic">When you search your deck, you may immediately Prepare the card you find.</div></div>
+    <div class="upright-footer">⁘ WIZARD | Core ⁘</div>
+    <span class="draft-tag">DRAFT</span>
+  </div>
+</div></div>
+</div>
+</section>
+</body>
+</html>
