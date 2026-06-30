@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="primer-card-scope.css">
-<title>Instinct RPG — Upright Core Layout (4 classes)</title>
+<title>Instinct RPG — Upright Core Layout (v3)</title>
 <style>
 :root{--gold:#c8a96e;--gold-d:#7a6030;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -92,6 +92,47 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 .mini-sketch{height:40px;width:80%;border:1px solid #ccc;border-radius:4px;margin-bottom:6px;}
 .mini-name-line{font-size:7px;color:#aaa;text-transform:uppercase;border-top:1px solid #ccc;padding-top:4px;width:80%;}
 
+/* boon / ancestry / background — match Card Studio */
+.format-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:start;margin-bottom:8px;}
+.scope-boon .card,.scope-boon .cardwrap .card{width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;display:flex;flex-direction:column;overflow:hidden;font-family:system-ui,-apple-system,sans-serif;color:#241a08;box-shadow:5px 5px 0 rgba(0,0,0,.45);}
+.scope-boon .bf-body{flex:1;padding:7px 10px 26px;display:flex;flex-direction:column;gap:7px;font-size:11px;line-height:1.5;overflow:hidden;}
+.scope-boon .bf-flv{font-style:italic;color:#5a4520;font-size:11px;line-height:1.45;}
+.scope-boon .anc-trigger{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.scope-boon .anc-freq{font-size:7.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a6a40;}
+.scope-boon .anc-callout{font-style:normal;font-weight:600;font-size:10.5px;line-height:1.45;color:#1c1408;padding:5px 8px;border-left:3px solid var(--ad,#7e5726);background:rgba(0,0,0,.04);border-radius:0 4px 4px 0;}
+.scope-boon .anc-callout-act{border-left-color:#1C3A5E;background:rgba(28,58,94,.07);}
+.scope-boon .anc-callout-react{border-left-color:#6D28D9;background:rgba(109,40,217,.08);}
+.scope-boon .bf-react-gate{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;line-height:1.45;font-size:10.5px;color:#1c1408;flex-shrink:0;}
+.scope-boon .cap-react-gate{border-color:#6D28D9;color:#6D28D9;background:rgba(109,40,217,.06);font-size:8px;padding:0 5px;}
+.scope-boon .bf-react-when{font-style:italic;color:#3a2c10;font-weight:500;}
+.scope-boon .snap-intro{font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6D28D9;margin-top:3px;flex-shrink:0;}
+.scope-boon .bf-choices{display:flex;flex-direction:column;gap:3px;}
+.scope-boon .bf-choice{font-size:10.5px;line-height:1.5;}
+.scope-boon .snap-compact{margin-top:auto;padding-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;line-height:1.35;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
+.scope-boon .snap-chip{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+.scope-boon .snap-dot{opacity:.45;}
+.kw-snap{background:#6D28D9;color:#EDE9FE;font-size:9px;min-width:1.6em;text-align:center;}
+
+/* tableside strip — icons + names on shared baselines */
+.tableside-strip{max-width:720px;margin:0 auto 32px;padding:20px 16px 24px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #c45c5c;border-radius:10px;}
+.tableside-caption{font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:#c45c5c;margin-bottom:18px;text-align:center;}
+.tableside-row{display:flex;align-items:flex-end;justify-content:center;gap:10px;flex-wrap:wrap;}
+.ts-col{flex:0 0 108px;}
+.ts-tent-silhouette{position:relative;padding-top:14px;}
+.ts-roof{position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:0;border-left:54px solid transparent;border-right:54px solid transparent;border-bottom:14px solid;}
+.ts-panel{border:2px solid;border-radius:4px 4px 2px 2px;min-height:108px;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 6px 10px;box-shadow:0 2px 0 rgba(0,0,0,.12);}
+.ts-icon-row{height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
+.ts-icon{display:flex;align-items:center;justify-content:center;line-height:0;}
+.ts-icon svg{width:32px;height:32px;}
+.ts-icon-spacer{display:block;width:32px;height:32px;}
+.ts-name-row{height:26px;display:flex;align-items:center;justify-content:center;}
+.ts-name{font-family:'Spectral',serif;font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:inherit;line-height:1;text-align:center;}
+.ts-name.char-public-name{text-transform:none;font-size:17px;letter-spacing:.02em;color:#333;}
+.ts-blank-line{display:block;width:72px;height:0;border-bottom:2px solid #999;margin-top:2px;}
+.ts-join{align-self:flex-end;padding-bottom:12px;font-family:'Spectral',serif;font-size:14px;color:#666;font-style:italic;}
+.ts-comma{font-style:normal;font-size:18px;color:#444;padding-bottom:10px;}
+.ts-the{font-weight:600;color:#5a4520;}
+
 
 .figma-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;align-items:start;margin-bottom:32px;}
 .figma-sample{display:flex;flex-direction:column;gap:8px;align-items:center;}
@@ -114,16 +155,14 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 </style>
 </head>
 <body>
-<h1>Upright Core — Layout Understanding (v2)</h1>
-<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card. Public face = class name + icon (once). Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
+<h1>Upright Core — Layout Understanding (v3)</h1>
+<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card (Core, Ancestry, Background). Public face = name + icon. Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
 
 <div class="rule-box">
-<strong>Fixes from your notes:</strong><br>
-• Private half embeds the <strong>real 2.5″×3.5″ card</strong> — same as every other ability card.<br>
-• Public half on the <strong>flat die</strong> is rotated 180° — prints upside-down so it reads correctly across the table after folding.
-• Public text oriented <strong>right-side up for across-the-table</strong> readers.<br>
-• <strong>Icon</strong> under class name on public face.<br>
-• Full double-tall <strong>Ancestry</strong> + <strong>Character</strong> dies included.<br>
+<strong>v3 updates:</strong><br>
+• <strong>Ancestry private face</strong> = live <code>dwarf-ancestry</code> from card-data (same Snap Check anatomy as Background cards).<br>
+• <strong>Tableside strip</strong> — character name/blank, ancestry icon+label, and class icon+label share aligned rows so it reads left → right.<br>
+• Public half on the <strong>flat die</strong> stays rotated 180° for correct across-the-table reading after folding.<br>
 • Section 0 = your uploaded Figma CSS, untouched, for comparison.
 </div>
 
@@ -211,6 +250,17 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 
 
 <section>
+<h2>1a — Card format check (Ancestry vs Background)</h2>
+<p class="h2-note">Live <strong>Dwarf</strong> ancestry + <strong>Field Medic</strong> background from card-data — same header ribbon, <code>bf-body</code> fork, Snap Check bands.</p>
+<div class="format-compare">
+  <div class="sample"><div class="stag">Dwarf — live card-data</div>
+    <div class="std-card-slot cls-ancestry"><div class="cardwrap"><div class="scope-boon cls-ancestry"><div class="card bf-ancestry acc-ancestry"><div class="hdr"><div class="hdr-top"><span class="cap cap-accent">Ancestry</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Dwarf</div></div><div class="bf-body"><div class="bf-flv">You were carved from stone and stubbornness — and it shows.</div><div class="anc-trigger"><div class="anc-freq">Once per Scene</div><div class="anc-callout anc-callout-react">When a blow — physical, social, or emotional — would stagger you, <strong>React</strong> with a <strong>Snap Check</strong>:</div></div><div class="bf-choices"><div class="bf-choice"><strong>Absorb It</strong> — take the hit and stay standing; narrate what you refuse to show</div><div class="bf-choice"><strong>Dig In</strong> — anchor the beat; the <strong>Scene</strong> must work around you</div><div class="bf-choice"><strong>Answer Back</strong> — a short, grounded reply that shifts the pressure</div></div><div class="snap-compact"><span class="snap-chip"><span class="kw kw-snap">1–3</span> Fails</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">4–8</span> Choose 1</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">9+</span> Choose 2</span></div></div></div></div></div></div></div>
+  <div class="sample"><div class="stag">Field Medic — Background reference</div>
+    <div class="std-card-slot cls-background"><div class="cardwrap"><div class="scope-boon cls-background"><div class="card bf-bg acc-background"><div class="hdr"><div class="hdr-top"><span class="cap cap-accent">Background</span></div><div class="hdr-name">Field Medic</div></div><div class="bf-body"><div class="bf-flv">You know what to do when someone is bleeding and the clock is running.</div><div class="bf-react-gate"><span class="cap cap-react-gate">React</span><span class="bf-react-when"> When precision matters and the pressure is high,</span></div><div class="snap-intro">Snap Check</div><div class="bf-choices"><div class="bf-choice"><strong>Steady the Hand</strong> — your hands do exactly what they must; take <span class="kw kw-boost">Boost 1</span> on the careful action</div><div class="bf-choice"><strong>Hold Them Together</strong> — keep someone beside you calm enough to do their part</div><div class="bf-choice"><strong>Work the Margin</strong> — narrate the small, exact thing that keeps it from getting worse</div></div><div class="snap-compact"><span class="snap-chip"><span class="kw kw-snap">1–3</span> Fails</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">4–8</span> Choose 1</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">9+</span> Choose 2</span></div></div><div class="mill-float" title="At scene start, you may discard this to draw 1."><span class="kw kw-mill">Mill</span></div></div></div></div></div></div>
+</div>
+</section>
+
+<section>
 <h2>1 — Leading Core double-tall dies (4 classes)</h2>
 <p class="h2-note">Top = public (class + icon). Bottom = private (standard Core card). Fold on dashed line → stand in Class slot.</p>
 <div class="grid-4"><div class="sample"><div class="stag">Barbarian · Rage</div><div class="double-die cls-barbarian" style="--a:#9E2B2B;--bg:#F5EDE4;--ribbon:#E8C4A8">
@@ -282,32 +332,22 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 
 <section>
 <h2>2 — Ancestry double-tall die (Dwarf)</h2>
-<p class="h2-note">Top = public (DWARF + icon). Bottom = private (ancestry action text). Same tent geometry as class card.</p>
-<div class="grid-2"><div class="sample"><div class="double-die cls-ancestry" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+<p class="h2-note">Top = public (DWARF + icon). Bottom = private — <strong>live Dwarf ancestry card</strong> (React Snap Check), not upright placeholder text.</p>
+<div class="grid-2"><div class="sample"><div class="double-die cls-ancestry" style="--a:#9a6a2e;--bg:#F5F0E9;--ribbon:#DDCBB8">
   <div class="die-outline"></div>
   <div class="die-fold"><span>fold here</span></div>
-  <div class="die-half die-public" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+  <div class="die-half die-public" style="--a:#9a6a2e;--bg:#F5F0E9;--ribbon:#DDCBB8">
   <div class="half-tag public-tag">Public — across the table</div>
   <div class="public-hero">
     <div class="public-name">DWARF</div>
-    <div class="public-icon" style="color:#7D5725"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></div>
+    <div class="public-icon" style="color:#9a6a2e"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></div>
   </div>
 </div>
-  <div class="die-half die-private ancestry-private" style="--a:#7D5725;--bg:#F5F0E9;--ribbon:#DDCBB8">
+  <div class="die-half die-private" style="--a:#9a6a2e;--bg:#F5F0E9">
   <div class="half-tag private-tag">Private — you read this</div>
-  <div class="ribbon-band">
-      <div class="ribbon-cap ribbon-cap-l"></div>
-      <div class="ribbon-cap ribbon-cap-r"></div>
-      <div class="ribbon-text">Dwarf</div>
-    </div>
-  <div class="upright-subtitle">You were carved from stone and stubbornness, and it shows</div>
-  <div class="upright-content">
-    <div class="upright-body">When a blow would stagger someone else, choose one:</div>
-    <div class="upright-body">Absorb it — take it and stay standing; you don't let the cost show.</div>
-    <div class="upright-body">Shake it off — make a Luck Check. On a success, your resilience turns the tide.</div>
-    <div class="upright-body">Dig in — your refusal to be moved becomes a statement the Scene must acknowledge</div>
+  <div class="std-card-slot cls-ancestry">
+    <div class="cardwrap"><div class="scope-boon cls-ancestry"><div class="card bf-ancestry acc-ancestry"><div class="hdr"><div class="hdr-top"><span class="cap cap-accent">Ancestry</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Dwarf</div></div><div class="bf-body"><div class="bf-flv">You were carved from stone and stubbornness — and it shows.</div><div class="anc-trigger"><div class="anc-freq">Once per Scene</div><div class="anc-callout anc-callout-react">When a blow — physical, social, or emotional — would stagger you, <strong>React</strong> with a <strong>Snap Check</strong>:</div></div><div class="bf-choices"><div class="bf-choice"><strong>Absorb It</strong> — take the hit and stay standing; narrate what you refuse to show</div><div class="bf-choice"><strong>Dig In</strong> — anchor the beat; the <strong>Scene</strong> must work around you</div><div class="bf-choice"><strong>Answer Back</strong> — a short, grounded reply that shifts the pressure</div></div><div class="snap-compact"><span class="snap-chip"><span class="kw kw-snap">1–3</span> Fails</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">4–8</span> Choose 1</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">9+</span> Choose 2</span></div></div></div></div></div>
   </div>
-  <div class="upright-footer">⁘ Ancestry | Action ⁘</div>
 </div>
 </div></div></div>
 </section>
@@ -350,20 +390,84 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
   <div class="std-card-slot sm cls-rogue">
     <div class="cardwrap"><div class="scope-core cls-rogue"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Core</span></div><div class="hdr-name">Ace</div></div><div class="cbody"><div class="flv">Always one more card up the sleeve.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Once per <strong>Scene</strong>: when you play a card and succeed on the check, gain <span class="kw kw-boost">Boost 1</span> on your next check this beat. This triggers automatically — no action required.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci"><span class="kw kw-crit">1</span> Draw a card instead of gaining <span class="kw kw-boost">Boost 1</span>.</div></div></div></div><div class="idtag">Rogue</div></div></div></div>
   </div>
-</div></div><div class="cell-foot">Rogue · Ace</div></div><div class="sheet-cell"><div class="cell-tag">Ancestry</div><div class="cell-tent"><div class="mini-tent tent-private ancestry-mini" style="--a:#7D5725;--bg:#F5F0E9">
-  <div class="tent-panel mini-rules"><div class="mini-title">Dwarf</div><div class="mini-sub">Absorb · Shake it off · Dig in</div></div></div></div><div class="cell-foot">Dwarf</div></div><div class="sheet-cell"><div class="cell-tag">Character</div><div class="cell-tent"><div class="mini-tent tent-private char-mini"><div class="tent-panel mini-char"><div class="mini-sketch"></div><div class="mini-name-line">Character name</div></div></div></div><div class="cell-foot">Nathan</div></div></div>
+</div></div><div class="cell-foot">Rogue · Ace</div></div><div class="sheet-cell"><div class="cell-tag">Ancestry</div><div class="cell-tent"><div class="mini-tent tent-private cls-ancestry">
+  <div class="std-card-slot sm cls-ancestry">
+    <div class="cardwrap"><div class="scope-boon cls-ancestry"><div class="card bf-ancestry acc-ancestry"><div class="hdr"><div class="hdr-top"><span class="cap cap-accent">Ancestry</span><span class="cap cap-neutral">React</span></div><div class="hdr-name">Dwarf</div></div><div class="bf-body"><div class="bf-flv">You were carved from stone and stubbornness — and it shows.</div><div class="anc-trigger"><div class="anc-freq">Once per Scene</div><div class="anc-callout anc-callout-react">When a blow — physical, social, or emotional — would stagger you, <strong>React</strong> with a <strong>Snap Check</strong>:</div></div><div class="bf-choices"><div class="bf-choice"><strong>Absorb It</strong> — take the hit and stay standing; narrate what you refuse to show</div><div class="bf-choice"><strong>Dig In</strong> — anchor the beat; the <strong>Scene</strong> must work around you</div><div class="bf-choice"><strong>Answer Back</strong> — a short, grounded reply that shifts the pressure</div></div><div class="snap-compact"><span class="snap-chip"><span class="kw kw-snap">1–3</span> Fails</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">4–8</span> Choose 1</span><span class="snap-dot">·</span><span class="snap-chip"><span class="kw kw-snap">9+</span> Choose 2</span></div></div></div></div></div>
+  </div>
+</div></div><div class="cell-foot">Dwarf</div></div><div class="sheet-cell"><div class="cell-tag">Character</div><div class="cell-tent"><div class="mini-tent tent-private char-mini"><div class="tent-panel mini-char"><div class="mini-sketch"></div><div class="mini-name-line">Character name</div></div></div></div><div class="cell-foot">Nathan</div></div></div>
 </section>
 
 <section>
-<h2>5 — Across the table</h2>
-<p class="h2-note">Column order <strong>reversed</strong>. Reads left → right: <strong>Nathan · DWARF · ROGUE</strong> — "Nathan, the Dwarf Rogue."</p>
-<div class="sheet-row table-row"><div class="pov-note table-pov">Across the table — reads left → right: <strong>Nathan, the Dwarf Rogue</strong></div><div class="sheet-cell"><div class="cell-tag">Character</div><div class="cell-tent"><div class="mini-tent tent-public char-mini"><div class="tent-panel"><div class="public-name char-public-name">Nathan</div></div></div></div><div class="cell-foot">Nathan</div></div><div class="sheet-cell"><div class="cell-tag">Ancestry</div><div class="cell-tent"><div class="mini-tent tent-public cls-ancestry" style="--a:#7D5725;--bg:#F5F0E9">
-  <div class="tent-panel"><div class="public-name">DWARF</div><div class="public-icon" style="color:#7D5725"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></div></div></div></div><div class="cell-foot">DWARF</div></div><div class="sheet-cell"><div class="cell-tag">Class</div><div class="cell-tent"><div class="mini-tent tent-public cls-rogue" style="--a:#6C5BA8;--bg:#F0EFF6">
-  <div class="tent-panel">
-    <div class="public-name">ROGUE</div>
-    <div class="public-icon" style="color:#6C5BA8"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L38 10"/><circle cx="32" cy="16" r="4"/></svg></div>
+<h2>5 — Across the table — aligned tableside strip</h2>
+<p class="h2-note">Icons on one row, names on the row below — <strong>Nathan</strong> lines up with <strong>DWARF</strong> and <strong>ROGUE</strong>. Second row shows unfilled character name blank.</p>
+<div class="tableside-strip">
+  <div class="tableside-caption">Tableside — aligned left → right: <strong>Nathan, the Dwarf Rogue</strong></div>
+  <div class="tableside-row">
+    <div class="ts-col char-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#888"></div>
+    <div class="ts-panel" style="border-color:#888;background:#fff">
+      <div class="ts-icon-row"><span class="ts-icon ts-icon-spacer" aria-hidden="true"></span></div>
+      <div class="ts-name-row"><span class="ts-name char-public-name">Nathan</span></div>
+    </div>
   </div>
-</div></div><div class="cell-foot">ROGUE</div></div></div>
+</div>
+    <div class="ts-join ts-comma">,</div>
+    <div class="ts-join ts-the">the</div>
+    <div class="ts-col ancestry-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#9a6a2e"></div>
+    <div class="ts-panel" style="border-color:#9a6a2e;background:#F5F0E9">
+      <div class="ts-icon-row"><span class="ts-icon" style="color:#9a6a2e"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></span></div>
+      <div class="ts-name-row"><span class="ts-name">DWARF</span></div>
+    </div>
+  </div>
+</div>
+    <div class="ts-col class-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#6C5BA8"></div>
+    <div class="ts-panel" style="border-color:#6C5BA8;background:#F0EFF6">
+      <div class="ts-icon-row"><span class="ts-icon" style="color:#6C5BA8"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L38 10"/><circle cx="32" cy="16" r="4"/></svg></span></div>
+      <div class="ts-name-row"><span class="ts-name">ROGUE</span></div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+<div class="tableside-strip">
+  <div class="tableside-caption">Tableside — aligned left → right: <strong>________, the Dwarf Rogue</strong></div>
+  <div class="tableside-row">
+    <div class="ts-col char-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#888"></div>
+    <div class="ts-panel" style="border-color:#888;background:#fff">
+      <div class="ts-icon-row"><span class="ts-icon" style="color:#888"><svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="16" r="8"/><path d="M8 42c0-8 7-14 16-14s16 6 16 14"/></svg></span></div>
+      <div class="ts-name-row"><span class="ts-blank-line" aria-label="Character name blank"></span></div>
+    </div>
+  </div>
+</div>
+    <div class="ts-join ts-comma">,</div>
+    <div class="ts-join ts-the">the</div>
+    <div class="ts-col ancestry-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#9a6a2e"></div>
+    <div class="ts-panel" style="border-color:#9a6a2e;background:#F5F0E9">
+      <div class="ts-icon-row"><span class="ts-icon" style="color:#9a6a2e"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L18 18 L24 28 L30 14 L38 38"/></svg></span></div>
+      <div class="ts-name-row"><span class="ts-name">DWARF</span></div>
+    </div>
+  </div>
+</div>
+    <div class="ts-col class-col">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:#6C5BA8"></div>
+    <div class="ts-panel" style="border-color:#6C5BA8;background:#F0EFF6">
+      <div class="ts-icon-row"><span class="ts-icon" style="color:#6C5BA8"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 38 L38 10"/><circle cx="32" cy="16" r="4"/></svg></span></div>
+      <div class="ts-name-row"><span class="ts-name">ROGUE</span></div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
 </section>
 
 </body>

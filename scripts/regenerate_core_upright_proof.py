@@ -13,9 +13,11 @@ from scripts.build_core_upright_html import (  # noqa: E402
     LEADING_KEYS,
     CLASS_THEME,
     build_ancestry_double_die,
+    build_card_format_comparison,
     build_character_double_die,
     build_core_double_die,
     build_sheet_row_pov,
+    build_tableside_inline_strip,
 )
 from scripts.build_figma_reference_html import FIGMA_CSS, figma_section_html  # noqa: E402
 
@@ -105,6 +107,47 @@ h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold
 .mini-sketch{height:40px;width:80%;border:1px solid #ccc;border-radius:4px;margin-bottom:6px;}
 .mini-name-line{font-size:7px;color:#aaa;text-transform:uppercase;border-top:1px solid #ccc;padding-top:4px;width:80%;}
 
+/* boon / ancestry / background — match Card Studio */
+.format-compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;align-items:start;margin-bottom:8px;}
+.scope-boon .card,.scope-boon .cardwrap .card{width:2.5in;height:3.5in;background:#f7f0e0;border:0.5px solid #c8a96e;display:flex;flex-direction:column;overflow:hidden;font-family:system-ui,-apple-system,sans-serif;color:#241a08;box-shadow:5px 5px 0 rgba(0,0,0,.45);}
+.scope-boon .bf-body{flex:1;padding:7px 10px 26px;display:flex;flex-direction:column;gap:7px;font-size:11px;line-height:1.5;overflow:hidden;}
+.scope-boon .bf-flv{font-style:italic;color:#5a4520;font-size:11px;line-height:1.45;}
+.scope-boon .anc-trigger{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+.scope-boon .anc-freq{font-size:7.5px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:#8a6a40;}
+.scope-boon .anc-callout{font-style:normal;font-weight:600;font-size:10.5px;line-height:1.45;color:#1c1408;padding:5px 8px;border-left:3px solid var(--ad,#7e5726);background:rgba(0,0,0,.04);border-radius:0 4px 4px 0;}
+.scope-boon .anc-callout-act{border-left-color:#1C3A5E;background:rgba(28,58,94,.07);}
+.scope-boon .anc-callout-react{border-left-color:#6D28D9;background:rgba(109,40,217,.08);}
+.scope-boon .bf-react-gate{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;line-height:1.45;font-size:10.5px;color:#1c1408;flex-shrink:0;}
+.scope-boon .cap-react-gate{border-color:#6D28D9;color:#6D28D9;background:rgba(109,40,217,.06);font-size:8px;padding:0 5px;}
+.scope-boon .bf-react-when{font-style:italic;color:#3a2c10;font-weight:500;}
+.scope-boon .snap-intro{font-size:8px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#6D28D9;margin-top:3px;flex-shrink:0;}
+.scope-boon .bf-choices{display:flex;flex-direction:column;gap:3px;}
+.scope-boon .bf-choice{font-size:10.5px;line-height:1.5;}
+.scope-boon .snap-compact{margin-top:auto;padding-top:4px;display:flex;flex-wrap:wrap;align-items:center;gap:3px 5px;font-size:9px;line-height:1.35;color:#5a4520;border-top:0.5px solid rgba(200,169,110,.45);}
+.scope-boon .snap-chip{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+.scope-boon .snap-dot{opacity:.45;}
+.kw-snap{background:#6D28D9;color:#EDE9FE;font-size:9px;min-width:1.6em;text-align:center;}
+
+/* tableside strip — icons + names on shared baselines */
+.tableside-strip{max-width:720px;margin:0 auto 32px;padding:20px 16px 24px;background:linear-gradient(180deg,#f8f4ee,#ece6dc);border:1px solid #c45c5c;border-radius:10px;}
+.tableside-caption{font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:#c45c5c;margin-bottom:18px;text-align:center;}
+.tableside-row{display:flex;align-items:flex-end;justify-content:center;gap:10px;flex-wrap:wrap;}
+.ts-col{flex:0 0 108px;}
+.ts-tent-silhouette{position:relative;padding-top:14px;}
+.ts-roof{position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:0;border-left:54px solid transparent;border-right:54px solid transparent;border-bottom:14px solid;}
+.ts-panel{border:2px solid;border-radius:4px 4px 2px 2px;min-height:108px;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 6px 10px;box-shadow:0 2px 0 rgba(0,0,0,.12);}
+.ts-icon-row{height:40px;display:flex;align-items:center;justify-content:center;margin-bottom:4px;}
+.ts-icon{display:flex;align-items:center;justify-content:center;line-height:0;}
+.ts-icon svg{width:32px;height:32px;}
+.ts-icon-spacer{display:block;width:32px;height:32px;}
+.ts-name-row{height:26px;display:flex;align-items:center;justify-content:center;}
+.ts-name{font-family:'Spectral',serif;font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:inherit;line-height:1;text-align:center;}
+.ts-name.char-public-name{text-transform:none;font-size:17px;letter-spacing:.02em;color:#333;}
+.ts-blank-line{display:block;width:72px;height:0;border-bottom:2px solid #999;margin-top:2px;}
+.ts-join{align-self:flex-end;padding-bottom:12px;font-family:'Spectral',serif;font-size:14px;color:#666;font-style:italic;}
+.ts-comma{font-style:normal;font-size:18px;color:#444;padding-bottom:10px;}
+.ts-the{font-weight:600;color:#5a4520;}
+
 """ + FIGMA_CSS
 
 
@@ -121,7 +164,7 @@ def main() -> None:
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Spectral:ital,wght@0,300;0,400;1,300&family=EB+Garamond:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="primer-card-scope.css">
-<title>Instinct RPG — Upright Core Layout (4 classes)</title>
+<title>Instinct RPG — Upright Core Layout (v3)</title>
 <style>{CSS}
 /* primer overrides for proof scope */
 .scope-core .card{{position:relative;border-left:5px solid var(--a);display:flex;flex-direction:column;}}
@@ -139,20 +182,24 @@ def main() -> None:
 </style>
 </head>
 <body>
-<h1>Upright Core — Layout Understanding (v2)</h1>
-<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card. Public face = class name + icon (once). Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
+<h1>Upright Core — Layout Understanding (v3)</h1>
+<p class="sub">Four done classes · leading picks: <strong>Rage · Ace · Bulwark · Pact</strong>. Private face = standard Instinct card (Core, Ancestry, Background). Public face = name + icon. Player sheet order: Class · Ancestry · Character. Table reads reversed: <em>Nathan, the Dwarf Rogue</em>.</p>
 
 <div class="rule-box">
-<strong>Fixes from your notes:</strong><br>
-• Private half embeds the <strong>real 2.5″×3.5″ card</strong> — same as every other ability card.<br>
-• Public half on the <strong>flat die</strong> is rotated 180° — prints upside-down so it reads correctly across the table after folding.
-• Public text oriented <strong>right-side up for across-the-table</strong> readers.<br>
-• <strong>Icon</strong> under class name on public face.<br>
-• Full double-tall <strong>Ancestry</strong> + <strong>Character</strong> dies included.<br>
+<strong>v3 updates:</strong><br>
+• <strong>Ancestry private face</strong> = live <code>dwarf-ancestry</code> from card-data (same Snap Check anatomy as Background cards).<br>
+• <strong>Tableside strip</strong> — character name/blank, ancestry icon+label, and class icon+label share aligned rows so it reads left → right.<br>
+• Public half on the <strong>flat die</strong> stays rotated 180° for correct across-the-table reading after folding.<br>
 • Section 0 = your uploaded Figma CSS, untouched, for comparison.
 </div>
 
 {figma_section_html()}
+
+<section>
+<h2>1a — Card format check (Ancestry vs Background)</h2>
+<p class="h2-note">Live <strong>Dwarf</strong> ancestry + <strong>Field Medic</strong> background from card-data — same header ribbon, <code>bf-body</code> fork, Snap Check bands.</p>
+{build_card_format_comparison()}
+</section>
 
 <section>
 <h2>1 — Leading Core double-tall dies (4 classes)</h2>
@@ -162,7 +209,7 @@ def main() -> None:
 
 <section>
 <h2>2 — Ancestry double-tall die (Dwarf)</h2>
-<p class="h2-note">Top = public (DWARF + icon). Bottom = private (ancestry action text). Same tent geometry as class card.</p>
+<p class="h2-note">Top = public (DWARF + icon). Bottom = private — <strong>live Dwarf ancestry card</strong> (React Snap Check), not upright placeholder text.</p>
 <div class="grid-2"><div class="sample">{build_ancestry_double_die()}</div></div>
 </section>
 
@@ -179,9 +226,10 @@ def main() -> None:
 </section>
 
 <section>
-<h2>5 — Across the table</h2>
-<p class="h2-note">Column order <strong>reversed</strong>. Reads left → right: <strong>Nathan · DWARF · ROGUE</strong> — "Nathan, the Dwarf Rogue."</p>
-{build_sheet_row_pov("table", "rogue", "Nathan", "Dwarf")}
+<h2>5 — Across the table — aligned tableside strip</h2>
+<p class="h2-note">Icons on one row, names on the row below — <strong>Nathan</strong> lines up with <strong>DWARF</strong> and <strong>ROGUE</strong>. Second row shows unfilled character name blank.</p>
+{build_tableside_inline_strip("rogue", "Nathan", "Dwarf", show_blank_name=False)}
+{build_tableside_inline_strip("rogue", "Nathan", "Dwarf", show_blank_name=True)}
 </section>
 
 </body>
