@@ -10,6 +10,9 @@ The **live** player-facing primer is `instinct-rpg-primer-v2.html`, embedded in 
 **Player Primer** tab (`index.html` → iframe). Older `instinct-rpg-primer*.html` files are not live
 unless Annie explicitly switches the iframe.
 
+The **live** at-table quick reference is `instinct-rpg-quick-ref-v2.html` (Card Studio **Quick Ref**
+tab). `instinct-rpg-quick-ref.html` is retired — do not link or update it.
+
 ## Related rules (read when editing the primer)
 
 | Rule file | Covers |
@@ -20,6 +23,7 @@ unless Annie explicitly switches the iframe.
 | `instinct-playtest-tone.mdc` | Welcoming, hand-first copy |
 | `instinct-chargen-sample-keys.mdc` | `MOUNTS` / `Card_Key` contract |
 | `instinct-typography-tiers.mdc` | Cinzel / Crimson Pro / sans sub-labels |
+| `instinct-quick-ref.mdc` | At-table quick ref v2 scope |
 | `instinct-proof-links.mdc` | Live Pages URLs |
 
 ## In scope (summary)

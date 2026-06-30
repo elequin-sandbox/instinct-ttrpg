@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instinct RPG — At-Table Quick Reference</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #1a1410;
+      --ink-mid: #3a2e24;
+      --ink-muted: #6a5a48;
+      --cream: #faf5ec;
+      --rule: #c8a96e;
+      --rule-light: #e4d4b8;
+      --gold: #8a6428;
+      --max-w: 440px;
+      --kw-boost-bg: #0F766E; --kw-boost-tx: #CCFBF1;
+      --kw-resolve-bg: #166534; --kw-resolve-tx: #F0FDF4;
+      --kw-hd-bg: #991B1B; --kw-hd-tx: #FEF2F2;
+      --kw-threat-bg: #991B1B; --kw-threat-tx: #FEF2F2;
+      --kw-crit-bg: #B8860B; --kw-crit-tx: #FFFDE7;
+      --kw-toll-bg: #B45309; --kw-toll-tx: #FFFBEB;
+      --kw-miss-bg: #7F1D1D; --kw-miss-tx: #FEF2F2;
+      --kw-aid-bg: #2563EB; --kw-aid-tx: #EFF6FF;
+      --kw-mill-bg: #0C4A6E; --kw-mill-tx: #BAE6FD;
+    }
+    html, body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 14px;
+      line-height: 1.48;
+    }
+    .page { max-width: var(--max-w); margin: 0 auto; padding: 18px 16px 28px; }
+
+    .qr-header {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--rule);
+      margin-bottom: 12px;
+    }
+    .qr-title {
+      font-family: Cinzel, serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .qr-sub {
+      font-family: Cinzel, serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 3px;
+    }
+
+    .golden {
+      text-align: center;
+      padding: 10px 12px;
+      background: #f8f2e4;
+      border: 1.5px solid var(--rule);
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .golden-main {
+      font-family: Cinzel, serif;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.45;
+      letter-spacing: 0.02em;
+    }
+    .golden-hint {
+      font-size: 11px;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-top: 4px;
+    }
+
+    .block { margin-bottom: 11px; }
+    .block-title {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--rule-light);
+      padding-bottom: 3px;
+      margin-bottom: 6px;
+    }
+
+    .kw {
+      display: inline-block;
+      padding: 0 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      font-size: 0.88em;
+      vertical-align: baseline;
+      line-height: 1.55;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-style: normal;
+    }
+    .kw-boost { background: var(--kw-boost-bg); color: var(--kw-boost-tx); }
+    .kw-resolve { background: var(--kw-resolve-bg); color: var(--kw-resolve-tx); }
+    .kw-hd { background: var(--kw-hd-bg); color: var(--kw-hd-tx); }
+    .kw-threat { background: var(--kw-threat-bg); color: var(--kw-threat-tx); }
+    .kw-crit { background: var(--kw-crit-bg); color: var(--kw-crit-tx); }
+    .kw-toll { background: var(--kw-toll-bg); color: var(--kw-toll-tx); }
+    .kw-miss { background: var(--kw-miss-bg); color: var(--kw-miss-tx); }
+    .kw-aid { background: var(--kw-aid-bg); color: var(--kw-aid-tx); }
+    .kw-mill { background: var(--kw-mill-bg); color: var(--kw-mill-tx); }
+
+    .phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+    .phase {
+      text-align: center;
+      padding: 5px 4px;
+      background: #f4efea;
+      border: 1px solid var(--rule-light);
+      border-radius: 4px;
+    }
+    .phase-name {
+      font-family: Cinzel, serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .phase-hint {
+      font-size: 9.5px;
+      color: var(--ink-muted);
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      margin-bottom: 6px;
+    }
+    .tier {
+      text-align: center;
+      font-size: 10.5px;
+      padding: 4px;
+      border: 1px solid var(--rule-light);
+      border-radius: 3px;
+      background: white;
+      color: var(--ink-mid);
+    }
+    .tier strong { display: block; font-family: Cinzel, serif; font-size: 9px; color: var(--gold); }
+
+    .rows { display: flex; flex-direction: column; gap: 3px; }
+    .row {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      border: 1px solid var(--rule-light);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .row-label {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 6px;
+      background: #f4efea;
+      color: var(--ink-mid);
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--rule-light);
+    }
+    .row-desc {
+      padding: 5px 8px;
+      font-size: 12px;
+      color: var(--ink-mid);
+      background: white;
+      line-height: 1.4;
+    }
+
+    .outcomes { display: flex; flex-direction: column; gap: 3px; }
+    .outcome {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      border-radius: 3px;
+      overflow: hidden;
+      border: 1px solid var(--rule-light);
+    }
+    .outcome-lbl {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 5px 6px;
+      display: flex;
+      align-items: center;
+    }
+    .outcome-desc {
+      padding: 5px 8px;
+      font-size: 12px;
+      background: white;
+      color: var(--ink-mid);
+      line-height: 1.4;
+    }
+    .out-success .outcome-lbl { background: #e8f4ea; color: #1a5030; }
+    .out-partial .outcome-lbl { background: #fef6ec; color: #7a4a10; }
+
+    .card-types {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .ct { border-radius: 3px; overflow: hidden; border: 1px solid var(--rule-light); }
+    .ct-header {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 6px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .ct-body {
+      font-size: 10.5px;
+      color: var(--ink-mid);
+      padding: 4px 6px 5px;
+      background: white;
+      line-height: 1.35;
+    }
+    .ct-instinct .ct-header { background: #1e2540; color: #d4e0f0; }
+    .ct-act .ct-header { background: #1C3A5E; color: #dbeafe; }
+    .ct-react .ct-header { background: #0C4A6E; color: #bae6fd; }
+    .ct-core .ct-header { background: #1a3a1a; color: #9fd4a8; }
+    .ct-bg .ct-header { background: #0f2d45; color: #c4d8e8; }
+    .ct-ancestry .ct-header { background: #2a1a08; color: #d8c080; }
+    .ct-bond .ct-header { background: #0f2b15; color: #b8d0b0; }
+    .ct-connection .ct-header { background: #2d1020; color: #f0d0e0; }
+    .ct-item .ct-header { background: #92400E; color: #FEF3C7; }
+
+    .cond-note {
+      font-size: 10.5px;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+    .cond-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .cond-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: #f4efea;
+      border: 1px solid var(--rule-light);
+      color: var(--ink-mid);
+    }
+
+    .gm-defer {
+      background: #eef3fa;
+      border: 1px solid #b8cce8;
+      border-radius: 5px;
+      padding: 8px 10px;
+      margin-bottom: 11px;
+      font-size: 11.5px;
+      color: var(--ink-mid);
+      line-height: 1.45;
+    }
+    .gm-defer-title {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #3a5a8a;
+      margin-bottom: 4px;
+    }
+
+    .qr-footer {
+      margin-top: 12px;
+      text-align: center;
+      border-top: 1px solid var(--rule);
+      padding-top: 10px;
+    }
+    .qr-footer .label {
+      font-family: Cinzel, serif;
+      font-size: 8px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 4px;
+    }
+    .qr-footer a {
+      font-family: Cinzel, serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .qr-footer .hint {
+      font-size: 10.5px;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-top: 6px;
+    }
+
+    @media print {
+      body { background: white; }
+      .page { max-width: 100%; padding: 10px 12px; }
+      .row-desc, .outcome-desc, .ct-body, .tier { background: white; }
+    }
+    @media (max-width: 400px) {
+      .card-types { grid-template-columns: 1fr; }
+      .phases { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header class="qr-header">
+    <div class="qr-title">Instinct RPG</div>
+    <div class="qr-sub">At-Table Quick Reference · Playtest · June 2026</div>
+  </header>
+
+  <div class="golden">
+    <div class="golden-main">Your Hand Shows What Your Character Wants To Do.<br>You Show The Table How.</div>
+    <div class="golden-hint">Deck = character · Hand = Instincts right now · ~5 cards per scene</div>
+  </div>
+
+  <div class="block">
+    <div class="block-title">Checks — Build · Roll · Read</div>
+    <div class="phases">
+      <div class="phase">
+        <div class="phase-name">Build</div>
+        <div class="phase-hint">GM pool on table first</div>
+      </div>
+      <div class="phase">
+        <div class="phase-name">Roll</div>
+        <div class="phase-hint">All dice at once</div>
+      </div>
+      <div class="phase">
+        <div class="phase-name">Read</div>
+        <div class="phase-hint">Misses · Crits · clear</div>
+      </div>
+    </div>
+    <div class="tiers">
+      <div class="tier"><strong>Tier 1</strong>2d6 · Lv 1–3</div>
+      <div class="tier"><strong>Tier 2</strong>3d6 · Lv 4–6</div>
+      <div class="tier"><strong>Tier 3</strong>4d6 · Lv 7–9</div>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-label"><span class="kw kw-miss">Miss</span></div>
+        <div class="row-desc">Natural <strong>1</strong> — remove immediately. GM gains 1 <span class="kw kw-toll">Toll</span> per Miss (even on success).</div>
+      </div>
+      <div class="row">
+        <div class="row-label"><span class="kw kw-crit">Crit</span></div>
+        <div class="row-desc">Natural <strong>6</strong> — <strong>explodes</strong> (roll +1 die; a second 6 counts as Crit but doesn’t explode again).</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Flourish</div>
+        <div class="row-desc">Count dice still showing 6. Each Crit lets you <strong>gain</strong> one bonus option from the card you played.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Clear</div>
+        <div class="row-desc">Match your dice to GM dice: <strong>equal or higher</strong> removes both; <strong>lower</strong> may reduce GM die by 1 and remove yours. No hidden DC.</div>
+      </div>
+      <div class="row">
+        <div class="row-label"><span class="kw kw-aid">Aid</span></div>
+        <div class="row-desc">Ally discards a card, narrates how it helps (not the card’s normal effect — GM agrees), +1 die. <strong>One ally per check. No self-Aid.</strong></div>
+      </div>
+      <div class="row">
+        <div class="row-label"><span class="kw kw-boost">Boost</span></div>
+        <div class="row-desc">Extra dice from cards, Aid, or GM reward. Expire at scene end. A 1 on a Boost die is a Miss.</div>
+      </div>
+    </div>
+    <div class="outcomes" style="margin-top:6px">
+      <div class="outcome out-success">
+        <div class="outcome-lbl">Success</div>
+        <div class="outcome-desc">All GM dice cleared. Gain Flourishes for Crits earned.</div>
+      </div>
+      <div class="outcome out-partial">
+        <div class="outcome-lbl">Partial</div>
+        <div class="outcome-desc">Some GM dice remain — not a failure. GM says what landed and what didn’t.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title">Health &amp; Resources</div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-label"><span class="kw kw-hd">Hit Dice</span></div>
+        <div class="row-desc">Health — physical d6s on the table. Never “HP.” Out of Hit Dice = out of the fight.</div>
+      </div>
+      <div class="row">
+        <div class="row-label"><span class="kw kw-toll">Toll</span></div>
+        <div class="row-desc">GM currency from Misses. Spent to make the world react.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">Scene</div>
+        <div class="row-desc">Hand discarded at scene end; draw fresh (~5). Party average hand ~2 → expect a transition.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gm-defer">
+    <div class="gm-defer-title">GM teaches when it comes up</div>
+    <span class="kw kw-resolve">Resolve</span> · <span class="kw kw-threat">Threat</span> · Contests · Snap Check — your GM walks the table through these in high-stakes scenes. Ask; that’s normal.
+  </div>
+
+  <div class="block">
+    <div class="block-title">Card Types</div>
+    <div class="card-types">
+      <div class="ct ct-instinct">
+        <div class="ct-header">Instinct</div>
+        <div class="ct-body"><strong>Reveal</strong> when it drives an Action — <span class="kw kw-boost">Boost 2</span> or Draw 2.</div>
+      </div>
+      <div class="ct ct-act">
+        <div class="ct-header">Act</div>
+        <div class="ct-body">Your move this spotlight. Cost: 1.</div>
+      </div>
+      <div class="ct ct-react">
+        <div class="ct-header">React</div>
+        <div class="ct-body">Any time, in response. Cost: 0. Some <span class="kw kw-mill">Mill</span>.</div>
+      </div>
+      <div class="ct ct-core">
+        <div class="ct-header">Core</div>
+        <div class="ct-body">Face-up in front of you. Never shuffled.</div>
+      </div>
+      <div class="ct ct-bg">
+        <div class="ct-header">Background</div>
+        <div class="ct-body">Past expertise — plays on trigger.</div>
+      </div>
+      <div class="ct ct-ancestry">
+        <div class="ct-header">Ancestry</div>
+        <div class="ct-body">Heritage — plays when it matters.</div>
+      </div>
+      <div class="ct ct-bond">
+        <div class="ct-header">Bond</div>
+        <div class="ct-body">Find · Act · Then — both gain <span class="kw kw-boost">Boost 1</span> if it lands.</div>
+      </div>
+      <div class="ct ct-connection">
+        <div class="ct-header">Connection</div>
+        <div class="ct-body">Your name on it → other players’ decks.</div>
+      </div>
+      <div class="ct ct-item">
+        <div class="ct-header">Item</div>
+        <div class="ct-body">In your deck. Many <span class="kw kw-mill">Mill</span> at scene start.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title">Playing a Card</div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-label">Trigger</div>
+        <div class="row-desc">If the scene matches the card’s Trigger line, you’re good. When unsure, ask the GM.</div>
+      </div>
+      <div class="row">
+        <div class="row-label">No fit?</div>
+        <div class="row-desc">Describe the action anyway — it can still be a basic check without card effects.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="block-title">Shared Words (Conditions)</div>
+    <p class="cond-note">Fiction labels only — <strong>the GM decides</strong> what they mean in the moment. Not automatic rules.</p>
+    <div class="cond-tags">
+      <span class="cond-tag">Exposed</span>
+      <span class="cond-tag">Rattled</span>
+      <span class="cond-tag">Rooted</span>
+      <span class="cond-tag">Hidden</span>
+      <span class="cond-tag">Marked</span>
+      <span class="cond-tag">Sundered</span>
+      <span class="cond-tag">Break</span>
+    </div>
+  </div>
+
+  <footer class="qr-footer">
+    <div class="label">Card Studio</div>
+    <a href="https://elequin-sandbox.github.io/instinct-ttrpg/" target="_blank" rel="noopener">elequin-sandbox.github.io/instinct-ttrpg</a>
+    <div class="hint">First session? Read the <a href="https://elequin-sandbox.github.io/instinct-ttrpg/instinct-rpg-primer-v2.html" style="color:var(--gold);font-style:normal">Player Primer</a> once — use this at the table.</div>
+  </footer>
+
+</div>
+</body>
+</html>
