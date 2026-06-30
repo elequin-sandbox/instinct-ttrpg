@@ -190,6 +190,7 @@ When a new card is designed and approved:
 
 - [June 29 2026] — **Background Snap Check pass.** All 12 Background deck cards → React + Snap Check bands + Mill. Builder: `scripts/build_background_snap.py`. Proof: `background-snap-proof.html`.
 - [June 29 2026] — **Origin stems killed.** All 34 Background/Ancestry/Bond deck cards stripped of Origin/Bond stems; Backgrounds gained 1-line flavor; Bonds reformatted to Find/Act/Then zones. Write-in deferred to Character/Class/Ancestry sheet cards. Script: `scripts/strip_origin_stems.py`.
+- [June 30 2026] — **Paladin pool PbtA pass.** Full ability deck audit: narrative glosses on **Exposed** / **Rattled**, split Crit spend lines, no condition-mechanic language. Renames: Sentence → Marked Wrath, Sacred Ground → Condemn, Rebuke → Aura of Courage, Vow of Enmity → Divine Shield. Bulwark = Courageous Resolve + Parry This. Smite repeat Crit (`1↻`). Proof: `paladin-pool-proof.html`. Rows 368–381, 622.
 - [June 29 2026] — **Paladin Oath v7.** L→R mad-lib layout (production); larger gold type + row index chips; alignment compare page (outward vs meet-at-the).
 - [June 29 2026] — **Paladin Oath v6b.** Dotted phrase frame; golden Garamond verb/*the*/noun; smaller Boost/Resolve/Toll pills.
 - [June 29 2026] — **Paladin Oath v6.** Horizontal die-slot rows; Core+Oath caps; *Oath of* ribbon title; Scene start / Break Your Oath copy.
