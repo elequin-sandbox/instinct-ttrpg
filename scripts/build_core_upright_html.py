@@ -36,6 +36,10 @@ LEADING_KEYS = {
     "warlock": "pact-warlock-core",
 }
 
+ANCESTRY_KEY = "dwarf-ancestry"
+
+CHARACTER_ICON = '<svg viewBox="0 0 48 48" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="16" r="8"/><path d="M8 42c0-8 7-14 16-14s16 6 16 14"/></svg>'
+
 
 def _load_card_html(key: str) -> str:
     text = (ROOT / "card-data.js").read_text(encoding="utf-8")
@@ -66,14 +70,18 @@ def build_public_face(label: str, icon_svg: str, theme: dict[str, str]) -> str:
 </div>"""
 
 
-def build_private_core_face(cls: str, card_html: str, theme: dict[str, str]) -> str:
-    """Player-facing panel: standard 2.5×3.5 Instinct card, unchanged."""
+def build_private_std_card_face(scope: str, cls: str, card_html: str, theme: dict[str, str]) -> str:
+    """Player-facing panel: standard 2.5×3.5 Instinct card (Core, Ancestry, Background, etc.)."""
     return f"""<div class="die-half die-private" style="--a:{theme['a']};--bg:{theme['bg']}">
   <div class="half-tag private-tag">Private — you read this</div>
   <div class="std-card-slot cls-{cls}">
-    <div class="cardwrap"><div class="scope-core cls-{cls}">{card_html}</div></div>
+    <div class="cardwrap"><div class="scope-{scope} cls-{cls}">{card_html}</div></div>
   </div>
 </div>"""
+
+
+def build_private_core_face(cls: str, card_html: str, theme: dict[str, str]) -> str:
+    return build_private_std_card_face("core", cls, card_html, theme)
 
 
 def build_core_double_die(cls: str) -> str:
@@ -89,21 +97,12 @@ def build_core_double_die(cls: str) -> str:
 </div>"""
 
 
-def build_ancestry_double_die() -> str:
-    theme = {"a": "#7D5725", "ad": "#623807", "bg": "#F5F0E9", "ribbon": "#DDCBB8"}
-    pub = build_public_face("Dwarf", ANCESTRY_ICON, theme)
-    priv = f"""<div class="die-half die-private ancestry-private" style="--a:{theme['a']};--bg:{theme['bg']};--ribbon:{theme['ribbon']}">
-  <div class="half-tag private-tag">Private — you read this</div>
-  {_ribbon_bar("Dwarf")}
-  <div class="upright-subtitle">You were carved from stone and stubbornness, and it shows</div>
-  <div class="upright-content">
-    <div class="upright-body">When a blow would stagger someone else, choose one:</div>
-    <div class="upright-body">Absorb it — take it and stay standing; you don't let the cost show.</div>
-    <div class="upright-body">Shake it off — make a Luck Check. On a success, your resilience turns the tide.</div>
-    <div class="upright-body">Dig in — your refusal to be moved becomes a statement the Scene must acknowledge</div>
-  </div>
-  <div class="upright-footer">⁘ Ancestry | Action ⁘</div>
-</div>"""
+def build_ancestry_double_die(ancestry_key: str = ANCESTRY_KEY) -> str:
+    theme = {"a": "#9a6a2e", "ad": "#7e5726", "bg": "#F5F0E9", "ribbon": "#DDCBB8"}
+    card_html = _load_card_html(ancestry_key)
+    name = ancestry_key.replace("-ancestry", "").title()
+    pub = build_public_face(name, ANCESTRY_ICON, theme)
+    priv = build_private_std_card_face("boon", "ancestry", card_html, theme)
     return f"""<div class="double-die cls-ancestry" style="--a:{theme['a']};--bg:{theme['bg']};--ribbon:{theme['ribbon']}">
   <div class="die-outline"></div>
   <div class="die-fold"><span>fold here</span></div>
@@ -144,12 +143,114 @@ def build_character_double_die(name: str = "Nathan") -> str:
 </div>"""
 
 
+def build_folded_tent_private_ancestry() -> str:
+    card_html = _load_card_html(ANCESTRY_KEY)
+    return f"""<div class="mini-tent tent-private cls-ancestry">
+  <div class="std-card-slot sm cls-ancestry">
+    <div class="cardwrap"><div class="scope-boon cls-ancestry">{card_html}</div></div>
+  </div>
+</div>"""
+
+
+def _tableside_tent_col(
+    *,
+    border: str,
+    bg: str,
+    icon_html: str,
+    name_html: str,
+    extra_cls: str = "",
+) -> str:
+    return f"""<div class="ts-col {extra_cls}">
+  <div class="ts-tent-silhouette">
+    <div class="ts-roof" style="border-bottom-color:{border}"></div>
+    <div class="ts-panel" style="border-color:{border};background:{bg}">
+      <div class="ts-icon-row">{icon_html}</div>
+      <div class="ts-name-row">{name_html}</div>
+    </div>
+  </div>
+</div>"""
+
+
+def build_tableside_inline_strip(
+    cls: str = "rogue",
+    name: str = "Nathan",
+    ancestry: str = "Dwarf",
+    show_blank_name: bool = False,
+) -> str:
+    """Table reads left → right: Name · Ancestry · Class — icons + labels on aligned rows."""
+    theme_cls = CLASS_THEME[cls]
+    theme_anc = {"a": "#9a6a2e", "bg": "#F5F0E9"}
+
+    if show_blank_name:
+        name_html = '<span class="ts-blank-line" aria-label="Character name blank"></span>'
+        icon_html = f'<span class="ts-icon" style="color:#888">{CHARACTER_ICON}</span>'
+        caption_name = "________"
+    else:
+        name_html = f'<span class="ts-name char-public-name">{html.escape(name)}</span>'
+        icon_html = '<span class="ts-icon ts-icon-spacer" aria-hidden="true"></span>'
+        caption_name = name
+
+    char_cell = _tableside_tent_col(
+        border="#888",
+        bg="#fff",
+        icon_html=icon_html,
+        name_html=name_html,
+        extra_cls="char-col",
+    )
+    anc_cell = _tableside_tent_col(
+        border=theme_anc["a"],
+        bg=theme_anc["bg"],
+        icon_html=f'<span class="ts-icon" style="color:{theme_anc["a"]}">{ANCESTRY_ICON}</span>',
+        name_html=f'<span class="ts-name">{html.escape(ancestry.upper())}</span>',
+        extra_cls="ancestry-col",
+    )
+    class_cell = _tableside_tent_col(
+        border=theme_cls["a"],
+        bg=theme_cls["bg"],
+        icon_html=f'<span class="ts-icon" style="color:{theme_cls["a"]}">{CLASS_ICONS[cls]}</span>',
+        name_html=f'<span class="ts-name">{html.escape(theme_cls["label"].upper())}</span>',
+        extra_cls="class-col",
+    )
+
+    return f"""<div class="tableside-strip">
+  <div class="tableside-caption">Tableside — aligned left → right: <strong>{html.escape(caption_name)}, the {html.escape(ancestry)} {html.escape(theme_cls['label'])}</strong></div>
+  <div class="tableside-row">
+    {char_cell}
+    <div class="ts-join ts-comma">,</div>
+    <div class="ts-join ts-the">the</div>
+    {anc_cell}
+    {class_cell}
+  </div>
+</div>"""
+
+
+def build_card_format_comparison() -> str:
+    """Dwarf ancestry + Field Medic background — confirms live card anatomy."""
+    dwarf = _load_card_html("dwarf-ancestry")
+    medic = _load_card_html("field-medic-background")
+    return f"""<div class="format-compare">
+  <div class="sample"><div class="stag">Dwarf — live card-data</div>
+    <div class="std-card-slot cls-ancestry"><div class="cardwrap"><div class="scope-boon cls-ancestry">{dwarf}</div></div></div></div>
+  <div class="sample"><div class="stag">Field Medic — Background reference</div>
+    <div class="std-card-slot cls-background"><div class="cardwrap"><div class="scope-boon cls-background">{medic}</div></div></div></div>
+</div>"""
+
+
 def build_folded_tent_public(cls: str) -> str:
     theme = CLASS_THEME[cls]
     return f"""<div class="mini-tent tent-public cls-{cls}" style="--a:{theme['a']};--bg:{theme['bg']}">
   <div class="tent-panel">
     <div class="public-name">{html.escape(theme['label'].upper())}</div>
     <div class="public-icon" style="color:{theme['a']}">{CLASS_ICONS[cls]}</div>
+  </div>
+</div>"""
+
+
+def build_folded_tent_public_ancestry(ancestry: str = "Dwarf") -> str:
+    return f"""<div class="mini-tent tent-public cls-ancestry" style="--a:#9a6a2e;--bg:#F5F0E9">
+  <div class="tent-panel">
+    <div class="public-name">{html.escape(ancestry.upper())}</div>
+    <div class="public-icon" style="color:#9a6a2e">{ANCESTRY_ICON}</div>
   </div>
 </div>"""
 
@@ -166,10 +267,8 @@ def build_folded_tent_private_core(cls: str) -> str:
 def build_sheet_row_pov(pov: str = "player", cls: str = "rogue", name: str = "Nathan", ancestry: str = "Dwarf") -> str:
     """Player POV: Class | Ancestry | Character. Table POV: reversed → Name · Ancestry · Class."""
     class_tent = build_folded_tent_private_core(cls) if pov == "player" else build_folded_tent_public(cls)
-    ancestry_pub = f"""<div class="mini-tent tent-public cls-ancestry" style="--a:#7D5725;--bg:#F5F0E9">
-  <div class="tent-panel"><div class="public-name">{html.escape(ancestry.upper())}</div><div class="public-icon" style="color:#7D5725">{ANCESTRY_ICON}</div></div></div>"""
-    ancestry_priv = f"""<div class="mini-tent tent-private ancestry-mini" style="--a:#7D5725;--bg:#F5F0E9">
-  <div class="tent-panel mini-rules"><div class="mini-title">{html.escape(ancestry)}</div><div class="mini-sub">Absorb · Shake it off · Dig in</div></div></div>"""
+    ancestry_pub = build_folded_tent_public_ancestry(ancestry)
+    ancestry_priv = build_folded_tent_private_ancestry()
     char_pub = f"""<div class="mini-tent tent-public char-mini"><div class="tent-panel"><div class="public-name char-public-name">{html.escape(name)}</div></div></div>"""
     char_priv = f"""<div class="mini-tent tent-private char-mini"><div class="tent-panel mini-char"><div class="mini-sketch"></div><div class="mini-name-line">Character name</div></div></div>"""
 
