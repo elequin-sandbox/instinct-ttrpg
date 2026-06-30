@@ -272,17 +272,21 @@ injected into `index.html`. Status: current.
 > **Status:** exploration — June 2026. Proof: `core-leading-upright-proof.html`.
 
 The **leading** Core card per class (first in the Core set — not labeled on-card) uses a **tall foldable
-tent format** that stands upright in the **Class** panel of the 3-panel character sheet (same geometry as
-Ancestry sheet cards and the retired Loadout cards).
+tent format** that stands upright in the **Class** panel of the 3-panel character sheet.
+
+**Done classes (June 2026):** Barbarian **Rage** · Rogue **Ace** · Paladin **Bulwark** · Warlock **Pact**.
+Proof: `core-leading-upright-proof.html`.
+
+| Face | Visible to | Content |
+|---|---|---|
+| **Private** (inward) | Player | Card name ribbon + subtitle + Core rules + `⁘ CLASS \| Core ⁘` |
+| **Public** (outward) | Across the table | Big **CLASS** name only (same role as ancestry public face) |
 
 | Element | Spec |
 |---|---|
-| Fold | Horizontal dashed line at mid-height; lower half is player-facing read |
-| Ribbon | Card **name** in Spectral uppercase at the fold band (angled end caps) |
-| Subtitle | Italic flavor line below ribbon (lower half) |
-| Body | Inter 600 zone labels + rules text (lower half) |
-| Footer | `⁘ CLASS \| Core ⁘` — no “leading” label |
-| Retired | All **Loadout** Core cards removed — Player Primer v2 owns chargen setup |
+| Fold | Horizontal dashed line at mid-height |
+| Ribbon | Spectral uppercase at fold band (angled end caps) |
+| Retired | **Loadout** cards — Player Primer v2 owns chargen setup |
 
 Builder: `scripts/build_core_upright_html.py` · regen: `scripts/regenerate_core_upright_proof.py`.
 
