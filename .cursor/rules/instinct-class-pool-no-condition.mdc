@@ -1,0 +1,18 @@
+# Instinct RPG — No Condition cards in class pools
+
+**Class ability decks** must **never** use the **Condition** index subtype again.
+
+## Rule
+
+- **Forbidden in class pools:** header badge `Condition`, `Card_Type: Condition`, or any card framed
+  as a persistent “condition” subtype in a class deck.
+- **While-in-hand passives:** single **Ability** cap only; flavor opens `While in hand: …`.
+
+## Narrative terms (Exposed, Rattled, etc.)
+
+These carry **no built-in mechanics**. On class cards:
+
+1. Bold the term (**Exposed**, **Rattled**, …).
+2. Add a **few words of scene-specific narrative** (em dash or choose-one fork).
+3. **Split combined crits** into separate Crit lines — one spend option per line (PbtA style).
+4. Never write “immune to **Rattled**,” “remove condition,” or “this condition persists.”

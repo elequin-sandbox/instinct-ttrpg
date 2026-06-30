@@ -23,8 +23,11 @@ Mirrors the keyword taxonomy in `core-rules.md §11`; exact colors live in `card
 2. **Index Keywords → outlined chips.** Card types and class names used to *classify* a card
    (Act, React, Core, Instinct, Background, Bond, Flaw, Ancestry, Item; class names). Rendered as
    outlined chips in their type/class color — see `card-anatomy.md`.
-3. **Narrative vocabulary → plain bold.** Descriptive conditions with no mechanics
+3. **Narrative vocabulary → plain bold.** Descriptive terms with no built-in mechanics
    (**Exposed, Rattled, Rooted, Hidden, Marked, Sundered, Break**). Bold title case, no pill, no color.
+   **Always gloss on the card** — a few words of scene-specific meaning (em dash or choose-one fork).
+   Split combined crit spends into separate Crit lines (one keyword + gloss per line). Never “immune to
+   **Rattled**,” “remove condition,” or “this condition persists.”
 
 **Declared Actions → Bold + Capitalized** (not pills): **Action · Reaction · Draw · Discard ·
 Shuffle · Cleanse · Snap Check · Scene** (plus **Combat · Rest** as scene/time terms).

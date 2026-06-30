@@ -39,7 +39,9 @@
 > 🔒 **Paladin (June 2026):** Player picks 1 **Oath** Core card at creation (Warlock Patron parallel).
 > Each scene: at **Scene start**, roll 2d6 onto Verb + Noun lists → **Vow** phrase; once per scene,
 > GM-gated fulfill adds both dice → **Boost 2**. **Break Your Oath:** defiance → dice to **Resolve**;
-> GM **Toll 2** vs you. **Bulwark** = **[Resolve]** specialist (no Oath tie-in). Detail → `design/paladin-oath-charge.md`.
+> GM **Toll 2** vs you. **Bulwark** = extra **[Resolve]** die + re-rolls; **Parry This** adds
+> **[Resolve]** to **Defensive** rolls in **Contests** (no Oath tie-in). Detail →
+> `design/paladin-oath-charge.md`.
 
 ---
 
@@ -89,7 +91,9 @@ a design problem; retire it from one class or build a distinct parallel.
   prior-contact becomes a standing counter.
 - **Paladin:** Pick 1 **Oath** at creation (Active area). **Vow:** 2d6 at **Scene start** on Verb+Noun;
   once/scene GM-gated fulfill adds both dice → **Boost 2**. **Break Your Oath:** defiance → dice to
-  **Resolve**; GM **Toll 2** vs you this scene. **Bulwark:** +2 **[Resolve]** rolls. Replaces Conviction·Defiance.
+  **Resolve**; GM **Toll 2** vs you this scene. **Bulwark:** roll an extra **[Resolve]** die and
+  re-roll any **[Resolve]** dice; **Parry This** adds **[Resolve]** to **Defensive** rolls in
+  **Contests**. Replaces Conviction·Defiance.
 - **Rogue:** Owns **Stow** (intentional planning). Primary Exposed user. Hidden = primary defensive
   framing. Stow = cards hidden from other players.
 - **Ranger:** Owns **Trap** cards (place roll → trigger-condition fire). Shares Rooted framing with
