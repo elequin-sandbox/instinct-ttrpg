@@ -1101,7 +1101,7 @@ function restyle(root){
   scanText(root.querySelector('.cbody, .card-body, .bf-body'));
   // 3. crit option: wrap trailing text after the cost so it wraps cleanly
   root.querySelectorAll('.ci').forEach(function(ci){
-    const cost=ci.querySelector('.tc'); if(!cost) return;
+    const cost=ci.querySelector('.tc, .kw-crit'); if(!cost) return;
     if(ci.querySelector('.ci-txt')) return;
     const wrap=document.createElement('span'); wrap.className='ci-txt';
     let nx=cost.nextSibling;
