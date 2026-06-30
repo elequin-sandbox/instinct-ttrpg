@@ -22,6 +22,7 @@ The live primer mounts one Baserow card per chargen step via the `MOUNTS` object
 | `core-card-wrap-a` | `weapon-master-fighter-core` | Class Core (sample 1) |
 | `core-card-wrap-b` | `battlemaster-fighter-core` | Class Core (sample 2) |
 | `ability-card-wrap` | `find-the-gap-rogue` | 12 Abilities (sample) |
+| `walkthrough-card-wrap` | `break-barbarian` | §3 check walkthrough (Break) |
 
 When you change a key in the primer script, **update this table** in the same commit.
 
