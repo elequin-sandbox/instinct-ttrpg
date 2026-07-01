@@ -726,7 +726,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .sparklab-panel{
   background:#1a1510;border:1px solid #322818;border-radius:12px;
   display:flex;flex-direction:column;overflow:hidden;
+  position:relative;z-index:1;transition:z-index 0s;
 }
+.sparklab-panel:hover{z-index:25;overflow:visible;}
 .sparklab-panel.ships{border-color:#5a4a30;box-shadow:inset 3px 0 0 #c9a24a;}
 .sparklab-hd{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
@@ -739,8 +741,49 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   background:linear-gradient(180deg,#e8dfc8 0%,#d8cdb0 100%);
   padding:16px 12px 14px;display:flex;justify-content:center;
   border-bottom:1px solid #3a3020;
+  cursor:zoom-in;position:relative;overflow:visible;
 }
-.sparklab-stage .spark-lab-cardwrap{width:280px;transform:scale(1);transform-origin:top center;}
+.sparklab-stage .spark-lab-cardwrap{
+  width:280px;transform:scale(1);transform-origin:top center;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.sparklab-panel:hover .sparklab-stage .spark-lab-cardwrap{
+  transform:scale(1.14);
+  box-shadow:0 14px 36px rgba(12,8,4,.38);
+}
+.sparklab-zoom-hint{
+  position:absolute;bottom:6px;right:8px;font-size:9px;letter-spacing:.06em;
+  text-transform:uppercase;color:#6a5a40;opacity:0;transition:opacity .15s;
+  pointer-events:none;
+}
+.sparklab-panel:hover .sparklab-zoom-hint{opacity:1;}
+.sparklab-lightbox{
+  position:fixed;inset:0;z-index:260;background:rgba(10,7,3,.9);
+  display:flex;align-items:center;justify-content:center;padding:28px 16px;
+  overflow:auto;
+}
+.sparklab-lb-inner{
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  gap:14px;max-width:96vw;
+}
+.sparklab-lb-title{color:#e7d6ac;font-size:15px;font-weight:700;text-align:center;letter-spacing:.02em;}
+.sparklab-lb-cat{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8a7a5a;text-align:center;margin-top:-8px;}
+.sparklab-lb-stage{
+  background:linear-gradient(180deg,#e8dfc8 0%,#d8cdb0 100%);
+  padding:28px 32px 32px;border-radius:14px;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+}
+.sparklab-lb-stage .spark-lab-cardwrap{width:280px;}
+.sparklab-lb-stage .card{
+  width:280px !important;height:392px !important;
+  background:#f7f0e0 !important;
+  box-shadow:0 6px 20px rgba(20,12,4,.25) !important;
+}
+.sparklab-lb-stage .cbody{padding-bottom:28px !important;color:#1c1408;}
+.sparklab-lb-stage .flv{font-style:italic;color:#5a4520;font-size:9.8px;line-height:1.42;}
+.sparklab-lb-stage .etxt{color:#1c1408;font-size:9.8px;line-height:1.42;}
+.sparklab-lb-stage .elbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6030;}
+.sparklab-lb-hint{font-size:11px;color:#8a7a5a;text-align:center;}
 .sparklab-stage .card{
   width:280px !important;height:392px !important;
   background:#f7f0e0 !important;
@@ -1137,7 +1180,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 </section>
 
 <section class="view hidden" id="view-sparklab">
-  <p class="sparklab-intro" id="sparkLabIntro">Leave a comment, or tap <strong>I like something here</strong> on designs that work for you.</p>
+  <p class="sparklab-intro" id="sparkLabIntro">Hover a card to peek closer, or click to open full size. Leave a comment, or tap <strong>I like something here</strong> on designs that work for you.</p>
   <div class="sparklab-toolbar">
     <span class="flabel" style="min-width:auto">Show</span>
     <button class="chip on" data-slab="all" onclick="filterSparkLab('all',this)">All</button>
@@ -1274,6 +1317,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   </div>
 </section>
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
+<div id="sparkLabLightbox" class="sparklab-lightbox hidden" onclick="if(event.target===this)closeSparkLabLightbox()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
 
@@ -1945,7 +1989,12 @@ async function init(){
   updateSparkLabBadge();
 }
 init();
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const lb=document.getElementById('sparkLabLightbox');
+  if(lb&&!lb.classList.contains('hidden'))closeSparkLabLightbox();
+  else closeModal();
+});
 
 /* ===== ONBOARDING FLOW ===== */
 const CLASSES = [
@@ -2411,13 +2460,38 @@ function renderSparkLabPanels(data){
     }).join('');
     return '<article class="sparklab-panel'+(v.ships?' ships':'')+'" data-cat="'+escAttr(v.category)+'">'+
       '<div class="sparklab-hd"><div><div class="sparklab-cat">'+esc(v.categoryLabel)+'</div><div class="sparklab-title">'+esc(v.label)+'</div></div>'+ship+'</div>'+
-      '<div class="sparklab-stage">'+v.html+'</div>'+
+      '<div class="sparklab-stage" onclick="openSparkLabLightbox(\''+escAttr(v.id)+'\')" title="Click to enlarge">'+
+      v.html+'<span class="sparklab-zoom-hint">Click to enlarge</span></div>'+
       '<div class="sparklab-meta"><details class="sparklab-details">'+
       '<summary>Design goals &amp; playtest question</summary>'+
       '<ul class="sparklab-goals">'+goals+'</ul>'+
       '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div></details></div>'+
       feedbackPanelHTML(v,ur)+'</article>';
   }).join('');
+}
+function sparkLabLightboxZoom(){
+  const w=Math.min(window.innerWidth,window.innerHeight);
+  return Math.max(1.25,Math.min(2.8,Math.round(w*0.38/280*10)/10));
+}
+function openSparkLabLightbox(id){
+  const data=window.SPARK_DESIGN_LAB;
+  if(!data||!data.variants)return;
+  const v=data.variants.find(function(x){return x.id===id;});
+  if(!v)return;
+  const zoom=sparkLabLightboxZoom();
+  const box=document.getElementById('sparkLabLightbox');
+  box.innerHTML='<div class="sparklab-lb-inner" onclick="event.stopPropagation()">'+
+    '<button class="closex" onclick="closeSparkLabLightbox()" aria-label="Close">&times;</button>'+
+    '<div class="sparklab-lb-title">'+esc(v.label)+'</div>'+
+    '<div class="sparklab-lb-cat">'+esc(v.categoryLabel||'')+'</div>'+
+    '<div class="sparklab-lb-stage"><div style="zoom:'+zoom+'">'+v.html+'</div></div>'+
+    '<div class="sparklab-lb-hint">Esc or click outside to close</div></div>';
+  box.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+function closeSparkLabLightbox(){
+  document.getElementById('sparkLabLightbox').classList.add('hidden');
+  document.body.style.overflow='';
 }
 async function submitSparkLabFeedback(){
   const fb=getSparkLabFeedback();

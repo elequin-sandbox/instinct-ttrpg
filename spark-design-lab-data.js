@@ -3,7 +3,7 @@ window.SPARK_DESIGN_LAB = {
   "cardName": "Smoke and Mirrors",
   "cardClass": "Rogue",
   "updated": "2026-07-03",
-  "intro": "Same Rogue card, different Spark presentations. Tap ♥ I like something here or leave a comment on what works for you.",
+  "intro": "Same Rogue card, different Spark presentations. Hover to peek closer, or click a card to open full size. Tap ♥ I like something here or leave a comment on what works for you.",
   "variants": [
     {
       "id": "pay-spark-glyph",
