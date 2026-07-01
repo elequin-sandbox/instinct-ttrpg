@@ -2,7 +2,8 @@
 
 /* --- Legacy minimal layout (superseded by fork stack) --- */
 .scope-boon .cbody,
-.cardwrap .cbody {
+.cardwrap .cbody,
+.spark-lab-cardwrap .cbody {
   flex: 1;
   padding: 7px 10px 5px;
   display: flex;
@@ -14,14 +15,16 @@
   overflow: hidden;
 }
 .scope-boon .flv,
-.cardwrap .flv {
+.cardwrap .flv,
+.spark-lab-cardwrap .flv {
   font-style: italic;
   color: #5a4520;
   font-size: 9.8px;
   line-height: 1.42;
 }
 .scope-boon .etxt,
-.cardwrap .etxt {
+.cardwrap .etxt,
+.spark-lab-cardwrap .etxt {
   font-size: 9.8px;
   line-height: 1.42;
   color: #1c1408;
