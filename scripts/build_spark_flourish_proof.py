@@ -26,7 +26,7 @@ from scripts.strip_origin_stems import CARD_DATA, load_cards, push_baserow  # no
 
 PROOF_OUT = ROOT / "spark-flourish-proof.html"
 BATCH_OUT = ROOT / "scripts" / "spark_flourish_batch.json"
-DATE = "2026-07-03"
+DATE = "2026-07-01"
 
 B1 = '<span class="kw kw-boost">Boost 1</span>'
 HD = '<span class="kw kw-hd">Hit Die</span>'
@@ -224,8 +224,8 @@ def column_flow_shape(cat: Cat) -> str:
     if cat == "def":
         return '<span class="yield-tri cat-def" aria-hidden="true"></span>'
     if cat == "off":
-        return '<span class="yield-sq cat-off" aria-hidden="true"></span>'
-    return '<span class="yield-sq cat-res" aria-hidden="true"></span>'
+        return '<span class="yield-tri cat-off" aria-hidden="true"></span>'
+    return '<span class="yield-dot cat-res" aria-hidden="true"></span>'
 
 
 def column_flow_key(
@@ -272,21 +272,44 @@ def sam_spark_column_flow() -> str:
     return column_flow_block(
         column_flow_entry(
             column_flow_row(
-                column_flow_key("Deflect", "def", cost=1),
-                "attention from an Ally",
+                column_flow_key("Slip", "def", cost=1),
+                "your ally through the gap you opened",
             ),
         ),
         column_flow_entry(
             column_flow_row(
-                column_flow_key("Sell", "def", cost=2),
+                column_flow_key("Sell", "off", cost=2),
                 "the wrong threat",
             ),
             column_flow_row(
-                column_flow_key("Pass", "off"),
-                "your ally through the opening",
+                column_flow_key("Pass", "def"),
+                "your partner through the opening",
             ),
         ),
     )
+
+
+ColumnClause = tuple[Cat, str, str]
+
+
+def production_column_flow(*options: tuple[int, list[ColumnClause]]) -> str:
+    """Ship layout: left key column (cost, shape, verb) + sentence tail right."""
+    entries: list[str] = []
+    for cost, clauses in options:
+        rows: list[str] = []
+        for i, (cat, verb, tail) in enumerate(clauses):
+            key = column_flow_key(verb, cat, cost=cost if i == 0 else None)
+            rows.append(column_flow_row(key, tail))
+        entries.append(column_flow_entry(*rows))
+    return column_flow_block(*entries)
+
+
+def specs_to_column_flow(*specs: SparkLineSpec) -> str:
+    options: list[tuple[int, list[ColumnClause]]] = []
+    for spec in specs:
+        clauses = [(cat, verb, tail) for cat, verb, tail, _mag in spec.clauses]
+        options.append((spec.cost, clauses))
+    return production_column_flow(*options)
 
 
 def ability_card(
@@ -703,11 +726,10 @@ CARDS: list[dict] = [
             "You make yourself the problem they can't ignore.",
             "Perform a <strong>Presence</strong> check to draw an enemy's focus onto you — "
             "make them answer your challenge before they go for your allies.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
-                    [("off", "Jolt", "a second foe's attention onto you", 1)],
+                    [("off", "Call", "another foe to answer you first", 1)],
                     "Another enemy can't look at anyone but you.",
                 ),
             ),
@@ -725,11 +747,10 @@ CARDS: list[dict] = [
             "You don't curse them. You recognize what they are.",
             "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
             "the truth lands while everyone watches.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
-                    [("off", "Unmask", "them until the room goes quiet", 2)],
+                    [("off", "Name", "what they are until the room goes quiet", 2)],
                     "Swagger drains away; everyone sees what remains.",
                 ),
                 SparkLineSpec(
@@ -752,8 +773,7 @@ CARDS: list[dict] = [
             "You stop caring about what happens to you.",
             f"Perform an <strong>Athletics</strong> check with {B1} to <strong>Strike</strong> with "
             "full force — leave your guard wide open until your next turn.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
                     [("off", "Cleave", "through what they're holding", 2)],
@@ -762,7 +782,7 @@ CARDS: list[dict] = [
                 SparkLineSpec(
                     2,
                     [
-                        ("off", "Rupture", "their defenses as you pass", None),
+                        ("off", "Rupture", "their guard as you pass", None),
                         ("def", "Hurl", "an ally above them", None),
                     ],
                     "Steel opens the lane; your friend falls through it.",
@@ -782,8 +802,7 @@ CARDS: list[dict] = [
             "There is no obstacle. There is only physics.",
             "Perform an <strong>Athletics</strong> check to smash part of the <strong>Scene</strong> — "
             "destroy a barrier or structure and open a path.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
                     [("off", "Cascade", "wreckage onto whoever's hiding", 2)],
@@ -804,8 +823,7 @@ CARDS: list[dict] = [
             "You weren't watching the right shadow.",
             "Perform a <strong>Stealth</strong> check to <strong>Strike</strong> a target "
             "unaware of you or occupied with an ally.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
                     [("off", "Pierce", "from the blind side", 1)],
@@ -824,7 +842,14 @@ CARDS: list[dict] = [
         "key": "smoke-and-mirrors-rogue",
         "class": "Rogue",
         "name": "Smoke and Mirrors",
-        "build": lambda: build_sam_variant(SAM_VARIANTS[0]),
+        "build": lambda: ability_card(
+            "rogue",
+            "Rogue",
+            "Smoke and Mirrors",
+            "The lie lands first. The truth walks through second.",
+            SAM_EFFECT,
+            sam_spark_column_flow(),
+        ),
     },
     {
         "id": 312,
@@ -838,8 +863,7 @@ CARDS: list[dict] = [
             "The power is yours. So is the price.",
             f"Remove a {HD} from your pool and <strong>Strike</strong> at any range — add that die "
             "to your strike. Dark magic marks where to hit them next.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
                     [("off", "Brand", "them with a crawling sigil", 1)],
@@ -865,8 +889,7 @@ CARDS: list[dict] = [
             "More. Always more.",
             f"Remove a {HD} from your pool. Perform a <strong>Spellcast</strong> check — add that die "
             "to the roll — to pour more power into your next Act this <strong>Scene</strong>.",
-            spark_block(
-                SPARK_V5,
+            specs_to_column_flow(
                 SparkLineSpec(
                     1,
                     [("res", "Exhale", "the hunger for a breath", 1)],

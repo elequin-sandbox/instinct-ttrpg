@@ -25,7 +25,7 @@ window.SPARK_DESIGN_LAB = {
       "category": "layout",
       "categoryLabel": "Layout",
       "label": "Exchange row (v5)",
-      "ships": true,
+      "ships": false,
       "goals": [
         {
           "title": "Spend ⇄ yield",
@@ -65,7 +65,7 @@ window.SPARK_DESIGN_LAB = {
       "category": "layout",
       "categoryLabel": "Layout",
       "label": "Column flow (book read)",
-      "ships": false,
+      "ships": true,
       "goals": [
         {
           "title": "Key column left",
@@ -81,7 +81,7 @@ window.SPARK_DESIGN_LAB = {
         }
       ],
       "playtestQuestion": "Read down the left column for the trade, then left-to-right across each row — does it feel like a book?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-column-flow\"><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"spark-cost-dies\" title=\"1 Spark\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-def\">Deflect</span></div><div class=\"spark-flow-tail\">attention from an Ally</div></div></div><div class=\"ci spark-entry spark-entry-column-flow\"><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"spark-cost-dies\" title=\"2 Sparks\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-def\">Sell</span></div><div class=\"spark-flow-tail\">the wrong threat</div></div><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"yield-sq cat-off\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-off\">Pass</span></div><div class=\"spark-flow-tail\">your ally through the opening</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-column-flow\"><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"spark-cost-dies\" title=\"1 Spark\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-def\">Slip</span></div><div class=\"spark-flow-tail\">your ally through the gap you opened</div></div></div><div class=\"ci spark-entry spark-entry-column-flow\"><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"spark-cost-dies\" title=\"2 Sparks\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-off\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-off\">Sell</span></div><div class=\"spark-flow-tail\">the wrong threat</div></div><div class=\"spark-flow-row\"><div class=\"spark-flow-key\"><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-flow-verb spark-v-def\">Pass</span></div><div class=\"spark-flow-tail\">your partner through the opening</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
       "sort": 102
     },
     {

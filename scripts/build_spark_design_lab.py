@@ -68,7 +68,7 @@ def collect_variants() -> list[dict]:
         (
             "layout-exchange",
             "Exchange row (v5)",
-            True,
+            False,
             [
                 {"title": "Spend ⇄ yield", "body": "Amber exchange strip above the verb line."},
                 {"title": "Ships today", "body": "Current production layout on Spark cards."},
@@ -96,7 +96,7 @@ def collect_variants() -> list[dict]:
         (
             "layout-column-flow",
             "Column flow (book read)",
-            False,
+            True,
             [
                 {
                     "title": "Key column left",
