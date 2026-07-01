@@ -2,7 +2,7 @@
 
 *Living document — update this file whenever cards are created, revised, or pushed to Baserow.*
 
-**Last updated:** June 29 2026
+**Last updated:** July 1 2026
 **Total cards designed:** 64 (character creation) + tutorial class decks + Items
 **In Baserow (table 911939):** ALL Status:current cards — character creation, class abilities, items, connections (245+ rows)
 
@@ -188,6 +188,24 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [July 1 2026] — **Playtest 4 Phase 2B — Crit Flourish card rework (first pass).** Rewrote the model
+  cards named in `classes.md` §4 ("pared Smite / Strike") plus 6 more to the locked Crit Flourish
+  pattern (`core-rules.md` §5 / `card-anatomy.md` §4 / `writing-conventions.md` §3): bold Flourish
+  keyword + printed number, colored red (offensive — remove N dice from the opposing pool), blue
+  (defensive — help allies), or green (resolve — heal/recover Resolve or Hit Die). Paladin: **Smite**
+  (red, repeatable), **Divine Challenge** (red), **Condemn** (red + blue), **Lay on Hands** (green).
+  Barbarian: **Reckless Strike**, **Break**, **Sundering Blow** (red + blue) — all on Barbarian's
+  owned **Sundered** term (`classes.md` §2) — and **Endure** (green). Each base Effect pared to one
+  clear check + outcome (no stacked forks); dropped **Exposed** from all 8 (Rogue-owned term) in favor
+  of **Rattled** (Paladin) / **Sundered** (Barbarian, class-owned). New shared CSS
+  (`primer-card-scope.css` `.ci.fl-red/.fl-blue/.fl-green`) — colored dot + bold colored keyword per
+  Flourish line. Builder: `scripts/build_flourish_cards.py`. Proof: `flourish-cards-proof.html`.
+  Rows 370, 373, 378, 369, 342, 343, 348, 349 patched in `card-data.js`; **Baserow push blocked this
+  session** (Baserow MCP rejected all calls; `config.js` token still a placeholder) — batch payload
+  ready at `scripts/flourish_cards_batch.json` for the next session with working credentials.
+  `[needs Nathan verify]`: Rattled/Sundered as the chosen Flourish words (no hard doctrine lock on
+  word choice, just avoided Rogue's Exposed); remaining ~12+ pool cards from the P4 "top ~20" audit
+  still use the pre-Flourish narrative-crit style and are not yet converted.
 - [July 1 2026] — **Playtest 4 doctrine lock (Phase 1 — no card changes yet).** Locked P1 (objective/
   challenge-pool co-definition + telegraphing + multi-wave pools), P2 (Crit Flourish self-adjudicated
   three-coloring system), and flagged P3–P4 + Secondary items (S1–S8) as current direction/open
