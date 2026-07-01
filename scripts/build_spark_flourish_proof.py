@@ -222,43 +222,34 @@ def sam_spark_inverted() -> str:
 
 def column_flow_shape(cat: Cat) -> str:
     if cat == "def":
-        return '<span class="yield-tri cat-def" aria-hidden="true"></span>'
+        return '<span class="yield-sq cat-def" aria-hidden="true"></span>'
     if cat == "off":
         return '<span class="yield-tri cat-off" aria-hidden="true"></span>'
     return '<span class="yield-dot cat-res" aria-hidden="true"></span>'
 
 
-def column_flow_key(
-    verb: str,
-    cat: Cat,
-    *,
-    cost: int | None = None,
-) -> str:
-    cost_html = cost_die_icons(cost) if cost else ""
+def column_flow_lemma(cat: Cat, verb: str) -> str:
     return (
-        '<div class="spark-flow-key">'
-        f"{cost_html}"
+        '<div class="spark-flow-lemma">'
         f"{column_flow_shape(cat)}"
         f'<span class="spark-flow-verb spark-v-{cat}">{verb}</span>'
         "</div>"
     )
 
 
-def column_flow_row(key_html: str, tail: str) -> str:
-    return (
-        '<div class="spark-flow-row">'
-        f"{key_html}"
-        f'<div class="spark-flow-tail">{tail}</div>'
-        "</div>"
-    )
-
-
-def column_flow_entry(*rows: str) -> str:
-    return (
-        '<div class="ci spark-entry spark-entry-column-flow">'
-        f'{"".join(rows)}'
-        "</div>"
-    )
+def column_flow_entry(cost: int, clauses: list[tuple[Cat, str, str]]) -> str:
+    cells: list[str] = [
+        '<div class="ci spark-entry spark-entry-column-flow">',
+        '<div class="spark-flow-grid">',
+        '<div class="spark-flow-vrule" aria-hidden="true"></div>',
+        f'<div class="spark-flow-cost">{cost_die_icons(cost)}</div>',
+        '<div class="spark-flow-pad" aria-hidden="true"></div>',
+    ]
+    for cat, verb, tail in clauses:
+        cells.append(column_flow_lemma(cat, verb))
+        cells.append(f'<div class="spark-flow-tail">{tail}</div>')
+    cells.extend(["</div>", "</div>"])
+    return "".join(cells)
 
 
 def column_flow_block(*entries: str) -> str:
@@ -270,21 +261,13 @@ def column_flow_block(*entries: str) -> str:
 
 def sam_spark_column_flow() -> str:
     return column_flow_block(
+        column_flow_entry(1, [("def", "Slip", "your ally through the gap you opened")]),
         column_flow_entry(
-            column_flow_row(
-                column_flow_key("Slip", "def", cost=1),
-                "your ally through the gap you opened",
-            ),
-        ),
-        column_flow_entry(
-            column_flow_row(
-                column_flow_key("Sell", "off", cost=2),
-                "the wrong threat",
-            ),
-            column_flow_row(
-                column_flow_key("Pass", "def"),
-                "your partner through the opening",
-            ),
+            2,
+            [
+                ("off", "Sell", "the wrong threat, and then"),
+                ("def", "Pass", "your partner through the opening"),
+            ],
         ),
     )
 
@@ -293,14 +276,8 @@ ColumnClause = tuple[Cat, str, str]
 
 
 def production_column_flow(*options: tuple[int, list[ColumnClause]]) -> str:
-    """Ship layout: left key column (cost, shape, verb) + sentence tail right."""
-    entries: list[str] = []
-    for cost, clauses in options:
-        rows: list[str] = []
-        for i, (cat, verb, tail) in enumerate(clauses):
-            key = column_flow_key(verb, cat, cost=cost if i == 0 else None)
-            rows.append(column_flow_row(key, tail))
-        entries.append(column_flow_entry(*rows))
+    """Ship layout: left key column (cost, shape+verb) | rule | sentence tail."""
+    entries = [column_flow_entry(cost, list(clauses)) for cost, clauses in options]
     return column_flow_block(*entries)
 
 
