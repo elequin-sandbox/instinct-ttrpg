@@ -17,27 +17,35 @@
 .ci.fl-green .fl-dot{background:#166534;}
 .ci.fl-green .fl-word{color:#166534;}
 .ci .fl-word{font-weight:700;}
-/* Spark / Flourish (July 2026): glyph cost + PbtA verb phrase + small prompt.
-   Magnitude in colored parens only — no keyword pills. ▲/■/● via .spark-n hue. */
-.ci.spark-entry{align-items:flex-start;gap:4px;}
-.spark-glyphs{display:inline-flex;gap:1px;flex-shrink:0;padding-top:1px;}
-.spark-glyph{
-  display:inline-block;width:8px;height:10px;flex-shrink:0;
-  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
-  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+/* Spark / Flourish (July 2026): pip cost + bold colored verb + shape (CB) + story invite.
+   ▲ offensive · ■ empower · ● resolve — icon + hue on verb and magnitude. */
+.ci.spark-entry{align-items:flex-start;gap:5px;}
+.spark-pips{display:flex;flex-direction:column;gap:3px;flex-shrink:0;padding-top:2px;}
+.spark-pip{
+  display:block;width:3px;height:10px;flex-shrink:0;border-radius:1px;
+  background:linear-gradient(180deg,#c89010,#7a5a08);
 }
 .spark-body{flex:1;min-width:0;}
-.spark-verb{font-size:9.5px;line-height:1.38;color:#1a1008;font-weight:600;}
-.spark-verb .spark-sep{color:#8a7350;font-weight:500;padding:0 2px;}
-.spark-n{font-weight:700;}
-.spark-n-off{color:#991B1B;}
-.spark-n-def{color:#2563EB;}
-.spark-n-res{color:#166534;}
-.spark-prompt{
-  font-size:8px;line-height:1.35;font-style:italic;color:#5a4a32;
-  margin-top:1px;padding-left:1px;
+.spark-row{font-size:9.5px;line-height:1.38;color:#1a1008;}
+.spark-v{font-weight:800;}
+.spark-v-off{color:#991B1B;}
+.spark-v-def{color:#2563EB;}
+.spark-v-res{color:#166534;}
+.spark-mag{white-space:nowrap;font-weight:700;font-size:9px;}
+.spark-mag .mag-n{font-weight:800;}
+.spark-mag-off .mag-n{color:#991B1B;}
+.spark-mag-def .mag-n{color:#2563EB;}
+.spark-mag-res .mag-n{color:#166534;}
+.cat-icon{display:inline-block;width:6px;height:6px;margin-right:2px;vertical-align:baseline;position:relative;top:1px;}
+.cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.cat-def{background:#2563EB;border-radius:1px;}
+.cat-res{border-radius:50%;background:#166534;}
+.spark-invite{
+  font-size:8px;line-height:1.38;font-style:italic;color:#5a4a32;
+  margin-top:2px;padding-left:1px;
 }
 .csec.spark-sec .clbl{color:#9a7209;letter-spacing:.08em;}
+.csec.spark-sec .crow{gap:5px;}
 /* Legacy Crit-count + chip styles (older flourish pass cards) */
 .ci.spark-line{align-items:flex-start;gap:4px;}
 .ci .fl-icon{display:inline-block;width:7px;height:7px;flex-shrink:0;}
@@ -291,7 +299,7 @@
 }
 .primer-cards .ci .kw-crit,
 .primer-cards .ci .kw.kw-crit,
-.primer-cards .ci .spark-glyphs,
+.primer-cards .ci .spark-pips,
 .primer-cards .ci .tc { flex: 0 0 auto; }
 .primer-cards .ci.spark-entry .spark-body { flex: 1; min-width: 0; }
 .primer-cards .ci .ci-txt { flex: 1; min-width: 0; }
