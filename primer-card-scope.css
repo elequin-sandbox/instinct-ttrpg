@@ -33,10 +33,10 @@
 .spark-body{flex:1;min-width:0;}
 .spark-xch{
   display:inline-flex;align-items:center;gap:4px;
-  padding:2px 5px;margin-bottom:3px;
-  border-radius:3px;
-  background:rgba(154,114,9,.09);
-  border:1px solid rgba(154,114,9,.22);
+  padding:0;margin-bottom:2px;
+  border-radius:0;
+  background:transparent;
+  border:none;
 }
 .spark-xch-row{flex-wrap:wrap;}
 .spark-xch-compact{padding:1px 4px;gap:3px;}

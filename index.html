@@ -702,39 +702,89 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
 /* ---------- Spark design lab ---------- */
 .tab-sparklab{color:#e0c060 !important;}
-#view-sparklab{min-height:calc(100vh - 62px);background:#16110a;}
-.sparklab-intro{max-width:52rem;padding:18px 20px 8px;color:#a08a5c;font-size:14px;line-height:1.55;}
-.sparklab-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 18px 14px;border-bottom:1px solid #2a1d10;}
+#view-sparklab{min-height:calc(100vh - 62px);background:#12100c;}
+.sparklab-intro{max-width:40rem;padding:16px 20px 6px;color:#9a8a6a;font-size:13px;line-height:1.5;}
+.sparklab-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 18px 12px;border-bottom:1px solid #2a1d10;position:sticky;top:62px;z-index:40;background:#12100c;}
 .sparklab-toolbar .chip.on{background:#8a6608;border-color:#c9a24a;color:#fff;}
 .sparklab-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
-.sparklab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px 20px;padding:20px 18px 40px;align-items:start;}
-.sparklab-panel{background:#1d140b;border:1px solid #3a2c19;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;}
-.sparklab-panel.ships{border-color:#3fae6c;box-shadow:0 0 0 1px rgba(63,174,108,.25);}
-.sparklab-hd{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;}
-.sparklab-title{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.3px;}
-.sparklab-cat{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8a7a5a;}
-.sparklab-ship{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#3fae6c;background:rgba(63,174,108,.12);padding:2px 6px;border-radius:4px;}
-.sparklab-goals{font-size:12px;line-height:1.45;color:#cbb98e;}
-.sparklab-goals li{margin:0 0 6px 14px;}
-.sparklab-goals strong{color:#e7d6ac;font-weight:700;}
-.sparklab-playtest{font-size:11px;font-style:italic;color:#9a8a6a;line-height:1.4;padding:8px 10px;background:#241a0f;border-radius:6px;border-left:3px solid #8a6608;}
-.sparklab-card{display:flex;justify-content:center;padding:4px 0;}
-.sparklab-card .spark-lab-cardwrap{width:300px;}
-.sparklab-card .card{width:300px !important;height:420px !important;background:#f7f0e0;}
-.sparklab-card .cbody{padding-bottom:32px;}
-.sparklab-rating{display:flex;flex-direction:column;gap:6px;border-top:1px solid #2a1d10;padding-top:10px;}
-.sparklab-rating-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-d);}
-.star-row{display:flex;gap:4px;align-items:center;}
-.star-btn{background:transparent;border:none;font-size:22px;line-height:1;color:#4a3d28;padding:0 2px;cursor:pointer;transition:color .1s,transform .1s;}
-.star-btn:hover,.star-btn.on{color:#e0c060;transform:scale(1.08);}
-.star-btn.user{color:#f5d76e;}
-.sparklab-avg{font-size:11px;color:#8a7a5a;}
+.sparklab-viewtoggle{display:flex;gap:4px;margin-left:8px;}
+.sparklab-viewtoggle .chip{font-size:11px;padding:4px 10px;}
+/* 2-up gallery — cards need ~300px; 4-across was crushing them */
+.sparklab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:28px 24px;padding:24px 20px 48px;align-items:start;
+  max-width:1200px;margin:0 auto;
+}
+.sparklab-grid.compare-mode{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:900px;
+}
+@media(max-width:760px){
+  .sparklab-grid,.sparklab-grid.compare-mode{grid-template-columns:1fr;max-width:400px;}
+}
+.sparklab-panel{
+  background:#1a1510;border:1px solid #322818;border-radius:12px;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sparklab-panel.ships{border-color:#5a4a30;box-shadow:inset 3px 0 0 #c9a24a;}
+.sparklab-hd{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 12px 8px;border-bottom:1px solid #2a2018;
+}
+.sparklab-title{font-size:12px;font-weight:700;color:#e7d6ac;letter-spacing:.02em;}
+.sparklab-cat{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#7a6a50;}
+.sparklab-ship{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#c9a24a;opacity:.9;}
+.sparklab-stage{
+  background:linear-gradient(180deg,#e8dfc8 0%,#d8cdb0 100%);
+  padding:16px 12px 14px;display:flex;justify-content:center;
+  border-bottom:1px solid #3a3020;
+}
+.sparklab-stage .spark-lab-cardwrap{width:280px;transform:scale(1);transform-origin:top center;}
+.sparklab-stage .card{
+  width:280px !important;height:392px !important;
+  background:#f7f0e0 !important;
+  box-shadow:0 4px 14px rgba(20,12,4,.22),0 1px 0 rgba(255,255,255,.4) inset !important;
+}
+.sparklab-stage .cbody{padding-bottom:28px !important;}
+.sparklab-meta{padding:0 12px 10px;}
+.sparklab-details{border:none;margin:0;}
+.sparklab-details summary{
+  cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+  color:#8a7a5a;padding:8px 0 4px;list-style:none;
+}
+.sparklab-details summary::-webkit-details-marker{display:none;}
+.sparklab-details summary::before{content:'▸ ';color:#c9a24a;}
+.sparklab-details[open] summary::before{content:'▾ ';}
+.sparklab-goals{font-size:11px;line-height:1.45;color:#b8a88a;margin:0 0 8px;padding-left:14px;}
+.sparklab-goals li{margin:0 0 4px;}
+.sparklab-goals strong{color:#d8c8a8;font-weight:600;}
+.sparklab-playtest{
+  font-size:11px;font-style:italic;color:#a89878;line-height:1.4;
+  padding:0 0 6px;
+}
+.sparklab-rating{
+  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+  padding:10px 12px 12px;background:#14100c;border-top:1px solid #2a2018;
+}
+.sparklab-rating-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#6a5a40;width:100%;}
+.star-row{display:flex;gap:2px;align-items:center;}
+.star-btn{background:transparent;border:none;font-size:20px;line-height:1;color:#3a3020;padding:0 3px;cursor:pointer;}
+.star-btn:hover,.star-btn.on{color:#e0c060;}
+.star-btn.user{color:#f5d76e;text-shadow:0 0 8px rgba(245,215,110,.35);}
+.sparklab-avg{font-size:10px;color:#7a6a50;margin-left:auto;}
 .sparklab-avg strong{color:#c9a24a;}
-.sparklab-leaderboard{padding:20px 18px 40px;max-width:720px;}
+.sparklab-leaderboard{padding:20px 18px 40px;max-width:640px;margin:0 auto;}
 .sparklab-lb-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #2a1d10;font-size:13px;}
-.sparklab-lb-row:first-child{font-weight:700;color:var(--gold);}
 .sparklab-lb-rank{width:28px;color:#8a7a5a;}
 .sparklab-lb-score{margin-left:auto;color:#e0c060;font-weight:700;}
+/* Lab: subtler on-card exchange — less amber box */
+#view-sparklab .spark-xch{
+  background:transparent;border:none;padding:0;margin:0 0 2px;gap:3px;
+}
+#view-sparklab .spark-entry{padding:4px 5px 5px 6px;}
+#view-sparklab .spark-phrase{font-size:9.25px;line-height:1.42;}
+#view-sparklab .spark-invite{font-size:7.5px;margin-top:2px;opacity:.92;}
 #view-sparklab .spark-glyphs{display:inline-flex;gap:1px;}
 #view-sparklab .spark-glyph{display:inline-block;width:8px;height:10px;background:linear-gradient(160deg,#ffe566,#d4a017 55%,#9a7209);clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);}
 #view-sparklab .spark-pips-heritage{display:flex;flex-direction:column;gap:3px;}
@@ -829,10 +879,10 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .spark-body{flex:1;min-width:0;}
 .spark-xch{
   display:inline-flex;align-items:center;gap:4px;
-  padding:2px 5px;margin-bottom:3px;
-  border-radius:3px;
-  background:rgba(154,114,9,.09);
-  border:1px solid rgba(154,114,9,.22);
+  padding:0;margin-bottom:2px;
+  border-radius:0;
+  background:transparent;
+  border:none;
 }
 .spark-xch-row{flex-wrap:wrap;}
 .spark-xch-compact{padding:1px 4px;gap:3px;}
@@ -1080,6 +1130,10 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="chip" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout &amp; copy</button>
     <button class="chip" data-slab="heritage" onclick="filterSparkLab('heritage',this)">Heritage</button>
     <button class="chip" data-slab="leaderboard" onclick="filterSparkLab('leaderboard',this)">Leaderboard</button>
+    <span class="sparklab-viewtoggle">
+      <button class="chip on" id="sparkViewGallery" onclick="setSparkLabView('gallery')">Gallery</button>
+      <button class="chip" id="sparkViewCompare" onclick="setSparkLabView('compare')">Compare (2-up)</button>
+    </span>
     <div class="sparklab-actions">
       <button class="hbtn" onclick="submitSparkLabRatings()">Submit my ratings</button>
       <button class="hbtn" onclick="renderSparkLab(true)">↺ Refresh averages</button>
@@ -2191,6 +2245,7 @@ const SPARK_LAB_SUBMIT_KEY = 'irpg_spark_lab_submitted';
 let sparkLabFilter = 'all';
 let sparkLabCommunity = {};
 let sparkLabCommunityLoaded = false;
+let sparkLabViewMode = 'gallery';
 
 function getSparkLabUserRatings(){
   try{return JSON.parse(localStorage.getItem(SPARK_LAB_STORE)||'{}');}catch(e){return {};}
@@ -2212,6 +2267,13 @@ function filterSparkLab(cat,btn){
   sparkLabFilter=cat;
   document.querySelectorAll('[data-slab]').forEach(b=>b.classList.toggle('on',b===btn));
   renderSparkLab();
+}
+function setSparkLabView(mode){
+  sparkLabViewMode=mode;
+  document.getElementById('sparkViewGallery').classList.toggle('on',mode==='gallery');
+  document.getElementById('sparkViewCompare').classList.toggle('on',mode==='compare');
+  const grid=document.getElementById('sparkLabGrid');
+  if(grid)grid.classList.toggle('compare-mode',mode==='compare');
 }
 function parseSparkLabSubmission(text){
   const out={};
@@ -2317,19 +2379,21 @@ function renderSparkLabPanels(data){
     const ur=user[v.id];
     const stars=ur?ur.stars:0;
     const comm=communityAvg(v.id);
-    const ship=v.ships?'<span class="sparklab-ship">Ships today</span>':'';
+    const ship=v.ships?'<span class="sparklab-ship">Current pick</span>':'';
     const goals=(v.goals||[]).map(function(g){
       return '<li><strong>'+esc(g.title)+':</strong> '+esc(g.body)+'</li>';
     }).join('');
     let avgHtml='';
-    if(comm)avgHtml='<div class="sparklab-avg">Community: <strong>'+comm.avg.toFixed(1)+'</strong> ★ ('+comm.n+' playtesters)</div>';
-    else if(stars)avgHtml='<div class="sparklab-avg">Your rating: <strong>'+stars+'</strong> ★ (submit to share)</div>';
+    if(comm)avgHtml='<div class="sparklab-avg">Avg <strong>'+comm.avg.toFixed(1)+'</strong>★ · '+comm.n+' votes</div>';
+    else if(stars)avgHtml='<div class="sparklab-avg">You: <strong>'+stars+'</strong>★</div>';
     return '<article class="sparklab-panel'+(v.ships?' ships':'')+'" data-cat="'+escAttr(v.category)+'">'+
       '<div class="sparklab-hd"><div><div class="sparklab-cat">'+esc(v.categoryLabel)+'</div><div class="sparklab-title">'+esc(v.label)+'</div></div>'+ship+'</div>'+
+      '<div class="sparklab-stage">'+v.html+'</div>'+
+      '<div class="sparklab-meta"><details class="sparklab-details">'+
+      '<summary>Design goals &amp; playtest question</summary>'+
       '<ul class="sparklab-goals">'+goals+'</ul>'+
-      '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div>'+
-      '<div class="sparklab-card">'+v.html+'</div>'+
-      '<div class="sparklab-rating"><div class="sparklab-rating-lbl">Your rating (1–5)</div>'+
+      '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div></details></div>'+
+      '<div class="sparklab-rating"><div class="sparklab-rating-lbl">Rate this design</div>'+
       starButtonsHTML(v.id,stars)+avgHtml+'</div></article>';
   }).join('');
 }
