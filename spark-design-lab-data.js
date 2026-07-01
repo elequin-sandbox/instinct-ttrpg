@@ -2,9 +2,204 @@
 window.SPARK_DESIGN_LAB = {
   "cardName": "Smoke and Mirrors",
   "cardClass": "Rogue",
-  "updated": "2026-07-03",
-  "intro": "Same Rogue card, different Spark presentations. Tap ♥ I like something here or leave a comment on what works for you.",
+  "updated": "2026-07-01",
+  "intro": "Same Rogue card — compare Layout, Language, and Spend icon in separate tabs. Tap ♥ or leave a comment on what works for you.",
+  "categories": {
+    "layout": {
+      "label": "Layout",
+      "intro": "How the Spark block is structured: exchange row vs verb-first, compact vs labeled grid. Copy stays similar so you can judge structure alone."
+    },
+    "language": {
+      "label": "Language",
+      "intro": "How the lines read at the table: bold verbs, invites, questions, or keyword chips. Structure is mostly v5 exchange unless noted."
+    },
+    "pay": {
+      "label": "Spend icon",
+      "intro": "What marks cost on the left: Spark glyph, bonus-roll icons, amber bars, or the retired misleading “6”. Natural 6s earn Spark — you spend Spark, not the die."
+    }
+  },
+  "defaultCategory": "layout",
   "variants": [
+    {
+      "id": "layout-exchange",
+      "category": "layout",
+      "categoryLabel": "Layout",
+      "label": "Exchange row (v5)",
+      "ships": true,
+      "goals": [
+        {
+          "title": "Spend ⇄ yield",
+          "body": "Amber exchange strip above the verb line."
+        },
+        {
+          "title": "Ships today",
+          "body": "Current production layout on Spark cards."
+        }
+      ],
+      "playtestQuestion": "Can you read cost, category, and verb in one glance?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
+      "sort": 100
+    },
+    {
+      "id": "layout-inverted",
+      "category": "layout",
+      "categoryLabel": "Layout",
+      "label": "Verb-first + invite box",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Cost → shapes → verb",
+          "body": "Open row: die cost, yield shapes, bold Defend / Attack."
+        },
+        {
+          "title": "Serif invite below",
+          "body": "Bordered box holds the table description — fiction under the pick."
+        }
+      ],
+      "playtestQuestion": "Does putting verbs first speed your pick? Is the invite box clearer than italic under?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-inverted\"><div class=\"spark-verb-row\"><span class=\"spark-cost-dies\" title=\"1 Spark\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Defend</span></div><div class=\"spark-invite-box\">Deflect attention from an Ally</div></div><div class=\"ci spark-entry spark-entry-inverted\"><div class=\"spark-verb-row\"><span class=\"spark-cost-dies\" title=\"2 Sparks\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Defend</span><span class=\"spark-combo-plus\" aria-hidden=\"true\">+</span><span class=\"yield-sq cat-off\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Attack</span></div><div class=\"spark-invite-box\">Sell the wrong threat, then pass your ally through the opening</div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "sort": 101
+    },
+    {
+      "id": "layout-compact",
+      "category": "layout",
+      "categoryLabel": "Layout",
+      "label": "Compact exchange",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Tighter strip",
+          "body": "Smaller pay⇄yield bar — more room for copy."
+        }
+      ],
+      "playtestQuestion": "Is the exchange still readable when compact?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-compact\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-compact\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
+      "sort": 102
+    },
+    {
+      "id": "layout-table",
+      "category": "layout",
+      "categoryLabel": "Layout",
+      "label": "Spend / Yield labels",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Mini grid",
+          "body": "Explicit Spend and Yield column headers."
+        }
+      ],
+      "playtestQuestion": "Do labels help first-timers or feel like homework?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-table\"><div class=\"xch-th\">Spark</div><div class=\"xch-th\">Yield</div><div class=\"xch-td\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span></div><div class=\"xch-td\"><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-table\"><div class=\"xch-th\">Spark</div><div class=\"xch-th\">Yield</div><div class=\"xch-td\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span></div><div class=\"xch-td\"><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
+      "sort": 103
+    },
+    {
+      "id": "layout-phrase-first",
+      "category": "layout",
+      "categoryLabel": "Layout",
+      "label": "Phrase before exchange",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Verb hero",
+          "body": "Action line leads; exchange chip trails inline."
+        }
+      ],
+      "playtestQuestion": "Does trailing the exchange after the verb change how you read the line?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def spark-entry-phrase-first\"><div class=\"spark-body\"><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix spark-entry-phrase-first\"><div class=\"spark-body\"><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
+      "sort": 104
+    },
+    {
+      "id": "lang-invites",
+      "category": "language",
+      "categoryLabel": "Language",
+      "label": "Verbs + story invites",
+      "ships": true,
+      "goals": [
+        {
+          "title": "Bold verbs",
+          "body": "Thread / Feint / Ghost — category-colored."
+        },
+        {
+          "title": "Italic invite",
+          "body": "One line nudges how you describe it at the table."
+        }
+      ],
+      "playtestQuestion": "Read both lines aloud — can you play them chronologically?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
+      "sort": 200
+    },
+    {
+      "id": "lang-no-invites",
+      "category": "language",
+      "categoryLabel": "Language",
+      "label": "Verbs only",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Less clutter",
+          "body": "No italic stems — action lines carry everything."
+        }
+      ],
+      "playtestQuestion": "Do you miss the invite line, or is the verb enough?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div></div></div></div></div></div>",
+      "sort": 201
+    },
+    {
+      "id": "lang-evocative",
+      "category": "language",
+      "categoryLabel": "Language",
+      "label": "Evocative chronology",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Read left-to-right",
+          "body": "Sell the wrong threat, and Pass your partner — say it, then describe."
+        }
+      ],
+      "playtestQuestion": "Can you say line 2 out loud and describe both beats in order?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">The lie lands first. The truth walks through second.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Slip</strong> your ally through the gap you opened.</div><div class=\"spark-invite\">You point; they move; the enemy still swats at your echo.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Sell</strong> the wrong threat, and <strong class=\"spark-v spark-v-def\">Pass</strong> your partner through the opening.</div><div class=\"spark-invite\">You throw your voice left — they commit — your friend is already past.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "sort": 202
+    },
+    {
+      "id": "lang-questions",
+      "category": "language",
+      "categoryLabel": "Language",
+      "label": "Question prompts",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Improv fuel",
+          "body": "Full-sentence questions instead of story invites."
+        },
+        {
+          "title": "Heritage H2",
+          "body": "“What did they think they saw?” under each option."
+        }
+      ],
+      "playtestQuestion": "Are questions better or worse than story invites?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry-heritage\"><span class=\"spark-glyphs\" title=\"1 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-verb\">Thread an ally through the hesitation <span class=\"spark-n spark-n-def\">(1)</span>.</div><div class=\"spark-prompt\">What did they think they saw?</div></div></div><div class=\"ci spark-entry-heritage\"><span class=\"spark-glyphs\" title=\"2 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-verb\">Feint one way · Ghost a friend past them <span class=\"spark-n spark-n-off\">(2)</span>.</div><div class=\"spark-prompt\">What do they lunge at — who slips past?</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "sort": 203
+    },
+    {
+      "id": "lang-chips",
+      "category": "language",
+      "categoryLabel": "Language",
+      "label": "Keyword chips",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Mechanical voice",
+          "body": "Boost / Stagger pills — rules-forward read."
+        },
+        {
+          "title": "Heritage H1",
+          "body": "Compare to verb-first Spark copy."
+        }
+      ],
+      "playtestQuestion": "Do chips feel too rules-heavy compared to verbs?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-line fl-blue\"><span class=\"spark-glyphs\" title=\"1 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><span class=\"spark-keys\"><span class=\"fl-chip fl-chip-blue\"><span class=\"fl-icon fl-icon-def\" aria-hidden=\"true\"></span><span class=\"fl-term\">Boost</span><span class=\"fl-mag\">1</span></span></span><span class=\"ci-txt\">— Slip an ally through the hesitation <span class=\"spark-how\">— what did they think they saw?</span></span></div><div class=\"ci spark-line fl-red\"><span class=\"spark-glyphs\" title=\"2 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><span class=\"spark-keys\"><span class=\"fl-chip fl-chip-red\"><span class=\"fl-icon fl-icon-off\" aria-hidden=\"true\"></span><span class=\"fl-term\">Stagger</span><span class=\"fl-mag\">1</span></span><span class=\"fl-plus\">+</span><span class=\"fl-chip fl-chip-blue\"><span class=\"fl-icon fl-icon-def\" aria-hidden=\"true\"></span><span class=\"fl-term\">Boost</span><span class=\"fl-mag\">1</span></span></span><span class=\"ci-txt\">— Feint one way; send a friend the other <span class=\"spark-how\">— what do they lunge at — who slips past?</span></span></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "sort": 204
+    },
     {
       "id": "pay-spark-glyph",
       "category": "pay",
@@ -14,20 +209,16 @@ window.SPARK_DESIGN_LAB = {
       "goals": [
         {
           "title": "Spark = currency",
-          "body": "Spend icon reads as Spark earned from 6s — not the die face itself."
-        },
-        {
-          "title": "Name matches section",
-          "body": "Glyph ties to the Spark label on the card."
+          "body": "Earned from 6s — not the die face itself."
         },
         {
           "title": "Quick scan",
-          "body": "Count glyphs = how many Sparks this option costs."
+          "body": "Count glyphs = Sparks spent."
         }
       ],
       "playtestQuestion": "Does the left side feel like spending Spark, or rolling a die?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 100
+      "sort": 300
     },
     {
       "id": "pay-bonus-die",
@@ -38,16 +229,12 @@ window.SPARK_DESIGN_LAB = {
       "goals": [
         {
           "title": "Roll vs option",
-          "body": "Shows you're giving up the bonus die roll for this card effect."
-        },
-        {
-          "title": "Mechanic clarity",
-          "body": "+ die = the extra roll you'd otherwise take."
+          "body": "Giving up the bonus die roll for this effect."
         }
       ],
       "playtestQuestion": "Does + on a die make the spend-versus-roll tradeoff obvious?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 bonus die\"><span class=\"pay-bonus\" aria-hidden=\"true\" title=\"bonus die\"><span class=\"pay-plus\">+</span></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 bonus die\"><span class=\"pay-bonus\" aria-hidden=\"true\" title=\"bonus die\"><span class=\"pay-plus\">+</span></span><span class=\"pay-bonus\" aria-hidden=\"true\" title=\"bonus die\"><span class=\"pay-plus\">+</span></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 101
+      "sort": 301
     },
     {
       "id": "pay-hollow-roll",
@@ -58,16 +245,12 @@ window.SPARK_DESIGN_LAB = {
       "goals": [
         {
           "title": "Uncommitted roll",
-          "body": "Dashed die = bonus roll you're cashing in without taking."
-        },
-        {
-          "title": "Softer than +",
-          "body": "Less mechanical, more 'I'm spending a roll chance'."
+          "body": "Dashed outline — bonus roll you're cashing in."
         }
       ],
-      "playtestQuestion": "Does the dashed die read as 'bonus roll' without feeling like a natural 6?",
+      "playtestQuestion": "Does the dashed die read as bonus roll without feeling like a natural 6?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 bonus roll\"><span class=\"pay-hollow\" aria-hidden=\"true\" title=\"roll bonus die\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 bonus roll\"><span class=\"pay-hollow\" aria-hidden=\"true\" title=\"roll bonus die\"></span><span class=\"pay-hollow\" aria-hidden=\"true\" title=\"roll bonus die\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 102
+      "sort": 302
     },
     {
       "id": "pay-bolt",
@@ -78,16 +261,12 @@ window.SPARK_DESIGN_LAB = {
       "goals": [
         {
           "title": "Energy at a glance",
-          "body": "Lightning = spark energy, fast to spot."
-        },
-        {
-          "title": "Less literal",
-          "body": "Doesn't say die or currency — pure flair."
+          "body": "Lightning tick — spark energy, not a die."
         }
       ],
-      "playtestQuestion": "Can you tell how much Spark this costs from the bolt icons alone?",
+      "playtestQuestion": "Can you tell cost from the bolt icons alone?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-bolt\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-bolt\" aria-hidden=\"true\"></span><span class=\"pay-bolt\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 103
+      "sort": 303
     },
     {
       "id": "pay-amber-bars",
@@ -97,17 +276,13 @@ window.SPARK_DESIGN_LAB = {
       "ships": false,
       "goals": [
         {
-          "title": "Familiar cost pips",
-          "body": "Recycles v3 vertical bars — count bars = cost."
-        },
-        {
-          "title": "Separate from yield",
-          "body": "Bars only on spend side; triangles/squares stay on yield."
+          "title": "Cost pips",
+          "body": "Vertical bars — count bars = cost."
         }
       ],
       "playtestQuestion": "Do amber bars read as cost without confusing yield shapes?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-bar\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-bar\" aria-hidden=\"true\"></span><span class=\"pay-bar\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 104
+      "sort": 304
     },
     {
       "id": "pay-die-six",
@@ -118,248 +293,32 @@ window.SPARK_DESIGN_LAB = {
       "goals": [
         {
           "title": "Anti-pattern",
-          "body": "Shows 6 on spend — implies you lose the natural 6 (wrong)."
-        },
-        {
-          "title": "Playtest control",
-          "body": "Rate low if this confuses you at the table."
+          "body": "Implies you lose the natural 6 — wrong."
         }
       ],
       "playtestQuestion": "Does showing 6 make you think you're spending the die that rolled 6?",
       "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 6 (misleading)\"><span class=\"spark-die\" aria-hidden=\"true\">6</span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 6 (misleading)\"><span class=\"spark-die\" aria-hidden=\"true\">6</span><span class=\"spark-die\" aria-hidden=\"true\">6</span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 105
-    },
-    {
-      "id": "layout-canonical",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "v5 Canonical layout",
-      "ships": true,
-      "goals": [
-        {
-          "title": "Exchange row",
-          "body": "Spend ⇄ yield shapes above the verb line."
-        },
-        {
-          "title": "One invite",
-          "body": "Single italic line nudges the story after you read verbs."
-        },
-        {
-          "title": "Flowing combo",
-          "body": "Two-spark = one sentence: Feint…, while you Ghost…"
-        }
-      ],
-      "playtestQuestion": "Read both Spark lines aloud — can you play them chronologically?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
-      "sort": 200
-    },
-    {
-      "id": "layout-no-invites",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "No invites",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Verb only",
-          "body": "No italic stems — action lines carry everything."
-        },
-        {
-          "title": "Less clutter",
-          "body": "More room on dense cards."
-        }
-      ],
-      "playtestQuestion": "Do you miss the italic line, or is the verb enough?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div></div></div></div></div></div>",
-      "sort": 201
-    },
-    {
-      "id": "layout-compact-xch",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "Compact exchange",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Tighter strip",
-          "body": "Smaller pay⇄yield bar — phrase gets more space."
-        }
-      ],
-      "playtestQuestion": "Is the exchange still readable when compact?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-compact\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-compact\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
-      "sort": 202
-    },
-    {
-      "id": "layout-table-xch",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "Spend / Yield table",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Explicit labels",
-          "body": "Mini grid names Spend and Yield columns."
-        },
-        {
-          "title": "Teach once",
-          "body": "Helps first-time players learn the exchange."
-        }
-      ],
-      "playtestQuestion": "Do labels help or feel like homework?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-table\"><div class=\"xch-th\">Spark</div><div class=\"xch-th\">Yield</div><div class=\"xch-td\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span></div><div class=\"xch-td\"><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-table\"><div class=\"xch-th\">Spark</div><div class=\"xch-th\">Yield</div><div class=\"xch-td\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span></div><div class=\"xch-td\"><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
-      "sort": 203
-    },
-    {
-      "id": "layout-evocative",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "Evocative chronology",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Read left-to-right",
-          "body": "Sell the wrong threat, and Pass your partner — say it, then describe."
-        },
-        {
-          "title": "Improv fuel",
-          "body": "Verbs invite confident table narration."
-        }
-      ],
-      "playtestQuestion": "Can you say line 2 out loud and describe both beats in order?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">The lie lands first. The truth walks through second.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Slip</strong> your ally through the gap you opened.</div><div class=\"spark-invite\">You point; they move; the enemy still swats at your echo.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Sell</strong> the wrong threat, and <strong class=\"spark-v spark-v-def\">Pass</strong> your partner through the opening.</div><div class=\"spark-invite\">You throw your voice left — they commit — your friend is already past.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 204
-    },
-    {
-      "id": "layout-phrase-first",
-      "category": "layout",
-      "categoryLabel": "Layout & copy",
-      "label": "Phrase-primary",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Verb hero",
-          "body": "Action line first; exchange chip trails inline."
-        },
-        {
-          "title": "Fiction forward",
-          "body": "Mechanics don't lead the read."
-        }
-      ],
-      "playtestQuestion": "Does putting verbs first speed up your pick at the table?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def spark-entry-phrase-first\"><div class=\"spark-body\"><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix spark-entry-phrase-first\"><div class=\"spark-body\"><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div>",
-      "sort": 205
-    },
-    {
-      "id": "heritage-crit",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H0 · Crit (pre-Spark)",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Legacy flourish",
-          "body": "Crit-count options — no Spark section at all."
-        },
-        {
-          "title": "Baseline",
-          "body": "Compare: is Spark clearer than Crit for this card?"
-        }
-      ],
-      "playtestQuestion": "Is anything lost moving from Crit to Spark on this ability?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check. On success, create a false impression — a sound, a silhouette, a dropped object. Every enemy in the <strong>Scene</strong> is <strong>Rattled</strong>, wrong-footed by what they think they saw, until one spends an <strong>Action</strong> investigating.</div><div class=\"csec\"><div class=\"clbl\">Crit</div><div class=\"crow\"><div class=\"ci\"><span class=\"kw kw-crit\">1</span> Two enemies investigate, not one.</div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 300
-    },
-    {
-      "id": "heritage-chips",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H1 · Chip pills",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Keyword pills",
-          "body": "Boost 1 / Stagger 1 chips — mechanical voice."
-        },
-        {
-          "title": "Questions",
-          "body": "Italic questions prompt improv ('what did they see?')."
-        }
-      ],
-      "playtestQuestion": "Do chips feel too rules-heavy compared to verbs?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-line fl-blue\"><span class=\"spark-glyphs\" title=\"1 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><span class=\"spark-keys\"><span class=\"fl-chip fl-chip-blue\"><span class=\"fl-icon fl-icon-def\" aria-hidden=\"true\"></span><span class=\"fl-term\">Boost</span><span class=\"fl-mag\">1</span></span></span><span class=\"ci-txt\">— Slip an ally through the hesitation <span class=\"spark-how\">— what did they think they saw?</span></span></div><div class=\"ci spark-line fl-red\"><span class=\"spark-glyphs\" title=\"2 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><span class=\"spark-keys\"><span class=\"fl-chip fl-chip-red\"><span class=\"fl-icon fl-icon-off\" aria-hidden=\"true\"></span><span class=\"fl-term\">Stagger</span><span class=\"fl-mag\">1</span></span><span class=\"fl-plus\">+</span><span class=\"fl-chip fl-chip-blue\"><span class=\"fl-icon fl-icon-def\" aria-hidden=\"true\"></span><span class=\"fl-term\">Boost</span><span class=\"fl-mag\">1</span></span></span><span class=\"ci-txt\">— Feint one way; send a friend the other <span class=\"spark-how\">— what do they lunge at — who slips past?</span></span></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 301
-    },
-    {
-      "id": "heritage-glyph-questions",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H2 · Glyph + (n) questions",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Star cost",
-          "body": "Spark glyph cost with colored (1) magnitude."
-        },
-        {
-          "title": "Question gloss",
-          "body": "Full-sentence questions under each option."
-        }
-      ],
-      "playtestQuestion": "Are questions better or worse than story invites?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry-heritage\"><span class=\"spark-glyphs\" title=\"1 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-verb\">Thread an ally through the hesitation <span class=\"spark-n spark-n-def\">(1)</span>.</div><div class=\"spark-prompt\">What did they think they saw?</div></div></div><div class=\"ci spark-entry-heritage\"><span class=\"spark-glyphs\" title=\"2 Spark\"><span class=\"spark-glyph\" aria-hidden=\"true\"></span><span class=\"spark-glyph\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-verb\">Feint one way · Ghost a friend past them <span class=\"spark-n spark-n-off\">(2)</span>.</div><div class=\"spark-prompt\">What do they lunge at — who slips past?</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 302
-    },
-    {
-      "id": "heritage-v3-arrows",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H3 · Arrows + bars",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Split combos",
-          "body": "→ between Feint and Ghost on separate lines."
-        },
-        {
-          "title": "Bar cost",
-          "body": "Amber bars left; (n) numbers for magnitude."
-        }
-      ],
-      "playtestQuestion": "Do arrows help combos or break the sentence flow?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry-heritage spark-entry-def\"><span class=\"spark-pips-heritage\" title=\"1 Spark\"><span class=\"spark-pip-heritage\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-row\"><span class=\"cat-icon cat-def\" aria-hidden=\"true\"></span><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation <span class=\"spark-mag spark-mag-def\"><span class=\"cat-icon cat-def\" aria-hidden=\"true\"></span><span class=\"mag-n\">(1)</span></span>.</div><div class=\"spark-invite-heritage\"><span class=\"invite-lead\">—</span> They lunge at the wrong shape.</div></div></div><div class=\"ci spark-entry-heritage spark-entry-mix\"><span class=\"spark-pips-heritage\" title=\"2 Spark\"><span class=\"spark-pip-heritage\" aria-hidden=\"true\"></span><span class=\"spark-pip-heritage\" aria-hidden=\"true\"></span></span><div class=\"spark-body\"><div class=\"spark-row\"><span class=\"cat-icon cat-off\" aria-hidden=\"true\"></span><strong class=\"spark-v spark-v-off\">Feint</strong> one way.</div><div class=\"spark-chain\"><span class=\"spark-link\">→</span></div><div class=\"spark-row\"><span class=\"cat-icon cat-def\" aria-hidden=\"true\"></span><strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite-heritage\"><span class=\"invite-lead\">—</span> The wrong person moves; the right one is already gone.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 303
-    },
-    {
-      "id": "heritage-v5-die-six",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H4 · Exchange with “6”",
-      "ships": false,
-      "goals": [
-        {
-          "title": "Misleading spend",
-          "body": "v5 layout but 6 on spend column — retired."
-        }
-      ],
-      "playtestQuestion": "Compare to spark glyph — which spend icon is clearer?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 6 (misleading)\"><span class=\"spark-die\" aria-hidden=\"true\">6</span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 6 (misleading)\"><span class=\"spark-die\" aria-hidden=\"true\">6</span><span class=\"spark-die\" aria-hidden=\"true\">6</span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
-      "sort": 304
-    },
-    {
-      "id": "heritage-v5-current",
-      "category": "heritage",
-      "categoryLabel": "Heritage timeline",
-      "label": "H5 · v5 Spark glyph",
-      "ships": true,
-      "goals": [
-        {
-          "title": "Current ship",
-          "body": "Spark token ⇄ shape yield · flowing sentence."
-        }
-      ],
-      "playtestQuestion": "Overall — would you ship this over heritage options?",
-      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-def\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"1 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"mag-pips mag-pips-def\" aria-label=\"magnitude 1\"><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-def\">Thread</strong> an ally through the hesitation.</div><div class=\"spark-invite\">They lunge at the wrong shape while your friend slips through.</div></div></div><div class=\"ci spark-entry spark-entry-mix\"><div class=\"spark-body\"><div class=\"spark-xch spark-xch-row\"><span class=\"xch-pay\" title=\"2 Spark\"><span class=\"pay-spark\" aria-hidden=\"true\"></span><span class=\"pay-spark\" aria-hidden=\"true\"></span></span><span class=\"xch-mid\" aria-hidden=\"true\">⇄</span><span class=\"xch-yield\"><span class=\"pip-shape cat-off\" aria-hidden=\"true\"></span><span class=\"pip-shape cat-def\" aria-hidden=\"true\"></span></span></div><div class=\"spark-phrase\"><strong class=\"spark-v spark-v-off\">Feint</strong> one way, while you <strong class=\"spark-v spark-v-def\">Ghost</strong> a friend past them.</div><div class=\"spark-invite\">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
       "sort": 305
+    },
+    {
+      "id": "pay-cost-die-blue",
+      "category": "pay",
+      "categoryLabel": "Spend icon",
+      "label": "Blue “6” cost die",
+      "ships": false,
+      "goals": [
+        {
+          "title": "Inverted layout",
+          "body": "Periwinkle 6 before shapes — cost reads first on the verb row."
+        },
+        {
+          "title": "Not the natural 6",
+          "body": "Still a spend marker; pairs with verb-first + invite box layout."
+        }
+      ],
+      "playtestQuestion": "Does a blue 6 before Defend read as cost without implying you lose the crit die?",
+      "html": "<div class=\"spark-lab-cardwrap primer-cards\"><div class=\"card acc-rogue\"><div class=\"hdr\"><div class=\"hdr-top\"><span class=\"cap cap-neutral\">Ability</span><span class=\"cap cap-neutral\">Act</span></div><div class=\"hdr-name\">Smoke and Mirrors</div></div><div class=\"cbody\"><div class=\"flv\">Let them argue about what they saw.</div><div class=\"hr\"></div><div class=\"elbl\">Effect</div><div class=\"etxt\">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class=\"csec spark-sec\"><div class=\"clbl\">Spark</div><div class=\"crow\"><div class=\"ci spark-entry spark-entry-inverted\"><div class=\"spark-verb-row\"><span class=\"spark-cost-dies\" title=\"1 Spark\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Defend</span></div><div class=\"spark-invite-box\">Deflect attention from an Ally</div></div><div class=\"ci spark-entry spark-entry-inverted\"><div class=\"spark-verb-row\"><span class=\"spark-cost-dies\" title=\"2 Sparks\"><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span><span class=\"spark-cost-die\" aria-hidden=\"true\">6</span></span><span class=\"yield-tri cat-def\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Defend</span><span class=\"spark-combo-plus\" aria-hidden=\"true\">+</span><span class=\"yield-sq cat-off\" aria-hidden=\"true\"></span><span class=\"spark-verb-label\">Attack</span></div><div class=\"spark-invite-box\">Sell the wrong threat, then pass your ally through the opening</div></div></div></div></div><div class=\"idtag\">Rogue</div><div class=\"tier-float\"><span>t1</span></div></div></div>",
+      "sort": 306
     }
   ]
 };

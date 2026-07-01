@@ -173,6 +173,53 @@ def spark_block(style: SparkStyle, *lines: SparkLineSpec) -> str:
     )
 
 
+def cost_die_icons(cost: int) -> str:
+    dies = "".join('<span class="spark-cost-die" aria-hidden="true">6</span>' for _ in range(cost))
+    title = f"{cost} Spark" if cost == 1 else f"{cost} Sparks"
+    return f'<span class="spark-cost-dies" title="{title}">{dies}</span>'
+
+
+def inverted_spark_entry(cost: int, verb_row: str, invite: str) -> str:
+    return (
+        '<div class="ci spark-entry spark-entry-inverted">'
+        f'<div class="spark-verb-row">{cost_die_icons(cost)}{verb_row}</div>'
+        f'<div class="spark-invite-box">{invite}</div>'
+        "</div>"
+    )
+
+
+def inverted_spark_block(*entries: tuple[int, str, str]) -> str:
+    rendered = "".join(inverted_spark_entry(c, row, inv) for c, row, inv in entries)
+    return (
+        '<div class="csec spark-sec"><div class="clbl">Spark</div>'
+        f'<div class="crow">{rendered}</div></div>'
+    )
+
+
+SAM_INVERTED_DEFEND_ROW = (
+    '<span class="yield-tri cat-def" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Defend</span>'
+)
+SAM_INVERTED_COMBO_ROW = (
+    '<span class="yield-tri cat-def" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Defend</span>'
+    '<span class="spark-combo-plus" aria-hidden="true">+</span>'
+    '<span class="yield-sq cat-off" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Attack</span>'
+)
+
+
+def sam_spark_inverted() -> str:
+    return inverted_spark_block(
+        (1, SAM_INVERTED_DEFEND_ROW, "Deflect attention from an Ally"),
+        (
+            2,
+            SAM_INVERTED_COMBO_ROW,
+            "Sell the wrong threat, then pass your ally through the opening",
+        ),
+    )
+
+
 def ability_card(
     accent: str,
     idtag: str,
@@ -263,6 +310,17 @@ def sam_spark_evocative() -> str:
 
 def sam_spark_yield_first() -> str:
     return sam_spark(SparkStyle(phrase_first=True))
+
+
+def sam_spark_inverted_card() -> str:
+    return ability_card(
+        "rogue",
+        "Rogue",
+        "Smoke and Mirrors",
+        "Let them argue about what they saw.",
+        SAM_EFFECT,
+        sam_spark_inverted(),
+    )
 
 
 PAY_ICON_VARIANTS: list[dict] = [
