@@ -909,70 +909,57 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   padding:4px 6px;font-family:Georgia,'Times New Roman',serif;
   font-size:9.25px;line-height:1.32;color:#1a1008;background:rgba(255,255,255,.5);
 }
-/* Column flow — production layout (also in primer-card-scope.css) */
+/* Column flow — production layout */
 .spark-entry-column-flow{
-  padding:4px 5px 5px;margin:0;
+  padding:5px 6px 6px;margin:0;
   border-radius:4px;border:1px solid rgba(90,74,50,.12);
   background:rgba(255,255,255,.35);
-  display:flex;flex-direction:column;gap:5px;
 }
-.spark-flow-row{display:flex;align-items:flex-end;gap:5px;}
-.spark-flow-key{
-  flex:0 0 34px;display:flex;flex-direction:column;align-items:center;
-  gap:2px;padding-bottom:1px;
+.spark-flow-grid{
+  display:grid;
+  grid-template-columns:minmax(56px,max-content) 1px 1fr;
+  column-gap:8px;row-gap:6px;align-items:center;
 }
-.spark-cost-dies{display:inline-flex;gap:2px;align-items:center;}
+.spark-flow-vrule{
+  grid-column:2;grid-row:1/-1;width:1px;min-height:100%;
+  background:rgba(91,127,212,.42);justify-self:center;
+}
+.spark-flow-cost{
+  grid-column:1;justify-self:end;align-self:start;
+  padding-bottom:8px;margin-bottom:2px;
+}
+.spark-flow-pad{grid-column:3;min-height:1px;}
+.spark-cost-dies{display:inline-flex;gap:3px;align-items:center;}
 .spark-cost-die{
   display:inline-flex;align-items:center;justify-content:center;
   width:13px;height:13px;border-radius:3px;
   background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
   font-family:system-ui,-apple-system,sans-serif;
 }
+.spark-flow-lemma{
+  grid-column:1;justify-self:end;
+  display:flex;flex-direction:row;align-items:center;gap:5px;
+}
 .yield-tri{
   display:inline-block;width:0;height:0;border-left:5px solid transparent;
   border-right:5px solid transparent;flex-shrink:0;
 }
-.yield-tri.cat-def{border-bottom:8px solid #2563EB;}
 .yield-tri.cat-off{border-bottom:8px solid #991B1B;}
+.yield-sq{display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.yield-sq.cat-def{background:#2563EB;}
 .yield-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .yield-dot.cat-res{background:#166534;}
-.yield-sq{display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;}
-.yield-sq.cat-off{background:#991B1B;}
 .spark-flow-verb{
-  font-size:9.5px;font-weight:800;line-height:1.1;
-  font-family:system-ui,-apple-system,sans-serif;text-align:center;
+  font-size:9.5px;font-weight:800;line-height:1.15;
+  font-family:system-ui,-apple-system,sans-serif;text-align:right;
+  white-space:nowrap;
 }
 .spark-flow-verb.spark-v-def{color:#2563EB;}
 .spark-flow-verb.spark-v-off{color:#991B1B;}
 .spark-flow-verb.spark-v-res{color:#166534;}
 .spark-flow-tail{
-  flex:1;min-width:0;font-size:9.5px;line-height:1.32;font-weight:500;
-  color:#1a1008;padding-bottom:1px;
-}
-/* Spark lab scoped duplicates (tighter on lab stage) */
-#view-sparklab .spark-entry-column-flow{
-  padding:4px 5px 5px;margin:0;
-  border-radius:4px;border:1px solid rgba(90,74,50,.12);
-  background:rgba(255,255,255,.35);
-  display:flex;flex-direction:column;gap:5px;
-}
-#view-sparklab .spark-flow-row{
-  display:flex;align-items:flex-end;gap:5px;
-}
-#view-sparklab .spark-flow-key{
-  flex:0 0 34px;display:flex;flex-direction:column;align-items:center;
-  gap:2px;padding-bottom:1px;
-}
-#view-sparklab .spark-flow-verb{
-  font-size:9.5px;font-weight:800;line-height:1.1;
-  font-family:system-ui,-apple-system,sans-serif;text-align:center;
-}
-#view-sparklab .spark-flow-verb.spark-v-def{color:#2563EB;}
-#view-sparklab .spark-flow-verb.spark-v-off{color:#991B1B;}
-#view-sparklab .spark-flow-verb.spark-v-res{color:#166534;}
-#view-sparklab .spark-flow-tail{
-  flex:1;min-width:0;font-size:9.5px;line-height:1.32;font-weight:500;
-  color:#1a1008;padding-bottom:1px;
+  grid-column:3;min-width:0;font-size:9.5px;line-height:1.34;font-weight:500;
+  color:#1a1008;align-self:center;
 }
 /* ---------- submit idea view ---------- */
 .tab-submit{color:#c8a96e !important;font-weight:600;}
