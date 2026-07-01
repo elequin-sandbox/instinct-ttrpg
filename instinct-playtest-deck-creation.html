@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instinct RPG — Playtest Deck Creation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="primer-card-scope.css">
+  <link rel="stylesheet" href="instinct-dual-styles.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #090f1c; --panel: #111e30; --text: #e2d4b8; --muted: #8499aa;
+      --gold: #c8a96e; --gold-l: #dfc98e; --border: rgba(200,169,110,0.25);
+      --accent: #5E81AC; --deck: #166534;
+    }
+    body {
+      font-family: 'Crimson Pro', Georgia, serif; background: var(--bg); color: var(--text);
+      min-height: 100vh; line-height: 1.6; font-size: 18px;
+    }
+    .shell { max-width: 720px; margin: 0 auto; padding: 20px 18px 48px; }
+    .topbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 12px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    }
+    .topbar a { color: var(--gold); font-size: 14px; text-decoration: none; }
+    .topbar a:hover { text-decoration: underline; }
+    .eyebrow {
+      font-family: Cinzel, serif; font-size: 10px; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold); opacity: 0.85;
+    }
+    h1 {
+      font-family: Cinzel, serif; font-size: clamp(22px, 5vw, 32px);
+      color: var(--gold-l); margin: 6px 0 4px;
+    }
+    .sub { font-size: 15px; color: var(--muted); font-style: italic; }
+    .progress { display: flex; gap: 4px; margin: 18px 0 8px; }
+    .prog-dot {
+      flex: 1; height: 4px; border-radius: 2px; background: rgba(200,169,110,0.15);
+      transition: background 0.25s;
+    }
+    .prog-dot.done { background: var(--gold); }
+    .prog-dot.now { background: var(--accent); }
+    .deck-meter {
+      display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+      background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+      margin-bottom: 20px; font-size: 14px;
+    }
+    .deck-pile {
+      display: flex; gap: 3px; align-items: flex-end; min-width: 80px;
+    }
+    .deck-chip {
+      width: 14px; border-radius: 2px; background: linear-gradient(180deg, #2d5a3d, #14532d);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .core-pile {
+      display: flex; gap: 4px; margin-left: auto;
+    }
+    .core-chip {
+      width: 18px; height: 26px; border-radius: 3px;
+      background: linear-gradient(180deg, #b8860b, #8b6914);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .step-panel {
+      background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+      padding: 22px 20px 20px; margin-bottom: 16px;
+    }
+    .step-panel h2 {
+      font-family: Cinzel, serif; font-size: 18px; color: var(--gold-l);
+      margin-bottom: 12px;
+    }
+    .step-panel p { margin-bottom: 12px; font-size: 17px; }
+    .step-panel em { color: var(--gold-l); font-style: italic; }
+    .gm-note {
+      font-size: 15px; color: #93c5fd; background: rgba(94,129,172,0.12);
+      border: 1px solid rgba(94,129,172,0.35); border-radius: 8px; padding: 12px 14px;
+      margin: 14px 0;
+    }
+    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+    @media (max-width: 520px) { .mode-grid { grid-template-columns: 1fr; } }
+    .mode-btn {
+      text-align: left; padding: 16px; border-radius: 8px; cursor: pointer;
+      background: rgba(200,169,110,0.06); border: 2px solid var(--border);
+      color: var(--text); font-family: inherit; font-size: 16px;
+    }
+    .mode-btn:hover { border-color: var(--gold); }
+    .mode-btn.selected { border-color: var(--gold); background: rgba(200,169,110,0.14); }
+    .mode-btn strong {
+      display: block; font-family: Cinzel, serif; font-size: 13px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+    }
+    .instinct-stage { margin: 16px 0; }
+    .instinct-hand {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; min-height: 120px;
+    }
+    .instinct-pick {
+      width: 88px; padding: 12px 8px; border-radius: 8px; cursor: pointer;
+      border: 2px solid var(--border); background: #1a2838; text-align: center;
+      font-family: Cinzel, serif; font-size: 11px; font-weight: 700; color: var(--gold-l);
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .instinct-pick:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .instinct-pick.picked { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(200,169,110,0.35); }
+    .instinct-pick .ip-sub { font-size: 9px; color: var(--muted); font-family: 'Crimson Pro', serif; font-weight: 400; margin-top: 4px; }
+    .picked-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .picked-tag {
+      font-size: 12px; padding: 4px 10px; border-radius: 12px;
+      background: rgba(200,169,110,0.15); border: 1px solid var(--border); color: var(--gold-l);
+    }
+    .round-label { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 8px; }
+    .card-sample { margin: 14px 0; }
+    .card-sample .primer-cards { margin: 0; }
+    .nav-row { display: flex; gap: 10px; justify-content: space-between; margin-top: 8px; }
+    .btn {
+      font-family: Cinzel, serif; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 12px 22px; border-radius: 6px; cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--gold); color: #1a1108; font-weight: 700; }
+    .btn-primary:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .hidden { display: none !important; }
+    .writein {
+      width: 100%; margin: 10px 0; padding: 10px 12px; border-radius: 6px;
+      border: 1px solid var(--border); background: #0d1520; color: var(--text);
+      font-family: inherit; font-size: 17px;
+    }
+    .summary-list { margin: 12px 0 0 18px; font-size: 16px; }
+    .summary-list li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div>
+      <div class="eyebrow">Instinct RPG · Playtest</div>
+      <h1>Deck Creation</h1>
+      <p class="sub">Tap through each step — same flow Nathan uses at the table.</p>
+    </div>
+    <a href="instinct-rpg-primer-v2.html#building-deck">← Player Primer</a>
+  </div>
+
+  <div class="deck-meter" id="deckMeter">
+    <div>
+      <strong style="color:var(--gold);font-family:Cinzel,serif;font-size:11px;letter-spacing:.12em;">YOUR DECK</strong>
+      <div id="deckCountLabel">0 cards shuffled in</div>
+    </div>
+    <div class="deck-pile" id="deckPileVis"></div>
+    <div class="core-pile" id="corePileVis" title="Core cards — beside deck, not shuffled in"></div>
+  </div>
+
+  <div class="progress" id="progressBar"></div>
+
+  <div id="stepHost"></div>
+
+  <div class="nav-row">
+    <button type="button" class="btn btn-ghost hidden" id="backBtn">Back</button>
+    <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+  </div>
+</div>
+
+<script src="card-data.js"></script>
+<script>
+(function () {
+  const SAMPLES = {
+    bond: 'warm-presence-bond',
+    connection: 'connection-template',
+    background: 'field-medic-background',
+    ancestry: 'human-ancestry',
+    item: 'immovable-rod-item',
+    coreA: 'weapon-master-fighter-core',
+    coreB: 'battlemaster-fighter-core',
+    ability: 'find-the-gap-rogue'
+  };
+
+  const state = {
+    mode: null,
+    step: 0,
+    instincts: [],
+    instinctRound: 0,
+    instinctPicks: [],
+    mulliganUsed: false,
+    connectionName: '',
+    deckCount: 0,
+    coreCount: 0
+  };
+
+  const STEPS = [
+    { id: 'welcome', title: 'Choose your pace' },
+    { id: 'instincts', title: '5 Instincts' },
+    { id: 'connection', title: 'Connection card' },
+    { id: 'bond', title: '1 Bond' },
+    { id: 'background', title: 'Background & Ancestry' },
+    { id: 'party', title: 'Know the party' },
+    { id: 'item', title: '1 Item' },
+    { id: 'core', title: 'Class Core' },
+    { id: 'abilities', title: '12 Abilities' },
+    { id: 'core-read', title: 'Check your Core' },
+    { id: 'session', title: 'Before the first scene' },
+    { id: 'done', title: 'You\'re ready' }
+  ];
+
+  let instinctPool = [];
+
+  function cardByKey(key) {
+    if (!window.CARD_DATA) return null;
+    return window.CARD_DATA.find(c => c.Card_Key === key) || null;
+  }
+
+  function mountCard(elId, key) {
+    const el = document.getElementById(elId);
+    const card = cardByKey(key);
+    if (el && card && card.HTML) {
+      el.innerHTML = '<div class="cardwrap">' + card.HTML + '</div>';
+    }
+  }
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function loadInstinctPool() {
+    if (!window.CARD_DATA) return [];
+    return window.CARD_DATA.filter(c =>
+      c.Card_Type === 'Instinct' && c.Status !== 'legacy'
+    );
+  }
+
+  function updateMeter() {
+    document.getElementById('deckCountLabel').textContent =
+      state.deckCount + ' card' + (state.deckCount === 1 ? '' : 's') + ' shuffled in';
+    const pile = document.getElementById('deckPileVis');
+    pile.innerHTML = '';
+    const n = Math.min(state.deckCount, 12);
+    for (let i = 0; i < n; i++) {
+      const h = 12 + (i % 4) * 3;
+      const chip = document.createElement('div');
+      chip.className = 'deck-chip';
+      chip.style.height = h + 'px';
+      pile.appendChild(chip);
+    }
+    const core = document.getElementById('corePileVis');
+    core.innerHTML = '';
+    for (let i = 0; i < state.coreCount; i++) {
+      core.appendChild(document.createElement('div')).className = 'core-chip';
+    }
+  }
+
+  function renderProgress() {
+    const bar = document.getElementById('progressBar');
+    bar.innerHTML = STEPS.map((s, i) => {
+      let cls = 'prog-dot';
+      if (i < state.step) cls += ' done';
+      if (i === state.step) cls += ' now';
+      return '<div class="' + cls + '" title="' + s.title + '"></div>';
+    }).join('');
+  }
+
+  function drawInstinctHand(n) {
+    return shuffle(instinctPool).slice(0, n);
+  }
+
+  function renderInstinctStage(host) {
+    if (state.mode === 'quick') {
+      if (!state.instinctPicks.length) state.instinctPicks = drawInstinctHand(5);
+      host.innerHTML =
+        '<div class="round-label">Quick — draw 5 Instincts. Mulligan any you don\'t want (once).</div>' +
+        '<div class="instinct-hand" id="instinctHand"></div>' +
+        '<div class="picked-row" id="pickedRow"></div>' +
+        (state.mulliganUsed ? '' : '<p style="text-align:center;margin-top:10px;"><button type="button" class="btn btn-ghost" id="mulliganBtn">Mulligan — redraw all 5</button></p>');
+      const hand = document.getElementById('instinctHand');
+      state.instinctPicks.forEach((card, idx) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'instinct-pick' + (state.instincts.includes(card.Card_Key) ? ' picked' : '');
+        b.innerHTML = card.Name + '<div class="ip-sub">Instinct</div>';
+        b.onclick = () => toggleInstinct(card.Card_Key, b);
+        hand.appendChild(b);
+      });
+      renderPickedTags();
+      const mb = document.getElementById('mulliganBtn');
+      if (mb) mb.onclick = () => {
+        state.mulliganUsed = true;
+        state.instincts = [];
+        state.instinctPicks = drawInstinctHand(5);
+        renderStep();
+      };
+      return;
+    }
+    // Full: 5 rounds draw 3 pick 1
+    if (state.instinctRound >= 5) {
+      host.innerHTML = '<p>All five Instincts chosen. Shuffle them into your deck.</p><div class="picked-row" id="pickedRow"></div>';
+      renderPickedTags();
+      return;
+    }
+    if (!state.instinctPicks.length || state.instinctPicks._spent) {
+      state.instinctPicks = drawInstinctHand(3);
+      state.instinctPicks._spent = false;
+    }
+    host.innerHTML =
+      '<div class="round-label">Full — round ' + (state.instinctRound + 1) + ' of 5: draw 3, pick 1</div>' +
+      '<div class="instinct-hand" id="instinctHand"></div>' +
+      '<div class="picked-row" id="pickedRow"></div>';
+    const hand = document.getElementById('instinctHand');
+    state.instinctPicks.forEach(card => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'instinct-pick';
+      b.innerHTML = card.Name + '<div class="ip-sub">tap to keep</div>';
+      b.onclick = () => {
+        state.instincts.push(card.Card_Key);
+        state.instinctRound++;
+        state.instinctPicks._spent = true;
+        state.instinctPicks = [];
+        if (state.instinctRound === 5) state.deckCount += 5;
+        renderStep();
+      };
+      hand.appendChild(b);
+    });
+    renderPickedTags();
+  }
+
+  function toggleInstinct(key, btn) {
+    const i = state.instincts.indexOf(key);
+    if (i >= 0) {
+      state.instincts.splice(i, 1);
+      btn.classList.remove('picked');
+    } else if (state.instincts.length < 5) {
+      state.instincts.push(key);
+      btn.classList.add('picked');
+    }
+    if (state.instincts.length === 5) state.deckCount = Math.max(state.deckCount, 5);
+    updateMeter();
+    renderPickedTags();
+    updateNextBtn();
+  }
+
+  function renderPickedTags() {
+    const row = document.getElementById('pickedRow');
+    if (!row) return;
+    row.innerHTML = state.instincts.map(k => {
+      const c = cardByKey(k);
+      return '<span class="picked-tag">' + (c ? c.Name : k) + '</span>';
+    }).join('');
+  }
+
+  function updateNextBtn() {
+    const btn = document.getElementById('nextBtn');
+    const step = STEPS[state.step];
+    let ok = true;
+    if (step.id === 'welcome') ok = !!state.mode;
+    if (step.id === 'instincts') {
+      ok = state.mode === 'quick' ? state.instincts.length === 5 : state.instinctRound >= 5;
+    }
+    if (step.id === 'connection') ok = state.connectionName.trim().length > 0;
+    btn.disabled = !ok;
+    btn.textContent = step.id === 'done' ? 'Open Player Primer' : 'Continue';
+  }
+
+  function renderStep() {
+    renderProgress();
+    updateMeter();
+    const step = STEPS[state.step];
+    const host = document.getElementById('stepHost');
+    document.getElementById('backBtn').classList.toggle('hidden', state.step === 0);
+
+    let html = '<div class="step-panel"><h2>' + step.title + '</h2>';
+
+    switch (step.id) {
+      case 'welcome':
+        html += '<p>Character creation <em>is</em> play — about an hour at the table. This wizard follows how Nathan walks the group through it in a live playtest (June 30), step by step.</p>' +
+          '<p>Pick <strong>Quick</strong> for a one-shot, or <strong>Full</strong> when you have time to shape your Instincts carefully.</p>' +
+          '<div class="mode-grid">' +
+          '<button type="button" class="mode-btn' + (state.mode === 'quick' ? ' selected' : '') + '" data-mode="quick">' +
+          '<strong>Quick</strong>Draw 5 Instincts — mulligan once if you want. Faster party intro.</button>' +
+          '<button type="button" class="mode-btn' + (state.mode === 'full' ? ' selected' : '') + '" data-mode="full">' +
+          '<strong>Full</strong>Draw 3, pick 1 — repeat 5 times. More personality in the deck.</button></div>';
+        break;
+
+      case 'instincts':
+        html += '<p>Your <strong>Instinct</strong> cards are the big words on the card — Bold, Sardonic, Gregarious. When one is in your hand, that quality is <em>live</em> in this scene. Trade keywords with neighbors if a word doesn\'t fit.</p>' +
+          '<div class="instinct-stage" id="instinctStage"></div>';
+        break;
+
+      case 'connection':
+        html += '<p><em>Early at the table</em> — before you finish the rest of the deck — write <strong>your character\'s name</strong> on a Connection card and set it aside. It does <strong>not</strong> go into your deck yet.</p>' +
+          '<p>At session start, the GM shuffles everyone\'s Connection cards into <em>other players\'</em> decks. When you draw someone\'s name, narrate a shared-memory flashback that fits the scene.</p>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-connection"></div></div></div>' +
+          '<label for="connName" style="font-size:14px;color:var(--muted);">Your character name</label>' +
+          '<input class="writein" id="connName" placeholder="e.g. Chotsky" value="' + escapeAttr(state.connectionName) + '">';
+        break;
+
+      case 'bond':
+        html += '<p>Choose <strong>one Bond</strong> that fits how your character connects to others. Shuffle it into your deck.</p>' +
+          '<p>Bonds are player-initiated — you start the moment, not the circumstances.</p>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-bond"></div></div></div>';
+        state.deckCount = Math.max(state.deckCount, state.instincts.length + 1);
+        break;
+
+      case 'background':
+        html += '<p>Pick <strong>one Background</strong> and <strong>one Ancestry</strong>. Shuffle both into your deck. Backstory write-ins live on your sheet cards, not these deck cards.</p>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-background"></div></div></div>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-ancestry"></div></div></div>' +
+          '<div class="gm-note">Your <strong>Ancestry</strong> card also sits face-up in front of you for the whole session — the GM may ask you to Snap Check it when relevant.</div>';
+        state.deckCount = Math.max(state.deckCount, state.instincts.length + 3);
+        break;
+
+      case 'party':
+        html += '<p>Nathan draws a <strong>relationship card</strong> for new players: describe in a sentence or two how you know another character at the table. This is play — not a rules step, but part of creation.</p>' +
+          '<p>Don\'t rush it. The goal is inter-character chemistry before the first scene.</p>';
+        break;
+
+      case 'item':
+        html += '<p>Choose <strong>one Item</strong> and shuffle it into your deck. (Rogues: your class may start with extra items in play — your GM will tell you.)</p>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-item"></div></div></div>';
+        state.deckCount = Math.max(state.deckCount, state.instincts.length + 4);
+        break;
+
+      case 'core':
+        html += '<p>Place <strong>two Class Core cards</strong> face-up in your <strong>active area</strong> — always available, <em>never</em> shuffled into the deck.</p>' +
+          '<p>Warlock: your Patron enters play when chosen. Paladin: your Oath stays in the active area. Rogue: you may start with Ace face-down and one Item in play.</p>' +
+          '<div style="display:flex;gap:12px;flex-wrap:wrap;"><div class="card-sample"><div class="primer-cards"><div id="sample-core-a"></div></div></div>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-core-b"></div></div></div></div>';
+        state.coreCount = 2;
+        break;
+
+      case 'abilities':
+        html += '<p>Select <strong>12 Ability cards</strong> from your class pool. Shuffle them into your deck.</p>' +
+          '<div class="card-sample"><div class="primer-cards"><div id="sample-ability"></div></div></div>';
+        state.deckCount = Math.max(state.deckCount, state.instincts.length + 4 + 12);
+        break;
+
+      case 'core-read':
+        html += '<p>Read your Core cards. If they tell you to grab extra cards at creation — a weapon, kit, or bonus pick — do that now.</p>' +
+          '<p>Your GM may explain class-specific setup (Rage, Vow, Pact, Ace) as you place these.</p>';
+        break;
+
+      case 'session':
+        html += '<p>At the table, before scene one:</p><ul class="summary-list">' +
+          '<li>Roll Hit Dice — say why your character feels that way if you roll high or low.</li>' +
+          '<li>Connection cards shuffle into everyone <em>else\'s</em> decks.</li>' +
+          '<li>Party deck shuffle together.</li>' +
+          '<li>When the GM says <strong>start the scene</strong>, draw 5 cards.</li></ul>';
+        break;
+
+      case 'done':
+        html += '<p>Your deck should have about <strong>21 cards</strong> shuffled in, plus <strong>2 Core</strong> beside the deck.</p><ul class="summary-list">' +
+          '<li>' + state.instincts.length + ' Instincts</li><li>1 Bond · 1 Background · 1 Ancestry · 1 Item</li>' +
+          '<li>12 Abilities</li><li>Connection set aside for session start</li></ul>' +
+          '<p>Read the <a href="instinct-rpg-primer-v2.html" style="color:var(--gold);">Player Primer</a> for how checks, Flourishes, and scenes work — then play.</p>';
+        state.deckCount = 21;
+        break;
+    }
+
+    html += '</div>';
+    host.innerHTML = html;
+
+    if (step.id === 'welcome') {
+      host.querySelectorAll('.mode-btn').forEach(b => {
+        b.onclick = () => {
+          state.mode = b.dataset.mode;
+          host.querySelectorAll('.mode-btn').forEach(x => x.classList.remove('selected'));
+          b.classList.add('selected');
+          updateNextBtn();
+        };
+      });
+    }
+    if (step.id === 'instincts') renderInstinctStage(document.getElementById('instinctStage'));
+    if (step.id === 'connection') {
+      mountCard('sample-connection', SAMPLES.connection);
+      const inp = document.getElementById('connName');
+      inp.oninput = () => { state.connectionName = inp.value; updateNextBtn(); };
+    }
+    if (step.id === 'bond') mountCard('sample-bond', SAMPLES.bond);
+    if (step.id === 'background') {
+      mountCard('sample-background', SAMPLES.background);
+      mountCard('sample-ancestry', SAMPLES.ancestry);
+    }
+    if (step.id === 'item') mountCard('sample-item', SAMPLES.item);
+    if (step.id === 'core') {
+      mountCard('sample-core-a', SAMPLES.coreA);
+      mountCard('sample-core-b', SAMPLES.coreB);
+    }
+    if (step.id === 'abilities') mountCard('sample-ability', SAMPLES.ability);
+
+    updateNextBtn();
+  }
+
+  function escapeAttr(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  }
+
+  document.getElementById('backBtn').onclick = () => {
+    if (state.step > 0) { state.step--; renderStep(); }
+  };
+
+  document.getElementById('nextBtn').onclick = () => {
+    const step = STEPS[state.step];
+    if (step.id === 'done') {
+      window.location.href = 'instinct-rpg-primer-v2.html';
+      return;
+    }
+    if (state.step < STEPS.length - 1) {
+      state.step++;
+      renderStep();
+    }
+  };
+
+  instinctPool = loadInstinctPool();
+  renderStep();
+})();
+</script>
+</body>
+</html>
