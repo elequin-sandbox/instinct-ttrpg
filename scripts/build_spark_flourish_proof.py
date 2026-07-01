@@ -352,9 +352,9 @@ def write_proof() -> None:
             html = spec["build"]()
             chunks.append(
                 f'<div class="sample"><div class="stag">{spec["name"]}</div>'
-                f'<div class="cardwrap scope-ability">{html}</div></div>'
+                f'<div class="primer-cards"><div class="cardwrap">{html}</div></div></div>'
             )
-        sections.append(f'<h2>{cls}</h2><div class="grid">{"".join(chunks)}</div>')
+        sections.append(f'<h2>{cls}</h2><div class="proof-grid">{"".join(chunks)}</div>')
 
     legend = """
 <div class="legend">
@@ -369,30 +369,44 @@ def write_proof() -> None:
 </div>
 """
 
+    proof_css = """
+body.proof-spark{background:#14100a;padding:28px 20px 48px;color:#f0e6cf;font-family:system-ui,sans-serif;}
+body.proof-spark h1{font-size:20px;letter-spacing:1px;color:#e7d6ac;margin-bottom:6px;}
+body.proof-spark h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c9a24a;
+  margin:32px 0 14px;border-bottom:1px solid #3a2c19;padding-bottom:6px;}
+body.proof-spark p.sub{color:#a08a5c;font-size:14px;margin-bottom:20px;max-width:52rem;line-height:1.5;}
+body.proof-spark .legend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-bottom:16px;font-size:13px;color:#d8c8a0;}
+body.proof-spark .lg-item{display:flex;align-items:center;gap:6px;}
+body.proof-spark .box{background:#1b130b;border:1px solid #3a2c19;border-radius:8px;padding:12px 14px;
+  font-size:13px;line-height:1.55;color:#d8c8a0;margin-bottom:24px;max-width:52rem;}
+body.proof-spark .proof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px 24px;align-items:start;}
+body.proof-spark .sample{display:flex;flex-direction:column;align-items:center;gap:10px;}
+body.proof-spark .stag{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#c9b896;}
+/* Screen-readable cards — full print frame, centered, no primer 0.58 shrink */
+body.proof-spark .primer-cards{margin:0;display:flex;justify-content:center;width:100%;}
+body.proof-spark .primer-cards .cardwrap{
+  transform:none;
+  margin-bottom:0;margin-right:0;
+  width:auto;height:auto;
+}
+body.proof-spark .primer-cards .cardwrap .card{
+  width:300px;height:420px;
+  background:#f7f0e0;border:0.5px solid #c8a96e;box-shadow:6px 6px 0 #1a1a1a;
+}
+body.proof-spark .primer-cards .cbody{padding:7px 10px 5px;}
+body.proof-spark .spark-sec .crow{gap:4px;}
+body.proof-spark .spark-prompt{font-size:7.8px;line-height:1.38;}
+body.proof-spark .spark-verb{font-size:9.5px;line-height:1.36;}
+body.proof-spark .idtag{z-index:2;}
+"""
+
     PROOF_OUT.write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         "<title>Spark / Flourish proof — 8 model cards</title><style>"
         f"{css}"
-        ".primer-cards .card{width:2.5in;height:3.5in;}"
-        "body{background:#14100a;padding:28px;color:#f0e6cf;font-family:system-ui,sans-serif;}"
-        "h1{font-size:18px;letter-spacing:1px;color:#e7d6ac;margin-bottom:4px;}"
-        "h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c9a24a;"
-        "margin:28px 0 12px;border-bottom:1px solid #3a2c19;padding-bottom:6px;}"
-        "p.sub{color:#a08a5c;font-size:13px;margin-bottom:18px;max-width:52rem;line-height:1.45;}"
-        ".legend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-bottom:16px;font-size:12px;color:#d8c8a0;}"
-        ".lg-item{display:flex;align-items:center;gap:6px;}"
-        ".lg-shape{display:inline-block;width:9px;height:9px;}"
-        ".lg-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}"
-        ".lg-def{background:#2563EB;border-radius:1px;}"
-        ".lg-res{border-radius:50%;background:#166534;}"
-        ".box{background:#1b130b;border:1px solid #3a2c19;border-radius:8px;padding:12px 14px;"
-        "font-size:12px;line-height:1.5;color:#d8c8a0;margin-bottom:22px;max-width:52rem;}"
-        ".grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}"
-        ".stag{font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;"
-        "margin-bottom:8px;color:#c9b896;}"
-        ".cardwrap{display:flex;justify-content:center;}"
-        "</style></head><body>"
-        "<h1>Spark / Flourish overhaul — live model cards</h1>"
+        f"{proof_css}"
+        "</style></head><body class=\"proof-spark\">"
+        "<h1>Spark / Flourish overhaul — model cards</h1>"
         '<p class="sub">Spark = active verb phrase (magnitude) + italic prompt — story voice, not pills. '
         "Empower verbs (Rally, Hurl, Slip…) map to Boost at the table.</p>"
         f"{legend}"
