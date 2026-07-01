@@ -24,42 +24,46 @@ from scripts.strip_origin_stems import CARD_DATA, load_cards, push_baserow  # no
 
 PROOF_OUT = ROOT / "spark-flourish-proof.html"
 BATCH_OUT = ROOT / "scripts" / "spark_flourish_batch.json"
-DATE = "2026-07-01"
+DATE = "2026-07-02"
 
 B1 = '<span class="kw kw-boost">Boost 1</span>'
 HD = '<span class="kw kw-hd">Hit Die</span>'
 
-
-DATE = "2026-07-02"
-
-# phrase = (category off|def|res, verb phrase without magnitude, magnitude int)
-Phrase = tuple[str, str, int]
-
-CAT_CLASS = {"off": "spark-n-off", "def": "spark-n-def", "res": "spark-n-res"}
+# clause: category (off|def|res), bold verb, tail text, optional magnitude
+Clause = tuple[str, str, str, int | None]
 
 
-def spark_cost(n: int) -> str:
-    glyphs = "".join('<span class="spark-glyph" aria-hidden="true"></span>' for _ in range(n))
-    return f'<span class="spark-glyphs" title="{n} Spark">{glyphs}</span>'
+def spark_pips(n: int) -> str:
+    pips = "".join('<span class="spark-pip" aria-hidden="true"></span>' for _ in range(n))
+    return f'<span class="spark-pips" title="{n} Spark">{pips}</span>'
 
 
-def spark_mag(cat: str, n: int) -> str:
-    return f'<span class="spark-n {CAT_CLASS[cat]}">({n})</span>'
+def verb_span(cat: str, verb: str) -> str:
+    return f'<strong class="spark-v spark-v-{cat}">{verb}</strong>'
 
 
-def spark_phrase(cat: str, text: str, mag: int) -> str:
-    return f"{text} {spark_mag(cat, mag)}."
+def mag_span(cat: str, n: int) -> str:
+    return (
+        f'<span class="spark-mag spark-mag-{cat}">'
+        f'<span class="cat-icon cat-{cat}" aria-hidden="true"></span>'
+        f'<span class="mag-n">({n})</span></span>'
+    )
 
 
-def spark_line(cost: int, phrases: list[Phrase], prompt: str) -> str:
-    parts = []
-    for i, (cat, text, mag) in enumerate(phrases):
-        if i:
-            parts.append('<span class="spark-sep">·</span>')
-        parts.append(spark_phrase(cat, text, mag))
-    verb = f'<div class="spark-verb">{"".join(parts)}</div>'
-    body = f'<div class="spark-body">{verb}<div class="spark-prompt">{prompt}</div></div>'
-    return f'<div class="ci spark-entry">{spark_cost(cost)}{body}</div>'
+def clause_row(cat: str, verb: str, tail: str, mag: int | None = None) -> str:
+    if mag is not None:
+        suffix = f" {mag_span(cat, mag)}."
+    elif tail.rstrip().endswith("then") or tail.rstrip().endswith(","):
+        suffix = ""
+    else:
+        suffix = "."
+    return f'<div class="spark-row">{verb_span(cat, verb)} {tail}{suffix}</div>'
+
+
+def spark_line(cost: int, clauses: list[Clause], invite: str) -> str:
+    rows = "".join(clause_row(c, v, t, m) for c, v, t, m in clauses)
+    body = f'<div class="spark-body">{rows}<div class="spark-invite">{invite}</div></div>'
+    return f'<div class="ci spark-entry">{spark_pips(cost)}{body}</div>'
 
 
 def spark_block(*rows: str) -> str:
@@ -106,8 +110,8 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Rattle a second foe", 1)],
-                    "How do you wrench their eyes off your allies?",
+                    [("off", "Jolt", "a second foe's attention onto you", 1)],
+                    "Another enemy can't look at anyone but you.",
                 ),
             ),
         ),
@@ -127,18 +131,21 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Rattle them until the room stops", 2)],
-                    "What word lands, and how do they show it?",
+                    [("off", "Unmask", "them until the room goes quiet", 2)],
+                    "The truth sits in their chest where swagger was.",
                 ),
                 spark_line(
                     1,
-                    [("def", "Rally your allies", 1)],
-                    "How do you signal them in?",
+                    [("def", "Sound", "the charge for your allies", 1)],
+                    "Your allies move on the conviction in your voice.",
                 ),
                 spark_line(
                     2,
-                    [("off", "Rattle them", 1), ("res", "Steady yourself", 1)],
-                    "What cracks in them — what hardens in you?",
+                    [
+                        ("off", "Shake", "their certainty, then", None),
+                        ("res", "Plant", "your feet like stone", None),
+                    ],
+                    "They buckle; you don't.",
                 ),
             ),
         ),
@@ -158,13 +165,16 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Sunder the target", 2)],
-                    "What gives — guard, footing, or nerve?",
+                    [("off", "Cleave", "through what they're holding", 2)],
+                    "Their guard, footing, or nerve is broken.",
                 ),
                 spark_line(
                     2,
-                    [("off", "Sunder them as you pass", 1), ("def", "Hurl an ally into the opening", 1)],
-                    "What cracks; who answers your voice?",
+                    [
+                        ("off", "Rupture", "their defenses as you pass, then", None),
+                        ("def", "Hurl", "an ally above them", None),
+                    ],
+                    "Steel and surprise — your friend falls toward the opening.",
                 ),
             ),
         ),
@@ -184,8 +194,8 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Bring the wreckage down on them", 2)],
-                    "What collapses — and who gets caught?",
+                    [("off", "Cascade", "wreckage onto whoever's hiding", 2)],
+                    "Cover becomes rubble; someone wasn't fast enough.",
                 ),
             ),
         ),
@@ -205,13 +215,13 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Stagger them from the shadows", 1)],
-                    "Where were you a moment ago?",
+                    [("off", "Pierce", "from the blind side", 1)],
+                    "They never saw which shadow moved.",
                 ),
                 spark_line(
                     2,
-                    [("off", "Take their legs out", 2)],
-                    "How do they hit the ground?",
+                    [("off", "Drop", "them hard", 2)],
+                    "The floor meets them before their next thought.",
                 ),
             ),
         ),
@@ -231,13 +241,16 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("def", "Slip an ally through the lie", 1)],
-                    "What did they think they saw?",
+                    [("def", "Thread", "an ally through the hesitation", 1)],
+                    "They lunge at the wrong shape.",
                 ),
                 spark_line(
                     2,
-                    [("off", "Stagger the wrong target", 1), ("def", "Slip an ally past", 1)],
-                    "What do they lunge at — who gets through?",
+                    [
+                        ("off", "Feint", "one way, then", None),
+                        ("def", "Ghost", "a friend past them", None),
+                    ],
+                    "The wrong person moves; the right one is already gone.",
                 ),
             ),
         ),
@@ -257,13 +270,13 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("off", "Burn a sigil on them", 1)],
-                    "What does it look like — how do they react?",
+                    [("off", "Brand", "them with a crawling sigil", 1)],
+                    "Everyone sees where the next blow belongs.",
                 ),
                 spark_line(
                     2,
-                    [("off", "Spread the mark across them", 2)],
-                    "What does their guard look like when it fails?",
+                    [("off", "Unravel", "their guard across their body", 2)],
+                    "Their stance comes apart like wet cloth.",
                 ),
             ),
         ),
@@ -283,13 +296,16 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("res", "Let the hunger pass through you", 1)],
-                    "What steadiness returns — and where?",
+                    [("res", "Exhale", "the hunger for a breath", 1)],
+                    "For a moment, you feel like a person again.",
                 ),
                 spark_line(
                     2,
-                    [("res", "Steady your breath", 1), ("off", "Hex the nearest foe", 1)],
-                    "What floods out of you — how do they break?",
+                    [
+                        ("res", "Ground", "yourself in the surge, then", None),
+                        ("off", "Wither", "the nearest fool who stepped close", None),
+                    ],
+                    "Power leaves your hands; someone nearby pays for it.",
                 ),
             ),
         ),
@@ -358,14 +374,14 @@ def write_proof() -> None:
 
     legend = """
 <div class="legend">
-  <span class="lg-item"><span class="spark-n spark-n-off">(n)</span> Offensive — Sunder, Rattle, Stagger…</span>
-  <span class="lg-item"><span class="spark-n spark-n-def">(n)</span> Empower — Rally, Hurl, Slip… (Boost at the table)</span>
-  <span class="lg-item"><span class="spark-n spark-n-res">(n)</span> Resolve — steady, recover, endure</span>
-  <span class="lg-item"><span class="spark-glyphs"><span class="spark-glyph"></span></span> Spark cost</span>
+  <span class="lg-item"><span class="cat-icon cat-off"></span> <strong class="spark-v-off">Verb</strong> — offensive</span>
+  <span class="lg-item"><span class="cat-icon cat-def"></span> <strong class="spark-v-def">Verb</strong> — empower (Boost at table)</span>
+  <span class="lg-item"><span class="cat-icon cat-res"></span> <strong class="spark-v-res">Verb</strong> — resolve</span>
+  <span class="lg-item"><span class="spark-pip"></span> Spark cost (one pip per 6)</span>
 </div>
 <div class="proc box">
-  Spark reads like a move list: <strong>verb phrase (magnitude).</strong> then a smaller italic prompt.
-  Parens color hints category; global rules carry the math. GM judges fit only.
+  Bold colored <strong>verb</strong> + ▲■● + <strong>(n)</strong> on single effects. Two-spark options split across
+  lines — verb first. Italic line invites the story; global rules carry the math.
 </div>
 """
 
@@ -394,9 +410,9 @@ body.proof-spark .primer-cards .cardwrap .card{
   background:#f7f0e0;border:0.5px solid #c8a96e;box-shadow:6px 6px 0 #1a1a1a;
 }
 body.proof-spark .primer-cards .cbody{padding:7px 10px 5px;}
-body.proof-spark .spark-sec .crow{gap:4px;}
-body.proof-spark .spark-prompt{font-size:7.8px;line-height:1.38;}
-body.proof-spark .spark-verb{font-size:9.5px;line-height:1.36;}
+body.proof-spark .spark-sec .crow{gap:6px;}
+body.proof-spark .spark-invite{font-size:8px;line-height:1.4;}
+body.proof-spark .spark-row{font-size:9.5px;line-height:1.38;}
 body.proof-spark .idtag{z-index:2;}
 """
 
@@ -407,8 +423,8 @@ body.proof-spark .idtag{z-index:2;}
         f"{proof_css}"
         "</style></head><body class=\"proof-spark\">"
         "<h1>Spark / Flourish overhaul — model cards</h1>"
-        '<p class="sub">Spark = active verb phrase (magnitude) + italic prompt — story voice, not pills. '
-        "Empower verbs (Rally, Hurl, Slip…) map to Boost at the table.</p>"
+        '<p class="sub">Bold colored verbs, shape + (n) for magnitude, story invites instead of questions. '
+        "Two-spark moves stack verbs on separate lines — Hurl implies Boost without saying it.</p>"
         f"{legend}"
         + "".join(sections)
         + "</body></html>",
