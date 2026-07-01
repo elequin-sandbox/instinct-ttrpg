@@ -98,8 +98,8 @@ CARDS: list[dict] = [
             "Paladin",
             "Smite",
             "You make yourself the problem they can't ignore.",
-            "Perform a <strong>Presence</strong> check. On success, draw an enemy's focus onto you — "
-            "they must answer your challenge before acting on anyone else this beat.",
+            "Perform a <strong>Presence</strong> check to draw an enemy's focus onto you — "
+            "make them answer your challenge before anyone else this beat.",
             spark_block(
                 spark_line(
                     1,
@@ -118,9 +118,8 @@ CARDS: list[dict] = [
             "Paladin",
             "Condemn",
             "You don't curse them. You recognize what they are.",
-            "Perform a <strong>Faith</strong> check. On success, speak what they have done aloud — "
-            "the truth lands. They must choose: <strong>Stand down</strong> or <strong>Press on</strong> "
-            "while everyone watches.",
+            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
+            "the truth lands while everyone watches.",
             spark_block(
                 spark_line(
                     1,
@@ -151,8 +150,8 @@ CARDS: list[dict] = [
             "Barbarian",
             "Reckless Strike",
             "You stop caring about what happens to you.",
-            f"Perform an <strong>Athletics</strong> check with {B1}. On success, "
-            "<strong>Strike</strong> with full force — your guard stays wide open until your next turn.",
+            f"Perform an <strong>Athletics</strong> check with {B1} to <strong>Strike</strong> with "
+            "full force — leave your guard wide open until your next turn.",
             spark_block(
                 spark_line(
                     1,
@@ -177,9 +176,8 @@ CARDS: list[dict] = [
             "Barbarian",
             "Break",
             "There is no obstacle. There is only physics.",
-            "Perform an <strong>Athletics</strong> check. On success, smash part of the "
-            "<strong>Scene</strong> — a barrier or structure is destroyed, opening a path or "
-            "clearing cover.",
+            "Perform an <strong>Athletics</strong> check to smash part of the <strong>Scene</strong> — "
+            "destroy a barrier or structure and open a path.",
             spark_block(
                 spark_line(
                     1,
@@ -198,8 +196,8 @@ CARDS: list[dict] = [
             "Rogue",
             "Sneak Attack",
             "You weren't watching the right shadow.",
-            "Perform a <strong>Stealth</strong> check. On success, <strong>Strike</strong> a target "
-            "that is unaware of you or occupied with an ally.",
+            "Perform a <strong>Stealth</strong> check to <strong>Strike</strong> a target "
+            "unaware of you or occupied with an ally.",
             spark_block(
                 spark_line(
                     1,
@@ -224,8 +222,8 @@ CARDS: list[dict] = [
             "Rogue",
             "Smoke and Mirrors",
             "Let them argue about what they saw.",
-            "Perform a <strong>Deception</strong> check. On success, plant a false impression — "
-            "a sound, silhouette, or dropped object. Enemies in the area hesitate.",
+            "Perform a <strong>Deception</strong> check to plant a false impression — "
+            "a sound, silhouette, or dropped object.",
             spark_block(
                 spark_line(
                     1,
@@ -251,7 +249,7 @@ CARDS: list[dict] = [
             "Eldritch Strike",
             "The power is yours. So is the price.",
             f"Remove a {HD} from your pool and <strong>Strike</strong> at any range — add that die "
-            "to your strike. On success, dark magic marks exactly where to hit them again.",
+            "to your strike. Dark magic marks where to hit them next.",
             spark_block(
                 spark_line(
                     1,
@@ -277,7 +275,7 @@ CARDS: list[dict] = [
             "Feed the Fire",
             "More. Always more.",
             f"Remove a {HD} from your pool. Perform a <strong>Spellcast</strong> check — add that die "
-            "to the roll. On success, your next Act this <strong>Scene</strong> meets no resistance.",
+            "to the roll — to pour more power into your next Act this <strong>Scene</strong>.",
             spark_block(
                 spark_line(
                     1,
