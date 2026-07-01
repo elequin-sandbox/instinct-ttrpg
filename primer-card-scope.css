@@ -17,13 +17,31 @@
 .ci.fl-green .fl-dot{background:#166534;}
 .ci.fl-green .fl-word{color:#166534;}
 .ci .fl-word{font-weight:700;}
-/* Spark / Flourish (July 2026): pip cost + bold colored verb + shape (CB) + story invite.
-   ▲ offensive · ■ empower · ● resolve — icon + hue on verb and magnitude. */
-.ci.spark-entry{align-items:flex-start;gap:5px;}
-.spark-pips{display:flex;flex-direction:column;gap:3px;flex-shrink:0;padding-top:2px;}
+/* Spark / Flourish v4 (July 2026): discrete choice blocks, shape-before-verb, CB icons.
+   ▲ offensive · ■ empower · ● resolve — shape leads each row; (n) magnitude after phrase. */
+.ci.spark-entry{
+  align-items:flex-start;gap:6px;
+  padding:4px 5px 4px 6px;margin:0;
+  border-radius:4px;
+  border:1px solid rgba(90,74,50,.14);
+  border-left-width:3px;
+  background:rgba(0,0,0,.02);
+}
+.spark-entry-off{border-left-color:#991B1B;background:rgba(153,27,27,.04);}
+.spark-entry-def{border-left-color:#2563EB;background:rgba(37,99,235,.05);}
+.spark-entry-res{border-left-color:#166534;background:rgba(22,101,52,.05);}
+.spark-entry-mix{border-left-color:#9a7209;background:rgba(154,114,9,.05);}
+.spark-pips{display:flex;flex-direction:column;gap:4px;flex-shrink:0;padding-top:3px;}
 .spark-pip{
-  display:block;width:3px;height:10px;flex-shrink:0;border-radius:1px;
-  background:linear-gradient(180deg,#c89010,#7a5a08);
+  display:block;width:5px;height:13px;flex-shrink:0;border-radius:2px;
+  background:linear-gradient(180deg,#e0a820,#8a6508);
+  box-shadow:0 0 0 1px rgba(106,72,6,.35);
+}
+.spark-pips-dots{gap:5px;padding-top:4px;}
+.spark-pips-dots .spark-pip{
+  width:8px;height:8px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#f0d060,#a87810);
+  box-shadow:0 0 0 1px rgba(106,72,6,.45);
 }
 .spark-body{flex:1;min-width:0;}
 .spark-row{font-size:9.5px;line-height:1.38;color:#1a1008;}
@@ -31,21 +49,26 @@
 .spark-v-off{color:#991B1B;}
 .spark-v-def{color:#2563EB;}
 .spark-v-res{color:#166534;}
-.spark-mag{white-space:nowrap;font-weight:700;font-size:9px;}
+.spark-mag{white-space:nowrap;font-weight:700;font-size:9px;margin-left:1px;}
 .spark-mag .mag-n{font-weight:800;}
 .spark-mag-off .mag-n{color:#991B1B;}
 .spark-mag-def .mag-n{color:#2563EB;}
 .spark-mag-res .mag-n{color:#166534;}
-.cat-icon{display:inline-block;width:6px;height:6px;margin-right:2px;vertical-align:baseline;position:relative;top:1px;}
+.cat-icon{display:inline-block;width:7px;height:7px;margin-right:3px;vertical-align:baseline;position:relative;top:0;}
 .cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
 .cat-def{background:#2563EB;border-radius:1px;}
 .cat-res{border-radius:50%;background:#166534;}
+.spark-chain{padding-left:11px;line-height:1;margin:2px 0 1px;}
+.spark-link{color:#9a7209;font-size:9px;font-weight:800;letter-spacing:.02em;}
 .spark-invite{
-  font-size:8px;line-height:1.38;font-style:italic;color:#5a4a32;
-  margin-top:2px;padding-left:1px;
+  font-size:7.75px;line-height:1.4;font-style:italic;color:#5a4a32;
+  margin-top:3px;padding-left:8px;
 }
-.csec.spark-sec .clbl{color:#9a7209;letter-spacing:.08em;}
-.csec.spark-sec .crow{gap:5px;}
+.spark-invite-2{margin-top:1px;}
+.invite-lead{font-style:normal;color:#a08a5c;margin-right:3px;font-weight:600;}
+.csec.spark-sec .clbl{color:#5c4a32;letter-spacing:.1em;}
+.csec.spark-sec.spark-lbl-cool .clbl{color:#4a5568;}
+.csec.spark-sec .crow{gap:7px;flex-direction:column;}
 /* Legacy Crit-count + chip styles (older flourish pass cards) */
 .ci.spark-line{align-items:flex-start;gap:4px;}
 .ci .fl-icon{display:inline-block;width:7px;height:7px;flex-shrink:0;}
