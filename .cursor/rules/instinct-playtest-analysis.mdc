@@ -25,3 +25,15 @@ When Annie provides playtest transcript(s) or asks for post-playtest processing,
 ## Agent owns the run
 
 Read full transcripts, write both files, present for verification. No handoffs.
+
+## Open artifacts (required)
+
+After writing the checklist and Discord recap:
+
+1. **Generate browser-readable proof HTML** for each artifact (`.md` does not render on
+   GitHub Pages / Simple Browser) — e.g. `jun-30-playtest-analysis-proof.html` and
+   `jun-30-discord-recap-proof.html` in the same session folder.
+2. **Open both in the Cursor browser** (`browser_navigate`, `position: "active"`) — checklist
+   first, Discord recap second (`newTab: true`). Use local `file://` paths immediately; after
+   push, also give GitHub Pages URLs for the `*-proof.html` files.
+3. Mention both URLs in chat so Annie can re-open them.

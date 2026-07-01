@@ -121,8 +121,12 @@ Identify speakers from transcript; if ambiguous, note `[verify: speaker?]` or as
 2. **Extract observation ledger** (silent): story, rulings, player confusion, Nathan scope statements, tossed ideas
 3. **Draft checklist** — strengths → tiers → parked → open → inferences → quotes → Monday list
 4. **Draft Discord post** — story recap → feedback distilled
-5. **Present to Annie** — link both files; highlight **AGENT INFERENCES** for verification
-6. **After Annie confirms** — map Primary items to `design/` via `at-session-close`; do not edit doctrine from unverified inferences alone
+5. **Build `*-proof.html`** for each artifact (browser-readable; raw `.md` is not enough).
+6. **Open both proof pages in the Cursor browser** — `browser_navigate` with `position: "active"`;
+   checklist first, Discord recap second (`newTab: true`). Local `file://` immediately; GitHub
+   Pages URLs for `*-proof.html` after push.
+7. **Present to Annie** — link both proof pages; highlight **AGENT INFERENCES** for verification
+8. **After Annie confirms** — map Primary items to `design/` via `at-session-close`; do not edit doctrine from unverified inferences alone
 
 ---
 
