@@ -107,6 +107,21 @@
     .yield-tri.off {
       border-bottom: 10px solid var(--spark-red-dark);
     }
+    .yield-sq {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .yield-sq.off { background: var(--spark-red-dark); }
+
+    .spark-combo-plus {
+      font-size: 11px;
+      font-weight: 800;
+      color: #6a5b48;
+      line-height: 1;
+    }
 
     .spark-verb {
       font-size: 12.5px;
@@ -226,6 +241,8 @@
     }
     .card .yield-tri.def { border-bottom-width: 8px; }
     .card .yield-tri.off { border-bottom-width: 8px; }
+    .card .yield-sq { width: 8px; height: 8px; }
+    .card .spark-combo-plus { font-size: 9px; }
     .card .spark-verb { font-size: 9.5px; }
     .card .spark-invite-box {
       font-size: 9.5px;
@@ -299,12 +316,14 @@
           <span class="cost-die" title="Spend 1 Spark">6</span>
           <span class="cost-die" title="Spend 1 Spark">6</span>
           <span class="yield-tri def" aria-hidden="true"></span>
-          <span class="yield-tri off" aria-hidden="true"></span>
-          <span class="spark-verb">Smoke and Mirrors</span>
+          <span class="spark-verb">Defend</span>
+          <span class="spark-combo-plus" aria-hidden="true">+</span>
+          <span class="yield-sq off" aria-hidden="true"></span>
+          <span class="spark-verb">Attack</span>
         </div>
-        <div class="spark-invite-box">Feint one way while you ghost an ally past them</div>
+        <div class="spark-invite-box">Sell the wrong threat, then pass your ally through the opening</div>
       </div>
-      <p class="note">Top row = cost + category shapes + bold verb/combo name. Box = how you describe it at the table.</p>
+      <p class="note">Top row = cost + category shapes + bold verbs. Box = how you describe it at the table.</p>
     </div>
 
     <div class="demo-block card-wrap">
@@ -337,10 +356,12 @@
                 <span class="cost-die" title="Spend 1 Spark">6</span>
                 <span class="cost-die" title="Spend 1 Spark">6</span>
                 <span class="yield-tri def" aria-hidden="true"></span>
-                <span class="yield-tri off" aria-hidden="true"></span>
-                <span class="spark-verb">Smoke and Mirrors</span>
+                <span class="spark-verb">Defend</span>
+                <span class="spark-combo-plus" aria-hidden="true">+</span>
+                <span class="yield-sq off" aria-hidden="true"></span>
+                <span class="spark-verb">Attack</span>
               </div>
-              <div class="spark-invite-box">Feint one way while you ghost an ally past them</div>
+              <div class="spark-invite-box">Sell the wrong threat, then pass your ally through the opening</div>
             </div>
           </div>
         </div>
