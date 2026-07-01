@@ -220,6 +220,75 @@ def sam_spark_inverted() -> str:
     )
 
 
+def column_flow_shape(cat: Cat) -> str:
+    if cat == "def":
+        return '<span class="yield-tri cat-def" aria-hidden="true"></span>'
+    if cat == "off":
+        return '<span class="yield-sq cat-off" aria-hidden="true"></span>'
+    return '<span class="yield-sq cat-res" aria-hidden="true"></span>'
+
+
+def column_flow_key(
+    verb: str,
+    cat: Cat,
+    *,
+    cost: int | None = None,
+) -> str:
+    cost_html = cost_die_icons(cost) if cost else ""
+    return (
+        '<div class="spark-flow-key">'
+        f"{cost_html}"
+        f"{column_flow_shape(cat)}"
+        f'<span class="spark-flow-verb spark-v-{cat}">{verb}</span>'
+        "</div>"
+    )
+
+
+def column_flow_row(key_html: str, tail: str) -> str:
+    return (
+        '<div class="spark-flow-row">'
+        f"{key_html}"
+        f'<div class="spark-flow-tail">{tail}</div>'
+        "</div>"
+    )
+
+
+def column_flow_entry(*rows: str) -> str:
+    return (
+        '<div class="ci spark-entry spark-entry-column-flow">'
+        f'{"".join(rows)}'
+        "</div>"
+    )
+
+
+def column_flow_block(*entries: str) -> str:
+    return (
+        '<div class="csec spark-sec"><div class="clbl">Spark</div>'
+        f'<div class="crow">{"".join(entries)}</div></div>'
+    )
+
+
+def sam_spark_column_flow() -> str:
+    return column_flow_block(
+        column_flow_entry(
+            column_flow_row(
+                column_flow_key("Deflect", "def", cost=1),
+                "attention from an Ally",
+            ),
+        ),
+        column_flow_entry(
+            column_flow_row(
+                column_flow_key("Sell", "def", cost=2),
+                "the wrong threat",
+            ),
+            column_flow_row(
+                column_flow_key("Pass", "off"),
+                "your ally through the opening",
+            ),
+        ),
+    )
+
+
 def ability_card(
     accent: str,
     idtag: str,
@@ -320,6 +389,17 @@ def sam_spark_inverted_card() -> str:
         "Let them argue about what they saw.",
         SAM_EFFECT,
         sam_spark_inverted(),
+    )
+
+
+def sam_spark_column_flow_card() -> str:
+    return ability_card(
+        "rogue",
+        "Rogue",
+        "Smoke and Mirrors",
+        "Let them argue about what they saw.",
+        SAM_EFFECT,
+        sam_spark_column_flow(),
     )
 
 

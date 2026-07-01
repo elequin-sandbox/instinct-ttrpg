@@ -19,6 +19,7 @@ def collect_variants() -> list[dict]:
         heritage_chip_sam,
         heritage_v2_question_sam,
         sam_spark_canonical,
+        sam_spark_column_flow_card,
         sam_spark_compact_xch,
         sam_spark_evocative,
         sam_spark_inverted_card,
@@ -91,6 +92,27 @@ def collect_variants() -> list[dict]:
             ],
             "Does putting verbs first speed your pick? Is the invite box clearer than italic under?",
             lambda: card_html(sam_spark_inverted_card),
+        ),
+        (
+            "layout-column-flow",
+            "Column flow (book read)",
+            False,
+            [
+                {
+                    "title": "Key column left",
+                    "body": "Cost die, shape, and impact verb stack in a narrow left column.",
+                },
+                {
+                    "title": "Sentence continues right",
+                    "body": "Same-size prose flows right — Deflect attention… / Sell the wrong threat.",
+                },
+                {
+                    "title": "Combo = two rows",
+                    "body": "Second row: Pass (red) + your ally through the opening — read top to bottom.",
+                },
+            ],
+            "Read down the left column for the trade, then left-to-right across each row — does it feel like a book?",
+            lambda: card_html(sam_spark_column_flow_card),
         ),
         (
             "layout-compact",
