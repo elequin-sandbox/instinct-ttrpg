@@ -703,11 +703,28 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 /* ---------- Spark design lab ---------- */
 .tab-sparklab{color:#e0c060 !important;}
 #view-sparklab{min-height:calc(100vh - 62px);background:#12100c;}
-.sparklab-intro{max-width:40rem;padding:16px 20px 6px;color:#9a8a6a;font-size:13px;line-height:1.5;}
-.sparklab-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 18px 12px;border-bottom:1px solid #2a1d10;position:sticky;top:62px;z-index:40;background:#12100c;}
+.sparklab-intro{max-width:44rem;padding:14px 20px 4px;color:#9a8a6a;font-size:13px;line-height:1.5;}
+.sparklab-peek-hint{max-width:44rem;padding:0 20px 6px;color:#7a6a50;font-size:12px;line-height:1.4;}
+.sparklab-tabs{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:0 18px 10px;border-bottom:1px solid #2a1d10;
+  position:sticky;top:62px;z-index:41;background:#12100c;
+}
+.sparklab-tab{
+  background:#1a1510;border:1px solid #3a2c19;color:#9a8a6a;
+  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
+  font-family:inherit;cursor:pointer;letter-spacing:.02em;
+}
+.sparklab-tab:hover{border-color:#6a5a40;color:#d8c8a8;}
+.sparklab-tab.on{background:#3a2c10;border-color:#c9a24a;color:#f5d76e;}
+.sparklab-toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  padding:10px 18px 12px;border-bottom:1px solid #2a1d10;
+  position:sticky;top:108px;z-index:40;background:#12100c;
+}
 .sparklab-toolbar .chip.on{background:#8a6608;border-color:#c9a24a;color:#fff;}
 .sparklab-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
-.sparklab-viewtoggle{display:flex;gap:4px;margin-left:8px;}
+.sparklab-viewtoggle{display:flex;gap:4px;}
 .sparklab-viewtoggle .chip{font-size:11px;padding:4px 10px;}
 /* 2-up gallery — cards need ~300px; 4-across was crushing them */
 .sparklab-grid{
@@ -857,6 +874,66 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 #view-sparklab .spark-link{color:#9a7209;font-size:9px;font-weight:800;}
 #view-sparklab .spark-invite-heritage{font-size:7.75px;font-style:italic;color:#5a4a32;margin-top:2px;}
 #view-sparklab .spark-entry-heritage .spark-row{font-size:9.5px;}
+/* Inverted verb-first + invite box (layout lab) */
+#view-sparklab .spark-entry-inverted{
+  padding:4px 5px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+#view-sparklab .spark-verb-row{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:4px;
+}
+#view-sparklab .spark-cost-dies{display:inline-flex;gap:2px;align-items:center;}
+#view-sparklab .spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+#view-sparklab .yield-tri{
+  display:inline-block;width:0;height:0;border-left:5px solid transparent;
+  border-right:5px solid transparent;flex-shrink:0;
+}
+#view-sparklab .yield-tri.cat-def{border-bottom:8px solid #2563EB;}
+#view-sparklab .yield-sq{
+  display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;
+}
+#view-sparklab .yield-sq.cat-off{background:#991B1B;}
+#view-sparklab .spark-verb-label{
+  font-size:9.5px;font-weight:800;color:#1a1008;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+#view-sparklab .spark-combo-plus{font-size:9px;font-weight:800;color:#6a5b48;line-height:1;}
+#view-sparklab .spark-invite-box{
+  border:1.5px solid rgba(91,127,212,.45);border-radius:4px;
+  padding:4px 6px;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.25px;line-height:1.32;color:#1a1008;background:rgba(255,255,255,.5);
+}
+/* Column flow — key stack left, sentence continues right */
+#view-sparklab .spark-entry-column-flow{
+  padding:4px 5px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+  display:flex;flex-direction:column;gap:5px;
+}
+#view-sparklab .spark-flow-row{
+  display:flex;align-items:flex-end;gap:5px;
+}
+#view-sparklab .spark-flow-key{
+  flex:0 0 34px;display:flex;flex-direction:column;align-items:center;
+  gap:2px;padding-bottom:1px;
+}
+#view-sparklab .spark-flow-verb{
+  font-size:9.5px;font-weight:800;line-height:1.1;
+  font-family:system-ui,-apple-system,sans-serif;text-align:center;
+}
+#view-sparklab .spark-flow-verb.spark-v-def{color:#2563EB;}
+#view-sparklab .spark-flow-verb.spark-v-off{color:#991B1B;}
+#view-sparklab .spark-flow-verb.spark-v-res{color:#166534;}
+#view-sparklab .spark-flow-tail{
+  flex:1;min-width:0;font-size:9.5px;line-height:1.32;font-weight:500;
+  color:#1a1008;padding-bottom:1px;
+}
 /* ---------- submit idea view ---------- */
 .tab-submit{color:#c8a96e !important;font-weight:600;}
 .tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
@@ -1180,14 +1257,15 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 </section>
 
 <section class="view hidden" id="view-sparklab">
-  <p class="sparklab-intro" id="sparkLabIntro">Hover a card to peek closer, or click to open full size. Leave a comment, or tap <strong>I like something here</strong> on designs that work for you.</p>
+  <p class="sparklab-intro" id="sparkLabIntro">Compare Layout, Language, and Spend icon on the same card.</p>
+  <p class="sparklab-peek-hint">Hover a card to peek closer, or click to open full size.</p>
+  <div class="sparklab-tabs" id="sparkLabTabs">
+    <button type="button" class="sparklab-tab on" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout</button>
+    <button type="button" class="sparklab-tab" data-slab="language" onclick="filterSparkLab('language',this)">Language</button>
+    <button type="button" class="sparklab-tab" data-slab="pay" onclick="filterSparkLab('pay',this)">Spend icon</button>
+    <button type="button" class="sparklab-tab" data-slab="likes" onclick="filterSparkLab('likes',this)">♥ Likes</button>
+  </div>
   <div class="sparklab-toolbar">
-    <span class="flabel" style="min-width:auto">Show</span>
-    <button class="chip on" data-slab="all" onclick="filterSparkLab('all',this)">All</button>
-    <button class="chip" data-slab="pay" onclick="filterSparkLab('pay',this)">Spend icons</button>
-    <button class="chip" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout &amp; copy</button>
-    <button class="chip" data-slab="heritage" onclick="filterSparkLab('heritage',this)">Heritage</button>
-    <button class="chip" data-slab="likes" onclick="filterSparkLab('likes',this)">Likes</button>
     <span class="sparklab-viewtoggle">
       <button class="chip on" id="sparkViewGallery" onclick="setSparkLabView('gallery')">Gallery</button>
       <button class="chip" id="sparkViewCompare" onclick="setSparkLabView('compare')">Compare (2-up)</button>
@@ -2306,7 +2384,7 @@ function resetSubmitForm(){
 /* ---------- Spark design lab (playtest feedback) ---------- */
 const SPARK_LAB_STORE = 'irpg_spark_lab_feedback';
 const SPARK_LAB_SUBMIT_KEY = 'irpg_spark_lab_submitted';
-let sparkLabFilter = 'all';
+let sparkLabFilter = 'layout';
 let sparkLabCommunityLikes = {};
 let sparkLabCommunityLoaded = false;
 let sparkLabViewMode = 'gallery';
@@ -2348,7 +2426,7 @@ function updateSparkLabBadge(){
 }
 function filterSparkLab(cat,btn){
   sparkLabFilter=cat;
-  document.querySelectorAll('[data-slab]').forEach(b=>b.classList.toggle('on',b===btn));
+  document.querySelectorAll('#sparkLabTabs .sparklab-tab').forEach(b=>b.classList.toggle('on',b===btn));
   renderSparkLab();
 }
 function setSparkLabView(mode){
@@ -2440,7 +2518,17 @@ function renderSparkLab(refreshCommunity){
 function renderSparkLabPanels(data){
   const grid=document.getElementById('sparkLabGrid');
   const intro=document.getElementById('sparkLabIntro');
-  if(intro&&data.intro)intro.textContent=data.intro;
+  if(intro){
+    const cats=data.categories||{};
+    const cat=cats[sparkLabFilter];
+    if(sparkLabFilter==='likes'){
+      intro.textContent='Designs playtesters liked — submit ♥ to add yours.';
+    }else if(cat&&cat.intro){
+      intro.textContent=cat.intro;
+    }else if(data.intro){
+      intro.textContent=data.intro;
+    }
+  }
   updateSparkLabBadge();
   if(sparkLabFilter==='likes'){
     renderSparkLabLikes(data.variants);
@@ -2450,7 +2538,7 @@ function renderSparkLabPanels(data){
   grid.classList.remove('hidden');
   const user=getSparkLabFeedback();
   const filtered=data.variants.filter(function(v){
-    return sparkLabFilter==='all'||v.category===sparkLabFilter;
+    return v.category===sparkLabFilter;
   });
   grid.innerHTML=filtered.map(function(v){
     const ur=user[v.id];
