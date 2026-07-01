@@ -4,7 +4,7 @@
 > ornaments, per-type body anatomy, and the **keyword formatting gospel** (`core-rules.md` points
 > here for it). Design/tokens live here; the copy-paste rendering **code** that implements them lives
 > in the `at-card-renderer` skill.
-> **Status:** current. **Last updated:** June 29 2026.
+> **Status:** current, Playtest 4 prep. **Last updated:** July 1 2026.
 >
 > **Sibling docs:** rules/keyword meanings → `design/core-rules.md` · wording & forbidden terms →
 > `design/writing-conventions.md` · classes → `design/classes.md` · inventory → `card-inventory.md`.
@@ -30,6 +30,9 @@ Bane (umbrella — negative)
 
 Instinct (independent)  ◇◇◇   Slate indigo  #1e2540
    Dual-purpose: positive path [Boost 2] OR negative path Draw 2 (formerly separate Flaw cards)
+   ⚠️ Status open (S7) — Nathan may revert to a prior strength/weakness dual-card model; see
+   `core-rules.md` Open questions #5. Do not build further on the dual-purpose Flaw merge without
+   `[Nathan verify]`.
 
 Connection (session-start template)  *(no ornament — name blank)*   Deep rose  #2d1020
    One per player; filled in at session start with character name; shuffled into other players' decks.
@@ -112,6 +115,26 @@ Every word that carries a real gameplay effect. Rendered as a filled inline pill
 
 **Declared Actions** — a related mechanical set rendered **Bold + Capitalized** (not pills):
 **Action · Reaction · Draw · Discard · Shuffle · Cleanse · Luck Check · Scene**.
+
+### 🔒 Crit Flourish colorings (locked Playtest 4 — P2)
+
+Each **Flourish** option line (spent via `[Crit]` — full procedure `core-rules.md` §5) carries one of
+three color treatments, in addition to the gold `[Crit]` pill already on the card header, so the table
+reads a Flourish's *category* at a glance:
+
+| Coloring | Meaning | Reuses |
+|---|---|---|
+| 🔴 Red / offensive | removes dice from the objective/opposing pool (e.g. a Flourish printed **Exposed 2**) | Threat/Hit Dice red `#991B1B` |
+| 🔵 Blue / defensive | helps allies (Boost, redirect Threat, etc.) | Aid blue `#2563EB` |
+| 🟢 Green / resolve | heals, sheds Threat, recovers Resolve/Hit Die narrative | Resolve green `#166534` |
+
+This locks the **color-to-meaning mapping only** — no new palette, reuses existing Tier-1 pill colors
+above. Whether the coloring renders as a left-rail bar, a small label chip, or a bullet dot is the
+flourish-cards track's implementation call.
+
+**Coexistence with Tier 3 narrative words:** a Flourish's bold keyword is often a Tier 3 narrative
+term (Exposed, Rattled, etc. — see §4 Tier 3 below). The word itself stays plain-bold; the **coloring
+and the printed number belong to the Flourish line**, not to the word everywhere it appears on a card.
 
 **CRPG action verbs** (Move, Strike, Speak, Sense, Know, Focus, Enter, Exit, Read, Summon, Lift,
 Restrain) are the effect-syntax layer — their own established set, rendered as **steel-blue pills**

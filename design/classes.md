@@ -2,7 +2,7 @@
 
 > **Purpose:** What each class *is*, the narrative terms and mechanics it owns, what's locked, and
 > what's still open. Verify a class's identity and open items here before writing new cards for it.
-> **Status:** current, but several classes have ⚠️ open redesigns (see flags). **Last updated:** June 2026.
+> **Status:** current, but several classes have ⚠️ open redesigns (see flags). **Last updated:** July 1 2026.
 >
 > **Sibling docs:** rules → `design/core-rules.md` · card look → `design/card-anatomy.md` · wording →
 > `design/writing-conventions.md` · inventory → `card-inventory.md`.
@@ -17,6 +17,10 @@
 >   Break). "Tag ownership" is therefore reframed as *which class is the primary user/associate of a
 >   narrative term*, plus each class's own **mechanics** (Rage, Beastform, etc.), which are unaffected.
 > - Also global: **Guard eliminated**, **d6-only**, **Strong Roll → [Crit]**, **Failure → Miss**.
+> - **Playtest 4 addition:** the class's narrative term (Exposed, Sundered, Marked, etc.) is now also
+>   the natural **Crit Flourish keyword** for that class's cards (`core-rules.md` §5, three colorings).
+>   The ownership table below is unaffected — it still names who *primarily uses* each term; the
+>   flourish-cards track decides, card by card, which of those terms get a printed Flourish number.
 
 ---
 
@@ -111,6 +115,7 @@ a design problem; retire it from one class or build a distinct parallel.
 | **Wizard / Fighter** | Sundered consumption hooks needed. |
 | **Warlock** | Party-gift card not yet designed. |
 | **Ranger / all** | Marked expansion to at least 3 classes total. |
+| **All classes** | 🔒 **Playtest 4 card audit (P4)** — strip legacy unit-linked condition complexity from active pool cards (PbtA-style: one clear effect + optional Flourish band, not stacked forks); replace GM-tracked per-unit conditions with the Crit Flourish system (`core-rules.md` §5) wherever it cleanly applies. Model cards: pared **Smite** (Paladin) / **Strike** (Barbarian). Owned by the flourish-cards + pool-simplification Playtest 4 tracks; top ~20 active abilities first. |
 
 ---
 
@@ -126,6 +131,8 @@ a design problem; retire it from one class or build a distinct parallel.
 - **Exchange** is system-wide — any weapon card may be discarded at scene opening.
 - **Guard is eliminated** — never a tag or mechanic.
 - **Strong Roll → [Crit]** throughout.
+- 🔒 **Crit Flourishes resolve immediately when spent** (Playtest 4/P2) — no card should require the
+  GM to track a lingering per-unit condition between turns. Full mechanic → `core-rules.md` §5.
 
 ---
 
