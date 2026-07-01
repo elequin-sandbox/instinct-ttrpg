@@ -700,6 +700,55 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
+/* ---------- Spark design lab ---------- */
+.tab-sparklab{color:#e0c060 !important;}
+#view-sparklab{min-height:calc(100vh - 62px);background:#16110a;}
+.sparklab-intro{max-width:52rem;padding:18px 20px 8px;color:#a08a5c;font-size:14px;line-height:1.55;}
+.sparklab-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 18px 14px;border-bottom:1px solid #2a1d10;}
+.sparklab-toolbar .chip.on{background:#8a6608;border-color:#c9a24a;color:#fff;}
+.sparklab-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.sparklab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px 20px;padding:20px 18px 40px;align-items:start;}
+.sparklab-panel{background:#1d140b;border:1px solid #3a2c19;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.sparklab-panel.ships{border-color:#3fae6c;box-shadow:0 0 0 1px rgba(63,174,108,.25);}
+.sparklab-hd{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:8px;}
+.sparklab-title{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.3px;}
+.sparklab-cat{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8a7a5a;}
+.sparklab-ship{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#3fae6c;background:rgba(63,174,108,.12);padding:2px 6px;border-radius:4px;}
+.sparklab-goals{font-size:12px;line-height:1.45;color:#cbb98e;}
+.sparklab-goals li{margin:0 0 6px 14px;}
+.sparklab-goals strong{color:#e7d6ac;font-weight:700;}
+.sparklab-playtest{font-size:11px;font-style:italic;color:#9a8a6a;line-height:1.4;padding:8px 10px;background:#241a0f;border-radius:6px;border-left:3px solid #8a6608;}
+.sparklab-card{display:flex;justify-content:center;padding:4px 0;}
+.sparklab-card .spark-lab-cardwrap{width:300px;}
+.sparklab-card .card{width:300px !important;height:420px !important;background:#f7f0e0;}
+.sparklab-card .cbody{padding-bottom:32px;}
+.sparklab-rating{display:flex;flex-direction:column;gap:6px;border-top:1px solid #2a1d10;padding-top:10px;}
+.sparklab-rating-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-d);}
+.star-row{display:flex;gap:4px;align-items:center;}
+.star-btn{background:transparent;border:none;font-size:22px;line-height:1;color:#4a3d28;padding:0 2px;cursor:pointer;transition:color .1s,transform .1s;}
+.star-btn:hover,.star-btn.on{color:#e0c060;transform:scale(1.08);}
+.star-btn.user{color:#f5d76e;}
+.sparklab-avg{font-size:11px;color:#8a7a5a;}
+.sparklab-avg strong{color:#c9a24a;}
+.sparklab-leaderboard{padding:20px 18px 40px;max-width:720px;}
+.sparklab-lb-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #2a1d10;font-size:13px;}
+.sparklab-lb-row:first-child{font-weight:700;color:var(--gold);}
+.sparklab-lb-rank{width:28px;color:#8a7a5a;}
+.sparklab-lb-score{margin-left:auto;color:#e0c060;font-weight:700;}
+#view-sparklab .spark-glyphs{display:inline-flex;gap:1px;}
+#view-sparklab .spark-glyph{display:inline-block;width:8px;height:10px;background:linear-gradient(160deg,#ffe566,#d4a017 55%,#9a7209);clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);}
+#view-sparklab .spark-pips-heritage{display:flex;flex-direction:column;gap:3px;}
+#view-sparklab .spark-pip-heritage{display:block;width:4px;height:11px;border-radius:1px;background:linear-gradient(180deg,#e0a820,#8a6508);}
+#view-sparklab .ci.spark-entry-heritage{display:flex;gap:5px;padding:4px 5px;border-radius:4px;border:1px solid rgba(90,74,50,.12);}
+#view-sparklab .spark-verb{font-size:9.5px;line-height:1.38;font-weight:600;}
+#view-sparklab .spark-n{font-weight:800;font-size:9px;}
+#view-sparklab .spark-n-off{color:#991B1B;}
+#view-sparklab .spark-n-def{color:#2563EB;}
+#view-sparklab .spark-prompt{font-size:8px;font-style:italic;color:#5a4a32;margin-top:2px;}
+#view-sparklab .spark-chain{padding-left:10px;}
+#view-sparklab .spark-link{color:#9a7209;font-size:9px;font-weight:800;}
+#view-sparklab .spark-invite-heritage{font-size:7.75px;font-style:italic;color:#5a4a32;margin-top:2px;}
+#view-sparklab .spark-entry-heritage .spark-row{font-size:9.5px;}
 /* ---------- submit idea view ---------- */
 .tab-submit{color:#c8a96e !important;font-weight:600;}
 .tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
@@ -995,6 +1044,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
+    <button class="tab tab-sparklab" data-view="sparklab" onclick="showView('sparklab')">Spark Lab <span class="badge" id="sparkLabBadge" style="background:#8a6608">★</span></button>
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
     <button class="tab" data-view="deckbuild" onclick="showView('deckbuild')">Deck Build</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
@@ -1019,6 +1069,25 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 </section>
 <section class="view hidden" id="view-quickref">
   <iframe src="instinct-rpg-quick-ref-v2.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
+</section>
+
+<section class="view hidden" id="view-sparklab">
+  <p class="sparklab-intro" id="sparkLabIntro">Loading Spark design lab…</p>
+  <div class="sparklab-toolbar">
+    <span class="flabel" style="min-width:auto">Show</span>
+    <button class="chip on" data-slab="all" onclick="filterSparkLab('all',this)">All</button>
+    <button class="chip" data-slab="pay" onclick="filterSparkLab('pay',this)">Spend icons</button>
+    <button class="chip" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout &amp; copy</button>
+    <button class="chip" data-slab="heritage" onclick="filterSparkLab('heritage',this)">Heritage</button>
+    <button class="chip" data-slab="leaderboard" onclick="filterSparkLab('leaderboard',this)">Leaderboard</button>
+    <div class="sparklab-actions">
+      <button class="hbtn" onclick="submitSparkLabRatings()">Submit my ratings</button>
+      <button class="hbtn" onclick="renderSparkLab(true)">↺ Refresh averages</button>
+    </div>
+  </div>
+  <div id="sparkLabGrid" class="sparklab-grid"></div>
+  <div id="sparkLabLeaderboard" class="sparklab-leaderboard hidden"></div>
+  <p id="sparkLabStatus" class="sparklab-intro" style="padding-top:0;font-size:12px;"></p>
 </section>
 
 <div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
@@ -1140,6 +1209,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 <div id="toast"></div>
 
 <script src="config.js"></script>
+<script src="spark-design-lab-data.js"></script>
 <script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
 const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "tableIdeas": 1041581, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
@@ -1464,6 +1534,7 @@ function showView(v){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
   if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
   if(v==='submit'){const n=getCookieName();if(n)document.getElementById('submitName').value=n;}
+  if(v==='sparklab')renderSparkLab();
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1802,6 +1873,7 @@ async function init(){
   }
   const viewParam=new URLSearchParams(location.search).get('view');
   if(viewParam&&document.getElementById('view-'+viewParam))showView(viewParam);
+  updateSparkLabBadge();
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -2111,6 +2183,194 @@ function resetSubmitForm(){
   btn.disabled = false;
   btn.textContent = 'Send It In ✦';
   btn.classList.remove('hidden');
+}
+
+/* ---------- Spark design lab (playtest voting) ---------- */
+const SPARK_LAB_STORE = 'irpg_spark_lab_ratings';
+const SPARK_LAB_SUBMIT_KEY = 'irpg_spark_lab_submitted';
+let sparkLabFilter = 'all';
+let sparkLabCommunity = {};
+let sparkLabCommunityLoaded = false;
+
+function getSparkLabUserRatings(){
+  try{return JSON.parse(localStorage.getItem(SPARK_LAB_STORE)||'{}');}catch(e){return {};}
+}
+function setSparkLabRating(id, stars){
+  const r=getSparkLabUserRatings();
+  r[id]={stars:stars,at:new Date().toISOString()};
+  localStorage.setItem(SPARK_LAB_STORE,JSON.stringify(r));
+  updateSparkLabBadge();
+  renderSparkLab();
+}
+function updateSparkLabBadge(){
+  const r=getSparkLabUserRatings();
+  const n=Object.keys(r).length;
+  const el=document.getElementById('sparkLabBadge');
+  if(el)el.textContent=n?String(n):'★';
+}
+function filterSparkLab(cat,btn){
+  sparkLabFilter=cat;
+  document.querySelectorAll('[data-slab]').forEach(b=>b.classList.toggle('on',b===btn));
+  renderSparkLab();
+}
+function parseSparkLabSubmission(text){
+  const out={};
+  if(!text||text.indexOf('[SPARK-LAB]')<0)return out;
+  const lines=text.split('\n');
+  lines.forEach(function(line){
+    const m=line.match(/^([a-z0-9-]+):\s*(\d)\s*$/);
+    if(m)out[m[1]]=parseInt(m[2],10);
+  });
+  return out;
+}
+async function loadSparkLabCommunity(){
+  sparkLabCommunity={};
+  const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
+  if(!CONFIG.useLive||!CONFIG.tableIdeas||!hasToken)return;
+  try{
+    const rows=await fetchAll(CONFIG.tableIdeas,'');
+    rows.forEach(function(row){
+      const text=row.Idea_Text||'';
+      if(text.indexOf('[SPARK-LAB]')<0)return;
+      const parsed=parseSparkLabSubmission(text);
+      Object.keys(parsed).forEach(function(id){
+        if(!sparkLabCommunity[id])sparkLabCommunity[id]=[];
+        sparkLabCommunity[id].push(parsed[id]);
+      });
+    });
+  }catch(e){/* offline */}
+}
+function communityAvg(id){
+  const arr=sparkLabCommunity[id];
+  if(!arr||!arr.length)return null;
+  const sum=arr.reduce(function(a,b){return a+b;},0);
+  return {avg:sum/arr.length,n:arr.length};
+}
+function starButtonsHTML(id,userStars){
+  let html='<div class="star-row" role="group" aria-label="Rate 1 to 5 stars">';
+  for(let s=1;s<=5;s++){
+    const on=(userStars&&userStars>=s)?' on user':'';
+    html+='<button type="button" class="star-btn'+on+'" data-id="'+escAttr(id)+'" data-star="'+s+'" onclick="setSparkLabRating(\''+escAttr(id)+'\','+s+')" aria-label="'+s+' stars">★</button>';
+  }
+  html+='</div>';
+  return html;
+}
+function renderSparkLabLeaderboard(variants){
+  const scored=variants.map(function(v){
+    const c=communityAvg(v.id);
+    const u=getSparkLabUserRatings()[v.id];
+    const score=c?c.avg:(u?u.stars:0);
+    const n=c?c.n:(u?1:0);
+    return {v:v,score:score,n:n};
+  }).filter(function(x){return x.n>0;}).sort(function(a,b){return b.score-a.score;});
+  const box=document.getElementById('sparkLabLeaderboard');
+  if(!scored.length){
+    box.innerHTML='<div class="empty">No ratings yet — rate designs and submit to contribute.</div>';
+    box.classList.remove('hidden');
+    document.getElementById('sparkLabGrid').classList.add('hidden');
+    return;
+  }
+  box.innerHTML='<h3 style="color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:12px;">Community averages</h3>'+
+    scored.map(function(row,i){
+      return '<div class="sparklab-lb-row"><span class="sparklab-lb-rank">#'+(i+1)+'</span><span>'+esc(row.v.label)+'</span><span class="sparklab-lb-score">'+
+        row.score.toFixed(1)+' ★ <span style="font-weight:400;color:#8a7a5a">('+row.n+')</span></span></div>';
+    }).join('');
+  box.classList.remove('hidden');
+  document.getElementById('sparkLabGrid').classList.add('hidden');
+}
+function renderSparkLab(refreshCommunity){
+  const data=window.SPARK_DESIGN_LAB;
+  const grid=document.getElementById('sparkLabGrid');
+  const intro=document.getElementById('sparkLabIntro');
+  const status=document.getElementById('sparkLabStatus');
+  if(!data||!data.variants){
+    if(intro)intro.textContent='Spark lab data missing — rebuild with python3 scripts/build_spark_flourish_proof.py --write';
+    return;
+  }
+  if(refreshCommunity||!sparkLabCommunityLoaded){
+    status.textContent='Loading community averages…';
+    loadSparkLabCommunity().then(function(){
+      sparkLabCommunityLoaded=true;
+      status.textContent='';
+      renderSparkLabPanels(data);
+    });
+    return;
+  }
+  renderSparkLabPanels(data);
+}
+function renderSparkLabPanels(data){
+  const grid=document.getElementById('sparkLabGrid');
+  const intro=document.getElementById('sparkLabIntro');
+  if(intro)intro.textContent=data.intro||'';
+  updateSparkLabBadge();
+  if(sparkLabFilter==='leaderboard'){
+    renderSparkLabLeaderboard(data.variants);
+    return;
+  }
+  document.getElementById('sparkLabLeaderboard').classList.add('hidden');
+  grid.classList.remove('hidden');
+  const user=getSparkLabUserRatings();
+  const filtered=data.variants.filter(function(v){
+    return sparkLabFilter==='all'||v.category===sparkLabFilter;
+  });
+  grid.innerHTML=filtered.map(function(v){
+    const ur=user[v.id];
+    const stars=ur?ur.stars:0;
+    const comm=communityAvg(v.id);
+    const ship=v.ships?'<span class="sparklab-ship">Ships today</span>':'';
+    const goals=(v.goals||[]).map(function(g){
+      return '<li><strong>'+esc(g.title)+':</strong> '+esc(g.body)+'</li>';
+    }).join('');
+    let avgHtml='';
+    if(comm)avgHtml='<div class="sparklab-avg">Community: <strong>'+comm.avg.toFixed(1)+'</strong> ★ ('+comm.n+' playtesters)</div>';
+    else if(stars)avgHtml='<div class="sparklab-avg">Your rating: <strong>'+stars+'</strong> ★ (submit to share)</div>';
+    return '<article class="sparklab-panel'+(v.ships?' ships':'')+'" data-cat="'+escAttr(v.category)+'">'+
+      '<div class="sparklab-hd"><div><div class="sparklab-cat">'+esc(v.categoryLabel)+'</div><div class="sparklab-title">'+esc(v.label)+'</div></div>'+ship+'</div>'+
+      '<ul class="sparklab-goals">'+goals+'</ul>'+
+      '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div>'+
+      '<div class="sparklab-card">'+v.html+'</div>'+
+      '<div class="sparklab-rating"><div class="sparklab-rating-lbl">Your rating (1–5)</div>'+
+      starButtonsHTML(v.id,stars)+avgHtml+'</div></article>';
+  }).join('');
+}
+async function submitSparkLabRatings(){
+  const data=window.SPARK_DESIGN_LAB;
+  const ratings=getSparkLabUserRatings();
+  const ids=Object.keys(ratings);
+  if(!ids.length){toast('Rate at least one design first');return;}
+  const name=getCookieName()||'anonymous';
+  let body='[SPARK-LAB]\nPlaytester: '+name+'\nSubmitted: '+new Date().toISOString()+'\n';
+  ids.forEach(function(id){
+    body+=id+': '+ratings[id].stars+'\n';
+  });
+  const notes=prompt('Optional note for the design team (or Cancel to skip):');
+  if(notes)body+='Note: '+notes+'\n';
+  const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
+  if(CONFIG.useLive&&CONFIG.tableIdeas&&hasToken){
+    try{
+      const resp=await fetch(CONFIG.apiBase+CONFIG.tableIdeas+'/?user_field_names=true',{
+        method:'POST',
+        headers:Object.assign({'Content-Type':'application/json'},authHeaders()),
+        body:JSON.stringify({
+          Card_Type:'Spark Lab',
+          Card_Class:'Rogue',
+          Idea_Text:body,
+          Submitter_Name:name,
+          Submitted_At:new Date().toISOString(),
+          Status:'new'
+        })
+      });
+      if(!resp.ok)throw new Error('HTTP '+resp.status);
+      localStorage.setItem(SPARK_LAB_SUBMIT_KEY,new Date().toISOString());
+      toast('Ratings submitted — thank you!');
+      renderSparkLab(true);
+      return;
+    }catch(e){
+      toast('Could not submit — saved locally only');
+    }
+  }else{
+    toast('Saved locally ('+ids.length+' ratings). Add Baserow token to submit.');
+  }
 }
 
 </script>

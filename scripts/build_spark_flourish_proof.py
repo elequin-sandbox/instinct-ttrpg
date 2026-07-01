@@ -965,6 +965,11 @@ def main() -> None:
         batch = json.loads(BATCH_OUT.read_text(encoding="utf-8"))
         push_baserow(batch)
 
+    if args.write:
+        from scripts.build_spark_design_lab import write_lab_data  # noqa: WPS433
+
+        write_lab_data()
+
 
 if __name__ == "__main__":
     main()
