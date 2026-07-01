@@ -3,7 +3,7 @@
 > **Purpose:** How to put words on a card — formatting tiers, voice, section anatomy, the forbidden-
 > terms list, and the pre-finalize audit. Run the **Term Audit** (bottom) before any card is approved
 > or pushed to Baserow.
-> **Status:** current. **Last updated:** June 2026.
+> **Status:** current, Playtest 4 prep. **Last updated:** July 1 2026.
 >
 > **Sibling docs:** keyword *meanings* → `design/core-rules.md` · pill/chip *colors* →
 > `design/card-anatomy.md` · classes → `design/classes.md`. Rendering **code** + Baserow viewer CSS
@@ -27,7 +27,10 @@ Mirrors the keyword taxonomy in `core-rules.md §11`; exact colors live in `card
    (**Exposed, Rattled, Rooted, Hidden, Marked, Sundered, Break**). Bold title case, no pill, no color.
    **Always gloss on the card** — a few words of scene-specific meaning (em dash or choose-one fork).
    Split combined crit spends into separate Crit lines (one keyword + gloss per line). Never “immune to
-   **Rattled**,” “remove condition,” or “this condition persists.”
+   **Rattled**,” “remove condition,” or “this condition persists.” **Exception (locked Playtest 4/P2):**
+   when one of these words is printed as a card's **Flourish** option (a Crit line), it *does* carry a
+   printed number and a coloring — see the Crit/Flourish line format above and `core-rules.md` §5. The
+   word alone, anywhere else, stays exactly as described in this bullet.
 
 **Declared Actions → Bold + Capitalized** (not pills): **Action · Reaction · Draw · Discard ·
 Shuffle · Cleanse · Snap Check · Scene** (plus **Combat · Rest** as scene/time terms).
@@ -77,6 +80,13 @@ the card earns framing) · **Trigger** (italic conditional, soft fiction-first g
 scenes) · **Effect** (main outcome; CRPG verb format for choose-one; hint direction, never prescribe)
 · **Crit** (only when the fiction earns it; 3–6 words/option, 2–3 options max) · **Discard** (one
 short clause).
+
+🔒 **Crit/Flourish line format (locked Playtest 4 — P2):** lead with the **bold Flourish keyword**
+(often a Tier 3 narrative term — Exposed, Rattled, etc.), then the **printed numeric effect** — e.g.
+**Exposed 2** — remove 2 dice from the objective pool. Assign one of the three colorings (red
+offensive / blue defensive / green resolve — `card-anatomy.md`). One keyword + effect per line; split
+combined spends into separate lines (§1 below). No GM-adjudicated magnitude language ("some," "a
+lot") — the number on the card is the whole effect. Full mechanic → `core-rules.md` §5.
 
 **React + Snap Check cards** (high-variance Reactions — see `core-rules.md` §10): **Flavor** ·
 **Setup** (everything *before* the Snap Check bands — describes the **attempt**, never a guaranteed

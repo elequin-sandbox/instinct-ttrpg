@@ -188,6 +188,12 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [July 1 2026] — **Playtest 4 doctrine lock (Phase 1 — no card changes yet).** Locked P1 (objective/
+  challenge-pool co-definition + telegraphing + multi-wave pools), P2 (Crit Flourish self-adjudicated
+  three-coloring system), and flagged P3–P4 + Secondary items (S1–S8) as current direction/open
+  questions across `core-rules.md`, `card-anatomy.md`, `writing-conventions.md`, `classes.md`; added
+  new `design/gm-guidance.md` for GM scripts/checklists. Unblocks the primer, flourish-cards, and
+  pool-simplification Playtest 4 tracks.
 - [June 29 2026] — **Background Snap Check pass.** All 12 Background deck cards → React + Snap Check bands + Mill. Builder: `scripts/build_background_snap.py`. Proof: `background-snap-proof.html`.
 - [June 29 2026] — **Origin stems killed.** All 34 Background/Ancestry/Bond deck cards stripped of Origin/Bond stems; Backgrounds gained 1-line flavor; Bonds reformatted to Find/Act/Then zones. Write-in deferred to Character/Class/Ancestry sheet cards. Script: `scripts/strip_origin_stems.py`.
 - [June 30 2026] — **Chargen setup cards retired.** All 9 **Loadout** Core + 9 **Build Your Deck** cards → Status:legacy in Baserow (rows 412–436, 595–603). Primer v2 owns deck setup. Removed from `card-data.js`. Script: `scripts/retire_chargen_setup_baserow.py`.

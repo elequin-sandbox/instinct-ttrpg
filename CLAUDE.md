@@ -21,6 +21,8 @@ are the single source of current truth. Never answer from memory or from old HTM
   (Impact pills / Index chips / Narrative bold).
 - **`design/writing-conventions.md`** — wording, voice, section names, forbidden terms, Term Audit.
 - **`design/classes.md`** — class identity, term/mechanic ownership, locked + open items.
+- **`design/gm-guidance.md`** — GM-facing procedures/scripts (objective telegraphing, encounter design
+  checklist, scene 1 script) that put `core-rules.md` mechanics into practice at the table.
 - **`card-inventory.md`** — live tally of what exists / is pushed to Baserow.
 
 This is guaranteed two ways: this file is loaded every session, and the `at-design-system` skill

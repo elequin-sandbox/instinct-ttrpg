@@ -2,8 +2,8 @@
 
 > **Purpose:** The single authoritative source for how the game *currently plays* — the truth any
 > card design must obey. If a rule here and a card disagree, this file wins (or the card is wrong).
-> **Status:** Post-Playtest #1 · authoritative only (no deprecated or future-scoped content).
-> **Last updated:** June 2026.
+> **Status:** Post-Playtest #3, Playtest 4 prep · authoritative only (no deprecated or future-scoped content).
+> **Last updated:** July 1 2026.
 >
 > **Sibling docs:** card structure/colors/tags → `design/card-anatomy.md` · wording, forbidden terms &
 > the keyword formatting gospel → `design/writing-conventions.md` · per-class detail →
@@ -64,6 +64,12 @@ locked to a scene type.
 
 **Scene end:** hands are discarded and redrawn. Anything a card described mid-scene (e.g. someone
 being **Exposed**) carries forward only if the GM rules the fiction says so.
+
+**🔒 Scene open (locked Playtest 4 — P1):** before any roll, the table **co-defines the objective**
+in plain language — "get out of the cell," "take the keys," "soften him up so he gives them up" — and
+the GM **telegraphs what success looks like**, including any alternate paths the fiction supports
+(e.g. a persuasion lane vs. a strike lane). Full mechanic → **§6 Objectives & Challenge Pools**.
+**Scene 1 carries an extra teaching job** (script + checklist) → `design/gm-guidance.md`.
 
 ---
 
@@ -140,9 +146,59 @@ resolution.
 bonus option listed on an ability card; you **spend** earned Crits to take Flourishes after the roll
 resolves. Card sections may label the spend block **Crit** or **Flourish** — same mechanic.
 
+### 🔒 Crit Flourish — self-adjudicated colorings (locked Playtest 4 — P2)
+
+Nathan's locked direction for crits: **story punctuation, not a rules tree.** No GM inventing an
+effect mid-turn; no lingering per-unit condition to track.
+
+**Procedure:** Crit → read the card's **bold Flourish keyword** → *"does this fit what we're trying
+to do right now?"* → if the table agrees it fits, apply the card's **printed numeric effect** exactly
+as written. **The GM judges fiction fit only — never effect size.** (Optional table variant: "remove
+a die of 4 or less" for finer granularity.)
+
+**Three colorings** (visual spec → `card-anatomy.md` §4):
+- 🔴 **Red / offensive** — remove N dice from the objective/opposing pool (e.g. a Flourish printed
+  **Exposed 2** removes 2 dice from the GM's pool).
+- 🔵 **Blue / defensive** — help allies (Boost, redirect Threat, etc.).
+- 🟢 **Green / resolve** — heal, shed Threat, recover Resolve/Hit Die narrative.
+
+**Relationship to narrative vocabulary (§11 Tier 3):** the same words (Exposed, Rattled, etc.) still
+work as plain-bold, mechanic-free narrative descriptors everywhere else on a card or in table talk.
+**Only a printed Flourish option carries a number** — the bare word alone never does. This is the
+mechanism that replaces legacy **unit-linked conditions** (P4): a Flourish resolves immediately when
+spent, so nothing is left for the GM to track between turns.
+
 ---
 
-## §6 — The opposing dice pool (difficulty)
+## §6 — Objectives, Challenge Pools & the opposing dice pool (difficulty)
+
+### 🔒 Objective setup (locked Playtest 4 — P1)
+
+The problem Playtest 3 surfaced: objectives were implicit, shifted mid-scene, or fought the fiction
+(stealing keys didn't "count"; talking an enemy down felt like it should work but didn't map to
+anything). Fix, locked by Nathan:
+
+- At scene/Contest open, **co-define the objective in plain language** with the table.
+- The GM **telegraphs what success looks like** before any dice are rolled — including alternate
+  paths when Nathan/the GM allows them (e.g. persuade the guard vs. strike him down both clear the
+  same lane, differently).
+- Treat **almost all checks — social and combat alike — as challenge pools**: the GM's opposing pool
+  *is* the objective, sized and described in the objective's terms. Players clear it with the same
+  tactile loop regardless of scene type (§5 Read your dice).
+
+**Objective branching (S3 — current direction):** when the fiction shifts mid-objective (e.g.
+pickpocket vs. brawl), the GM may telegraph a **declared sub-objective** with its own smaller,
+telegraphed pool instead of punishing the creative pivot. The original objective's pool remains
+underneath; a new lane locks out the old one only when the table agrees it should.
+
+### Multi-wave challenge pools
+
+A challenge pool may be split into **sequential waves/rows** — separate opposing-pool rows the
+players clear in order (this is what worked in the Playtest 3 jail scene). 🔒 **Front wave must clear
+before the next wave is engaged** unless the GM rules otherwise for the fiction. Waves are the same
+opposing-pool mechanic (below), just presented as more than one row at once.
+
+### Setting pool difficulty
 
 Difficulty in *all* checks is the **GM's opposing dice pool** — placed physically on the table before
 the roll, making difficulty visible and tactile. No DC ladder, no hidden number.
@@ -187,6 +243,13 @@ choose **fight** (accepting the incoming Threat), **flee**, or **negotiate** —
 accepting the Threat. **Open Floor:** no fixed turn order; after Threat is revealed, players act in
 whatever sequence makes narrative sense, deciding collectively moment to moment. Known stakes, real
 tactical choice — not a surprise tax.
+
+⚠️ **Rhetoric direction (S1 — open, not locked):** Playtest 3 showed all-defend ("turtling") rounds
+read as story-stagnant — no opportunity cost for ignoring the objective lane. Nathan is considering
+subtitling Threat as **incoming** or **trading blows** in player-facing copy, plus a GM script for
+what turtling costs (objective pool gets harder / a parallel track advances). Mechanic unchanged;
+wording + GM script only. `[needs Nathan verify]` — not yet a committed direction. Script draft →
+`design/gm-guidance.md`.
 
 **Defensive dice & spillover:** when a player's defensive dice (from a card or React) fully clear an
 incoming Threat pool, leftover dice may be applied defensively to **any target, including themselves**
@@ -245,6 +308,10 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 - **Threat can appear here too** — social pressure aimed at a player's Resolve, set by the GM exactly
   like any Threat check.
 
+**🔒 Objective co-definition (P1) applies identically here (S2):** a Social Contest's challenge pool
+is set up, telegraphed, and cleared exactly like a Deadly Contest's — see §6. There is no separate
+"social difficulty" system; secret DCs are the exception, never the default.
+
 ---
 
 ## §10 — Card play rules
@@ -263,6 +330,12 @@ opposing-pool model, same Open Floor, same Miss/Crit/Toll.
 
 **React window:** after every roll, before narration, there is a brief beat where React cards may be
 played. Name it at the table.
+
+⚠️ **Reaction design direction (S5 — open, not locked):** Playtest 3 Reactions felt too mechanical.
+Nathan wants Reacts to stay dynamic but **narrative-first** — a fiction trigger resolving into a
+**Snap Check** or a simple stated outcome, not a nested rules tree. The existing Ancestry/Background
+Snap Check pattern (below) is the model for new/reworked Reacts. `[needs Nathan verify]` — direction,
+not yet a hard rule.
 
 **Zones:**
 
@@ -293,6 +366,12 @@ standard Miss/Crit rules. Read bands: **1–3** thematic failure · **4–8** ch
 options · **9+** choose **2** of the same three (requires **6** + explode). Options cap at niche fiction
 and **[Boost 1]** max. Proof: `ancestry-snap-proof.html`.
 
+⚠️ **Delivery tension (S6 — open, not locked):** Playtest 3 found Ancestry-as-Snap-Check weak/situational
+(Dragonborn example). Nathan's tension: always-available Ancestry (Snap Check, current) feels "too
+optimal"; in-deck Ancestry (drawn into the hand like other cards) is simpler but rarer to trigger.
+**Plan: test in-deck Ancestry next session** with clearer fiction triggers before changing the locked
+bands above. `[needs Nathan verify]` before any card rework.
+
 ---
 
 ## §11 — Keywords & terms
@@ -317,7 +396,7 @@ Every word that carries a real, functional gameplay effect — the load-bearing 
 |---|---|
 | **[Boost N]** | N dice added to a pool from card effects/other sources. Expire at scene end; removed if they show a 1. (Boost is the elevated keyword that absorbed the old **Bolstered** — Bolstered is retired.) |
 | **[Crit]** | A natural **6** on a die (explodes once). After resolution, count Crits — each one lets you **gain** one **Flourish** from the played card. The die stays in the pool. |
-| **Flourish** | A bonus option line on an ability card (section header on the card). Gained by spending Crit count — one Crit typically unlocks one Flourish. Not a die result. |
+| **Flourish** | A bonus option line on an ability card (section header on the card), keyed to a bold keyword. Gained by spending Crit count — one Crit typically unlocks one Flourish. Not a die result. 🔒 **Self-adjudicated by fiction fit (locked Playtest 4/P2):** if the bold keyword fits the current objective, apply the card's printed numeric effect exactly as written — GM judges fit only, never magnitude. Three colorings: red/offensive (remove dice from the objective pool), blue/defensive (help allies), green/resolve (heal/shed Threat). Full procedure → §5; visual spec → `card-anatomy.md` §4. |
 | **[Miss]** | A natural 1. Removed from the pool; gives the GM 1 [Toll]. A partial result is not a Miss. |
 | **[Toll]** | GM resource generated by Misses. Escalates scenes. |
 | **[Hit Die] / [Hit Dice]** | Player health resource. Always capitalized. Never "HP." |
@@ -349,6 +428,13 @@ entirely the GM's call.** They are written as plain **bold title case** — neve
 Current narrative terms: **Exposed · Rattled · Rooted · Hidden · Marked · Sundered · Break.**
 *(**Bolstered** is gone — replaced by Boost. Any prior "mechanical" reading of Hidden/Marked/Sundered/
 Break is retired; they are descriptions now.)*
+
+**Exception — Flourish spends (locked Playtest 4/P2):** when one of these words is printed as a
+card's **Flourish** option header (spent via Crit, §5), that specific card's Flourish line **does**
+carry a printed numeric effect and a color (red/blue/green). The bare word — anywhere else on a card,
+in narration, or on any card that hasn't printed it as a Flourish — stays exactly as described above:
+plain bold, no pill, no enforced mechanic, GM's call. Never write a numeric effect on a narrative word
+outside a Flourish block.
 
 > **Planned (Nathan's prerogative):** a GM- and player-facing reference offering *suggested* ways these
 > narrative terms might resolve mid-Contest or in exploration — explicitly recommendations only, with
@@ -415,6 +501,18 @@ random Mark — and this cost must be stated **on the card itself**.
    still settling. (§8)
 2. **Narrative-term guidance reference** — Nathan plans a GM+player aid suggesting how descriptive
    terms (Exposed, Hidden, etc.) might resolve in play; recommendations only, GM has final say. (§11)
+3. **Threat rhetoric + turtling cost (S1)** — subtitle Threat as *incoming*/*trading blows*; GM script
+   for the cost of all-defend rounds. Direction only, `[needs Nathan verify]`. (§8)
+4. **Ancestry delivery: Snap Check vs in-deck (S6)** — testing in-deck Ancestry next session before
+   touching the locked Snap Check bands. `[needs Nathan verify]`. (§10)
+5. **Flaw revert/redesign (S7)** — Flaw-as-tactical-discount (e.g. Greedy sandbagging for Boost) landed
+   as a story beat but Nathan is unsure it's the right *mechanical* frame; he's leaning toward
+   reverting to a prior strength/weakness dual-card model or keeping the Connection-only relationship
+   model instead. **Do not ship Flaw-as-tactical-discount as a system without another playtest.**
+   `[needs Nathan verify]`. Current status of the retired Flaw type → `card-anatomy.md` §1/§5.
+6. **Objective/challenge-pool wave granularity (P1/S3)** — how many waves per Contest, and how
+   explicit sub-objective telegraphing should be, are being learned live at Playtest 4 rather than
+   locked in advance. (§6)
 
 ---
 
