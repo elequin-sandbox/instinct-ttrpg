@@ -351,6 +351,8 @@
   flex-shrink: 0;
   margin: 2px 0;
 }
+.primer-cards .flv { font-style: italic; color: #5a4520; font-size: 9.8px; line-height: 1.42; }
+.primer-cards .etxt { color: #1c1408; font-size: 9.8px; line-height: 1.42; }
 .primer-cards .elbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; }
 .primer-cards .hr { height: 0.5px; background: #eee; margin: 2px 0; }
 .primer-cards .csec { margin-top: 4px; }
