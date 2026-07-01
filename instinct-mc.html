@@ -189,15 +189,18 @@ const SESSIONS = {
     questions: [
       {
         id: 'currency-name',
-        prompt: 'Each natural 6 on your **initial** roll earns one spendable token (the bonus die you would have rolled). What should we call it at the table?',
-        more: 'Must stay short for card headers and primer copy. A natural 6 on the die stays **[Crit]**; this is the spend currency. Current July 1 Flourish cards use gold Crit-count pips (1, 1↻) on each line — that UI will change to match your pick.',
+        prompt: 'One word for BOTH the energy off an initial 6 AND the improv spend on a card option — you’re trading raw explosion power for a styled, guaranteed effect. What’s the table word?',
+        more: 'Not two terms (no “earn X, spend on Flourish”). The natural 6 on the die can stay [Crit] or collapse into this word too — we’ll sync primer copy after you pick. Short, say-it-out-loud friendly.',
         options: [
-          { id: 'a', label: 'A — Spark', desc: 'Energy off a hot roll; “spend a Spark.”' },
-          { id: 'b', label: 'B — Surge', desc: 'Momentum you cash in; slightly more heroic.' },
-          { id: 'c', label: 'C — Edge', desc: 'Tactical advantage; clean and neutral.' },
-          { id: 'd', label: 'D — Combo', desc: 'Fighting-game punch; very short.' },
-          { id: 'e', label: 'E — Pop', desc: 'One syllable, table-talk friendly (“got two Pops”).' },
-          { id: 'f', label: 'F — Other', desc: 'I’ll type a word in chat (Charge, Flash, etc.).' }
+          { id: 'a', label: 'A — Flourish', desc: 'Unify everything: “two Flourishes” = currency; card lines are Flourish options. Already in doctrine.' },
+          { id: 'b', label: 'B — Riff', desc: 'Improv spin on the hit — you riff the success instead of rolling louder.' },
+          { id: 'c', label: 'C — Sting', desc: 'Story punctuation — the sting in the tail; short and sharp.' },
+          { id: 'd', label: 'D — Sell', desc: 'Acting/wrestling — you sell the moment, trading kayfabe power for table impact.' },
+          { id: 'e', label: 'E — Kicker', desc: 'The optional kicker on your roll — familiar, punchy.' },
+          { id: 'f', label: 'F — Flare', desc: 'Burst you redirect — visible style instead of hidden bonus dice.' },
+          { id: 'g', label: 'G — Verve', desc: 'Energy + distinctive style; slightly fancier.' },
+          { id: 'h', label: 'H — Burn', desc: 'You burn the explosion for a guaranteed printed payoff.' },
+          { id: 'i', label: 'I — Other', desc: 'None of these — I’ll pitch in chat.' }
         ]
       },
       {
