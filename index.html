@@ -763,17 +763,29 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   font-size:11px;font-style:italic;color:#a89878;line-height:1.4;
   padding:0 0 6px;
 }
-.sparklab-rating{
-  display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;
+.sparklab-feedback{
+  display:flex;flex-direction:column;gap:8px;
   padding:10px 12px 12px;background:#14100c;border-top:1px solid #2a2018;
 }
-.sparklab-rating-lbl{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#6a5a40;width:100%;}
-.star-row{display:flex;gap:2px;align-items:center;}
-.star-btn{background:transparent;border:none;font-size:20px;line-height:1;color:#3a3020;padding:0 3px;cursor:pointer;}
-.star-btn:hover,.star-btn.on{color:#e0c060;}
-.star-btn.user{color:#f5d76e;text-shadow:0 0 8px rgba(245,215,110,.35);}
-.sparklab-avg{font-size:10px;color:#7a6a50;margin-left:auto;}
-.sparklab-avg strong{color:#c9a24a;}
+.sparklab-like-btn{
+  align-self:flex-start;
+  background:#241a0f;border:1px solid #5a4a30;color:#cbb98e;
+  padding:7px 12px;border-radius:20px;font-size:11px;font-family:inherit;
+  cursor:pointer;letter-spacing:.02em;transition:all .12s;
+}
+.sparklab-like-btn:hover{border-color:#c9a24a;color:#e7d6ac;}
+.sparklab-like-btn.on{
+  background:#3a2c10;border-color:#c9a24a;color:#f5d76e;font-weight:600;
+}
+.sparklab-comment{
+  width:100%;min-height:56px;padding:8px 10px;resize:vertical;
+  background:#1a1510;border:1px solid #3a3020;border-radius:8px;
+  color:#e8dcc8;font-family:inherit;font-size:12px;line-height:1.45;
+}
+.sparklab-comment:focus{outline:none;border-color:#8a6608;}
+.sparklab-comment::placeholder{color:#6a5a40;}
+.sparklab-community{font-size:10px;color:#7a6a50;}
+.sparklab-community strong{color:#c9a24a;}
 .sparklab-leaderboard{padding:20px 18px 40px;max-width:640px;margin:0 auto;}
 .sparklab-lb-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #2a1d10;font-size:13px;}
 .sparklab-lb-rank{width:28px;color:#8a7a5a;}
@@ -1094,7 +1106,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
-    <button class="tab tab-sparklab" data-view="sparklab" onclick="showView('sparklab')">Spark Lab <span class="badge" id="sparkLabBadge" style="background:#8a6608">★</span></button>
+    <button class="tab tab-sparklab" data-view="sparklab" onclick="showView('sparklab')">Spark Lab <span class="badge" id="sparkLabBadge" style="background:#8a6608">♥</span></button>
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
     <button class="tab" data-view="deckbuild" onclick="showView('deckbuild')">Deck Build</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
@@ -1122,21 +1134,21 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 </section>
 
 <section class="view hidden" id="view-sparklab">
-  <p class="sparklab-intro" id="sparkLabIntro">Loading Spark design lab…</p>
+  <p class="sparklab-intro" id="sparkLabIntro">Leave a comment, or tap <strong>I like something here</strong> on designs that work for you.</p>
   <div class="sparklab-toolbar">
     <span class="flabel" style="min-width:auto">Show</span>
     <button class="chip on" data-slab="all" onclick="filterSparkLab('all',this)">All</button>
     <button class="chip" data-slab="pay" onclick="filterSparkLab('pay',this)">Spend icons</button>
     <button class="chip" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout &amp; copy</button>
     <button class="chip" data-slab="heritage" onclick="filterSparkLab('heritage',this)">Heritage</button>
-    <button class="chip" data-slab="leaderboard" onclick="filterSparkLab('leaderboard',this)">Leaderboard</button>
+    <button class="chip" data-slab="likes" onclick="filterSparkLab('likes',this)">Likes</button>
     <span class="sparklab-viewtoggle">
       <button class="chip on" id="sparkViewGallery" onclick="setSparkLabView('gallery')">Gallery</button>
       <button class="chip" id="sparkViewCompare" onclick="setSparkLabView('compare')">Compare (2-up)</button>
     </span>
     <div class="sparklab-actions">
-      <button class="hbtn" onclick="submitSparkLabRatings()">Submit my ratings</button>
-      <button class="hbtn" onclick="renderSparkLab(true)">↺ Refresh averages</button>
+      <button class="hbtn" onclick="submitSparkLabFeedback()">Submit my feedback</button>
+      <button class="hbtn" onclick="renderSparkLab(true)">↺ Refresh community</button>
     </div>
   </div>
   <div id="sparkLabGrid" class="sparklab-grid"></div>
@@ -2239,29 +2251,48 @@ function resetSubmitForm(){
   btn.classList.remove('hidden');
 }
 
-/* ---------- Spark design lab (playtest voting) ---------- */
-const SPARK_LAB_STORE = 'irpg_spark_lab_ratings';
+/* ---------- Spark design lab (playtest feedback) ---------- */
+const SPARK_LAB_STORE = 'irpg_spark_lab_feedback';
 const SPARK_LAB_SUBMIT_KEY = 'irpg_spark_lab_submitted';
 let sparkLabFilter = 'all';
-let sparkLabCommunity = {};
+let sparkLabCommunityLikes = {};
 let sparkLabCommunityLoaded = false;
 let sparkLabViewMode = 'gallery';
 
-function getSparkLabUserRatings(){
+function getSparkLabFeedback(){
   try{return JSON.parse(localStorage.getItem(SPARK_LAB_STORE)||'{}');}catch(e){return {};}
 }
-function setSparkLabRating(id, stars){
-  const r=getSparkLabUserRatings();
-  r[id]={stars:stars,at:new Date().toISOString()};
-  localStorage.setItem(SPARK_LAB_STORE,JSON.stringify(r));
+function saveSparkLabFeedbackStore(fb){
+  localStorage.setItem(SPARK_LAB_STORE,JSON.stringify(fb));
   updateSparkLabBadge();
-  renderSparkLab();
+}
+function toggleSparkLabLike(id){
+  const fb=getSparkLabFeedback();
+  const cur=fb[id]||{};
+  cur.liked=!cur.liked;
+  cur.at=new Date().toISOString();
+  fb[id]=cur;
+  saveSparkLabFeedbackStore(fb);
+  const btn=document.querySelector('.sparklab-like-btn[data-id="'+id+'"]');
+  if(btn)btn.classList.toggle('on',!!cur.liked);
+}
+function saveSparkLabComment(id,text){
+  const fb=getSparkLabFeedback();
+  const cur=fb[id]||{};
+  cur.comment=text;
+  cur.at=new Date().toISOString();
+  fb[id]=cur;
+  saveSparkLabFeedbackStore(fb);
 }
 function updateSparkLabBadge(){
-  const r=getSparkLabUserRatings();
-  const n=Object.keys(r).length;
+  const fb=getSparkLabFeedback();
+  let n=0;
+  Object.keys(fb).forEach(function(k){
+    const x=fb[k];
+    if(x&&(x.liked||((x.comment||'').trim())))n++;
+  });
   const el=document.getElementById('sparkLabBadge');
-  if(el)el.textContent=n?String(n):'★';
+  if(el)el.textContent=n?String(n):'♥';
 }
 function filterSparkLab(cat,btn){
   sparkLabFilter=cat;
@@ -2276,17 +2307,18 @@ function setSparkLabView(mode){
   if(grid)grid.classList.toggle('compare-mode',mode==='compare');
 }
 function parseSparkLabSubmission(text){
-  const out={};
-  if(!text||text.indexOf('[SPARK-LAB]')<0)return out;
-  const lines=text.split('\n');
-  lines.forEach(function(line){
-    const m=line.match(/^([a-z0-9-]+):\s*(\d)\s*$/);
-    if(m)out[m[1]]=parseInt(m[2],10);
+  const likes={};
+  if(!text||text.indexOf('[SPARK-LAB]')<0)return likes;
+  text.split('\n').forEach(function(line){
+    const likeM=line.match(/^([a-z0-9-]+)\s*\|\s*LIKE\s*$/);
+    if(likeM){likes[likeM[1]]=(likes[likeM[1]]||0)+1;return;}
+    const starM=line.match(/^([a-z0-9-]+):\s*(\d)\s*$/);
+    if(starM){likes[starM[1]]=(likes[starM[1]]||0)+1;}
   });
-  return out;
+  return likes;
 }
 async function loadSparkLabCommunity(){
-  sparkLabCommunity={};
+  sparkLabCommunityLikes={};
   const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
   if(!CONFIG.useLive||!CONFIG.tableIdeas||!hasToken)return;
   try{
@@ -2296,53 +2328,46 @@ async function loadSparkLabCommunity(){
       if(text.indexOf('[SPARK-LAB]')<0)return;
       const parsed=parseSparkLabSubmission(text);
       Object.keys(parsed).forEach(function(id){
-        if(!sparkLabCommunity[id])sparkLabCommunity[id]=[];
-        sparkLabCommunity[id].push(parsed[id]);
+        sparkLabCommunityLikes[id]=(sparkLabCommunityLikes[id]||0)+parsed[id];
       });
     });
   }catch(e){/* offline */}
 }
-function communityAvg(id){
-  const arr=sparkLabCommunity[id];
-  if(!arr||!arr.length)return null;
-  const sum=arr.reduce(function(a,b){return a+b;},0);
-  return {avg:sum/arr.length,n:arr.length};
+function communityLikes(id){
+  const n=sparkLabCommunityLikes[id];
+  return n?n:0;
 }
-function starButtonsHTML(id,userStars){
-  let html='<div class="star-row" role="group" aria-label="Rate 1 to 5 stars">';
-  for(let s=1;s<=5;s++){
-    const on=(userStars&&userStars>=s)?' on user':'';
-    html+='<button type="button" class="star-btn'+on+'" data-id="'+escAttr(id)+'" data-star="'+s+'" onclick="setSparkLabRating(\''+escAttr(id)+'\','+s+')" aria-label="'+s+' stars">★</button>';
-  }
-  html+='</div>';
-  return html;
+function feedbackPanelHTML(v,userFb){
+  const liked=!!(userFb&&userFb.liked);
+  const comment=esc((userFb&&userFb.comment)||'');
+  const comm=communityLikes(v.id);
+  let commHtml='';
+  if(comm)commHtml='<div class="sparklab-community"><strong>'+comm+'</strong> playtester'+(comm===1?'':'s')+' liked something here</div>';
+  return '<div class="sparklab-feedback">'+
+    '<button type="button" class="sparklab-like-btn'+(liked?' on':'')+'" data-id="'+escAttr(v.id)+'" onclick="toggleSparkLabLike(\''+escAttr(v.id)+'\')">♥ I like something here</button>'+
+    '<textarea class="sparklab-comment" data-id="'+escAttr(v.id)+'" placeholder="Leave a comment — what works, what confuses you, what you\'d say at the table…" oninput="saveSparkLabComment(\''+escAttr(v.id)+'\',this.value)">'+comment+'</textarea>'+
+    commHtml+'</div>';
 }
-function renderSparkLabLeaderboard(variants){
+function renderSparkLabLikes(variants){
   const scored=variants.map(function(v){
-    const c=communityAvg(v.id);
-    const u=getSparkLabUserRatings()[v.id];
-    const score=c?c.avg:(u?u.stars:0);
-    const n=c?c.n:(u?1:0);
-    return {v:v,score:score,n:n};
-  }).filter(function(x){return x.n>0;}).sort(function(a,b){return b.score-a.score;});
+    return {v:v,n:communityLikes(v.id)};
+  }).filter(function(x){return x.n>0;}).sort(function(a,b){return b.n-a.n;});
   const box=document.getElementById('sparkLabLeaderboard');
   if(!scored.length){
-    box.innerHTML='<div class="empty">No ratings yet — rate designs and submit to contribute.</div>';
+    box.innerHTML='<div class="empty">No likes submitted yet — tap ♥ on designs you want to keep.</div>';
     box.classList.remove('hidden');
     document.getElementById('sparkLabGrid').classList.add('hidden');
     return;
   }
-  box.innerHTML='<h3 style="color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:12px;">Community averages</h3>'+
+  box.innerHTML='<h3 style="color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:12px;">What playtesters liked</h3>'+
     scored.map(function(row,i){
-      return '<div class="sparklab-lb-row"><span class="sparklab-lb-rank">#'+(i+1)+'</span><span>'+esc(row.v.label)+'</span><span class="sparklab-lb-score">'+
-        row.score.toFixed(1)+' ★ <span style="font-weight:400;color:#8a7a5a">('+row.n+')</span></span></div>';
+      return '<div class="sparklab-lb-row"><span class="sparklab-lb-rank">#'+(i+1)+'</span><span>'+esc(row.v.label)+'</span><span class="sparklab-lb-score">'+row.n+' ♥</span></div>';
     }).join('');
   box.classList.remove('hidden');
   document.getElementById('sparkLabGrid').classList.add('hidden');
 }
 function renderSparkLab(refreshCommunity){
   const data=window.SPARK_DESIGN_LAB;
-  const grid=document.getElementById('sparkLabGrid');
   const intro=document.getElementById('sparkLabIntro');
   const status=document.getElementById('sparkLabStatus');
   if(!data||!data.variants){
@@ -2350,7 +2375,7 @@ function renderSparkLab(refreshCommunity){
     return;
   }
   if(refreshCommunity||!sparkLabCommunityLoaded){
-    status.textContent='Loading community averages…';
+    status.textContent='Loading community feedback…';
     loadSparkLabCommunity().then(function(){
       sparkLabCommunityLoaded=true;
       status.textContent='';
@@ -2363,29 +2388,24 @@ function renderSparkLab(refreshCommunity){
 function renderSparkLabPanels(data){
   const grid=document.getElementById('sparkLabGrid');
   const intro=document.getElementById('sparkLabIntro');
-  if(intro)intro.textContent=data.intro||'';
+  if(intro&&data.intro)intro.textContent=data.intro;
   updateSparkLabBadge();
-  if(sparkLabFilter==='leaderboard'){
-    renderSparkLabLeaderboard(data.variants);
+  if(sparkLabFilter==='likes'){
+    renderSparkLabLikes(data.variants);
     return;
   }
   document.getElementById('sparkLabLeaderboard').classList.add('hidden');
   grid.classList.remove('hidden');
-  const user=getSparkLabUserRatings();
+  const user=getSparkLabFeedback();
   const filtered=data.variants.filter(function(v){
     return sparkLabFilter==='all'||v.category===sparkLabFilter;
   });
   grid.innerHTML=filtered.map(function(v){
     const ur=user[v.id];
-    const stars=ur?ur.stars:0;
-    const comm=communityAvg(v.id);
     const ship=v.ships?'<span class="sparklab-ship">Current pick</span>':'';
     const goals=(v.goals||[]).map(function(g){
       return '<li><strong>'+esc(g.title)+':</strong> '+esc(g.body)+'</li>';
     }).join('');
-    let avgHtml='';
-    if(comm)avgHtml='<div class="sparklab-avg">Avg <strong>'+comm.avg.toFixed(1)+'</strong>★ · '+comm.n+' votes</div>';
-    else if(stars)avgHtml='<div class="sparklab-avg">You: <strong>'+stars+'</strong>★</div>';
     return '<article class="sparklab-panel'+(v.ships?' ships':'')+'" data-cat="'+escAttr(v.category)+'">'+
       '<div class="sparklab-hd"><div><div class="sparklab-cat">'+esc(v.categoryLabel)+'</div><div class="sparklab-title">'+esc(v.label)+'</div></div>'+ship+'</div>'+
       '<div class="sparklab-stage">'+v.html+'</div>'+
@@ -2393,22 +2413,24 @@ function renderSparkLabPanels(data){
       '<summary>Design goals &amp; playtest question</summary>'+
       '<ul class="sparklab-goals">'+goals+'</ul>'+
       '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div></details></div>'+
-      '<div class="sparklab-rating"><div class="sparklab-rating-lbl">Rate this design</div>'+
-      starButtonsHTML(v.id,stars)+avgHtml+'</div></article>';
+      feedbackPanelHTML(v,ur)+'</article>';
   }).join('');
 }
-async function submitSparkLabRatings(){
-  const data=window.SPARK_DESIGN_LAB;
-  const ratings=getSparkLabUserRatings();
-  const ids=Object.keys(ratings);
-  if(!ids.length){toast('Rate at least one design first');return;}
+async function submitSparkLabFeedback(){
+  const fb=getSparkLabFeedback();
+  const ids=Object.keys(fb).filter(function(id){
+    const x=fb[id];
+    return x&&(x.liked||((x.comment||'').trim()));
+  });
+  if(!ids.length){toast('Like or comment on at least one design first');return;}
   const name=getCookieName()||'anonymous';
   let body='[SPARK-LAB]\nPlaytester: '+name+'\nSubmitted: '+new Date().toISOString()+'\n';
   ids.forEach(function(id){
-    body+=id+': '+ratings[id].stars+'\n';
+    const x=fb[id];
+    if(x.liked)body+=id+' | LIKE\n';
+    const c=(x.comment||'').trim();
+    if(c)body+=id+' | COMMENT | '+c.replace(/\n/g,' ')+'\n';
   });
-  const notes=prompt('Optional note for the design team (or Cancel to skip):');
-  if(notes)body+='Note: '+notes+'\n';
   const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
   if(CONFIG.useLive&&CONFIG.tableIdeas&&hasToken){
     try{
@@ -2426,14 +2448,14 @@ async function submitSparkLabRatings(){
       });
       if(!resp.ok)throw new Error('HTTP '+resp.status);
       localStorage.setItem(SPARK_LAB_SUBMIT_KEY,new Date().toISOString());
-      toast('Ratings submitted — thank you!');
+      toast('Feedback submitted — thank you!');
       renderSparkLab(true);
       return;
     }catch(e){
       toast('Could not submit — saved locally only');
     }
   }else{
-    toast('Saved locally ('+ids.length+' ratings). Add Baserow token to submit.');
+    toast('Saved locally ('+ids.length+' designs). Add Baserow token to submit.');
   }
 }
 
