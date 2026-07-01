@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 """Spark / Flourish overhaul — proof-page builder (8 model cards, 2 per class).
 
-Locked design (Annie, July 2026):
-- Each natural 6 on the *initial* roll earns 1 Spark.
-- The 6 stays in the pool. Per Spark: roll the bonus die OR spend on a Flourish.
-- Spend timing: right after the first handful, simultaneous with pulling 1s.
-- Fiction-fit gate is global (GM agrees keyword fits) — not repeated on cards.
-- Spark cost = glyph icon(s), not numbers. Keyword chips carry magnitude; gloss is narrative only.
-- Color-blind: shape icon (▲ offensive, ■ Boost/defensive, ● resolve) + hue.
+Spark lines read like PbtA / CRPG action choices: 2nd-person imperatives tied to the card,
+just enough to prompt narration. Mechanics live in the keyword chips only.
 
 Usage:
   python3 scripts/build_spark_flourish_proof.py --write
@@ -35,7 +30,6 @@ def fl_icon(color: str) -> str:
 
 
 def fl_chip(color: str, label: str) -> str:
-    """Keyword chip: 'Rattled 2' → shape + term + magnitude badge."""
     term, _, mag = label.rpartition(" ")
     if not mag.isdigit():
         term, mag = label, ""
@@ -46,7 +40,7 @@ def fl_chip(color: str, label: str) -> str:
     )
 
 
-def spark_line(cost: int, keywords: list[tuple[str, str]], gloss: str) -> str:
+def spark_line(cost: int, keywords: list[tuple[str, str]], prompt: str) -> str:
     chips = []
     for i, (color, word) in enumerate(keywords):
         if i:
@@ -56,7 +50,7 @@ def spark_line(cost: int, keywords: list[tuple[str, str]], gloss: str) -> str:
     multi = " spark-multi" if len(keywords) > 1 else ""
     return (
         f'<div class="ci spark-line fl-{keywords[0][0]}{multi}">'
-        f'{spark_cost(cost)}{keys}<span class="ci-txt">{gloss}</span></div>'
+        f'{spark_cost(cost)}{keys}<span class="ci-txt">— {prompt}</span></div>'
     )
 
 
@@ -103,7 +97,7 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Rattled 1")],
-                    "Your challenge echoes off a second foe — they falter, fixing on you instead.",
+                    "Force a second foe to answer you instead of your allies.",
                 ),
             ),
         ),
@@ -123,17 +117,17 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Rattled 2")],
-                    "The word hangs in the air; their certainty splinters in front of the room.",
+                    "Name what they did loud enough the room stops breathing.",
                 ),
                 spark_line(
                     1,
                     [("blue", "Boost 1")],
-                    "Allies hear the steel in your voice and surge into the opening.",
+                    "Point an ally at the opening your truth carved.",
                 ),
                 spark_line(
                     2,
                     [("red", "Rattled 1"), ("green", "Resolve 1")],
-                    "They stagger under the weight of it — and you feel your own spine straighten.",
+                    "Watch them buckle — then stand taller while they do.",
                 ),
             ),
         ),
@@ -152,12 +146,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Sundered 2")],
-                    "Something gives — bone, bark, or bravado — and they won't hold together the same.",
+                    "Break something they were counting on — guard, footing, or nerve.",
                 ),
                 spark_line(
                     2,
                     [("red", "Sundered 1"), ("blue", "Boost 1")],
-                    "You clip them on the way through and roar the opening for whoever follows.",
+                    "Clip them on the way through; shout the opening for whoever follows.",
                 ),
             ),
         ),
@@ -177,7 +171,7 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Sundered 2")],
-                    "The wreckage finds a body; cover becomes rubble and someone screams.",
+                    "Bring the wreckage down on whoever's hiding behind it.",
                 ),
             ),
         ),
@@ -196,12 +190,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Stagger 1")],
-                    "They're still turning toward the wrong threat when you land.",
+                    "Hit them while they're still facing the wrong threat.",
                 ),
                 spark_line(
                     2,
                     [("red", "Stagger 2")],
-                    "Both feet leave the floor — when they find them again, the fight moved on.",
+                    "Take their legs out — make sure they feel it when they stand again.",
                 ),
             ),
         ),
@@ -220,12 +214,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("blue", "Boost 1")],
-                    "Your ally moves on the hesitation you planted — a half-step ahead of the lie.",
+                    "Slip an ally through the hesitation you planted.",
                 ),
                 spark_line(
                     2,
                     [("red", "Stagger 1"), ("blue", "Boost 1")],
-                    "They lunge at the wrong shadow; your friend is already through the gap.",
+                    "Send them lunging at the wrong shadow; put your friend through the gap.",
                 ),
             ),
         ),
@@ -244,12 +238,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Hexed 1")],
-                    "The sigil crawls under their skin — everyone sees where to strike next.",
+                    "Burn a sigil where the next blow has to land.",
                 ),
                 spark_line(
                     2,
                     [("red", "Hexed 2")],
-                    "The brand spreads; their guard looks like tissue paper from here.",
+                    "Spread the mark until their guard looks like paper.",
                 ),
             ),
         ),
@@ -268,12 +262,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("green", "Resolve 1")],
-                    "The hunger clears for a breath — you remember you still have a body.",
+                    "Let the hunger pass through you instead of owning you.",
                 ),
                 spark_line(
                     2,
                     [("green", "Resolve 1"), ("red", "Hexed 1")],
-                    "Power ripples outward; a nearby foe buckles as the spell eats their footing.",
+                    "Steady your breath — and buckle the nearest foe when the surge hits.",
                 ),
             ),
         ),
@@ -299,15 +293,15 @@ def write_proof() -> None:
 
     legend = """
 <div class="legend">
-  <span class="lg-item"><span class="lg-shape lg-off"></span> ▲ Offensive — Sunder, Rattle, Stagger…</span>
-  <span class="lg-item"><span class="lg-shape lg-def"></span> ■ Boost — extra die to any player (self included)</span>
-  <span class="lg-item"><span class="lg-shape lg-res"></span> ● Resolve — recover Resolve / steadiness</span>
-  <span class="lg-item"><span class="spark-glyphs"><span class="spark-glyph"></span></span> Spark — spend instead of rolling that bonus die</span>
+  <span class="lg-item"><span class="lg-shape lg-off"></span> ▲ Offensive flourish</span>
+  <span class="lg-item"><span class="lg-shape lg-def"></span> ■ Boost — extra die (any player, incl. you)</span>
+  <span class="lg-item"><span class="lg-shape lg-res"></span> ● Resolve flourish</span>
+  <span class="lg-item"><span class="spark-glyphs"><span class="spark-glyph"></span></span> Spark cost</span>
 </div>
 <div class="proc box">
-  <strong>On-card rule:</strong> chips name the flourish; italic gloss is how <em>you</em> describe it landing.
-  Magnitude is global — <strong>Rattled 2</strong> means what Rattling means at the table. GM only judges
-  whether the keyword fits the objective (not repeated per card).
+  Each Spark line is an action choice: <strong>chip — imperative prompt</strong> (2nd person, active).
+  You narrate how that flourish lands if the keyword fits the objective. Magnitude is global; GM judges
+  fit only.
 </div>
 """
 
@@ -335,8 +329,8 @@ def write_proof() -> None:
         ".cardwrap{display:flex;justify-content:center;}"
         "</style></head><body>"
         "<h1>Spark / Flourish overhaul — model cards</h1>"
-        '<p class="sub">Eight abilities for the June 30 playtest classes. Spark glyphs = cost; '
-        "colored chips = guaranteed flourish; italic line = your narration hook.</p>"
+        '<p class="sub">Spark lines read like CRPG action picks — chip names the flourish, '
+        "the dash clause tells you what to narrate.</p>"
         f"{legend}"
         + "".join(sections)
         + "</body></html>",
