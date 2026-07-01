@@ -79,11 +79,11 @@ def collect_variants() -> list[dict]:
         (
             "layout-inverted",
             "Verb-first + invite box",
-            False,
+            True,
             [
                 {
                     "title": "Cost → shapes → verb",
-                    "body": "Open row: die cost, yield shapes, bold Defend / Attack.",
+                    "body": "Open row: die cost, yield shapes, bold Obscure / Pass + Distract.",
                 },
                 {
                     "title": "Serif invite below",
@@ -96,7 +96,7 @@ def collect_variants() -> list[dict]:
         (
             "layout-column-flow",
             "Column flow (book read)",
-            True,
+            False,
             [
                 {
                     "title": "Key column left",

@@ -196,26 +196,26 @@ def inverted_spark_block(*entries: tuple[int, str, str]) -> str:
     )
 
 
-SAM_INVERTED_DEFEND_ROW = (
-    '<span class="yield-tri cat-def" aria-hidden="true"></span>'
-    '<span class="spark-verb-label">Defend</span>'
+SAM_INVERTED_OBSCURE_ROW = (
+    '<span class="yield-sq cat-def" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Obscure</span>'
 )
 SAM_INVERTED_COMBO_ROW = (
-    '<span class="yield-tri cat-def" aria-hidden="true"></span>'
-    '<span class="spark-verb-label">Defend</span>'
+    '<span class="yield-sq cat-def" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Pass</span>'
     '<span class="spark-combo-plus" aria-hidden="true">+</span>'
-    '<span class="yield-sq cat-off" aria-hidden="true"></span>'
-    '<span class="spark-verb-label">Attack</span>'
+    '<span class="yield-tri cat-off" aria-hidden="true"></span>'
+    '<span class="spark-verb-label">Distract</span>'
 )
 
 
 def sam_spark_inverted() -> str:
     return inverted_spark_block(
-        (1, SAM_INVERTED_DEFEND_ROW, "Deflect attention from an Ally"),
+        (1, SAM_INVERTED_OBSCURE_ROW, "Deflect attention from an Ally"),
         (
             2,
             SAM_INVERTED_COMBO_ROW,
-            "Sell the wrong threat, then pass your ally through the opening",
+            "Sell the wrong threat, and then pass your ally through the opening",
         ),
     )
 
@@ -823,9 +823,9 @@ CARDS: list[dict] = [
             "rogue",
             "Rogue",
             "Smoke and Mirrors",
-            "The lie lands first. The truth walks through second.",
+            "Let them argue about what they saw.",
             SAM_EFFECT,
-            sam_spark_column_flow(),
+            sam_spark_inverted(),
         ),
     },
     {
