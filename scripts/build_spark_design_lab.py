@@ -6,32 +6,23 @@ Writes spark-design-lab-data.js — run via build_spark_flourish_proof.py --writ
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "spark-design-lab-data.js"
 
-# Import builders after path setup (called from build_spark_flourish_proof)
+
 def collect_variants() -> list[dict]:
     from scripts.build_spark_flourish_proof import (  # noqa: WPS433
-        HERITAGE_VARIANTS,
-        LAYOUT_VARIANTS,
-        PAY_ICON_VARIANTS,
         SAM_EFFECT,
-        SAM_VARIANTS,
-        SparkStyle,
-        _variant_card,
         build_sam_variant,
         heritage_chip_sam,
-        heritage_crit_sam,
         heritage_v2_question_sam,
-        heritage_v3_sam,
-        heritage_v5_die_sam,
-        sam_spark,
         sam_spark_canonical,
+        sam_spark_column_flow_card,
         sam_spark_compact_xch,
         sam_spark_evocative,
+        sam_spark_inverted_card,
         sam_spark_no_invites,
         sam_spark_pay,
         sam_spark_table_xch,
@@ -72,166 +63,119 @@ def collect_variants() -> list[dict]:
             }
         )
 
-    pay_meta = [
-        (
-            "pay-spark-glyph",
-            "Spark glyph",
-            True,
-            [
-                {
-                    "title": "Spark = currency",
-                    "body": "Spend icon reads as Spark earned from 6s — not the die face itself.",
-                },
-                {
-                    "title": "Name matches section",
-                    "body": "Glyph ties to the Spark label on the card.",
-                },
-                {
-                    "title": "Quick scan",
-                    "body": "Count glyphs = how many Sparks this option costs.",
-                },
-            ],
-            "Does the left side feel like spending Spark, or rolling a die?",
-            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("spark")})),
-        ),
-        (
-            "pay-bonus-die",
-            "Bonus die +",
-            False,
-            [
-                {
-                    "title": "Roll vs option",
-                    "body": "Shows you're giving up the bonus die roll for this card effect.",
-                },
-                {
-                    "title": "Mechanic clarity",
-                    "body": "+ die = the extra roll you'd otherwise take.",
-                },
-            ],
-            "Does + on a die make the spend-versus-roll tradeoff obvious?",
-            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bonus")})),
-        ),
-        (
-            "pay-hollow-roll",
-            "Hollow roll",
-            False,
-            [
-                {
-                    "title": "Uncommitted roll",
-                    "body": "Dashed die = bonus roll you're cashing in without taking.",
-                },
-                {
-                    "title": "Softer than +",
-                    "body": "Less mechanical, more 'I'm spending a roll chance'.",
-                },
-            ],
-            "Does the dashed die read as 'bonus roll' without feeling like a natural 6?",
-            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("hollow")})),
-        ),
-        (
-            "pay-bolt",
-            "Bolt slash",
-            False,
-            [
-                {
-                    "title": "Energy at a glance",
-                    "body": "Lightning = spark energy, fast to spot.",
-                },
-                {
-                    "title": "Less literal",
-                    "body": "Doesn't say die or currency — pure flair.",
-                },
-            ],
-            "Can you tell how much Spark this costs from the bolt icons alone?",
-            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bolt")})),
-        ),
-        (
-            "pay-amber-bars",
-            "Amber bars",
-            False,
-            [
-                {
-                    "title": "Familiar cost pips",
-                    "body": "Recycles v3 vertical bars — count bars = cost.",
-                },
-                {
-                    "title": "Separate from yield",
-                    "body": "Bars only on spend side; triangles/squares stay on yield.",
-                },
-            ],
-            "Do amber bars read as cost without confusing yield shapes?",
-            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bar")})),
-        ),
-        (
-            "pay-die-six",
-            "“6” die (retired)",
-            False,
-            [
-                {
-                    "title": "Anti-pattern",
-                    "body": "Shows 6 on spend — implies you lose the natural 6 (wrong).",
-                },
-                {
-                    "title": "Playtest control",
-                    "body": "Rate low if this confuses you at the table.",
-                },
-            ],
-            "Does showing 6 make you think you're spending the die that rolled 6?",
-            lambda: card_html(
-                lambda: build_sam_variant({"spark": lambda: sam_spark_pay("die-six")})
-            ),
-        ),
-    ]
-    for i, (vid, label, ships, goals, playtest, build) in enumerate(pay_meta):
-        add(vid, "pay", "Spend icon", label, ships=ships, goals=goals, playtest=playtest, html=build(), sort=100 + i)
-
+    # ── Layout — structure only (how rows stack / exchange reads) ───────────
     layout_meta = [
         (
-            "layout-canonical",
-            "v5 Canonical layout",
+            "layout-exchange",
+            "Exchange row (v5)",
             True,
             [
-                {"title": "Exchange row", "body": "Spend ⇄ yield shapes above the verb line."},
-                {"title": "One invite", "body": "Single italic line nudges the story after you read verbs."},
-                {"title": "Flowing combo", "body": "Two-spark = one sentence: Feint…, while you Ghost…"},
+                {"title": "Spend ⇄ yield", "body": "Amber exchange strip above the verb line."},
+                {"title": "Ships today", "body": "Current production layout on Spark cards."},
             ],
-            "Read both Spark lines aloud — can you play them chronologically?",
+            "Can you read cost, category, and verb in one glance?",
             lambda: card_html(sam_spark_canonical),
         ),
         (
-            "layout-no-invites",
-            "No invites",
+            "layout-inverted",
+            "Verb-first + invite box",
             False,
             [
-                {"title": "Verb only", "body": "No italic stems — action lines carry everything."},
-                {"title": "Less clutter", "body": "More room on dense cards."},
+                {
+                    "title": "Cost → shapes → verb",
+                    "body": "Open row: die cost, yield shapes, bold Defend / Attack.",
+                },
+                {
+                    "title": "Serif invite below",
+                    "body": "Bordered box holds the table description — fiction under the pick.",
+                },
             ],
-            "Do you miss the italic line, or is the verb enough?",
-            lambda: card_html(sam_spark_no_invites),
+            "Does putting verbs first speed your pick? Is the invite box clearer than italic under?",
+            lambda: card_html(sam_spark_inverted_card),
         ),
         (
-            "layout-compact-xch",
+            "layout-column-flow",
+            "Column flow (book read)",
+            False,
+            [
+                {
+                    "title": "Key column left",
+                    "body": "Cost die, shape, and impact verb stack in a narrow left column.",
+                },
+                {
+                    "title": "Sentence continues right",
+                    "body": "Same-size prose flows right — Deflect attention… / Sell the wrong threat.",
+                },
+                {
+                    "title": "Combo = two rows",
+                    "body": "Second row: Pass (red) + your ally through the opening — read top to bottom.",
+                },
+            ],
+            "Read down the left column for the trade, then left-to-right across each row — does it feel like a book?",
+            lambda: card_html(sam_spark_column_flow_card),
+        ),
+        (
+            "layout-compact",
             "Compact exchange",
             False,
             [
-                {"title": "Tighter strip", "body": "Smaller pay⇄yield bar — phrase gets more space."},
+                {"title": "Tighter strip", "body": "Smaller pay⇄yield bar — more room for copy."},
             ],
             "Is the exchange still readable when compact?",
             lambda: card_html(sam_spark_compact_xch),
         ),
         (
-            "layout-table-xch",
-            "Spend / Yield table",
+            "layout-table",
+            "Spend / Yield labels",
             False,
             [
-                {"title": "Explicit labels", "body": "Mini grid names Spend and Yield columns."},
-                {"title": "Teach once", "body": "Helps first-time players learn the exchange."},
+                {"title": "Mini grid", "body": "Explicit Spend and Yield column headers."},
             ],
-            "Do labels help or feel like homework?",
+            "Do labels help first-timers or feel like homework?",
             lambda: card_html(sam_spark_table_xch),
         ),
         (
-            "layout-evocative",
+            "layout-phrase-first",
+            "Phrase before exchange",
+            False,
+            [
+                {"title": "Verb hero", "body": "Action line leads; exchange chip trails inline."},
+            ],
+            "Does trailing the exchange after the verb change how you read the line?",
+            lambda: card_html(sam_spark_yield_first),
+        ),
+    ]
+    for i, (vid, label, ships, goals, playtest, build) in enumerate(layout_meta):
+        add(
+            vid, "layout", "Layout", label,
+            ships=ships, goals=goals, playtest=playtest, html=build(), sort=100 + i,
+        )
+
+    # ── Language — copy voice (same v5 structure unless noted) ─────────────
+    language_meta = [
+        (
+            "lang-invites",
+            "Verbs + story invites",
+            True,
+            [
+                {"title": "Bold verbs", "body": "Thread / Feint / Ghost — category-colored."},
+                {"title": "Italic invite", "body": "One line nudges how you describe it at the table."},
+            ],
+            "Read both lines aloud — can you play them chronologically?",
+            lambda: card_html(sam_spark_canonical),
+        ),
+        (
+            "lang-no-invites",
+            "Verbs only",
+            False,
+            [
+                {"title": "Less clutter", "body": "No italic stems — action lines carry everything."},
+            ],
+            "Do you miss the invite line, or is the verb enough?",
+            lambda: card_html(sam_spark_no_invites),
+        ),
+        (
+            "lang-evocative",
             "Evocative chronology",
             False,
             [
@@ -239,7 +183,6 @@ def collect_variants() -> list[dict]:
                     "title": "Read left-to-right",
                     "body": "Sell the wrong threat, and Pass your partner — say it, then describe.",
                 },
-                {"title": "Improv fuel", "body": "Verbs invite confident table narration."},
             ],
             "Can you say line 2 out loud and describe both beats in order?",
             lambda: card_html(
@@ -253,99 +196,121 @@ def collect_variants() -> list[dict]:
             ),
         ),
         (
-            "layout-phrase-first",
-            "Phrase-primary",
+            "lang-questions",
+            "Question prompts",
             False,
             [
-                {"title": "Verb hero", "body": "Action line first; exchange chip trails inline."},
-                {"title": "Fiction forward", "body": "Mechanics don't lead the read."},
-            ],
-            "Does putting verbs first speed up your pick at the table?",
-            lambda: card_html(sam_spark_yield_first),
-        ),
-    ]
-    for i, (vid, label, ships, goals, playtest, build) in enumerate(layout_meta):
-        add(vid, "layout", "Layout & copy", label, ships=ships, goals=goals, playtest=playtest, html=build(), sort=200 + i)
-
-    heritage_meta = [
-        (
-            "heritage-crit",
-            "H0 · Crit (pre-Spark)",
-            [
-                {"title": "Legacy flourish", "body": "Crit-count options — no Spark section at all."},
-                {"title": "Baseline", "body": "Compare: is Spark clearer than Crit for this card?"},
-            ],
-            "Is anything lost moving from Crit to Spark on this ability?",
-            lambda: card_html(heritage_crit_sam),
-        ),
-        (
-            "heritage-chips",
-            "H1 · Chip pills",
-            [
-                {"title": "Keyword pills", "body": "Boost 1 / Stagger 1 chips — mechanical voice."},
-                {"title": "Questions", "body": "Italic questions prompt improv ('what did they see?')."},
-            ],
-            "Do chips feel too rules-heavy compared to verbs?",
-            lambda: card_html(heritage_chip_sam),
-        ),
-        (
-            "heritage-glyph-questions",
-            "H2 · Glyph + (n) questions",
-            [
-                {"title": "Star cost", "body": "Spark glyph cost with colored (1) magnitude."},
-                {"title": "Question gloss", "body": "Full-sentence questions under each option."},
+                {"title": "Improv fuel", "body": "Full-sentence questions instead of story invites."},
+                {"title": "Heritage H2", "body": "“What did they think they saw?” under each option."},
             ],
             "Are questions better or worse than story invites?",
             lambda: card_html(heritage_v2_question_sam),
         ),
         (
-            "heritage-v3-arrows",
-            "H3 · Arrows + bars",
+            "lang-chips",
+            "Keyword chips",
+            False,
             [
-                {"title": "Split combos", "body": "→ between Feint and Ghost on separate lines."},
-                {"title": "Bar cost", "body": "Amber bars left; (n) numbers for magnitude."},
+                {"title": "Mechanical voice", "body": "Boost / Stagger pills — rules-forward read."},
+                {"title": "Heritage H1", "body": "Compare to verb-first Spark copy."},
             ],
-            "Do arrows help combos or break the sentence flow?",
-            lambda: card_html(heritage_v3_sam),
+            "Do chips feel too rules-heavy compared to verbs?",
+            lambda: card_html(heritage_chip_sam),
+        ),
+    ]
+    for i, (vid, label, ships, goals, playtest, build) in enumerate(language_meta):
+        add(
+            vid, "language", "Language", label,
+            ships=ships, goals=goals, playtest=playtest, html=build(), sort=200 + i,
+        )
+
+    # ── Spend icon — what the cost column looks like ───────────────────────
+    pay_meta = [
+        (
+            "pay-spark-glyph",
+            "Spark glyph",
+            True,
+            [
+                {"title": "Spark = currency", "body": "Earned from 6s — not the die face itself."},
+                {"title": "Quick scan", "body": "Count glyphs = Sparks spent."},
+            ],
+            "Does the left side feel like spending Spark, or rolling a die?",
+            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("spark")})),
         ),
         (
-            "heritage-v5-die-six",
-            "H4 · Exchange with “6”",
+            "pay-bonus-die",
+            "Bonus die +",
+            False,
             [
-                {"title": "Misleading spend", "body": "v5 layout but 6 on spend column — retired."},
+                {"title": "Roll vs option", "body": "Giving up the bonus die roll for this effect."},
             ],
-            "Compare to spark glyph — which spend icon is clearer?",
+            "Does + on a die make the spend-versus-roll tradeoff obvious?",
+            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bonus")})),
+        ),
+        (
+            "pay-hollow-roll",
+            "Hollow roll",
+            False,
+            [
+                {"title": "Uncommitted roll", "body": "Dashed outline — bonus roll you're cashing in."},
+            ],
+            "Does the dashed die read as bonus roll without feeling like a natural 6?",
+            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("hollow")})),
+        ),
+        (
+            "pay-bolt",
+            "Bolt slash",
+            False,
+            [
+                {"title": "Energy at a glance", "body": "Lightning tick — spark energy, not a die."},
+            ],
+            "Can you tell cost from the bolt icons alone?",
+            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bolt")})),
+        ),
+        (
+            "pay-amber-bars",
+            "Amber bars",
+            False,
+            [
+                {"title": "Cost pips", "body": "Vertical bars — count bars = cost."},
+            ],
+            "Do amber bars read as cost without confusing yield shapes?",
+            lambda: card_html(lambda: build_sam_variant({"spark": lambda: sam_spark_pay("bar")})),
+        ),
+        (
+            "pay-die-six",
+            "“6” die (retired)",
+            False,
+            [
+                {"title": "Anti-pattern", "body": "Implies you lose the natural 6 — wrong."},
+            ],
+            "Does showing 6 make you think you're spending the die that rolled 6?",
             lambda: card_html(
                 lambda: build_sam_variant({"spark": lambda: sam_spark_pay("die-six")})
             ),
         ),
         (
-            "heritage-v5-current",
-            "H5 · v5 Spark glyph",
-            True,
+            "pay-cost-die-blue",
+            "Blue “6” cost die",
+            False,
             [
-                {"title": "Current ship", "body": "Spark token ⇄ shape yield · flowing sentence."},
+                {
+                    "title": "Inverted layout",
+                    "body": "Periwinkle 6 before shapes — cost reads first on the verb row.",
+                },
+                {
+                    "title": "Not the natural 6",
+                    "body": "Still a spend marker; pairs with verb-first + invite box layout.",
+                },
             ],
-            "Overall — would you ship this over heritage options?",
-            lambda: card_html(lambda: build_sam_variant(SAM_VARIANTS[0])),
+            "Does a blue 6 before Defend read as cost without implying you lose the crit die?",
+            lambda: card_html(sam_spark_inverted_card),
         ),
     ]
-    for i, item in enumerate(heritage_meta):
-        if len(item) == 6:
-            vid, label, ships, goals, playtest, build = item
-        else:
-            vid, label, goals, playtest, build = item
-            ships = False
+    for i, (vid, label, ships, goals, playtest, build) in enumerate(pay_meta):
         add(
-            vid,
-            "heritage",
-            "Heritage timeline",
-            label,
-            ships=ships,
-            goals=goals,
-            playtest=playtest,
-            html=build(),
-            sort=300 + i,
+            vid, "pay", "Spend icon", label,
+            ships=ships, goals=goals, playtest=playtest, html=build(), sort=300 + i,
         )
 
     entries.sort(key=lambda e: e["sort"])
@@ -357,12 +322,36 @@ def write_lab_data() -> None:
     payload = {
         "cardName": "Smoke and Mirrors",
         "cardClass": "Rogue",
-        "updated": "2026-07-03",
+        "updated": "2026-07-01",
         "intro": (
-            "Same Rogue card, different Spark presentations. "
+            "Same Rogue card — compare Layout, Language, and Spend icon in separate tabs. "
             "Hover to peek closer, or click a card to open full size. "
-            "Tap ♥ I like something here or leave a comment on what works for you."
+            "Tap ♥ or leave a comment on what works for you."
         ),
+        "categories": {
+            "layout": {
+                "label": "Layout",
+                "intro": (
+                    "How the Spark block is structured: exchange row vs verb-first, compact vs "
+                    "labeled grid. Copy stays similar so you can judge structure alone."
+                ),
+            },
+            "language": {
+                "label": "Language",
+                "intro": (
+                    "How the lines read at the table: bold verbs, invites, questions, or keyword "
+                    "chips. Structure is mostly v5 exchange unless noted."
+                ),
+            },
+            "pay": {
+                "label": "Spend icon",
+                "intro": (
+                    "What marks cost on the left: Spark glyph, bonus-roll icons, amber bars, or "
+                    "the retired misleading “6”. Natural 6s earn Spark — you spend Spark, not the die."
+                ),
+            },
+        },
+        "defaultCategory": "layout",
         "variants": variants,
     }
     OUT.write_text(

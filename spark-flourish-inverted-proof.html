@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Spark / Flourish — inverted verb-first layout (Smoke and Mirrors)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --spark-blue: #5B7FD4;
+      --spark-blue-dark: #2563EB;
+      --spark-red: #B42318;
+      --spark-red-dark: #991B1B;
+      --box-border: rgba(91, 127, 212, 0.55);
+      --ink: #1a1008;
+      --muted: #4a3d28;
+      --page: #1a1410;
+      --panel: #f7f0e0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px 20px 48px;
+      background: var(--page);
+      color: #e8dfd0;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.45;
+    }
+    h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 600;
+      font-size: 1.55rem;
+      margin: 0 0 6px;
+      color: #f0e6d4;
+    }
+    .lede {
+      max-width: 52rem;
+      margin: 0 0 28px;
+      color: #b8a88e;
+      font-size: 0.95rem;
+    }
+    .demo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      align-items: flex-start;
+    }
+    .demo-block { flex: 0 0 auto; }
+    .demo-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8a7350;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    /* ── Inverted Spark entry (verb row → invite box) ── */
+    .spark-panel {
+      width: 268px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 8px 24px rgba(0,0,0,.28);
+    }
+    .spark-panel + .spark-panel { margin-top: 10px; }
+
+    .spark-verb-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }
+
+    .cost-die {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--spark-blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+      flex-shrink: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .cost-die + .cost-die { margin-left: -2px; }
+
+    .yield-tri {
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      flex-shrink: 0;
+    }
+    .yield-tri.def {
+      border-bottom: 10px solid var(--spark-blue-dark);
+    }
+    .yield-tri.off {
+      border-bottom: 10px solid var(--spark-red-dark);
+    }
+    .yield-sq {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .yield-sq.off { background: var(--spark-red-dark); }
+
+    .spark-combo-plus {
+      font-size: 11px;
+      font-weight: 800;
+      color: #6a5b48;
+      line-height: 1;
+    }
+
+    .spark-verb {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #2a2520;
+      letter-spacing: 0.01em;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .spark-invite-box {
+      border: 1.5px solid var(--box-border);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+      font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    /* ── Full card mock (Rogue) ── */
+    .card-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .card {
+      position: relative;
+      width: 240px;
+      height: 336px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border: 1.5px solid #c8a96e;
+      border-left: 5px solid #6C5BA8;
+      box-shadow: 5px 5px 0 #1a1a1a;
+      font-size: 9px;
+      color: var(--ink);
+    }
+    .hdr {
+      padding: 7px 9px 5px;
+      background: #f0eff6;
+      border-bottom: 1px solid rgba(0,0,0,.10);
+      flex-shrink: 0;
+    }
+    .hdr-top {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .cap {
+      border: 1.5px solid #3a3320;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .hdr-name {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      padding: 3px 12px;
+      margin: 4px 0 2px;
+      color: #594b8a;
+      background: #cdc7e1;
+      border-top: 2px solid #6C5BA8;
+      border-bottom: 2px solid #6C5BA8;
+    }
+    .cbody {
+      flex: 1;
+      min-height: 0;
+      padding: 6px 9px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .flv {
+      font-style: italic;
+      font-size: 8.5px;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+    .hr { height: 1px; background: rgba(0,0,0,.12); margin: 2px 0; }
+    .elbl {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #5c4a32;
+    }
+    .etxt { font-size: 9px; line-height: 1.38; }
+    .spark-sec { margin-top: 4px; }
+    .spark-sec .clbl {
+      font-size: 7.5px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #5c4a32;
+      margin-bottom: 5px;
+    }
+    .card .spark-panel {
+      width: 100%;
+      padding: 7px 8px 6px;
+      border-radius: 6px;
+      box-shadow: none;
+      border-color: rgba(0,0,0,.06);
+    }
+    .card .cost-die {
+      width: 14px;
+      height: 14px;
+      font-size: 9px;
+      border-radius: 3px;
+    }
+    .card .yield-tri {
+      border-left-width: 5px;
+      border-right-width: 5px;
+    }
+    .card .yield-tri.def { border-bottom-width: 8px; }
+    .card .yield-tri.off { border-bottom-width: 8px; }
+    .card .yield-sq { width: 8px; height: 8px; }
+    .card .spark-combo-plus { font-size: 9px; }
+    .card .spark-verb { font-size: 9.5px; }
+    .card .spark-invite-box {
+      font-size: 9.5px;
+      padding: 5px 7px;
+      border-radius: 4px;
+      line-height: 1.32;
+    }
+    .card .spark-verb-row { gap: 4px; margin-bottom: 5px; }
+    .card .spark-panel + .spark-panel { margin-top: 6px; }
+    .idtag {
+      position: absolute;
+      left: 8px;
+      bottom: 7px;
+      border: 1.5px solid #6C5BA8;
+      color: #594b8a;
+      background: #eae8f3;
+      border-radius: 4px;
+      padding: 1px 7px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .tier-float {
+      position: absolute;
+      right: 8px;
+      bottom: 7px;
+      width: 18px;
+      height: 18px;
+      border: 1px solid #9a9a9a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: #7d7d7d;
+      font-family: Georgia, serif;
+      font-style: italic;
+      background: rgba(255,255,255,.55);
+    }
+    .note {
+      max-width: 268px;
+      font-size: 0.78rem;
+      color: #8a7350;
+      font-style: italic;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Spark / Flourish — inverted layout</h1>
+  <p class="lede">
+    Verb + yield shapes lead on the open row (cost die first). The serif invite sits in the bordered box underneath —
+  matching your mock, applied to <strong>Smoke and Mirrors</strong>.
+  </p>
+
+  <div class="demo-grid">
+    <div class="demo-block">
+      <div class="demo-label">Isolated widget</div>
+      <div class="spark-panel">
+        <div class="spark-verb-row">
+          <span class="cost-die" title="Spend 1 Spark">6</span>
+          <span class="yield-tri def" aria-hidden="true"></span>
+          <span class="spark-verb">Defend</span>
+        </div>
+        <div class="spark-invite-box">Deflect attention from an Ally</div>
+      </div>
+
+      <div class="spark-panel">
+        <div class="spark-verb-row">
+          <span class="cost-die" title="Spend 1 Spark">6</span>
+          <span class="cost-die" title="Spend 1 Spark">6</span>
+          <span class="yield-tri def" aria-hidden="true"></span>
+          <span class="spark-verb">Defend</span>
+          <span class="spark-combo-plus" aria-hidden="true">+</span>
+          <span class="yield-sq off" aria-hidden="true"></span>
+          <span class="spark-verb">Attack</span>
+        </div>
+        <div class="spark-invite-box">Sell the wrong threat, then pass your ally through the opening</div>
+      </div>
+      <p class="note">Top row = cost + category shapes + bold verbs. Box = how you describe it at the table.</p>
+    </div>
+
+    <div class="demo-block card-wrap">
+      <div class="demo-label">On card — Smoke and Mirrors</div>
+      <div class="card acc-rogue">
+        <div class="hdr">
+          <div class="hdr-top">
+            <span class="cap">Ability</span>
+            <span class="cap">Act</span>
+          </div>
+          <div class="hdr-name">Smoke and Mirrors</div>
+        </div>
+        <div class="cbody">
+          <div class="flv">Let them argue about what they saw.</div>
+          <div class="hr"></div>
+          <div class="elbl">Effect</div>
+          <div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div>
+          <div class="spark-sec">
+            <div class="clbl">Spark</div>
+            <div class="spark-panel">
+              <div class="spark-verb-row">
+                <span class="cost-die" title="Spend 1 Spark">6</span>
+                <span class="yield-tri def" aria-hidden="true"></span>
+                <span class="spark-verb">Defend</span>
+              </div>
+              <div class="spark-invite-box">Deflect attention from an Ally</div>
+            </div>
+            <div class="spark-panel">
+              <div class="spark-verb-row">
+                <span class="cost-die" title="Spend 1 Spark">6</span>
+                <span class="cost-die" title="Spend 1 Spark">6</span>
+                <span class="yield-tri def" aria-hidden="true"></span>
+                <span class="spark-verb">Defend</span>
+                <span class="spark-combo-plus" aria-hidden="true">+</span>
+                <span class="yield-sq off" aria-hidden="true"></span>
+                <span class="spark-verb">Attack</span>
+              </div>
+              <div class="spark-invite-box">Sell the wrong threat, then pass your ally through the opening</div>
+            </div>
+          </div>
+        </div>
+        <div class="idtag">Rogue</div>
+        <div class="tier-float"><span>t1</span></div>
+      </div>
+      <p class="note">Print frame 2.5″×3.5″ (240×336px). Spark entries stack inside the card body.</p>
+    </div>
+  </div>
+</body>
+</html>
