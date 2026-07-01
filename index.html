@@ -879,6 +879,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
+    <button class="tab" data-view="deckbuild" onclick="showView('deckbuild')">Deck Build</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
     <button class="tab" data-view="discuss" onclick="showView('discuss')">Recent Discussion <span class="badge" id="discussBadge" style="background:#5E81AC">0</span></button>
     <button class="tab tab-submit" data-view="submit" onclick="showView('submit')">✦ Submit Idea</button>
@@ -895,6 +896,9 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 
 <section class="view hidden" id="view-primer">
   <iframe src="instinct-rpg-primer-v2.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
+</section>
+<section class="view hidden" id="view-deckbuild">
+  <iframe src="instinct-playtest-deck-creation.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
 </section>
 <section class="view hidden" id="view-quickref">
   <iframe src="instinct-rpg-quick-ref-v2.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
@@ -1679,6 +1683,8 @@ async function init(){
     await loadCards();
     loadRecentComments();
   }
+  const viewParam=new URLSearchParams(location.search).get('view');
+  if(viewParam&&document.getElementById('view-'+viewParam))showView(viewParam);
 }
 init();
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
