@@ -31,8 +31,8 @@ Read full transcripts, write both files, present for verification. No handoffs.
 After writing the checklist and Discord recap:
 
 1. **Generate browser-readable proof HTML** for each artifact (`.md` does not render on
-   GitHub Pages / Simple Browser) — e.g. `jun-30-playtest-analysis-proof.html` and
-   `jun-30-discord-recap-proof.html` in the same session folder.
+   GitHub Pages / Simple Browser) — e.g. `jun-30-playtest-analysis-proof.html` in the session
+   folder **and mirrored at repo root** (simple Pages URL, no `#` or spaces in path).
 2. **Open both in the Cursor browser** (`browser_navigate`, `position: "active"`) — checklist
    first, Discord recap second (`newTab: true`). Use local `file://` paths immediately; after
    push, also give GitHub Pages URLs for the `*-proof.html` files.
