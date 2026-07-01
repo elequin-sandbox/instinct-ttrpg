@@ -132,6 +132,13 @@ This locks the **color-to-meaning mapping only** — no new palette, reuses exis
 above. Whether the coloring renders as a left-rail bar, a small label chip, or a bullet dot is the
 flourish-cards track's implementation call.
 
+**Implementation chosen (July 1 2026 — first Flourish cards, Smite/Reckless Strike model pass):** a
+7px colored dot (`.fl-dot`) before the keyword, plus the keyword itself set in the matching color
+(`.fl-word`) — narrative Flourish words (Rattled, Sundered, etc.) stay **bold colored text, not a
+pill** (only true Impact Keywords like Boost/Resolve keep their filled pill; the dot+color marks the
+Flourish category on top of that). CSS: `.ci.fl-red/.fl-blue/.fl-green` in `primer-card-scope.css`.
+Proof: `flourish-cards-proof.html`.
+
 **Coexistence with Tier 3 narrative words:** a Flourish's bold keyword is often a Tier 3 narrative
 term (Exposed, Rattled, etc. — see §4 Tier 3 below). The word itself stays plain-bold; the **coloring
 and the printed number belong to the Flourish line**, not to the word everywhere it appears on a card.

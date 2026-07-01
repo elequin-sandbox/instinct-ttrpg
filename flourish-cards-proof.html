@@ -1,0 +1,265 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Crit Flourish proof — Playtest 4 Phase 2B</title><style>/* ===== INSTINCT RPG CANONICAL CARD SYSTEM (parallelism pass, June 2026) ===== */
+/* === Instinct RPG canonical keyword + chip styles (single source of color truth) === */
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.6;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-hd{background:#991B1B;color:#FEF2F2;}
+.kw-threat{background:#991B1B;color:#FEF2F2;}
+.kw-crit{background:#B8860B;color:#FFFDE7;}
+.kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
+/* Crit Flourish colorings (locked Playtest 4 — P2): red offensive / blue defensive / green resolve.
+   Dot + colored keyword text mark the category; narrative Flourish words (Rattled, Sundered) stay
+   bold text (not pills) since only the Flourish line — not the bare word — carries the number. */
+.ci .fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.ci.fl-red .fl-dot{background:#991B1B;}
+.ci.fl-red .fl-word{color:#991B1B;}
+.ci.fl-blue .fl-dot{background:#2563EB;}
+.ci.fl-blue .fl-word{color:#2563EB;}
+.ci.fl-green .fl-dot{background:#166534;}
+.ci.fl-green .fl-word{color:#166534;}
+.ci .fl-word{font-weight:700;}
+.kw-toll{background:#B45309;color:#FFFBEB;}
+.kw-miss{background:#7F1D1D;color:#FEF2F2;}
+.kw-aid{background:#2563EB;color:#EFF6FF;}
+.kw-mill{background:#0C4A6E;color:#BAE6FD;}
+.ix{display:inline-block;background:transparent;border:1.5px solid;border-radius:3px;padding:0 4px;font-weight:700;font-size:10px;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif;}
+.ix-instinct{border-color:#1e2540;color:#1e2540;}
+.ix-background{border-color:#0f2d45;color:#0f2d45;}
+.ix-bond{border-color:#0f2b15;color:#0f2b15;}
+.ix-flaw{border-color:#3d0a0a;color:#3d0a0a;}
+.ix-ancestry{border-color:#2a1a08;color:#2a1a08;}
+.ix-act{border-color:#1C3A5E;color:#1C3A5E;}
+.ix-react{border-color:#0C4A6E;color:#0C4A6E;}
+.ix-item{border-color:#92400E;color:#92400E;}
+.ix-barbarian{border-color:#9E2B2B;color:#9E2B2B;}
+.ix-fighter{border-color:#B45309;color:#B45309;}
+.ix-paladin{border-color:#8a6608;color:#8a6608;}
+.ix-cleric{border-color:#4d6a90;color:#4d6a90;}
+.ix-ranger{border-color:#2F6B3D;color:#2F6B3D;}
+.ix-rogue{border-color:#6C5BA8;color:#6C5BA8;}
+.ix-druid{border-color:#4d6b24;color:#4d6b24;}
+.ix-warlock{border-color:#9A2B5E;color:#9A2B5E;}
+.ix-bard{border-color:#B5388D;color:#B5388D;}
+.ix-wizard{border-color:#3C3489;color:#3C3489;}
+.ix-monk{border-color:#164E63;color:#164E63;}
+
+/* === per-accent color variables (single place to recolor a card type/class) === */
+.acc-barbarian{--a:#9E2B2B;--ad:#822323;--al:#deb7b7;--ah:#f5eaea;--at:#f1e1e1;}
+.acc-fighter{--a:#B45309;--ad:#944407;--al:#e6c5ab;--ah:#f8eee6;--at:#f4e7dd;}
+.acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
+.acc-cleric{--a:#5E81AC;--ad:#4d6a8d;--al:#c8d4e3;--ah:#eff2f7;--at:#e8edf3;}
+.acc-ranger{--a:#2F6B3D;--ad:#275832;--al:#b8cdbd;--ah:#eaf0ec;--at:#e2eae4;}
+.acc-rogue{--a:#6C5BA8;--ad:#594b8a;--al:#cdc7e1;--ah:#f0eff6;--at:#eae8f3;}
+.acc-druid{--a:#5A7D2A;--ad:#4a6722;--al:#c7d3b7;--ah:#eef2ea;--at:#e8ede1;}
+.acc-warlock{--a:#9A2B5E;--ad:#7e234d;--al:#ddb7c8;--ah:#f5eaef;--at:#f1e1e8;}
+.acc-bard{--a:#B5388D;--ad:#942e74;--al:#e6bbd8;--ah:#f8ebf4;--at:#f5e3ef;}
+.acc-wizard{--a:#3C3489;--ad:#312b70;--al:#bdbad7;--ah:#ecebf3;--at:#e4e3ee;}
+.acc-monk{--a:#164E63;--ad:#124051;--al:#b0c3ca;--ah:#e8edef;--at:#dee6e9;}
+.acc-instinct{--a:#4453a8;--ad:#38448a;--al:#bfc5e1;--ah:#eceef6;--at:#e5e7f3;}
+.acc-background{--a:#2f6da8;--ad:#27598a;--al:#b8cde1;--ah:#eaf0f6;--at:#e2ebf3;}
+.acc-bond{--a:#2f7d4f;--ad:#276741;--al:#b8d3c3;--ah:#eaf2ed;--at:#e2ede6;}
+.acc-flaw{--a:#b3261e;--ad:#931f19;--al:#e5b5b2;--ah:#f7e9e8;--at:#f4e1e0;}
+.acc-ancestry{--a:#9a6a2e;--ad:#7e5726;--al:#ddccb8;--ah:#f5f0ea;--at:#f1eae2;}
+.acc-connection{--a:#9a3b6b;--ad:#7e3058;--al:#ddbccd;--ah:#f5ebf0;--at:#f1e4ea;}
+.acc-any{--a:#92400E;--ad:#7a3409;--al:#e6cdb5;--ah:#f5ece4;--at:#f0e4d8;}
+
+/* === Instinct RPG canonical header system (var-driven, no inline color) === */
+.card{position:relative;border-left:5px solid var(--a,transparent);display:flex;flex-direction:column;}
+.primer-cards .cardwrap .card .cbody,.primer-cards .cardwrap .card .bf-body,.primer-cards .cardwrap .card .card-body{padding-bottom:26px;}
+.hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah,#faf6ec);border-bottom:1px solid rgba(0,0,0,.10);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
+.cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;white-space:nowrap;}
+.cap-neutral{border-color:#3a3320;color:#3a3320;}
+.cap-accent{border-color:var(--ad);color:var(--ad);}
+.hdr-name{font-family:'EB Garamond',Georgia,'Times New Roman',serif;font-weight:700;font-size:14px;line-height:1.08;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-name.hdr-bar{clip-path:none;margin:4px 0 2px;padding:3px 8px;text-align:left;display:flex;align-items:center;gap:5px;min-height:22px;}
+.hdr-name.hdr-bar .hdr-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;line-height:1.08;}
+.hdr-blankname{display:flex;align-items:center;justify-content:center;min-height:24px;}
+.hdr-sub{text-align:center;font-style:italic;font-size:8.5px;color:#6a5b38;line-height:1.22;margin-top:2px;}
+.idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;}
+.tier-float{position:absolute;right:8px;bottom:7px;width:18px;height:18px;border:1px solid #9a9a9a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#7d7d7d;font-family:Georgia,serif;font-style:italic;background:rgba(255,255,255,.55);}
+
+/* Dual-purpose Instinct — legacy OR divider (version history) + shared fork CSS in instinct-dual-styles.css */
+.or-divider{display:flex;align-items:center;gap:5px;margin:2px 0;}
+.or-line{flex:1;height:1px;background:#c8a96e;opacity:0.35;}
+.or-lbl{font-size:7.5px;font-weight:700;color:#c8a96e;letter-spacing:1.5px;}
+.instinct-split{display:flex;align-items:stretch;gap:0;min-height:0;flex:1;}
+.instinct-col{flex:1;min-width:0;padding:0 3px;}
+.instinct-col .etxt{font-size:9px;line-height:1.38;}
+.instinct-vrule{width:1px;background:#c8a96e;opacity:0.35;flex-shrink:0;margin:0 2px;}
+
+
+.primer-cards .card{width:2.5in;height:3.5in;}
+
+#modal{position:fixed;inset:0;z-index:200;background:rgba(10,7,3,.82);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;}
+.sheet{background:#221810;border:1px solid var(--gold-d);border-radius:12px;width:min(80vw,1600px);display:flex;flex-direction:row;gap:24px;padding:24px;position:relative;align-items:flex-start;}
+.sheet-card{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.modal-card-outer{display:flex;justify-content:center;}
+.modal-card-zoomed{cursor:default;}
+.vtoggle{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;height:30px;flex-shrink:0;}
+.vtoggle button{background:#2a1d10;border:1px solid var(--gold-d);color:var(--gold);width:30px;height:26px;border-radius:6px;font-size:14px;}
+.vtoggle button:disabled{opacity:.3;cursor:default;}
+.vlabel{min-width:120px;max-width:280px;text-align:center;color:#cbb98e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vnote{min-height:16px;font-size:11px;color:var(--gold-d);font-style:italic;text-align:center;line-height:1.4;}
+.sheet-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;}
+@media(max-width:700px){.sheet{flex-direction:column;width:94vw;}}
+.sheet-side h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;}
+.meta{font-size:12px;color:var(--gold-d);text-transform:capitalize;}
+.meta-cls{text-transform:capitalize;}
+.sbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.sbtns button{flex:1;min-width:110px;padding:8px;border-radius:7px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:12px;}
+.sbtns button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.cmts{border-top:1px solid #3a2c19;padding-top:12px;display:flex;flex-direction:column;gap:8px;}
+.cmts h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);}
+.cmt{background:#1b130b;border-left:2px solid var(--gold-d);padding:6px 10px;border-radius:4px;font-size:13px;}
+.cmt .who{color:var(--gold);font-weight:700;font-size:12px;}
+.cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
+.cmtform{display:flex;flex-direction:column;gap:6px;}
+.cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
+.name-input{width:100%;}
+.cmtform textarea{resize:vertical;min-height:48px;}
+.cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
+.cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
+.cmt-del{background:none;border:none;color:#7a5a4a;font-size:12px;cursor:pointer;margin-left:auto;padding:0 4px;line-height:1;}
+.cmt-del:hover{color:#d4604a;}
+.cmt-chk{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:#9a8a5a;cursor:pointer;user-select:none;}
+.cmt-chk.on{color:#d8b84a;font-weight:700;}
+.cmt-chk input{accent-color:#c8a96e;}
+.cmtform .cmt-chk{color:#bfae86;margin-top:2px;}
+.closex{position:absolute;top:12px;right:16px;background:none;border:none;color:#cbb98e;font-size:26px;line-height:1;}
+
+.panel{padding:20px 18px;}
+.panel h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;margin-bottom:6px;}
+.panel .sub{color:var(--gold-d);font-size:13px;margin-bottom:14px;}
+.simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.simbar button{padding:9px 16px;border-radius:8px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:13px;letter-spacing:.5px;}
+.simbar button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.simbar button:disabled{opacity:.35;cursor:default;}
+.simstat{color:#cbb98e;font-size:13px;}
+#simCoreArea{
+  background:linear-gradient(160deg,rgba(18,52,20,.55) 0%,rgba(10,35,12,.62) 100%);
+  border:1px solid rgba(65,112,60,.32);
+  border-radius:12px;padding:10px 16px 12px;margin-bottom:14px;
+  box-shadow:inset 0 3px 22px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.03),0 2px 8px rgba(0,0,0,.35);
+}
+#simCoreArea .grid{margin-top:8px;}
+.sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(138,188,125,.75);text-transform:uppercase;cursor:help;}
+#simHandArea{
+  background:rgba(26,16,4,.52);
+  border:1px solid rgba(148,118,52,.22);
+  border-radius:12px;padding:16px 20px 28px;
+  box-shadow:inset 0 2px 14px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.02);
+  overflow:visible;
+}
+.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;margin-bottom:12px;}
+.sim-hand-grid{display:flex;gap:10px;flex-wrap:nowrap;align-items:flex-start;}
+.sim-hand-slot{flex:0 0 130px;height:195px;position:relative;overflow:hidden;z-index:1;cursor:pointer;}
+.sim-hand-slot:hover{overflow:visible;z-index:100;}
+.sim-hand-slot .primer-cards .cardwrap{position:absolute !important;top:0;left:50%;margin-left:calc(-1.25in);width:2.5in;transform:scale(0.54);transform-origin:top center;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+.sim-hand-slot:hover .primer-cards .cardwrap{transform:scale(1.0);box-shadow:0 16px 60px rgba(0,0,0,.9);}
+
+#printroot{display:none;}
+@media print{
+  body{background:#fff;}
+  header,.filters,#modal,#toast{display:none !important;}
+  .view{display:none !important;}
+  #printroot{display:block !important;}
+  .print-sheet{display:grid;grid-template-columns:repeat(3,2.5in);gap:0;justify-content:center;align-content:start;}
+  .print-sheet .primer-cards .cardwrap{cursor:default;transform:none;width:2.5in;}
+  .print-sheet .primer-cards .cardwrap .card{box-shadow:none !important;}
+  .primer-cards .cardwrap{break-inside:avoid;page-break-inside:avoid;}
+  @page{size:letter;margin:.35in;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2f7d4f;color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;z-index:500;pointer-events:none;}
+#toast.show{opacity:1;}
+
+*{box-sizing:border-box;margin:0;padding:0;}.scope-ability body{background:#1e1810;font-family:system-ui,-apple-system,sans-serif;}.scope-ability .screen-header{text-align:center;padding:32px 24px 20px;}.scope-ability .page-title{font-family:system-ui,-apple-system,sans-serif;font-size:16.50px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;}.scope-ability .page-subtitle{font-size:13.20px;color:#7a6030;letter-spacing:1px;margin-top:6px;}.scope-ability 
+.primer-cards { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+.primer-cards .cardwrap {
+  position: relative;
+  width: 2.5in;
+  height: 3.5in;
+  flex-shrink: 0;
+  transform: scale(0.58);
+  transform-origin: top left;
+  margin-bottom: -58px;
+  margin-right: -42px;
+}
+.primer-cards .cardwrap .card {
+  width: 2.5in;
+  height: 3.5in;
+  background: #f7f0e0;
+  border: 0.5px solid #c8a96e;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #241a08;
+}
+.primer-cards .cbody, .primer-cards .bf-body, .primer-cards .card-body {
+  flex: 1;
+  padding: 7px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  line-height: 1.45;
+  overflow: hidden;
+  min-height: 0;
+}
+.primer-cards .zone-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8a6a30;
+  flex-shrink: 0;
+}
+.primer-cards .effect-text {
+  font-size: 9.5px;
+  line-height: 1.4;
+  color: #1a1008;
+  flex-shrink: 0;
+}
+.primer-cards .card-body .rule {
+  height: 0.5px;
+  background: rgba(180, 140, 60, 0.3);
+  flex-shrink: 0;
+  margin: 2px 0;
+}
+.primer-cards .elbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+.primer-cards .hr { height: 0.5px; background: #eee; margin: 2px 0; }
+.primer-cards .csec { margin-top: 4px; }
+.primer-cards .clbl { font-size: 9px; font-weight: 700; color: #16a34a; text-transform: uppercase; }
+.primer-cards .crow { display: flex; flex-direction: column; gap: 2px; }
+.primer-cards .ci {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+  font-size: 9.5px;
+  line-height: 1.42;
+}
+.primer-cards .ci .kw-crit,
+.primer-cards .ci .kw.kw-crit,
+.primer-cards .ci .tc { flex: 0 0 auto; }
+.primer-cards .ci .ci-txt { flex: 1; min-width: 0; }
+.primer-cards .bf-trig { font-style: italic; color: #3a2c10; font-size: 10px; }
+.primer-cards .bf-eff { color: #1c1408; font-size: 10px; }
+.primer-cards .bf-choose { font-weight: 700; font-size: 9.5px; color: #5a4520; }
+.primer-cards .bf-choices { display: flex; flex-direction: column; gap: 3px; }
+.primer-cards .bf-choice { font-size: 9.5px; line-height: 1.42; }
+.primer-cards .bf-type { font-size: 7.5px; text-transform: uppercase; letter-spacing: 1px; background: #e7d9ba; border: 1px solid #c8a96e; border-radius: 3px; padding: 1px 7px; color: #6a5020; align-self: flex-start; }
+.primer-cards ul { margin: 4px 0 0 16px; padding: 0; font-size: 9.5px; }
+
+/* Side-by-side Core samples — one scaled card per .primer-cards slot */
+.primer-core-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 18px 0;
+  align-items: flex-start;
+}
+.primer-core-pair .primer-cards { margin: 0; }
+body{background:#14100a;padding:28px;color:#f0e6cf;font-family:system-ui,sans-serif;}h1{font-size:18px;letter-spacing:1px;color:#e7d6ac;margin-bottom:4px;}h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c9a24a;margin:28px 0 12px;border-bottom:1px solid #3a2c19;padding-bottom:6px;}p.sub{color:#a08a5c;font-size:13px;margin-bottom:18px;}.legend{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:22px;font-size:12px;color:#d8c8a0;}.lg-item{display:flex;align-items:center;gap:6px;}.lg-dot{display:inline-block;width:9px;height:9px;border-radius:50%;}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}.stag{font-size:10px;text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:8px;color:#c9b896;}</style></head><body><h1>Crit Flourish rework — Playtest 4 Phase 2B</h1><p class="sub">Model cards: pared Smite (Paladin) / Strike (Barbarian) — design/classes.md §4. Bold Flourish keyword + printed number, colored by category.</p><div class="legend"><span class="lg-item"><span class="lg-dot" style="background:#991B1B"></span>Red — offensive: remove N dice from the opposing pool</span><span class="lg-item"><span class="lg-dot" style="background:#2563EB"></span>Blue — defensive: help allies (Boost, etc.)</span><span class="lg-item"><span class="lg-dot" style="background:#166534"></span>Green — resolve: heal / recover Resolve or Hit Die</span></div><h2>Paladin</h2><div class="grid"><div class="sample"><div class="stag">Smite</div><div class="cardwrap scope-ability cls-paladin"><div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smite</div></div><div class="cbody"><div class="flv">You make yourself the problem they can't ignore.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Presence</strong> check. On success, draw an enemy's focus entirely onto you — they must answer your challenge before acting on anyone else this beat.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit kw-crit-repeat">1↻</span><span class="fl-dot"></span><strong class="fl-word">Rattled 1</strong> — remove 1 die from another enemy who heard you; they falter, fixing on you instead.</div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Divine Challenge</div><div class="cardwrap scope-ability cls-paladin"><div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Divine Challenge</div></div><div class="cbody"><div class="flv">Conviction lands harder than steel.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Faith</strong> check. On success, <strong>Strike</strong> with divine force — gain <span class="kw kw-boost">Boost 1</span> on the damage roll.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Rattled 2</strong> — remove 2 dice from their pool; they reel, shaken in front of their allies.</div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Condemn</div><div class="cardwrap scope-ability cls-paladin"><div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Condemn</div></div><div class="cbody"><div class="flv">You don't curse them. You recognize what they are.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Faith</strong> check. On success, speak what they have done aloud — the truth lands. They must choose: <strong>Stand down</strong> — abandon their course, visibly shaken; or <strong>Press on</strong> — everyone present sees them clearly now.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Rattled 2</strong> — remove 2 dice from their pool.</div><div class="ci fl-blue"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Boost 1</strong> — each ally gains this on their next <strong>Strike</strong> against them.</div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Lay on Hands</div><div class="cardwrap scope-ability cls-paladin"><div class="card paladin acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Lay on Hands</div></div><div class="cbody"><div class="flv">Not this one. Not today.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Medicine</strong> check. On success, touch an ally — they shake off the worst thing pressing on them and recover a lost <span class="kw kw-hd">Hit Die</span>.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-green"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Resolve 2</strong> — they also recover 2 Resolve, steadied enough to keep fighting.</div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div></div><h2>Barbarian</h2><div class="grid"><div class="sample"><div class="stag">Reckless Strike</div><div class="cardwrap scope-ability cls-barbarian"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Reckless Strike</div></div><div class="cbody"><div class="flv">You stop caring about what happens to you.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Athletics</strong> check with <span class="kw kw-boost">Boost 1</span>. On success, <strong>Strike</strong> with full force — you leave your guard wide open until your next turn.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Sundered 2</strong> — remove 2 dice from their pool; the blow cracks something structural.</div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Break</div><div class="cardwrap scope-ability cls-barbarian"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Break</div></div><div class="cbody"><div class="flv">There is no obstacle. There is only physics.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Athletics</strong> check. On success, smash a piece of the <strong>Scene</strong> — an object, barrier, or structure is destroyed, opening a path or clearing an enemy's cover.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Sundered 2</strong> — remove 2 dice from an enemy caught in the wreckage.</div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Sundering Blow</div><div class="cardwrap scope-ability cls-barbarian"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Sundering Blow</div></div><div class="cbody"><div class="flv">You don't just hit them. You compromise them.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Athletics</strong> check. On success, <strong>Strike</strong> a target and open a structural weakness that follows them the rest of this <strong>Scene</strong>.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-red"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Sundered 2</strong> — remove 2 dice from their pool immediately.</div><div class="ci fl-blue"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Boost 1</strong> — each ally who <strong>Strikes</strong> them this <strong>Scene</strong> gains this.</div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div><div class="sample"><div class="stag">Endure</div><div class="cardwrap scope-ability cls-barbarian"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Endure</div></div><div class="cbody"><div class="flv">You have taken worse.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Endurance</strong> check. On success, name what you're pushing through — pain, fear, exhaustion — and shrug it off; add a Rage die to your pool.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci fl-green"><span class="kw kw-crit">1</span><span class="fl-dot"></span><strong class="fl-word">Resolve 2</strong> — you also recover 2 Resolve, steadied by what you just proved to yourself.</div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div></div></body></html>
