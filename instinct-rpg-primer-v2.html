@@ -216,6 +216,19 @@
     .deck-math tr:last-child td { border-bottom: none; }
     .deck-math td:last-child { text-align: right; font-weight: 600; color: var(--gold-light); }
 
+    /* Flourish colorings (Crit spend) */
+    .flr-grid { display: flex; flex-direction: column; gap: 8px; margin: 16px 0; }
+    .flr-item {
+      display: flex; align-items: flex-start; gap: 12px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+    }
+    .flr-dot { width: 13px; height: 13px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+    .flr-dot.flr-red { background: #991B1B; }
+    .flr-dot.flr-blue { background: #2563EB; }
+    .flr-dot.flr-green { background: #166534; }
+    .flr-body { font-size: 15.5px; }
+    .flr-body strong { color: var(--gold-light); }
+
     /* Clickable keyword glossary */
     .gloss-intro { font-size: 16px; color: var(--text-muted); margin-bottom: 18px; }
     .gloss-list { display: flex; flex-direction: column; gap: 8px; }
@@ -343,8 +356,21 @@
 
   <section class="section">
     <div class="section-eyebrow">03</div>
+    <h2 class="section-title">Before You Roll — Setting the Objective</h2>
+    <p>Before any dice hit the table, the whole table agrees on what you’re actually trying to do this scene — “get out of the cell,” “grab the keys,” “calm him down enough that he backs off.” Say it out loud so everyone heard the same thing.</p>
+    <p>Then the GM tells you <strong>what success looks like</strong> before you commit to anything. Sometimes more than one approach works — talking your way through and fighting your way through might both clear the same objective, just differently. If you’re not sure which lane you’re in, ask.</p>
+    <div class="callout">
+      <div class="callout-label">The GM’s dice are the objective</div>
+      <p>Difficulty in this game isn’t a hidden number — it’s the GM’s opposing dice pool, placed on the table where you can see it. Clear it, and you did the thing you set out to do. Some GM dice left over: partial success, and the GM tells you what you got and what you didn’t.</p>
+    </div>
+    <p>Big objectives sometimes come in <strong>waves</strong> — separate rows of GM dice you clear one at a time, front row first. Your GM will tell you when a new wave opens.</p>
+    <p>Found a smarter way in than the one the GM expected? Say so. If it fits the fiction, the GM can open a smaller objective for exactly your plan instead of ruling it doesn’t count.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">04</div>
     <h2 class="section-title">Basic Checks</h2>
-    <p>Roll only when the outcome is genuinely uncertain. You build a pool of d6s and roll against the GM’s opposing pool on the table. Then you match your dice against theirs. That’s the core of resolution.</p>
+    <p>Roll only when the outcome is genuinely uncertain. You build a pool of d6s and roll against the GM’s opposing pool on the table — the same objective pool from the last section. Then you match your dice against theirs. That’s the core of resolution.</p>
     <div class="steps">
       <div class="step">
         <div class="step-name">Build</div>
@@ -450,7 +476,34 @@
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">04</div>
+    <div class="section-eyebrow">05</div>
+    <h2 class="section-title">Spending a Flourish</h2>
+    <p>A Crit isn’t just a bigger number — it’s story punctuation. Once you’ve counted your Crits, here’s the whole procedure for spending them:</p>
+    <div class="ex-steps">
+      <div class="ex-step">
+        <div class="ex-step-num">Step 1</div>
+        <p>Look at the ability card you just played. Its <strong>Flourish</strong> options are printed right on the card, each behind a bold keyword.</p>
+      </div>
+      <div class="ex-step">
+        <div class="ex-step-num">Step 2</div>
+        <p>For each Crit you have, pick one Flourish and ask the table: <em>“Does this fit what we’re trying to do right now?”</em></p>
+      </div>
+      <div class="ex-step">
+        <div class="ex-step-num">Step 3</div>
+        <p>If the table agrees it fits, apply the card’s printed effect <strong>exactly as written</strong> — no more, no less. The GM only judges whether it fits the fiction, never how big it is.</p>
+      </div>
+    </div>
+    <p>Flourishes come in three colors, so you can read what kind of moment you’re about to make before you even read the words:</p>
+    <div class="flr-grid">
+      <div class="flr-item"><span class="flr-dot flr-red"></span><div class="flr-body"><strong>Red — offensive.</strong> Knocks dice off the objective or enemy pool (e.g. a Flourish printed <strong>Exposed 2</strong> removes 2 dice).</div></div>
+      <div class="flr-item"><span class="flr-dot flr-blue"></span><div class="flr-body"><strong>Blue — defensive.</strong> Helps an ally — Boost, redirected Threat, and the like.</div></div>
+      <div class="flr-item"><span class="flr-dot flr-green"></span><div class="flr-body"><strong>Green — resolve.</strong> Heals, sheds Threat, or recovers Resolve/Hit Dice in the fiction.</div></div>
+    </div>
+    <p class="note">You never lose the 6s that earned these — you’re counting them, not spending them away.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-eyebrow">06</div>
     <h2 class="section-title">Health — Hit Dice</h2>
     <p><span class="kw kw-hd">Hit Dice</span> are your health — actual d6s on the table, not a number on a sheet. We never say “HP.”</p>
     <p>When you take damage, Hit Dice are removed or reduced. When your last Hit Die is gone, you’re out of the fight. Damage and recovery details come up in play — your GM will walk you through the first time it matters.</p>
@@ -458,7 +511,7 @@
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">05</div>
+    <div class="section-eyebrow">07</div>
     <h2 class="section-title">Your Card Types</h2>
     <p>There are a lot of card types — that’s on purpose. They let your character be expressive. Every card explains itself; read the card to learn how it works. You don’t need this list memorized.</p>
     <div class="card-types">
@@ -472,10 +525,15 @@
       <div class="ct-row"><div class="ct-chip" style="background:#2d1020;color:#f0d0e0">Connection</div><div class="ct-desc">A card about <em>you</em> — write <strong>your own character’s name</strong> on it at session start. It shuffles into <em>other players’</em> decks so they can connect with your character in play.</div></div>
       <div class="ct-row"><div class="ct-chip" style="background:#92400E;color:#FEF3C7">Item</div><div class="ct-desc">Gear shuffled into your deck like any other card. Many carry <span class="kw kw-mill">Mill</span> — swap at scene start if the scene doesn’t call for it.</div></div>
     </div>
+    <div class="callout">
+      <div class="callout-label">Reading the corners of a card</div>
+      <p>Top-left badge is the card’s <strong>type</strong> (Ability, Core, Background, and so on). Top-right badge is its <strong>cost</strong>: <strong>Act</strong> spends your one action this turn, <strong>React</strong> is free and can fire any time its trigger is right, and blank means it’s a Core — always active, never played.</p>
+      <p>A gold <span class="kw kw-crit">Crit</span> marker on a Flourish line is just a reminder that option is a Crit spend (see below) — it isn’t something you can use any other way.</p>
+    </div>
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">06</div>
+    <div class="section-eyebrow">08</div>
     <h2 class="section-title">How a Card Plays</h2>
     <div class="golden-rule" style="border-color:rgba(200,169,110,0.45);padding:16px 20px">
       <div class="golden-rule-text" style="font-size:clamp(14px,3.5vw,18px)">Your Hand Shows What Your Character Wants To Do.<br>You Show The Table How.</div>
@@ -483,10 +541,15 @@
     <p>Glance at your hand. Something there is pulling at your character — an Instinct, a Bond, an ability itching to fire. Describe what they do in the scene. <em>Then</em> play the card that matches.</p>
     <p>If nothing in your hand fits what you described, the action can still happen as a basic check — just without card effects.</p>
     <p>Many cards have a <strong>Trigger</strong> line: a plain-language “when you can play this.” If what’s happening in the scene matches that moment, you’re good. When in doubt, ask the GM.</p>
+    <div class="callout">
+      <div class="callout-label">Play off-card, on purpose</div>
+      <p>A card’s type is a suggestion, not a cage. A punchy Barbarian card can trigger in the middle of a tense negotiation; a quiet Bard card can trigger mid-brawl — if the fiction supports it, the GM says yes. Especially in your first scene: if a “wrong” card fits what’s happening, play it. That’s the game working as intended, not a workaround.</p>
+    </div>
+    <p>Your hand can also set your character’s <strong>mood</strong> this scene, not just their options. A hand full of Bonds might mean they’re feeling connected and protective today; a hand thin on anything but sharp Instincts might mean they’re on edge. Let the shape of the hand color how you play the scene — even on cards you never end up playing.</p>
   </section>
 
   <section class="section">
-    <div class="section-eyebrow">07</div>
+    <div class="section-eyebrow">09</div>
     <h2 class="section-title">Building Your Deck</h2>
     <p>Character creation is play — about an hour. Gather these in order. Each step shows a sample card of that type. Backstory write-in lives on <strong>Character</strong>, <strong>Class</strong>, and <strong>Ancestry sheet cards</strong> (designed separately) — deck cards are triggers and mechanics only.</p>
     <div class="chargen-steps">
@@ -582,7 +645,7 @@
   </section>
 
   <section class="section" id="glossary">
-    <div class="section-eyebrow">08</div>
+    <div class="section-eyebrow">10</div>
     <h2 class="section-title">Impact Keyword Glossary</h2>
     <p class="gloss-intro">Tap any term to expand. These are the load-bearing words on your cards — filled color pills everywhere they appear.</p>
     <div class="gloss-list">
@@ -662,13 +725,24 @@
         </div>
       </details>
 
+      <details class="gloss-term" id="kw-contest">
+        <summary>
+          <span class="gloss-term-left"><strong style="font-size:16px;color:var(--gold-light)">Contest</strong></span>
+          <span class="gloss-arrow">▼</span>
+        </summary>
+        <div class="gloss-body">
+          <p>The scene-level container around a fight or a heated confrontation — bigger than a single Check. A <strong>Deadly Contest</strong> risks your <span class="kw kw-hd">Hit Dice</span>; a <strong>Social Contest</strong> risks your <span class="kw kw-resolve">Resolve</span> instead. Both run on the exact same Check engine underneath: build a pool, roll, clear dice.</p>
+          <span class="gloss-defer">Your GM names the Contest type when one opens. Not required reading before session one.</span>
+        </div>
+      </details>
+
       <details class="gloss-term" id="kw-threat">
         <summary>
           <span class="gloss-term-left"><span class="kw kw-threat">Threat</span></span>
           <span class="gloss-arrow">▼</span>
         </summary>
         <div class="gloss-body">
-          <p>The GM’s offensive pool — damage or pressure the scene will deal, placed visibly before you commit to acting.</p>
+          <p>The GM’s offensive pool — damage or pressure the scene will deal, placed visibly before you commit to acting. It’s built and read exactly like a check, just from the GM’s side.</p>
           <span class="gloss-defer">Taught at the table when your first Contest-style scene begins. Not required reading before session one.</span>
         </div>
       </details>
@@ -697,7 +771,7 @@
   </section>
 
   <section class="section" id="faq">
-    <div class="section-eyebrow">09</div>
+    <div class="section-eyebrow">11</div>
     <h2 class="section-title">FAQ</h2>
     <p class="gloss-intro">Questions that came up in playtests — tap to expand.</p>
     <div class="faq-list">
@@ -738,8 +812,18 @@
       </details>
 
       <details class="faq-item">
-        <summary>What are Threat and Resolve? <span class="gloss-arrow">▼</span></summary>
-        <div class="faq-body"><p>High-stakes scene tools your GM introduces when combat or tense confrontations begin. You don’t need them memorized from this page — tap them in the <a href="#glossary" style="color:var(--gold-light)">glossary</a> for a quick definition, then let the GM walk you through the first time.</p></div>
+        <summary>What’s the difference between a Check, a Contest, and Threat? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>A <strong>Check</strong> is any single roll — build a pool, clear dice, done; it’s the entire game’s core resolution and you already know how to run one. A <strong>Contest</strong> is the bigger scene around it: a Deadly Contest risks your Hit Dice, a Social Contest risks your Resolve, but both are made of ordinary Checks. <strong>Threat</strong> is just the GM’s half of a Contest — their offensive pool, revealed before you commit, built and read exactly like a Check from your side. You don’t need to memorize this; your GM names each one as it shows up. Quick definitions live in the <a href="#glossary" style="color:var(--gold-light)">glossary</a>.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does a first combat round actually look like? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>Say your party stumbles into a guard patrol. The GM reveals <span class="kw kw-threat">Threat</span> up front — the damage this fight could deal — so you can see the risk before anyone commits. You choose: fight (accepting that Threat), flee, or try to talk your way out. The GM also sets the fight’s objective pool (see the objective section above) — clearing <em>that</em> is how you win the scene, not just chipping away at guards one at a time. There’s no fixed turn order: once Threat is on the table, whoever’s action makes sense goes next, decided together as a table. Your GM sets up your <span class="kw kw-resolve">Resolve</span> before the first blow lands and walks you through the rest live — this is just the shape of it going in.</p></div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Some Instinct words feel abstract — how do I actually play one? <span class="gloss-arrow">▼</span></summary>
+        <div class="faq-body"><p>Instincts are meant to be interpreted, not defined — there’s no rulebook entry for what a single word “means.” If a word doesn’t suggest an obvious action, describe your character doing <em>something</em> in that manner: a drier, sharper Instinct might show up as a joke at the worst possible moment, or refusing to take the danger seriously out loud. Any reading the table buys is a correct one. Stuck? Ask the table what it makes them picture — someone usually has a read on it.</p></div>
       </details>
 
       <details class="faq-item">
