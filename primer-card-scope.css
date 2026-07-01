@@ -7,6 +7,17 @@
 .kw-threat{background:#991B1B;color:#FEF2F2;}
 .kw-crit{background:#B8860B;color:#FFFDE7;}
 .kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
+/* Crit Flourish colorings (locked Playtest 4 — P2): red offensive / blue defensive / green resolve.
+   Dot + colored keyword text mark the category; narrative Flourish words (Rattled, Sundered) stay
+   bold text (not pills) since only the Flourish line — not the bare word — carries the number. */
+.ci .fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.ci.fl-red .fl-dot{background:#991B1B;}
+.ci.fl-red .fl-word{color:#991B1B;}
+.ci.fl-blue .fl-dot{background:#2563EB;}
+.ci.fl-blue .fl-word{color:#2563EB;}
+.ci.fl-green .fl-dot{background:#166534;}
+.ci.fl-green .fl-word{color:#166534;}
+.ci .fl-word{font-weight:700;}
 .kw-toll{background:#B45309;color:#FFFBEB;}
 .kw-miss{background:#7F1D1D;color:#FEF2F2;}
 .kw-aid{background:#2563EB;color:#EFF6FF;}
