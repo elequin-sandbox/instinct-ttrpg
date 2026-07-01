@@ -359,8 +359,8 @@ def write_lab_data() -> None:
         "cardClass": "Rogue",
         "updated": "2026-07-03",
         "intro": (
-            "Each panel is the same Rogue card with a different Spark presentation. "
-            "Rate 1–5 stars: how well does it work at the table for you?"
+            "Same Rogue card, different Spark presentations. "
+            "Tap ♥ I like something here or leave a comment on what works for you."
         ),
         "variants": variants,
     }
