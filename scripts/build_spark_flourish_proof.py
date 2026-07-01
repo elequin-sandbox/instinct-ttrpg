@@ -1,19 +1,29 @@
 #!/usr/bin/env python3
-"""Spark / Flourish overhaul — proof-page builder (8 model cards, 2 per class).
+"""Spark / Flourish overhaul — 8 model cards (2 per June 30 playtest class).
 
-Spark lines read like PbtA / CRPG action choices: 2nd-person imperatives tied to the card,
-just enough to prompt narration. Mechanics live in the keyword chips only.
+Spark lines: chip — action — describe how. Effects: [Skill] check to [intent], no On success.
 
 Usage:
-  python3 scripts/build_spark_flourish_proof.py --write
+  python3 scripts/build_spark_flourish_proof.py              # proof HTML only
+  python3 scripts/build_spark_flourish_proof.py --write      # + patch card-data.js
+  python3 scripts/build_spark_flourish_proof.py --push       # + Baserow table 911939
 """
 from __future__ import annotations
 
 import argparse
+import json
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+from scripts.strip_origin_stems import CARD_DATA, load_cards, push_baserow  # noqa: E402
+
 PROOF_OUT = ROOT / "spark-flourish-proof.html"
+BATCH_OUT = ROOT / "scripts" / "spark_flourish_batch.json"
+DATE = "2026-07-01"
 
 B1 = '<span class="kw kw-boost">Boost 1</span>'
 HD = '<span class="kw kw-hd">Hit Die</span>'
@@ -91,15 +101,17 @@ def ability_card(
 
 CARDS: list[dict] = [
     {
+        "id": 370,
+        "key": "smite-paladin",
         "class": "Paladin",
         "name": "Smite",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "paladin",
             "Paladin",
             "Smite",
             "You make yourself the problem they can't ignore.",
             "Perform a <strong>Presence</strong> check to draw an enemy's focus onto you — "
-            "make them answer your challenge before anyone else this beat.",
+            "make them answer your challenge before they go for your allies.",
             spark_block(
                 spark_line(
                     1,
@@ -111,9 +123,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 378,
+        "key": "sacred-ground-paladin",
         "class": "Paladin",
         "name": "Condemn",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "paladin",
             "Paladin",
             "Condemn",
@@ -143,9 +157,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 342,
+        "key": "reckless-strike-barbarian",
         "class": "Barbarian",
         "name": "Reckless Strike",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "barbarian",
             "Barbarian",
             "Reckless Strike",
@@ -169,9 +185,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 343,
+        "key": "break-barbarian",
         "class": "Barbarian",
         "name": "Break",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "barbarian",
             "Barbarian",
             "Break",
@@ -189,9 +207,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 300,
+        "key": "sneak-attack-rogue",
         "class": "Rogue",
         "name": "Sneak Attack",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "rogue",
             "Rogue",
             "Sneak Attack",
@@ -215,9 +235,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 310,
+        "key": "smoke-and-mirrors-rogue",
         "class": "Rogue",
         "name": "Smoke and Mirrors",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "rogue",
             "Rogue",
             "Smoke and Mirrors",
@@ -241,9 +263,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 312,
+        "key": "eldritch-strike-warlock",
         "class": "Warlock",
         "name": "Eldritch Strike",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "warlock",
             "Warlock",
             "Eldritch Strike",
@@ -267,9 +291,11 @@ CARDS: list[dict] = [
         ),
     },
     {
+        "id": 316,
+        "key": "feed-the-fire-warlock",
         "class": "Warlock",
         "name": "Feed the Fire",
-        "html": ability_card(
+        "build": lambda: ability_card(
             "warlock",
             "Warlock",
             "Feed the Fire",
@@ -295,19 +321,62 @@ CARDS: list[dict] = [
 ]
 
 
+def strip_plain(html: str) -> str:
+    t = re.sub(r"<[^>]+>", " ", html)
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def patch_cards(cards: list[dict]) -> tuple[list[dict], list[dict]]:
+    by_key = {c.get("Card_Key"): c for c in cards}
+    missing = [spec["key"] for spec in CARDS if spec["key"] not in by_key]
+    if missing:
+        raise SystemExit(f"Card_Key(s) not found in card-data.js: {missing}")
+
+    batch: list[dict] = []
+    for spec in CARDS:
+        html = spec["build"]()
+        card = by_key[spec["key"]]
+        plain = f"> {strip_plain(html)}"
+        card["HTML"] = html
+        card["EffectText_Plain"] = plain
+        card["Last_Rework_Date"] = DATE
+        batch.append(
+            {
+                "id": spec["id"],
+                "Name": spec["name"],
+                "Card_Key": spec["key"],
+                "HTML": html,
+                "EffectText_Plain": plain,
+                "Last_Rework_Date": DATE,
+            }
+        )
+    return cards, batch
+
+
+def write_card_data(cards: list[dict]) -> None:
+    payload = json.dumps(cards, ensure_ascii=False, separators=(",", ":"))
+    CARD_DATA.write_text(
+        "// Generated by scripts/build_spark_flourish_proof.py — do not edit manually. "
+        f"Last updated: {DATE}\n"
+        f"window.CARD_DATA = {payload};\n",
+        encoding="utf-8",
+    )
+
+
 def write_proof() -> None:
     css = (ROOT / "primer-card-scope.css").read_text(encoding="utf-8")
     by_class: dict[str, list[dict]] = {}
-    for card in CARDS:
-        by_class.setdefault(card["class"], []).append(card)
+    for spec in CARDS:
+        by_class.setdefault(spec["class"], []).append(spec)
 
     sections = []
     for cls in ("Paladin", "Barbarian", "Rogue", "Warlock"):
         chunks = []
-        for card in by_class[cls]:
+        for spec in by_class[cls]:
+            html = spec["build"]()
             chunks.append(
-                f'<div class="sample"><div class="stag">{card["name"]}</div>'
-                f'<div class="cardwrap scope-ability">{card["html"]}</div></div>'
+                f'<div class="sample"><div class="stag">{spec["name"]}</div>'
+                f'<div class="cardwrap scope-ability">{html}</div></div>'
             )
         sections.append(f'<h2>{cls}</h2><div class="grid">{"".join(chunks)}</div>')
 
@@ -347,9 +416,9 @@ def write_proof() -> None:
         "margin-bottom:8px;color:#c9b896;}"
         ".cardwrap{display:flex;justify-content:center;}"
         "</style></head><body>"
-        "<h1>Spark / Flourish overhaul — model cards</h1>"
-        '<p class="sub">Spark lines: chip — action — <span style="color:#4a3d28">describe how</span>. '
-        "Testing whether the second clause prompts enough narration without crowding the card.</p>"
+        "<h1>Spark / Flourish overhaul — live model cards</h1>"
+        '<p class="sub">Eight abilities shipped to Card Studio — Effect + Spark on every card. '
+        "Effect = check to intent; Spark = chip — action — describe how.</p>"
         f"{legend}"
         + "".join(sections)
         + "</body></html>",
@@ -360,9 +429,24 @@ def write_proof() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--write", action="store_true", help="Write proof HTML")
+    parser.add_argument("--write", action="store_true", help="Patch card-data.js + proof HTML")
+    parser.add_argument("--push", action="store_true", help="Also push to Baserow")
     args = parser.parse_args()
+
     write_proof()
+
+    if args.write or args.push:
+        cards = load_cards()
+        cards, batch = patch_cards(cards)
+        write_card_data(cards)
+        BATCH_OUT.write_text(json.dumps(batch, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        print(f"Patched {len(batch)} cards → {CARD_DATA.name}, {BATCH_OUT.name}")
+        for item in batch:
+            print(f"  row {item['id']}: {item['Card_Key']}")
+
+    if args.push:
+        batch = json.loads(BATCH_OUT.read_text(encoding="utf-8"))
+        push_baserow(batch)
 
 
 if __name__ == "__main__":
