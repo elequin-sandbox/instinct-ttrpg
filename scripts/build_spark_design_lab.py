@@ -360,6 +360,7 @@ def write_lab_data() -> None:
         "updated": "2026-07-03",
         "intro": (
             "Same Rogue card, different Spark presentations. "
+            "Hover to peek closer, or click a card to open full size. "
             "Tap ♥ I like something here or leave a comment on what works for you."
         ),
         "variants": variants,
