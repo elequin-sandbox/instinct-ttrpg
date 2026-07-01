@@ -1,0 +1,27 @@
+---
+description: Instinct RPG — playtest transcript post-processing (checklist + Discord recap)
+globs: "Playtest Info & Feedback/**,*Playtest*Analysis*,*Discord*Recap*"
+alwaysApply: false
+---
+
+# Instinct RPG — Playtest analysis
+
+When Annie provides playtest transcript(s) or asks for post-playtest processing, follow
+**`skill-sources/at-playtest-analysis/SKILL.md`** end-to-end.
+
+## Two deliverables (always)
+
+1. **`[date] Playtest Analysis & Design Checklist.md`** — tiered, checkbox, strengths-first
+2. **`[date] Discord Recap Post.md`** — story episode recap **before** design takeaways; paste-ready
+
+## Non-negotiables
+
+- **Nathan's debrief statements** = scope authority; separate committed / locked / brainstorm
+- **AGENT INFERENCES — VERIFY** section in every checklist
+- **Parked ideas** ≠ Tertiary (undecided vs deliberately deferred)
+- **Primer teachability** + **on-the-fly rulings** sections required
+- Do not edit `design/` from unverified inferences — Annie confirms first (`at-session-close`)
+
+## Agent owns the run
+
+Read full transcripts, write both files, present for verification. No handoffs.

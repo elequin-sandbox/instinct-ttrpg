@@ -102,5 +102,6 @@ PRs unless Annie explicitly requests them. See that file for exclusions and safe
 - `skill-sources/` — canonical mirror of the installed skills (see its README).
 - `instinct-rpg-primer-updated.html`, `gm-guide-updated.html`, `instinct-rpg-quick-ref.html`,
   `completion-guide.html`, `*-draft.html` — game documents/deliverables.
-- `Jun 20 *` — playtest notes & analysis.
+- `Playtest Info & Feedback/` — session transcripts + analysis artifacts (see
+  `skill-sources/at-playtest-analysis` for post-processing workflow).
 - Baserow card data + viewer workflow: see the `at-baserow-push` skill.
