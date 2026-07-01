@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Spark / Flourish overhaul — 8 model cards + Condemn variant lab on proof page.
+"""Spark / Flourish — 8 model cards + Rogue variant lab (Smoke and Mirrors).
 
-Spark v4: discrete choice blocks, shape-before-verb, heavier pips, → combo chain,
-invite em-dash, cooler Spark label. Condemn gets multiple language/visual variants on proof only.
+Spark v5: exchange table (spend 6s ⇄ yield shapes), magnitude as shape pips,
+flowing combo sentences (no arrows), max 2 entries, optional invites.
 
 Usage:
-  python3 scripts/build_spark_flourish_proof.py              # proof HTML only
-  python3 scripts/build_spark_flourish_proof.py --write      # + patch card-data.js
-  python3 scripts/build_spark_flourish_proof.py --push       # + Baserow table 911939
+  python3 scripts/build_spark_flourish_proof.py --write
+  python3 scripts/build_spark_flourish_proof.py --push
 """
 from __future__ import annotations
 
@@ -15,7 +14,7 @@ import argparse
 import json
 import re
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
@@ -33,33 +32,82 @@ HD = '<span class="kw kw-hd">Hit Die</span>'
 
 Cat = Literal["off", "def", "res"]
 Clause = tuple[Cat, str, str, int | None]
-PipStyle = Literal["bar", "dot"]
+XchLayout = Literal["row", "compact", "table"]
 
 
 @dataclass
 class SparkStyle:
-    pip_style: PipStyle = "bar"
-    cool_label: bool = False
+    xch_layout: XchLayout = "row"
+    show_invites: bool = True
+    phrase_first: bool = False
 
 
 @dataclass
 class SparkLineSpec:
     cost: int
     clauses: list[Clause]
-    invite: str
-    invite2: str | None = None
-
-
-def cat_icon(cat: Cat) -> str:
-    return f'<span class="cat-icon cat-{cat}" aria-hidden="true"></span>'
+    invite: str | None = None
+    combo_join: str = "while you"
 
 
 def verb_span(cat: Cat, verb: str) -> str:
     return f'<strong class="spark-v spark-v-{cat}">{verb}</strong>'
 
 
-def mag_span(cat: Cat, n: int) -> str:
-    return f'<span class="spark-mag spark-mag-{cat}"><span class="mag-n">({n})</span></span>'
+def shape_pip(cat: Cat) -> str:
+    return f'<span class="pip-shape cat-{cat}" aria-hidden="true"></span>'
+
+
+def mag_pips(cat: Cat, n: int) -> str:
+    shapes = "".join(shape_pip(cat) for _ in range(n))
+    return f'<span class="mag-pips mag-pips-{cat}" aria-label="magnitude {n}">{shapes}</span>'
+
+
+def yield_icons(clauses: list[Clause]) -> str:
+    parts: list[str] = []
+    for cat, _verb, _tail, mag in clauses:
+        if mag is not None and mag > 0:
+            parts.append(mag_pips(cat, mag))
+        else:
+            parts.append(shape_pip(cat))
+    return "".join(parts)
+
+
+def pay_dice(cost: int) -> str:
+    dice = "".join('<span class="spark-die" aria-hidden="true">6</span>' for _ in range(cost))
+    return f'<span class="xch-pay" title="{cost} Spark">{dice}</span>'
+
+
+def exchange_row(cost: int, clauses: list[Clause], layout: XchLayout) -> str:
+    pay = pay_dice(cost)
+    yld = f'<span class="xch-yield">{yield_icons(clauses)}</span>'
+    mid = '<span class="xch-mid" aria-hidden="true">⇄</span>'
+    if layout == "compact":
+        return f'<div class="spark-xch spark-xch-compact">{pay}{mid}{yld}</div>'
+    if layout == "table":
+        return (
+            '<div class="spark-xch spark-xch-table">'
+            f'<div class="xch-th">Spend</div><div class="xch-th">Yield</div>'
+            f'<div class="xch-td">{pay}</div><div class="xch-td">{yld}</div>'
+            "</div>"
+        )
+    return f'<div class="spark-xch spark-xch-row">{pay}{mid}{yld}</div>'
+
+
+def flowing_phrase(clauses: list[Clause], combo_join: str) -> str:
+    if len(clauses) == 1:
+        cat, verb, tail, _mag = clauses[0]
+        end = "" if tail.rstrip().endswith((".", "!", "?")) else "."
+        return f"{verb_span(cat, verb)} {tail}{end}"
+
+    c0, v0, t0, _ = clauses[0]
+    t0 = re.sub(r",?\s*then\s*$", "", t0, flags=re.I).rstrip("., ")
+    c1, v1, t1, _ = clauses[1]
+    end = "" if t1.rstrip().endswith((".", "!", "?")) else "."
+    return (
+        f"{verb_span(c0, v0)} {t0}, {combo_join} "
+        f"{verb_span(c1, v1)} {t1}{end}"
+    )
 
 
 def entry_border_class(clauses: list[Clause]) -> str:
@@ -69,74 +117,30 @@ def entry_border_class(clauses: list[Clause]) -> str:
     return f"spark-entry-{clauses[0][0]}"
 
 
-def spark_pips(n: int, style: PipStyle) -> str:
-    dot_cls = " spark-pips-dots" if style == "dot" else ""
-    pips = "".join('<span class="spark-pip" aria-hidden="true"></span>' for _ in range(n))
-    return f'<span class="spark-pips{dot_cls}" title="{n} Spark">{pips}</span>'
-
-
-def invite_html(text: str, *, second: bool = False) -> str:
-    cls = "spark-invite spark-invite-2" if second else "spark-invite"
-    return (
-        f'<div class="{cls}">'
-        f'<span class="invite-lead" aria-hidden="true">—</span> {text}</div>'
-    )
-
-
-def clause_row(
-    cat: Cat,
-    verb: str,
-    tail: str,
-    mag: int | None = None,
-    *,
-    combo_first: bool = False,
-) -> str:
-    icon = cat_icon(cat)
-    v = verb_span(cat, verb)
-    clean = re.sub(r",?\s*then\s*$", "", tail, flags=re.I) if combo_first else tail
-    if mag is not None:
-        return f'<div class="spark-row">{icon}{v} {clean} {mag_span(cat, mag)}.</div>'
-    end = "" if clean.rstrip().endswith(".") else "."
-    return f'<div class="spark-row">{icon}{v} {clean}{end}</div>'
-
-
-def combo_connector() -> str:
-    return '<div class="spark-chain" aria-hidden="true"><span class="spark-link">→</span></div>'
+def invite_html(text: str | None) -> str:
+    if not text:
+        return ""
+    return f'<div class="spark-invite">{text}</div>'
 
 
 def spark_line(spec: SparkLineSpec, style: SparkStyle) -> str:
-    rows: list[str] = []
-    multi = len(spec.clauses) > 1
-    for i, (cat, verb, tail, mag) in enumerate(spec.clauses):
-        if i > 0 and multi:
-            rows.append(combo_connector())
-        rows.append(
-            clause_row(
-                cat,
-                verb,
-                tail,
-                mag,
-                combo_first=multi and i == 0,
-            )
-        )
-    if spec.invite2:
-        rows.append(invite_html(spec.invite))
-        rows.append(invite_html(spec.invite2, second=True))
+    xch = exchange_row(spec.cost, spec.clauses, style.xch_layout)
+    phrase = flowing_phrase(spec.clauses, spec.combo_join)
+    invite = invite_html(spec.invite) if style.show_invites else ""
+    if style.phrase_first:
+        inner = f'<div class="spark-phrase">{phrase}</div>{xch}{invite}'
     else:
-        rows.append(invite_html(spec.invite))
-    body = f'<div class="spark-body">{"".join(rows)}</div>'
+        inner = f'{xch}<div class="spark-phrase">{phrase}</div>{invite}'
+    body = f'<div class="spark-body">{inner}</div>'
     border = entry_border_class(spec.clauses)
-    return (
-        f'<div class="ci spark-entry {border}">'
-        f'{spark_pips(spec.cost, style.pip_style)}{body}</div>'
-    )
+    pf = " spark-entry-phrase-first" if style.phrase_first else ""
+    return f'<div class="ci spark-entry {border}{pf}">{body}</div>'
 
 
 def spark_block(style: SparkStyle, *lines: SparkLineSpec) -> str:
-    lbl_cls = " spark-lbl-cool" if style.cool_label else ""
     rendered = "".join(spark_line(line, style) for line in lines)
     return (
-        f'<div class="csec spark-sec{lbl_cls}"><div class="clbl">Spark</div>'
+        '<div class="csec spark-sec"><div class="clbl">Spark</div>'
         f'<div class="crow">{rendered}</div></div>'
     )
 
@@ -162,278 +166,177 @@ def ability_card(
     )
 
 
-SPARK_V4 = SparkStyle()
+SPARK_V5 = SparkStyle()
 
 
-def condemn_spark_canonical() -> str:
+# ── Smoke and Mirrors — Rogue variant lab (proof only) ─────────────────────
+
+SAM_EFFECT = (
+    "Perform a <strong>Deception</strong> check to plant a false impression — "
+    "a sound, silhouette, or dropped object."
+)
+
+
+def sam_spark_canonical() -> str:
     return spark_block(
-        SPARK_V4,
+        SPARK_V5,
         SparkLineSpec(
             1,
-            [("off", "Unmask", "them until the room goes quiet", 2)],
-            "The truth sits in their chest where swagger was.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Sound", "the charge for your allies", 1)],
-            "Your allies move on the conviction in your voice.",
+            [("def", "Thread", "an ally through the hesitation", 1)],
+            "They lunge at the wrong shape while your friend slips through.",
         ),
         SparkLineSpec(
             2,
-            [("off", "Shake", "their certainty, then", None), ("res", "Plant", "your feet like stone", None)],
-            "They buckle; you don't.",
+            [("off", "Feint", "one way", None), ("def", "Ghost", "a friend past them", None)],
+            "The decoy takes the hit; the real one is already behind them.",
         ),
     )
 
 
-def condemn_spark_terse() -> str:
+def sam_spark_no_invites() -> str:
     return spark_block(
-        SPARK_V4,
+        SparkStyle(show_invites=False),
         SparkLineSpec(
             1,
-            [("off", "Bare", "them before the room", 2)],
-            "Swagger drains out of them.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Rally", "your allies with one sentence", 1)],
-            "They answer your voice, not their fear.",
+            [("def", "Thread", "an ally through the hesitation", 1)],
         ),
         SparkLineSpec(
             2,
-            [("off", "Unseat", "their certainty", None), ("res", "Anchor", "yourself in place", None)],
-            "They fold. You hold.",
+            [("off", "Feint", "one way", None), ("def", "Ghost", "a friend past them", None)],
         ),
     )
 
 
-def condemn_spark_two_door() -> str:
-    """Density cap: two spark entries only."""
+def sam_spark_compact_xch() -> str:
     return spark_block(
-        SPARK_V4,
+        SparkStyle(xch_layout="compact"),
         SparkLineSpec(
             1,
-            [("off", "Unmask", "them until the room goes quiet", 2)],
-            "Swagger gives way to what they really are.",
+            [("def", "Thread", "an ally through the hesitation", 1)],
+            "They lunge at the wrong shape while your friend slips through.",
         ),
         SparkLineSpec(
             2,
-            [("off", "Shake", "their certainty", None), ("res", "Plant", "your feet like stone", None)],
-            "They buckle; you don't.",
+            [("off", "Feint", "one way", None), ("def", "Ghost", "a friend past them", None)],
+            "The decoy takes the hit; the real one is already behind them.",
         ),
     )
 
 
-def condemn_spark_split_invites() -> str:
+def sam_spark_table_xch() -> str:
     return spark_block(
-        SPARK_V4,
+        SparkStyle(xch_layout="table"),
         SparkLineSpec(
             1,
-            [("off", "Unmask", "them until the room goes quiet", 2)],
-            "The truth sits in their chest where swagger was.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Sound", "the charge for your allies", 1)],
-            "Your allies move on the conviction in your voice.",
+            [("def", "Thread", "an ally through the hesitation", 1)],
+            "They lunge at the wrong shape while your friend slips through.",
         ),
         SparkLineSpec(
             2,
-            [("off", "Shake", "their certainty, then", None), ("res", "Plant", "your feet like stone", None)],
-            "Their certainty cracks.",
-            invite2="You stand unmoved.",
+            [("off", "Feint", "one way", None), ("def", "Ghost", "a friend past them", None)],
+            "The decoy takes the hit; the real one is already behind them.",
         ),
     )
 
 
-def condemn_spark_poetic() -> str:
+def sam_spark_evocative() -> str:
+    """Read-aloud chronology: player says the line, then describes beat by beat."""
     return spark_block(
-        SPARK_V4,
+        SPARK_V5,
         SparkLineSpec(
             1,
-            [("off", "Lay bare", "what they have done", 2)],
-            "The room holds its breath on your words.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Proclaim", "who stands with you", 1)],
-            "Steel answers when your voice does.",
+            [("def", "Slip", "your ally through the gap you opened", 1)],
+            "You point; they move; the enemy still swats at your echo.",
         ),
         SparkLineSpec(
             2,
-            [("off", "Unseat", "their bravado", None), ("res", "Root", "yourself in the oath", None)],
-            "Their knees remember gravity; yours remember stone.",
+            [("off", "Sell", "the wrong threat", None), ("def", "Pass", "your partner through the opening", None)],
+            "You throw your voice left — they commit — your friend is already past.",
+            combo_join="and",
         ),
     )
 
 
-def condemn_spark_dot_pips() -> str:
+def sam_spark_yield_first() -> str:
     return spark_block(
-        SparkStyle(pip_style="dot"),
+        SparkStyle(phrase_first=True),
         SparkLineSpec(
             1,
-            [("off", "Unmask", "them until the room goes quiet", 2)],
-            "The truth sits in their chest where swagger was.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Sound", "the charge for your allies", 1)],
-            "Your allies move on the conviction in your voice.",
+            [("def", "Thread", "an ally through the hesitation", 1)],
+            "They lunge at the wrong shape while your friend slips through.",
         ),
         SparkLineSpec(
             2,
-            [("off", "Shake", "their certainty, then", None), ("res", "Plant", "your feet like stone", None)],
-            "They buckle; you don't.",
+            [("off", "Feint", "one way", None), ("def", "Ghost", "a friend past them", None)],
+            "The decoy takes the hit; the real one is already behind them.",
         ),
     )
 
 
-def condemn_spark_cool_label() -> str:
-    return spark_block(
-        SparkStyle(cool_label=True),
-        SparkLineSpec(
-            1,
-            [("off", "Unmask", "them until the room goes quiet", 2)],
-            "The truth sits in their chest where swagger was.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Sound", "the charge for your allies", 1)],
-            "Your allies move on the conviction in your voice.",
-        ),
-        SparkLineSpec(
-            2,
-            [("off", "Shake", "their certainty, then", None), ("res", "Plant", "your feet like stone", None)],
-            "They buckle; you don't.",
-        ),
-    )
-
-
-def condemn_spark_kitchen_sink() -> str:
-    """Terse copy + dot pips + cool label + split combo invites."""
-    return spark_block(
-        SparkStyle(pip_style="dot", cool_label=True),
-        SparkLineSpec(
-            1,
-            [("off", "Bare", "them before the room", 2)],
-            "Swagger drains out of them.",
-        ),
-        SparkLineSpec(
-            1,
-            [("def", "Rally", "your allies with one sentence", 1)],
-            "They answer your voice, not their fear.",
-        ),
-        SparkLineSpec(
-            2,
-            [("off", "Unseat", "their certainty", None), ("res", "Anchor", "yourself in place", None)],
-            "They fold.",
-            invite2="You hold.",
-        ),
-    )
-
-
-CONDEMN_VARIANTS: list[dict] = [
+SAM_VARIANTS: list[dict] = [
     {
         "slug": "canonical",
-        "label": "A · v4 Canonical (ships)",
-        "note": "Production — all v4 visual fixes, current copy.",
-        "flavor": "You don't curse them. You recognize what they are.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
-            "the truth lands while everyone watches."
-        ),
-        "spark": condemn_spark_canonical,
+        "label": "A · v5 Canonical (ships)",
+        "note": "Exchange row: spend 6s ⇄ yield shapes · flowing combo · one invite.",
+        "flavor": "Let them argue about what they saw.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_canonical,
     },
     {
-        "slug": "terse",
-        "label": "B · Terse language",
-        "note": "Shorter effect + punchier verbs (Bare, Rally, Unseat/Anchor).",
-        "flavor": "You name what they are, not what you wish.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak their crime aloud — "
-            "the room goes still."
-        ),
-        "spark": condemn_spark_terse,
+        "slug": "no-invites",
+        "label": "B · No invites",
+        "note": "Action lines only — no italic stems.",
+        "flavor": "Let them argue about what they saw.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_no_invites,
     },
     {
-        "slug": "two-door",
-        "label": "C · Two-door (density cap)",
-        "note": "Only two Spark entries — drops the 1-spark Rally line.",
-        "flavor": "You don't curse them. You recognize what they are.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
-            "the truth lands while everyone watches."
-        ),
-        "spark": condemn_spark_two_door,
+        "slug": "compact-xch",
+        "label": "C · Compact exchange",
+        "note": "Tighter pay⇄yield strip above the phrase.",
+        "flavor": "Let them argue about what they saw.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_compact_xch,
     },
     {
-        "slug": "split-invites",
-        "label": "D · Split combo invites",
-        "note": "Same copy; combo row gets two em-dash invites.",
-        "flavor": "You don't curse them. You recognize what they are.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
-            "the truth lands while everyone watches."
-        ),
-        "spark": condemn_spark_split_invites,
+        "slug": "table-xch",
+        "label": "D · Spend / Yield table",
+        "note": "Mini grid labels the exchange explicitly.",
+        "flavor": "Let them argue about what they saw.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_table_xch,
     },
     {
-        "slug": "poetic",
-        "label": "E · Poetic language",
-        "note": "More literary verbs + longer invites.",
-        "flavor": "Judgment is not a spell. It is a mirror held steady.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to name their sin where witnesses stand — "
-            "let the <strong>Scene</strong> remember it."
-        ),
-        "spark": condemn_spark_poetic,
+        "slug": "evocative",
+        "label": "E · Evocative chronology",
+        "note": "Verbs you say aloud, then play out left-to-right (Sell… and Pass…).",
+        "flavor": "The lie lands first. The truth walks through second.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_evocative,
     },
     {
-        "slug": "dot-pips",
-        "label": "F · Dot pips (visual)",
-        "note": "Mana-style circular cost pips instead of bars.",
-        "flavor": "You don't curse them. You recognize what they are.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
-            "the truth lands while everyone watches."
-        ),
-        "spark": condemn_spark_dot_pips,
-    },
-    {
-        "slug": "cool-label",
-        "label": "G · Cool Spark label",
-        "note": "Slate section label — less gold competition with header.",
-        "flavor": "You don't curse them. You recognize what they are.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
-            "the truth lands while everyone watches."
-        ),
-        "spark": condemn_spark_cool_label,
-    },
-    {
-        "slug": "kitchen-sink",
-        "label": "H · Kitchen sink alt",
-        "note": "Terse + dot pips + cool label + split combo invites.",
-        "flavor": "You name what they are, not what you wish.",
-        "effect": (
-            "Perform a <strong>Faith</strong> check to speak their crime aloud — "
-            "the room goes still."
-        ),
-        "spark": condemn_spark_kitchen_sink,
+        "slug": "yield-first",
+        "label": "F · Phrase-primary",
+        "note": "Same as A — exchange stays compact; phrase is the hero line.",
+        "flavor": "Let them argue about what they saw.",
+        "effect": SAM_EFFECT,
+        "spark": sam_spark_yield_first,
     },
 ]
 
 
-def build_condemn_variant(spec: dict) -> str:
+def build_sam_variant(spec: dict) -> str:
     return ability_card(
-        "paladin",
-        "Paladin",
-        "Condemn",
+        "rogue",
+        "Rogue",
+        "Smoke and Mirrors",
         spec["flavor"],
         spec["effect"],
         spec["spark"](),
     )
 
+
+# ── Production cards (8) ─────────────────────────────────────────────────
 
 CARDS: list[dict] = [
     {
@@ -449,7 +352,7 @@ CARDS: list[dict] = [
             "Perform a <strong>Presence</strong> check to draw an enemy's focus onto you — "
             "make them answer your challenge before they go for your allies.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("off", "Jolt", "a second foe's attention onto you", 1)],
@@ -463,7 +366,27 @@ CARDS: list[dict] = [
         "key": "sacred-ground-paladin",
         "class": "Paladin",
         "name": "Condemn",
-        "build": lambda: build_condemn_variant(CONDEMN_VARIANTS[0]),
+        "build": lambda: ability_card(
+            "paladin",
+            "Paladin",
+            "Condemn",
+            "You don't curse them. You recognize what they are.",
+            "Perform a <strong>Faith</strong> check to speak what they have done aloud — "
+            "the truth lands while everyone watches.",
+            spark_block(
+                SPARK_V5,
+                SparkLineSpec(
+                    1,
+                    [("off", "Unmask", "them until the room goes quiet", 2)],
+                    "Swagger drains away; everyone sees what remains.",
+                ),
+                SparkLineSpec(
+                    2,
+                    [("off", "Shake", "their certainty", None), ("res", "Plant", "your feet like stone", None)],
+                    "They buckle in the telling; you do not move.",
+                ),
+            ),
+        ),
     },
     {
         "id": 342,
@@ -478,7 +401,7 @@ CARDS: list[dict] = [
             f"Perform an <strong>Athletics</strong> check with {B1} to <strong>Strike</strong> with "
             "full force — leave your guard wide open until your next turn.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("off", "Cleave", "through what they're holding", 2)],
@@ -487,10 +410,10 @@ CARDS: list[dict] = [
                 SparkLineSpec(
                     2,
                     [
-                        ("off", "Rupture", "their defenses as you pass, then", None),
+                        ("off", "Rupture", "their defenses as you pass", None),
                         ("def", "Hurl", "an ally above them", None),
                     ],
-                    "Steel and surprise — your friend falls toward the opening.",
+                    "Steel opens the lane; your friend falls through it.",
                 ),
             ),
         ),
@@ -508,7 +431,7 @@ CARDS: list[dict] = [
             "Perform an <strong>Athletics</strong> check to smash part of the <strong>Scene</strong> — "
             "destroy a barrier or structure and open a path.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("off", "Cascade", "wreckage onto whoever's hiding", 2)],
@@ -530,7 +453,7 @@ CARDS: list[dict] = [
             "Perform a <strong>Stealth</strong> check to <strong>Strike</strong> a target "
             "unaware of you or occupied with an ally.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("off", "Pierce", "from the blind side", 1)],
@@ -538,8 +461,8 @@ CARDS: list[dict] = [
                 ),
                 SparkLineSpec(
                     2,
-                    [("off", "Drop", "them hard", 2)],
-                    "The floor meets them before their next thought.",
+                    [("off", "Drop", "them before they finish turning", 2)],
+                    "The floor meets them mid-thought.",
                 ),
             ),
         ),
@@ -549,30 +472,7 @@ CARDS: list[dict] = [
         "key": "smoke-and-mirrors-rogue",
         "class": "Rogue",
         "name": "Smoke and Mirrors",
-        "build": lambda: ability_card(
-            "rogue",
-            "Rogue",
-            "Smoke and Mirrors",
-            "Let them argue about what they saw.",
-            "Perform a <strong>Deception</strong> check to plant a false impression — "
-            "a sound, silhouette, or dropped object.",
-            spark_block(
-                SPARK_V4,
-                SparkLineSpec(
-                    1,
-                    [("def", "Thread", "an ally through the hesitation", 1)],
-                    "They lunge at the wrong shape.",
-                ),
-                SparkLineSpec(
-                    2,
-                    [
-                        ("off", "Feint", "one way, then", None),
-                        ("def", "Ghost", "a friend past them", None),
-                    ],
-                    "The wrong person moves; the right one is already gone.",
-                ),
-            ),
-        ),
+        "build": lambda: build_sam_variant(SAM_VARIANTS[0]),
     },
     {
         "id": 312,
@@ -587,7 +487,7 @@ CARDS: list[dict] = [
             f"Remove a {HD} from your pool and <strong>Strike</strong> at any range — add that die "
             "to your strike. Dark magic marks where to hit them next.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("off", "Brand", "them with a crawling sigil", 1)],
@@ -595,7 +495,7 @@ CARDS: list[dict] = [
                 ),
                 SparkLineSpec(
                     2,
-                    [("off", "Unravel", "their guard across their body", 2)],
+                    [("off", "Unravel", "their guard from throat to heel", 2)],
                     "Their stance comes apart like wet cloth.",
                 ),
             ),
@@ -614,7 +514,7 @@ CARDS: list[dict] = [
             f"Remove a {HD} from your pool. Perform a <strong>Spellcast</strong> check — add that die "
             "to the roll — to pour more power into your next Act this <strong>Scene</strong>.",
             spark_block(
-                SPARK_V4,
+                SPARK_V5,
                 SparkLineSpec(
                     1,
                     [("res", "Exhale", "the hunger for a breath", 1)],
@@ -623,10 +523,10 @@ CARDS: list[dict] = [
                 SparkLineSpec(
                     2,
                     [
-                        ("res", "Ground", "yourself in the surge, then", None),
-                        ("off", "Wither", "the nearest fool who stepped close", None),
+                        ("res", "Ground", "yourself in the surge", None),
+                        ("off", "Wither", "whoever stood too close", None),
                     ],
-                    "Power leaves your hands; someone nearby pays for it.",
+                    "You steady; the heat finds the nearest fool.",
                 ),
             ),
         ),
@@ -693,33 +593,33 @@ def write_proof() -> None:
             )
         sections.append(f'<h2>{cls}</h2><div class="proof-grid">{"".join(chunks)}</div>')
 
-    condemn_chunks = []
-    for var in CONDEMN_VARIANTS:
-        html = build_condemn_variant(var)
-        condemn_chunks.append(
+    sam_chunks = []
+    for var in SAM_VARIANTS:
+        html = build_sam_variant(var)
+        sam_chunks.append(
             f'<div class="sample variant-sample">'
             f'<div class="stag">{var["label"]}</div>'
             f'<div class="vnote">{var["note"]}</div>'
             f'<div class="primer-cards"><div class="cardwrap">{html}</div></div></div>'
         )
-    condemn_section = (
-        '<h2 id="condemn-lab">Condemn — language &amp; visual lab</h2>'
-        '<p class="lab-intro">Eight Condemn variants side-by-side. <strong>A</strong> ships to '
-        "card-data / Baserow; B–H are proof-only experiments.</p>"
-        f'<div class="proof-grid variant-grid">{"".join(condemn_chunks)}</div>'
+    sam_section = (
+        '<h2 id="rogue-lab">Smoke and Mirrors — Rogue lab</h2>'
+        '<p class="lab-intro">Six variants on one Rogue card. <strong>A</strong> ships to card-data / '
+        "Baserow. Rejected v4 experiments (arrows, split invites, dot pips, 3+ entries) removed.</p>"
+        f'<div class="proof-grid variant-grid">{"".join(sam_chunks)}</div>'
     )
 
     legend = """
 <div class="legend">
-  <span class="lg-item"><span class="cat-icon cat-off"></span> <strong class="spark-v-off">Verb</strong> — offensive</span>
-  <span class="lg-item"><span class="cat-icon cat-def"></span> <strong class="spark-v-def">Verb</strong> — empower</span>
-  <span class="lg-item"><span class="cat-icon cat-res"></span> <strong class="spark-v-res">Verb</strong> — resolve</span>
-  <span class="lg-item"><span class="spark-pip"></span> Spark cost (bar pips)</span>
-  <span class="lg-item"><span class="spark-pips spark-pips-dots"><span class="spark-pip"></span></span> dot pips (variant)</span>
+  <span class="lg-item"><span class="spark-die">6</span> Spark spent (natural 6)</span>
+  <span class="lg-item"><span class="xch-mid">⇄</span> exchange</span>
+  <span class="lg-item"><span class="mag-pips mag-pips-off"><span class="pip-shape cat-off"></span><span class="pip-shape cat-off"></span></span> yield (▲▲ = mag 2)</span>
+  <span class="lg-item"><strong class="spark-v-def">Verb</strong> read aloud, then describe</span>
 </div>
 <div class="proc box">
-  <strong>v4:</strong> shape-before-verb + <strong>(n)</strong> · tinted choice blocks · heavier bar pips ·
-  <strong>→</strong> combo chain · em-dash story invites · cooler Spark label. Combos omit <strong>(n)</strong>.
+  <strong>v5:</strong> spend <strong>6</strong>s ⇄ yield shape-pips · magnitude = repeated ▲/■/● (not numbers) ·
+  combos are one sentence (<em>Feint…, while you Ghost…</em>) · max <strong>2</strong> Spark entries ·
+  invites optional (lab variant B drops them).
 </div>
 """
 
@@ -750,21 +650,21 @@ body.proof-spark .idtag{z-index:2;}
 
     PROOF_OUT.write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
-        "<title>Spark v4 proof — 8 model cards + Condemn lab</title><style>"
+        "<title>Spark v5 proof — 8 cards + Rogue lab</title><style>"
         f"{css}"
         f"{proof_css}"
         "</style></head><body class=\"proof-spark\">"
-        "<h1>Spark v4 — model cards + Condemn lab</h1>"
-        '<p class="sub">Discrete Spark choice blocks, shape-before-verb, combo <strong>→</strong> chains, '
-        "and em-dash story invites. Scroll to <a href=\"#condemn-lab\" style=\"color:#e7d6ac\">Condemn lab</a> "
-        "for eight language/visual variants.</p>"
+        "<h1>Spark v5 — exchange table + Rogue lab</h1>"
+        '<p class="sub">Spend natural <strong>6</strong>s on the left, yield shape-pips on the right, '
+        'then read the <strong>verb line</strong> aloud. See '
+        '<a href="#rogue-lab" style="color:#e7d6ac">Smoke and Mirrors lab</a>.</p>'
         f"{legend}"
         + "".join(sections)
-        + condemn_section
+        + sam_section
         + "</body></html>",
         encoding="utf-8",
     )
-    print(f"Wrote {PROOF_OUT} ({len(CARDS)} cards + {len(CONDEMN_VARIANTS)} Condemn variants)")
+    print(f"Wrote {PROOF_OUT} ({len(CARDS)} cards + {len(SAM_VARIANTS)} SAM variants)")
 
 
 def main() -> None:
