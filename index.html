@@ -756,8 +756,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-crit{background:#B8860B;color:#FFFDE7;}
 .kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
 .kw-spark{background:linear-gradient(180deg,#f5d76e,#d4a017);color:#1a1108;border:1px solid #9a7209;box-shadow:0 0 0 1px rgba(255,253,231,.35) inset;}
-/* Crit Flourish colorings (locked Playtest 4 — P2): red offensive / blue defensive / green resolve.
-   Keep in sync with primer-card-scope.css — narrative Flourish words stay bold text, not a pill. */
+/* Crit Flourish colorings (legacy Crit-count cards) — see Spark chips below for July 2026 prototype. */
 .ci .fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
 .ci.fl-red .fl-dot{background:#991B1B;}
 .ci.fl-red .fl-word{color:#991B1B;}
@@ -766,15 +765,38 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .ci.fl-green .fl-dot{background:#166534;}
 .ci.fl-green .fl-word{color:#166534;}
 .ci .fl-word{font-weight:700;}
-/* Spark / Flourish (July 2026): cost pip + shape icon (color-blind) + colored keyword. */
-.ci.spark-line{align-items:flex-start;}
-.ci .fl-icon{display:inline-block;width:8px;height:8px;flex-shrink:0;margin-top:2px;}
-.ci.fl-red .fl-icon-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
-.ci.fl-blue .fl-icon-def{background:#2563EB;border-radius:1px;}
-.ci.fl-green .fl-icon-res{border-radius:50%;background:#166534;}
-.ci .fl-keygrp{display:inline-flex;align-items:baseline;gap:3px;flex-shrink:0;}
-.ci.spark-multi .fl-keygrp{flex-wrap:wrap;}
-.ci .fl-plus{color:#6a5b38;font-weight:700;font-size:8px;padding:0 1px;}
+/* Spark / Flourish (July 2026): spark-glyph cost + category chip + narrative gloss. */
+.ci.spark-line{align-items:flex-start;gap:4px;}
+.spark-glyphs{display:inline-flex;gap:1px;flex-shrink:0;padding-top:2px;}
+.spark-glyph{
+  display:inline-block;width:8px;height:10px;flex-shrink:0;
+  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
+  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+}
+.ci .fl-icon{display:inline-block;width:7px;height:7px;flex-shrink:0;}
+.fl-chip-red .fl-icon-off,.ci.fl-red .fl-icon-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.fl-chip-blue .fl-icon-def,.ci.fl-blue .fl-icon-def{background:#2563EB;border-radius:1px;}
+.fl-chip-green .fl-icon-res,.ci.fl-green .fl-icon-res{border-radius:50%;background:#166534;}
+.fl-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:1px 4px 1px 3px;border-radius:4px;border:1.2px solid;
+  font-size:8.5px;font-weight:800;line-height:1.3;letter-spacing:.02em;
+  font-family:system-ui,-apple-system,sans-serif;white-space:nowrap;flex-shrink:0;
+}
+.fl-chip-red{border-color:#991B1B;background:#fef2f2;color:#7f1d1d;}
+.fl-chip-blue{border-color:#2563EB;background:#eff6ff;color:#1e40af;}
+.fl-chip-green{border-color:#166534;background:#f0fdf4;color:#14532d;}
+.fl-chip .fl-term{font-weight:800;}
+.fl-chip .fl-mag{
+  display:inline-block;min-width:11px;text-align:center;
+  padding:0 3px;border-radius:3px;font-size:7.5px;font-weight:900;line-height:1.45;
+}
+.fl-chip-red .fl-mag{background:#991B1B;color:#fff;}
+.fl-chip-blue .fl-mag{background:#2563EB;color:#fff;}
+.fl-chip-green .fl-mag{background:#166534;color:#fff;}
+.ci .spark-keys{display:inline-flex;align-items:center;gap:3px;flex-wrap:wrap;flex-shrink:0;}
+.ci .fl-plus{color:#8a7350;font-weight:800;font-size:7px;line-height:1;padding:0 1px;}
+.ci.spark-line .ci-txt{flex:1;min-width:0;font-style:italic;color:#3a2c10;}
 .csec.spark-sec .clbl{color:#9a7209;letter-spacing:.08em;}
 .kw-toll{background:#B45309;color:#FFFBEB;}
 .kw-miss{background:#7F1D1D;color:#FEF2F2;}

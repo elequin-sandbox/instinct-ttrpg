@@ -3,15 +3,14 @@
 
 Locked design (Annie, July 2026):
 - Each natural 6 on the *initial* roll earns 1 Spark.
-- The 6 stays in the pool. Per Spark, choose: roll the bonus die OR spend on a Flourish.
+- The 6 stays in the pool. Per Spark: roll the bonus die OR spend on a Flourish.
 - Spend timing: right after the first handful, simultaneous with pulling 1s.
 - Fiction-fit gate is global (GM agrees keyword fits) — not repeated on cards.
-- Cost model C: separate Spark cost pip + colored keyword (with effect magnitude) + gloss.
-- Color-blind: shape icon (▲ offensive, ■ defensive, ● resolve) + hue.
+- Spark cost = glyph icon(s), not numbers. Keyword chips carry magnitude; gloss is narrative only.
+- Color-blind: shape icon (▲ offensive, ■ Boost/defensive, ● resolve) + hue.
 
 Usage:
-  python3 scripts/build_spark_flourish_proof.py
-  python3 scripts/build_spark_flourish_proof.py --write   # also refresh spark-flourish-proof.html
+  python3 scripts/build_spark_flourish_proof.py --write
 """
 from __future__ import annotations
 
@@ -20,41 +19,44 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PROOF_OUT = ROOT / "spark-flourish-proof.html"
-DATE = "2026-07-01"
 
 B1 = '<span class="kw kw-boost">Boost 1</span>'
 HD = '<span class="kw kw-hd">Hit Die</span>'
-RES = '<span class="kw kw-resolve">Resolve</span>'
 
 
 def spark_cost(n: int) -> str:
-    return f'<span class="kw kw-spark">{n}</span>'
+    glyphs = "".join('<span class="spark-glyph" aria-hidden="true"></span>' for _ in range(n))
+    return f'<span class="spark-glyphs" title="{n} Spark">{glyphs}</span>'
 
 
 def fl_icon(color: str) -> str:
     kind = {"red": "off", "blue": "def", "green": "res"}[color]
-    return f'<span class="fl-icon fl-icon-{kind}" title="{color}"></span>'
+    return f'<span class="fl-icon fl-icon-{kind}" aria-hidden="true"></span>'
 
 
-def fl_keyword(color: str, word: str) -> str:
+def fl_chip(color: str, label: str) -> str:
+    """Keyword chip: 'Rattled 2' → shape + term + magnitude badge."""
+    term, _, mag = label.rpartition(" ")
+    if not mag.isdigit():
+        term, mag = label, ""
+    mag_html = f'<span class="fl-mag">{mag}</span>' if mag else ""
     return (
-        f'<span class="fl-keygrp fl-{color}">{fl_icon(color)}'
-        f'<strong class="fl-word">{word}</strong></span>'
+        f'<span class="fl-chip fl-chip-{color}">{fl_icon(color)}'
+        f'<span class="fl-term">{term}</span>{mag_html}</span>'
     )
 
 
 def spark_line(cost: int, keywords: list[tuple[str, str]], gloss: str) -> str:
-    """One Flourish row: cost pip + one or more colored keywords + gloss."""
-    keys = []
+    chips = []
     for i, (color, word) in enumerate(keywords):
         if i:
-            keys.append('<span class="fl-plus">+</span>')
-        keys.append(fl_keyword(color, word))
-    body = "".join(keys) + f'<span class="ci-txt"> — {gloss}</span>'
+            chips.append('<span class="fl-plus">+</span>')
+        chips.append(fl_chip(color, word))
+    keys = f'<span class="spark-keys">{"".join(chips)}</span>'
     multi = " spark-multi" if len(keywords) > 1 else ""
     return (
         f'<div class="ci spark-line fl-{keywords[0][0]}{multi}">'
-        f'{spark_cost(cost)}{body}</div>'
+        f'{spark_cost(cost)}{keys}<span class="ci-txt">{gloss}</span></div>'
     )
 
 
@@ -87,7 +89,6 @@ def ability_card(
 
 
 CARDS: list[dict] = [
-    # ---- Paladin ----
     {
         "class": "Paladin",
         "name": "Smite",
@@ -102,7 +103,7 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Rattled 1")],
-                    "remove 1 die from another enemy who heard you.",
+                    "Your challenge echoes off a second foe — they falter, fixing on you instead.",
                 ),
             ),
         ),
@@ -122,22 +123,21 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Rattled 2")],
-                    "remove 2 dice from their pool.",
+                    "The word hangs in the air; their certainty splinters in front of the room.",
                 ),
                 spark_line(
                     1,
-                    [("blue", "Inspire 1")],
-                    f"each ally gains {B1} on their next <strong>Strike</strong> against them.",
+                    [("blue", "Boost 1")],
+                    "Allies hear the steel in your voice and surge into the opening.",
                 ),
                 spark_line(
                     2,
                     [("red", "Rattled 1"), ("green", "Resolve 1")],
-                    "remove 1 die from their pool; you recover 1 Resolve.",
+                    "They stagger under the weight of it — and you feel your own spine straighten.",
                 ),
             ),
         ),
     },
-    # ---- Barbarian ----
     {
         "class": "Barbarian",
         "name": "Reckless Strike",
@@ -152,12 +152,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Sundered 2")],
-                    "remove 2 dice from their pool; the blow cracks something structural.",
+                    "Something gives — bone, bark, or bravado — and they won't hold together the same.",
                 ),
                 spark_line(
                     2,
-                    [("red", "Sundered 1"), ("blue", "Rally 1")],
-                    "remove 1 die; an ally gains 1 die on their next check against them.",
+                    [("red", "Sundered 1"), ("blue", "Boost 1")],
+                    "You clip them on the way through and roar the opening for whoever follows.",
                 ),
             ),
         ),
@@ -177,12 +177,11 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Sundered 2")],
-                    "remove 2 dice from an enemy caught in the wreckage.",
+                    "The wreckage finds a body; cover becomes rubble and someone screams.",
                 ),
             ),
         ),
     },
-    # ---- Rogue ----
     {
         "class": "Rogue",
         "name": "Sneak Attack",
@@ -197,12 +196,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Stagger 1")],
-                    "remove 1 die from their pool; they never saw it coming.",
+                    "They're still turning toward the wrong threat when you land.",
                 ),
                 spark_line(
                     2,
                     [("red", "Stagger 2")],
-                    "remove 2 dice from their pool.",
+                    "Both feet leave the floor — when they find them again, the fight moved on.",
                 ),
             ),
         ),
@@ -220,18 +219,17 @@ CARDS: list[dict] = [
             spark_block(
                 spark_line(
                     1,
-                    [("blue", "Misdirect 1")],
-                    f"one ally gains {B1} on their next check while the enemy is confused.",
+                    [("blue", "Boost 1")],
+                    "Your ally moves on the hesitation you planted — a half-step ahead of the lie.",
                 ),
                 spark_line(
                     2,
-                    [("red", "Stagger 1"), ("blue", "Misdirect 1")],
-                    "remove 1 die from their pool; an ally gains Boost on the opening.",
+                    [("red", "Stagger 1"), ("blue", "Boost 1")],
+                    "They lunge at the wrong shadow; your friend is already through the gap.",
                 ),
             ),
         ),
     },
-    # ---- Warlock ----
     {
         "class": "Warlock",
         "name": "Eldritch Strike",
@@ -246,12 +244,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("red", "Hexed 1")],
-                    "remove 1 die from their pool; the mark burns visible.",
+                    "The sigil crawls under their skin — everyone sees where to strike next.",
                 ),
                 spark_line(
                     2,
                     [("red", "Hexed 2")],
-                    "remove 2 dice from their pool.",
+                    "The brand spreads; their guard looks like tissue paper from here.",
                 ),
             ),
         ),
@@ -270,12 +268,12 @@ CARDS: list[dict] = [
                 spark_line(
                     1,
                     [("green", "Resolve 1")],
-                    "recover 1 Resolve — the hunger steadies for a beat.",
+                    "The hunger clears for a breath — you remember you still have a body.",
                 ),
                 spark_line(
                     2,
                     [("green", "Resolve 1"), ("red", "Hexed 1")],
-                    "recover 1 Resolve; remove 1 die from a foe who felt the surge.",
+                    "Power ripples outward; a nearby foe buckles as the spell eats their footing.",
                 ),
             ),
         ),
@@ -297,24 +295,24 @@ def write_proof() -> None:
                 f'<div class="sample"><div class="stag">{card["name"]}</div>'
                 f'<div class="cardwrap scope-ability">{card["html"]}</div></div>'
             )
-        sections.append(f"<h2>{cls}</h2><div class=\"grid\">{''.join(chunks)}</div>")
+        sections.append(f'<h2>{cls}</h2><div class="grid">{"".join(chunks)}</div>')
 
     legend = """
 <div class="legend">
-  <span class="lg-item"><span class="lg-shape lg-off"></span> ▲ Offensive — remove dice from the pool</span>
-  <span class="lg-item"><span class="lg-shape lg-def"></span> ■ Defensive — help allies</span>
-  <span class="lg-item"><span class="lg-shape lg-res"></span> ● Resolve — heal / recover Resolve or Hit Die</span>
-  <span class="lg-item"><span class="kw kw-spark">1</span> Spark cost — spend instead of rolling that bonus die</span>
+  <span class="lg-item"><span class="lg-shape lg-off"></span> ▲ Offensive — Sunder, Rattle, Stagger…</span>
+  <span class="lg-item"><span class="lg-shape lg-def"></span> ■ Boost — extra die to any player (self included)</span>
+  <span class="lg-item"><span class="lg-shape lg-res"></span> ● Resolve — recover Resolve / steadiness</span>
+  <span class="lg-item"><span class="spark-glyphs"><span class="spark-glyph"></span></span> Spark — spend instead of rolling that bonus die</span>
 </div>
 <div class="proc box">
-  <strong>Procedure (locked):</strong> Roll → pull 1s → for each initial <strong>6</strong>, earn 1 Spark
-  (the 6 stays in your pool). Per Spark: <em>roll the bonus die</em> OR <em>spend on a Flourish</em> below
-  if the bold keyword fits the fiction (GM agrees). Spend before any bonus dice are rolled.
+  <strong>On-card rule:</strong> chips name the flourish; italic gloss is how <em>you</em> describe it landing.
+  Magnitude is global — <strong>Rattled 2</strong> means what Rattling means at the table. GM only judges
+  whether the keyword fits the objective (not repeated per card).
 </div>
 """
 
     PROOF_OUT.write_text(
-        "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         "<title>Spark / Flourish proof — 8 model cards</title><style>"
         f"{css}"
         ".primer-cards .card{width:2.5in;height:3.5in;}"
@@ -337,9 +335,8 @@ def write_proof() -> None:
         ".cardwrap{display:flex;justify-content:center;}"
         "</style></head><body>"
         "<h1>Spark / Flourish overhaul — model cards</h1>"
-        "<p class=\"sub\">Eight abilities (2× Paladin, Barbarian, Rogue, Warlock) for the June 30 playtest "
-        "classes. Spark = earned per initial 6; Flourish = guaranteed utility you buy with Spark instead "
-        "of rolling louder.</p>"
+        '<p class="sub">Eight abilities for the June 30 playtest classes. Spark glyphs = cost; '
+        "colored chips = guaranteed flourish; italic line = your narration hook.</p>"
         f"{legend}"
         + "".join(sections)
         + "</body></html>",
@@ -350,7 +347,7 @@ def write_proof() -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--write", action="store_true", help="Write proof HTML (default)")
+    parser.add_argument("--write", action="store_true", help="Write proof HTML")
     args = parser.parse_args()
     write_proof()
 
