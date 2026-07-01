@@ -17,8 +17,8 @@
 .ci.fl-green .fl-dot{background:#166534;}
 .ci.fl-green .fl-word{color:#166534;}
 .ci .fl-word{font-weight:700;}
-/* Spark / Flourish v5 (July 2026): exchange table (spend 6 ⇄ yield shapes), flowing combos.
-   Magnitude = repeated ▲/■/● pip-shapes (not parenthetical numbers). Max 2 entries per card. */
+/* Spark / Flourish v5: exchange (pay icon ⇄ yield shapes), flowing combos.
+   Pay icons = Spark currency / bonus-roll choice — NOT the natural 6 face. */
 .ci.spark-entry{
   padding:5px 6px 5px 8px;margin:0;
   border-radius:4px;
@@ -50,6 +50,34 @@
 .xch-pay{display:inline-flex;gap:2px;align-items:center;}
 .xch-yield{display:inline-flex;gap:3px;align-items:center;}
 .xch-mid{font-size:8px;color:#9a7209;font-weight:800;line-height:1;}
+.pay-spark{
+  display:inline-block;width:9px;height:11px;flex-shrink:0;
+  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
+  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+}
+.pay-bonus{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:12px;border-radius:2px;box-sizing:border-box;
+  border:1.5px solid #7a5a08;background:#faf3dc;color:#5c4008;
+}
+.pay-plus{font-size:9px;font-weight:900;line-height:1;font-family:system-ui,sans-serif;}
+.pay-hollow{
+  display:inline-block;width:11px;height:11px;border-radius:2px;box-sizing:border-box;
+  border:1.5px dashed #9a7209;background:rgba(250,243,220,.45);position:relative;
+}
+.pay-hollow::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:3px;height:3px;border-radius:50%;background:#9a7209;
+}
+.pay-bolt{
+  display:inline-block;width:7px;height:11px;flex-shrink:0;background:#c89010;
+  clip-path:polygon(45% 0%,62% 36%,100% 40%,54% 56%,72% 100%,40% 60%,0% 56%,44% 38%);
+}
+.pay-bar{
+  display:inline-block;width:4px;height:12px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(180deg,#e0a820,#8a6508);
+  box-shadow:0 0 0 1px rgba(106,72,6,.35);
+}
 .spark-die{
   display:inline-flex;align-items:center;justify-content:center;
   width:11px;height:11px;font-size:7px;font-weight:900;line-height:1;
