@@ -146,6 +146,23 @@ resolution.
 bonus option listed on an ability card; you **spend** earned Crits to take Flourishes after the roll
 resolves. Card sections may label the spend block **Crit** or **Flourish** — same mechanic.
 
+### Flourish v6 — spend choice + global keywords (July 2026 prototype — Nathan)
+
+Playtest direction after Discord thread + community poll: before rolling each bonus die from a **6**,
+choose **Explode** (roll the bonus die) or **Flourish** (spend that Crit on one printed line on the
+played card for a **guaranteed** category effect — no extra roll, no Toll risk on that die).
+
+**Global category keywords** (shape icon + word — not card-specific jargon):
+- 🔺 **Advance** — progress the objective / remove dice from the opposing pool
+- 🟦 **Defend** — protect an ally / shed threat
+- 🟢 **Restore** — recover Resolve or hope
+
+**Ability card body (v6 content):** the main text is **attempt-only** — what you try to do, not a
+guaranteed on-success outcome. In Deadly Contests the attempt still feeds the normal Offense/Defense
+roll. Flourish lines are **mechanical only** (cost + shapes + keyword); fiction is how you describe
+the attempt and justify the spend. GM agrees Flourish fits the scene (same social contract as Aid /
+Instinct picks). Full spec → `design/spark-flourish-v6.md`.
+
 ### 🔒 Crit Flourish — self-adjudicated colorings (locked Playtest 4 — P2)
 
 Nathan's locked direction for crits: **story punctuation, not a rules tree.** No GM inventing an

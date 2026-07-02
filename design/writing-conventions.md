@@ -88,6 +88,15 @@ offensive / blue defensive / green resolve — `card-anatomy.md`). One keyword +
 combined spends into separate lines (§1 below). No GM-adjudicated magnitude language ("some," "a
 lot") — the number on the card is the whole effect. Full mechanic → `core-rules.md` §5.
 
+🔒 **Flourish v6 content (July 2026 prototype — Nathan):** supersedes P2 *wording on new Ability
+cards* — attempt paragraph only (no Effect label, no on-success clause); Flourish box uses **global
+keywords** Advance / Defend / Restore + shape icons, not card-specific mechanical tags. See
+`design/spark-flourish-v6.md`. P2 colored-keyword lines remain on cards not yet migrated.
+
+**Ability attempt setup (v6):** *Perform a **[Skill]** check to [try X]* — describes the **attempt**,
+never a guaranteed outcome. In combat the attempt feeds the normal Offense/Defense roll; out of
+combat the GM frames a Contest. No stacked forks in the base paragraph.
+
 **React + Snap Check cards** (high-variance Reactions — see `core-rules.md` §10): **Flavor** ·
 **Setup** (everything *before* the Snap Check bands — describes the **attempt**, never a guaranteed
 outcome; ends with *make a* **Snap Check***) · **Snap Check** section (card-printed bands or face

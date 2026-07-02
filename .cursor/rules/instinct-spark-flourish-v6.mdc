@@ -1,0 +1,50 @@
+---
+description: Flourish v6 card content — attempt-only body, minimal mechanical Flourish box (July 2026 poll winner). Use when designing or reworking Ability cards per Nathan's Spark/Flourish direction.
+globs:
+  - scripts/build_flourish*.py
+  - scripts/build_spark*.py
+  - spark-*.html
+  - flourish-*.html
+  - design/spark-flourish-v6.md
+  - design/core-rules.md
+  - design/card-anatomy.md
+  - design/writing-conventions.md
+---
+
+# Instinct RPG — Flourish v6 content (attempt + minimal Flourish)
+
+**Doctrine:** `design/spark-flourish-v6.md` · `design/core-rules.md` §5 · `design/card-anatomy.md` §4
+
+**Proof:** [flourish-v6-sample-proof.html](https://elequin-sandbox.github.io/instinct-ttrpg/flourish-v6-sample-proof.html)
+**Builder:** `scripts/build_flourish_v6_samples.py`
+
+---
+
+## Locked content pattern (poll winner — LEFT card)
+
+1. **No flavor line** under the title (unless explicitly A/B testing).
+2. **No Effect label** — one attempt paragraph only: *Perform a **[Skill]** check to…*
+3. **No guaranteed outcomes** in the attempt (“On success…” is retired for Ability pool cards).
+4. **Flourish box** (beige, dotted): max 2 lines; each line = cost + category shape(s) + global keyword only:
+   - 🔺 **Advance** · 🟦 **Defend** · 🟢 **Restore**
+   - Combos: `Defend + Advance` with both shapes before the text.
+5. **Do not** add per-line narrative gloss under Flourish keywords on v6 samples.
+
+**Chrome unchanged:** header caps, idtag, tier, fonts, class colors — content pass only unless Annie asks.
+
+---
+
+## Workflow
+
+1. **Render before committing** — `python3 scripts/build_flourish_v6_samples.py --write`; link proof URL.
+2. **Smoke and Mirrors** is the reference card — compare variants on proof page if copy forks exist.
+3. **Do not push Baserow** until Nathan approves the content pass (prototype HTML only).
+4. **Spark Lab** remains for layout/spend-icon experiments; v6 content can ship on older layouts later.
+
+---
+
+## Anti-patterns (retired on this track)
+
+- Crit-count lines with class-owned condition words + printed numbers (July 1 Flourish pass — superseded for new design)
+- Spark invite boxes with full-sentence fiction under every option (poll: too heavy)
+- Card-specific mechanical tags (Protect 1, Stagger 1) — use global Advance/Defend/Restore + shapes

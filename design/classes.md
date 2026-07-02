@@ -116,6 +116,7 @@ a design problem; retire it from one class or build a distinct parallel.
 | **Warlock** | Party-gift card not yet designed. |
 | **Ranger / all** | Marked expansion to at least 3 classes total. |
 | **All classes** | 🔒 **Playtest 4 card audit (P4)** — strip legacy unit-linked condition complexity from active pool cards (PbtA-style: one clear effect + optional Flourish band, not stacked forks); replace GM-tracked per-unit conditions with the Crit Flourish system (`core-rules.md` §5) wherever it cleanly applies. ✅ **Model cards built (July 1 2026):** pared **Smite** (Paladin) / **Reckless Strike** (Barbarian) + 6 more — Paladin (Divine Challenge, Condemn, Lay on Hands) and Barbarian (Break, Sundering Blow, Endure). Proof: `flourish-cards-proof.html`; builder: `scripts/build_flourish_cards.py`. Remaining ~12+ of the "top ~20 active abilities first" scope still on the pre-Flourish narrative-crit style — continue this pass next session. |
+| **Rogue · Fighter · Bard** | 🔒 **Flourish v6 content prototype (July 2026)** — attempt-only Ability bodies + minimal mechanical Flourish box (global **Advance** / **Defend** / **Restore**). 12 sample cards: `flourish-v6-sample-proof.html`. Tactician classes get more cross-category Flourish combos per Discord direction. |
 
 ---
 

@@ -223,6 +223,13 @@ chip, no color. *(Bolstered retired → Boost; any old "mechanical" reading of t
 **Ability (Act / React / Core)** — class-deck cards. Header = class color + name + type badge; body =
 labeled zones; cost pip in footer. Full design system in `at-card-renderer` + `at-design-session`.
 
+**Ability v6 content** *(prototype — `design/spark-flourish-v6.md`, proof `flourish-v6-sample-proof.html`)*:
+- **Attempt only** — one paragraph, no Effect label, no “On success…” guarantee; ends with the check
+  or table verb describing what you *try*.
+- **Flourish** — beige dotted box, max 2 lines; cost + category shape(s) + global keyword
+  (**Advance** / **Defend** / **Restore**) only — no per-line narrative gloss on poll-winner layout.
+- **No flavor line** on v6 samples (optional A/B later). Card chrome (header, idtag, tier) unchanged.
+
 **React + Snap Check** *(prototype anatomy — see `snap-check-react-proof.html`)*:
 - **Flavor** · **Effect** setup (attempt language only — what you *try* to do; ends with **Snap Check**)
 - **Snap Check** label + outcome block — violet band pills (`1–2`, `1–5`, etc.) for threshold/step
