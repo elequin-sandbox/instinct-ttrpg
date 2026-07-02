@@ -145,6 +145,11 @@
   background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
   font-family:system-ui,-apple-system,sans-serif;
 }
+.spark-kw{font-size:9.5px;font-weight:800;font-family:system-ui,-apple-system,sans-serif;line-height:1;}
+.spark-kw-off{color:#991B1B;}
+.spark-kw-def{color:#2563EB;}
+.spark-kw-boost{color:#0d9488;}
+.spark-kw-res{color:#166534;}
 .spark-verb-label{
   font-size:9.5px;font-weight:800;color:#1a1008;
   font-family:system-ui,-apple-system,sans-serif;
@@ -193,6 +198,7 @@
 .yield-tri.cat-off{border-bottom:8px solid #991B1B;}
 .yield-sq{display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;}
 .yield-sq.cat-def{background:#2563EB;}
+.yield-sq.cat-boost{background:#0d9488;}
 .yield-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .yield-dot.cat-res{background:#166534;}
 .spark-flow-verb{
