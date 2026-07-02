@@ -19,6 +19,7 @@ current truth; never answer from memory or from old HTML/notes. They are cheap t
 | **`classes.md`** | Any class work — identity, term/mechanic ownership, what's locked, what's open (Paladin Oath/Charge, Cleric/Bard post-Bolstered, etc.). |
 | **`paladin-oath-charge.md`** | Paladin Oath pick + Scene **Vow** mechanic — draft/prototype detail. |
 | **`gm-guidance.md`** | GM-facing procedures/scripts that put the mechanics into practice — objective telegraphing, encounter design checklist, scene 1 script. Mechanic truth stays in `core-rules.md`; this file is the script layer. |
+| **`spark-flourish-v6.md`** | July 2026 Flourish v6 prototype — attempt-only Ability bodies, minimal mechanical Flourish box, global Advance/Defend/Restore keywords. |
 | **`../card-inventory.md`** | What cards exist and what's pushed to Baserow (live production tally). |
 
 ## What is NOT doctrine

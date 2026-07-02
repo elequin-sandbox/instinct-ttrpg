@@ -188,6 +188,10 @@ When a new card is designed and approved:
 
 ## Changelog
 
+- [July 1 2026] — **Flourish v6 content prototype.** Attempt-only Ability bodies + minimal mechanical
+  Flourish box (poll-winner layout: no flavor, no Effect label, global Advance/Defend/Restore keywords).
+  12 sample cards (4 Rogue, 4 Fighter, 4 Bard) + Smoke and Mirrors A/B/C compare on proof page.
+  Doctrine: `design/spark-flourish-v6.md`. Proof: `flourish-v6-sample-proof.html`. **Not pushed to Baserow** — content prototype only.
 - [July 1 2026] — **Playtest 4 Phase 2B — Crit Flourish card rework (first pass).** Rewrote the model
   cards named in `classes.md` §4 ("pared Smite / Strike") plus 6 more to the locked Crit Flourish
   pattern (`core-rules.md` §5 / `card-anatomy.md` §4 / `writing-conventions.md` §3): bold Flourish
