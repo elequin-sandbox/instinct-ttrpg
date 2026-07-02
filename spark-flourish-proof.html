@@ -1,0 +1,535 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Spark v5 proof — pay icons + heritage</title><style>/* ===== INSTINCT RPG CANONICAL CARD SYSTEM (parallelism pass, June 2026) ===== */
+/* === Instinct RPG canonical keyword + chip styles (single source of color truth) === */
+.kw{display:inline-block;padding:0 5px;border-radius:3px;font-size:10px;font-weight:700;vertical-align:middle;line-height:1.6;font-style:normal;font-family:system-ui,-apple-system,sans-serif;}
+.kw-boost{background:#0F766E;color:#CCFBF1;}
+.kw-resolve{background:#166534;color:#F0FDF4;}
+.kw-hd{background:#991B1B;color:#FEF2F2;}
+.kw-threat{background:#991B1B;color:#FEF2F2;}
+.kw-crit{background:#B8860B;color:#FFFDE7;}
+.kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
+.kw-spark{background:linear-gradient(180deg,#f5d76e,#d4a017);color:#1a1108;border:1px solid #9a7209;box-shadow:0 0 0 1px rgba(255,253,231,.35) inset;}
+/* Crit Flourish colorings (legacy Crit-count cards) — see Spark chips below for July 2026 prototype. */
+.ci .fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+.ci.fl-red .fl-dot{background:#991B1B;}
+.ci.fl-red .fl-word{color:#991B1B;}
+.ci.fl-blue .fl-dot{background:#2563EB;}
+.ci.fl-blue .fl-word{color:#2563EB;}
+.ci.fl-green .fl-dot{background:#166534;}
+.ci.fl-green .fl-word{color:#166534;}
+.ci .fl-word{font-weight:700;}
+/* Spark / Flourish v5: exchange (pay icon ⇄ yield shapes), flowing combos.
+   Pay icons = Spark currency / bonus-roll choice — NOT the natural 6 face. */
+.ci.spark-entry{
+  padding:5px 6px 5px 8px;margin:0;
+  border-radius:4px;
+  border:1px solid rgba(90,74,50,.14);
+  border-left-width:3px;
+  background:rgba(0,0,0,.02);
+}
+.spark-entry-off{border-left-color:#991B1B;background:rgba(153,27,27,.04);}
+.spark-entry-def{border-left-color:#2563EB;background:rgba(37,99,235,.05);}
+.spark-entry-res{border-left-color:#166534;background:rgba(22,101,52,.05);}
+.spark-entry-mix{border-left-color:#9a7209;background:rgba(154,114,9,.05);}
+.spark-body{flex:1;min-width:0;}
+.spark-xch{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:0;margin-bottom:2px;
+  border-radius:0;
+  background:transparent;
+  border:none;
+}
+.spark-xch-row{flex-wrap:wrap;}
+.spark-xch-compact{padding:1px 4px;gap:3px;}
+.spark-xch-table{
+  display:grid;grid-template-columns:auto auto;gap:2px 6px;
+  padding:3px 5px;font-size:7px;text-transform:uppercase;letter-spacing:.06em;
+  color:#7a6540;
+}
+.spark-xch-table .xch-th{font-weight:800;color:#5c4a32;}
+.spark-xch-table .xch-td{display:flex;align-items:center;gap:2px;}
+.xch-pay{display:inline-flex;gap:2px;align-items:center;}
+.xch-yield{display:inline-flex;gap:3px;align-items:center;}
+.xch-mid{font-size:8px;color:#9a7209;font-weight:800;line-height:1;}
+.pay-spark{
+  display:inline-block;width:9px;height:11px;flex-shrink:0;
+  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
+  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+}
+.pay-bonus{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:12px;border-radius:2px;box-sizing:border-box;
+  border:1.5px solid #7a5a08;background:#faf3dc;color:#5c4008;
+}
+.pay-plus{font-size:9px;font-weight:900;line-height:1;font-family:system-ui,sans-serif;}
+.pay-hollow{
+  display:inline-block;width:11px;height:11px;border-radius:2px;box-sizing:border-box;
+  border:1.5px dashed #9a7209;background:rgba(250,243,220,.45);position:relative;
+}
+.pay-hollow::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:3px;height:3px;border-radius:50%;background:#9a7209;
+}
+.pay-bolt{
+  display:inline-block;width:7px;height:11px;flex-shrink:0;background:#c89010;
+  clip-path:polygon(45% 0%,62% 36%,100% 40%,54% 56%,72% 100%,40% 60%,0% 56%,44% 38%);
+}
+.pay-bar{
+  display:inline-block;width:4px;height:12px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(180deg,#e0a820,#8a6508);
+  box-shadow:0 0 0 1px rgba(106,72,6,.35);
+}
+.spark-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:11px;height:11px;font-size:7px;font-weight:900;line-height:1;
+  border-radius:2px;
+  background:linear-gradient(180deg,#f5d76e,#c89010);
+  border:1px solid #7a5a08;color:#3d2806;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.mag-pips{display:inline-flex;gap:2px;align-items:center;}
+.pip-shape{display:inline-block;width:8px;height:8px;flex-shrink:0;}
+.pip-shape.cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.pip-shape.cat-def{background:#2563EB;border-radius:1px;}
+.pip-shape.cat-res{border-radius:50%;background:#166534;}
+.spark-phrase{font-size:9.5px;line-height:1.4;color:#1a1008;}
+.spark-v{font-weight:800;}
+.spark-v-off{color:#991B1B;}
+.spark-v-def{color:#2563EB;}
+.spark-v-res{color:#166534;}
+.spark-invite{
+  font-size:7.75px;line-height:1.38;font-style:italic;color:#5a4a32;
+  margin-top:3px;
+}
+.csec.spark-sec .clbl{color:#5c4a32;letter-spacing:.1em;}
+.csec.spark-sec .crow{gap:7px;flex-direction:column;}
+/* phrase-first lab: verb line leads, exchange chip trails inline */
+.spark-entry-phrase-first .spark-body{display:block;}
+.spark-entry-phrase-first .spark-phrase{display:inline;font-size:9.5px;line-height:1.4;}
+.spark-entry-phrase-first .spark-xch{display:inline-flex;margin-left:5px;vertical-align:middle;}
+.spark-entry-phrase-first .spark-invite{display:block;margin-top:3px;}
+/* Inverted verb-first + invite box — ships on Smoke and Mirrors */
+.spark-entry-inverted{
+  padding:4px 5px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+.spark-verb-row{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:4px;
+}
+.spark-entry-inverted .spark-cost-dies{display:inline-flex;gap:2px;align-items:center;}
+.spark-entry-inverted .spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-verb-label{
+  font-size:9.5px;font-weight:800;color:#1a1008;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-combo-plus{font-size:9px;font-weight:800;color:#6a5b48;line-height:1;}
+.spark-invite-box{
+  border:1.5px solid rgba(91,127,212,.45);border-radius:4px;
+  padding:4px 6px;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.25px;line-height:1.32;color:#1a1008;background:rgba(255,255,255,.5);
+}
+/* Column flow — ships July 2026: key column | divider | sentence tail */
+.spark-entry-column-flow{
+  padding:5px 6px 6px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+.spark-flow-grid{
+  display:grid;
+  grid-template-columns:minmax(56px,max-content) 1px 1fr;
+  column-gap:8px;row-gap:6px;align-items:center;
+}
+.spark-flow-vrule{
+  grid-column:2;grid-row:1/-1;width:1px;min-height:100%;
+  background:rgba(91,127,212,.42);justify-self:center;
+}
+.spark-flow-cost{
+  grid-column:1;justify-self:end;align-self:start;
+  padding-bottom:8px;margin-bottom:2px;
+}
+.spark-flow-pad{grid-column:3;min-height:1px;}
+.spark-cost-dies{display:inline-flex;gap:3px;align-items:center;}
+.spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-flow-lemma{
+  grid-column:1;justify-self:end;
+  display:flex;flex-direction:row;align-items:center;gap:5px;
+}
+.yield-tri{
+  display:inline-block;width:0;height:0;border-left:5px solid transparent;
+  border-right:5px solid transparent;flex-shrink:0;
+}
+.yield-tri.cat-off{border-bottom:8px solid #991B1B;}
+.yield-sq{display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.yield-sq.cat-def{background:#2563EB;}
+.yield-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.yield-dot.cat-res{background:#166534;}
+.spark-flow-verb{
+  font-size:9.5px;font-weight:800;line-height:1.15;
+  font-family:system-ui,-apple-system,sans-serif;text-align:right;
+  white-space:nowrap;
+}
+.spark-flow-verb.spark-v-def{color:#2563EB;}
+.spark-flow-verb.spark-v-off{color:#991B1B;}
+.spark-flow-verb.spark-v-res{color:#166534;}
+.spark-flow-tail{
+  grid-column:3;min-width:0;font-size:9.5px;line-height:1.34;font-weight:500;
+  color:#1a1008;align-self:center;
+}
+/* legacy cat-icon (crit flourish) */
+.cat-icon{display:inline-block;width:7px;height:7px;margin-right:3px;vertical-align:baseline;position:relative;top:0;}
+.cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.cat-def{background:#2563EB;border-radius:1px;}
+.cat-res{border-radius:50%;background:#166534;}
+/* Legacy Crit-count + chip styles (older flourish pass cards) */
+.ci.spark-line{align-items:flex-start;gap:4px;}
+.ci .fl-icon{display:inline-block;width:7px;height:7px;flex-shrink:0;}
+.fl-chip-red .fl-icon-off,.ci.fl-red .fl-icon-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.fl-chip-blue .fl-icon-def,.ci.fl-blue .fl-icon-def{background:#2563EB;border-radius:1px;}
+.fl-chip-green .fl-icon-res,.ci.fl-green .fl-icon-res{border-radius:50%;background:#166534;}
+.fl-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:1px 4px 1px 3px;border-radius:4px;border:1.2px solid;
+  font-size:8.5px;font-weight:800;line-height:1.3;letter-spacing:.02em;
+  font-family:system-ui,-apple-system,sans-serif;white-space:nowrap;flex-shrink:0;
+}
+.fl-chip-red{border-color:#991B1B;background:#fef2f2;color:#7f1d1d;}
+.fl-chip-blue{border-color:#2563EB;background:#eff6ff;color:#1e40af;}
+.fl-chip-green{border-color:#166534;background:#f0fdf4;color:#14532d;}
+.fl-chip .fl-term{font-weight:800;}
+.fl-chip .fl-mag{
+  display:inline-block;min-width:11px;text-align:center;
+  padding:0 3px;border-radius:3px;font-size:7.5px;font-weight:900;line-height:1.45;
+}
+.fl-chip-red .fl-mag{background:#991B1B;color:#fff;}
+.fl-chip-blue .fl-mag{background:#2563EB;color:#fff;}
+.fl-chip-green .fl-mag{background:#166534;color:#fff;}
+.ci .spark-keys{display:inline-flex;align-items:center;gap:3px;flex-wrap:wrap;flex-shrink:0;}
+.ci .fl-plus{color:#8a7350;font-weight:800;font-size:7px;line-height:1;padding:0 1px;}
+.ci.spark-line .ci-txt{flex:1;min-width:0;font-style:normal;color:#1a1008;font-weight:600;}
+.ci.spark-line .spark-how{font-weight:500;color:#4a3d28;}
+.kw-toll{background:#B45309;color:#FFFBEB;}
+.kw-miss{background:#7F1D1D;color:#FEF2F2;}
+.kw-aid{background:#2563EB;color:#EFF6FF;}
+.kw-mill{background:#0C4A6E;color:#BAE6FD;}
+.ix{display:inline-block;background:transparent;border:1.5px solid;border-radius:3px;padding:0 4px;font-weight:700;font-size:10px;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif;}
+.ix-instinct{border-color:#1e2540;color:#1e2540;}
+.ix-background{border-color:#0f2d45;color:#0f2d45;}
+.ix-bond{border-color:#0f2b15;color:#0f2b15;}
+.ix-flaw{border-color:#3d0a0a;color:#3d0a0a;}
+.ix-ancestry{border-color:#2a1a08;color:#2a1a08;}
+.ix-act{border-color:#1C3A5E;color:#1C3A5E;}
+.ix-react{border-color:#0C4A6E;color:#0C4A6E;}
+.ix-item{border-color:#92400E;color:#92400E;}
+.ix-barbarian{border-color:#9E2B2B;color:#9E2B2B;}
+.ix-fighter{border-color:#B45309;color:#B45309;}
+.ix-paladin{border-color:#8a6608;color:#8a6608;}
+.ix-cleric{border-color:#4d6a90;color:#4d6a90;}
+.ix-ranger{border-color:#2F6B3D;color:#2F6B3D;}
+.ix-rogue{border-color:#6C5BA8;color:#6C5BA8;}
+.ix-druid{border-color:#4d6b24;color:#4d6b24;}
+.ix-warlock{border-color:#9A2B5E;color:#9A2B5E;}
+.ix-bard{border-color:#B5388D;color:#B5388D;}
+.ix-wizard{border-color:#3C3489;color:#3C3489;}
+.ix-monk{border-color:#164E63;color:#164E63;}
+
+/* === per-accent color variables (single place to recolor a card type/class) === */
+.acc-barbarian{--a:#9E2B2B;--ad:#822323;--al:#deb7b7;--ah:#f5eaea;--at:#f1e1e1;}
+.acc-fighter{--a:#B45309;--ad:#944407;--al:#e6c5ab;--ah:#f8eee6;--at:#f4e7dd;}
+.acc-paladin{--a:#B8860B;--ad:#976e09;--al:#e7d6ac;--ah:#f8f3e7;--at:#f5eedd;}
+.acc-cleric{--a:#5E81AC;--ad:#4d6a8d;--al:#c8d4e3;--ah:#eff2f7;--at:#e8edf3;}
+.acc-ranger{--a:#2F6B3D;--ad:#275832;--al:#b8cdbd;--ah:#eaf0ec;--at:#e2eae4;}
+.acc-rogue{--a:#6C5BA8;--ad:#594b8a;--al:#cdc7e1;--ah:#f0eff6;--at:#eae8f3;}
+.acc-druid{--a:#5A7D2A;--ad:#4a6722;--al:#c7d3b7;--ah:#eef2ea;--at:#e8ede1;}
+.acc-warlock{--a:#9A2B5E;--ad:#7e234d;--al:#ddb7c8;--ah:#f5eaef;--at:#f1e1e8;}
+.acc-bard{--a:#B5388D;--ad:#942e74;--al:#e6bbd8;--ah:#f8ebf4;--at:#f5e3ef;}
+.acc-wizard{--a:#3C3489;--ad:#312b70;--al:#bdbad7;--ah:#ecebf3;--at:#e4e3ee;}
+.acc-monk{--a:#164E63;--ad:#124051;--al:#b0c3ca;--ah:#e8edef;--at:#dee6e9;}
+.acc-instinct{--a:#4453a8;--ad:#38448a;--al:#bfc5e1;--ah:#eceef6;--at:#e5e7f3;}
+.acc-background{--a:#2f6da8;--ad:#27598a;--al:#b8cde1;--ah:#eaf0f6;--at:#e2ebf3;}
+.acc-bond{--a:#2f7d4f;--ad:#276741;--al:#b8d3c3;--ah:#eaf2ed;--at:#e2ede6;}
+.acc-flaw{--a:#b3261e;--ad:#931f19;--al:#e5b5b2;--ah:#f7e9e8;--at:#f4e1e0;}
+.acc-ancestry{--a:#9a6a2e;--ad:#7e5726;--al:#ddccb8;--ah:#f5f0ea;--at:#f1eae2;}
+.acc-connection{--a:#9a3b6b;--ad:#7e3058;--al:#ddbccd;--ah:#f5ebf0;--at:#f1e4ea;}
+.acc-any{--a:#92400E;--ad:#7a3409;--al:#e6cdb5;--ah:#f5ece4;--at:#f0e4d8;}
+
+/* === Instinct RPG canonical header system (var-driven, no inline color) === */
+.card{position:relative;border-left:5px solid var(--a,transparent);display:flex;flex-direction:column;}
+.primer-cards .cardwrap .card .cbody,.primer-cards .cardwrap .card .bf-body,.primer-cards .cardwrap .card .card-body{padding-bottom:26px;}
+.primer-cards .cardwrap .card .cbody:has(.spark-sec),.primer-cards .cardwrap .card .bf-body:has(.spark-sec),.primer-cards .cardwrap .card .card-body:has(.spark-sec){padding-bottom:32px;}
+.hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah,#faf6ec);border-bottom:1px solid rgba(0,0,0,.10);}
+.hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
+.cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;white-space:nowrap;}
+.cap-neutral{border-color:#3a3320;color:#3a3320;}
+.cap-accent{border-color:var(--ad);color:var(--ad);}
+.hdr-name{font-family:'EB Garamond',Georgia,'Times New Roman',serif;font-weight:700;font-size:14px;line-height:1.08;text-align:center;padding:3px 12px;margin:6px -1px 2px;color:var(--ad);background:var(--al);border-top:2px solid var(--a);border-bottom:2px solid var(--a);clip-path:polygon(0 0,100% 0,calc(100% - 11px) 50%,100% 100%,0 100%,11px 50%);}
+.hdr-name.hdr-bar{clip-path:none;margin:4px 0 2px;padding:3px 8px;text-align:left;display:flex;align-items:center;gap:5px;min-height:22px;}
+.hdr-name.hdr-bar .hdr-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;line-height:1.08;}
+.hdr-blankname{display:flex;align-items:center;justify-content:center;min-height:24px;}
+.hdr-sub{text-align:center;font-style:italic;font-size:8.5px;color:#6a5b38;line-height:1.22;margin-top:2px;}
+.idtag{position:absolute;left:8px;bottom:7px;border:1.5px solid var(--a);color:var(--ad);background:var(--at);border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;}
+.tier-float{position:absolute;right:8px;bottom:7px;width:18px;height:18px;border:1px solid #9a9a9a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#7d7d7d;font-family:Georgia,serif;font-style:italic;background:rgba(255,255,255,.55);}
+
+/* Dual-purpose Instinct — legacy OR divider (version history) + shared fork CSS in instinct-dual-styles.css */
+.or-divider{display:flex;align-items:center;gap:5px;margin:2px 0;}
+.or-line{flex:1;height:1px;background:#c8a96e;opacity:0.35;}
+.or-lbl{font-size:7.5px;font-weight:700;color:#c8a96e;letter-spacing:1.5px;}
+.instinct-split{display:flex;align-items:stretch;gap:0;min-height:0;flex:1;}
+.instinct-col{flex:1;min-width:0;padding:0 3px;}
+.instinct-col .etxt{font-size:9px;line-height:1.38;}
+.instinct-vrule{width:1px;background:#c8a96e;opacity:0.35;flex-shrink:0;margin:0 2px;}
+
+
+.primer-cards .card{width:2.5in;height:3.5in;}
+
+#modal{position:fixed;inset:0;z-index:200;background:rgba(10,7,3,.82);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;}
+.sheet{background:#221810;border:1px solid var(--gold-d);border-radius:12px;width:min(80vw,1600px);display:flex;flex-direction:row;gap:24px;padding:24px;position:relative;align-items:flex-start;}
+.sheet-card{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.modal-card-outer{display:flex;justify-content:center;}
+.modal-card-zoomed{cursor:default;}
+.vtoggle{display:flex;align-items:center;gap:10px;color:var(--gold);font-size:12px;height:30px;flex-shrink:0;}
+.vtoggle button{background:#2a1d10;border:1px solid var(--gold-d);color:var(--gold);width:30px;height:26px;border-radius:6px;font-size:14px;}
+.vtoggle button:disabled{opacity:.3;cursor:default;}
+.vlabel{min-width:120px;max-width:280px;text-align:center;color:#cbb98e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.vnote{min-height:16px;font-size:11px;color:var(--gold-d);font-style:italic;text-align:center;line-height:1.4;}
+.sheet-side{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px;}
+@media(max-width:700px){.sheet{flex-direction:column;width:94vw;}}
+.sheet-side h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;}
+.meta{font-size:12px;color:var(--gold-d);text-transform:capitalize;}
+.meta-cls{text-transform:capitalize;}
+.sbtns{display:flex;gap:8px;flex-wrap:wrap;}
+.sbtns button{flex:1;min-width:110px;padding:8px;border-radius:7px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:12px;}
+.sbtns button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.cmts{border-top:1px solid #3a2c19;padding-top:12px;display:flex;flex-direction:column;gap:8px;}
+.cmts h3{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold-d);}
+.cmt{background:#1b130b;border-left:2px solid var(--gold-d);padding:6px 10px;border-radius:4px;font-size:13px;}
+.cmt .who{color:var(--gold);font-weight:700;font-size:12px;}
+.cmt .when{color:#6a5a3a;font-size:10px;margin-left:6px;}
+.cmtform{display:flex;flex-direction:column;gap:6px;}
+.cmtform input,.cmtform textarea,.cmtform select{background:#241a0f;border:1px solid #3a2c19;color:#f0e6cf;border-radius:6px;padding:7px 9px;font-family:inherit;font-size:13px;}
+.name-input{width:100%;}
+.cmtform textarea{resize:vertical;min-height:48px;}
+.cmtform button{align-self:flex-end;background:var(--gold);color:#1a1108;border:none;border-radius:6px;padding:6px 16px;font-weight:700;font-size:12px;}
+.cmt-meta{display:flex;align-items:center;gap:6px;margin-top:3px;}
+.cmt-del{background:none;border:none;color:#7a5a4a;font-size:12px;cursor:pointer;margin-left:auto;padding:0 4px;line-height:1;}
+.cmt-del:hover{color:#d4604a;}
+.cmt-chk{display:flex;align-items:center;gap:6px;margin-top:5px;font-size:11px;color:#9a8a5a;cursor:pointer;user-select:none;}
+.cmt-chk.on{color:#d8b84a;font-weight:700;}
+.cmt-chk input{accent-color:#c8a96e;}
+.cmtform .cmt-chk{color:#bfae86;margin-top:2px;}
+.closex{position:absolute;top:12px;right:16px;background:none;border:none;color:#cbb98e;font-size:26px;line-height:1;}
+
+.panel{padding:20px 18px;}
+.panel h2{font-family:system-ui,-apple-system,sans-serif;color:var(--gold);font-size:18px;margin-bottom:6px;}
+.panel .sub{color:var(--gold-d);font-size:13px;margin-bottom:14px;}
+.simbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px;}
+.simbar button{padding:9px 16px;border-radius:8px;border:1px solid var(--gold-d);background:#2a1d10;color:var(--gold);font-size:13px;letter-spacing:.5px;}
+.simbar button.primary{background:var(--gold);color:#1a1108;border-color:var(--gold);font-weight:700;}
+.simbar button:disabled{opacity:.35;cursor:default;}
+.simstat{color:#cbb98e;font-size:13px;}
+#simCoreArea{
+  background:linear-gradient(160deg,rgba(18,52,20,.55) 0%,rgba(10,35,12,.62) 100%);
+  border:1px solid rgba(65,112,60,.32);
+  border-radius:12px;padding:10px 16px 12px;margin-bottom:14px;
+  box-shadow:inset 0 3px 22px rgba(0,0,0,.52),inset 0 0 0 1px rgba(255,255,255,.03),0 2px 8px rgba(0,0,0,.35);
+}
+#simCoreArea .grid{margin-top:8px;}
+.sim-core-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:rgba(138,188,125,.75);text-transform:uppercase;cursor:help;}
+#simHandArea{
+  background:rgba(26,16,4,.52);
+  border:1px solid rgba(148,118,52,.22);
+  border-radius:12px;padding:16px 20px 28px;
+  box-shadow:inset 0 2px 14px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,255,255,.02);
+  overflow:visible;
+}
+.sim-hand-label{font-family:system-ui,-apple-system,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--gold-d);text-transform:uppercase;margin-bottom:12px;}
+.sim-hand-grid{display:flex;gap:10px;flex-wrap:nowrap;align-items:flex-start;}
+.sim-hand-slot{flex:0 0 130px;height:195px;position:relative;overflow:hidden;z-index:1;cursor:pointer;}
+.sim-hand-slot:hover{overflow:visible;z-index:100;}
+.sim-hand-slot .primer-cards .cardwrap{position:absolute !important;top:0;left:50%;margin-left:calc(-1.25in);width:2.5in;transform:scale(0.54);transform-origin:top center;transition:transform 0.2s ease,box-shadow 0.2s ease;}
+.sim-hand-slot:hover .primer-cards .cardwrap{transform:scale(1.0);box-shadow:0 16px 60px rgba(0,0,0,.9);}
+
+#printroot{display:none;}
+@media print{
+  body{background:#fff;}
+  header,.filters,#modal,#toast{display:none !important;}
+  .view{display:none !important;}
+  #printroot{display:block !important;}
+  .print-sheet{display:grid;grid-template-columns:repeat(3,2.5in);gap:0;justify-content:center;align-content:start;}
+  .print-sheet .primer-cards .cardwrap{cursor:default;transform:none;width:2.5in;}
+  .print-sheet .primer-cards .cardwrap .card{box-shadow:none !important;}
+  .primer-cards .cardwrap{break-inside:avoid;page-break-inside:avoid;}
+  @page{size:letter;margin:.35in;}
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#2f7d4f;color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;opacity:0;transition:opacity .2s;z-index:500;pointer-events:none;}
+#toast.show{opacity:1;}
+
+*{box-sizing:border-box;margin:0;padding:0;}.scope-ability body{background:#1e1810;font-family:system-ui,-apple-system,sans-serif;}.scope-ability .screen-header{text-align:center;padding:32px 24px 20px;}.scope-ability .page-title{font-family:system-ui,-apple-system,sans-serif;font-size:16.50px;letter-spacing:3px;text-transform:uppercase;color:#c8a96e;}.scope-ability .page-subtitle{font-size:13.20px;color:#7a6030;letter-spacing:1px;margin-top:6px;}.scope-ability 
+.primer-cards { display: flex; flex-wrap: wrap; gap: 14px; margin: 18px 0; }
+.primer-cards .cardwrap {
+  position: relative;
+  width: 2.5in;
+  height: 3.5in;
+  flex-shrink: 0;
+  transform: scale(0.58);
+  transform-origin: top left;
+  margin-bottom: -58px;
+  margin-right: -42px;
+}
+.primer-cards .cardwrap .card {
+  width: 2.5in;
+  height: 3.5in;
+  background: #f7f0e0;
+  border: 0.5px solid #c8a96e;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #241a08;
+}
+.primer-cards .cbody, .primer-cards .bf-body, .primer-cards .card-body {
+  flex: 1;
+  padding: 7px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+  line-height: 1.45;
+  overflow: hidden;
+  min-height: 0;
+}
+.primer-cards .zone-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8a6a30;
+  flex-shrink: 0;
+}
+.primer-cards .effect-text {
+  font-size: 9.5px;
+  line-height: 1.4;
+  color: #1a1008;
+  flex-shrink: 0;
+}
+.primer-cards .card-body .rule {
+  height: 0.5px;
+  background: rgba(180, 140, 60, 0.3);
+  flex-shrink: 0;
+  margin: 2px 0;
+}
+.primer-cards .flv { font-style: italic; color: #5a4520; font-size: 9.8px; line-height: 1.42; }
+.primer-cards .etxt { color: #1c1408; font-size: 9.8px; line-height: 1.42; }
+.primer-cards .elbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+.primer-cards .hr { height: 0.5px; background: #eee; margin: 2px 0; }
+.primer-cards .csec { margin-top: 4px; }
+.primer-cards .clbl { font-size: 9px; font-weight: 700; color: #16a34a; text-transform: uppercase; }
+.primer-cards .crow { display: flex; flex-direction: column; gap: 2px; }
+.primer-cards .ci {
+  display: flex;
+  gap: 5px;
+  align-items: flex-start;
+  font-size: 9.5px;
+  line-height: 1.42;
+}
+.primer-cards .ci .kw-crit,
+.primer-cards .ci .kw.kw-crit,
+.primer-cards .ci .spark-pips,
+.primer-cards .ci .tc { flex: 0 0 auto; }
+.primer-cards .ci.spark-entry .spark-body { flex: 1; min-width: 0; }
+.primer-cards .ci .ci-txt { flex: 1; min-width: 0; }
+.primer-cards .bf-trig { font-style: italic; color: #3a2c10; font-size: 10px; }
+.primer-cards .bf-eff { color: #1c1408; font-size: 10px; }
+.primer-cards .bf-choose { font-weight: 700; font-size: 9.5px; color: #5a4520; }
+.primer-cards .bf-choices { display: flex; flex-direction: column; gap: 3px; }
+.primer-cards .bf-choice { font-size: 9.5px; line-height: 1.42; }
+.primer-cards .bf-type { font-size: 7.5px; text-transform: uppercase; letter-spacing: 1px; background: #e7d9ba; border: 1px solid #c8a96e; border-radius: 3px; padding: 1px 7px; color: #6a5020; align-self: flex-start; }
+.primer-cards ul { margin: 4px 0 0 16px; padding: 0; font-size: 9.5px; }
+
+/* Side-by-side Core samples — one scaled card per .primer-cards slot */
+.primer-core-pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 18px 0;
+  align-items: flex-start;
+}
+.primer-core-pair .primer-cards { margin: 0; }
+
+body.proof-spark{background:#14100a;padding:28px 20px 48px;color:#f0e6cf;font-family:system-ui,sans-serif;}
+body.proof-spark h1{font-size:20px;letter-spacing:1px;color:#e7d6ac;margin-bottom:6px;}
+body.proof-spark h2{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#c9a24a;
+  margin:32px 0 14px;border-bottom:1px solid #3a2c19;padding-bottom:6px;}
+body.proof-spark p.sub,body.proof-spark p.lab-intro{color:#a08a5c;font-size:14px;margin-bottom:20px;max-width:52rem;line-height:1.5;}
+body.proof-spark .legend{display:flex;flex-wrap:wrap;gap:14px 20px;margin-bottom:16px;font-size:13px;color:#d8c8a0;}
+body.proof-spark .lg-item{display:flex;align-items:center;gap:6px;}
+body.proof-spark .box{background:#1b130b;border:1px solid #3a2c19;border-radius:8px;padding:12px 14px;
+  font-size:13px;line-height:1.55;color:#d8c8a0;margin-bottom:24px;max-width:52rem;}
+body.proof-spark .proof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px 24px;align-items:start;}
+body.proof-spark .variant-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr));}
+body.proof-spark .sample{display:flex;flex-direction:column;align-items:center;gap:10px;}
+body.proof-spark .variant-sample .vnote{font-size:11px;color:#8a7a5c;text-align:center;max-width:280px;line-height:1.45;}
+body.proof-spark .stag{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#c9b896;text-align:center;}
+body.proof-spark .primer-cards{margin:0;display:flex;justify-content:center;width:100%;}
+body.proof-spark .primer-cards .cardwrap{transform:none;margin-bottom:0;margin-right:0;width:auto;height:auto;}
+body.proof-spark .primer-cards .cardwrap .card{
+  width:300px;height:420px;
+  background:#f7f0e0;border:0.5px solid #c8a96e;box-shadow:6px 6px 0 #1a1a1a;
+}
+body.proof-spark .primer-cards .cbody{padding:7px 10px 5px;}
+body.proof-spark .heritage-grid .stag{font-size:10px;}
+/* Heritage-only styles (retired passes) */
+.spark-glyphs{display:inline-flex;gap:1px;flex-shrink:0;padding-top:2px;}
+.spark-glyph{
+  display:inline-block;width:8px;height:10px;flex-shrink:0;
+  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
+  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+}
+.spark-pips-heritage{display:flex;flex-direction:column;gap:3px;flex-shrink:0;padding-top:2px;}
+.spark-pip-heritage{
+  display:block;width:4px;height:11px;border-radius:1px;
+  background:linear-gradient(180deg,#e0a820,#8a6508);
+}
+.ci.spark-entry-heritage{display:flex;align-items:flex-start;gap:5px;padding:4px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);background:rgba(0,0,0,.02);}
+.spark-verb{font-size:9.5px;line-height:1.38;font-weight:600;color:#1a1008;}
+.spark-n{font-weight:800;font-size:9px;}
+.spark-n-off{color:#991B1B;}
+.spark-n-def{color:#2563EB;}
+.spark-n-res{color:#166534;}
+.spark-prompt{font-size:8px;line-height:1.38;font-style:italic;color:#5a4a32;margin-top:2px;}
+.spark-entry-heritage .spark-row{font-size:9.5px;line-height:1.38;}
+.spark-entry-heritage .spark-mag{font-size:9px;}
+.spark-chain{padding-left:10px;line-height:1;margin:2px 0;}
+.spark-link{color:#9a7209;font-size:9px;font-weight:800;}
+.spark-invite-heritage{font-size:7.75px;font-style:italic;color:#5a4a32;margin-top:2px;padding-left:6px;}
+.spark-invite-heritage .invite-lead{color:#a08a5c;font-style:normal;margin-right:2px;}
+</style></head><body class="proof-spark"><h1>Spark v5 — pay icons + heritage timeline</h1><p class="sub">Eight model cards use the <strong>spark glyph</strong> spend icon. <a href="#pay-lab" style="color:#e7d6ac">Pay icon lab</a> · <a href="#layout-lab" style="color:#e7d6ac">Layout lab</a> · <a href="#heritage" style="color:#e7d6ac">Heritage timeline</a> on Smoke and Mirrors.</p>
+<div class="legend">
+  <span class="lg-item"><span class="pay-spark"></span> Spark token (spend)</span>
+  <span class="lg-item"><span class="pay-bonus"><span class="pay-plus">+</span></span> bonus die</span>
+  <span class="lg-item"><span class="xch-mid">⇄</span> exchange</span>
+  <span class="lg-item"><span class="mag-pips mag-pips-off"><span class="pip-shape cat-off"></span><span class="pip-shape cat-off"></span></span> yield</span>
+</div>
+<div class="proc box">
+  <strong>Spend icon ideation:</strong> A natural <strong>6</strong> earns Spark but stays in your pool.
+  Spending Spark means <em>not</em> rolling the bonus die — so the left column should read as
+  <strong>Spark currency</strong> or <strong>bonus-roll choice</strong>, not a die showing 6.
+  Candidates: spark glyph · <strong>+</strong> die · hollow roll · bolt · amber bars.
+</div>
+<div class="proc box">
+  <strong>v5 (ships):</strong> spark glyph ⇄ yield shape-pips · read verb line aloud ·
+  combos one sentence (<em>Feint…, while you Ghost…</em>) · max <strong>2</strong> entries.
+</div>
+<h2>Paladin</h2><div class="proof-grid"><div class="sample"><div class="stag">Smite</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smite</div></div><div class="cbody"><div class="flv">You make yourself the problem they can't ignore.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Presence</strong> check to draw an enemy's focus onto you — make them answer your challenge before they go for your allies.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Call</span></div><div class="spark-flow-tail">another foe to answer you first</div></div></div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample"><div class="stag">Condemn</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-paladin"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Condemn</div></div><div class="cbody"><div class="flv">You don't curse them. You recognize what they are.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Faith</strong> check to speak what they have done aloud — the truth lands while everyone watches.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Name</span></div><div class="spark-flow-tail">what they are until the room goes quiet</div></div></div><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Shake</span></div><div class="spark-flow-tail">their certainty</div><div class="spark-flow-lemma"><span class="yield-dot cat-res" aria-hidden="true"></span><span class="spark-flow-verb spark-v-res">Plant</span></div><div class="spark-flow-tail">your feet like stone</div></div></div></div></div></div><div class="idtag">Paladin</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2>Barbarian</h2><div class="proof-grid"><div class="sample"><div class="stag">Reckless Strike</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Reckless Strike</div></div><div class="cbody"><div class="flv">You stop caring about what happens to you.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Athletics</strong> check with <span class="kw kw-boost">Boost 1</span> to <strong>Strike</strong> with full force — leave your guard wide open until your next turn.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Cleave</span></div><div class="spark-flow-tail">through what they're holding</div></div></div><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Rupture</span></div><div class="spark-flow-tail">their guard as you pass</div><div class="spark-flow-lemma"><span class="yield-sq cat-def" aria-hidden="true"></span><span class="spark-flow-verb spark-v-def">Hurl</span></div><div class="spark-flow-tail">an ally above them</div></div></div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample"><div class="stag">Break</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-barbarian"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Break</div></div><div class="cbody"><div class="flv">There is no obstacle. There is only physics.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform an <strong>Athletics</strong> check to smash part of the <strong>Scene</strong> — destroy a barrier or structure and open a path.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Cascade</span></div><div class="spark-flow-tail">wreckage onto whoever's hiding</div></div></div></div></div></div><div class="idtag">Barbarian</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2>Rogue</h2><div class="proof-grid"><div class="sample"><div class="stag">Sneak Attack</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Sneak Attack</div></div><div class="cbody"><div class="flv">You weren't watching the right shadow.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Stealth</strong> check to <strong>Strike</strong> a target unaware of you or occupied with an ally.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Pierce</span></div><div class="spark-flow-tail">from the blind side</div></div></div><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Drop</span></div><div class="spark-flow-tail">them before they finish turning</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample"><div class="stag">Smoke and Mirrors</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-inverted"><div class="spark-verb-row"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span><span class="yield-sq cat-def" aria-hidden="true"></span><span class="spark-verb-label">Obscure</span></div><div class="spark-invite-box">Deflect attention from an Ally</div></div><div class="ci spark-entry spark-entry-inverted"><div class="spark-verb-row"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span><span class="yield-sq cat-def" aria-hidden="true"></span><span class="spark-verb-label">Pass</span><span class="spark-combo-plus" aria-hidden="true">+</span><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-verb-label">Distract</span></div><div class="spark-invite-box">Sell the wrong threat, and then pass your ally through the opening</div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2>Warlock</h2><div class="proof-grid"><div class="sample"><div class="stag">Eldritch Strike</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-warlock"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Eldritch Strike</div></div><div class="cbody"><div class="flv">The power is yours. So is the price.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Remove a <span class="kw kw-hd">Hit Die</span> from your pool and <strong>Strike</strong> at any range — add that die to your strike. Dark magic marks where to hit them next.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Brand</span></div><div class="spark-flow-tail">them with a crawling sigil</div></div></div><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Unravel</span></div><div class="spark-flow-tail">their guard from throat to heel</div></div></div></div></div></div><div class="idtag">Warlock</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample"><div class="stag">Feed the Fire</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-warlock"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Feed the Fire</div></div><div class="cbody"><div class="flv">More. Always more.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Remove a <span class="kw kw-hd">Hit Die</span> from your pool. Perform a <strong>Spellcast</strong> check — add that die to the roll — to pour more power into your next Act this <strong>Scene</strong>.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="1 Spark"><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-dot cat-res" aria-hidden="true"></span><span class="spark-flow-verb spark-v-res">Exhale</span></div><div class="spark-flow-tail">the hunger for a breath</div></div></div><div class="ci spark-entry spark-entry-column-flow"><div class="spark-flow-grid"><div class="spark-flow-vrule" aria-hidden="true"></div><div class="spark-flow-cost"><span class="spark-cost-dies" title="2 Sparks"><span class="spark-cost-die" aria-hidden="true">6</span><span class="spark-cost-die" aria-hidden="true">6</span></span></div><div class="spark-flow-pad" aria-hidden="true"></div><div class="spark-flow-lemma"><span class="yield-dot cat-res" aria-hidden="true"></span><span class="spark-flow-verb spark-v-res">Ground</span></div><div class="spark-flow-tail">yourself in the surge</div><div class="spark-flow-lemma"><span class="yield-tri cat-off" aria-hidden="true"></span><span class="spark-flow-verb spark-v-off">Wither</span></div><div class="spark-flow-tail">whoever stood too close</div></div></div></div></div></div><div class="idtag">Warlock</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2 id="pay-lab">Smoke and Mirrors — pay icon lab</h2><p class="lab-intro">Same card, six spend-column icons. Natural <strong>6</strong>s earn Spark; you <em>spend Spark</em> to roll the bonus die or take the card option — the spend icon should not look like a 6.</p><div class="proof-grid variant-grid"><div class="sample variant-sample"><div class="stag">Pay · Spark glyph (ships)</div><div class="vnote">Amber spark token — currency earned from 6s, spent as bonus-roll choice.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Pay · Bonus die +</div><div class="vnote">Hollow die with + — you spend the bonus roll, not the natural 6.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 bonus die"><span class="pay-bonus" aria-hidden="true" title="bonus die"><span class="pay-plus">+</span></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 bonus die"><span class="pay-bonus" aria-hidden="true" title="bonus die"><span class="pay-plus">+</span></span><span class="pay-bonus" aria-hidden="true" title="bonus die"><span class="pay-plus">+</span></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Pay · Hollow roll</div><div class="vnote">Dashed outline — unrolled bonus die you're committing.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 bonus roll"><span class="pay-hollow" aria-hidden="true" title="roll bonus die"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 bonus roll"><span class="pay-hollow" aria-hidden="true" title="roll bonus die"></span><span class="pay-hollow" aria-hidden="true" title="roll bonus die"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Pay · Bolt slash</div><div class="vnote">Lightning tick — quick spark-energy read at arm's length.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-bolt" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-bolt" aria-hidden="true"></span><span class="pay-bolt" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Pay · Amber bars</div><div class="vnote">v3 cost pips recycled as spend column only.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-bar" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-bar" aria-hidden="true"></span><span class="pay-bar" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Pay · “6” die (retired)</div><div class="vnote">Misleading — implies you spend the 6 itself. Do not ship.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 6 (misleading)"><span class="spark-die" aria-hidden="true">6</span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 6 (misleading)"><span class="spark-die" aria-hidden="true">6</span><span class="spark-die" aria-hidden="true">6</span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2 id="layout-lab">Smoke and Mirrors — layout lab</h2><div class="proof-grid variant-grid"><div class="sample variant-sample"><div class="stag">Layout · No invites</div><div class="vnote">Verb lines only.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Layout · Compact exchange</div><div class="vnote">Tighter pay⇄yield strip.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-compact"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-compact"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Layout · Spend/Yield table</div><div class="vnote">Labeled mini-grid.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-table"><div class="xch-th">Spark</div><div class="xch-th">Yield</div><div class="xch-td"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span></div><div class="xch-td"><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-table"><div class="xch-th">Spark</div><div class="xch-th">Yield</div><div class="xch-td"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span></div><div class="xch-td"><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Layout · Evocative chronology</div><div class="vnote">Sell… and Pass… — read left-to-right at table.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Slip</strong> your ally through the gap you opened.</div><div class="spark-invite">You point; they move; the enemy still swats at your echo.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Sell</strong> the wrong threat, and <strong class="spark-v spark-v-def">Pass</strong> your partner through the opening.</div><div class="spark-invite">You throw your voice left — they commit — your friend is already past.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">Layout · Phrase-primary</div><div class="vnote">Verb line first; exchange trails inline.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def spark-entry-phrase-first"><div class="spark-body"><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix spark-entry-phrase-first"><div class="spark-body"><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div><h2 id="heritage">Smoke and Mirrors — heritage timeline</h2><p class="lab-intro">Oldest → newest on the same card. <strong>H5</strong> is what ships today.</p><div class="proof-grid variant-grid heritage-grid"><div class="sample variant-sample"><div class="stag">H0 · Crit (pre-Spark)</div><div class="vnote">Crit-count flourish — keyword outcomes, no Spark section.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check. On success, create a false impression — a sound, a silhouette, a dropped object. Every enemy in the <strong>Scene</strong> is <strong>Rattled</strong>, wrong-footed by what they think they saw, until one spends an <strong>Action</strong> investigating.</div><div class="csec"><div class="clbl">Crit</div><div class="crow"><div class="ci"><span class="kw kw-crit">1</span> Two enemies investigate, not one.</div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">H1 · Chip pills</div><div class="vnote">Boost/Stagger keyword chips + question gloss.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-line fl-blue"><span class="spark-glyphs" title="1 Spark"><span class="spark-glyph" aria-hidden="true"></span></span><span class="spark-keys"><span class="fl-chip fl-chip-blue"><span class="fl-icon fl-icon-def" aria-hidden="true"></span><span class="fl-term">Boost</span><span class="fl-mag">1</span></span></span><span class="ci-txt">— Slip an ally through the hesitation <span class="spark-how">— what did they think they saw?</span></span></div><div class="ci spark-line fl-red"><span class="spark-glyphs" title="2 Spark"><span class="spark-glyph" aria-hidden="true"></span><span class="spark-glyph" aria-hidden="true"></span></span><span class="spark-keys"><span class="fl-chip fl-chip-red"><span class="fl-icon fl-icon-off" aria-hidden="true"></span><span class="fl-term">Stagger</span><span class="fl-mag">1</span></span><span class="fl-plus">+</span><span class="fl-chip fl-chip-blue"><span class="fl-icon fl-icon-def" aria-hidden="true"></span><span class="fl-term">Boost</span><span class="fl-mag">1</span></span></span><span class="ci-txt">— Feint one way; send a friend the other <span class="spark-how">— what do they lunge at — who slips past?</span></span></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">H2 · Glyph + (n) questions</div><div class="vnote">Star cost glyphs, colored parentheses, italic questions.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry-heritage"><span class="spark-glyphs" title="1 Spark"><span class="spark-glyph" aria-hidden="true"></span></span><div class="spark-body"><div class="spark-verb">Thread an ally through the hesitation <span class="spark-n spark-n-def">(1)</span>.</div><div class="spark-prompt">What did they think they saw?</div></div></div><div class="ci spark-entry-heritage"><span class="spark-glyphs" title="2 Spark"><span class="spark-glyph" aria-hidden="true"></span><span class="spark-glyph" aria-hidden="true"></span></span><div class="spark-body"><div class="spark-verb">Feint one way · Ghost a friend past them <span class="spark-n spark-n-off">(2)</span>.</div><div class="spark-prompt">What do they lunge at — who slips past?</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">H3 · v3 arrows + bars</div><div class="vnote">Amber bar cost, → split combos, em-dash invites, (n) magnitude.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry-heritage spark-entry-def"><span class="spark-pips-heritage" title="1 Spark"><span class="spark-pip-heritage" aria-hidden="true"></span></span><div class="spark-body"><div class="spark-row"><span class="cat-icon cat-def" aria-hidden="true"></span><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation <span class="spark-mag spark-mag-def"><span class="cat-icon cat-def" aria-hidden="true"></span><span class="mag-n">(1)</span></span>.</div><div class="spark-invite-heritage"><span class="invite-lead">—</span> They lunge at the wrong shape.</div></div></div><div class="ci spark-entry-heritage spark-entry-mix"><span class="spark-pips-heritage" title="2 Spark"><span class="spark-pip-heritage" aria-hidden="true"></span><span class="spark-pip-heritage" aria-hidden="true"></span></span><div class="spark-body"><div class="spark-row"><span class="cat-icon cat-off" aria-hidden="true"></span><strong class="spark-v spark-v-off">Feint</strong> one way.</div><div class="spark-chain"><span class="spark-link">→</span></div><div class="spark-row"><span class="cat-icon cat-def" aria-hidden="true"></span><strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite-heritage"><span class="invite-lead">—</span> The wrong person moves; the right one is already gone.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">H4 · v5 misleading “6”</div><div class="vnote">Exchange table but spend column shows 6 — retired.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 6 (misleading)"><span class="spark-die" aria-hidden="true">6</span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 6 (misleading)"><span class="spark-die" aria-hidden="true">6</span><span class="spark-die" aria-hidden="true">6</span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div><div class="sample variant-sample"><div class="stag">H5 · v5 Spark glyph (current)</div><div class="vnote">Spend spark token ⇄ yield shapes · flowing sentence.</div><div class="primer-cards"><div class="cardwrap"><div class="card acc-rogue"><div class="hdr"><div class="hdr-top"><span class="cap cap-neutral">Ability</span><span class="cap cap-neutral">Act</span></div><div class="hdr-name">Smoke and Mirrors</div></div><div class="cbody"><div class="flv">Let them argue about what they saw.</div><div class="hr"></div><div class="elbl">Effect</div><div class="etxt">Perform a <strong>Deception</strong> check to plant a false impression — a sound, silhouette, or dropped object.</div><div class="csec spark-sec"><div class="clbl">Spark</div><div class="crow"><div class="ci spark-entry spark-entry-def"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="1 Spark"><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="mag-pips mag-pips-def" aria-label="magnitude 1"><span class="pip-shape cat-def" aria-hidden="true"></span></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-def">Thread</strong> an ally through the hesitation.</div><div class="spark-invite">They lunge at the wrong shape while your friend slips through.</div></div></div><div class="ci spark-entry spark-entry-mix"><div class="spark-body"><div class="spark-xch spark-xch-row"><span class="xch-pay" title="2 Spark"><span class="pay-spark" aria-hidden="true"></span><span class="pay-spark" aria-hidden="true"></span></span><span class="xch-mid" aria-hidden="true">⇄</span><span class="xch-yield"><span class="pip-shape cat-off" aria-hidden="true"></span><span class="pip-shape cat-def" aria-hidden="true"></span></span></div><div class="spark-phrase"><strong class="spark-v spark-v-off">Feint</strong> one way, while you <strong class="spark-v spark-v-def">Ghost</strong> a friend past them.</div><div class="spark-invite">The decoy takes the hit; the real one is already behind them.</div></div></div></div></div></div><div class="idtag">Rogue</div><div class="tier-float"><span>t1</span></div></div></div></div></div></div></body></html>

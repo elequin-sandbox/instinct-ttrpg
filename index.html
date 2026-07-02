@@ -700,6 +700,293 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .deck-lane-nav.nav-top{border-top:none;border-bottom:1px solid #2a1d10;margin-bottom:12px;}
 .deck-lane-navbtn{background:#241a0f;border:1px solid #3a2c19;color:#cbb98e;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit;letter-spacing:.5px;}
 .deck-lane-navbtn:hover{border-color:var(--gold-d);color:var(--gold);}
+/* ---------- Spark design lab ---------- */
+.tab-sparklab{color:#e0c060 !important;}
+#view-sparklab{min-height:calc(100vh - 62px);background:#12100c;}
+.sparklab-intro{max-width:44rem;padding:14px 20px 4px;color:#9a8a6a;font-size:13px;line-height:1.5;}
+.sparklab-peek-hint{max-width:44rem;padding:0 20px 6px;color:#7a6a50;font-size:12px;line-height:1.4;}
+.sparklab-tabs{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  padding:0 18px 10px;border-bottom:1px solid #2a1d10;
+  position:sticky;top:62px;z-index:41;background:#12100c;
+}
+.sparklab-tab{
+  background:#1a1510;border:1px solid #3a2c19;color:#9a8a6a;
+  padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;
+  font-family:inherit;cursor:pointer;letter-spacing:.02em;
+}
+.sparklab-tab:hover{border-color:#6a5a40;color:#d8c8a8;}
+.sparklab-tab.on{background:#3a2c10;border-color:#c9a24a;color:#f5d76e;}
+.sparklab-toolbar{
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+  padding:10px 18px 12px;border-bottom:1px solid #2a1d10;
+  position:sticky;top:108px;z-index:40;background:#12100c;
+}
+.sparklab-toolbar .chip.on{background:#8a6608;border-color:#c9a24a;color:#fff;}
+.sparklab-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;}
+.sparklab-viewtoggle{display:flex;gap:4px;}
+.sparklab-viewtoggle .chip{font-size:11px;padding:4px 10px;}
+/* 2-up gallery — cards need ~300px; 4-across was crushing them */
+.sparklab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:28px 24px;padding:24px 20px 48px;align-items:start;
+  max-width:1200px;margin:0 auto;
+}
+.sparklab-grid.compare-mode{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-width:900px;
+}
+@media(max-width:760px){
+  .sparklab-grid,.sparklab-grid.compare-mode{grid-template-columns:1fr;max-width:400px;}
+}
+.sparklab-panel{
+  background:#1a1510;border:1px solid #322818;border-radius:12px;
+  display:flex;flex-direction:column;overflow:hidden;
+  position:relative;z-index:1;transition:z-index 0s;
+}
+.sparklab-panel:hover{z-index:25;overflow:visible;}
+.sparklab-panel.ships{border-color:#5a4a30;box-shadow:inset 3px 0 0 #c9a24a;}
+.sparklab-hd{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:10px 12px 8px;border-bottom:1px solid #2a2018;
+}
+.sparklab-title{font-size:12px;font-weight:700;color:#e7d6ac;letter-spacing:.02em;}
+.sparklab-cat{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#7a6a50;}
+.sparklab-ship{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#c9a24a;opacity:.9;}
+.sparklab-stage{
+  background:linear-gradient(180deg,#e8dfc8 0%,#d8cdb0 100%);
+  padding:16px 12px 14px;display:flex;justify-content:center;
+  border-bottom:1px solid #3a3020;
+  cursor:zoom-in;position:relative;overflow:visible;
+}
+.sparklab-stage .spark-lab-cardwrap{
+  width:280px;transform:scale(1);transform-origin:top center;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.sparklab-panel:hover .sparklab-stage .spark-lab-cardwrap{
+  transform:scale(1.14);
+  box-shadow:0 14px 36px rgba(12,8,4,.38);
+}
+.sparklab-zoom-hint{
+  position:absolute;bottom:6px;right:8px;font-size:9px;letter-spacing:.06em;
+  text-transform:uppercase;color:#6a5a40;opacity:0;transition:opacity .15s;
+  pointer-events:none;
+}
+.sparklab-panel:hover .sparklab-zoom-hint{opacity:1;}
+.sparklab-lightbox{
+  position:fixed;inset:0;z-index:260;background:rgba(10,7,3,.9);
+  display:flex;align-items:center;justify-content:center;padding:28px 16px;
+  overflow:auto;
+}
+.sparklab-lb-inner{
+  position:relative;display:flex;flex-direction:column;align-items:center;
+  gap:14px;max-width:96vw;
+}
+.sparklab-lb-title{color:#e7d6ac;font-size:15px;font-weight:700;text-align:center;letter-spacing:.02em;}
+.sparklab-lb-cat{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8a7a5a;text-align:center;margin-top:-8px;}
+.sparklab-lb-stage{
+  background:linear-gradient(180deg,#e8dfc8 0%,#d8cdb0 100%);
+  padding:28px 32px 32px;border-radius:14px;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);
+}
+.sparklab-lb-stage .spark-lab-cardwrap{width:280px;}
+.sparklab-lb-stage .card{
+  width:280px !important;height:392px !important;
+  background:#f7f0e0 !important;
+  box-shadow:0 6px 20px rgba(20,12,4,.25) !important;
+}
+.sparklab-lb-stage .cbody{padding-bottom:28px !important;color:#1c1408;}
+.sparklab-lb-stage .flv{font-style:italic;color:#5a4520;font-size:9.8px;line-height:1.42;}
+.sparklab-lb-stage .etxt{color:#1c1408;font-size:9.8px;line-height:1.42;}
+.sparklab-lb-stage .elbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6030;}
+.sparklab-lb-hint{font-size:11px;color:#8a7a5a;text-align:center;}
+.sparklab-stage .card{
+  width:280px !important;height:392px !important;
+  background:#f7f0e0 !important;
+  box-shadow:0 4px 14px rgba(20,12,4,.22),0 1px 0 rgba(255,255,255,.4) inset !important;
+}
+.sparklab-stage .cbody{padding-bottom:28px !important;color:#1c1408;}
+.sparklab-stage .flv{font-style:italic;color:#5a4520;font-size:9.8px;line-height:1.42;}
+.sparklab-stage .etxt{color:#1c1408;font-size:9.8px;line-height:1.42;}
+.sparklab-stage .elbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#7a6030;}
+.sparklab-meta{padding:0 12px 10px;}
+.sparklab-details{border:none;margin:0;}
+.sparklab-details summary{
+  cursor:pointer;font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+  color:#8a7a5a;padding:8px 0 4px;list-style:none;
+}
+.sparklab-details summary::-webkit-details-marker{display:none;}
+.sparklab-details summary::before{content:'▸ ';color:#c9a24a;}
+.sparklab-details[open] summary::before{content:'▾ ';}
+.sparklab-goals{font-size:11px;line-height:1.45;color:#b8a88a;margin:0 0 8px;padding-left:14px;}
+.sparklab-goals li{margin:0 0 4px;}
+.sparklab-goals strong{color:#d8c8a8;font-weight:600;}
+.sparklab-playtest{
+  font-size:11px;font-style:italic;color:#a89878;line-height:1.4;
+  padding:0 0 6px;
+}
+.sparklab-feedback{
+  display:flex;flex-direction:column;gap:8px;
+  padding:10px 12px 12px;background:#14100c;border-top:1px solid #2a2018;
+}
+.sparklab-like-btn{
+  align-self:flex-start;
+  background:#241a0f;border:1px solid #5a4a30;color:#cbb98e;
+  padding:7px 12px;border-radius:20px;font-size:11px;font-family:inherit;
+  cursor:pointer;letter-spacing:.02em;transition:all .12s;
+}
+.sparklab-like-btn:hover{border-color:#c9a24a;color:#e7d6ac;}
+.sparklab-like-btn.on{
+  background:#3a2c10;border-color:#c9a24a;color:#f5d76e;font-weight:600;
+}
+.sparklab-comment{
+  width:100%;min-height:56px;padding:8px 10px;resize:vertical;
+  background:#1a1510;border:1px solid #3a3020;border-radius:8px;
+  color:#e8dcc8;font-family:inherit;font-size:12px;line-height:1.45;
+}
+.sparklab-comment:focus{outline:none;border-color:#8a6608;}
+.sparklab-comment::placeholder{color:#6a5a40;}
+.sparklab-community{font-size:10px;color:#7a6a50;}
+.sparklab-community strong{color:#c9a24a;}
+.sparklab-leaderboard{padding:20px 18px 40px;max-width:640px;margin:0 auto;}
+.sparklab-lb-row{display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid #2a1d10;font-size:13px;}
+.sparklab-lb-rank{width:28px;color:#8a7a5a;}
+.sparklab-lb-score{margin-left:auto;color:#e0c060;font-weight:700;}
+/* Lab: subtler on-card exchange — less amber box */
+#view-sparklab .spark-xch{
+  background:transparent;border:none;padding:0;margin:0 0 2px;gap:3px;
+}
+#view-sparklab .spark-entry{padding:4px 5px 5px 6px;}
+#view-sparklab .spark-phrase{font-size:9.25px;line-height:1.42;}
+#view-sparklab .spark-invite{font-size:7.5px;margin-top:2px;opacity:.92;}
+#view-sparklab .spark-glyphs{display:inline-flex;gap:1px;}
+#view-sparklab .spark-glyph{display:inline-block;width:8px;height:10px;background:linear-gradient(160deg,#ffe566,#d4a017 55%,#9a7209);clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);}
+#view-sparklab .spark-pips-heritage{display:flex;flex-direction:column;gap:3px;}
+#view-sparklab .spark-pip-heritage{display:block;width:4px;height:11px;border-radius:1px;background:linear-gradient(180deg,#e0a820,#8a6508);}
+#view-sparklab .ci.spark-entry-heritage{display:flex;gap:5px;padding:4px 5px;border-radius:4px;border:1px solid rgba(90,74,50,.12);}
+#view-sparklab .spark-verb{font-size:9.5px;line-height:1.38;font-weight:600;}
+#view-sparklab .spark-n{font-weight:800;font-size:9px;}
+#view-sparklab .spark-n-off{color:#991B1B;}
+#view-sparklab .spark-n-def{color:#2563EB;}
+#view-sparklab .spark-prompt{font-size:8px;font-style:italic;color:#5a4a32;margin-top:2px;}
+#view-sparklab .spark-chain{padding-left:10px;}
+#view-sparklab .spark-link{color:#9a7209;font-size:9px;font-weight:800;}
+#view-sparklab .spark-invite-heritage{font-size:7.75px;font-style:italic;color:#5a4a32;margin-top:2px;}
+#view-sparklab .spark-entry-heritage .spark-row{font-size:9.5px;}
+/* Inverted verb-first + invite box (layout lab) */
+#view-sparklab .spark-entry-inverted{
+  padding:4px 5px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+#view-sparklab .spark-verb-row{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:4px;
+}
+#view-sparklab .spark-cost-dies{display:inline-flex;gap:2px;align-items:center;}
+#view-sparklab .spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+#view-sparklab .yield-tri{
+  display:inline-block;width:0;height:0;border-left:5px solid transparent;
+  border-right:5px solid transparent;flex-shrink:0;
+}
+#view-sparklab .yield-tri.cat-def{border-bottom:8px solid #2563EB;}
+#view-sparklab .yield-sq{
+  display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;
+}
+#view-sparklab .yield-sq.cat-off{background:#991B1B;}
+#view-sparklab .spark-verb-label{
+  font-size:9.5px;font-weight:800;color:#1a1008;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+#view-sparklab .spark-combo-plus{font-size:9px;font-weight:800;color:#6a5b48;line-height:1;}
+#view-sparklab .spark-invite-box{
+  border:1.5px solid rgba(91,127,212,.45);border-radius:4px;
+  padding:4px 6px;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.25px;line-height:1.32;color:#1a1008;background:rgba(255,255,255,.5);
+}
+/* Inverted verb-first + invite box — ships on Smoke and Mirrors */
+.spark-entry-inverted{
+  padding:4px 5px 5px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+.spark-verb-row{
+  display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:4px;
+}
+.spark-entry-inverted .spark-cost-dies{display:inline-flex;gap:2px;align-items:center;}
+.spark-entry-inverted .spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-verb-label{
+  font-size:9.5px;font-weight:800;color:#1a1008;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-combo-plus{font-size:9px;font-weight:800;color:#6a5b48;line-height:1;}
+.spark-invite-box{
+  border:1.5px solid rgba(91,127,212,.45);border-radius:4px;
+  padding:4px 6px;font-family:Georgia,'Times New Roman',serif;
+  font-size:9.25px;line-height:1.32;color:#1a1008;background:rgba(255,255,255,.5);
+}
+/* Column flow — production layout */
+.spark-entry-column-flow{
+  padding:5px 6px 6px;margin:0;
+  border-radius:4px;border:1px solid rgba(90,74,50,.12);
+  background:rgba(255,255,255,.35);
+}
+.spark-flow-grid{
+  display:grid;
+  grid-template-columns:minmax(56px,max-content) 1px 1fr;
+  column-gap:8px;row-gap:6px;align-items:center;
+}
+.spark-flow-vrule{
+  grid-column:2;grid-row:1/-1;width:1px;min-height:100%;
+  background:rgba(91,127,212,.42);justify-self:center;
+}
+.spark-flow-cost{
+  grid-column:1;justify-self:end;align-self:start;
+  padding-bottom:8px;margin-bottom:2px;
+}
+.spark-flow-pad{grid-column:3;min-height:1px;}
+.spark-cost-dies{display:inline-flex;gap:3px;align-items:center;}
+.spark-cost-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:13px;height:13px;border-radius:3px;
+  background:#5B7FD4;color:#fff;font-size:8px;font-weight:800;line-height:1;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.spark-flow-lemma{
+  grid-column:1;justify-self:end;
+  display:flex;flex-direction:row;align-items:center;gap:5px;
+}
+.yield-tri{
+  display:inline-block;width:0;height:0;border-left:5px solid transparent;
+  border-right:5px solid transparent;flex-shrink:0;
+}
+.yield-tri.cat-off{border-bottom:8px solid #991B1B;}
+.yield-sq{display:inline-block;width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.yield-sq.cat-def{background:#2563EB;}
+.yield-dot{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.yield-dot.cat-res{background:#166534;}
+.spark-flow-verb{
+  font-size:9.5px;font-weight:800;line-height:1.15;
+  font-family:system-ui,-apple-system,sans-serif;text-align:right;
+  white-space:nowrap;
+}
+.spark-flow-verb.spark-v-def{color:#2563EB;}
+.spark-flow-verb.spark-v-off{color:#991B1B;}
+.spark-flow-verb.spark-v-res{color:#166534;}
+.spark-flow-tail{
+  grid-column:3;min-width:0;font-size:9.5px;line-height:1.34;font-weight:500;
+  color:#1a1008;align-self:center;
+}
 /* ---------- submit idea view ---------- */
 .tab-submit{color:#c8a96e !important;font-weight:600;}
 .tab-submit.active{background:#2a1d10;border-color:var(--gold) !important;color:var(--gold) !important;}
@@ -755,8 +1042,8 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .kw-threat{background:#991B1B;color:#FEF2F2;}
 .kw-crit{background:#B8860B;color:#FFFDE7;}
 .kw-crit-repeat{font-weight:900;letter-spacing:-0.5px;}
-/* Crit Flourish colorings (locked Playtest 4 — P2): red offensive / blue defensive / green resolve.
-   Keep in sync with primer-card-scope.css — narrative Flourish words stay bold text, not a pill. */
+.kw-spark{background:linear-gradient(180deg,#f5d76e,#d4a017);color:#1a1108;border:1px solid #9a7209;box-shadow:0 0 0 1px rgba(255,253,231,.35) inset;}
+/* Crit Flourish colorings (legacy Crit-count cards) — see Spark chips below for July 2026 prototype. */
 .ci .fl-dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:3px;}
 .ci.fl-red .fl-dot{background:#991B1B;}
 .ci.fl-red .fl-word{color:#991B1B;}
@@ -765,6 +1052,122 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 .ci.fl-green .fl-dot{background:#166534;}
 .ci.fl-green .fl-word{color:#166534;}
 .ci .fl-word{font-weight:700;}
+/* Spark / Flourish v5 (July 2026): exchange table (spend 6 ⇄ yield shapes), flowing combos. */
+.ci.spark-entry{
+  padding:5px 6px 5px 8px;margin:0;
+  border-radius:4px;
+  border:1px solid rgba(90,74,50,.14);
+  border-left-width:3px;
+  background:rgba(0,0,0,.02);
+}
+.spark-entry-off{border-left-color:#991B1B;background:rgba(153,27,27,.04);}
+.spark-entry-def{border-left-color:#2563EB;background:rgba(37,99,235,.05);}
+.spark-entry-res{border-left-color:#166534;background:rgba(22,101,52,.05);}
+.spark-entry-mix{border-left-color:#9a7209;background:rgba(154,114,9,.05);}
+.spark-body{flex:1;min-width:0;}
+.spark-xch{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:0;margin-bottom:2px;
+  border-radius:0;
+  background:transparent;
+  border:none;
+}
+.spark-xch-row{flex-wrap:wrap;}
+.spark-xch-compact{padding:1px 4px;gap:3px;}
+.spark-xch-table{
+  display:grid;grid-template-columns:auto auto;gap:2px 6px;
+  padding:3px 5px;font-size:7px;text-transform:uppercase;letter-spacing:.06em;
+  color:#7a6540;
+}
+.spark-xch-table .xch-th{font-weight:800;color:#5c4a32;}
+.spark-xch-table .xch-td{display:flex;align-items:center;gap:2px;}
+.xch-pay{display:inline-flex;gap:2px;align-items:center;}
+.xch-yield{display:inline-flex;gap:3px;align-items:center;}
+.xch-mid{font-size:8px;color:#9a7209;font-weight:800;line-height:1;}
+.pay-spark{
+  display:inline-block;width:9px;height:11px;flex-shrink:0;
+  background:linear-gradient(160deg,#ffe566 0%,#d4a017 55%,#9a7209 100%);
+  clip-path:polygon(50% 0%,68% 36%,100% 38%,74% 60%,82% 100%,50% 78%,18% 100%,26% 60%,0% 38%,32% 36%);
+}
+.pay-bonus{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:12px;height:12px;border-radius:2px;box-sizing:border-box;
+  border:1.5px solid #7a5a08;background:#faf3dc;color:#5c4008;
+}
+.pay-plus{font-size:9px;font-weight:900;line-height:1;font-family:system-ui,sans-serif;}
+.pay-hollow{
+  display:inline-block;width:11px;height:11px;border-radius:2px;box-sizing:border-box;
+  border:1.5px dashed #9a7209;background:rgba(250,243,220,.45);position:relative;
+}
+.pay-hollow::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:3px;height:3px;border-radius:50%;background:#9a7209;
+}
+.pay-bolt{
+  display:inline-block;width:7px;height:11px;flex-shrink:0;background:#c89010;
+  clip-path:polygon(45% 0%,62% 36%,100% 40%,54% 56%,72% 100%,40% 60%,0% 56%,44% 38%);
+}
+.pay-bar{
+  display:inline-block;width:4px;height:12px;border-radius:2px;flex-shrink:0;
+  background:linear-gradient(180deg,#e0a820,#8a6508);
+  box-shadow:0 0 0 1px rgba(106,72,6,.35);
+}
+.spark-die{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:11px;height:11px;font-size:7px;font-weight:900;line-height:1;
+  border-radius:2px;
+  background:linear-gradient(180deg,#f5d76e,#c89010);
+  border:1px solid #7a5a08;color:#3d2806;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.mag-pips{display:inline-flex;gap:2px;align-items:center;}
+.pip-shape{display:inline-block;width:8px;height:8px;flex-shrink:0;}
+.pip-shape.cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.pip-shape.cat-def{background:#2563EB;border-radius:1px;}
+.pip-shape.cat-res{border-radius:50%;background:#166534;}
+.spark-phrase{font-size:9.5px;line-height:1.4;color:#1a1008;}
+.spark-v{font-weight:800;}
+.spark-v-off{color:#991B1B;}
+.spark-v-def{color:#2563EB;}
+.spark-v-res{color:#166534;}
+.spark-invite{font-size:7.75px;line-height:1.38;font-style:italic;color:#5a4a32;margin-top:3px;}
+.csec.spark-sec .clbl{color:#5c4a32;letter-spacing:.1em;}
+.csec.spark-sec .crow{gap:7px;flex-direction:column;}
+.spark-entry-phrase-first .spark-body{display:block;}
+.spark-entry-phrase-first .spark-phrase{display:inline;font-size:9.5px;line-height:1.4;}
+.spark-entry-phrase-first .spark-xch{display:inline-flex;margin-left:5px;vertical-align:middle;margin-bottom:0;}
+.spark-entry-phrase-first .spark-invite{display:block;margin-top:3px;}
+.cat-icon{display:inline-block;width:7px;height:7px;margin-right:3px;vertical-align:baseline;position:relative;top:0;}
+.cat-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.cat-def{background:#2563EB;border-radius:1px;}
+.cat-res{border-radius:50%;background:#166534;}
+/* Legacy spark chip lines */
+.ci.spark-line{align-items:flex-start;gap:4px;}
+.ci .fl-icon{display:inline-block;width:7px;height:7px;flex-shrink:0;}
+.fl-chip-red .fl-icon-off,.ci.fl-red .fl-icon-off{clip-path:polygon(50% 0%,0% 100%,100% 100%);background:#991B1B;}
+.fl-chip-blue .fl-icon-def,.ci.fl-blue .fl-icon-def{background:#2563EB;border-radius:1px;}
+.fl-chip-green .fl-icon-res,.ci.fl-green .fl-icon-res{border-radius:50%;background:#166534;}
+.fl-chip{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:1px 4px 1px 3px;border-radius:4px;border:1.2px solid;
+  font-size:8.5px;font-weight:800;line-height:1.3;letter-spacing:.02em;
+  font-family:system-ui,-apple-system,sans-serif;white-space:nowrap;flex-shrink:0;
+}
+.fl-chip-red{border-color:#991B1B;background:#fef2f2;color:#7f1d1d;}
+.fl-chip-blue{border-color:#2563EB;background:#eff6ff;color:#1e40af;}
+.fl-chip-green{border-color:#166534;background:#f0fdf4;color:#14532d;}
+.fl-chip .fl-term{font-weight:800;}
+.fl-chip .fl-mag{
+  display:inline-block;min-width:11px;text-align:center;
+  padding:0 3px;border-radius:3px;font-size:7.5px;font-weight:900;line-height:1.45;
+}
+.fl-chip-red .fl-mag{background:#991B1B;color:#fff;}
+.fl-chip-blue .fl-mag{background:#2563EB;color:#fff;}
+.fl-chip-green .fl-mag{background:#166534;color:#fff;}
+.ci .spark-keys{display:inline-flex;align-items:center;gap:3px;flex-wrap:wrap;flex-shrink:0;}
+.ci .fl-plus{color:#8a7350;font-weight:800;font-size:7px;line-height:1;padding:0 1px;}
+.ci.spark-line .ci-txt{flex:1;min-width:0;font-style:normal;color:#1a1008;font-weight:600;}
+.ci.spark-line .spark-how{font-weight:500;color:#4a3d28;}
 .kw-toll{background:#B45309;color:#FFFBEB;}
 .kw-miss{background:#7F1D1D;color:#FEF2F2;}
 .kw-aid{background:#2563EB;color:#EFF6FF;}
@@ -838,6 +1241,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 /* === Instinct RPG canonical header system (var-driven, no inline color) === */
 .card{position:relative;border-left:5px solid var(--a,transparent);display:flex;flex-direction:column;}
 .cardwrap .card .cbody,.cardwrap .card .bf-body,.cardwrap .card .card-body{padding-bottom:26px;}
+.cardwrap .card .cbody:has(.spark-sec),.cardwrap .card .bf-body:has(.spark-sec),.cardwrap .card .card-body:has(.spark-sec){padding-bottom:32px;}
 .hdr{padding:7px 9px 5px;display:flex;flex-direction:column;gap:2px;flex-shrink:0;background:var(--ah,#faf6ec);border-bottom:1px solid rgba(0,0,0,.10);}
 .hdr-top{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:16px;}
 .cap{display:inline-flex;align-items:center;border:1.5px solid;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;font-family:system-ui,-apple-system,sans-serif;line-height:1.35;white-space:nowrap;}
@@ -878,6 +1282,7 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
     <button class="tab active" data-view="browse" onclick="showView('browse')">Browse</button>
     <button class="tab" data-view="deck" onclick="showView('deck')">My Deck <span class="badge" id="deckBadge">0</span></button>
     <button class="tab" data-view="sim" onclick="showView('sim')">Simulator</button>
+    <button class="tab tab-sparklab" data-view="sparklab" onclick="showView('sparklab')">Spark Lab <span class="badge" id="sparkLabBadge" style="background:#8a6608">♥</span></button>
     <button class="tab" data-view="primer" onclick="showView('primer')">Player Primer</button>
     <button class="tab" data-view="deckbuild" onclick="showView('deckbuild')">Deck Build</button>
     <button class="tab" data-view="quickref" onclick="showView('quickref')">Quick Ref</button>
@@ -902,6 +1307,30 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
 </section>
 <section class="view hidden" id="view-quickref">
   <iframe src="instinct-rpg-quick-ref-v2.html" style="width:100%;height:calc(100vh - 62px);border:none;display:block;"></iframe>
+</section>
+
+<section class="view hidden" id="view-sparklab">
+  <p class="sparklab-intro" id="sparkLabIntro">Compare Layout, Language, and Spend icon on the same card.</p>
+  <p class="sparklab-peek-hint">Hover a card to peek closer, or click to open full size.</p>
+  <div class="sparklab-tabs" id="sparkLabTabs">
+    <button type="button" class="sparklab-tab on" data-slab="layout" onclick="filterSparkLab('layout',this)">Layout</button>
+    <button type="button" class="sparklab-tab" data-slab="language" onclick="filterSparkLab('language',this)">Language</button>
+    <button type="button" class="sparklab-tab" data-slab="pay" onclick="filterSparkLab('pay',this)">Spend icon</button>
+    <button type="button" class="sparklab-tab" data-slab="likes" onclick="filterSparkLab('likes',this)">♥ Likes</button>
+  </div>
+  <div class="sparklab-toolbar">
+    <span class="sparklab-viewtoggle">
+      <button class="chip on" id="sparkViewGallery" onclick="setSparkLabView('gallery')">Gallery</button>
+      <button class="chip" id="sparkViewCompare" onclick="setSparkLabView('compare')">Compare (2-up)</button>
+    </span>
+    <div class="sparklab-actions">
+      <button class="hbtn" onclick="submitSparkLabFeedback()">Submit my feedback</button>
+      <button class="hbtn" onclick="renderSparkLab(true)">↺ Refresh community</button>
+    </div>
+  </div>
+  <div id="sparkLabGrid" class="sparklab-grid"></div>
+  <div id="sparkLabLeaderboard" class="sparklab-leaderboard hidden"></div>
+  <p id="sparkLabStatus" class="sparklab-intro" style="padding-top:0;font-size:12px;"></p>
 </section>
 
 <div id="ob-overlay" class="hidden"><div id="ob-inner"></div></div>
@@ -1019,10 +1448,12 @@ header{position:sticky;top:0;z-index:50;background:#1a1108;border-bottom:2px sol
   </div>
 </section>
 <div id="modal" class="hidden" onclick="if(event.target===this)closeModal()"></div>
+<div id="sparkLabLightbox" class="sparklab-lightbox hidden" onclick="if(event.target===this)closeSparkLabLightbox()"></div>
 <div id="printroot"></div>
 <div id="toast"></div>
 
 <script src="config.js"></script>
+<script src="spark-design-lab-data.js"></script>
 <script>if(location.hostname===''){document.write('<script src="local-cards.js"><\/script>');}</script>
 <script>
 const CONFIG = {"useLive": true, "apiBase": "https://api.baserow.io/api/database/rows/table/", "tableCards": 911939, "tableComments": 1014004, "tableVersions": 1014012, "tableUsers": 1026051, "tableIdeas": 1041581, "readToken": (typeof window!=="undefined" && window.IRPG_TOKEN) ? window.IRPG_TOKEN : "", "palette": {"barbarian": "#9E2B2B", "fighter": "#B45309", "paladin": "#B8860B", "cleric": "#5E81AC", "ranger": "#2F6B3D", "rogue": "#6C5BA8", "druid": "#5A7D2A", "warlock": "#9A2B5E", "bard": "#B5388D"}};
@@ -1347,6 +1778,7 @@ function showView(v){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
   if(v==='deck')renderDeck(); if(v==='sim')renderSim(); if(v==='discuss')renderDiscuss();
   if(v==='submit'){const n=getCookieName();if(n)document.getElementById('submitName').value=n;}
+  if(v==='sparklab')renderSparkLab();
 }
 
 /* ---------- simulator (Mode B) ---------- */
@@ -1685,9 +2117,15 @@ async function init(){
   }
   const viewParam=new URLSearchParams(location.search).get('view');
   if(viewParam&&document.getElementById('view-'+viewParam))showView(viewParam);
+  updateSparkLabBadge();
 }
 init();
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  const lb=document.getElementById('sparkLabLightbox');
+  if(lb&&!lb.classList.contains('hidden'))closeSparkLabLightbox();
+  else closeModal();
+});
 
 /* ===== ONBOARDING FLOW ===== */
 const CLASSES = [
@@ -1994,6 +2432,249 @@ function resetSubmitForm(){
   btn.disabled = false;
   btn.textContent = 'Send It In ✦';
   btn.classList.remove('hidden');
+}
+
+/* ---------- Spark design lab (playtest feedback) ---------- */
+const SPARK_LAB_STORE = 'irpg_spark_lab_feedback';
+const SPARK_LAB_SUBMIT_KEY = 'irpg_spark_lab_submitted';
+let sparkLabFilter = 'layout';
+let sparkLabCommunityLikes = {};
+let sparkLabCommunityLoaded = false;
+let sparkLabViewMode = 'gallery';
+
+function getSparkLabFeedback(){
+  try{return JSON.parse(localStorage.getItem(SPARK_LAB_STORE)||'{}');}catch(e){return {};}
+}
+function saveSparkLabFeedbackStore(fb){
+  localStorage.setItem(SPARK_LAB_STORE,JSON.stringify(fb));
+  updateSparkLabBadge();
+}
+function toggleSparkLabLike(id){
+  const fb=getSparkLabFeedback();
+  const cur=fb[id]||{};
+  cur.liked=!cur.liked;
+  cur.at=new Date().toISOString();
+  fb[id]=cur;
+  saveSparkLabFeedbackStore(fb);
+  const btn=document.querySelector('.sparklab-like-btn[data-id="'+id+'"]');
+  if(btn)btn.classList.toggle('on',!!cur.liked);
+}
+function saveSparkLabComment(id,text){
+  const fb=getSparkLabFeedback();
+  const cur=fb[id]||{};
+  cur.comment=text;
+  cur.at=new Date().toISOString();
+  fb[id]=cur;
+  saveSparkLabFeedbackStore(fb);
+}
+function updateSparkLabBadge(){
+  const fb=getSparkLabFeedback();
+  let n=0;
+  Object.keys(fb).forEach(function(k){
+    const x=fb[k];
+    if(x&&(x.liked||((x.comment||'').trim())))n++;
+  });
+  const el=document.getElementById('sparkLabBadge');
+  if(el)el.textContent=n?String(n):'♥';
+}
+function filterSparkLab(cat,btn){
+  sparkLabFilter=cat;
+  document.querySelectorAll('#sparkLabTabs .sparklab-tab').forEach(b=>b.classList.toggle('on',b===btn));
+  renderSparkLab();
+}
+function setSparkLabView(mode){
+  sparkLabViewMode=mode;
+  document.getElementById('sparkViewGallery').classList.toggle('on',mode==='gallery');
+  document.getElementById('sparkViewCompare').classList.toggle('on',mode==='compare');
+  const grid=document.getElementById('sparkLabGrid');
+  if(grid)grid.classList.toggle('compare-mode',mode==='compare');
+}
+function parseSparkLabSubmission(text){
+  const likes={};
+  if(!text||text.indexOf('[SPARK-LAB]')<0)return likes;
+  text.split('\n').forEach(function(line){
+    const likeM=line.match(/^([a-z0-9-]+)\s*\|\s*LIKE\s*$/);
+    if(likeM){likes[likeM[1]]=(likes[likeM[1]]||0)+1;return;}
+    const starM=line.match(/^([a-z0-9-]+):\s*(\d)\s*$/);
+    if(starM){likes[starM[1]]=(likes[starM[1]]||0)+1;}
+  });
+  return likes;
+}
+async function loadSparkLabCommunity(){
+  sparkLabCommunityLikes={};
+  const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
+  if(!CONFIG.useLive||!CONFIG.tableIdeas||!hasToken)return;
+  try{
+    const rows=await fetchAll(CONFIG.tableIdeas,'');
+    rows.forEach(function(row){
+      const text=row.Idea_Text||'';
+      if(text.indexOf('[SPARK-LAB]')<0)return;
+      const parsed=parseSparkLabSubmission(text);
+      Object.keys(parsed).forEach(function(id){
+        sparkLabCommunityLikes[id]=(sparkLabCommunityLikes[id]||0)+parsed[id];
+      });
+    });
+  }catch(e){/* offline */}
+}
+function communityLikes(id){
+  const n=sparkLabCommunityLikes[id];
+  return n?n:0;
+}
+function feedbackPanelHTML(v,userFb){
+  const liked=!!(userFb&&userFb.liked);
+  const comment=esc((userFb&&userFb.comment)||'');
+  const comm=communityLikes(v.id);
+  let commHtml='';
+  if(comm)commHtml='<div class="sparklab-community"><strong>'+comm+'</strong> playtester'+(comm===1?'':'s')+' liked something here</div>';
+  return '<div class="sparklab-feedback">'+
+    '<button type="button" class="sparklab-like-btn'+(liked?' on':'')+'" data-id="'+escAttr(v.id)+'" onclick="toggleSparkLabLike(\''+escAttr(v.id)+'\')">♥ I like something here</button>'+
+    '<textarea class="sparklab-comment" data-id="'+escAttr(v.id)+'" placeholder="Leave a comment — what works, what confuses you, what you\'d say at the table…" oninput="saveSparkLabComment(\''+escAttr(v.id)+'\',this.value)">'+comment+'</textarea>'+
+    commHtml+'</div>';
+}
+function renderSparkLabLikes(variants){
+  const scored=variants.map(function(v){
+    return {v:v,n:communityLikes(v.id)};
+  }).filter(function(x){return x.n>0;}).sort(function(a,b){return b.n-a.n;});
+  const box=document.getElementById('sparkLabLeaderboard');
+  if(!scored.length){
+    box.innerHTML='<div class="empty">No likes submitted yet — tap ♥ on designs you want to keep.</div>';
+    box.classList.remove('hidden');
+    document.getElementById('sparkLabGrid').classList.add('hidden');
+    return;
+  }
+  box.innerHTML='<h3 style="color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:12px;">What playtesters liked</h3>'+
+    scored.map(function(row,i){
+      return '<div class="sparklab-lb-row"><span class="sparklab-lb-rank">#'+(i+1)+'</span><span>'+esc(row.v.label)+'</span><span class="sparklab-lb-score">'+row.n+' ♥</span></div>';
+    }).join('');
+  box.classList.remove('hidden');
+  document.getElementById('sparkLabGrid').classList.add('hidden');
+}
+function renderSparkLab(refreshCommunity){
+  const data=window.SPARK_DESIGN_LAB;
+  const intro=document.getElementById('sparkLabIntro');
+  const status=document.getElementById('sparkLabStatus');
+  if(!data||!data.variants){
+    if(intro)intro.textContent='Spark lab data missing — rebuild with python3 scripts/build_spark_flourish_proof.py --write';
+    return;
+  }
+  if(refreshCommunity||!sparkLabCommunityLoaded){
+    status.textContent='Loading community feedback…';
+    loadSparkLabCommunity().then(function(){
+      sparkLabCommunityLoaded=true;
+      status.textContent='';
+      renderSparkLabPanels(data);
+    });
+    return;
+  }
+  renderSparkLabPanels(data);
+}
+function renderSparkLabPanels(data){
+  const grid=document.getElementById('sparkLabGrid');
+  const intro=document.getElementById('sparkLabIntro');
+  if(intro){
+    const cats=data.categories||{};
+    const cat=cats[sparkLabFilter];
+    if(sparkLabFilter==='likes'){
+      intro.textContent='Designs playtesters liked — submit ♥ to add yours.';
+    }else if(cat&&cat.intro){
+      intro.textContent=cat.intro;
+    }else if(data.intro){
+      intro.textContent=data.intro;
+    }
+  }
+  updateSparkLabBadge();
+  if(sparkLabFilter==='likes'){
+    renderSparkLabLikes(data.variants);
+    return;
+  }
+  document.getElementById('sparkLabLeaderboard').classList.add('hidden');
+  grid.classList.remove('hidden');
+  const user=getSparkLabFeedback();
+  const filtered=data.variants.filter(function(v){
+    return v.category===sparkLabFilter;
+  });
+  grid.innerHTML=filtered.map(function(v){
+    const ur=user[v.id];
+    const ship=v.ships?'<span class="sparklab-ship">Current pick</span>':'';
+    const goals=(v.goals||[]).map(function(g){
+      return '<li><strong>'+esc(g.title)+':</strong> '+esc(g.body)+'</li>';
+    }).join('');
+    return '<article class="sparklab-panel'+(v.ships?' ships':'')+'" data-cat="'+escAttr(v.category)+'">'+
+      '<div class="sparklab-hd"><div><div class="sparklab-cat">'+esc(v.categoryLabel)+'</div><div class="sparklab-title">'+esc(v.label)+'</div></div>'+ship+'</div>'+
+      '<div class="sparklab-stage" onclick="openSparkLabLightbox(\''+escAttr(v.id)+'\')" title="Click to enlarge">'+
+      v.html+'<span class="sparklab-zoom-hint">Click to enlarge</span></div>'+
+      '<div class="sparklab-meta"><details class="sparklab-details">'+
+      '<summary>Design goals &amp; playtest question</summary>'+
+      '<ul class="sparklab-goals">'+goals+'</ul>'+
+      '<div class="sparklab-playtest">'+esc(v.playtestQuestion)+'</div></details></div>'+
+      feedbackPanelHTML(v,ur)+'</article>';
+  }).join('');
+}
+function sparkLabLightboxZoom(){
+  const w=Math.min(window.innerWidth,window.innerHeight);
+  return Math.max(1.25,Math.min(2.8,Math.round(w*0.38/280*10)/10));
+}
+function openSparkLabLightbox(id){
+  const data=window.SPARK_DESIGN_LAB;
+  if(!data||!data.variants)return;
+  const v=data.variants.find(function(x){return x.id===id;});
+  if(!v)return;
+  const zoom=sparkLabLightboxZoom();
+  const box=document.getElementById('sparkLabLightbox');
+  box.innerHTML='<div class="sparklab-lb-inner" onclick="event.stopPropagation()">'+
+    '<button class="closex" onclick="closeSparkLabLightbox()" aria-label="Close">&times;</button>'+
+    '<div class="sparklab-lb-title">'+esc(v.label)+'</div>'+
+    '<div class="sparklab-lb-cat">'+esc(v.categoryLabel||'')+'</div>'+
+    '<div class="sparklab-lb-stage"><div style="zoom:'+zoom+'">'+v.html+'</div></div>'+
+    '<div class="sparklab-lb-hint">Esc or click outside to close</div></div>';
+  box.classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+function closeSparkLabLightbox(){
+  document.getElementById('sparkLabLightbox').classList.add('hidden');
+  document.body.style.overflow='';
+}
+async function submitSparkLabFeedback(){
+  const fb=getSparkLabFeedback();
+  const ids=Object.keys(fb).filter(function(id){
+    const x=fb[id];
+    return x&&(x.liked||((x.comment||'').trim()));
+  });
+  if(!ids.length){toast('Like or comment on at least one design first');return;}
+  const name=getCookieName()||'anonymous';
+  let body='[SPARK-LAB]\nPlaytester: '+name+'\nSubmitted: '+new Date().toISOString()+'\n';
+  ids.forEach(function(id){
+    const x=fb[id];
+    if(x.liked)body+=id+' | LIKE\n';
+    const c=(x.comment||'').trim();
+    if(c)body+=id+' | COMMENT | '+c.replace(/\n/g,' ')+'\n';
+  });
+  const hasToken=CONFIG.readToken&&CONFIG.readToken!=='PASTE_YOUR_SCOPED_BASEROW_TOKEN_HERE';
+  if(CONFIG.useLive&&CONFIG.tableIdeas&&hasToken){
+    try{
+      const resp=await fetch(CONFIG.apiBase+CONFIG.tableIdeas+'/?user_field_names=true',{
+        method:'POST',
+        headers:Object.assign({'Content-Type':'application/json'},authHeaders()),
+        body:JSON.stringify({
+          Card_Type:'Spark Lab',
+          Card_Class:'Rogue',
+          Idea_Text:body,
+          Submitter_Name:name,
+          Submitted_At:new Date().toISOString(),
+          Status:'new'
+        })
+      });
+      if(!resp.ok)throw new Error('HTTP '+resp.status);
+      localStorage.setItem(SPARK_LAB_SUBMIT_KEY,new Date().toISOString());
+      toast('Feedback submitted — thank you!');
+      renderSparkLab(true);
+      return;
+    }catch(e){
+      toast('Could not submit — saved locally only');
+    }
+  }else{
+    toast('Saved locally ('+ids.length+' designs). Add Baserow token to submit.');
+  }
 }
 
 </script>

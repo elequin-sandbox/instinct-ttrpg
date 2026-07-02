@@ -183,6 +183,78 @@
 
 <script>
 const SESSIONS = {
+  'flourish-combo-overhaul': {
+    title: 'Flourish / Combo overhaul',
+    subtitle: 'Six picks — one question at a time. Locks card prototypes after.',
+    questions: [
+      {
+        id: 'currency-name',
+        prompt: 'One word for BOTH the energy off an initial 6 AND the improv spend on a card option — you’re trading raw explosion power for a styled, guaranteed effect. What’s the table word?',
+        more: 'Not two terms (no “earn X, spend on Flourish”). The natural 6 on the die can stay [Crit] or collapse into this word too — we’ll sync primer copy after you pick. Short, say-it-out-loud friendly.',
+        options: [
+          { id: 'a', label: 'A — Flourish', desc: 'Unify everything: “two Flourishes” = currency; card lines are Flourish options. Already in doctrine.' },
+          { id: 'b', label: 'B — Riff', desc: 'Improv spin on the hit — you riff the success instead of rolling louder.' },
+          { id: 'c', label: 'C — Sting', desc: 'Story punctuation — the sting in the tail; short and sharp.' },
+          { id: 'd', label: 'D — Sell', desc: 'Acting/wrestling — you sell the moment, trading kayfabe power for table impact.' },
+          { id: 'e', label: 'E — Kicker', desc: 'The optional kicker on your roll — familiar, punchy.' },
+          { id: 'f', label: 'F — Flare', desc: 'Burst you redirect — visible style instead of hidden bonus dice.' },
+          { id: 'g', label: 'G — Verve', desc: 'Energy + distinctive style; slightly fancier.' },
+          { id: 'h', label: 'H — Burn', desc: 'You burn the explosion for a guaranteed printed payoff.' },
+          { id: 'i', label: 'I — Other', desc: 'None of these — I’ll pitch in chat.' }
+        ]
+      },
+      {
+        id: 'six-in-pool',
+        prompt: 'When you earn tokens from initial 6s, do those 6s still sit in your pool at face value for clearing the GM’s dice?',
+        more: 'Old rule: 6s explode (roll + add to total) AND count toward Flourish options. New rule drops the extra roll — but the initial 6 might still help you beat opposing dice.',
+        options: [
+          { id: 'a', label: 'A — Yes, 6s stay in the pool', desc: 'Tokens are extra; you still assign the 6 against opposition.' },
+          { id: 'b', label: 'B — No, spending converts the 6', desc: 'Each token spent removes that 6 from your pool (trade power for flourish).' },
+          { id: 'c', label: 'C — 6s stay unless spent on a flourish', desc: 'Unspent tokens = 6s remain; spent ones leave the pool.' }
+        ]
+      },
+      {
+        id: 'spend-timing',
+        prompt: 'When do players spend tokens on Flourishes in the check procedure?',
+        more: 'Proposal: after pulling 1s (Misses), before assigning dice against the opposing pool — spend first, then read success.',
+        options: [
+          { id: 'a', label: 'A — After Misses, before pool read', desc: 'Matches “spend before rolling bonus dice.”' },
+          { id: 'b', label: 'B — Only after you know the check outcome', desc: 'Spend on Hit/partial only — no gambling on failure.' },
+          { id: 'c', label: 'C — Split: red on success, blue/green anytime', desc: 'Offensive flourishes need a hit; support/heal can fire on partial.' }
+        ]
+      },
+      {
+        id: 'fiction-gate',
+        prompt: 'Keep Nathan’s Playtest 4 “does this bold Flourish word fit the fiction?” gate when spending?',
+        more: 'P2 locked self-adjudication: GM judges fit only, never magnitude. Guaranteed numeric effects (Rattled 2 = remove 2 dice) replace GM-invented conditions.',
+        options: [
+          { id: 'a', label: 'A — Keep the fiction-fit gate', desc: 'Spend token → table agrees keyword fits → apply printed number.' },
+          { id: 'b', label: 'B — Drop the gate — spend = auto-apply', desc: 'Faster; opportunity cost is enough.' },
+          { id: 'c', label: 'C — Gate only red (offensive) flourishes', desc: 'Blue/green always apply when spent.' }
+        ]
+      },
+      {
+        id: 'flourish-cost-model',
+        prompt: 'How should Flourish lines show cost vs effect magnitude (e.g. “Rattled 2”)?',
+        more: 'Proposal: **Rattled 2** always means remove 2 objective dice. Cost is usually **1 token per line** unless the card prints **2** in the cost column. The number after the keyword is effect size, not cost.',
+        options: [
+          { id: 'a', label: 'A — 1 token per line; number = effect size', desc: 'Stagger 1 costs 1 token, removes 1 die. Stagger 2 costs 1 token, removes 2.' },
+          { id: 'b', label: 'B — Number is both cost and effect', desc: 'Stagger 2 costs 2 tokens AND removes 2 dice (1:1).' },
+          { id: 'c', label: 'C — Split display on card', desc: 'Show cost pip + keyword separately: “● Rattled — remove 2 dice” with gold “2” cost.' }
+        ]
+      },
+      {
+        id: 'prototype-scope',
+        prompt: 'Which eight cards should we prototype first (2 per class from the June 30 table)?',
+        more: 'Default set leans on playtest highlights + existing Flourish pass: Paladin Smite & Condemn; Barbarian Reckless Strike & Break; Rogue Sneak Attack & Smoke and Mirrors; Warlock Eldritch Strike & Feed the Fire.',
+        options: [
+          { id: 'a', label: 'A — Use the default eight', desc: 'Smite, Condemn, Reckless Strike, Break, Sneak Attack, Smoke and Mirrors, Eldritch Strike, Feed the Fire.' },
+          { id: 'b', label: 'B — Swap in React cards', desc: 'Replace 2 Acts with Vanish (Rogue) + Patron’s Favor (Warlock).' },
+          { id: 'c', label: 'C — I’ll list alternates in chat', desc: 'Pick this and name replacements.' }
+        ]
+      }
+    ]
+  },
   'primer-chargen-followup': {
     title: 'Primer — chargen follow-up',
     subtitle: 'One quick pick.',
