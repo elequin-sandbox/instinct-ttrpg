@@ -200,12 +200,18 @@ When a new card is designed and approved:
   of **Rattled** (Paladin) / **Sundered** (Barbarian, class-owned). New shared CSS
   (`primer-card-scope.css` `.ci.fl-red/.fl-blue/.fl-green`) — colored dot + bold colored keyword per
   Flourish line. Builder: `scripts/build_flourish_cards.py`. Proof: `flourish-cards-proof.html`.
-  Rows 370, 373, 378, 369, 342, 343, 348, 349 patched in `card-data.js`; **Baserow push blocked this
-  session** (Baserow MCP rejected all calls; `config.js` token still a placeholder) — batch payload
-  ready at `scripts/flourish_cards_batch.json` for the next session with working credentials.
+  Rows 370, 373, 378, 369, 342, 343, 348, 349 patched in `card-data.js` and **pushed to Baserow**
+  (table 911939) July 1 evening via MCP `update_rows`. Batch: `scripts/flourish_cards_batch.json`.
   `[needs Nathan verify]`: Rattled/Sundered as the chosen Flourish words (no hard doctrine lock on
   word choice, just avoided Rogue's Exposed); remaining ~12+ pool cards from the P4 "top ~20" audit
   still use the pre-Flourish narrative-crit style and are not yet converted.
+- [July 1 2026] — **Playtest 4 pool simplification (Phase 2C).** 34 active-pool cards stripped of
+  legacy unit-linked condition tracking, Item Check / placed-dice / Disguised mechanics, and dense
+  multi-fork React lines. Priority: Smoke Bomb, Warlock hit-die cards, items, Fighter/Druid/Ranger/
+  Wizard offenders. Narrative terms (**Exposed**, **Rattled**, **Rooted**, **Hidden**) → bold + em-dash
+  gloss, one term per line. Builder: `scripts/pool_simplification_p4.py`. Proof:
+  `pool-simplification-p4-proof.html`. **Pushed to Baserow** July 1 evening (combined 2B+2C batch —
+  42 rows total via MCP). Batch: `scripts/pool_simplification_p4_batch.json`.
 - [July 1 2026] — **Playtest 4 doctrine lock (Phase 1 — no card changes yet).** Locked P1 (objective/
   challenge-pool co-definition + telegraphing + multi-wave pools), P2 (Crit Flourish self-adjudicated
   three-coloring system), and flagged P3–P4 + Secondary items (S1–S8) as current direction/open
